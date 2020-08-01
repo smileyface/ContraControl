@@ -2,17 +2,16 @@
 
 SwitchDevice::SwitchDevice()
 {
-	SwitchDevice::add_command(SWITCH_DEVICE_COMMANDS::INITALIZE, Command_Func{
-		state = SWITCH_DEVICE_COMMANDS::INITALIZE;
-	});
-	SwitchDevice::add_command(SWITCH_DEVICE_COMMANDS::ON, Command_Func{
-		state = SWITCH_DEVICE_COMMANDS::ON;
-	});
-	SwitchDevice::add_command(SWITCH_DEVICE_COMMANDS::OFF, Command_Func{
-		state = SWITCH_DEVICE_COMMANDS::OFF;
-	});
+
 }
 
-void SwitchDevice::initalize() {
-	Device::initalize();
+void SwitchDevice::run_command(Command command)
+{
+	switch (command.unique_id)
+	{
+	case COMMAND_ID::INITALIZE:
+		Device::run_command(command);
+	default:
+		break;
+	}
 }

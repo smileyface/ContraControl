@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-#include"device.h"
+#include"devices.h"
 #include "devices/switch_device.h"
 
 
@@ -20,27 +20,14 @@ namespace model {
 		known_devices["Device_1"] = new SwitchDevice();
 	};
 
-	std::function<void()> initalize = []() {
-		read_program();
-		std::map<std::string, Device*>::iterator it;
-		for (it = known_devices.begin(); it != known_devices.end(); it++) {
-			it->second->initalize();
-		}
-		//common_id to system_id mapping
-		for (it = known_devices.begin(); it != known_devices.end(); it++) {
-			id_map[it->second->get_id()] = it->first;
-		}
-	};
-
 	std::function<void()> loop = []() {
-		model::initalize();
 		while (model_running) {
-			int start_time = 0;
+			float start_time = 0.0;
 			std::map<uint16_t, Command>::iterator it;
 			for (it = step_run.begin(); it != step_run.end(); it++) {
 				known_devices[id_map[it->first]]->run_command(it->second);
 			}
-			timestamp = 0 - start_time;
+			timestamp = 0.0 - start_time;
 
 		}
 	};

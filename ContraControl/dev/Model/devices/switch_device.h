@@ -1,22 +1,15 @@
 #ifndef SWITCH_DEVICE_H
 #define SWITCH_DEVICE_H
 
-#include "../device.h"
-
-class SWITCH_DEVICE_COMMANDS : public DEVICE_COMMAND
-{
-public:
-	Command_Def ON = 1;
-	Command_Def OFF = 2;
-};
+#include "device.h"
 
 class SwitchDevice: public Device
 {
 public:
 	SwitchDevice();
+	void run_command(Command command);
 	~SwitchDevice();
 
-	void initalize();
 
 };
 

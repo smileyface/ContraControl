@@ -37,3 +37,5 @@
 /ContraControl/ContraControl.vcxproj.filters
 /ContraControl/ContraControl.vcxproj
 /x64/Debug
+/ContraControl.vcxproj.user
+/cpp.hint
