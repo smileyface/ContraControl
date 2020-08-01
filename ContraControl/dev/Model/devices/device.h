@@ -7,15 +7,17 @@
 
 #include "../../Controller/commands.h"
 
+static uint16_t device_id_pool = 0;
 
 class Device
 {
 public:
-	Device();
+	Device() {};
+	~Device() {};
 	void run_command(Command command);
 	uint16_t get_id() { return id; };
 protected:
-	void add_command(Command, std::function<void()>);
+	void register_device(){ id = device_id_pool; device_id_pool++; }
 	COMMAND_ID state = Command::unique_id;
 	uint16_t id = UINT16_MAX;
 private:

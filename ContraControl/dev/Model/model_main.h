@@ -5,7 +5,6 @@
 #include <string>
 
 #include"devices.h"
-#include "devices/switch_device.h"
 
 
 namespace model {
@@ -19,6 +18,11 @@ namespace model {
 	std::function<void()> read_program = []() {
 		known_devices["Device_1"] = new SwitchDevice();
 	};
+
+	std::function<void()> initalize = []() {
+		read_program();
+	};
+
 
 	std::function<void()> loop = []() {
 		while (model_running) {

@@ -4,7 +4,9 @@
 
 enum class COMMAND_ID :uint16_t
 {
-	INITALIZE = 0,
+	INITALIZE,
+	ON,
+	OFF,
 	INVALID = UINT16_MAX
 };
 
