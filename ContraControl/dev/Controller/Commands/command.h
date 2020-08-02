@@ -13,6 +13,7 @@ enum class COMMAND_ID :uint16_t
 class Command {
 public:
 	const static COMMAND_ID unique_id = COMMAND_ID::INVALID;
+	double time_to_complete = 0.0;
 	Command() {};
 	~Command() {};
 };
