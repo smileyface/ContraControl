@@ -2,7 +2,8 @@
 
 class Off : public Command {
 public:
-	const static COMMAND_ID unique_id = COMMAND_ID::OFF;
+ 
 	Off() {};
 	~Off() {};
+	COMMAND_ID get_unique_id() { return COMMAND_ID::OFF; };
 };

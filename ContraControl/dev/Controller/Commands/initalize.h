@@ -6,8 +6,8 @@
 class Initalize : public Command
 {
 public:
-	const static COMMAND_ID unique_id = COMMAND_ID::INITALIZE;
-	Initalize() {};
+	Initalize() { };
 	~Initalize() {};
+	COMMAND_ID get_unique_id() { return COMMAND_ID::INITALIZE; };
 };
 #endif // !INITALIZE_COMMAND_H

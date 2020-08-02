@@ -10,11 +10,21 @@
 
 
 namespace model {
+	class Model_Command {
+	public:
+		Model_Command(Device_Id id, Command* command){
+			this->command = command;
+			this->id = id;
+		}
+		Device_Id id; 
+		Command* command;
+	};
+
 	Timer timer;
 	std::map<Device_Name, Device*> known_devices;
 	bool model_running = true;
 
-	std::map<Device_Id, Command> step_run;
+	std::vector<Model_Command> step_run;
 	std::map<Device_Id, Device_Name> id_map;
 
 
@@ -26,25 +36,24 @@ namespace model {
 
 	};
 
-	std::function<void(std::pair<Device_Id, Command>)> add_to_step = [](std::pair<Device_Id, Command> theCommand) {
-		model::step_run.emplace(theCommand);
+	std::function<void(Model_Command)> add_to_step = [](Model_Command theCommand) {
+		model::step_run.emplace_back(theCommand);
 	};
 
 	std::function<void()> loop = []() {
 		//while (model_running) {
-		std::map<Device_Id, Command>::iterator it;
-		std::vector<Device_Id> completed_list;
-		for (it = step_run.begin(); it != step_run.end(); it++) {
-			known_devices[id_map[it->first]]->run_command(it->second);
-			if (it->second.time_to_complete <= 0) {
-				completed_list.push_back(it->first);
+		std::vector<int> completed_index;
+		for (int i = 0; i < step_run.size(); i++) {
+			known_devices[id_map[step_run[i].id]]->run_command(step_run[i].command);
+			if (step_run[i].command->time_to_complete <= 0) {
+				completed_index.push_back(i);
 			}
 			else {
-				it->second.time_to_complete -= model::timer.elapsed_time;
+				step_run[i].command->time_to_complete -= model::timer.elapsed_time;
 			}
 		}
-		for (int i = 0; i < completed_list.size(); i++) {
-			model::step_run.erase(completed_list[i]);
+		for (int i = completed_index.size(); i > 0; i--) {
+			model::step_run.erase(step_run.begin() + completed_index[i-1]);
 		}
 		timer.update_time();
 

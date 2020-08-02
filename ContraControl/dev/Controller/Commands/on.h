@@ -6,8 +6,8 @@
 
 class On : public Command {
 public:
-	const static COMMAND_ID unique_id = COMMAND_ID::ON;
 	On() {};
 	~On() {};
+	COMMAND_ID get_unique_id() { return COMMAND_ID::ON; };
 };
 #endif // !ON_COMMAND_H

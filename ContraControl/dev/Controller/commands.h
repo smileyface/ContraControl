@@ -6,8 +6,8 @@
 #include "Commands/on.h"
 #include "Commands/Off.h"
 
-typedef std::pair<uint16_t, Command> Device_Command;
-typedef std::pair<double, Device_Command> Timed_Command;
+
+
 
 
 #endif // !COMMANDS_INCLUSION_H

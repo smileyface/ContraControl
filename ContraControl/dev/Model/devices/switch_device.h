@@ -6,20 +6,23 @@
 class SwitchDevice: public Device
 {
 public:
-	SwitchDevice() { register_device(); };
+	SwitchDevice(std::string name) { register_device(name); };
 	~SwitchDevice() {};
-	void run_command(Command command)
+	void run_command(Command* command)
 	{
 		Device::run_command(command);
-		switch (command.unique_id)
+		switch (command->get_unique_id())
 		{
 		case COMMAND_ID::INITALIZE:
 			break;
 		case COMMAND_ID::ON:
 			state = COMMAND_ID::ON;
+			break;
 		case COMMAND_ID::OFF:
 			state = COMMAND_ID::OFF;
+			break;
 		default:
+			_log.logging.push_back(LogItem(LOG_PRIORITY::ERROR, "Invalid Swtich Command", name));
 			break;
 		}
 	};

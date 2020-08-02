@@ -5,20 +5,23 @@
 #include<functional>
 
 #include "../../Controller/commands.h"
+#include "../../Utilities/Logging/logging.h"
 
 static uint16_t device_id_pool = 0;
 
 class Device
 {
 public:
-	Device() {};
+	Device() { };
 	~Device() {};
-	void run_command(Command command);
 	uint16_t get_id() { return id; };
+
+	virtual void run_command(Command* command);
 protected:
-	void register_device(){ id = device_id_pool; device_id_pool++; }
-	COMMAND_ID state = Command::unique_id;
+	void register_device(std::string name) { id = device_id_pool; device_id_pool++; this->name = name; }
+	COMMAND_ID state = COMMAND_ID::INVALID;
 	uint16_t id = UINT16_MAX;
+	std::string name = "INVALID";
 private:
 	
 };
