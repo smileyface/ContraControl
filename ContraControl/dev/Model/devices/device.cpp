@@ -1,3 +1,5 @@
+#include <string>
+
 #include "device.h"
 
 
@@ -7,16 +9,18 @@ void Device::run_command(Command* command)
 	{
 	case COMMAND_ID::INITALIZE:
 		state = COMMAND_ID::INITALIZE;
-		_log.logging.emplace_back(LogItem(LOG_PRIORITY::DEBUG, "Initalizing", name));
+		sys_log::log(LOG_PRIORITY::DEBUG, "Initalizing", name);
 		break;
 	case COMMAND_ID::OFF:
-		_log.logging.emplace_back(LogItem(LOG_PRIORITY::DEBUG, "Off", name));
+		sys_log::log(LOG_PRIORITY::DEBUG, "Off", name);
 		break;
 	case COMMAND_ID::ON:
-		_log.logging.emplace_back(LogItem(LOG_PRIORITY::DEBUG, "On", name));
+		sys_log::log(LOG_PRIORITY::DEBUG, "On", name);
 		break;
+	case COMMAND_ID::MOVE:
+		sys_log::log(LOG_PRIORITY::DEBUG, "Movement", name);
 	default:
-		_log.logging.emplace_back(LogItem(LOG_PRIORITY::ERROR, "Invalid Device Command", name));
+		sys_log::log(LOG_PRIORITY::ERROR, "Invalid Device Command", name);
 		break;
 	}
 }

@@ -4,11 +4,23 @@
 
 #include <vector>
 #include "log_item.h"
-class logger {
+class Logger {
 public:
+	/* Static access method. */
+	static Logger* getInstance();
+
+	void addItem(LOG_PRIORITY priority, std::string msg, std::string  device);
+private:
+	Logger() {};
+	static Logger* instance;
 	std::vector<LogItem> logging;
 };
+/* Null, because instance will be initialized on demand. */
 
-static logger _log;
+
+namespace sys_log {
+	void log(LOG_PRIORITY priority, std::string msg, std::string  device);
+};
+
 
 #endif // !LOGGING_MAIN_H

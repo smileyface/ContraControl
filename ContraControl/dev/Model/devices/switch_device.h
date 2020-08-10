@@ -22,7 +22,7 @@ public:
 			state = COMMAND_ID::OFF;
 			break;
 		default:
-			_log.logging.push_back(LogItem(LOG_PRIORITY::ERROR, "Invalid Swtich Command", name));
+			sys_log::log(LOG_PRIORITY::ERROR, "Invalid Swtich Command", name);
 			break;
 		}
 	};

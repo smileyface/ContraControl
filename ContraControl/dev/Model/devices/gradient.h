@@ -6,7 +6,7 @@
 class Gradient: public Device
 {
 public:
-	Gradient() {};
+	Gradient() { position = 0.0; };
 	~Gradient() {};
 	void run_command(Command* command)
 	{
@@ -27,8 +27,9 @@ public:
 		case COMMAND_ID::MOVE:
 			state = COMMAND_ID::MOVE;
 			position = dynamic_cast<Move*>(command)->amount;
+			sys_log::log(LOG_PRIORITY::DEBUG, "Move to " + std::to_string(position * 100), name);
 		default:
-			_log.logging.push_back(LogItem(LOG_PRIORITY::ERROR, "Invalid Gradient Command", name));
+			sys_log::log(LOG_PRIORITY::ERROR, "Invalid Gradient Command", name);
 			break;
 		}
 	};
