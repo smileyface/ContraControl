@@ -7,6 +7,7 @@ enum class COMMAND_ID :uint16_t
 	INITALIZE,
 	ON,
 	OFF,
+	MOVE,
 	INVALID = UINT16_MAX
 };
 

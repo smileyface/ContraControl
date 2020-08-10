@@ -52,8 +52,8 @@ namespace model {
 				step_run[i].command->time_to_complete -= model::timer.elapsed_time;
 			}
 		}
-		for (int i = completed_index.size(); i > 0; i--) {
-			model::step_run.erase(step_run.begin() + completed_index[i-1]);
+		for (int i = completed_index.size()-1; i >-1; i--) {
+			model::step_run.erase(step_run.begin() + completed_index[i]);
 		}
 		timer.update_time();
 

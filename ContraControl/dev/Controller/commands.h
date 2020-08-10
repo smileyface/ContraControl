@@ -4,7 +4,8 @@
 #include "Commands/command.h"
 #include "Commands/initalize.h"
 #include "Commands/on.h"
-#include "Commands/Off.h"
+#include "Commands/off.h"
+#include "Commands/move.h"
 
 
 
