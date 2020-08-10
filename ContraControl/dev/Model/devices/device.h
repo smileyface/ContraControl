@@ -12,13 +12,13 @@ static uint16_t device_id_pool = 0;
 class Device
 {
 public:
-	Device() { };
-	~Device() {};
-	uint16_t get_id() { return id; };
+	Device();
+	~Device();
+	uint16_t get_id();
 
 	virtual void run_command(Command* command);
 protected:
-	void register_device(std::string name) { id = device_id_pool; device_id_pool++; this->name = name; }
+	void register_device(std::string name);
 	COMMAND_ID state = COMMAND_ID::INVALID;
 	uint16_t id = UINT16_MAX;
 	std::string name = "INVALID";

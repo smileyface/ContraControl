@@ -39,53 +39,16 @@ public:
 
 namespace controller
 {
-	Timer controller_timer;
-	bool controller_running = true;
-	std::vector<Timed_Command> test_commands;
+	extern Timer controller_timer;
+	extern bool controller_running;
+	extern std::vector<Timed_Command> test_commands;
 
-	bool sort_pair(Timed_Command i, Timed_Command j) {
-		return i.time < j.time;
-	}
+	bool sort_pair(Timed_Command i, Timed_Command j);
 
-	func_ptr initalize = []() {
-		std::map<std::string, Device*>::iterator it;
-		for (it = model::known_devices.begin(); it != model::known_devices.end(); it++) {
-			test_commands.emplace_back(Timed_Command(new Initalize(), it->second->get_id(), 0));
-		}
-		std::sort(test_commands.begin(), test_commands.end(), sort_pair);
-		controller_timer.reset_clock();
-	};
+	void initalize();
+	void stop_controller();
 
-
-	func_ptr stop_controller = []() {
-		controller_running = false;
-	};
-
-	func_ptr loop = []() {
-		//while (controller_running) {
-			double time = controller_timer.get_elapsed_time();
-			std::vector<int> remove_indexes;
-			for (int i = 0; i < test_commands.size(); i++) {
-				if (test_commands[i].time <= 0)
-				{
-					model::Model_Command mc(test_commands[i].device_id, test_commands[i].command);
-					model::add_to_step(test_commands[i].create_model_command());
-					remove_indexes.push_back(i);
-				}
-				else {
-					test_commands[i].time -= time;
-				}
-			}
-			for (int i = remove_indexes.size()-1; i >-1  ; i--) {
-				test_commands.erase(test_commands.begin() + remove_indexes[i]);
-			}
-			controller_timer.update_time();
-
-		//}
-	};
-
-
-
+	void loop();
 }
 
 

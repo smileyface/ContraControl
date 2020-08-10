@@ -6,7 +6,7 @@
 class Gradient: public Device
 {
 public:
-	Gradient() { position = 0.0; };
+	Gradient(std::string name) { position = 0.0; register_device(name); };
 	~Gradient() {};
 	void run_command(Command* command)
 	{

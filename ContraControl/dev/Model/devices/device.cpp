@@ -2,6 +2,12 @@
 
 #include "device.h"
 
+Device::Device() {}
+Device::~Device() {}
+uint16_t Device::get_id()
+{
+	return id;
+}
 
 void Device::run_command(Command* command)
 {
@@ -23,5 +29,12 @@ void Device::run_command(Command* command)
 		sys_log::log(LOG_PRIORITY::ERROR, "Invalid Device Command", name);
 		break;
 	}
+}
+
+void Device::register_device(std::string name)
+{
+	id = device_id_pool;
+	device_id_pool++;
+	this->name = name;
 }
 
