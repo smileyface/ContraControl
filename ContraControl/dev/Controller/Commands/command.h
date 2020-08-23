@@ -1,15 +1,25 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include <utility>
+
+#include <cinttypes>
 
 enum class COMMAND_ID :uint16_t
 {
+	//System Commands
+	ADD,
+	REMOVE,
+	//Device Commands
 	INITALIZE,
 	ON,
 	OFF,
 	MOVE,
 	INVALID = UINT16_MAX
 };
+
+const std::pair<COMMAND_ID, COMMAND_ID> SYSTEM_COMMANDS_INDEXES(COMMAND_ID::ADD, COMMAND_ID::REMOVE);
+const std::pair<COMMAND_ID, COMMAND_ID> DEVICE_COMMANDS_INDEXES(COMMAND_ID::INITALIZE, COMMAND_ID::MOVE);
 
 class Command {
 public:

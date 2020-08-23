@@ -15,7 +15,6 @@ public:
 	Device();
 	~Device();
 	uint16_t get_id();
-
 	virtual void run_command(Command* command);
 protected:
 	void register_device(std::string name);

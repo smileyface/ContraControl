@@ -8,5 +8,6 @@ typedef std::string Device_Name;
 
 #include "devices/device.h"
 #include "devices/switch_device.h"
+#include "devices/gradient.h"
 
 #endif // !DEVICES_H

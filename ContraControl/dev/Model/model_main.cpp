@@ -1,10 +1,13 @@
 #include "model_main.h"
 
+#include "interfaces/types.h"
+#include "interfaces/controller.h"
+
 Timer model::timer;
 std::map<Device_Name, Device*> model::known_devices;
 bool model::model_running = true;
 
-std::vector<model::Model_Command> model::step_run;
+std::vector<Model_Command> model::step_run;
 std::map<Device_Id, Device_Name> model::id_map;
 
 void model::initalize()
@@ -15,13 +18,11 @@ void model::initalize()
 	}
 
 }
-void model::add_to_step(Model_Command theCommand)
-{
-	model::step_run.emplace_back(theCommand);
-}
 void model::add_device(std::string name, Device* device)
 {
 	model::known_devices.emplace(name, device);
+	Model_Command m_command(device->get_id(), model_interfaces::controller_interface::get_command_object(COMMAND_ID::INITALIZE));
+	model_interfaces::controller_interface::request_command(m_command, 0);
 }
 void model::loop()
 {
@@ -49,8 +50,7 @@ void model::stop_loop()
 	model_running = false;
 }
 
-model::Model_Command::Model_Command(Device_Id id, Command* command)
+void model::clean_up()
 {
-	this->command = command;
-	this->id = id;
+	model::known_devices.erase(model::known_devices.begin(), model::known_devices.end());
 }

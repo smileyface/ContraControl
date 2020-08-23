@@ -9,7 +9,7 @@ int main() {
 	controller::initalize();
 	model::initalize();
 	while (1) {
-		controller::loop();
+		controller::step();
 		model::loop();
 	}
 	return 0;
