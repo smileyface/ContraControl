@@ -1,3 +1,6 @@
+# Testing Libraries
+packages/*
+
 # Prerequisites
 *.d
 
