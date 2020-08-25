@@ -2,6 +2,7 @@
 #include "../model_main.h"
 #include "../../Controller/Interfaces/model.h"
 #include "../../Controller/types.h"
+#include "../../Controller/Commands/initalize.h"
 
 void model_interfaces::controller_interface::add_to_step(Model_Command theCommand)
 {
@@ -14,10 +15,11 @@ void model_interfaces::controller_interface::request_command(Model_Command theCo
 	controller_interfaces::model_interface::request_command_add(command);
 }
 
-Command* model_interfaces::controller_interface::get_command_object(COMMAND_ID Command)
+Command* model_interfaces::controller_interface::get_command_object(COMMAND_ID Command, std::string args)
 {
 	switch (Command) {
 	case COMMAND_ID::INITALIZE:
-		return new Initalize();
+		return new Initalize(args);
 	}
+	return nullptr;
 }
