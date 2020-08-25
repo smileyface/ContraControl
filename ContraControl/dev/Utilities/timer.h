@@ -5,7 +5,7 @@
 
 class Timer {
 public:
-	std::clock_t current_time = std::clock();
+	double current_time = std::clock();
 	double elapsed_time = 0.0;
 
 	void update_time() {

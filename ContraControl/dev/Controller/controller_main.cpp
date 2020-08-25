@@ -38,7 +38,7 @@ void controller::step()
 			controller_queue[i].time -= time;
 		}
 	}
-	for (int i = remove_indexes.size() - 1; i > -1; i--) {
+	for (size_t i = 0; i < remove_indexes.size(); i++) {
 		controller_queue.erase(controller_queue.begin() + remove_indexes[i]);
 	}
 	controller_timer.update_time();

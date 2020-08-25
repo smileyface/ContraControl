@@ -8,7 +8,7 @@ namespace model_interfaces {
 
 		void add_to_step(Model_Command theCommand);
 		void request_command(Model_Command theCommand, double seconds_to_execute);
-		Command* get_command_object(COMMAND_ID Command);
+		Command* get_command_object(COMMAND_ID Command, std::string args);
 	}
 }
 

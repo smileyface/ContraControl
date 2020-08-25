@@ -14,6 +14,11 @@ enum class LOG_PRIORITY {
 class LogItem
 {
 public:
+	LogItem() {
+		priority = LOG_PRIORITY::ERROR;
+		message = "NO MESSAGE";
+		device = "SYSTEM ERROR";
+	}
 	LogItem(LOG_PRIORITY, std::string, std::string);
 	LOG_PRIORITY priority;
 	std::string message;
