@@ -2,7 +2,7 @@
 #define ON_COMMAND_H
 
 
-#include "command.h"
+#include "../command.h"
 
 class On : public Command {
 public:

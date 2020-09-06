@@ -48,4 +48,5 @@ void controller::step()
 
 void controller::clean_up()
 {
+	controller_queue.erase(controller_queue.begin(), controller_queue.end());
 }

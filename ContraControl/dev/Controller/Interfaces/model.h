@@ -4,15 +4,22 @@
 #include "../types.h"
 #include "../../Model/interfaces/types.h"
 
-namespace controller_interfaces {
-	namespace model_interface {
-		//to model
-		void send_command(Timed_Command timed_command);
-		
-		//from model
-		void request_command_add(Timed_Command timed_command);
-	}
-}
+class controller_interfaces {
+public:
+	class model_interface;
+};
+
+class controller_interfaces::model_interface {
+public:
+	//to model
+	static void send_command(Timed_Command timed_command);
+
+	//from model
+	static void request_command_add(Timed_Command timed_command);
+
+	//get device pointer from the model
+	static Device get_device(Device_Name name);
+};
 
 #endif // !MODEL_CONTROLLER_INTERFACE_H
 

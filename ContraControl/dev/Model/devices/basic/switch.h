@@ -3,11 +3,11 @@
 
 #include "device.h"
 
-class SwitchDevice: public Device
+class Switch_Device: public Device
 {
 public:
-	SwitchDevice() { position = false; };
-	~SwitchDevice() {};
+	Switch_Device() { position = false; };
+	~Switch_Device() {};
 
 	void set_position(bool new_position)
 	{

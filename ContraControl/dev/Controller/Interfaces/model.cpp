@@ -14,3 +14,8 @@ void controller_interfaces::model_interface::request_command_add(Timed_Command t
 	controller::controller_queue.push_back(timed_command);
 	std::sort(controller::controller_queue.begin(), controller::controller_queue.end(), controller::sort_pair);
 }
+
+Device controller_interfaces::model_interface::get_device(Device_Name name)
+{
+	return model_interfaces::controller_interface::get_device(name);
+}
