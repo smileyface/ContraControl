@@ -1,7 +1,7 @@
 #include "controller_main.h"
 
 
-#include "../Model/types.h"
+#include "../Model/interfaces/types.h"
 #include "../Interfaces/controller_interface.h"
 
 Timer controller::controller_timer;
@@ -23,12 +23,6 @@ void controller::stop_controller()
 	controller_running = false;
 }
 
-void controller::add_command(Timed_Command tc)
-{
-	controller::controller_queue.push_back(tc);
-	std::sort(controller::controller_queue.begin(), controller::controller_queue.end(), controller::sort_pair);
-}
-
 void controller::step()
 {
 	//while (controller_running) {
@@ -38,8 +32,7 @@ void controller::step()
 		if (controller_queue[i].time <= 0)
 		{
 			controller_interfaces::model_interface::send_command(controller_queue[i]);
-			if(controller_queue[i].command->completed())
-				remove_indexes.push_back(i);
+			remove_indexes.push_back(i);
 		}
 		else {
 			controller_queue[i].time -= time;

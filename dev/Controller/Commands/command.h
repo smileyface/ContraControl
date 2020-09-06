@@ -4,42 +4,30 @@
 #include <utility>
 
 #include <cinttypes>
-#include <string>
-#include <typeinfo>
 
-typedef uint16_t command_id;
-
-enum class COMMAND_ENUM :uint16_t
+enum class COMMAND_ID :uint16_t
 {
+	//System Commands
+	ADD,
+	REMOVE,
+	//Device Commands
 	INITALIZE,
 	ON,
 	OFF,
-	TRANSITION,
-	LINEAR_TRANSITION,
+	LEVEL,
 	INVALID = UINT16_MAX
 };
 
+const std::pair<COMMAND_ID, COMMAND_ID> SYSTEM_COMMANDS_INDEXES(COMMAND_ID::ADD, COMMAND_ID::REMOVE);
+const std::pair<COMMAND_ID, COMMAND_ID> DEVICE_COMMANDS_INDEXES(COMMAND_ID::INITALIZE, COMMAND_ID::LEVEL);
+
 class Command {
 public:
+	
 	double time_to_complete = 0.0;
 	Command() { };
 	~Command() {};
-	virtual void step_command(double time_step) { }
-	bool completed() { return time_to_complete <= 0.0; }
-	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::INVALID; }
-	virtual std::string get_unique_id() 
-	{
-		switch (get_id())
-		{
-		case COMMAND_ENUM::INITALIZE:
-			return "INITALIZE";
-		case COMMAND_ENUM::ON:
-			return "ON";
-		case COMMAND_ENUM::OFF:
-			return "OFF";
-		}
-		return "INVALID"; 
-	}
+	virtual COMMAND_ID get_unique_id() { return COMMAND_ID::INVALID; };
 private:
 };
 

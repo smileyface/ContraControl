@@ -35,5 +35,3 @@ packages/*
 *.app
 /.vs
 out/*
-/dev/.vs
-/dev/out/build/x64-Debug (default)
