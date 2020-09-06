@@ -18,3 +18,8 @@ Device controller_interfaces::model_interface::get_device_from_model(Device_Name
 {
 	return model_interfaces::controller_interface::get_device(name);
 }
+
+Device controller_interfaces::model_interface::get_device(Device_Name name)
+{
+	return model_interfaces::controller_interface::get_device(name);
+}
