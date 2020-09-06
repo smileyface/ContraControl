@@ -2,7 +2,7 @@
 #define SWTICH_ACTION_INTERFACE_H
 
 #include "device.h"
-#include "../switch.h"
+#include "../basic/switch.h"
 
 class Switch_Action_Interface : Device_Action_Interface
 {
@@ -11,7 +11,7 @@ public:
 	{ 
 	};
 	~Switch_Action_Interface() {};
-	void run_command(Command* command, SwitchDevice& device) {
+	void run_command(Command* command, Switch_Device& device) {
 		Device_Action_Interface::run_command(command, device);
 		switch (command->get_unique_id())
 		{

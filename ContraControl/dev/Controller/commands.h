@@ -2,10 +2,10 @@
 #define COMMANDS_INCLUSION_H
 
 #include "Commands/command.h"
-#include "Commands/initalize.h"
-#include "Commands/on.h"
-#include "Commands/off.h"
-#include "Commands/move.h"
+#include "Commands/basic/initalize.h"
+#include "Commands/basic/on.h"
+#include "Commands/basic/off.h"
+#include "Commands/basic/level.h"
 
 
 

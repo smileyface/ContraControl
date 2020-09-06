@@ -6,8 +6,10 @@
 typedef uint16_t Device_Id;
 typedef std::string Device_Name;
 
-#include "devices/device.h"
-#include "devices/switch.h"
-#include "devices/gradient.h"
+#define INVALID_DEVICE UINT16_MAX
+
+#include "devices/basic/device.h"
+#include "devices/basic/switch.h"
+#include "devices/basic/gradient.h"
 
 #endif // !DEVICES_H

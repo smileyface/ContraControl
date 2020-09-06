@@ -3,11 +3,11 @@
 
 #include "device.h"
 
-class Gradient: public Device
+class Gradient_Device: public Device
 {
 public:
-	Gradient() { position = 0.0; };
-	~Gradient() {};
+	Gradient_Device() { position = 0.0; };
+	~Gradient_Device() {};
 
 	void set_position(float new_position)
 	{

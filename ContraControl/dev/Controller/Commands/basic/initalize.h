@@ -1,7 +1,7 @@
 #ifndef INITALIZE_COMMAND_H
 #define INITALIZE_COMMAND_H
 
-#include "command.h"
+#include "../command.h"
 #include <string>
 
 class Initalize : public Command

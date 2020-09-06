@@ -15,13 +15,15 @@ namespace model {
 	extern std::map<Device_Name, Device*> known_devices;
 	extern bool model_running;
 
-	extern std::vector<Model_Command> step_run;
+	extern std::vector<Model_Command> step_actions;
 	extern std::map<Device_Id, Device_Name> id_map;
+
+	Device* get_device(Device_Id device_id);
 
 	void initalize();
 	void add_device(std::string name, Device *device);
 
-	void loop();
+	void step();
 
 	void stop_loop();
 
