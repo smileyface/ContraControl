@@ -2,6 +2,7 @@
 #define MODEL_CONTROLLER_INTERFACE_H
 
 #include "../Controller/types.h"
+#include "../Model/device.h"
 
 class controller_interfaces {
 public:

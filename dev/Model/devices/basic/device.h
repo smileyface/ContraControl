@@ -5,6 +5,7 @@
 #include<functional>
 
 #include "../../../Controller/commands.h"
+#include "../../types.h"
 
 class Device
 {

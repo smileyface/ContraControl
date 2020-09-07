@@ -3,10 +3,7 @@
 
 #include <string>
 
-typedef uint16_t Device_Id;
-typedef std::string Device_Name;
 
-#define INVALID_DEVICE UINT16_MAX
 
 #include "devices/basic/device.h"
 #include "devices/basic/switch.h"

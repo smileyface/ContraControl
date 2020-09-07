@@ -1,7 +1,7 @@
 #ifndef CONTROLLER_TYPES_H
 #define CONTROLLER_TYPES_H
 
-#include "../Model/interfaces/types.h"
+#include "../Model/types.h"
 #include "Commands/command.h"
 
 
