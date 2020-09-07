@@ -1,7 +1,7 @@
 #include "model_main.h"
 
-#include "interfaces/types.h"
-#include "interfaces/controller.h"
+#include "types.h"
+#include "../Interfaces/model_interface.h"
 #include "interfaces/model_actions.h"
 
 Timer model::timer;

@@ -2,6 +2,9 @@
 #define COMMAND_MODEL_INTERFACE
 
 #include "../Controller/types.h"
+#include "../Model/types.h"
+#include "../Model/device.h"
+
 
 
 class model_interfaces {
