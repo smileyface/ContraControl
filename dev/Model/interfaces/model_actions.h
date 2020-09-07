@@ -5,9 +5,7 @@
 #include <memory>
 #include <iostream>
 
-#include "../devices/actions/device.h"
-#include "../devices/actions/gradient.h"
-#include "../devices/actions/switch.h"
+#include "../actions.h"
 #include "../../Utilities/Logging/logging.h"
 
 namespace model_action 

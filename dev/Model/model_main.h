@@ -7,7 +7,7 @@
 
 #include "device.h"
 #include "../Utilities/timer.h"
-#include"interfaces/types.h"
+#include "types.h"
 
 
 namespace model {
