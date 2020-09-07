@@ -38,4 +38,4 @@ endif()
 
 add_executable(Test ${TEST_FILES})
 target_link_libraries(Test gtest_main Test_Utilities)
-add_test(Test SwitchInitalize)
+add_test(Device Test)
