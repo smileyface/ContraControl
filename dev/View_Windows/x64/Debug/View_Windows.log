@@ -1,6 +1,0 @@
-﻿  main.cpp
-main.obj : error LNK2019: unresolved external symbol "void __cdecl model::initalize(void)" (?initalize@model@@YAXXZ) referenced in function main
-main.obj : error LNK2019: unresolved external symbol "void __cdecl model::step(void)" (?step@model@@YAXXZ) referenced in function main
-main.obj : error LNK2019: unresolved external symbol "void __cdecl controller::initalize(void)" (?initalize@controller@@YAXXZ) referenced in function main
-main.obj : error LNK2019: unresolved external symbol "void __cdecl controller::step(void)" (?step@controller@@YAXXZ) referenced in function main
-C:\Users\kason\source\repos\ContraControl\x64\Debug\View_Windows.exe : fatal error LNK1120: 4 unresolved externals
