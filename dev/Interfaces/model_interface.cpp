@@ -4,7 +4,7 @@
 #include "../Model/model_main.h"
 #include "../Controller/controller_main.h"
 #include "../Controller/types.h"
-#include "../Controller/Commands/basic/initalize.h"
+#include "../Controller/Commands/common/initalize.h"
 
 void model_interfaces::controller_interface::add_to_step(Model_Command theCommand)
 {
