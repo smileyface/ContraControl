@@ -14,6 +14,7 @@ public:
 
 	~Initalize() {};
 	COMMAND_ID get_unique_id() { return COMMAND_ID::INITALIZE; };
+	std::string get_log_entry() { return "Initalizing"; };
 	std::string name;
 };
 #endif // !INITALIZE_COMMAND_H

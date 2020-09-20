@@ -19,7 +19,21 @@ public:
 		return position;
 	}
 
-	virtual std::string type_id() { return "Switch"; };
+protected:
+	virtual void do_command(Command* command)
+	{
+		Device::do_command(command);
+		switch (command->get_unique_id())
+		{
+		case(COMMAND_ID::INITALIZE):
+		case(COMMAND_ID::OFF):
+			set_position(false);
+			break;
+		case(COMMAND_ID::ON):
+			set_position(true);
+			break;
+		}
+	};
 
 private:
 	bool position;

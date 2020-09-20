@@ -1,9 +1,7 @@
-#include "pch.h"
-
 #include "system_testings.h"
 
-#include "../dev/Model/model_main.h"
-#include "../dev/Controller/controller_main.h"
+#include "../../dev/Model/model_main.h"
+#include "../../dev/Controller/controller_main.h"
 
 
 void system_util::setup()

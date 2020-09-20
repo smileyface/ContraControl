@@ -22,6 +22,7 @@ namespace controller
 
 	void initalize();
 	void stop_controller();
+	void add_command(Timed_Command tc);
 
 	void step();
 

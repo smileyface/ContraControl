@@ -1,7 +1,6 @@
-﻿set(TEST_FILES "tests/Commands.cpp"
-                "tests/Devices.cpp")
+﻿set(TEST_FILES "tests/Gradient_Device.cpp")
 
-add_library(Test_Utilities "pch.h" "system_testings.h" "system_testings.cpp"  "module_mains.h")
+add_library(Test_Utilities "utilities/pch.h" "utilities/system_testings.h" "utilities/system_testings.cpp"  "utilities/module_mains.h" "utilities/test_utilities.h" "utilities/test_utilities.cpp")
 target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller Interface)
 
 # Download and unpack googletest at configure time
@@ -38,4 +37,4 @@ endif()
 
 add_executable(Test ${TEST_FILES})
 target_link_libraries(Test gtest_main Test_Utilities)
-add_test(Device Test)
+add_test(Devices Test)
