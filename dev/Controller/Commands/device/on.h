@@ -9,5 +9,6 @@ public:
 	On() {};
 	~On() {};
 	COMMAND_ID get_unique_id() { return COMMAND_ID::ON; };
+	std::string get_log_entry() { return "Turned On"; };
 };
 #endif // !ON_COMMAND_H

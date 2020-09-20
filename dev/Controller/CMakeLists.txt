@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.10)
 
 
 set(CONTROLLER_HEADER_FILES 
-                    Commands/basic/initalize.h
-                    Commands/basic/level.h
-                    Commands/basic/off.h
-                    Commands/basic/on.h
+                    Commands/common/initalize.h
+                    Commands/device/transition.h
+                    Commands/device/off.h
+                    Commands/device/on.h
                     Commands/command.h
                     commands.h
                     controller_main.h
