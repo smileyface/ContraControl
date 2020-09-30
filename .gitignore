@@ -34,12 +34,6 @@ packages/*
 *.out
 *.app
 /.vs
-/ContraControl.vcxproj.filters
-/ContraControl.vcxproj
-/ContraControl.sln
-/ContraControl/ContraControl.vcxproj.filters
-/ContraControl/ContraControl.vcxproj
-/x64/Debug
-/ContraControl.vcxproj.user
-/cpp.hint
-/Debug
+out/*
+/dev/.vs
+/dev/out/build/x64-Debug (default)
