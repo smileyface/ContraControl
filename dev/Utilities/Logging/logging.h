@@ -12,16 +12,19 @@ public:
 
 	void addItem(LOG_PRIORITY priority, std::string msg, std::string  device);
 	LogItem pop();
+	LogItem drop();
 private:
 	Logger();
 	static Logger* instance;
-	std::queue<LogItem> logging;
+	std::deque<LogItem> logging;
 };
 
 
 namespace sys_log {
 	void log(LOG_PRIORITY priority, std::string msg, std::string  device);
 	LogItem pop();
+	LogItem drop();
+
 };
 
 

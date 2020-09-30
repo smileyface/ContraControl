@@ -7,5 +7,7 @@
 namespace testing_util
 {
 	void log_top_test(Command* command, Device* device);
+	void log_bottom_test(Command* command, Device* device);
+	void get_partial_on(Command* command, Device* device, int timeout);
 }
 #endif

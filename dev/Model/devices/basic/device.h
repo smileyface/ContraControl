@@ -9,9 +9,11 @@
 #include "../../types.h"
 #include "../../../Utilities/Logging/logging.h"
 #include "../../system/timer.h"
+#include "../../state/state.h"
 
 
 static uint16_t device_id_pool = 0;
+
 
 
 class Device
@@ -23,7 +25,6 @@ public:
 	{
 		return id;
 	};
-
 	std::string get_name()
 	{
 		return device_name;
@@ -33,10 +34,6 @@ public:
 		std::string device_name = typeid(*this).name();
 		return device_name.erase(0, 6) + "::" + get_name();
 	}
-	void set_state(COMMAND_ID unique_id)
-	{
-		state = unique_id;
-	};
 	void set_name(std::string new_name)
 	{
 		device_name = new_name;
@@ -45,40 +42,44 @@ public:
 	{
 		id = new_id;
 	}
-
 	void run_command(Command* command)
 	{
-		if (command->get_unique_id() == COMMAND_ID::INVALID)
-		{
-
-		}
-		else
-		{
 			do_command(command);
-			set_state(command->get_unique_id());
-			add_command_to_log(command);
-		}
+	}
+
+	unsigned char get_state_switches()
+	{
+		return state.switches_pack();
+	}
+	float get_position()
+	{
+		return state.position;
 	}
 
 protected:
+	
 	Device_Id id = INVALID_DEVICE;
 	std::string device_name = "INVALID";
-	COMMAND_ID state;
+	device_state state;
 
 	virtual void do_command(Command* command) 
 	{
-		if (command->get_unique_id() == COMMAND_ID::INITALIZE)
+		switch(command->get_id())
 		{
+		case COMMAND_ENUM::INITALIZE:
 			set_id(device_id_pool);
 			device_id_pool++;
 			set_name(static_cast<Initalize*>(command)->name);
-		}
-	};
 
-	void add_command_to_log(Command* command)
-	{
-		sys_log::log(LOG_PRIORITY::DEBUG, command->get_log_entry(), get_full_name());
-	}
+			state.initalized = true;
+			state.valid = true;
+			state.position = 0.0;
+			break;
+		case COMMAND_ENUM::INVALID:
+			state.valid = false;
+		}
+
+	};
 };
 
 #endif

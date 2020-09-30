@@ -13,8 +13,7 @@ public:
 	};
 
 	~Initalize() {};
-	COMMAND_ID get_unique_id() { return COMMAND_ID::INITALIZE; };
-	std::string get_log_entry() { return "Initalizing"; };
 	std::string name;
+	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::INITALIZE; }
 };
 #endif // !INITALIZE_COMMAND_H

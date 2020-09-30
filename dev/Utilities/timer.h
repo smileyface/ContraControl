@@ -12,6 +12,7 @@ public:
 	void update_time() {
 
 		elapsed_time = (std::clock() - current_time) / (double)CLOCKS_PER_SEC;
+		current_time += elapsed_time;
 	}
 	double get_elapsed_time() { return elapsed_time; }
 	void reset_clock() {

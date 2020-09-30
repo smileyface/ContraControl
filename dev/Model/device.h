@@ -9,4 +9,11 @@
 #include "devices/basic/switch.h"
 #include "devices/basic/gradient.h"
 
+enum class DEVICE_IDENTIFIER
+{
+	DEVICE,
+	SWITCH,
+	GRADIENT
+};
+
 #endif // !DEVICES_H
