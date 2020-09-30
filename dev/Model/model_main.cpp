@@ -2,6 +2,7 @@
 
 #include "types.h"
 #include "../Interfaces/model_interface.h"
+#include "../Controller/Commands/common/initalize.h"
 
 Timer model_timer;
 
@@ -36,7 +37,7 @@ void model::initalize()
 void model::add_device(std::string name, Device* device)
 {
 	model::known_devices.emplace(name, device);
-	Model_Command m_command(device->get_id(), model_interfaces::controller_interface::get_command_object(COMMAND_ID::INITALIZE, name));
+	Model_Command m_command(device->get_id(), new Initalize(name));
 	model_interfaces::controller_interface::request_command(m_command, 0);
 }
 void model::step()
@@ -64,32 +65,20 @@ std::vector<int> model::run_commands()
 	std::vector<int> completed_index;
 	for (int i = 0; i < model::step_actions.size(); i++) {
 
-		if (model::step_actions[i].command->time_to_complete <= 0) {
 			model::get_device(model::step_actions[i].id)->run_command(model::step_actions[i].command);
 			model::system_commands(model::step_actions[i].command);
-			completed_index.push_back(i);
-		}
-		else {
-			model::step_actions[i].command->time_to_complete -= model_timer.elapsed_time;
-		}
+			if(model::step_actions[i].command->completed())
+				completed_index.push_back(i);
+
 	}
 	return completed_index;
 }
 
 void model::system_commands(Command* commands)
 {
-	if (commands->get_unique_id() == COMMAND_ID::INITALIZE)
+	if (commands->get_id() == COMMAND_ENUM::INITALIZE)
 	{
-		Initalize* init = dynamic_cast<Initalize*>(commands);
-		std::map<Device_Id, Device_Name>::iterator i;
-		for (i = model::id_map.begin(); i != id_map.end(); i++)
-		{
-			if (i->second == init->name)
-			{
-				model::id_map.erase(i->first);
-				break;
-			}
-		}
-		model::id_map[model::get_device(init->name)->get_id()] = init->name;
+		model::id_map.clear();
+		model::initalize();
 	}
 }

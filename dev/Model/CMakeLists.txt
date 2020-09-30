@@ -9,8 +9,10 @@ set(MODEL_DEVICES_HEADER_FILES
                     device.h)
 
 set(MODEL_SYSTEM_HEADER_FILES
-                    "system/timer.h")
+                    system/timer.h)
 
+set(MODEL_STATE_HEADER_FILES
+                    state/state.h)
 set(MODEL_HEADER_FILES 
                     actions.h
                     device.h
