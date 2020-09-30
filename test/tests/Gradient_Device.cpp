@@ -1,50 +1,62 @@
 
-#include "../utilities/pch.h"
+#include "../utilities/device_utilities.h"
 #include "../utilities/system_testings.h"
-#include "../utilities/test_utilities.h"
 
-class Device_Commands: public ::testing::Test
-{
-	Device_Commands() {
-		// initialization code here
-	}
+#include "../utilities/pch.h"
 
-	void SetUp() {
-		// code here will execute just before the test ensues 
-	}
+	TEST(Device_Commands, Gradient_Initalize) {
+		std::string device = device_utilities::add_device(new Gradient_Device());
+		device_state ds;
+		ds.initalized = true;
+		ds.valid = true;
 
-	void TearDown() {
+		device_utilities::check_state(device, ds);
+
 		system_util::cleanup();
-
 	}
-};
-TEST(Device_Commands, Gradient_Initalize) {
-	model::add_device("Device_1", new Gradient_Device());
-	system_util::setup();
-	system_util::step(1);
 
-	testing_util::log_top_test(new Initalize("non-sense"), model::get_device("Device_1"));
-	EXPECT_EQ(dynamic_cast<Gradient_Device*>(model::get_device("Device_1"))->get_position(), 0) << "Device is not initalized properly";
-}
+	TEST(Device_Commands, Gradient_On) {
+		std::string device = device_utilities::add_device(new Gradient_Device());
 
-TEST(Device_Commands, Gradient_On) {
-	controller::add_command(Timed_Command(new On(), model::get_device("Device_1")->get_id(), 0));
-	system_util::step(1);
-	testing_util::log_top_test(new On(), model::get_device("Device_1"));
-	EXPECT_EQ(dynamic_cast<Gradient_Device*>(model::known_devices["Device_1"])->get_position(), 1.0f) << "Device is not on";
-}
+		device_state ds = device_utilities::command_device(device, new On());
+		device_utilities::check_state(device, ds);
+		system_util::cleanup();
+	}
 
-TEST(Device_Commands, Gradient_Off) {
-	controller::add_command(Timed_Command(new Off(), model::get_device("Device_1")->get_id(), 0));
-	system_util::step(1);
-	testing_util::log_top_test(new Off(), model::get_device("Device_1"));
-	EXPECT_EQ(dynamic_cast<Gradient_Device*>(model::known_devices["Device_1"])->get_position(), 0.0f) << "Device is not off";
-}
+	TEST(Device_Commands, Gradient_Off) {
+		std::string device = device_utilities::add_device(new Gradient_Device());
 
-TEST(Device_Commands, Gradient_Transition) {
-	Transition* trans = new Transition(50, 20);
-	controller::add_command(Timed_Command(trans, model::get_device("Device_1")->get_id(), 0));
-	system_util::step(1);
-	testing_util::log_top_test(trans, model::get_device("Device_1"));
-	EXPECT_EQ(dynamic_cast<Gradient_Device*>(model::known_devices["Device_1"])->get_position(), 0.5f) << "Device is not off";
-}
+		device_state ds = device_utilities::command_device(device, new On());
+		device_utilities::check_state(device, ds);
+
+		ds = device_utilities::command_device(device, new Off());
+		device_utilities::check_state(device, ds);
+
+		system_util::cleanup();
+	}
+
+	TEST(Device_Commands, Gradient_Transition) {
+		std::string device = device_utilities::add_device(new Gradient_Device());
+		device_utilities::check_position(device, 0);
+
+		//do transition
+		auto time = model_timer.current_time;
+		Transition* trans = new Transition(50, 200);
+		device_state ds = device_utilities::command_device(device, trans);
+		device_utilities::check_state(device, ds);
+		ds = device_utilities::finish_command(trans);
+		ds.transitioning = false;
+		EXPECT_NEAR(model_timer.current_time- time , 200, .1);
+		device_utilities::check_state(device, ds);
+		device_utilities::check_position(device, 50);
+
+		system_util::cleanup();
+	}
+
+	/*TEST_F(Device_Commands, Gradient_Linear_Transition) {
+		Linear_Transition* trans = new Linear_Transition(75, 20);
+		controller::add_command(Timed_Command(trans, model::get_device("Device_1")->get_id(), 0));
+		system_util::step(1);
+		testing_util::log_top_test(trans, model::get_device("Device_1"));
+		EXPECT_EQ(dynamic_cast<Gradient_Device*>(model::known_devices["Device_1"])->get_position(), 0.75f) << "Device is not off";
+	}*/

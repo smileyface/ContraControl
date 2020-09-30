@@ -7,38 +7,39 @@
 class Gradient_Device: public Device
 {
 public:
-	Gradient_Device() { position = 0.0; };
+	Gradient_Device() {};
 	~Gradient_Device() {};
 
-	void set_position(float new_position)
-	{
-		position = new_position;
-	};
 	float get_position() 
 	{
-		return position;
+		return state.position;
 	}
 
-protected:
-	void do_command(Command* command)
+	virtual void do_command(Command* command)
 	{
 		Device::do_command(command);
-		switch (command->get_unique_id())
+		switch (command->get_id())
 		{
-		case COMMAND_ID::INITALIZE:
-		case COMMAND_ID::OFF:
-			set_position(0.0);
+		case COMMAND_ENUM::OFF:
+			state.power = false;
+			state.position = 0.0;
 			break;
-		case COMMAND_ID::ON:
-			set_position(1.0f);
+		case COMMAND_ENUM::ON:
+			state.power = true;
+			state.position = 1.0;
 			break;
-		case COMMAND_ID::TRANSITION:
-			set_position(get_position() - dynamic_cast<Transition*>(command)->get_amount(model_timer.get_elapsed_time()));
-			break;
+		case COMMAND_ENUM::TRANSITION:
+			state.power = true;
+			state.transitioning = true;
+			dynamic_cast<Transition*>(command)->transition(state.position, model_timer.get_elapsed_time());
+			if (command->completed())
+			{
+				state.transitioning = false;
+			}
 		}
 	};
+
 private:
-	float position;
 
 };
 

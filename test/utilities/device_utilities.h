@@ -31,7 +31,6 @@ namespace device_utilities
 	//Check if device state is what is expected
 	void check_state(std::string device, device_state expected_state);
 	void check_position(std::string device, float position);
-	void check_validity(std::string device, bool expect_valid);
 }
 
 #endif // !TESTING_DEVICE_UTILITIES

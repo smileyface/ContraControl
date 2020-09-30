@@ -50,22 +50,13 @@ void device_utilities::check_state(std::string device, device_state expected_sta
 	device_state received_state;
 	received_state.switches_unpack(model::get_device(device)->get_state_switches());
 
-
-	EXPECT_EQ(received_state.valid, expected_state.valid) << "Device validity is not correct";
 	EXPECT_EQ(received_state.initalized, expected_state.initalized) << "Device is not initalized properly";
 	EXPECT_EQ(received_state.power, expected_state.power) << "Device power is not correct";
 	EXPECT_EQ(received_state.transitioning, expected_state.transitioning) << "Device transition is not correct";
+	EXPECT_EQ(received_state.valid, expected_state.valid) << "Device validity is not correct";
 }
 
 void device_utilities::check_position(std::string device, float position)
 {
 	EXPECT_EQ(model::get_device(device)->get_position(), position/100);
-}
-
-void device_utilities::check_validity(std::string device, bool expect_valid)
-{
-	device_state received_state;
-	received_state.switches_unpack(model::get_device(device)->get_state_switches());
-
-	EXPECT_EQ(received_state.valid, expect_valid) << "Device validity is not correct";
 }

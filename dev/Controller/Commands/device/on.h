@@ -8,7 +8,6 @@ class On : public Command {
 public:
 	On() {};
 	~On() {};
-	COMMAND_ID get_unique_id() { return COMMAND_ID::ON; };
-	std::string get_log_entry() { return "Turned On"; };
+	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::ON; }
 };
 #endif // !ON_COMMAND_H
