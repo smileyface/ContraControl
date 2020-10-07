@@ -18,10 +18,15 @@ public:
 		Device::do_command(command);
 		switch (command->get_id())
 		{
+		case COMMAND_ENUM::INITALIZE:
 		case COMMAND_ENUM::OFF:
 			state.power = false;
+			break;
 		case COMMAND_ENUM::ON:
 			state.power = true;
+			break;
+		default:
+			state.valid = false;
 		}
 	};
 
