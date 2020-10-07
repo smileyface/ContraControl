@@ -20,6 +20,7 @@ public:
 		Device::do_command(command);
 		switch (command->get_id())
 		{
+		case COMMAND_ENUM::INITALIZE:
 		case COMMAND_ENUM::OFF:
 			state.power = false;
 			state.position = 0.0;
@@ -36,6 +37,9 @@ public:
 			{
 				state.transitioning = false;
 			}
+			break;
+		default:
+			state.valid = false;
 		}
 	};
 

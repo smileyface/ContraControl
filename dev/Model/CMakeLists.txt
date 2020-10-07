@@ -6,7 +6,8 @@ set(MODEL_DEVICES_HEADER_FILES
                     devices/basic/gradient.h
                     devices/basic/switch.h
                     devices/single_complex/rgb.h
-                    device.h)
+                    devices/single_complex/audio.h
+                    device.h  "devices/single_complex/led.h")
 
 set(MODEL_SYSTEM_HEADER_FILES
                     system/timer.h)
