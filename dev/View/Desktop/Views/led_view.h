@@ -1,6 +1,6 @@
-#include "../view.h"
+#include "view.h"
 
-class LED_View : public View
+class LED_View : public Desktop_View
 {
 	LED_View(const char CLASS_NAME[], const char WIN_TEXT[], int nCmdShow)
 	{

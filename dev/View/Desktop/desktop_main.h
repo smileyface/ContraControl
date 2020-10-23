@@ -5,14 +5,15 @@
 #include <map>
 #include <string>
 #include "views.h"
+#include "Interfaces/interfaces.h"
 
 namespace CC_Window_Tree_Interface
 {
 	extern std::string main_window_handle;
-	extern std::map<std::string, View*> window_tree;
-	void initalize(HINSTANCE hInstance);
+	extern std::map<std::string, Desktop_View*> view_tree;
+	void initalize();
 	void show_all();
-	View* getWindow(HWND hwnd);
+	View* getWindow(View* hwnd);
 
 
 }
