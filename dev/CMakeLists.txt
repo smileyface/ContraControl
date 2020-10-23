@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.6)
 
 project(ContraControlDev VERSION 0.0.3)
 
@@ -12,3 +12,4 @@ add_subdirectory(Controller)
 add_subdirectory(Model)
 add_subdirectory(Utilities)
 add_subdirectory(View)
+

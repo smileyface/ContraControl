@@ -4,9 +4,6 @@
 #include "../../system_interface.h"
 #ifdef WIN32
 
-
-
-
 #include <Windows.h>
 
 

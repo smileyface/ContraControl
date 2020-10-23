@@ -3,6 +3,7 @@
 #include "types.h"
 #include "../Interfaces/model_interface.h"
 #include "../Controller/Commands/common/initalize.h"
+#include "../Utilities/Logging/logging.h"
 
 Timer model_timer;
 

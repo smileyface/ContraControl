@@ -19,7 +19,12 @@ public:
 		message = "NO MESSAGE";
 		device = "SYSTEM ERROR";
 	}
-	LogItem(LOG_PRIORITY, std::string, std::string);
+	LogItem(LOG_PRIORITY pri, std::string msg, std::string dev)
+	{
+		priority = pri;
+		message = msg;
+		device = dev;
+	};
 	LOG_PRIORITY priority;
 	std::string message;
 	std::string device;

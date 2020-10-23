@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.10)
-
-
 set(CONTROLLER_HEADER_FILES 
                     Commands/common/initalize.h
                     Commands/device/transitions/transition.h

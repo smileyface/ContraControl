@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.10)
-
 
 set(MODEL_DEVICES_HEADER_FILES 
                     devices/basic/device.h
@@ -19,4 +17,7 @@ set(MODEL_HEADER_FILES
                     device.h
                     types.h )
 
+
 add_library(Model model_main.cpp ${MODEL_DEVICES_HEADER_FILES} ${MODEL_HEADER_FILES} ${MODEL_SYSTEM_HEADER_FILES})
+target_link_libraries(Model Utilities Interface)
+set_property(TARGET Model PROPERTY CXX_STANDARD 11)
