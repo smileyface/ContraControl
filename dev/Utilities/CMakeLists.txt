@@ -7,4 +7,4 @@ set(UTILITIES_HEADER_FILES
                     utils.h
     )
 
-add_library(Utilities Logging/log_item.cpp Logging/logging.cpp ${UTILITIES_HEADER_FILES})
+add_library(Utilities Logging/log_item.cpp Logging/logging.cpp ${UTILITIES_HEADER_FILES} "system.h")
