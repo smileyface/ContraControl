@@ -5,6 +5,7 @@ set(UTILITIES_HEADER_FILES
                     save_reader.h
                     timer.h
                     utils.h
+                    system.h
     )
 
-add_library(Utilities Logging/log_item.cpp Logging/logging.cpp ${UTILITIES_HEADER_FILES} "system.h")
+add_library(Utilities Logging/logging.cpp ${UTILITIES_HEADER_FILES})
