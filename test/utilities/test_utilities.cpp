@@ -16,7 +16,7 @@ void testing_util::log_bottom_test(Command* command, Device* device)
 	topItem = sys_log::drop();
 }
 
-void testing_util::get_partial_on(Command* command, Device* device, int timeout)
+void testing_util::get_partial_on(Command* command, Device* device, double timeout)
 {
 	while (timeout > 0)
 	{

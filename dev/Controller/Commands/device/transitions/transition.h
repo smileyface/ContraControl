@@ -10,7 +10,7 @@ public:
 	Transition(int transition_amount, double transition_time)
 	{
 		time_to_complete = transition_time;
-		amount = transition_amount / 100.0;
+		amount = transition_amount / 100.0f;
 	};
 	~Transition() { };
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::TRANSITION; }

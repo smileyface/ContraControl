@@ -10,7 +10,7 @@ public:
 	Linear_Transition(int transition_amount, double transition_time)
 	{
 		time_to_complete = transition_time;
-		amount = transition_amount / 100;
+		amount = transition_amount / 100.0f;
 	}
 	virtual void set_device_position(double& position, double elapsed_time)
 	{
