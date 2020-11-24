@@ -15,7 +15,7 @@ set(MODEL_STATE_HEADER_FILES
 set(MODEL_HEADER_FILES 
                     actions.h
                     device.h
-                    types.h )
+                    types.h  "state/rgb.h")
 
 
 add_library(Model model_main.cpp ${MODEL_DEVICES_HEADER_FILES} ${MODEL_HEADER_FILES} ${MODEL_SYSTEM_HEADER_FILES})

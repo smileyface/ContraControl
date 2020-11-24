@@ -1,6 +1,9 @@
 #ifndef VIEW_INTERFACES_H
 #define VIEW_INTERFACES_H
-#include "system_interface.h"
-System_Interface* get_system_interface();
+#include "common/window.h"
+#include "common/menu.h"
+#include "common/painter.h"
+
+Window* get_system_interface();
 
 #endif

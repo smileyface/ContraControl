@@ -1,15 +1,16 @@
 #include "../../system_interface.h"
 #ifdef IS_WIN32
 #include <Windows.h>
-#include "interfaces.h"
+#include "window.h"
 #include "../view/view_interface.h"
-#include "..\..\interfaces.h"
+#include "../../interfaces.h"
 
 const int DEFAULT_SIZE = CW_USEDEFAULT;
 HINSTANCE window_hInstance;
 
 void Windows_Interface::initalize(dimension dim)
 {
+
     
     WNDCLASS wc = { };
     wc.lpfnWndProc = WindowProc;
@@ -62,10 +63,5 @@ bool Windows_Interface::operator==(Windows_Interface h)
     return false;
 }
 
-
-void Windows_Interface::Painter::rectangle(dimension size, rgb color)
-{
-
-}
 
 #endif // WIN32

@@ -6,7 +6,13 @@ std::string CC_Window_Tree_Interface::main_window_handle = "Main";
 
 void CC_Window_Tree_Interface::initalize()
 {
-	view_tree.emplace(std::make_pair(main_window_handle, new Main_View("Simple Window", "Contra Control", 10)));
+	add_view(main_window_handle, new Main_View());
+}
+
+void CC_Window_Tree_Interface::add_view(std::string handle, Desktop_View* view)
+{
+	view_tree.emplace(std::make_pair(handle, view));
+	view_tree[handle]->initalize(handle, handle);
 }
 
 void CC_Window_Tree_Interface::show_all()

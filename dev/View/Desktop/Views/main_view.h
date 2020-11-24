@@ -1,26 +1,18 @@
 #include "view.h"
+#include "../Interfaces/common/menu.h"
 
 class Main_View : public Desktop_View
 {
 public:
-	Main_View() { };
-	Main_View(const char CLASS_NAME[], const char WIN_TEXT[], int nCmdShow)
+	void create_menu(Menu& main_menu)
 	{
-		initalize(CLASS_NAME, WIN_TEXT, nCmdShow);
-	}
-
-	void initalize(const std::string CLASS_NAME, const std::string WIN_TEXT, int nCmdShow) {}
-
-	void create_menu(System_Interface::Menu& main_menu)
-	{
-		handle->menu.add_menu_item(System_Interface::Menu_Item("Quit"));
-		handle->menu.add_menu_item(System_Interface::Menu_Item("Add Device"));
+		handle->menu->add_menu_item(new Menu("File"));
+		handle->menu->add_menu_item(new Menu_Item("Add Device", Menu_Item::Menu_Types::MENU, 0));
 	}
 
 	void on_paint()
 	{
-		System_Interface::Painter paint;
-		paint.rectangle({ 256, 256, 256, 256 }, { 255, 255, 255 });
+		handle->painter->rectangle({ 256, 256, 256, 256 }, rgb(255, 0, 255));
 	}
 
 	void on_destroy()
@@ -46,4 +38,13 @@ public:
 
 	void on_create() {}
 
+protected:
+	void view_initalize()
+	{
+		dim.x = 256;
+		dim.y = 256;
+		dim.height = 256;
+		dim.length = 1024;
+		handle->initalize(dim);
+	}
 };

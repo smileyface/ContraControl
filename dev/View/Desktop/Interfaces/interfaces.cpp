@@ -2,12 +2,12 @@
 #include "system_interface.h"
 
 #ifdef IS_WIN32
-#include "Windows/view/interfaces.h"
+#include "Windows/view/window.h"
 #endif
-System_Interface* get_system_interface()
+Window* get_system_interface()
 {
-#ifdef IS_WIN32
+	#ifdef IS_WIN32
 	return new Windows_Interface();
 	#endif
-	return nullptr;
+	return NULL;
 }

@@ -2,7 +2,8 @@
 #define WINDOW_MAIN_TYPE
 
 #include "../Interfaces/interfaces.h"
-#include "../../common/view.h"
+#include "../../Common/view.h"
+#include "../Interfaces/common/lib/dimensions.h"
 
 
 constexpr auto IDM_QUIT = 101;
@@ -12,11 +13,16 @@ public:
 
     dimension dim = { DEFAULT_SIZE , DEFAULT_SIZE , DEFAULT_SIZE, DEFAULT_SIZE };
 
-    Desktop_View() {
+    void initalize(const std::string CLASS_NAME, const std::string WIN_TEXT) 
+    {
         handle = get_system_interface();
-        displayed = false; 
-    };
-    virtual void initalize(const std::string CLASS_NAME, const std::string WIN_TEXT, int nCmdShow) = 0;
+        displayed = false;
+        handle->set_window_name(CLASS_NAME);
+        handle->set_window_text(WIN_TEXT);
+        view_initalize();
+    }
+
+
     virtual void on_destroy() = 0;
     virtual void on_paint() = 0;
     virtual void on_create() = 0;
@@ -24,7 +30,7 @@ public:
     virtual void on_mouse_down() = 0;
     virtual void on_command(unsigned int* command) = 0;
 
-    virtual void create_menu(System_Interface::Menu& main_menu) = 0;;
+    virtual void create_menu(Menu& main_menu) = 0;;
 
     void display() {
         handle->show_window();
@@ -42,7 +48,9 @@ public:
 protected:
     bool displayed;
     //window display handle
-    System_Interface* handle;
+    Window* handle;
+
+    virtual void view_initalize() = 0;
 
 };
 
