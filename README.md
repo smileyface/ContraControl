@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/smileyface/ContraControl)
+
 # ContraControl
 ## purpose
 This is a controller for various purposes. It is being designed for the purpose of holiday light and animatronic shows. 
