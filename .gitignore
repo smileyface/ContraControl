@@ -38,6 +38,7 @@ out/*
 /dev/.vs
 /dev/out/build/x64-Debug (default)
 bin/*
+build/*
 
 
 #Testing Extras
