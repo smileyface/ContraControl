@@ -37,3 +37,24 @@ packages/*
 out/*
 /dev/.vs
 /dev/out/build/x64-Debug (default)
+bin/*
+build/*
+
+
+#Testing Extras
+test/googletest*
+Test
+
+#CMake Extras
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
