@@ -1,13 +1,16 @@
-#ifdef WIN32
+#include "../../system_interface.h"
+#ifdef IS_WIN32
 #include <Windows.h>
 #include "interfaces.h"
 #include "../view/view_interface.h"
+#include "..\..\interfaces.h"
 
 const int DEFAULT_SIZE = CW_USEDEFAULT;
+HINSTANCE window_hInstance;
 
 void Windows_Interface::initalize(dimension dim)
 {
-    HINSTANCE window_hInstance;
+    
     WNDCLASS wc = { };
     wc.lpfnWndProc = WindowProc;
     wc.hInstance = window_hInstance;

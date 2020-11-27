@@ -1,5 +1,5 @@
 IF (CMAKE_HOST_WIN32)
-    file(WRITE "system.h" "#ifndef SYSTEM_VARIABLES\n #define SYSTEM_VARIABLES\n #define WIN32\n#endif")
+    file(WRITE "system.h" "#ifndef SYSTEM_VARIABLES\n #define SYSTEM_VARIABLES\n #define IS_WIN32\n#endif")
 ENDIF()
 
 set(COMMON_DESKTOP_VIEW_INCLUDE "Desktop/views.h"
@@ -9,7 +9,7 @@ set(COMMON_DESKTOP_VIEW_INCLUDE "Desktop/views.h"
                                 "Desktop/Interfaces/interfaces.h" 
                                 "Desktop/desktop_main.cpp"
                                 "Desktop/desktop_main.h" 
-                                "common/view.h" "Desktop/Interfaces/system_interface.h")
+                                "common/view.h" "Desktop/Interfaces/system_interface.h" "Desktop/Interfaces/interfaces.cpp")
 
 
 

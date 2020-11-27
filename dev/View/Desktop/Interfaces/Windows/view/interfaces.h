@@ -3,7 +3,9 @@
 
 #include "../../system_interface.h"
 
-
+#ifdef IS_WIN32
+#include <Windows.h>
+#endif // WIN32
 
 
 class Windows_Interface : public System_Interface
@@ -16,7 +18,7 @@ public:
 	bool Windows_Interface::operator==(Windows_Interface h);
 
 protected:
-#ifdef WIN32
+#ifdef IS_WIN32
 	HWND handle;
 #endif // WIN32
 

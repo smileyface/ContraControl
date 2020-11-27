@@ -13,6 +13,7 @@ public:
     dimension dim = { DEFAULT_SIZE , DEFAULT_SIZE , DEFAULT_SIZE, DEFAULT_SIZE };
 
     Desktop_View() {
+        handle = get_system_interface();
         displayed = false; 
     };
     virtual void initalize(const std::string CLASS_NAME, const std::string WIN_TEXT, int nCmdShow) = 0;
