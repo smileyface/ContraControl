@@ -23,8 +23,8 @@ void Windows_Interface::initalize(dimension dim)
 
     HWND hwnd = CreateWindowEx(
         0,                              // Optional window styles.
-        name.c_str(),                     // Window class
-        window_text.c_str(),                       // Window text
+        name.c_str(),                   // Window class
+        window_text.c_str(),            // Window text
         WS_OVERLAPPEDWINDOW,            // Window style
 
         // Size and position
@@ -41,6 +41,7 @@ void Windows_Interface::initalize(dimension dim)
         throw "Window  not created";
     }
     handle = hwnd;
+    main_menu = CreateMenu();
 }
 
 void Windows_Interface::show_window()
@@ -56,6 +57,12 @@ void Windows_Interface::hide_window()
 void Windows_Interface::close_window()
 {
     PostQuitMessage(0);
+}
+
+void Windows_Interface::set_menu(Menu* main)
+{
+    main_menu = dynamic_cast<Windows_Menu*>(main)->get_menu();
+    SetMenu(handle, main_menu);
 }
 
 bool Windows_Interface::operator==(Windows_Interface h)

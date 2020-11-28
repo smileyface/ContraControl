@@ -5,5 +5,7 @@
 #include "common/painter.h"
 
 Window* get_system_interface();
+Menu* get_menu(std::string txt);
+Menu_Item* get_menu(std::string txt, Menu_Item::Menu_Types flg, unsigned int id);
 
 #endif

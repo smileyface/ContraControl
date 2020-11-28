@@ -30,7 +30,21 @@ public:
     virtual void on_mouse_down() = 0;
     virtual void on_command(unsigned int* command) = 0;
 
-    virtual void create_menu(Menu& main_menu) = 0;;
+    virtual void create_menu() = 0;
+    void add_to_main_menu(Menu_Item* item)
+    {
+        main_menu.push_back(item);
+    }
+
+    void pack_main_menu()
+    {
+        Menu* main_menu_handle = get_menu("Main");
+        for (int x = 0; x < main_menu.size(); x++)
+        {
+            main_menu_handle->add_to_menu(main_menu[x]);
+        }
+        handle->set_menu(main_menu_handle);
+    }
 
     void display() {
         handle->show_window();
@@ -49,6 +63,8 @@ protected:
     bool displayed;
     //window display handle
     Window* handle;
+    //main menu handles
+    std::vector<Menu_Item*> main_menu;
 
     virtual void view_initalize() = 0;
 

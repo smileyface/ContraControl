@@ -13,6 +13,8 @@ void CC_Window_Tree_Interface::add_view(std::string handle, Desktop_View* view)
 {
 	view_tree.emplace(std::make_pair(handle, view));
 	view_tree[handle]->initalize(handle, handle);
+	view_tree[handle]->create_menu();
+	view_tree[handle]->pack_main_menu();
 }
 
 void CC_Window_Tree_Interface::show_all()

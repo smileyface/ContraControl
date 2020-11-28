@@ -3,8 +3,9 @@
 #include<string>
 #include<vector>
 
-struct Menu_Item
+class Menu_Item
 {
+public:
     enum class Menu_Types
     {
         MENU,
@@ -15,16 +16,16 @@ struct Menu_Item
     };
     std::string text;
     Menu_Types flag;
-    unsigned int* id;
+    unsigned int id;
 
 
     Menu_Item()
     {
         text = "";
         flag = Menu_Types::INVALID;
-        *id = UINT32_MAX;
+        id = UINT32_MAX;
     }
-    Menu_Item(std::string txt, Menu_Types flg, unsigned int* _id)
+    Menu_Item(std::string txt, Menu_Types flg, unsigned int _id)
     {
         text = txt;
         flag = flg;
@@ -37,9 +38,10 @@ public:
     Menu() {};
     Menu(std::string txt)
     {
+        flag = Menu_Types::MENU;
         text = txt;
     }
-    virtual void add_menu_item(Menu_Item* menu)
+    virtual void add_to_menu(Menu_Item* menu)
     {
         menu_tree.push_back(menu);
     }

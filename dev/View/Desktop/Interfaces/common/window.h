@@ -16,6 +16,7 @@ public:
     void virtual show_window() = 0;
     void virtual hide_window() = 0;
     void virtual close_window() = 0;
+    void virtual set_menu(Menu* main) = 0;
 
 
     void set_window_name(std::string window_name)

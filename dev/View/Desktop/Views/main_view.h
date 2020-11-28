@@ -4,10 +4,12 @@
 class Main_View : public Desktop_View
 {
 public:
-	void create_menu(Menu& main_menu)
+	void create_menu()
 	{
-		handle->menu->add_menu_item(new Menu("File"));
-		handle->menu->add_menu_item(new Menu_Item("Add Device", Menu_Item::Menu_Types::MENU, 0));
+		Menu* file_menu = get_menu("File");
+		file_menu->add_to_menu(get_menu("Quit", Menu_Item::Menu_Types::MENU_ITEM, IDM_QUIT));
+		add_to_main_menu(file_menu);
+
 	}
 
 	void on_paint()
