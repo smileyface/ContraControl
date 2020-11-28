@@ -26,15 +26,3 @@ void CC_Window_Tree_Interface::show_all()
 	}
 }
 
-View* CC_Window_Tree_Interface::getWindow(View* hwnd)
-{
-	std::map<std::string, Desktop_View*>::iterator it;
-	for (it = view_tree.begin(); it != view_tree.end(); it++)
-	{
-		if (view_tree[it->first] == hwnd)
-		{
-			return view_tree[it->first];
-		}
-	}
-	throw "This window does not exist";
-}

@@ -28,12 +28,17 @@ public:
     virtual void on_create() = 0;
     virtual void on_quit() = 0;
     virtual void on_mouse_down() = 0;
-    virtual void on_command(unsigned int* command) = 0;
+    virtual void on_command(unsigned int command) = 0;
 
     virtual void create_menu() = 0;
     void add_to_main_menu(Menu_Item* item)
     {
         main_menu.push_back(item);
+    }
+
+    Window* get_handle()
+    {
+        return handle;
     }
 
     void pack_main_menu()
@@ -59,6 +64,7 @@ public:
     {
         return &handle == &h->handle;
     }
+
 protected:
     bool displayed;
     //window display handle

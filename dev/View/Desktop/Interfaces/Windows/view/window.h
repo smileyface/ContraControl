@@ -24,6 +24,7 @@ public:
 	virtual void hide_window();
 	virtual void close_window();
 	virtual void set_menu(Menu* main);
+	HWND get_handle();
 	bool Windows_Interface::operator==(Windows_Interface h);
 
 protected:

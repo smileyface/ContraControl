@@ -15,7 +15,6 @@ namespace CC_Window_Tree_Interface
 	void add_view(std::string handle, Desktop_View* view);
 
 	void show_all();
-	View* getWindow(View* hwnd);
 
 
 }

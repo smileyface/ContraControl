@@ -7,6 +7,9 @@
 #include <Windows.h>
 
 extern HINSTANCE window_hInstance;
+
+
+
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 #endif // IS_WIN32

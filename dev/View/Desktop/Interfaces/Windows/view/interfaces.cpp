@@ -65,6 +65,11 @@ void Windows_Interface::set_menu(Menu* main)
     SetMenu(handle, main_menu);
 }
 
+HWND Windows_Interface::get_handle()
+{
+    return handle;
+}
+
 bool Windows_Interface::operator==(Windows_Interface h)
 {
     return false;

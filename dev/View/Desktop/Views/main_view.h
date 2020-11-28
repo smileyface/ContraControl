@@ -22,9 +22,9 @@ public:
 		handle->close_window();
 	}
 
-	void on_command(unsigned int* command)
+	void on_command(unsigned int command)
 	{
-		if(*command == IDM_QUIT)
+		if(command == IDM_QUIT)
 		{
 			on_quit();
 		}

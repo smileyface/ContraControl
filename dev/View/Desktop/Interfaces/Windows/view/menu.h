@@ -7,7 +7,12 @@
 class Windows_Menu : public Menu
 {
 public:
-    Windows_Menu() {};
+    Windows_Menu() 
+    {
+        text = "";
+        flag = Menu_Item::Menu_Types::INVALID;
+        this_menu = NULL;
+    };
     Windows_Menu(std::string txt) 
     {
         text = txt;
