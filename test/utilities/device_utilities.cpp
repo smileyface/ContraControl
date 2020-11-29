@@ -69,3 +69,8 @@ void device_utilities::check_validity(std::string device, bool expect_valid)
 
 	EXPECT_EQ(received_state.valid, expect_valid) << "Device validity is not correct";
 }
+
+void device_utilities::initalize_device(std::string device)
+{
+	command_device(device, new Initalize(device));
+}

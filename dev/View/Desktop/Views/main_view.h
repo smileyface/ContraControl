@@ -10,6 +10,15 @@ public:
 		file_menu->add_to_menu(get_menu("Quit", Menu_Item::Menu_Types::MENU_ITEM, IDM_QUIT));
 		add_to_main_menu(file_menu);
 
+		Menu* devices_menu = get_menu("Devices");
+		Menu* add_devices_menu = get_menu("Add");
+		add_devices_menu->add_to_menu(get_menu("LED", Menu_Item::Menu_Types::MENU_ITEM, 102));
+		Menu* remove_devices_menu = get_menu("Remove");
+
+		devices_menu->add_to_menu(add_devices_menu);
+		devices_menu->add_to_menu(remove_devices_menu);
+		add_to_main_menu(devices_menu);
+
 	}
 
 	void on_paint()

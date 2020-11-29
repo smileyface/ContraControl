@@ -19,6 +19,7 @@ public:
     {
         state.initalized = true;
         state.valid = true;
+		state.position = 0.0f;
     }
 };
 #endif // !INITALIZE_COMMAND_H

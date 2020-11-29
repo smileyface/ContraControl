@@ -38,9 +38,8 @@ void model::initalize()
 void model::add_device(std::string name, Device* device)
 {
 	model::known_devices.emplace(name, device);
-	Model_Command m_command(device->get_id(), new Initalize(name));
-	model_interfaces::controller_interface::request_command(m_command, 0);
 }
+
 void model::step()
 {
 	std::vector<int> completed_index = model::run_commands();

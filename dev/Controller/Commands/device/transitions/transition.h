@@ -37,6 +37,15 @@ public:
             state.valid = false;
             return;
         }
+		state.power = true;
+		if (state.position != amount)
+		{
+			state.transitioning = true;
+		}
+		else
+		{
+			state.transitioning = false;
+		}
         transition(state.position, model_timer.get_elapsed_time());
     }
 
