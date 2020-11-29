@@ -7,7 +7,7 @@ namespace device_utilities
 {
 	extern int device_in_use;
 
-	device_state get_nominal_state(Command* command);
+	Device_State get_nominal_state(Command* command);
 	
 	/*
 	MODEL MANIPULATION
@@ -20,16 +20,16 @@ namespace device_utilities
 	/*
 	Command a device. Returns the nominal state associated with that command.
 	*/
-	device_state command_device(std::string device_id, Command* command);
+	Device_State command_device(std::string device_id, Command* command);
 
-	device_state finish_command(Command* command);
+	Device_State finish_command(Command* command);
 
 	/*
 	DEVICE SPECIFIC CHECKS
 	*/
 
 	//Check if device state is what is expected
-	void check_state(std::string device, device_state expected_state);
+	void check_state(std::string device, Device_State expected_state);
 	void check_position(std::string device, float position);
 	void check_validity(std::string device, bool expect_valid);
 }

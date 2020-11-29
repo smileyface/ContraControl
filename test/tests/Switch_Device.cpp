@@ -5,7 +5,7 @@
 
 TEST(Device_Commands, Switch_Initalize) {
 	std::string device = device_utilities::add_device(new Switch_Device());
-	device_state ds;
+	Device_State ds;
 	ds.initalized = true;
 	ds.valid = true;
 
@@ -17,7 +17,7 @@ TEST(Device_Commands, Switch_Initalize) {
 TEST(Device_Commands, Switch_On) {
 	std::string device = device_utilities::add_device(new Switch_Device());
 
-	device_state ds = device_utilities::command_device(device, new On());
+	Device_State ds = device_utilities::command_device(device, new On());
 	device_utilities::check_state(device, ds);
 	system_util::cleanup();
 }
@@ -25,7 +25,7 @@ TEST(Device_Commands, Switch_On) {
 TEST(Device_Commands, Switch_Off) {
 	std::string device = device_utilities::add_device(new Switch_Device());
 
-	device_state ds = device_utilities::command_device(device, new On());
+	Device_State ds = device_utilities::command_device(device, new On());
 	device_utilities::check_state(device, ds);
 
 	ds = device_utilities::command_device(device, new Off());

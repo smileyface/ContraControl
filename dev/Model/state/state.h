@@ -1,14 +1,14 @@
 #ifndef DEVICE_STATE_MACHINE_H
 #define DEVICE_STATE_MACHINE_H
 
-#include "../../Controller/commands.h"
 #include<vector>
 #include <typeinfo> 
+#include <cinttypes>
 
 #define INVALID_POSITION -1
 
 
-struct device_state
+struct Device_State
 {
 	bool initalized = false;
 	bool power = false;

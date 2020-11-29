@@ -6,7 +6,7 @@
 #include "../Model/model_main.h"
 #include "../Controller/controller_main.h"
 #include "../Controller/types.h"
-#include "../Controller/Commands/common/initalize.h"
+#include "../Controller/commands.h"
 
 struct compare
 {
@@ -14,7 +14,7 @@ struct compare
 	compare(Model_Command const& i) : key(i) {}
 	bool operator()(Model_Command const& i)
 	{
-		return key.command->get_unique_id() == key.command->get_unique_id();
+		return get_command_name(key.command) == get_command_name(i.command);
 	}
 };
 

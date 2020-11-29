@@ -15,5 +15,10 @@ public:
 	~Initalize() {};
 	std::string name;
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::INITALIZE; }
+    virtual void mangle_state(Device_State& state)
+    {
+        state.initalized = true;
+        state.valid = true;
+    }
 };
 #endif // !INITALIZE_COMMAND_H

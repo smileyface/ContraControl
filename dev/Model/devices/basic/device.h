@@ -44,7 +44,7 @@ public:
 	}
 	void run_command(Command* command)
 	{
-			do_command(command);
+			command->mangle_state(state);
 	}
 
 	unsigned char get_state_switches()
@@ -60,7 +60,7 @@ protected:
 	
 	Device_Id id = INVALID_DEVICE;
 	std::string device_name = "INVALID";
-	device_state state;
+	Device_State state;
 
 	virtual void do_command(Command* command) 
 	{
@@ -77,6 +77,13 @@ protected:
 			break;
 		case COMMAND_ENUM::INVALID:
 			state.valid = false;
+            break;
+        case COMMAND_ENUM::LINEAR_TRANSITION:
+        case COMMAND_ENUM::TRANSITION: 
+        case COMMAND_ENUM::OFF:
+        case COMMAND_ENUM::ON:
+            break;
+        
 		}
 
 	};

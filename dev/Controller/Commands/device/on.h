@@ -9,5 +9,14 @@ public:
 	On() {};
 	~On() {};
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::ON; }
+    virtual void mangle_state(Device_State& state)
+    {
+        if(state.initalized == false)
+        {
+            state.valid = false;
+            return;
+        }
+        state.power = true;
+    }
 };
 #endif // !ON_COMMAND_H
