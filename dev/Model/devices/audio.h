@@ -1,5 +1,5 @@
-#include "../basic/switch.h"
-#include "../basic/gradient.h"
+#include "switch.h"
+#include "gradient.h"
 
 class Audio_Device : public Switch_Device
 {

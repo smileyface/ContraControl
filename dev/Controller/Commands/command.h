@@ -13,12 +13,12 @@ typedef uint16_t command_id;
 
 enum class COMMAND_ENUM :uint16_t
 {
-	INITALIZE,
-	ON,
-	OFF,
-	TRANSITION,
-	LINEAR_TRANSITION,
-	INVALID = UINT16_MAX
+	INITALIZE, //Do device start up routine
+	ON, // Turn device on
+	OFF, // Turn device off
+	TRANSITION, // Generic transition
+	LINEAR_TRANSITION, // Transition at in a linear manner
+	INVALID = UINT16_MAX //Unmapped Command
 };
 
 class Command {
@@ -48,8 +48,10 @@ inline std::string get_command_name(Command* command)
     case COMMAND_ENUM::OFF:
         return "OFF";
     case COMMAND_ENUM::INVALID:
+    default:
         return "INVALID"; 
     }
+    return "INVALID";
 }
 
 #endif // !COMMAND_H
