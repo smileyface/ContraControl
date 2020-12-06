@@ -1,14 +1,14 @@
 #ifndef DEVICE_STATE_MACHINE_H
 #define DEVICE_STATE_MACHINE_H
 
-#include "../../Controller/commands.h"
 #include<vector>
 #include <typeinfo> 
+#include <cinttypes>
 
 #define INVALID_POSITION -1
 
 
-struct device_state
+struct Device_State
 {
 	bool initalized = false;
 	bool power = false;
@@ -32,14 +32,14 @@ struct device_state
 	uint16_t pack()
 	{
 		uint16_t packed = switches_pack() << 8;
-		unsigned char pos = position * 255;
+		unsigned char pos = static_cast<int>(position) * 255;
 		packed += pos;
 
 		return packed;
 	}
 	void unpack(uint16_t state)
 	{
-		position = (state & 0xff)/255;
+		position = (state & 0xff)/255.0f;
 		switches_unpack(state >> 8);
 	}
 

@@ -1,13 +1,17 @@
-#ifdef WIN32
+#include "../../system_interface.h"
+#ifdef IS_WIN32
 #include <Windows.h>
-#include "interfaces.h"
+#include "window.h"
 #include "../view/view_interface.h"
+#include "../../interfaces.h"
 
 const int DEFAULT_SIZE = CW_USEDEFAULT;
+HINSTANCE window_hInstance;
 
 void Windows_Interface::initalize(dimension dim)
 {
-    HINSTANCE window_hInstance;
+
+    
     WNDCLASS wc = { };
     wc.lpfnWndProc = WindowProc;
     wc.hInstance = window_hInstance;
@@ -19,8 +23,8 @@ void Windows_Interface::initalize(dimension dim)
 
     HWND hwnd = CreateWindowEx(
         0,                              // Optional window styles.
-        name.c_str(),                     // Window class
-        window_text.c_str(),                       // Window text
+        name.c_str(),                   // Window class
+        window_text.c_str(),            // Window text
         WS_OVERLAPPEDWINDOW,            // Window style
 
         // Size and position
@@ -37,6 +41,7 @@ void Windows_Interface::initalize(dimension dim)
         throw "Window  not created";
     }
     handle = hwnd;
+    main_menu = CreateMenu();
 }
 
 void Windows_Interface::show_window()
@@ -54,15 +59,21 @@ void Windows_Interface::close_window()
     PostQuitMessage(0);
 }
 
+void Windows_Interface::set_menu(Menu* main)
+{
+    main_menu = dynamic_cast<Windows_Menu*>(main)->get_menu();
+    SetMenu(handle, main_menu);
+}
+
+HWND Windows_Interface::get_handle()
+{
+    return handle;
+}
+
 bool Windows_Interface::operator==(Windows_Interface h)
 {
     return false;
 }
 
-
-void Windows_Interface::Painter::rectangle(dimension size, rgb color)
-{
-
-}
 
 #endif // WIN32

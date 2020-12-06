@@ -1,26 +1,29 @@
 #include "view.h"
+#include "../Interfaces/common/menu.h"
 
 class Main_View : public Desktop_View
 {
 public:
-	Main_View() { };
-	Main_View(const char CLASS_NAME[], const char WIN_TEXT[], int nCmdShow)
+	void create_menu()
 	{
-		initalize(CLASS_NAME, WIN_TEXT, nCmdShow);
-	}
+		Menu* file_menu = get_menu("File");
+		file_menu->add_to_menu(get_menu("Quit", Menu_Item::Menu_Types::MENU_ITEM, IDM_QUIT));
+		add_to_main_menu(file_menu);
 
-	void initalize(const std::string CLASS_NAME, const std::string WIN_TEXT, int nCmdShow) {}
+		Menu* devices_menu = get_menu("Devices");
+		Menu* add_devices_menu = get_menu("Add");
+		add_devices_menu->add_to_menu(get_menu("LED", Menu_Item::Menu_Types::MENU_ITEM, 102));
+		Menu* remove_devices_menu = get_menu("Remove");
 
-	void create_menu(System_Interface::Menu& main_menu)
-	{
-		handle->menu.add_menu_item(System_Interface::Menu_Item("Quit"));
-		handle->menu.add_menu_item(System_Interface::Menu_Item("Add Device"));
+		devices_menu->add_to_menu(add_devices_menu);
+		devices_menu->add_to_menu(remove_devices_menu);
+		add_to_main_menu(devices_menu);
+
 	}
 
 	void on_paint()
 	{
-		System_Interface::Painter paint;
-		paint.rectangle({ 256, 256, 256, 256 }, { 255, 255, 255 });
+		handle->painter->rectangle({ 256, 256, 256, 256 }, rgb(255, 0, 255));
 	}
 
 	void on_destroy()
@@ -28,9 +31,9 @@ public:
 		handle->close_window();
 	}
 
-	void on_command(unsigned int* command)
+	void on_command(unsigned int command)
 	{
-		if(*command == IDM_QUIT)
+		if(command == IDM_QUIT)
 		{
 			on_quit();
 		}
@@ -46,4 +49,13 @@ public:
 
 	void on_create() {}
 
+protected:
+	void view_initalize()
+	{
+		dim.x = 256;
+		dim.y = 256;
+		dim.height = 256;
+		dim.length = 1024;
+		handle->initalize(dim);
+	}
 };

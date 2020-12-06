@@ -2,6 +2,7 @@
 #define TRANSITION_COMMAND_H
 
 #include "../../command.h"
+#include "../../../../Model/system/timer.h"
 
 class Transition : public Command
 {
@@ -10,7 +11,7 @@ public:
 	Transition(int transition_amount, double transition_time)
 	{
 		time_to_complete = transition_time;
-		amount = transition_amount / 100.0;
+		amount = transition_amount / 100.0f;
 	};
 	~Transition() { };
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::TRANSITION; }
@@ -29,6 +30,24 @@ public:
 	{
 		return "TRANSITION: T=" + std::to_string(time_to_complete + total_elapsed_time) + " P=" + std::to_string(amount);
 	}
+    virtual void mangle_state(Device_State& state)
+    {
+        if(state.initalized == false)
+        {
+            state.valid = false;
+            return;
+        }
+		state.power = true;
+		if (state.position != amount)
+		{
+			state.transitioning = true;
+		}
+		else
+		{
+			state.transitioning = false;
+		}
+        transition(state.position, model_timer.get_elapsed_time());
+    }
 
 protected:
 	float amount = 0.0;

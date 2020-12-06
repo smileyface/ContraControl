@@ -1,0 +1,21 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  "version": "0.2.0",
+  "configurations":[
+      {
+          "type": "gdb",
+          "request": "launch",
+          "name": "Launch Program (SSH)",
+          "target": "./bin/executable",
+          "cwd": "${workspaceRoot}",
+          "ssh": {
+              "host": "192.168.86.3",
+              "cwd": "/home/remote_user/project/",
+              "keyfile": "/home/my_user/.ssh/id_rsa",
+              "user": "kason"
+          },
+          "valuesFormatting": "parseText"
+      }
+  ]
+}
