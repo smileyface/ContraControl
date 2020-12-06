@@ -5,15 +5,17 @@
 
 
 
-#include "devices/basic/device.h"
-#include "devices/basic/switch.h"
-#include "devices/basic/gradient.h"
+#include "devices/device.h"
+#include "devices/switch.h"
+#include "devices/gradient.h"
+#include "devices/channel.h"
 
 enum class DEVICE_IDENTIFIER
 {
 	DEVICE,
 	SWITCH,
-	GRADIENT
+	GRADIENT,
+    CHANNEL
 };
 
 #endif // !DEVICES_H

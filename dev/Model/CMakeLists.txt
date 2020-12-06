@@ -1,10 +1,10 @@
 
 set(MODEL_DEVICES_HEADER_FILES 
-                    devices/basic/device.h
-                    devices/basic/gradient.h
-                    devices/basic/switch.h
-                    devices/basic/channel.h
-                    devices/single_complex/audio.h
+                    devices/device.h
+                    devices/gradient.h
+                    devices/switch.h
+                    devices/channel.h
+                    devices/audio.h
                     device.h )
 
 set(MODEL_SYSTEM_HEADER_FILES

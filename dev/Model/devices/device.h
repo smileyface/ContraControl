@@ -5,11 +5,11 @@
 #include<functional>
 #include <typeinfo> 
 
-#include "../../../Controller/commands.h"
-#include "../../types.h"
-#include "../../../Utilities/Logging/logging.h"
-#include "../../system/timer.h"
-#include "../../state/state.h"
+#include "../../Controller/commands.h"
+#include "../types.h"
+#include "../../Utilities/Logging/logging.h"
+#include "../system/timer.h"
+#include "../state/state.h"
 
 
 static uint16_t device_id_pool = 0;
