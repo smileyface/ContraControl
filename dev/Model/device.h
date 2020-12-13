@@ -15,7 +15,8 @@ enum class DEVICE_IDENTIFIER
 	DEVICE,
 	SWITCH,
 	GRADIENT,
-    CHANNEL
+    CHANNEL,
+	AUDIO
 };
 
 #endif // !DEVICES_H
