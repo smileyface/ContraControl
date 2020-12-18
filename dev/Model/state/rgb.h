@@ -1,23 +1,23 @@
-#ifndef MODEL_RBG_STATE
+#ifndef MODEL_RGB_STATE
 #define MODEL_RGB_STATE
 
 
-class rgb
+class Model_RGB
 {
 public:
-	rgb(unsigned int byte_string)
+	Model_RGB(unsigned int byte_string)
 	{
 		m_red = byte_string % 256;
 		m_green = (byte_string << 8) % 256;
 		m_blue = (byte_string << 16) % 256;
 	}
-	rgb(unsigned char byte_array[3])
+	Model_RGB(unsigned char byte_array[3])
 	{
 		m_red = byte_array[0];
 		m_green = byte_array[1];
 		m_blue = byte_array[2];
 	}
-	rgb(unsigned char red, unsigned char green, unsigned char blue)
+	Model_RGB(unsigned char red, unsigned char green, unsigned char blue)
 	{
 		m_red = red;
 		m_green = green;
@@ -29,4 +29,4 @@ private:
 	unsigned char m_blue;
 
 };
-#endif // !MODEL_RBG_STATE
+#endif // !MODEL_RGB_STATE

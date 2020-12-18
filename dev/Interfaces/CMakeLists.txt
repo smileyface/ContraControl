@@ -8,4 +8,4 @@ set(INTERFACE_SOURCE_FILES
                     model_interface.cpp
     )
 
-add_library(Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
+add_library(Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES} "Network/connection.h")

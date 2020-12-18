@@ -9,12 +9,12 @@
 
 
 
-class model_interfaces {
+class Model_Interfaces {
 public:
-	class controller_interface;
+	class Controller_Interface;
 };
 
-class model_interfaces::controller_interface {
+class Model_Interfaces::Controller_Interface {
 public:
 	static void add_to_step(Model_Command theCommand);
 	static void request_command(Model_Command theCommand, double seconds_to_execute);

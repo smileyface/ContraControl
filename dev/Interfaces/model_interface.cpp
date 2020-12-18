@@ -18,7 +18,7 @@ struct compare
 	}
 };
 
-void model_interfaces::controller_interface::add_to_step(Model_Command theCommand)
+void Model_Interfaces::Controller_Interface::add_to_step(Model_Command theCommand)
 {
 	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(theCommand));
 	if (found == model::step_actions.end() || model::step_actions.size() == 0)
@@ -28,14 +28,14 @@ void model_interfaces::controller_interface::add_to_step(Model_Command theComman
 	
 }
 
-void model_interfaces::controller_interface::request_command(Model_Command theCommand, double seconds_to_execute)
+void Model_Interfaces::Controller_Interface::request_command(Model_Command theCommand, double seconds_to_execute)
 {
 	Timed_Command command(theCommand.command, theCommand.id, seconds_to_execute);
-	controller_interfaces::model_interface::request_command_add(command);
+	Controller_Interfaces::Model_Interface::request_command_add(command);
 }
 
 
-Device model_interfaces::controller_interface::get_device(Device_Name name)
+Device Model_Interfaces::Controller_Interface::get_device(Device_Name name)
 {
 	return *model::known_devices[name];
 }

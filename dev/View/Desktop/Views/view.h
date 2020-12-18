@@ -11,7 +11,7 @@ constexpr auto IDM_QUIT = 101;
 class Desktop_View : public View {
 public:
 
-    dimension dim = { DEFAULT_SIZE , DEFAULT_SIZE , DEFAULT_SIZE, DEFAULT_SIZE };
+    Dimension dim = { DEFAULT_SIZE , DEFAULT_SIZE , DEFAULT_SIZE, DEFAULT_SIZE };
 
     void initalize(const std::string CLASS_NAME, const std::string WIN_TEXT) 
     {

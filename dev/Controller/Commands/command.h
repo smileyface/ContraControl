@@ -1,24 +1,51 @@
+/*****************************************************************//**
+ * \file   command.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   December 2020
+ *********************************************************************/
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include <utility>
-
-#include <cinttypes>
 #include <string>
-#include <typeinfo>
 
 #include "../../Model/state/state.h"
 
+/*!
+   An identifier object mainly for readability
+ */
 typedef uint16_t command_id;
 
-enum class COMMAND_ENUM :uint16_t
+/*!
+   An enumerated list of command types
+ */
+enum class COMMAND_ENUM :command_id
 {
-	INITALIZE, //Do device start up routine
-	ON, // Turn device on
-	OFF, // Turn device off
-	TRANSITION, // Generic transition
-	LINEAR_TRANSITION, // Transition at in a linear manner
-	INVALID = UINT16_MAX //Unmapped Command
+    /**
+        Do device start up routine
+     */
+	INITALIZE,
+    /**
+        Turn device on
+     */
+	ON,
+    /**
+        Turn device off
+     */
+	OFF,
+    /**
+        Generic transition
+     */
+	TRANSITION,
+    /**
+        Transition at in a linear manner
+     */
+	LINEAR_TRANSITION,
+    /**
+        Unmapped Command
+     */
+	INVALID = UINT16_MAX
 };
 
 class Command {

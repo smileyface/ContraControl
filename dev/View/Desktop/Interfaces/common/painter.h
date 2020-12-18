@@ -5,7 +5,7 @@
 class Painter
 {
 public:
-    void rectangle(dimension size, rgb color)
+    void rectangle(Dimension size, Model_RGB color)
     {
 
     }
