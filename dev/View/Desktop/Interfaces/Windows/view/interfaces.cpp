@@ -8,7 +8,7 @@
 const int DEFAULT_SIZE = CW_USEDEFAULT;
 HINSTANCE window_hInstance;
 
-void Windows_Interface::initalize(dimension dim)
+void Windows_Interface::initalize(Dimension dim)
 {
 
     

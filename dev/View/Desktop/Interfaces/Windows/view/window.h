@@ -19,7 +19,7 @@ public:
 		main_menu = NULL;
 		menu = new Windows_Menu();
 	}
-	virtual void initalize(dimension dim);
+	virtual void initalize(Dimension dim);
 	virtual void show_window();
 	virtual void hide_window();
 	virtual void close_window();

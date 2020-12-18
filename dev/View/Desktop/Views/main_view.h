@@ -23,7 +23,7 @@ public:
 
 	void on_paint()
 	{
-		handle->painter->rectangle({ 256, 256, 256, 256 }, rgb(255, 0, 255));
+		handle->painter->rectangle({ 256, 256, 256, 256 }, Model_RGB(255, 0, 255));
 	}
 
 	void on_destroy()
