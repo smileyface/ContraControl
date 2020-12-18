@@ -33,7 +33,7 @@ void model_interfaces::controller_interface::add_to_step(Model_Command theComman
 	
 }
 
-void model_interfaces::controller_interface::request_command(Model_Command theCommand, double seconds_to_execute)
+void Model_Interfaces::Controller_Interface::request_command(Model_Command theCommand, double seconds_to_execute)
 {
 	Timed_Command command(theCommand.command, theCommand.label, seconds_to_execute);
 	controller_interfaces::model_interface::request_command_add(command);

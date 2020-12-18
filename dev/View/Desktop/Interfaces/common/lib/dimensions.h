@@ -3,7 +3,7 @@
 #define COMMON_LIB_DIMENSION
 
 extern const int DEFAULT_SIZE;
-struct dimension
+struct Dimension
 {
     int x;
     int y;

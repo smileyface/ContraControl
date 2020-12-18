@@ -4,13 +4,13 @@
 #include "../Controller/types.h"
 #include "../Model/node/node.h"
 
-class controller_interfaces {
+class Controller_Interfaces {
 public:
-	class model_interface;
+	class Model_Interface;
 
 };
 
-class controller_interfaces::model_interface {
+class Controller_Interfaces::Model_Interface {
 public:
 	//to model
 	static void send_command(Timed_Command timed_command);

@@ -12,7 +12,7 @@ public:
         menu = new Menu();
         painter = new Painter();
     }
-    void virtual initalize(dimension dim) = 0;
+    void virtual initalize(Dimension dim) = 0;
     void virtual show_window() = 0;
     void virtual hide_window() = 0;
     void virtual close_window() = 0;
