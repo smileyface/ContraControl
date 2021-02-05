@@ -8,4 +8,10 @@ set(INTERFACE_SOURCE_FILES
                     model_interface.cpp
     )
 
+set(NETWORK_INTERFACE_HEADERS
+                    Network/connections.h)
+set(NETWORK_INTERFACE_SOURCE
+                    Network/connections.cpp)
+
 add_library(Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
+add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE})
