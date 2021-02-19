@@ -4,7 +4,7 @@
 #include "../Controller/types.h"
 #include "../Controller/Commands/common/initalize.h"
 #include "../Model/types.h"
-#include "../Model/device.h"
+#include "../Model/node/node.h"
 
 
 
@@ -19,7 +19,7 @@ public:
 	static void add_to_step(Model_Command theCommand);
 	static void request_command(Model_Command theCommand, double seconds_to_execute);
 
-	static Device get_device(Device_Name name);
+	static Device* get_device(Node_Id node, Device_Name name);
 
 };
 
