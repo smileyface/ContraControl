@@ -35,7 +35,7 @@ void model_interfaces::controller_interface::request_command(Model_Command theCo
 }
 
 
-Device model_interfaces::controller_interface::get_device(Device_Name name)
+Device* model_interfaces::controller_interface::get_device(Node_Id node, Device_Name device)
 {
-	return *model::known_devices[name];
+	return model::nodes[node].get_device(device);
 }

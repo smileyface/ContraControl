@@ -6,20 +6,20 @@
 #include <string>
 
 #include "device.h"
+#include "node/node.h"
 #include "../Utilities/timer.h"
 #include "types.h"
 #include "system/timer.h"
 
 
 namespace model {
-	extern std::map<Device_Name, Device*> known_devices;
+	extern std::map<Node_Id, Node> nodes;
 	extern bool model_running;
 
 	extern std::vector<Model_Command> step_actions;
 	extern std::map<Device_Id, Device_Name> id_map;
 
-	Device* get_device(Device_Id device_id);
-	Device* get_device(Device_Name device_name);
+	Node get_node(Node_Id);
 
 	void initalize();
 	void add_device(std::string name, Device* device);

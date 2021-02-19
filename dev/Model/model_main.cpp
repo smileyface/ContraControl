@@ -5,40 +5,26 @@
 #include "../Controller/Commands/common/initalize.h"
 #include "../Utilities/Logging/logging.h"
 
+
 Timer model_timer;
 
-std::map<Device_Name, Device*> model::known_devices;
+std::map<Node_Id, Node> model::nodes;
 bool model::model_running = true;
 
 std::vector<Model_Command> model::step_actions;
 std::map<Device_Id, Device_Name> model::id_map;
 
-Device* model::get_device(Device_Id device_id)
-{
-	if (known_devices[id_map[device_id]] == nullptr)
-	{
-		Logger::getInstance()->addItem(LOG_PRIORITY::ERROR, "Invalid Device Id Called", "INVALID");
-		throw - 1;
-	}
-	return known_devices[id_map[device_id]];
-}
-
-Device* model::get_device(Device_Name device_name)
-{
-	return known_devices[device_name];
-}
 
 void model::initalize()
 {
-	std::map<Device_Name, Device*>::iterator it;
-	for (it = known_devices.begin(); it != known_devices.end(); it++) {
-		id_map[it->second->get_id()] = it->first;
-	}
+
 }
-void model::add_device(std::string name, Device* device)
+
+Node get_node(Node_Id id)
 {
-	model::known_devices.emplace(name, device);
+	return model::nodes[id];
 }
+
 
 void model::step()
 {
@@ -57,20 +43,20 @@ void model::stop_loop()
 
 void model::clean_up()
 {
-	model::known_devices.erase(model::known_devices.begin(), model::known_devices.end());
+	model::nodes.clear();
 }
 
 std::vector<int> model::run_commands()
 {
 	std::vector<int> completed_index;
-	for (int i = 0; i < model::step_actions.size(); i++) {
+	//for (int i = 0; i < model::step_actions.size(); i++) {
 
-			model::get_device(model::step_actions[i].id)->run_command(model::step_actions[i].command);
-			model::system_commands(model::step_actions[i].command);
-			if(model::step_actions[i].command->completed())
-				completed_index.push_back(i);
+	//		model::get_device(model::step_actions[i].id)->run_command(model::step_actions[i].command);
+	//		model::system_commands(model::step_actions[i].command);
+	//		if(model::step_actions[i].command->completed())
+	//			completed_index.push_back(i);
 
-	}
+	//}
 	return completed_index;
 }
 
