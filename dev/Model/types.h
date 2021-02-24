@@ -4,6 +4,7 @@
 #include "../Controller/Commands/command.h"
 
 #include <string>
+typedef std::string Node_Id;
 typedef uint16_t Device_Id;
 typedef std::string Device_Name;
 
