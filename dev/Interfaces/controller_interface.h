@@ -2,7 +2,7 @@
 #define MODEL_CONTROLLER_INTERFACE_H
 
 #include "../Controller/types.h"
-#include "../Model/Node/node.h"
+#include "../Model/node/node.h"
 
 class controller_interfaces {
 public:

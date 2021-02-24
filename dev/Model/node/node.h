@@ -6,7 +6,7 @@
 #include "../device.h"
 #include "../../Interfaces/Network/connections.h"
 
-typedef std::string Node_Id;
+
 
 class Node
 {
