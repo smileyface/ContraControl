@@ -22,11 +22,12 @@ Device_State device_utilities::get_nominal_state(Command* command)
 }
 std::string device_utilities::add_device(Device* dev)
 {
-	device_in_use++;
-	model::add_device(std::to_string(device_in_use), dev);
-	system_util::setup();
-	system_util::step(1);
-	return(std::to_string(device_in_use));
+	//device_in_use++;
+	//model::add_device(std::to_string(device_in_use), dev);
+	//system_util::setup();
+	//system_util::step(1);
+	//return(std::to_string(device_in_use));
+	return std::to_string(device_in_use);
 }
 
 Device_State device_utilities::command_device(std::string device_id, Command* command)
