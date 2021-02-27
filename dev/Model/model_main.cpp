@@ -8,7 +8,7 @@
 
 Timer model_timer;
 
-std::map<Node_Id, Node> model::nodes;
+std::map<Node_Id, Node*> model::nodes;
 bool model::model_running = true;
 
 std::vector<Model_Command> model::step_actions;
@@ -20,11 +20,20 @@ void model::initalize()
 
 }
 
-Node get_node(Node_Id id)
+Node* model::get_node(Node_Id id)
 {
 	return model::nodes[id];
 }
 
+void model::create_node(Node_Type type, Node_Id id)
+{
+	model::nodes.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
+}
+
+Device* model::get_device(Device_Label label)
+{
+	return model::get_node(label.first)->get_device(label.second);
+}
 
 void model::step()
 {

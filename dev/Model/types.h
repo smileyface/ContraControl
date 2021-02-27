@@ -6,6 +6,7 @@
 #include <string>
 typedef std::string Node_Id;
 typedef uint16_t Device_Id;
+typedef std::pair<Node_Id, Device_Id> Device_Label;
 typedef std::string Device_Name;
 
 const uint16_t INVALID_DEVICE = UINT16_MAX;
