@@ -37,12 +37,12 @@ Device* model::get_device(Device_Label label)
 
 void model::step()
 {
-	std::vector<int> completed_index = model::run_commands();
 
-	for (size_t i = 0; i < completed_index.size(); i++) {
-		model::step_actions.erase(step_actions.begin() + completed_index[i]);
-	}
-	model_timer.update_time();
+}
+
+void model::add_command(Device_Label label, Command* command)
+{
+
 }
 
 void model::stop_loop()
@@ -55,19 +55,6 @@ void model::clean_up()
 	model::nodes.clear();
 }
 
-std::vector<int> model::run_commands()
-{
-	std::vector<int> completed_index;
-	//for (int i = 0; i < model::step_actions.size(); i++) {
-
-	//		model::get_device(model::step_actions[i].id)->run_command(model::step_actions[i].command);
-	//		model::system_commands(model::step_actions[i].command);
-	//		if(model::step_actions[i].command->completed())
-	//			completed_index.push_back(i);
-
-	//}
-	return completed_index;
-}
 
 void model::system_commands(Command* commands)
 {

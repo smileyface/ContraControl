@@ -3,8 +3,6 @@
 
 #include <string>
 
-
-
 #include "devices/device.h"
 #include "devices/switch.h"
 #include "devices/gradient.h"

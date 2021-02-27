@@ -27,13 +27,10 @@ namespace model {
 
 	void step();
 
-	/*
-	Return: array of run commands
-	*/
-	std::vector<int> run_commands();
+	void add_command(Device_Label, Command*);
 
 
-	void system_commands(Command* command);
+	void system_commands(Command*);
 
 	void stop_loop();
 
