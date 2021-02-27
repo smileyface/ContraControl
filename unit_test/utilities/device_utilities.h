@@ -12,15 +12,18 @@ namespace device_utilities
 	/*
 	MODEL MANIPULATION
 	*/
-
 	/*
-	Add a device to the model. Returns device name.
+	Create node in the model.
 	*/
-	std::string add_device(Device* dev);
+	void create_node(Node_Id);
+	/*
+	Add a device to the given node in the model. Returns device name.
+	*/
+	Device_Label add_device(Node_Id, Device* dev);
 	/*
 	Command a device. Returns the nominal state associated with that command.
 	*/
-	Device_State command_device(std::string device_id, Command* command);
+	Device_State command_device(Device_Label label, Command* command);
 
 	Device_State finish_command(Command* command);
 
@@ -29,10 +32,10 @@ namespace device_utilities
 	*/
 
 	//Check if device state is what is expected
-	void check_state(std::string device, Device_State expected_state);
+	void check_state(Device_Label label, Device_State expected_state);
 	void check_position(std::string device, float position);
 	void check_validity(std::string device, bool expect_valid);
-	void initalize_device(std::string device);
+	void initalize_device(Device_Label label);
 }
 
 #endif // !TESTING_DEVICE_UTILITIES

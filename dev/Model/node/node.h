@@ -6,11 +6,24 @@
 #include "../device.h"
 #include "../../Interfaces/Network/connections.h"
 
-
+enum class Node_Type : uint8_t
+{
+	TEST,
+	UI,
+	INVALID
+};
 
 class Node
 {
 public:
+	Node(Node_Type type)
+	{
+		my_type = type;
+	}
+	Node() 
+	{
+		my_type = Node_Type::INVALID;
+	}
 	void register_device(Device* device)
 	{
 		devices[device->get_id()] = device;
@@ -35,6 +48,7 @@ private:
 	Connection connections;
 	std::map<Device_Id, Device*> devices;
 	std::map<Device_Name, Device_Id> name_to_id_map;
+	Node_Type my_type;
 };
 
 #endif // !MODEL_NODE_H

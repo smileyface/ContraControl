@@ -4,6 +4,8 @@
 #include "../utilities/pch.h"
 
 TEST(Controller_Tests, Gradient_Initalize) {
+	FAIL() << "Need to be implemented";
+	/*
 	std::string device = device_utilities::add_device(new Gradient_Device());
 	device_state ds;
 	ds.initalized = true;
@@ -11,5 +13,5 @@ TEST(Controller_Tests, Gradient_Initalize) {
 
 	device_utilities::check_state(device, ds);
 
-	system_util::cleanup();
+	system_util::cleanup();*/
 }
