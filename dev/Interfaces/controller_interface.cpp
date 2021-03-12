@@ -5,7 +5,7 @@
 
 void controller_interfaces::model_interface::send_command(Timed_Command timed_command)
 {
-	Model_Command m_command(timed_command.device_id, timed_command.command);
+	Model_Command m_command(timed_command.device_label, timed_command.command);
 	model_interfaces::controller_interface::add_to_step(m_command);
 }
 

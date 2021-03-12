@@ -5,7 +5,7 @@
 
 TEST(Device_Commands, Switch_Initalize) {
 	device_utilities::create_node("Test_Node_1");
-	Device_Label dl = device_utilities::add_device("Test_Node_1", new Switch_Device());
+	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 	device_utilities::initalize_device(dl);
 	Device_State ds;
 	ds.initalized = true;

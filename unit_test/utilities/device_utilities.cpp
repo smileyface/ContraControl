@@ -26,14 +26,12 @@ void device_utilities::create_node(Node_Id id)
 	model::create_node(Node_Type::TEST, id);
 }
 
-Device_Label device_utilities::add_device(Node_Id id, Device* dev)
+Device_Label device_utilities::add_device(Node_Id id, Device_Creator creator)
 {
-	device_in_use++;
-	dev->set_id(device_in_use);
-	model::get_node(id)->register_device(dev);
+	model::get_node(id)->register_device(creator);
 	system_util::setup();
 	system_util::step(1);
-	return(Device_Label(id, device_in_use));
+	return(Device_Label(id, model::get_node(id)->get_device(creator.second)->get_id()));
 }
 
 Device_State device_utilities::command_device(Device_Label label, Command* command)
@@ -80,5 +78,5 @@ void device_utilities::check_validity(std::string device, bool expect_valid)
 
 void device_utilities::initalize_device(Device_Label label)
 {
-	command_device(label, new Initalize(std::to_string(label.second)));
+	command_device(label, new Initalize());
 }

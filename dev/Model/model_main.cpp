@@ -17,7 +17,13 @@ std::map<Device_Id, Device_Name> model::id_map;
 
 void model::initalize()
 {
-
+	for (std::map<Node_Id, Node*>::iterator node_iterator = model::nodes.begin(); node_iterator != model::nodes.end(); ++node_iterator)
+	{
+		std::vector<Device_Id> node_devices = node_iterator->second->get_devices();
+		for (std::vector<Device_Id>::iterator device_iterator = node_devices.begin(); device_iterator != node_devices.end(); ++device_iterator)
+			model_interfaces::controller_interface::request_command(Model_Command(Device_Label(node_iterator->first, *device_iterator), new Initalize()), 0);
+	}
+		
 }
 
 Node* model::get_node(Node_Id id)

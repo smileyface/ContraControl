@@ -19,7 +19,7 @@ namespace device_utilities
 	/*
 	Add a device to the given node in the model. Returns device name.
 	*/
-	Device_Label add_device(Node_Id, Device* dev);
+	Device_Label add_device(Node_Id, Device_Creator dev);
 	/*
 	Command a device. Returns the nominal state associated with that command.
 	*/
