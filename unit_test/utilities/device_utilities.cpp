@@ -9,6 +9,7 @@ Device_State device_utilities::get_nominal_state(Command* command)
 		switch (command->get_id())
 		{
 		case COMMAND_ENUM::TRANSITION:
+		case COMMAND_ENUM::LINEAR_TRANSITION:
 			ds.transitioning = true;
 		case COMMAND_ENUM::ON:
 			ds.power = true;
@@ -16,6 +17,7 @@ Device_State device_utilities::get_nominal_state(Command* command)
 		case COMMAND_ENUM::INITALIZE:
 			ds.initalized = true;
 			ds.valid = true;
+		case COMMAND_ENUM::INVALID:
 			break;
 		}
 		return ds;
