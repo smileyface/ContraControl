@@ -27,14 +27,6 @@ namespace device_utilities
 
 	Device_State finish_command(Command* command);
 
-	/*
-	DEVICE SPECIFIC CHECKS
-	*/
-
-	//Check if device state is what is expected
-	void check_state(Device_Label label, Device_State expected_state);
-	void check_position(std::string device, float position);
-	void check_validity(std::string device, bool expect_valid);
 	void initalize_device(Device_Label label);
 }
 

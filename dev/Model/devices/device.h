@@ -44,7 +44,7 @@ public:
 	}
 	void run_command(Command* command)
 	{
-			command->mangle_state(state);
+		command->mangle_state(state);
 	}
 
 	unsigned char get_state_switches()
