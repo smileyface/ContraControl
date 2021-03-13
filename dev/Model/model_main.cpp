@@ -17,6 +17,7 @@ std::map<Device_Id, Device_Name> model::id_map;
 
 void model::initalize()
 {
+	model_timer.reset_clock();
 	//for (std::map<Node_Id, Node*>::iterator node_iterator = model::nodes.begin(); node_iterator != model::nodes.end(); ++node_iterator)
 	//{
 	//	std::vector<Device_Id> node_devices = node_iterator->second->get_devices();
@@ -47,6 +48,7 @@ void model::step()
 	{
 		model::get_device(it->label)->run_command(it->command);
 	}
+	model_timer.update_time();
 	model::step_actions.clear();
 }
 
