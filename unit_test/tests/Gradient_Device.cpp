@@ -52,13 +52,13 @@
 		testing_util::device_utilities::check_position(dl, 0);
 
 		//do transition
-		auto time = model_timer.current_time;
-		Transition* trans = new Transition(50, 200);
+		auto time = model_timer.program_time;
+		Transition* trans = new Transition(50, 20);
 		Device_State ds = device_utilities::command_device(dl, trans);
 		testing_util::device_utilities::check_state(dl, ds);
 		ds = device_utilities::finish_command(trans);
+		EXPECT_NEAR(model_timer.program_time - time, 20, .1);
 		ds.transitioning = false;
-		EXPECT_NEAR(model_timer.current_time - time, 200, .1);
 		testing_util::device_utilities::check_state(dl, ds);
 		testing_util::device_utilities::check_position(dl, 50);
 

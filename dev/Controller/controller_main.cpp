@@ -32,20 +32,21 @@ void controller::add_command(Timed_Command tc)
 void controller::step()
 {
 	//while (controller_running) {
-	double time = controller_timer.get_elapsed_time();
 	std::vector<int> remove_indexes;
-	for (int i = 0; i < controller_queue.size(); i++) {
+	for (int i = 0; i < controller_queue.size(); i++) 
+	{
 		if (controller_queue[i].time <= 0)
 		{
 			controller_interfaces::model_interface::send_command(controller_queue[i]);
-			if(controller_queue[i].command->completed())
+			if (controller_queue[i].command->completed())
 				remove_indexes.push_back(i);
 		}
 		else {
-			controller_queue[i].time -= time;
+			controller_queue[i].time -= controller_timer.get_elapsed_time();
 		}
 	}
-	for (size_t i = 0; i < remove_indexes.size(); i++) {
+	for (size_t i = 0; i < remove_indexes.size(); i++) 
+	{
 		controller_queue.erase(controller_queue.begin() + remove_indexes[i]);
 	}
 	controller_timer.update_time();
