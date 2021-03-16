@@ -57,7 +57,7 @@ void model::step()
 		catch (std::exception& exc)
 		{
 			model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
-			throw exc;
+			std::rethrow_exception(std::current_exception());
 		}
 	}
 
