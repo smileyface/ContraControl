@@ -25,6 +25,9 @@ inline Device* create_device_instance(Device_Creator creator)
 	case DEVICE_IDENTIFIER::SWITCH:
 		the_device = new Switch_Device();
 		break;
+	case DEVICE_IDENTIFIER::GRADIENT:
+		the_device = new Gradient_Device();
+		break;
 	default:
 		the_device = new Device();
 	}

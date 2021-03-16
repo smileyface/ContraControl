@@ -15,6 +15,8 @@ namespace model {
 	extern std::map<Node_Id, Node*> nodes;
 	extern bool model_running;
 
+	extern Node_Id my_node;
+
 	extern std::vector<Model_Command> step_actions;
 	extern std::map<Device_Id, Device_Name> id_map;
 

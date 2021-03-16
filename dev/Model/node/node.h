@@ -5,6 +5,7 @@
 #include <string>
 #include "../device.h"
 #include "../../Interfaces/Network/connections.h"
+#include "../../Utilities/exceptions.h"
 
 enum class Node_Type : uint8_t
 {
@@ -42,6 +43,10 @@ public:
 	}
 	Device* get_device(Device_Id device)
 	{
+		if (devices.find(device) == devices.end())
+		{
+			throw DeviceNotFoundException();
+		}
 		return devices[device];
 	}
 	Device* get_device(Device_Name device)
