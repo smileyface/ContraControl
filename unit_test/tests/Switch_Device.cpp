@@ -5,7 +5,19 @@
 #include "../utilities/pch.h"
 
 
-TEST_F(Device_Commands_Test, Switch_Initalize) {
+namespace {
+	class Switch_Commands_Test : public ::testing::Test {
+		virtual void SetUp() {
+			system_util::setup();
+		}
+		virtual void TearDown() {
+			system_util::cleanup();
+		}
+
+	};
+}
+
+TEST_F(Switch_Commands_Test, Switch_Initalize) {
 	device_utilities::create_node("Test_Node_1");
 	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 	device_utilities::initalize_device(dl);
@@ -14,11 +26,9 @@ TEST_F(Device_Commands_Test, Switch_Initalize) {
 	ds.valid = true;
 
 	testing_util::device_utilities::check_state(dl, ds);
-
-	system_util::cleanup();
 }
 
-TEST_F(Device_Commands_Test, Switch_On) {
+TEST_F(Switch_Commands_Test, Switch_On) {
 	device_utilities::create_node("Test_Node_1");
 	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 	device_utilities::initalize_device(dl);
@@ -28,7 +38,7 @@ TEST_F(Device_Commands_Test, Switch_On) {
 	system_util::cleanup();
 }
 
-TEST_F(Device_Commands_Test, Switch_Off) {
+TEST_F(Switch_Commands_Test, Switch_Off) {
 	device_utilities::create_node("Test_Node_1");
 	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 	device_utilities::initalize_device(dl);
@@ -43,7 +53,7 @@ TEST_F(Device_Commands_Test, Switch_Off) {
 
 }
 
-TEST_F(Device_Commands_Test, Switch_Invalid) {
+TEST_F(Switch_Commands_Test, Switch_Invalid) {
 	device_utilities::create_node("Test_Node_1");
 	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 

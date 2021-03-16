@@ -4,7 +4,21 @@
 #include "../utilities/test_utilities.h"
 
 #include "../utilities/pch.h"
-TEST_F(Device_Commands_Test, Gradient_Initalize) {
+
+
+namespace {
+	class Gradient_Commands_Test : public ::testing::Test {
+		virtual void SetUp() {
+			system_util::setup();
+		}
+		virtual void TearDown() {
+			system_util::cleanup();
+		}
+
+	};
+}
+
+TEST_F(Gradient_Commands_Test, Gradient_Initalize) {
 	device_utilities::create_node("Test_Node_1");
 	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::GRADIENT, "Test1"));
 	device_utilities::initalize_device(dl);
@@ -16,7 +30,7 @@ TEST_F(Device_Commands_Test, Gradient_Initalize) {
 
 }
 
-TEST_F(Device_Commands_Test, Gradient_On) {
+TEST_F(Gradient_Commands_Test, Gradient_On) {
 
 	device_utilities::create_node("Test_Node_1");
 	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::GRADIENT, "Test1"));
@@ -26,7 +40,7 @@ TEST_F(Device_Commands_Test, Gradient_On) {
 	testing_util::device_utilities::check_state(dl, ds);
 }
 
-TEST_F(Device_Commands_Test, Gradient_Off) {
+TEST_F(Gradient_Commands_Test, Gradient_Off) {
 
 	device_utilities::create_node("Test_Node_1");
 	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::GRADIENT, "Test1"));
@@ -40,7 +54,7 @@ TEST_F(Device_Commands_Test, Gradient_Off) {
 
 }
 
-TEST_F(Device_Commands_Test, Gradient_Transition) {
+TEST_F(Gradient_Commands_Test, Gradient_Transition) {
 
 	device_utilities::create_node("Test_Node_1");
 	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::GRADIENT, "Test1"));
@@ -58,4 +72,15 @@ TEST_F(Device_Commands_Test, Gradient_Transition) {
 	testing_util::device_utilities::check_state(dl, ds);
 	testing_util::device_utilities::check_position(dl, 50);
 
+}
+
+TEST_F(Gradient_Commands_Test, Switch_Initalize) {
+	device_utilities::create_node("Test_Node_1");
+	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
+	device_utilities::initalize_device(dl);
+	Device_State ds;
+	ds.initalized = true;
+	ds.valid = true;
+
+	testing_util::device_utilities::check_state(dl, ds);
 }
