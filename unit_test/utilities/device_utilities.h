@@ -30,4 +30,18 @@ namespace device_utilities
 	void initalize_device(Device_Label label);
 }
 
+#include"../utilities/system_testings.h"
+
+namespace {
+	class Device_Commands_Test : public ::testing::Test {
+		virtual void SetUp() {
+			system_util::setup();
+		}
+		virtual void TearDown() {
+			system_util::cleanup();
+		}
+
+	};
+}
+
 #endif // !TESTING_DEVICE_UTILITIES
