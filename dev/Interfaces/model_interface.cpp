@@ -14,10 +14,15 @@ struct compare
 	compare(Model_Command const& i) : key(i) {}
 	bool operator()(Model_Command const& i)
 	{
-		return get_command_name(key.command) == get_command_name(i.command);
+		bool same_command = get_command_name(key.command) == get_command_name(i.command);
+		bool same_device = key.label.first == i.label.first;
+		return same_command&&same_device;
 	}
 };
 
+/**
+ * Add only .unique commands to the step
+ */
 void model_interfaces::controller_interface::add_to_step(Model_Command theCommand)
 {
 	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(theCommand));

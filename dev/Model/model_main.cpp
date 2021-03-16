@@ -14,21 +14,21 @@ bool model::model_running = true;
 std::vector<Model_Command> model::step_actions;
 std::map<Device_Id, Device_Name> model::id_map;
 
+Node_Id model::my_node;
+
 
 void model::initalize()
 {
 	model_timer.reset_clock();
-	//for (std::map<Node_Id, Node*>::iterator node_iterator = model::nodes.begin(); node_iterator != model::nodes.end(); ++node_iterator)
-	//{
-	//	std::vector<Device_Id> node_devices = node_iterator->second->get_devices();
-	//	for (std::vector<Device_Id>::iterator device_iterator = node_devices.begin(); device_iterator != node_devices.end(); ++device_iterator)
-	//		model_interfaces::controller_interface::request_command(Model_Command(Device_Label(node_iterator->first, *device_iterator), new Initalize()), 0);
-	//}
-		
+	my_node = "ALL";
 }
 
 Node* model::get_node(Node_Id id)
 {
+	if (nodes.find(id) == nodes.end())
+	{
+		throw NodeNotFoundException();
+	}
 	return model::nodes[id];
 }
 
@@ -42,14 +42,27 @@ Device* model::get_device(Device_Label label)
 	return model::get_node(label.first)->get_device(label.second);
 }
 
+/**
+ * Run all commands lined up for this step. If an exception is thrown, the command is thrown away and the exception gets rethrown.
+ * TODO: Add details to the exception thrown
+ */
 void model::step()
 {
 	for (std::vector<Model_Command>::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
 	{
-		model::get_device(it->label)->run_command(it->command);
+		try 
+		{
+			model::get_device(it->label)->run_command(it->command);
+		}
+		catch (std::exception& exc)
+		{
+			model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
+			throw exc;
+		}
 	}
+
 	model_timer.update_time();
-	model::step_actions.clear();
+	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
 }
 
 void model::add_command(Device_Label label, Command* command)
