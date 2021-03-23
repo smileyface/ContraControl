@@ -5,49 +5,68 @@
 #include "../Controller/Commands/common/initalize.h"
 #include "../Utilities/Logging/logging.h"
 
+
 Timer model_timer;
 
-std::map<Device_Name, Device*> model::known_devices;
+std::map<Node_Id, Node*> model::nodes;
 bool model::model_running = true;
 
 std::vector<Model_Command> model::step_actions;
-std::map<Device_Id, Device_Name> model::id_map;
 
-Device* model::get_device(Device_Id device_id)
-{
-	if (known_devices[id_map[device_id]] == nullptr)
-	{
-		Logger::getInstance()->addItem(LOG_PRIORITY::ERROR, "Invalid Device Id Called", "INVALID");
-		throw - 1;
-	}
-	return known_devices[id_map[device_id]];
-}
+Node_Id model::my_node;
 
-Device* model::get_device(Device_Name device_name)
-{
-	return known_devices[device_name];
-}
 
 void model::initalize()
 {
-	std::map<Device_Name, Device*>::iterator it;
-	for (it = known_devices.begin(); it != known_devices.end(); it++) {
-		id_map[it->second->get_id()] = it->first;
-	}
-}
-void model::add_device(std::string name, Device* device)
-{
-	model::known_devices.emplace(name, device);
+	model_timer.reset_clock();
+	my_node = "ALL";
 }
 
+Node* model::get_node(Node_Id id)
+{
+	if (nodes.find(id) == nodes.end())
+	{
+		throw NodeNotFoundException();
+	}
+	return model::nodes[id];
+}
+
+void model::create_node(Node_Type type, Node_Id id)
+{
+	model::nodes.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
+}
+
+Device* model::get_device(Device_Label label)
+{
+	return model::get_node(label.first)->get_device(label.second);
+}
+
+/**
+ * Run all commands lined up for this step. If an exception is thrown, the command is thrown away and the exception gets rethrown.
+ * TODO: Add details to the exception thrown
+ */
 void model::step()
 {
-	std::vector<int> completed_index = model::run_commands();
-
-	for (size_t i = 0; i < completed_index.size(); i++) {
-		model::step_actions.erase(step_actions.begin() + completed_index[i]);
+	for (std::vector<Model_Command>::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
+	{
+		try 
+		{
+			model::get_device(it->label)->run_command(it->command);
+		}
+		catch (std::exception& exc)
+		{
+			model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
+			std::rethrow_exception(std::current_exception());
+		}
 	}
+
 	model_timer.update_time();
+	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
+}
+
+void model::add_command(Device_Label label, Command* command)
+{
+
 }
 
 void model::stop_loop()
@@ -57,28 +76,14 @@ void model::stop_loop()
 
 void model::clean_up()
 {
-	model::known_devices.erase(model::known_devices.begin(), model::known_devices.end());
+	model::nodes.clear();
 }
 
-std::vector<int> model::run_commands()
-{
-	std::vector<int> completed_index;
-	for (int i = 0; i < model::step_actions.size(); i++) {
-
-			model::get_device(model::step_actions[i].id)->run_command(model::step_actions[i].command);
-			model::system_commands(model::step_actions[i].command);
-			if(model::step_actions[i].command->completed())
-				completed_index.push_back(i);
-
-	}
-	return completed_index;
-}
 
 void model::system_commands(Command* commands)
 {
 	if (commands->get_id() == COMMAND_ENUM::INITALIZE)
 	{
-		model::id_map.clear();
 		model::initalize();
 	}
 }

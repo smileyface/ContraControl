@@ -2,7 +2,7 @@
 #define MODEL_CONTROLLER_INTERFACE_H
 
 #include "../Controller/types.h"
-#include "../Model/device.h"
+#include "../Model/node/node.h"
 
 class controller_interfaces {
 public:
@@ -19,7 +19,7 @@ public:
 	static void request_command_add(Timed_Command timed_command);
 
 	//get device pointer from the model
-	static Device get_device_from_model(Device_Name name);
+	static Device* get_device_from_model(Node_Id node, Device_Name name);
 };
 
 #endif // !MODEL_CONTROLLER_INTERFACE_H

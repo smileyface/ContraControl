@@ -2,18 +2,20 @@
 #define CONTROLLER_TYPES_H
 
 #include "../Model/types.h"
+
 #include "Commands/command.h"
 
 
 class Timed_Command {
 public:
 	Command* command;
-	unsigned short device_id;
+	Device_Label device_label;
 	double time;
+	bool run;
 
-	Timed_Command(Command* cmd, Device_Id dev, double t) {
+	Timed_Command(Command* cmd, Device_Label label, double t) {
 		command = cmd;
-		device_id = dev;
+		device_label = label;
 		time = t;
 	};
 

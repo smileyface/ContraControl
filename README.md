@@ -14,3 +14,5 @@ This is a controller for various purposes. It is being designed for the purpose 
 - Redesigned code layout for CMake.
 - Adding View interface for Windows.
 - Various other fixes
+
+0.0.4 UI Generalizing

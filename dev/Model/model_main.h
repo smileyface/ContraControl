@@ -5,33 +5,33 @@
 #include <vector>
 #include <string>
 
-#include "device.h"
+#include "node/node.h"
 #include "../Utilities/timer.h"
 #include "types.h"
 #include "system/timer.h"
 
 
 namespace model {
-	extern std::map<Device_Name, Device*> known_devices;
+	extern std::map<Node_Id, Node*> nodes;
 	extern bool model_running;
 
-	extern std::vector<Model_Command> step_actions;
-	extern std::map<Device_Id, Device_Name> id_map;
+	extern Node_Id my_node;
 
-	Device* get_device(Device_Id device_id);
-	Device* get_device(Device_Name device_name);
+	extern std::vector<Model_Command> step_actions;
+
+	Node* get_node(Node_Id);
+	void create_node(Node_Type, Node_Id);
+
+	Device* get_device(Device_Label);
 
 	void initalize();
-	void add_device(std::string name, Device* device);
 
 	void step();
 
-	/*
-	Return: array of run commands
-	*/
-	std::vector<int> run_commands();
+	void add_command(Device_Label, Command*);
 
-	void system_commands(Command* command);
+
+	void system_commands(Command*);
 
 	void stop_loop();
 

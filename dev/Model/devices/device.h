@@ -44,7 +44,7 @@ public:
 	}
 	void run_command(Command* command)
 	{
-			command->mangle_state(state);
+		command->mangle_state(state);
 	}
 
 	unsigned char get_state_switches()
@@ -56,6 +56,12 @@ public:
 		return state.position;
 	}
 
+	bool operator==(const Device& ld)
+	{
+		bool type_check = typeid(*this).name() == typeid(ld).name();
+		bool device_name = this->device_name == ld.device_name;
+		return type_check && device_name;
+	}
 protected:
 	
 	Device_Id id = INVALID_DEVICE;

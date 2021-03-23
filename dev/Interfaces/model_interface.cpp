@@ -14,10 +14,15 @@ struct compare
 	compare(Model_Command const& i) : key(i) {}
 	bool operator()(Model_Command const& i)
 	{
-		return get_command_name(key.command) == get_command_name(i.command);
+		bool same_command = get_command_name(key.command) == get_command_name(i.command);
+		bool same_device = key.label.first == i.label.first;
+		return same_command&&same_device;
 	}
 };
 
+/**
+ * Add only .unique commands to the step
+ */
 void model_interfaces::controller_interface::add_to_step(Model_Command theCommand)
 {
 	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(theCommand));
@@ -30,12 +35,12 @@ void model_interfaces::controller_interface::add_to_step(Model_Command theComman
 
 void model_interfaces::controller_interface::request_command(Model_Command theCommand, double seconds_to_execute)
 {
-	Timed_Command command(theCommand.command, theCommand.id, seconds_to_execute);
+	Timed_Command command(theCommand.command, theCommand.label, seconds_to_execute);
 	controller_interfaces::model_interface::request_command_add(command);
 }
 
 
-Device model_interfaces::controller_interface::get_device(Device_Name name)
+Device* model_interfaces::controller_interface::get_device(Node_Id node, Device_Name device)
 {
-	return *model::known_devices[name];
+	return model::nodes[node]->get_device(device);
 }

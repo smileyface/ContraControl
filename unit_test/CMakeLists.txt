@@ -1,6 +1,15 @@
-﻿set(DEVICE_TEST_FILES "tests/Gradient_Device.cpp" "tests/Switch_Device.cpp")
+﻿set(DEVICE_TEST_FILES "tests/Gradient_Device.cpp" 
+                      "tests/Switch_Device.cpp" 
+                      "tests/Node.cpp")
 
-add_library(Test_Utilities "utilities/pch.h" "utilities/system_testings.h" "utilities/system_testings.cpp"  "utilities/module_mains.h" "utilities/test_utilities.h" "utilities/test_utilities.cpp" "utilities/device_utilities.h" "utilities/device_utilities.cpp")
+add_library(Test_Utilities "utilities/pch.h" 
+                           "utilities/system_testings.h" 
+                           "utilities/system_testings.cpp"  
+                           "utilities/module_mains.h" 
+                           "utilities/test_utilities.h" 
+                           "utilities/test_utilities.cpp" 
+                           "utilities/device_utilities.h" 
+                           "utilities/device_utilities.cpp")
 target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller Interface)
 
 # Download and unpack googletest at configure time
