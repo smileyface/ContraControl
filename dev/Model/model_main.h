@@ -18,7 +18,6 @@ namespace model {
 	extern Node_Id my_node;
 
 	extern std::vector<Model_Command> step_actions;
-	extern std::map<Device_Id, Device_Name> id_map;
 
 	Node* get_node(Node_Id);
 	void create_node(Node_Type, Node_Id);

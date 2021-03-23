@@ -12,7 +12,6 @@ std::map<Node_Id, Node*> model::nodes;
 bool model::model_running = true;
 
 std::vector<Model_Command> model::step_actions;
-std::map<Device_Id, Device_Name> model::id_map;
 
 Node_Id model::my_node;
 
@@ -85,7 +84,6 @@ void model::system_commands(Command* commands)
 {
 	if (commands->get_id() == COMMAND_ENUM::INITALIZE)
 	{
-		model::id_map.clear();
 		model::initalize();
 	}
 }
