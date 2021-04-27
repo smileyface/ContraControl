@@ -57,11 +57,6 @@ public:
 	Command() { };
 	~Command() {};
     /**
-     * \deprecated No longer implemented. Use mangle_state() instead. Will be removed in 0.0.5
-     * \todo Remove this
-     */
-	virtual void step_command(double time_step) { } 
-    /**
      * Change values in Device_State to reflect command.
      */
     virtual void mangle_state(Device_State& state) = 0;
@@ -75,28 +70,6 @@ public:
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::INVALID; }
 private:
 };
-/**
- * \todo Remove this
- */
-inline std::string get_command_name(Command* command)
-{
-    switch (command->get_id())
-    {
-    case COMMAND_ENUM::INITALIZE:
-        return "INITALIZE";
-    case COMMAND_ENUM::TRANSITION:
-        return "TRANSITION";
-    case COMMAND_ENUM::LINEAR_TRANSITION:
-        return "LINEAR_TRANSITION";
-    case COMMAND_ENUM::ON:
-        return "ON";
-    case COMMAND_ENUM::OFF:
-        return "OFF";
-    case COMMAND_ENUM::INVALID:
-    default:
-        return "INVALID"; 
-    }
-    return "INVALID";
-}
+
 
 #endif // !COMMAND_H

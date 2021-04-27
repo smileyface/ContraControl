@@ -37,7 +37,7 @@ void controller::step()
 	{
 		if (controller_queue[i].time <= 0)
 		{
-			controller_interfaces::model_interface::send_command(controller_queue[i]);
+			Controller_Interfaces::Model_Interface::send_command(controller_queue[i]);
 			if (controller_queue[i].command->completed())
 				remove_indexes.push_back(i);
 		}

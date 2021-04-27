@@ -46,21 +46,13 @@ public:
 		set_device_position(position, elapsed_time);
 		time_to_complete -= elapsed_time;
 	}
-	/**
-	 * \deprecated No longer implemented.
-	 * \todo Remove this
-	 */
-	std::string get_unique_id() 
-	{
-		return "TRANSITION: T=" + std::to_string(time_to_complete + total_elapsed_time) + " P=" + std::to_string(amount);
-	}
+
 	/**
 	 * Change values in Device_State to reflect command.<br>
      * If device is not initalized, set state to invalid and return.<br>
      * Transitions amount of command by a percentage. Children classes should not implement this function. They should instead implement \ref set_device_position(float&, double) "set_device_position(position, elapsed_time)".
-     * \todo remove virtual
 	 */
-    virtual void mangle_state(Device_State& state)
+    virtual void mangle_state(Device_State& state) final
     {
         if(state.initalized == false)
         {
