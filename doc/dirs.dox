@@ -1,0 +1,13 @@
+/**
+* \dir Commands
+* \brief All Device Commands including the base command.
+*/
+/**
+* \dir device
+* \brief All Device specific Commands. 
+* \todo rename to device_commands
+*/
+/**
+* \dir transitions
+* \brief Commands to move a devices position.
+*/

@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   linear_transition.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   April 2021
+ *********************************************************************/
+
 #ifndef LINEAR_TRANSITIONS_COMMAND_H
 #define LINEAR_TRANSITIONS_COMMAND_H
 

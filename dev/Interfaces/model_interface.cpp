@@ -8,20 +8,26 @@
 #include "../Controller/types.h"
 #include "../Controller/commands.h"
 
+/** 
+ *  \cond
+ */
 struct compare
 {
 	Model_Command key;
 	compare(Model_Command const& i) : key(i) {}
 	bool operator()(Model_Command const& i)
 	{
-		bool same_command = get_command_name(key.command) == get_command_name(i.command);
+		bool same_command = get_command_name(key.command) == get_command_name(i.command); 
 		bool same_device = key.label.first == i.label.first;
 		return same_command&&same_device;
 	}
 };
+/**
+ * \endcond
+ */
 
 /**
- * Add only .unique commands to the step
+ * Add only unique commands to the step
  */
 void model_interfaces::controller_interface::add_to_step(Model_Command theCommand)
 {
