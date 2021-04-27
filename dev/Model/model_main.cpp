@@ -43,7 +43,7 @@ Device* model::get_device(Device_Label label)
 
 /**
  * Run all commands lined up for this step. If an exception is thrown, the command is thrown away and the exception gets rethrown.
- * TODO: Add details to the exception thrown
+ * /todo Add details to the exception thrown
  */
 void model::step()
 {
