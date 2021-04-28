@@ -25,7 +25,7 @@ public:
 	 * \param transition_time Length of time that the transition should take place.
 	 * \todo change transition_amount from int to float
 	 */
-	Transition(int transition_amount, double transition_time)
+	Transition(float transition_amount, double transition_time)
 	{
 		time_to_complete = transition_time;
 		amount = transition_amount / 100.0f;

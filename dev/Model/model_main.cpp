@@ -1,7 +1,7 @@
 #include "model_main.h"
 
-#include "types.h"
 #include "../Interfaces/model_interface.h"
+#include "../Interfaces/types/model_command.h"
 #include "../Controller/Commands/common/initalize.h"
 #include "../Utilities/Logging/logging.h"
 
@@ -38,7 +38,7 @@ void model::create_node(Node_Type type, Node_Id id)
 
 Device* model::get_device(Device_Label label)
 {
-	return model::get_node(label.first)->get_device(label.second);
+	return model::get_node(label.get_node_id())->get_device(label.get_device_id());
 }
 
 /**
@@ -51,7 +51,7 @@ void model::step()
 	{
 		try 
 		{
-			model::get_device(it->label)->run_command(it->command);
+			model::get_node(it->label.get_node_id())->run_command(it->label.get_device_id(), it->command);
 		}
 		catch (std::exception& exc)
 		{

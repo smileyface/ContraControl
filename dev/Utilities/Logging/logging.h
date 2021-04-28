@@ -4,7 +4,6 @@
 
 #include <queue>
 #include "log_item.h"
-#include "../../Controller/commands.h"
 class Logger {
 public:
 	/* Static access method. */

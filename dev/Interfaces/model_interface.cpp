@@ -5,8 +5,8 @@
 
 #include "../Model/model_main.h"
 #include "../Controller/controller_main.h"
-#include "../Controller/types.h"
 #include "../Controller/commands.h"
+#include "../Interfaces/types/device_label.h"
 
 /** 
  *  \cond
@@ -18,7 +18,7 @@ struct compare
 	bool operator()(Model_Command const& i)
 	{
 		bool same_command = key.command == i.command; 
-		bool same_device = key.label.first == i.label.first;
+		bool same_device = key.label == i.label;
 		return same_command&&same_device;
 	}
 };

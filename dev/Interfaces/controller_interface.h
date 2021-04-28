@@ -1,8 +1,7 @@
 #ifndef MODEL_CONTROLLER_INTERFACE_H
 #define MODEL_CONTROLLER_INTERFACE_H
 
-#include "../Controller/types.h"
-#include "../Model/node/node.h"
+#include "types/timed_command.h"
 
 class Controller_Interfaces {
 public:

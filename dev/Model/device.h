@@ -8,6 +8,10 @@
 #include "devices/gradient.h"
 #include "devices/channel.h"
 
+typedef uint16_t Device_Id;
+typedef std::string Device_Name;
+typedef std::pair<uint16_t, Device_Name> Device_Creator;
+
 enum class DEVICE_IDENTIFIER : uint16_t
 {
 	DEVICE,
