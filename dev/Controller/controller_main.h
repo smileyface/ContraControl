@@ -12,7 +12,6 @@
 
 #include "../Interfaces/types/timed_command.h"
 
-
 namespace controller
 {
 	extern Timer controller_timer;
