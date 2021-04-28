@@ -51,7 +51,9 @@ void model::step()
 	{
 		try 
 		{
-			model::get_node(it->label.get_node_id())->run_command(it->label.get_device_id(), it->command);
+			it->command->mangle_state(model::get_device(it->label)->state);
+			it->command->time_to_complete -= model_timer.elapsed_time;
+
 		}
 		catch (std::exception& exc)
 		{
@@ -64,11 +66,6 @@ void model::step()
 	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
 }
 
-void model::add_command(Device_Label label, Command* command)
-{
-
-}
-
 void model::stop_loop()
 {
 	model_running = false;
@@ -79,11 +76,3 @@ void model::clean_up()
 	model::nodes.clear();
 }
 
-
-void model::system_commands(Command* commands)
-{
-	if (commands->get_id() == COMMAND_ENUM::INITALIZE)
-	{
-		model::initalize();
-	}
-}

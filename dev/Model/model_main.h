@@ -28,10 +28,6 @@ namespace model {
 
 	void step();
 
-	void add_command(Device_Label, Command*);
-
-
-	void system_commands(Command*);
 
 	void stop_loop();
 

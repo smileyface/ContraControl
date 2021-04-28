@@ -2,6 +2,8 @@
 #define INTERFACE_TIMED_COMMAND_TYPE
 
 #include "../../Interfaces/types/device_label.h"
+#include "../../Controller/commands.h"
+
 class Timed_Command {
 public:
 	Command* command;

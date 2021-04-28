@@ -1,7 +1,7 @@
 #ifndef DEVICE_STATE_MACHINE_H
 #define DEVICE_STATE_MACHINE_H
 
-#include<vector>
+#include <vector>
 #include <typeinfo> 
 #include <cinttypes>
 
