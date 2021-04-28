@@ -4,6 +4,7 @@
 #include <functional>   // std::function
 
 #include "../device.h"
+#include "../../Controller/commands.h"
 #include "../../Interfaces/Network/connections.h"
 #include "../../Utilities/exceptions.h"
 

@@ -53,6 +53,7 @@ void model::step()
 		{
 			it->command->mangle_state(model::get_device(it->label)->state);
 			it->command->time_to_complete -= model_timer.elapsed_time;
+
 		}
 		catch (std::exception& exc)
 		{
