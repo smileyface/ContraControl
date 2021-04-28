@@ -1,12 +1,7 @@
 #ifndef MAIN_DEVICE_H
 #define MAIN_DEVICE_H
 
-#include <map>
-#include<functional>
-#include <typeinfo> 
-
 #include "../../Utilities/Logging/logging.h"
-#include "../system/timer.h"
 #include "../state/state.h"
 
 

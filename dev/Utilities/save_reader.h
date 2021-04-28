@@ -2,8 +2,8 @@
 #define SAVE_READER_H
 
 
-#include "../Model/model_main.h"
-#include "../Controller/controller_main.h"
+#include "../Interfaces/model_interface.h"
+#include "../Interfaces/controller_interface.h"
 
 namespace file_reader {
 	std::function<void()>read_devices = []() {

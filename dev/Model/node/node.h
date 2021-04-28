@@ -1,10 +1,9 @@
 #ifndef MODEL_NODE_H
 #define MODEL_NODE_H
 
-#include <map>
-#include <string>
+#include <functional>   // std::function
+
 #include "../device.h"
-#include "../../Controller/commands.h"
 #include "../../Interfaces/Network/connections.h"
 #include "../../Utilities/exceptions.h"
 
@@ -38,10 +37,6 @@ public:
 		id_pool++;
 	}
 
-	void run_command(Device_Id device, Command* command)
-	{
-		command->mangle_state(get_device(device)->state);
-	}
 	Device* get_device(Device_Id device)
 	{
 		if (devices.find(device) == devices.end())
