@@ -9,7 +9,6 @@
 #define TRANSITION_COMMAND_H
 
 #include "../../command.h"
-#include "../../../../Model/system/timer.h"
 
 /**
 *A command to transition the position of the device.
@@ -28,6 +27,7 @@ public:
 	Transition(float transition_amount, double transition_time)
 	{
 		time_to_complete = transition_time;
+		total_elapsed_time = transition_time;
 		amount = transition_amount / 100.0f;
 	};
 	~Transition() { };
@@ -40,11 +40,9 @@ public:
 		position = amount;
 
 	}
-	void transition(float& position, double elapsed_time)
+	void transition(float& position)
 	{
-		total_elapsed_time += elapsed_time;
-		set_device_position(position, elapsed_time);
-		time_to_complete -= elapsed_time;
+		set_device_position(position, total_elapsed_time-time_to_complete);
 	}
 
 	/**
@@ -68,7 +66,7 @@ public:
 		{
 			state.transitioning = false;
 		}
-        transition(state.position, model_timer.get_elapsed_time());
+		transition(state.position);
     }
 
 protected:
