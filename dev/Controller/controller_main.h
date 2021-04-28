@@ -7,8 +7,7 @@
 #include <functional>
 
 #include "../Utilities/timer.h"
-#include "commands.h"
-#include "types.h"
+#include "../Interfaces/types/timed_command.h"
 
 
 

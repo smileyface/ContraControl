@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include "../device.h"
+#include "../../Controller/commands.h"
 #include "../../Interfaces/Network/connections.h"
 #include "../../Utilities/exceptions.h"
 
@@ -13,6 +14,8 @@ enum class Node_Type : uint8_t
 	UI,
 	INVALID
 };
+
+typedef std::string Node_Id;
 
 class Node
 {
@@ -34,12 +37,10 @@ public:
 		name_to_id_map[device.second] = id_pool;
 		id_pool++;
 	}
-	void run_command(Device* device, Command* command)
+
+	void run_command(Device_Id device, Command* command)
 	{
-		if (devices.find(device->get_id()) != devices.end())
-		{
-			device->run_command(command);
-		}
+		command->mangle_state(get_device(device)->state);
 	}
 	Device* get_device(Device_Id device)
 	{

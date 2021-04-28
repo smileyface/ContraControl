@@ -5,11 +5,11 @@
 #include <vector>
 #include <string>
 
-#include "node/node.h"
 #include "../Utilities/timer.h"
-#include "types.h"
 #include "system/timer.h"
 
+#include "../Interfaces/types/model_command.h"
+#include "../Interfaces/types/device_label.h"
 
 namespace model {
 	extern std::map<Node_Id, Node*> nodes;

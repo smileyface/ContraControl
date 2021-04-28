@@ -1,10 +1,7 @@
 #ifndef COMMAND_MODEL_INTERFACE
 #define COMMAND_MODEL_INTERFACE
 
-#include "../Controller/types.h"
-#include "../Controller/Commands/common/initalize.h"
-#include "../Model/types.h"
-#include "../Model/node/node.h"
+#include "types/model_command.h"
 
 
 

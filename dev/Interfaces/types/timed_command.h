@@ -1,11 +1,7 @@
-#ifndef CONTROLLER_TYPES_H
-#define CONTROLLER_TYPES_H
+#ifndef INTERFACE_TIMED_COMMAND_TYPE
+#define INTERFACE_TIMED_COMMAND_TYPE
 
-#include "../Model/types.h"
-
-#include "Commands/command.h"
-
-
+#include "../../Interfaces/types/device_label.h"
 class Timed_Command {
 public:
 	Command* command;
@@ -21,4 +17,5 @@ public:
 
 
 };
-#endif // !CONTROLLER_TYPES_H
+
+#endif
