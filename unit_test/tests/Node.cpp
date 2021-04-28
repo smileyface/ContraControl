@@ -25,6 +25,6 @@ TEST_F(NodeTest, Node_Exclusion)
 	
 	ASSERT_THROW(device_utilities::command_device(dl_e, new On()), DeviceNotFoundException);
 
-	dl_e.first = "Test_Fail";
-	ASSERT_THROW(device_utilities::command_device(dl_e, new Off()), NodeNotFoundException);
+	Device_Label dl_e2("Test_Fail", 0);
+	ASSERT_THROW(device_utilities::command_device(dl_e2, new Off()), NodeNotFoundException);
 }

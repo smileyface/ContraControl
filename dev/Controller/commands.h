@@ -1,11 +1,9 @@
 #ifndef COMMANDS_INCLUSION_H
 #define COMMANDS_INCLUSION_H
 
-#include "Commands/command.h"
 #include "Commands/common/initalize.h"
 #include "Commands/device/on.h"
 #include "Commands/device/off.h"
-#include "Commands/device/transitions/transition.h"
 #include "Commands/device/transitions/linear_transition.h"
 
 

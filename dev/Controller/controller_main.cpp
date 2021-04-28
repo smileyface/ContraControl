@@ -1,7 +1,4 @@
 #include "controller_main.h"
-
-
-#include "../Model/types.h"
 #include "../Interfaces/controller_interface.h"
 
 Timer controller::controller_timer;
