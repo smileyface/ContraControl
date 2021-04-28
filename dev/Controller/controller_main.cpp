@@ -1,3 +1,5 @@
+#include <algorithm>    // std::sort
+
 #include "controller_main.h"
 #include "../Interfaces/controller_interface.h"
 

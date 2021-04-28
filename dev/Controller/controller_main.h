@@ -1,15 +1,16 @@
+/*****************************************************************//**
+ * \file   controller_main.h
+ * \brief  Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead.
+ * 
+ * \author kason
+ * \date   April 2021
+ *********************************************************************/
+
 
 #ifndef MAIN_EXECUTOR_H
 #define MAIN_EXECUTOR_H
 
-#include <vector>
-#include <algorithm>
-#include <functional>
-
-#include "../Utilities/timer.h"
 #include "../Interfaces/types/timed_command.h"
-
-
 
 namespace controller
 {
