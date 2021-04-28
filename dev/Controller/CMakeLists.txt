@@ -6,7 +6,6 @@ set(CONTROLLER_HEADER_FILES
                     Commands/device/on.h
                     Commands/command.h
                     commands.h
-                    controller_main.h
-                    types.h )
+                    controller_main.h)
 
 add_library(Controller controller_main.cpp ${CONTROLLER_HEADER_FILES})

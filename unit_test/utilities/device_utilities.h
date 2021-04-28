@@ -1,7 +1,9 @@
 #ifndef TESTING_DEVICE_UTILITIES
 #define TESTING_DEVICE_UTILITIES
 
-#include "../../dev/Model/device.h"
+#include "../../dev/Model/node/node.h"
+#include "../../dev/Controller/commands.h"
+#include "../../dev/Interfaces/types/device_label.h"
 #include "pch.h"
 namespace device_utilities
 {
@@ -19,7 +21,7 @@ namespace device_utilities
 	/*
 	Add a device to the given node in the model. Returns device name.
 	*/
-	Device_Label add_device(Node_Id, Device_Creator dev);
+	Device_Label add_device(Node_Id, Device_Creator);
 	/*
 	Command a device. Returns the nominal state associated with that command.
 	*/

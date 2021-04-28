@@ -17,8 +17,7 @@ set(MODEL_NODE_HEADER_FILES
                     node/node.h)
 
 set(MODEL_HEADER_FILES 
-                    device.h
-                    types.h )
+                    device.h)
 
 
 add_library(Model model_main.cpp ${MODEL_DEVICES_HEADER_FILES} ${MODEL_SYSTEM_HEADER_FILES} ${MODEL_STATE_HEADER_FILES} ${MODEL_NODE_HEADER_FILES} ${MODEL_HEADER_FILES})

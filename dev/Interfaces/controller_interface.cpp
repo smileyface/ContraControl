@@ -1,5 +1,6 @@
 #include "controller_interface.h"
 #include "model_interface.h"
+#include "types/model_command.h"
 #include "../Controller/controller_main.h"
 
 
