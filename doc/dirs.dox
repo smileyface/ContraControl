@@ -11,3 +11,7 @@
 * \dir transitions
 * \brief Commands to move a devices position.
 */
+/**
+* \dir common
+* \brief Commands common to all devices.
+*/
