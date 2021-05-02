@@ -6,7 +6,7 @@
 class Device_Label
 {
 public:
-	Device_Label() {};
+	Device_Label() { device_label = INVALID_DEVICE; };
 	Device_Label(Node_Id node, Device_Id device)
 	{
 		node_label = node;

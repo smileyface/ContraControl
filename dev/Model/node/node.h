@@ -1,10 +1,9 @@
 #ifndef MODEL_NODE_H
 #define MODEL_NODE_H
 
-#include <functional>   // std::function
+#include <map>			// std::map
 
 #include "../device.h"
-#include "../../Controller/commands.h"
 #include "../../Interfaces/Network/connections.h"
 #include "../../Utilities/exceptions.h"
 

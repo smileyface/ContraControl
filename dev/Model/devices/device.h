@@ -1,6 +1,8 @@
 #ifndef MAIN_DEVICE_H
 #define MAIN_DEVICE_H
 
+#include <typeinfo> 
+
 #include "../../Utilities/Logging/logging.h"
 #include "../state/state.h"
 

@@ -2,7 +2,6 @@
 #define TIMER_H
 
 #include <ctime>
-#include <map>
 
 class Timer {
 public:
