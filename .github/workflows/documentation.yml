@@ -15,8 +15,6 @@ jobs:
       # uses: mattnotmitt/doxygen-action@9964e41e7f2e2a56e42fe789421f3fe33e938d63
       uses: mattnotmitt/doxygen-action@v1.3.1
       with:
-        # Path to Doxyfile
-        doxyfile-path: ${{runner.workspace}}/ContraControl/Doxyfile
         # Working directory
         working-directory: .
     - name: Deploy
