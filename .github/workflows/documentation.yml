@@ -15,6 +15,7 @@ jobs:
       # You may pin to the exact commit or the version.
       # uses: mattnotmitt/doxygen-action@9964e41e7f2e2a56e42fe789421f3fe33e938d63
       uses: mattnotmitt/doxygen-action@v1.3.1
+    - run: "ls -a"
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
