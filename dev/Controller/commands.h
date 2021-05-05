@@ -10,11 +10,11 @@
 #define COMMANDS_INCLUSION_H
 
 //device.h included by inheritance
-#include "Commands/common/initalize.h"
-#include "Commands/device/on.h"
-#include "Commands/device/off.h"
+#include "commands/common/initalize.h"
+#include "commands/device/on.h"
+#include "commands/device/off.h"
 //transition.h included by inheritance
-#include "Commands/device/transitions/linear_transition.h"
+#include "commands/device/transitions/linear_transition.h"
 
 
 

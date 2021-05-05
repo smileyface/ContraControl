@@ -8,7 +8,7 @@
 
 Timer model_timer;
 
-std::map<Node_Id, Node*> model::nodes;
+Node_Map model::nodes;
 bool model::model_running = true;
 
 std::vector<Model_Command> model::step_actions;

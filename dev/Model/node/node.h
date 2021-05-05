@@ -14,7 +14,6 @@ enum class Node_Type : uint8_t
 	INVALID
 };
 
-typedef std::string Node_Id;
 
 class Node
 {
@@ -65,5 +64,9 @@ private:
 	Node_Type my_type;
 	Device_Id id_pool;
 };
+
+
+typedef std::string Node_Id;
+typedef std::map<Node_Id, Node*> Node_Map;
 
 #endif // !MODEL_NODE_H

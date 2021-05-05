@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-#include "../timer.h"
-
 enum class LOG_PRIORITY {
 	SEVERE,
 	INFO,
@@ -30,7 +28,6 @@ public:
 	std::string message;
 	std::string device;
 private:
-	Timer timer;
 
 };
 

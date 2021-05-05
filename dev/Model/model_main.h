@@ -1,18 +1,20 @@
+/*****************************************************************//**
+ * \file   model_main.h
+ * \brief  Main brains for the model. DO NOT INCLUDE. Include a model_interface instead
+ * 
+ * \author kason
+ * \date   May 2021
+ *********************************************************************/
+
 #ifndef MODEL_MAIN_H
 #define MODEL_MAIN_H
 
-#include <map>
-#include <vector>
-#include <string>
-
-#include "../Utilities/timer.h"
 #include "system/timer.h"
 
 #include "../Interfaces/types/model_command.h"
-#include "../Interfaces/types/device_label.h"
 
 namespace model {
-	extern std::map<Node_Id, Node*> nodes;
+	extern Node_Map nodes;
 	extern bool model_running;
 
 	extern Node_Id my_node;
@@ -32,8 +34,5 @@ namespace model {
 	void stop_loop();
 
 	void clean_up();
-
-
-
 }
 #endif 

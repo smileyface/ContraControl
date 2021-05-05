@@ -1,11 +1,12 @@
 set(CONTROLLER_HEADER_FILES 
-                    Commands/common/initalize.h
-                    Commands/device/transitions/transition.h
-                    Commands/device/transitions/linear_transition.h
-                    Commands/device/off.h
-                    Commands/device/on.h
-                    Commands/command.h
+                    commands/common/initalize.h
+                    commands/device/transitions/transition.h
+                    commands/device/transitions/linear_transition.h
+                    commands/device/off.h
+                    commands/device/on.h
+                    commands/command.h
                     commands.h
-                    controller_main.h)
+                    controller_main.h
+                    system/timer.h)
 
 add_library(Controller controller_main.cpp ${CONTROLLER_HEADER_FILES})

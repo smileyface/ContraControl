@@ -12,7 +12,9 @@ const uint16_t INVALID_DEVICE = UINT16_MAX;
 
 
 typedef uint16_t Device_Id;
-
+/**
+ * An output.
+ */
 class Device
 {
 public:

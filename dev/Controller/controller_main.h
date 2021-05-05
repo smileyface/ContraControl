@@ -11,11 +11,10 @@
 #define MAIN_EXECUTOR_H
 
 #include "../Interfaces/types/timed_command.h"
-
+#include "system/timer.h"
 
 namespace controller
 {
-	extern Timer controller_timer;
 	extern bool controller_running;
 	extern std::vector<Timed_Command> controller_queue;
 

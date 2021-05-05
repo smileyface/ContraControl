@@ -3,7 +3,8 @@
 #include "controller_main.h"
 #include "../Interfaces/controller_interface.h"
 
-Timer controller::controller_timer;
+
+Timer controller_timer;
 bool controller::controller_running = true;
 std::vector<Timed_Command> controller::controller_queue;
 
