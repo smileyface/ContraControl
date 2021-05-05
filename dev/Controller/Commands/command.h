@@ -59,7 +59,7 @@ public:
      */
     virtual void mangle_state(Device_State& state) = 0;
     /**
-     * If time to complete is 0, Command has completed, therefore return true.
+     * @return If time to complete is 0, Command has completed, therefore return true.
      */
 	bool completed() { return time_to_complete <= 0.0; }
     /**

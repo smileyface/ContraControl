@@ -1,5 +1,5 @@
 /**
-* \dir Commands
+* \dir Controller/commands
 * \brief All Device Commands including the base command.
 */
 /**
@@ -12,6 +12,6 @@
 * \brief Commands to move a devices position.
 */
 /**
-* \dir common
+* \dir Controller/commands/common/
 * \brief Commands common to all devices.
 */

@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   node.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   May 2021
+ *********************************************************************/
+
 #ifndef MODEL_NODE_H
 #define MODEL_NODE_H
 
@@ -66,7 +74,7 @@ private:
 };
 
 
-typedef std::string Node_Id;
-typedef std::map<Node_Id, Node*> Node_Map;
+typedef std::string Node_Id; ///<An Identifier for a node
+typedef std::map<Node_Id, Node*> Node_Map; ///<A map to hold a node by a given ID
 
 #endif // !MODEL_NODE_H

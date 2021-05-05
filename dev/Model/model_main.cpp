@@ -1,8 +1,5 @@
 #include "model_main.h"
 
-#include "../Interfaces/model_interface.h"
-#include "../Interfaces/types/model_command.h"
-#include "../Controller/Commands/common/initalize.h"
 #include "../Utilities/Logging/logging.h"
 
 
@@ -41,10 +38,7 @@ Device* model::get_device(Device_Label label)
 	return model::get_node(label.get_node_id())->get_device(label.get_device_id());
 }
 
-/**
- * Run all commands lined up for this step. If an exception is thrown, the command is thrown away and the exception gets rethrown.
- * /todo Add details to the exception thrown
- */
+
 void model::step()
 {
 	for (std::vector<Model_Command>::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
@@ -69,6 +63,7 @@ void model::step()
 void model::stop_loop()
 {
 	model_running = false;
+	model::clean_up();
 }
 
 void model::clean_up()
