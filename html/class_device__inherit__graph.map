@@ -1,0 +1,7 @@
+<map id="Device" name="Device">
+<area shape="rect" id="node1" title=" " alt="" coords="173,5,236,32"/>
+<area shape="rect" id="node2" href="$class_channel___device.html" title=" " alt="" coords="5,80,121,107"/>
+<area shape="rect" id="node3" href="$class_gradient___device.html" title=" " alt="" coords="145,80,264,107"/>
+<area shape="rect" id="node4" href="$class_switch___device.html" title=" " alt="" coords="289,80,398,107"/>
+<area shape="rect" id="node5" href="$class_audio___device.html" title=" " alt="" coords="292,155,395,181"/>
+</map>

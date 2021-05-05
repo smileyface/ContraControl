@@ -1,0 +1,10 @@
+<map id="LED_View" name="LED_View">
+<area shape="rect" id="node1" title=" " alt="" coords="80,336,163,363"/>
+<area shape="rect" id="node2" href="$class_desktop___view.html" title=" " alt="" coords="68,260,175,287"/>
+<area shape="rect" id="node3" href="$class_view.html" title=" " alt="" coords="5,171,56,197"/>
+<area shape="rect" id="node4" href="$struct_dimension.html" title=" " alt="" coords="80,171,163,197"/>
+<area shape="rect" id="node5" href="$class_window.html" title=" " alt="" coords="187,171,255,197"/>
+<area shape="rect" id="node6" href="$class_painter.html" title=" " alt="" coords="151,81,214,108"/>
+<area shape="rect" id="node7" href="$class_menu.html" title=" " alt="" coords="238,81,293,108"/>
+<area shape="rect" id="node8" href="$class_menu___item.html" title=" " alt="" coords="222,5,309,32"/>
+</map>
