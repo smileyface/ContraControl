@@ -9,14 +9,14 @@ jobs:
   document:
     runs-on: ubuntu-latest
     steps:
-    - run: "ls -a ${{GITHUB_WORKSPACE}}/ContraControl"
+    - run: "ls -a ${{runner.workspace}}/ContraControl"
     - name: Doxygen Action
       # You may pin to the exact commit or the version.
       # uses: mattnotmitt/doxygen-action@9964e41e7f2e2a56e42fe789421f3fe33e938d63
       uses: mattnotmitt/doxygen-action@v1.3.1
       with:
         # Path to Doxyfile
-        doxyfile-path: ${{runner.workspace}}/Doxyfile
+        doxyfile-path: ${{runner.workspace}}/ContraControl/Doxyfile
         # Working directory
         working-directory: .
     - name: Deploy
