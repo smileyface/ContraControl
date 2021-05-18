@@ -21,27 +21,27 @@ typedef uint16_t command_id;
 enum class COMMAND_ENUM :command_id
 {
     /**
-        Do device start up routine
+     Do device start up routine
      */
 	INITALIZE,
     /**
-        Turn device on
+     Turn device on
      */
 	ON,
     /**
-        Turn device off
+     Turn device off
      */
 	OFF,
     /**
-        Generic transition
+     Generic transition
      */
 	TRANSITION,
     /**
-        Transition at in a linear manner
+     Transition at in a linear manner
      */
 	LINEAR_TRANSITION,
     /**
-        Unmapped Command
+     Unmapped Command
      */
 	INVALID = UINT16_MAX
 };
@@ -51,19 +51,25 @@ enum class COMMAND_ENUM :command_id
  */
 class Command {
 public:
-	double time_to_complete = 0.0; ///<How long the command will take to run.
+    /**
+     How long the command will take to run.
+     */
+	double time_to_complete = 0.0;
 	Command() { };
 	~Command() {};
     /**
      * Change values in Device_State to reflect command.
+     * 
+     * \param state reference to the state about to get mangled.
      */
     virtual void mangle_state(Device_State& state) = 0;
     /**
-     * @return If time to complete is 0, Command has completed, therefore return true.
+     * \return If time to complete is 0, Command has completed, therefore return true.
      */
 	bool completed() { return time_to_complete <= 0.0; }
     /**
      * Return Enum of the command. Mainly for Command indentification purposes.
+     * \return Enum value of the command.
      */
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::INVALID; }
 private:

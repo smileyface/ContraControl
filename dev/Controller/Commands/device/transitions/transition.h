@@ -33,22 +33,25 @@ public:
 	~Transition() { };
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::TRANSITION; }
 	/**
-	 * Calculation to move the position of a Device_State  
+	 * \brief Calculation to move the position of a Device_State. 
+	 * 
+	 * Immediately move to the desired state.
+	 * 
+	 * \param position current device position.
+	 * \param elapsed_time time since transition started.
 	 */
-	virtual void set_device_position(float& position, double elapsed_time)
+	virtual void transition(float& position, double elapsed_time)
 	{
 		position = amount;
 
 	}
-	void transition(float& position)
-	{
-		set_device_position(position, total_elapsed_time-time_to_complete);
-	}
+
 
 	/**
 	 * Change values in Device_State to reflect command.<br>
      * If device is not initalized, set state to invalid and return.<br>
-     * Transitions amount of command by a percentage. Children classes should not implement this function. They should instead implement \ref set_device_position(float&, double) "set_device_position(position, elapsed_time)".
+     * Transitions amount of command by a percentage. Children classes should not implement this function. They should instead implement \ref transition(float&, double) "transition(position, elapsed_time)".
+     * \param state reference to the state about to get mangled.
 	 */
     virtual void mangle_state(Device_State& state) final
     {
@@ -70,8 +73,22 @@ public:
     }
 
 protected:
+	/**
+	 Percentage of change.
+	 */
 	float amount = 0.0;
+	/**
+	 Current percentage of range.
+	 */
 	float current_position = -1;
+	/**
+	 How long this transition will take.
+	 */
 	double total_elapsed_time = 0.0;
+private:
+	void transition(float& position)
+	{
+		transition(position, total_elapsed_time - time_to_complete);
+	}
 };
 #endif // !TRANSITION_COMMAND_H

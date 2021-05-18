@@ -17,6 +17,10 @@ public:
 		time = t;
 	};
 
+	bool operator<(const Timed_Command& tc)
+	{
+		return time < tc.time;
+	}
 
 };
 
