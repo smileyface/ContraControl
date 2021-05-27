@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   device.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   May 2021
+ *********************************************************************/
+
 #ifndef DEVICES_H
 #define DEVICES_H
 
@@ -6,19 +14,27 @@
 #include "devices/gradient.h"
 #include "devices/channel.h"
 
-typedef uint16_t Device_Id;
-typedef std::string Device_Name;
-typedef std::pair<uint16_t, Device_Name> Device_Creator;
+typedef std::vector<Device_Id> Device_List;
+typedef std::pair<Device_Id, Device_Name> Device_Creator; ///<A struct to feed the device factory.
+typedef std::map<Device_Id, Device*> Device_Id_Map;
 
-enum class DEVICE_IDENTIFIER : uint16_t
+/** 
+ *  A list of types of devices.
+ */
+enum class DEVICE_IDENTIFIER : Device_Id
 {
-	DEVICE,
-	SWITCH,
-	GRADIENT,
-    CHANNEL,
-	AUDIO
+	DEVICE, ///<Generic Device
+	SWITCH, ///<Device that is binary
+	GRADIENT, ///<Device that has one channel that has various positions
+    CHANNEL, ///<Device with multiple channels
+	AUDIO ///<Device that controls audio
 };
 
+/**
+ * A factory for making device instances.
+ * \param creator A struct containing information to create the desired Device.
+ * \return A pointer to the desired Device
+ */
 inline Device* create_device_instance(Device_Creator creator)
 {
 	Device* the_device;

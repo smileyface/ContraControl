@@ -9,6 +9,8 @@
 #ifndef INITALIZE_COMMAND_H
 #define INITALIZE_COMMAND_H
 
+#include <string>			//std::string
+
 #include "../command.h"
 
 /**

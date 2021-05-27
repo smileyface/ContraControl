@@ -6,7 +6,7 @@
 
 Timer controller_timer;
 bool controller::controller_running = true;
-std::vector<Timed_Command> controller::controller_queue;
+Timed_List controller::controller_queue;
 
 void controller::initalize()
 {

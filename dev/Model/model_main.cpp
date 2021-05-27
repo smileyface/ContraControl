@@ -8,7 +8,7 @@ Timer model_timer;
 Node_Map model::nodes;
 bool model::model_running = true;
 
-std::vector<Model_Command> model::step_actions;
+Command_List model::step_actions;
 
 Node_Id model::my_node;
 
@@ -41,7 +41,7 @@ Device* model::get_device(Device_Label label)
 
 void model::step()
 {
-	for (std::vector<Model_Command>::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
+	for (Command_List::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
 	{
 		try 
 		{

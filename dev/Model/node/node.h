@@ -56,10 +56,10 @@ public:
 	{
 		return devices[name_to_id_map[device]];
 	}
-	std::vector<Device_Id> get_devices()
+	Device_List get_devices()
 	{
-		std::vector<Device_Id> device_ids;
-		for (std::map<Device_Id, Device*>::iterator it = devices.begin(); it != devices.end(); ++it)
+		Device_List device_ids;
+		for (Device_Id_Map::iterator it = devices.begin(); it != devices.end(); ++it)
 		{
 			device_ids.push_back(it->first);
 		}
@@ -67,7 +67,7 @@ public:
 	}
 private:
 	Connection connections;
-	std::map<Device_Id, Device*> devices;
+	Device_Id_Map devices;
 	std::map<Device_Name, Device_Id> name_to_id_map;
 	Node_Type my_type;
 	Device_Id id_pool;

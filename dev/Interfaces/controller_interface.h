@@ -1,6 +1,8 @@
 #ifndef MODEL_CONTROLLER_INTERFACE_H
 #define MODEL_CONTROLLER_INTERFACE_H
 
+#include <string>			//std::string
+
 #include "types/timed_command.h"
 
 class Controller_Interfaces {

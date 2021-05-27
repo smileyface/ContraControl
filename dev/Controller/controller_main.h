@@ -10,6 +10,8 @@
 #ifndef MAIN_EXECUTOR_H
 #define MAIN_EXECUTOR_H
 
+
+
 #include "../Interfaces/types/timed_command.h"
 #include "system/timer.h"
 
@@ -26,7 +28,7 @@ namespace controller
 	/**
 	 Sorted queue of commands to send to the model.
 	 */
-	extern std::vector<Timed_Command> controller_queue;
+	extern Timed_List controller_queue;
 
 	/**
 	 * Start up.

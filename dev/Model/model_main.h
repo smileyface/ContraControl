@@ -22,7 +22,7 @@ namespace model {
 	extern Node_Map nodes; ///<List of nodes known to the model.
 	extern bool model_running; ///<Is the model looping
 	extern Node_Id my_node; ///<The node ID where this model is running. Each node will have its own version of the model running on it.
-	extern std::vector<Model_Command> step_actions; ///<Actions to be completed on this step of the loop.
+	extern Command_List step_actions; ///<Actions to be completed on this step of the loop.
 
 	/**
 	 * @brief Get node from list of known nodes by ID
