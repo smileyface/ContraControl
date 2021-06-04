@@ -36,8 +36,6 @@ set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/device_label.h
                     Interfaces/types/state.h)
 
-print_all_variables()
-
 add_library(System_Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
 target_include_directories(System_Interface 
                             PUBLIC
@@ -68,6 +66,6 @@ target_include_directories(Network
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Network"
     PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
-install(FILES ${INTERFACE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/Network)
+install(FILES ${NETWORK_INTERFACE_HEADERS} DESTINATION ${CMAKE_BINARY_DIR}/inc/Network)
 install(FILES ${INTERFACE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface)
 install(FILES ${INTERFACE_TYPE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface/type)

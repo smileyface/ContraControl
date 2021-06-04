@@ -16,4 +16,5 @@ target_include_directories(Controller
                                 ${CMAKE_CURRENT_SOURCE_DIR}/commands)
                             
 
-target_link_libraries(Controller PUBLIC System_Interface Utilities)
+target_link_libraries(Controller System_Interface)
+target_link_libraries(Controller Utilities)
