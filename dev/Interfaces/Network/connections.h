@@ -1,6 +1,7 @@
+#include <string>
 class Connection
 {
 	std::string address;
-	int port;
+	int port = 0;
 
 };
