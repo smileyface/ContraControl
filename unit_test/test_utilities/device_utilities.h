@@ -32,6 +32,6 @@ namespace device_utilities
 	void initalize_device(Device_Label label);
 }
 
-#include"../utilities/system_testings.h"
+#include"../test_utilities/system_testings.h"
 
 #endif // !TESTING_DEVICE_UTILITIES

@@ -2,14 +2,14 @@
                       "tests/Switch_Device.cpp" 
                       "tests/Node.cpp")
 
-add_library(Test_Utilities "utilities/pch.h" 
-                           "utilities/system_testings.h" 
-                           "utilities/system_testings.cpp"  
-                           "utilities/module_mains.h" 
-                           "utilities/test_utilities.h" 
-                           "utilities/test_utilities.cpp" 
-                           "utilities/device_utilities.h" 
-                           "utilities/device_utilities.cpp")
+add_library(Test_Utilities "test_utilities/pch.h" 
+                           "test_utilities/system_testings.h" 
+                           "test_utilities/system_testings.cpp"  
+                           "test_utilities/module_mains.h" 
+                           "test_utilities/test_utilities.h" 
+                           "test_utilities/test_utilities.cpp" 
+                           "test_utilities/device_utilities.h" 
+                           "test_utilities/device_utilities.cpp")
 target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface)
 
 # Download and unpack googletest at configure time
