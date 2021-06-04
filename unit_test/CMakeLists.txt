@@ -10,7 +10,7 @@ add_library(Test_Utilities "utilities/pch.h"
                            "utilities/test_utilities.cpp" 
                            "utilities/device_utilities.h" 
                            "utilities/device_utilities.cpp")
-target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller Interface)
+target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)

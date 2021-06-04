@@ -12,8 +12,8 @@
 #include <map>			// std::map
 
 #include "../device.h"
-#include "../../Interfaces/Network/connections.h"
-#include "../../Utilities/exceptions.h"
+#include "Network/connections.h"
+#include "Utilities/exceptions.h"
 
 enum class Node_Type : uint8_t
 {
@@ -74,7 +74,6 @@ private:
 };
 
 
-typedef std::string Node_Id; ///<An Identifier for a node
-typedef std::map<Node_Id, Node*> Node_Map; ///<A map to hold a node by a given ID
+
 
 #endif // !MODEL_NODE_H

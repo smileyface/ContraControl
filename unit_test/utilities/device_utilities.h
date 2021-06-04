@@ -3,7 +3,7 @@
 
 #include "../../dev/Model/node/node.h"
 #include "../../dev/Controller/commands.h"
-#include "../../dev/Interfaces/types/device_label.h"
+#include "../../dev/Interfaces/Interfaces/types/device_label.h"
 #include "pch.h"
 namespace device_utilities
 {

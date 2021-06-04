@@ -14,8 +14,14 @@
 #include "devices/gradient.h"
 #include "devices/channel.h"
 
+/**
+ List of device IDs. For use with the Device_Id_Map.
+ */
 typedef std::vector<Device_Id> Device_List;
-typedef std::pair<Device_Id, Device_Name> Device_Creator; ///<A struct to feed the device factory.
+/**
+ A struct to feed the device factory.
+ */
+typedef std::pair<Device_Id, Device_Name> Device_Creator;
 typedef std::map<Device_Id, Device*> Device_Id_Map;
 
 /** 

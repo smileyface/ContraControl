@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#include "../../Interfaces/types/device_label.h"
-#include "../../Controller/commands.h"
+#include "Interfaces/types/device_label.h"
+#include "../../../Controller/commands.h"
 
 class Model_Command {
 public:

@@ -1,7 +1,7 @@
 #ifndef INTERFACE_TYPE_DEVICE_LABEL
 #define INTERFACE_TYPE_DEVICE_LABEL
 
-#include "../../Model/node/node.h"
+#include "../../../Model/node/node.h"
 
 class Device_Label
 {

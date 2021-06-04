@@ -12,7 +12,7 @@
 
 
 
-#include "../Interfaces/types/timed_command.h"
+#include "Interfaces/types/timed_command.h"
 #include "system/timer.h"
 
 /**

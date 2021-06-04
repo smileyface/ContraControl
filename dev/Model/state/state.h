@@ -1,9 +1,10 @@
 #ifndef DEVICE_STATE_MACHINE_H
 #define DEVICE_STATE_MACHINE_H
 
-
+#include <cstdint>
 
 #define INVALID_POSITION -1
+
 
 
 struct Device_State
