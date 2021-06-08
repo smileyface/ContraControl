@@ -6,7 +6,7 @@
 #include "../Model/model_main.h"
 #include "../Controller/controller_main.h"
 #include "../Controller/commands.h"
-#include "../Interfaces/types/device_label.h"
+#include "Interfaces/types/device_label.h"
 
 /** 
  *  \cond

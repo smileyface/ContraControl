@@ -5,8 +5,9 @@ project(ContraControlDev VERSION 0.0.4)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_subdirectory(Interfaces)
+
 add_subdirectory(Utilities)
+add_subdirectory(Interfaces)
 #Add the controller
 add_subdirectory(Controller)
 add_subdirectory(Model)

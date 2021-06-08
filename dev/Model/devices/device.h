@@ -10,8 +10,6 @@
 #define MAIN_DEVICE_H
 
 #include <typeinfo> //typeid
-#include <string>	//std::string
-#include <vector>   //std::vector
 
 #include "../state/state.h"
 
@@ -21,21 +19,6 @@
 static uint16_t device_id_pool = 0;
 /*!
  *  \endcond
- * 
- * Code for an invalid device.
- */
-const uint16_t INVALID_DEVICE = UINT16_MAX;
-
-/**
- An identifier object mainly for readability
- */
-typedef uint16_t Device_Id;
-/**
-A name for a device
- */
-typedef std::string Device_Name;
-
-/**
  * An output.
  */
 class Device
@@ -125,5 +108,6 @@ protected:
 	 */
 	Device_Name device_name = "INVALID";
 };
+
 
 #endif

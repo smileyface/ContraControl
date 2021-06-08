@@ -9,11 +9,13 @@
 #ifndef MODEL_NODE_H
 #define MODEL_NODE_H
 
-#include <map>			// std::map
 
 #include "../device.h"
 #include "Network/connections.h"
-#include "Utilities/exceptions.h"
+#include "../Utilities/Utilities/exceptions.h"
+#include "Interfaces/types/device_label.h"
+
+
 
 enum class Node_Type : uint8_t
 {
@@ -73,7 +75,6 @@ private:
 	Device_Id id_pool;
 };
 
-
-
+typedef std::map<Node_Id, Node*> Node_Map; ///<A map to hold a node by a given ID
 
 #endif // !MODEL_NODE_H

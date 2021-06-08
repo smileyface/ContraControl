@@ -1,6 +1,6 @@
 #include "model_main.h"
 
-#include "../Utilities/Logging/logging.h"
+#include "Logging/logging.h"
 
 
 Timer model_timer;
@@ -49,7 +49,7 @@ void model::step()
 			it->command->time_to_complete -= model_timer.elapsed_time;
 
 		}
-		catch (std::exception& exc)
+		catch (std::exception&)
 		{
 			model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
 			std::rethrow_exception(std::current_exception());

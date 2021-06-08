@@ -2,6 +2,7 @@
 #define COMMAND_MODEL_INTERFACE
 
 #include "types/model_command.h"
+#include "../Model/device.h"
 
 
 

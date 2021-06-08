@@ -1,10 +1,8 @@
 #ifndef INTERFACE_TIMED_COMMAND_TYPE
 #define INTERFACE_TIMED_COMMAND_TYPE
 
-#include <vector>		// std::vector
-
-#include "../../Interfaces/types/device_label.h"
-#include "../../Controller/commands.h"
+#include "Interfaces/types/device_label.h"
+#include "../../../Controller/commands.h"
 
 class Timed_Command {
 public:

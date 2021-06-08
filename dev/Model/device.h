@@ -9,20 +9,15 @@
 #ifndef DEVICES_H
 #define DEVICES_H
 
+#include <map>
+
+#include "Interfaces/types/device_label.h"
+
 //#include "devices/device.h"
 #include "devices/switch.h"
 #include "devices/gradient.h"
 #include "devices/channel.h"
 
-/**
- List of device IDs. For use with the Device_Id_Map.
- */
-typedef std::vector<Device_Id> Device_List;
-/**
- A struct to feed the device factory.
- */
-typedef std::pair<Device_Id, Device_Name> Device_Creator;
-typedef std::map<Device_Id, Device*> Device_Id_Map;
 
 /** 
  *  A list of types of devices.
@@ -58,5 +53,7 @@ inline Device* create_device_instance(Device_Creator creator)
 	the_device->set_name(creator.second);
 	return the_device;
 }
+
+typedef std::map<Device_Id, Device*> Device_Id_Map;
 
 #endif // !DEVICES_H

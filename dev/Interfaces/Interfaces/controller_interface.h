@@ -4,6 +4,7 @@
 #include <string>			//std::string
 
 #include "types/timed_command.h"
+#include "../../Model/model_main.h"
 
 class Controller_Interfaces {
 public:
