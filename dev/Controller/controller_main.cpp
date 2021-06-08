@@ -21,7 +21,9 @@ void controller::stop_controller()
 void controller::add_command(Timed_Command tc)
 {
 	controller::controller_queue.push_back(tc);
-	std::sort(controller::controller_queue.begin(), controller::controller_queue.end());
+	std::sort(controller::controller_queue.begin(), controller::controller_queue.end(), [](Timed_Command a, Timed_Command b) {
+		return a < b;
+		});
 }
 
 void controller::step()
