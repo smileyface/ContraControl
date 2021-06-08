@@ -20,7 +20,10 @@ class Initalize : public Command
 {
 public:
 	~Initalize() {};
-	std::string name; ///<Name for the device to be initalized
+	/**
+	 Name for the device to be initalized
+	 */
+	std::string name;
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::INITALIZE; }
 	/**
 	* Change values in Device_State to reflect command.<br>

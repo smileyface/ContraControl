@@ -24,11 +24,26 @@
  */
 enum class DEVICE_IDENTIFIER : Device_Id
 {
-	DEVICE, ///<Generic Device
-	SWITCH, ///<Device that is binary
-	GRADIENT, ///<Device that has one channel that has various positions
-    CHANNEL, ///<Device with multiple channels
-	AUDIO ///<Device that controls audio
+	/**
+	 Generic Device.
+	 */
+	DEVICE,
+	/**
+	 Device that is binary.
+	 */
+	SWITCH,
+	/**
+	 Device that has one channel that has various positions.
+	 */
+	GRADIENT,
+	/**
+	 Device with multiple channels
+	 */
+    CHANNEL,
+	/**
+	 Device that controls audio
+	 */
+	AUDIO
 };
 
 /**

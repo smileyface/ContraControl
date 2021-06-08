@@ -25,7 +25,10 @@ typedef std::string Device_Name;
  */
 typedef std::vector<Device_Id> Device_List;
 
-typedef std::string Node_Id; ///<An Identifier for a node
+/**
+ An Identifier for a node.
+ */
+typedef std::string Node_Id;
 
 /**
  A struct to feed the device factory.
