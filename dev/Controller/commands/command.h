@@ -8,7 +8,7 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "../../Model/state/state.h"
+#include "../Model/states.h"
 
 /*!
    An identifier object mainly for readability

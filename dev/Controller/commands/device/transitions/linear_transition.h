@@ -9,6 +9,8 @@
 #ifndef LINEAR_TRANSITIONS_COMMAND_H
 #define LINEAR_TRANSITIONS_COMMAND_H
 
+#include <cmath>
+
 #include "transition.h"
 
 /*!
@@ -24,10 +26,10 @@ public:
     * \param transition_time Length of time that the transition should take place.
     * \todo change transition_amount from int to float
     */
-	Linear_Transition(int transition_amount, double transition_time)
+	Linear_Transition(Channel transition_amount, double transition_time)
 	{
 		time_to_complete = transition_time;
-		amount = transition_amount / 100.0f;
+		amount = transition_amount / 100;
 	}
 	/**
  * \brief Calculation to move the position of a Device_State.
@@ -37,9 +39,9 @@ public:
  * \param position current device position.
  * \param elapsed_time time since transition started.
  */
-	virtual void transition(double& position, double elapsed_time)
+	virtual void transition(Channel position, double elapsed_time)
 	{
-		position = ((amount / time_to_complete) * elapsed_time) + (position / amount);
+		position = (int)round(((amount / time_to_complete) * elapsed_time) + (position / amount));
 	}
 };
 #endif // !LINEAR_TRANSITIONS_COMMAND_H

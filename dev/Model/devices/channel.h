@@ -4,6 +4,9 @@
 
 class Channel_Device : public Device
 {
+
+protected:
+	Channel_State state;
 };
 
 #endif

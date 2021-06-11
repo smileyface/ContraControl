@@ -13,7 +13,7 @@ namespace testing_util
 	namespace device_utilities
 	{
 		void check_state(Device_Label label, Device_State expected_state);
-		void check_position(Device_Label label, float position);
+		void check_position(Device_Label label, Channel position);
 		void check_validity(Device_Label label, bool expect_valid);
 	}
 }

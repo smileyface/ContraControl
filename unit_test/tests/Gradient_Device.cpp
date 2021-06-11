@@ -74,7 +74,7 @@ TEST_F(Gradient_Commands_Test, Gradient_Transition) {
 	//do transition
 	auto time = model_timer.program_time;
 	Transition* trans = new Transition(50, 20);
-	Device_State ds = device_utilities::command_device(dl, trans);
+	Channel_State ds = device_utilities::command_device(dl, trans);
 	testing_util::device_utilities::check_state(dl, ds);
 	ds = device_utilities::finish_command(trans);
 	EXPECT_NEAR(model_timer.program_time - time, 20, .1);

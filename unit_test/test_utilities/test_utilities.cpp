@@ -3,6 +3,9 @@
 
 #include "pch.h"
 
+
+#include <typeinfo>
+
 void testing_util::log_top_test(Command* command, Device* device)
 {
 	LogItem topItem;
@@ -34,13 +37,19 @@ void testing_util::device_utilities::check_state(Device_Label device, Device_Sta
 	EXPECT_EQ(received_state.valid, expected_state.valid) << "Device validity is not correct";
 	EXPECT_EQ(received_state.initalized, expected_state.initalized) << "Device is not initalized properly";
 	EXPECT_EQ(received_state.power, expected_state.power) << "Device power is not correct";
-	EXPECT_EQ(received_state.transitioning, expected_state.transitioning) << "Device transition is not correct";
+	if (typeid(expected_state).name() == typeid(Channel_State).name() && typeid(received_state).name() == typeid(Channel_State).name())
+	{
+		EXPECT_EQ(static_cast<Channel_State*>(&received_state)->transitioning, static_cast<Channel_State*>(&expected_state)->transitioning) << "Device transition is not correct";
+	}
 }
 
-void testing_util::device_utilities::check_position(Device_Label label, float position)
+void testing_util::device_utilities::check_position(Device_Label label, Channel position)
 {
-	EXPECT_EQ(model::get_device(label)->get_position(), position/100);
+	Gradient_Device* c_dev = dynamic_cast<Gradient_Device*>(model::get_device(label));
+	EXPECT_EQ(c_dev->get_position(), position);
 }
+
+
 
 void testing_util::device_utilities::check_validity(Device_Label label, bool expect_valid)
 {

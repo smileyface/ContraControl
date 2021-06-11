@@ -25,8 +25,7 @@ endif()
 set(INTERFACE_HEADER_FILES 
                     Interfaces/controller_interface.h
                     Interfaces/model_interface.h
-                    Interfaces/view_interface.h 
-                    Interfaces/common_objects.h)
+                    Interfaces/view_interface.h)
 set(INTERFACE_SOURCE_FILES 
                     Interfaces/controller_interface.cpp
                     Interfaces/model_interface.cpp)

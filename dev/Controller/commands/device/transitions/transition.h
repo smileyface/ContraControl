@@ -24,11 +24,17 @@ public:
 	 * \param transition_time Length of time that the transition should take place.
 	 * \todo change transition_amount from int to float
 	 */
-	Transition(float transition_amount, double transition_time)
+	Transition(Channel transition_amount, double transition_time)
 	{
 		time_to_complete = transition_time;
 		total_elapsed_time = transition_time;
-		amount = transition_amount / 100.0f;
+		amount = transition_amount / 100;
+	};
+	Transition(Channel transition_amount)
+	{
+		time_to_complete = 0;
+		total_elapsed_time = 0;
+		amount = transition_amount / 100;
 	};
 	~Transition() { };
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::TRANSITION; }
@@ -40,13 +46,10 @@ public:
 	 * \param position current device position.
 	 * \param elapsed_time time since transition started.
 	 */
-	virtual void transition(float& position, double elapsed_time)
+	virtual void transition(Channel& position, double elapsed_time)
 	{
 		position = amount;
-
 	}
-
-
 	/**
 	 * Change values in Device_State to reflect command.<br>
      * If device is not initalized, set state to invalid and return.<br>
@@ -55,28 +58,30 @@ public:
 	 */
     virtual void mangle_state(Device_State& state) final
     {
+		Channel_State c_state = static_cast<Channel_State&>(state);
         if(state.initalized == false)
         {
-            state.valid = false;
+            c_state.valid = false;
             return;
         }
-		state.power = true;
-		if (state.position != amount)
+		c_state.power = true;
+		if (c_state.get_position() != amount)
 		{
-			state.transitioning = true;
+			c_state.transitioning = true;
 		}
 		else
 		{
-			state.transitioning = false;
+			c_state.transitioning = false;
 		}
-		transition(state.position);
+		transition(c_state.get_position_ptr());
+
     }
 
 protected:
 	/**
 	 Percentage of change.
 	 */
-	float amount = 0.0;
+	Channel amount = 0;
 	/**
 	 Current percentage of range.
 	 */
@@ -86,7 +91,7 @@ protected:
 	 */
 	double total_elapsed_time = 0.0;
 private:
-	void transition(float& position)
+	void transition(Channel& position)
 	{
 		transition(position, total_elapsed_time - time_to_complete);
 	}

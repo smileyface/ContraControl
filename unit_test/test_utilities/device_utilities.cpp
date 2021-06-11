@@ -5,22 +5,22 @@
 int device_utilities::device_in_use = 0;
 Device_State device_utilities::get_nominal_state(Command* command)
 {
-		Device_State ds;
-		switch (command->get_id())
-		{
-		case COMMAND_ENUM::TRANSITION:
-		case COMMAND_ENUM::LINEAR_TRANSITION:
-			ds.transitioning = true;
-		case COMMAND_ENUM::ON:
-			ds.power = true;
-		case COMMAND_ENUM::OFF:
-		case COMMAND_ENUM::INITALIZE:
-			ds.initalized = true;
-			ds.valid = true;
-		case COMMAND_ENUM::INVALID:
-			break;
-		}
-		return ds;
+	Device_State ds;
+	switch (command->get_id())
+	{
+	case COMMAND_ENUM::TRANSITION:
+	case COMMAND_ENUM::LINEAR_TRANSITION:
+		static_cast<Channel_State*>(&ds)->transitioning = true;
+	case COMMAND_ENUM::ON:
+		ds.power = true;
+	case COMMAND_ENUM::OFF:
+	case COMMAND_ENUM::INITALIZE:
+		ds.initalized = true;
+		ds.valid = true;
+	case COMMAND_ENUM::INVALID:
+		break;
+	}
+	return ds;
 }
 
 void device_utilities::create_node(Node_Id id)

@@ -19,7 +19,10 @@ set(UTILITIES_SOURCE_FILES
                     "Utilities/save_reader.cpp")
 
 add_library(Utilities STATIC ${UTILITIES_SOURCE_FILES} ${UTILITIES_HEADER_FILES} )
-target_include_directories(Utilities PUBLIC ./)
+target_include_directories(Utilities 
+                            PUBLIC
+                                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"  
+                                "$<INSTALL_INTERFACE:${CMAKE_BINARY_DIR}/inc/Utilities>")
 # Set the output directory for build artifacts
   set_target_properties(Utilities
     PROPERTIES

@@ -11,15 +11,16 @@ set(MODEL_SYSTEM_HEADER_FILES
 
 set(MODEL_STATE_HEADER_FILES
                     state/state.h
-                    state/rgb.h)
+                    state/channel.h 
+                    state/time.h)
 
 set(MODEL_NODE_HEADER_FILES
                     node/node.h)
 
 set(MODEL_HEADER_FILES 
-                    device.h)
+                    device.h "states.h")
+                    
 
-
-add_library(Model model_main.cpp ${MODEL_DEVICES_HEADER_FILES} ${MODEL_SYSTEM_HEADER_FILES} ${MODEL_STATE_HEADER_FILES} ${MODEL_NODE_HEADER_FILES} ${MODEL_HEADER_FILES})
-target_link_libraries(Model PUBLIC  System_Interface PUBLIC Utilities)
+add_library(Model model_main.cpp ${MODEL_DEVICES_HEADER_FILES} ${MODEL_SYSTEM_HEADER_FILES} ${MODEL_STATE_HEADER_FILES} ${MODEL_NODE_HEADER_FILES} ${MODEL_HEADER_FILES} "states.h")
+target_link_libraries(Model PUBLIC  System_Interface Utilities)
 set_property(TARGET Model PROPERTY CXX_STANDARD 11)

@@ -8,12 +8,12 @@
 #ifndef GRADIENT_DEVICE_H
 #define GRADIENT_DEVICE_H
 
-#include "device.h"
+#include "channel.h"
 
 /** 
  *  A non-binary device.
  */
-class Gradient_Device: public Device
+class Gradient_Device: public Channel_Device
 {
 public:
 	Gradient_Device() {};
@@ -24,7 +24,7 @@ public:
 	 */
 	float get_position() 
 	{
-		return state.position;
+		return state.get_position();
 	}
 
 private:

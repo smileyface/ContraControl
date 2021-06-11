@@ -36,7 +36,6 @@ public:
     {
         state.initalized = true;
         state.valid = validity_check();
-		state.position = 0.0f;
     }
 
 	/**

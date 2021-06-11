@@ -11,7 +11,7 @@
 
 #include <typeinfo> //typeid
 
-#include "../state/state.h"
+#include "../states.h"
 
 /*!
  * \cond
@@ -72,15 +72,6 @@ public:
 	unsigned char get_state_switches()
 	{
 		return state.switches_pack();
-	}
-
-	/**
-	 * Get the position of the device
-	 * \return Devices position.
-	 */
-	float get_position()
-	{
-		return state.position;
 	}
 
 	/**
