@@ -8,7 +8,7 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "../Model/states.h"
+#include "../../Utilities/Utilities/exceptions.h"
 
 /*!
    An identifier object mainly for readability
@@ -57,16 +57,11 @@ public:
 	double time_to_complete = 0.0;
 	Command() { };
 	~Command() {};
-    /**
-     * Change values in Device_State to reflect command.
-     * 
-     * \param state reference to the state about to get mangled.
-     */
-    virtual void mangle_state(Device_State& state) = 0;
+
     /**
      * \return If time to complete is 0, Command has completed, therefore return true.
      */
-	bool completed() { return time_to_complete <= 0.0; }
+	virtual bool completed() { return time_to_complete <= 0.0; }
     /**
      * Return Enum of the command. Mainly for Command indentification purposes.
      * \return Enum value of the command.

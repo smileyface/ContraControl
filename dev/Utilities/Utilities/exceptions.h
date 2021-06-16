@@ -18,5 +18,18 @@ class NodeNotFoundException : public std::exception
         return "Node is unknown";
     }
 };
-
+class IncorrectStateTypeException : public std::exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Incorrect state attempting to be mangled";
+    }
+};
+class InvalidCommandException : public std::exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Invalid command given";
+    }
+};
 #endif

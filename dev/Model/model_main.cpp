@@ -1,6 +1,7 @@
 #include "model_main.h"
 
 #include "Logging/logging.h"
+#include "Interfaces/types/state.h"
 
 
 Timer model_timer;
@@ -38,6 +39,12 @@ Device* model::get_device(Device_Label label)
 	return model::get_node(label.get_node_id())->get_device(label.get_device_id());
 }
 
+template <class T>
+void mangle_model(T* command, Device* device)
+{
+	State_Interfaces::mangle_state(command, device);
+
+}
 
 void model::step()
 {
@@ -45,7 +52,7 @@ void model::step()
 	{
 		try 
 		{
-			it->command->mangle_state(model::get_device(it->label)->state);
+			mangle_model(it->command, model::get_device(it->label));
 			it->command->time_to_complete -= model_timer.elapsed_time;
 
 		}
@@ -59,6 +66,8 @@ void model::step()
 	model_timer.update_time();
 	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
 }
+
+
 
 void model::stop_loop()
 {

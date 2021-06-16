@@ -19,32 +19,7 @@
 #include "devices/channel.h"
 
 
-/** 
- *  A list of types of devices.
- */
-enum class DEVICE_IDENTIFIER : Device_Id
-{
-	/**
-	 Generic Device.
-	 */
-	DEVICE,
-	/**
-	 Device that is binary.
-	 */
-	SWITCH,
-	/**
-	 Device that has one channel that has various positions.
-	 */
-	GRADIENT,
-	/**
-	 Device with multiple channels
-	 */
-    CHANNEL,
-	/**
-	 Device that controls audio
-	 */
-	AUDIO
-};
+
 
 /**
  * A factory for making device instances.
@@ -69,6 +44,9 @@ inline Device* create_device_instance(Device_Creator creator)
 	return the_device;
 }
 
+/**
+ Map of Id's that is indexed by unique Id's
+ */
 typedef std::map<Device_Id, Device*> Device_Id_Map;
 
 #endif // !DEVICES_H
