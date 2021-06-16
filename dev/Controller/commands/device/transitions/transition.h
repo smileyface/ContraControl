@@ -9,7 +9,8 @@
 #define TRANSITION_COMMAND_H
 
 #include "../../command.h"
-
+#include "../Controller/system/timer.h"
+typedef unsigned char Channel;
 /**
 *A command to transition the position of the device.
  */
@@ -27,14 +28,14 @@ public:
 	Transition(Channel transition_amount, double transition_time)
 	{
 		time_to_complete = transition_time;
-		total_elapsed_time = transition_time;
-		amount = transition_amount / 100;
+		total_elapsed_time = 0;
+		amount = transition_amount;
 	};
 	Transition(Channel transition_amount)
 	{
 		time_to_complete = 0;
 		total_elapsed_time = 0;
-		amount = transition_amount / 100;
+		amount = transition_amount;
 	};
 	~Transition() { };
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::TRANSITION; }
@@ -50,33 +51,13 @@ public:
 	{
 		position = amount;
 	}
-	/**
-	 * Change values in Device_State to reflect command.<br>
-     * If device is not initalized, set state to invalid and return.<br>
-     * Transitions amount of command by a percentage. Children classes should not implement this function. They should instead implement \ref transition(float&, double) "transition(position, elapsed_time)".
-     * \param state reference to the state about to get mangled.
-	 */
-    virtual void mangle_state(Device_State& state) final
-    {
-		Channel_State c_state = static_cast<Channel_State&>(state);
-        if(state.initalized == false)
-        {
-            c_state.valid = false;
-            return;
-        }
-		c_state.power = true;
-		if (c_state.get_position() != amount)
-		{
-			c_state.transitioning = true;
-		}
-		else
-		{
-			c_state.transitioning = false;
-		}
-		transition(c_state.get_position_ptr());
-
-    }
-
+	
+	void transition(Channel& position)
+	{
+		transition(position, total_elapsed_time - time_to_complete);
+		current_position = position;
+		total_elapsed_time += controller_timer.elapsed_time;
+	}
 protected:
 	/**
 	 Percentage of change.
@@ -85,15 +66,11 @@ protected:
 	/**
 	 Current percentage of range.
 	 */
-	float current_position = -1;
+	Channel current_position = -1;
 	/**
 	 How long this transition will take.
 	 */
 	double total_elapsed_time = 0.0;
-private:
-	void transition(Channel& position)
-	{
-		transition(position, total_elapsed_time - time_to_complete);
-	}
+
 };
 #endif // !TRANSITION_COMMAND_H
