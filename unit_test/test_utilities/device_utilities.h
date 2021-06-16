@@ -9,7 +9,8 @@ namespace device_utilities
 {
 	extern int device_in_use;
 
-	Device_State get_nominal_state(Command* command);
+	Device* get_nominal_state(DEVICE_IDENTIFIER device, Command* command);
+	Channel_Device* get_nominal_tranistion_state(Transition* command);
 	
 	/*
 	MODEL MANIPULATION
@@ -25,9 +26,9 @@ namespace device_utilities
 	/*
 	Command a device. Returns the nominal state associated with that command.
 	*/
-	Device_State command_device(Device_Label label, Command* command);
+	Device* command_device(Device_Label label, Command* command);
 
-	Device_State finish_command(Command* command);
+	Device* finish_command(Device_Label label, Command* command);
 
 	void initalize_device(Device_Label label);
 }

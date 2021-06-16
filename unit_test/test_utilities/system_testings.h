@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef SYSTEM_TESTING_UTIL_H
+#define SYSTEM_TESTING_UTIL_H
 
 namespace system_util
 {
@@ -9,3 +9,5 @@ namespace system_util
 
 	void step(int steps);
 }
+
+#endif
