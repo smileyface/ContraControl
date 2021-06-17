@@ -18,6 +18,10 @@ class Switch_Device: public Device
 public:
 	Switch_Device() { };
 	~Switch_Device() {};
+
+	/**
+	\return Type of device based off of the DEVICE_IDENTIFIER enum table.
+	*/
 	virtual DEVICE_IDENTIFIER get_device_type() { return DEVICE_IDENTIFIER::SWITCH; }
 
 

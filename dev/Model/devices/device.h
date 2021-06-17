@@ -64,6 +64,7 @@ public:
 	};
 	/**
 	 * \return Device type + name of the device. This is mainly for human readability and debugging.
+	 * \todo move this to an interface
 	 */
 	virtual Device_Name get_full_name()
 	{
@@ -71,6 +72,9 @@ public:
 		return device_name.erase(0, 6) + "::" + get_name();
 	}
 
+	/**
+	\return Type of device based off of the DEVICE_IDENTIFIER enum table.
+	*/
 	virtual DEVICE_IDENTIFIER get_device_type() { return DEVICE_IDENTIFIER::DEVICE; }
 	/**
 	 * Set the name of the device.
@@ -100,12 +104,17 @@ public:
 		bool device_name = this->device_name == ld.device_name;
 		return type_check && device_name;
 	}
-
+	/**
+	 \return If device is valid.
+	 */
 	virtual bool validity_check()
 	{
 		return true;
 	}
-
+	/**
+	 Initalize the device
+	 \param name Common name of the device.
+	 */
 	void initalize(Device_Name name)
 	{
 		device_name = name;
@@ -113,13 +122,16 @@ public:
 		valid = validity_check();
 	}
 	/**
- Get whether device is on or off.
- \return if device is powered
- */
+	 Get whether device is on or off.
+	 \return if device is powered
+	 */
 	bool get_power()
 	{
 		return power;
 	}
+	/**
+	 Turn on the device.
+	 */
 	void turn_on()
 	{
 		if (initalized == false)
@@ -129,6 +141,9 @@ public:
 		}
 		power = true;
 	}
+	/**
+	 Turn off the device.
+	 */
 	void turn_off()
 	{
 		if (initalized == false)
@@ -138,8 +153,17 @@ public:
 		}
 		power = false;
 	}
+	/**
+	 Has the device been initalized.
+	 */
 	bool initalized = false;
+	/**
+	 Power state for the device.
+	 */
 	bool power = false;
+	/**
+	Validity bit for the device.
+	 */
 	bool valid = false;
 protected:
 	/**

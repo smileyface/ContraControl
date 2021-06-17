@@ -10,8 +10,6 @@
 #ifndef MAIN_EXECUTOR_H
 #define MAIN_EXECUTOR_H
 
-
-
 #include "Interfaces/types/timed_command.h"
 #include "system/timer.h"
 

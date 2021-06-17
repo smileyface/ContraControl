@@ -3,7 +3,6 @@ set(MODEL_DEVICES_HEADER_FILES
                     devices/gradient.h
                     devices/switch.h
                     devices/channel.h
-                    devices/audio.h
                     device.h )
 
 set(MODEL_SYSTEM_HEADER_FILES

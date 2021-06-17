@@ -11,7 +11,7 @@
 #include "channel.h"
 
 /** 
- *  A non-binary device.
+ *  A Channel device. It contains one channel called Position.
  */
 class Gradient_Device: public Channel_Device
 {
@@ -22,6 +22,9 @@ public:
 		transitioning = false;
 	};
 	~Gradient_Device() {};
+	/**
+	\return Type of device based off of the DEVICE_IDENTIFIER enum table.
+	*/
 	virtual DEVICE_IDENTIFIER get_device_type() { return DEVICE_IDENTIFIER::GRADIENT; }
 	/**
 	 * Return position in the gradient.
@@ -31,10 +34,18 @@ public:
 	{
 		return channels[0];
 	}
+	/**
+	 Return a pointer to the position.
+	 \return Pointer to the position channel for direct manipulation
+	 */
 	Channel* get_position_ptr()
 	{
 		return &channels[0];
 	}
+	/**
+	 If the position channel is not created, create it. Otherwise set the position channel to the incoming position.
+	 \param position Incoming position to set the position channel.
+	 */
 	void set_position(Channel position)
 	{
 		if (channels.size() == 0)

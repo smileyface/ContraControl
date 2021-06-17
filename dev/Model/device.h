@@ -9,14 +9,12 @@
 #ifndef DEVICES_H
 #define DEVICES_H
 
-#include <map>
-
 #include "Interfaces/types/device_label.h"
 
 //#include "devices/device.h"
 #include "devices/switch.h"
 #include "devices/gradient.h"
-#include "devices/channel.h"
+//#include "devices/channel.h"
 
 
 
