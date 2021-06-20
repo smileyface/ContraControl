@@ -26,9 +26,6 @@ struct compare
  * \endcond
  */
 
-/**
- * Add only unique commands to the step
- */
 void Model_Interfaces::Controller_Interface::add_to_step(Model_Command theCommand)
 {
 	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(theCommand));
@@ -45,8 +42,8 @@ void Model_Interfaces::Controller_Interface::request_command(Model_Command theCo
 	Controller_Interfaces::Model_Interface::request_command_add(command);
 }
 
-
-Device* Model_Interfaces::Controller_Interface::get_device(Node_Id node, Device_Name device)
+template <class Device_Template>
+Device_Template* Model_Interfaces::Controller_Interface::get_device(Device_Label label)
 {
-	return model::nodes[node]->get_device(device);
+	return model::get_device(label);
 }

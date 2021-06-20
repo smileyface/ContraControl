@@ -9,6 +9,8 @@
 #ifndef DEVICES_H
 #define DEVICES_H
 
+#include <map>    //std::map
+
 #include "Interfaces/types/device_label.h"
 
 //#include "devices/device.h"

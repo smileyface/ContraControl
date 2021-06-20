@@ -34,7 +34,8 @@ set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/timed_command.h 
                     Interfaces/types/device_label.h
                     Interfaces/types/state.h
-                    Interfaces/types/channel.h)
+                    Interfaces/types/channel.h
+                    Interfaces/types/command_interface.h)
 
 add_library(System_Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
 target_include_directories(System_Interface 
