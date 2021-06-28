@@ -8,12 +8,10 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "../../Utilities/Utilities/exceptions.h"
-
 /*!
    An identifier object mainly for readability
  */
-typedef uint16_t command_id;
+typedef unsigned short command_id;
 
 /*!
    An enumerated list of command types
@@ -43,7 +41,7 @@ enum class COMMAND_ENUM :command_id
     /**
      Unmapped Command
      */
-	INVALID = UINT16_MAX
+	INVALID = 0xffff
 };
 
 /*!

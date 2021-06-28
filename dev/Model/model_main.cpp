@@ -42,7 +42,7 @@ Device* model::get_device(Device_Label label)
 template <class T>
 void mangle_model(T* command, Device* device)
 {
-	State_Interfaces::mangle_state(command, device);
+	state_interfaces::mangle_state(command, device);
 
 }
 
@@ -53,7 +53,7 @@ void model::step()
 		try 
 		{
 			mangle_model(it->command, model::get_device(it->label));
-			it->command->time_to_complete -= model_timer.elapsed_time;
+			it->command->time_to_complete -= model_timer.get_elapsed_time();
 
 		}
 		catch (std::exception&)

@@ -38,7 +38,7 @@ public:
 	/**
 	 State describing whether the channels of the device are moving.
 	 */
-	bool transitioning;
+	bool transitioning = false;
 	/**
 	 Position of each channel. 1-255 range. 0 is reserved for unused channels
 	 */

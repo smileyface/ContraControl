@@ -72,12 +72,12 @@ TEST_F(Gradient_Commands_Test, Gradient_Transition) {
 	testing_util::device_utilities::check_position(dl, 0);
 
 	//do transition
-	auto time = model_timer.program_time;
+	auto time = model_timer.get_program_time();
 	Transition* trans = new Transition(50, 20);
 	Gradient_Device* ds = static_cast<Gradient_Device*>(device_utilities::command_device(dl, trans));
 	testing_util::device_utilities::check_state(dl, ds);
 	ds = static_cast<Gradient_Device*>(device_utilities::finish_command(dl, trans));
-	EXPECT_NEAR(model_timer.program_time - time, 20, .1);
+	EXPECT_NEAR(model_timer.get_program_time() - time, 20, .1);
 	ds->transitioning = false;
 	testing_util::device_utilities::check_state(dl, ds);
 	testing_util::device_utilities::check_position(dl, 50);

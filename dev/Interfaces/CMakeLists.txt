@@ -50,23 +50,23 @@ target_include_directories(System_Interface
     PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 
-set(NETWORK_INTERFACE_HEADERS
-                    Network/connections.h)
-set(NETWORK_INTERFACE_SOURCE
-                    Network/connections.cpp)
+#set(NETWORK_INTERFACE_HEADERS
+#                    Network/connections.h)
+#set(NETWORK_INTERFACE_SOURCE
+#                    Network/connections.cpp)
 
-add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE})
-target_include_directories(Network 
-                            PUBLIC
-                                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"  
-                                "$<INSTALL_INTERFACE:${CMAKE_BINARY_DIR}/inc/Network>")
+#add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE})
+#target_include_directories(Network 
+#                            PUBLIC
+#                                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"  
+#                                "$<INSTALL_INTERFACE:${CMAKE_BINARY_DIR}/inc/Network>")
 # Set the output directory for build artifacts
-  set_target_properties(Network
-    PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Network"
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Network"
-    PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+#  set_target_properties(Network
+#    PROPERTIES
+#    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Network"
+#    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Network"
+#    PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
-install(FILES ${NETWORK_INTERFACE_HEADERS} DESTINATION ${CMAKE_BINARY_DIR}/inc/Network)
+#install(FILES ${NETWORK_INTERFACE_HEADERS} DESTINATION ${CMAKE_BINARY_DIR}/inc/Network)
 install(FILES ${INTERFACE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface)
 install(FILES ${INTERFACE_TYPE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface/type)

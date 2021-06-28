@@ -16,6 +16,7 @@
 /**
  * Main brain of the controller. It keeps track of commands to send to the model, and when to send them
  * \todo Create a threaded looping function that will step through commands.
+ * \todo Change the timer interface from decrement timer to activate_state timer. This will mainly solve the issues with editing a timeline.
  */
 namespace controller
 {

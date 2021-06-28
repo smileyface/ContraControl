@@ -9,7 +9,6 @@
 #define TRANSITION_COMMAND_H
 
 #include "../../command.h"
-#include "../../../system/timer.h"
 #include "Interfaces/types/channel.h"
 
 /**
@@ -52,12 +51,7 @@ public:
 	 *
 	 * \param position pointer to the current channels position.
 	 */
-	void transition(Channel& position)
-	{
-		current_position = position;
-		transition(position, total_elapsed_time - time_to_complete);
-		total_elapsed_time += controller_timer.elapsed_time;
-	}
+	void transition(Channel& position);
 protected:
 	/**
  * \brief Calculation to move the position of a Device_State.

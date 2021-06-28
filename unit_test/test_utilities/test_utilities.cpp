@@ -8,14 +8,14 @@
 
 void testing_util::log_top_test(Command* command, Device* device)
 {
-	LogItem topItem;
+	Log_Entry topItem;
 	EXPECT_NO_THROW(topItem = sys_log::pop()) << "Nothing happened. Log empty";
 	EXPECT_EQ(topItem.device, device->get_full_name()) << "Wrong Device";
 }
 
 void testing_util::log_bottom_test(Command* command, Device* device)
 {
-	LogItem topItem;
+	Log_Entry topItem;
 	topItem = sys_log::drop();
 }
 
