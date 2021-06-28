@@ -36,14 +36,6 @@ public:
 	 */
 	static void request_command(Model_Command theCommand, double seconds_to_execute);
 
-	/**
-	 Get pointer to device by given label.
-	 \param label The Device_Label that maps to the desired device.
-	 \return Desired device.
-	 */
-	template <class Device_Template>
-	static Device_Template* get_device(Device_Label label);
-
 };
 
 #endif // !MODEL_COMMAND_INTERFACE

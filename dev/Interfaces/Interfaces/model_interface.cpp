@@ -41,9 +41,3 @@ void Model_Interfaces::Controller_Interface::request_command(Model_Command theCo
 	Timed_Command command(theCommand.command, theCommand.label, seconds_to_execute);
 	Controller_Interfaces::Model_Interface::request_command_add(command);
 }
-
-template <class Device_Template>
-Device_Template* Model_Interfaces::Controller_Interface::get_device(Device_Label label)
-{
-	return model::get_device(label);
-}

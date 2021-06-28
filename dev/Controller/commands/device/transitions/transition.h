@@ -24,21 +24,21 @@ public:
 	 * \param desired_value The final channel value.
 	 * \param transition_time Length of time that the transition should take place.
 	 */
-	Transition(Channel desired_value, double transition_time)
+	Transition(Channel value, double transition_time)
 	{
 		time_to_complete = transition_time;
 		total_elapsed_time = 0;
-		desired_value = desired_value;
+		desired_value = value;
 	};
 	/**
 	 * Constructor that gives a desired_value and expects to do it immediately.
 	 * \param desired_value The final channel value.
 	 */
-	Transition(Channel desired_value)
+	Transition(Channel value)
 	{
 		time_to_complete = 0;
 		total_elapsed_time = 0;
-		desired_value = desired_value;
+		desired_value = value;
 	};
 	~Transition() { };
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::TRANSITION; }
