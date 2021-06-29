@@ -1,0 +1,26 @@
+/*! \page tov Table of Versions
+
+\section naught_dot_one 0.0.1
+Adding the command interfaces
+
+\section naught_dot_two 0.0.2
+Model Command handling is currently done in the devices themselves. This needs to be split out for ease of handling of polymorphism.
+
+\section naught_dot_three 0.0.3
+Redesigned code layout for CMake.<br>
+Adding View interface for Windows.<br>
+Various other fixes
+
+\section naught_dot_four 0.0.4 *
+Unit testing.<br>
+More Windows view work.<br>
+Intersectional Interfaces.<br>
+
+\section naught_dot_five 0.0.5
+Nodes. <br>
+Networking. <br>
+Documentation. (All except views, as updating will need to be done.)
+
+\section naught_dot_six 0.0.6
+Console inputs
+*/
