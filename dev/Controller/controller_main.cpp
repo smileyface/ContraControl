@@ -1,16 +1,12 @@
 #include <algorithm>    // std::sort
 
 #include "controller_main.h"
-#include "../Interfaces/controller_interface.h"
+#include "Interfaces/controller_interface.h"
 
-Timer controller::controller_timer;
+
+Timer controller_timer;
 bool controller::controller_running = true;
-std::vector<Timed_Command> controller::controller_queue;
-
-bool controller::sort_pair(Timed_Command i, Timed_Command j)
-{
-		return i.time < j.time;
-}
+Timed_List controller::controller_queue;
 
 void controller::initalize()
 {
@@ -25,12 +21,13 @@ void controller::stop_controller()
 void controller::add_command(Timed_Command tc)
 {
 	controller::controller_queue.push_back(tc);
-	std::sort(controller::controller_queue.begin(), controller::controller_queue.end(), controller::sort_pair);
+	std::sort(controller::controller_queue.begin(), controller::controller_queue.end(), [](Timed_Command a, Timed_Command b) {
+		return a < b;
+		});
 }
 
 void controller::step()
 {
-	//while (controller_running) {
 	std::vector<int> remove_indexes;
 	for (int i = 0; i < controller_queue.size(); i++) 
 	{
@@ -49,8 +46,6 @@ void controller::step()
 		controller_queue.erase(controller_queue.begin() + remove_indexes[i]);
 	}
 	controller_timer.update_time();
-
-	//}
 }
 
 void controller::clean_up()

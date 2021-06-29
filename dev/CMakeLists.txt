@@ -6,10 +6,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
-#Add the controller
+add_subdirectory(Utilities)
 add_subdirectory(Interfaces)
+#Add the controller
 add_subdirectory(Controller)
 add_subdirectory(Model)
-add_subdirectory(Utilities)
 add_subdirectory(View)
 

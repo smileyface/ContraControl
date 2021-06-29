@@ -1,9 +1,9 @@
 
-#include "../utilities/device_utilities.h"
-#include "../utilities/system_testings.h"
-#include "../utilities/test_utilities.h"
+#include "../test_utilities/device_utilities.h"
+#include "../test_utilities/system_testings.h"
+#include "../test_utilities/test_utilities.h"
 
-#include "../utilities/pch.h"
+#include "../test_utilities/pch.h"
 
 
 namespace {
@@ -38,9 +38,9 @@ namespace {
 }
 
 TEST_F(Gradient_Commands_Test, Gradient_Initalize) {
-	Device_State ds;
-	ds.initalized = true;
-	ds.valid = true;
+	Gradient_Device* ds = new Gradient_Device();
+	ds->initalized = true;
+	ds->valid = true;
 
 	testing_util::device_utilities::check_state(dl, ds);
 
@@ -48,15 +48,15 @@ TEST_F(Gradient_Commands_Test, Gradient_Initalize) {
 
 TEST_F(Gradient_Commands_Test, Gradient_On) {
 
-	Device_State ds = device_utilities::command_device(dl, new On());
+	Gradient_Device* ds = static_cast<Gradient_Device*>(device_utilities::command_device(dl, new On()));
 	testing_util::device_utilities::check_state(dl, ds);
 }
 
 TEST_F(Gradient_Commands_Test, Gradient_Off) {
-	Device_State ds = device_utilities::command_device(dl, new On());
+	Gradient_Device* ds = static_cast<Gradient_Device*>(device_utilities::command_device(dl, new On()));
 	testing_util::device_utilities::check_state(dl, ds);
 
-	ds = device_utilities::command_device(dl, new Off());
+	ds = static_cast<Gradient_Device*>(device_utilities::command_device(dl, new Off()));
 	testing_util::device_utilities::check_state(dl, ds);
 
 }
@@ -72,13 +72,13 @@ TEST_F(Gradient_Commands_Test, Gradient_Transition) {
 	testing_util::device_utilities::check_position(dl, 0);
 
 	//do transition
-	auto time = model_timer.program_time;
+	auto time = model_timer.get_program_time();
 	Transition* trans = new Transition(50, 20);
-	Device_State ds = device_utilities::command_device(dl, trans);
+	Gradient_Device* ds = static_cast<Gradient_Device*>(device_utilities::command_device(dl, trans));
 	testing_util::device_utilities::check_state(dl, ds);
-	ds = device_utilities::finish_command(trans);
-	EXPECT_NEAR(model_timer.program_time - time, 20, .1);
-	ds.transitioning = false;
+	ds = static_cast<Gradient_Device*>(device_utilities::finish_command(dl, trans));
+	EXPECT_NEAR(model_timer.get_program_time() - time, 20, .1);
+	ds->transitioning = false;
 	testing_util::device_utilities::check_state(dl, ds);
 	testing_util::device_utilities::check_position(dl, 50);
 

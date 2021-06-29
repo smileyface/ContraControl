@@ -30,6 +30,7 @@ IF (CMAKE_HOST_WIN32)
 
     add_executable(WIN_VIEWS WIN32 ${WINDOWS_DESKTOP_VIEW_EXECUTABLES} ${COMMON_DESKTOP_VIEW_EXECUTABLES} ${WINDOWS_DESKTOP_VIEW_INCLUDES} ${COMMON_DESKTOP_VIEW_INCLUDE} "Desktop/Interfaces/Windows/view/menu.h")
 
+    target_link_libraries(WIN_VIEWS PUBLIC System_Interface)
 ENDIF()
 
                        

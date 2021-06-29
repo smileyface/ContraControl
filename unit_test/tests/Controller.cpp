@@ -1,7 +1,7 @@
-#include "../utilities/device_utilities.h"
-#include "../utilities/system_testings.h"
+#include "../test_utilities/device_utilities.h"
+#include "../test_utilities/system_testings.h"
 
-#include "../utilities/pch.h"
+#include "../test_utilities/pch.h"
 
 TEST(Controller_Tests, Gradient_Initalize) {
 	FAIL() << "Need to be implemented";
