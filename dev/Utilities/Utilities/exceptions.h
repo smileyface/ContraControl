@@ -1,3 +1,10 @@
+/*****************************************************************//**
+ * \file   exceptions.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   June 2021
+ *********************************************************************/
 #ifndef PROJECT_EXCEPTIONS_H
 #define PROJECT_EXCEPTIONS_H
 

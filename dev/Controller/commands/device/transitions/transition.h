@@ -21,7 +21,7 @@ public:
 
 	/**
 	 * Constructor that gives the desired channel value and a length of time for this transition to occur.
-	 * \param desired_value The final channel value.
+	 * \param value The final channel value.
 	 * \param transition_time Length of time that the transition should take place.
 	 */
 	Transition(Channel value, double transition_time)
@@ -32,7 +32,7 @@ public:
 	};
 	/**
 	 * Constructor that gives a desired_value and expects to do it immediately.
-	 * \param desired_value The final channel value.
+	 * \param value The final channel value.
 	 */
 	Transition(Channel value)
 	{
