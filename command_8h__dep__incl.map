@@ -1,8 +1,0 @@
-<map id="command.h" name="command.h">
-<area shape="rect" id="node1" title=" " alt="" coords="118,5,207,32"/>
-<area shape="rect" id="node2" href="$initalize_8h.html" title=" " alt="" coords="5,80,80,107"/>
-<area shape="rect" id="node3" href="$off_8h.html" title=" " alt="" coords="105,80,151,107"/>
-<area shape="rect" id="node4" href="$on_8h.html" title=" " alt="" coords="175,80,222,107"/>
-<area shape="rect" id="node5" href="$transition_8h.html" title=" " alt="" coords="247,80,332,107"/>
-<area shape="rect" id="node6" href="$linear__transition_8h.html" title=" " alt="" coords="228,155,351,181"/>
-</map>

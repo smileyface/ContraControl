@@ -1,7 +1,0 @@
-<map id="Audio_Device" name="Audio_Device">
-<area shape="rect" id="node1" title=" " alt="" coords="59,287,162,313"/>
-<area shape="rect" id="node2" href="$class_switch___device.html" title=" " alt="" coords="5,211,115,237"/>
-<area shape="rect" id="node3" href="$class_device.html" title=" " alt="" coords="45,95,107,121"/>
-<area shape="rect" id="node4" href="$struct_device___state.html" title=" " alt="" coords="66,5,166,32"/>
-<area shape="rect" id="node5" href="$struct_audio___device_1_1_audio___state.html" title=" " alt="" coords="88,145,229,187"/>
-</map>
