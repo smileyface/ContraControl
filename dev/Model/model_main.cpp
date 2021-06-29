@@ -1,17 +1,15 @@
 #include "model_main.h"
 
-#include "../Interfaces/model_interface.h"
-#include "../Interfaces/types/model_command.h"
-#include "../Controller/Commands/common/initalize.h"
-#include "../Utilities/Logging/logging.h"
+#include "Logging/logging.h"
+#include "Interfaces/types/state.h"
 
 
 Timer model_timer;
 
-std::map<Node_Id, Node*> model::nodes;
+Node_Map model::nodes;
 bool model::model_running = true;
 
-std::vector<Model_Command> model::step_actions;
+Command_List model::step_actions;
 
 Node_Id model::my_node;
 
@@ -41,20 +39,24 @@ Device* model::get_device(Device_Label label)
 	return model::get_node(label.get_node_id())->get_device(label.get_device_id());
 }
 
-/**
- * Run all commands lined up for this step. If an exception is thrown, the command is thrown away and the exception gets rethrown.
- * /todo Add details to the exception thrown
- */
+template <class T>
+void mangle_model(T* command, Device* device)
+{
+	state_interfaces::mangle_state(command, device);
+
+}
+
 void model::step()
 {
-	for (std::vector<Model_Command>::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
+	for (Command_List::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
 	{
 		try 
 		{
-			it->command->mangle_state(model::get_device(it->label)->state);
-			it->command->time_to_complete -= model_timer.elapsed_time;
+			mangle_model(it->command, model::get_device(it->label));
+			it->command->time_to_complete -= model_timer.get_elapsed_time();
+
 		}
-		catch (std::exception& exc)
+		catch (std::exception&)
 		{
 			model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
 			std::rethrow_exception(std::current_exception());
@@ -65,9 +67,12 @@ void model::step()
 	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
 }
 
+
+
 void model::stop_loop()
 {
 	model_running = false;
+	model::clean_up();
 }
 
 void model::clean_up()
