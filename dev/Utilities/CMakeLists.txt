@@ -1,3 +1,9 @@
+if(WIN32)
+    file(WRITE "Utilities/system.h" "#ifndef SYSTEM_VARIABLES\n #define SYSTEM_VARIABLES\n #define IS_WIN32\n#endif")
+ELSE(UNIX)
+    file(WRITE "Utilities/system.h" "#ifndef SYSTEM_VARIABLES\n #define SYSTEM_VARIABLES\n #define IS_UNIX\n#endif")
+ENDIF()
+
 if(NOT HOME)
   if(WIN32)
     string(REPLACE "\\" "/" HOME "$ENV{USERPROFILE}")

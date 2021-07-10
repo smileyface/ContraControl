@@ -9,8 +9,7 @@
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "variables": []
+      "ctestCommandArgs": ""
     },
     {
       "name": "RaspberryPi-Debug",
@@ -18,7 +17,7 @@
       "configurationType": "Debug",
       "cmakeExecutable": "cmake",
       "remoteCopySourcesExclusionList": [ ".vs", ".git", "out" ],
-      "cmakeCommandArgs": "-D CMAKE_C_COMPILER=/usr/local/bin/gcc -D CMAKE_CXX_COMPILER=/usr/local/bin/g++",
+      "cmakeCommandArgs": "-D CMAKE_C_COMPILER=/usr/local/bin/gcc -D CMAKE_CXX_COMPILER=/usr/local/bin/g++ -D CMAKE_SYSTEM_NAME=Linux",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
       "inheritEnvironments": [ "linux_arm" ],

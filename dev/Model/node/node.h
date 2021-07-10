@@ -11,7 +11,7 @@
 
 #include "../device.h"
 #include "../Utilities/Utilities/exceptions.h"
-
+#include "Network/connections.h"
 
 /**
  Type of node, such as UI, GENERIC_HARDWARE or R-PI
@@ -105,7 +105,7 @@ public:
 		return device_ids;
 	}
 private:
-	//Connection connections;
+	Connection_List connections;
 	Device_Id_Map devices;
 	std::map<Device_Name, Device_Id> name_to_id_map;
 	Node_Type my_type;

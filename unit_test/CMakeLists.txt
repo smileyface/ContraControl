@@ -1,6 +1,6 @@
 ﻿set(DEVICE_TEST_FILES "tests/Gradient_Device.cpp" 
                       "tests/Switch_Device.cpp" 
-                      "tests/Node.cpp")
+                      "tests/Node.cpp" "tests/Network.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h" 
                            "test_utilities/system_testings.h" 
@@ -10,7 +10,7 @@ add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/test_utilities.cpp" 
                            "test_utilities/device_utilities.h" 
                            "test_utilities/device_utilities.cpp")
-target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface)
+target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface Network)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)

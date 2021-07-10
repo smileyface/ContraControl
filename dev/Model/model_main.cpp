@@ -39,7 +39,7 @@ Device* model::get_device(Device_Label label)
 	return model::get_node(label.get_node_id())->get_device(label.get_device_id());
 }
 
-template <class T>
+template <typename T>
 void mangle_model(T* command, Device* device)
 {
 	state_interfaces::mangle_state(command, device);
