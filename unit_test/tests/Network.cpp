@@ -19,5 +19,7 @@ namespace {
 }
 TEST_F(NetworkTest, Network_SetUp)
 {
+	/** Start in server mode */
 	network::init_network_interfaces();
+	EXPECT_EQ(network::network_interface->initalized(), true);
 }

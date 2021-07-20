@@ -31,6 +31,7 @@ public:
     void set_server();
     void set_client();
     virtual void connect(ipv4_addr addr) = 0;
+    virtual bool initalized() = 0;
 protected:
     bool is_server = false;
     ipv4_addr my_ip = { 0xff,0xff,0xff,0xff };

@@ -1,6 +1,3 @@
-IF (CMAKE_HOST_WIN32)
-    file(WRITE "system.h" "#ifndef SYSTEM_VARIABLES\n #define SYSTEM_VARIABLES\n #define IS_WIN32\n#endif")
-ENDIF()
 
 set(COMMON_DESKTOP_VIEW_INCLUDE "Desktop/views.h"
                                 "Desktop/Views/view.h" 

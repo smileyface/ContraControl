@@ -17,5 +17,9 @@ namespace testing_util
 		void check_position(Device_Label label, Channel position);
 		void check_validity(Device_Label label, bool expect_valid);
 	}
+	namespace network_utilities
+	{
+
+	}
 }
 #endif

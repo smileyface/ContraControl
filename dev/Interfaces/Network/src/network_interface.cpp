@@ -5,10 +5,13 @@
 #include "../Utilities/Utilities/system.h"
 
 #include "Network/system_interfaces/network_interface.h"
-#ifdef IS_WIN32
+#ifdef WIN32
+#include <WinSock2.h>
+#include <WS2tcpip.h>
+
 #include "Network/system_interfaces/windows_network_interface.h"
 #endif
-#ifdef IS_UNIX
+#ifdef UNIX
 #include "Network/system_interfaces/linux_network_interface.h"
 #endif
 
@@ -49,7 +52,7 @@ ipv4_addr::ipv4_addr(char* str)
 }
 void network::init_network_interfaces()
 {
-#ifdef IS_WIN32
+#ifdef WIN32
 	network::network_interface = new Windows_Network_Interface();
 #endif // IS_WIN32
 #ifdef IS_UNIX
@@ -60,14 +63,46 @@ void network::init_network_interfaces()
 }
 
 /*This is where the Windows Network Interface object is defined*/
-#ifdef IS_WIN32
+#ifdef WIN32
+
+Windows_Network_Interface::Windows_Network_Interface()
+{
+	ListenSocket = INVALID_SOCKET;
+	WORD wVersionRequested = MAKEWORD(1, 1);
+	WSADATA wsaData;
+	PHOSTENT hostinfo;
+
+	if (WSAStartup(wVersionRequested, &wsaData) != 0)
+		throw - 1;
+	if (gethostname(hostname, sizeof(hostname)) != 0)
+		throw - 1;
+	if ((hostinfo = gethostbyname(hostname)) != NULL)
+	{
+		int nCount = 0;
+		while (hostinfo->h_addr_list[nCount])
+		{
+			local_ips.push_back(inet_ntoa(*(
+				struct in_addr*)hostinfo->h_addr_list[nCount]));
+			nCount++;
+		}
+	}
+
+}
+
+bool Windows_Network_Interface::initalized()
+{
+	return local_ips.size() > 0 &&
+		   Windows_Network_Interface::ListenSocket != INVALID_SOCKET;
+}
+
 void Windows_Network_Interface::connect(ipv4_addr addr)
 {
 
 }
-#endif // IS_WIN32
+
+#endif // WIN32
 
 /*This is where the Linux Network Interface object is defined*/
-#ifdef IS_UNIX
+#ifdef UNIX
 
-#endif //IS_UNIX
+#endif //UNIX
