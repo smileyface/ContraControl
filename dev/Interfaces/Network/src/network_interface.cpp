@@ -19,6 +19,7 @@
 Network_Interface* network::network_interface;
 
 bool network_is_init = false;
+const std::string invalid_hostname = "INVALID";
 
 void Network_Interface::set_client()
 {
@@ -33,6 +34,7 @@ void Network_Interface::set_server()
 ipv4_addr::ipv4_addr(char* str)
 {
 	size_t pos = 0;
+	S_un = { 0,0,0,0 };
 	std::string str_addr(str);
 	std::vector<unsigned char> bytes;
 	while ((pos = str_addr.find(".")) != std::string::npos) {
@@ -50,10 +52,12 @@ ipv4_addr::ipv4_addr(char* str)
 		S_un.S_un_b.s_b4 = bytes[3];
 	}
 }
+
 void network::init_network_interfaces()
 {
 #ifdef WIN32
 	network::network_interface = new Windows_Network_Interface();
+	network_interface->initalize();
 #endif // IS_WIN32
 #ifdef IS_UNIX
 	network::network_interface = new Linux_Network_Interface();
@@ -68,6 +72,12 @@ void network::init_network_interfaces()
 Windows_Network_Interface::Windows_Network_Interface()
 {
 	ListenSocket = INVALID_SOCKET;
+	strcpy(hostname, invalid_hostname.c_str());
+}
+
+void Windows_Network_Interface::initalize()
+{
+
 	WORD wVersionRequested = MAKEWORD(1, 1);
 	WSADATA wsaData;
 	PHOSTENT hostinfo;
@@ -86,13 +96,24 @@ Windows_Network_Interface::Windows_Network_Interface()
 			nCount++;
 		}
 	}
-
+	ListenSocket = socket(AF_INET, sock_type, ip_protocol);
 }
 
 bool Windows_Network_Interface::initalized()
 {
-	return local_ips.size() > 0 &&
-		   Windows_Network_Interface::ListenSocket != INVALID_SOCKET;
+	if (local_ips.size() == 0)
+	{
+		throw NETWORK_INITALIZED_ERRORS::ADAPTER_ERROR;
+	}
+	else if (ListenSocket == INVALID_SOCKET)
+	{
+		throw NETWORK_INITALIZED_ERRORS::SOCKET_INVALID;
+	}
+	else if (hostname == invalid_hostname)
+	{
+		throw NETWORK_INITALIZED_ERRORS::INVALID_HOSTNAME;
+	}
+	return true;
 }
 
 void Windows_Network_Interface::connect(ipv4_addr addr)

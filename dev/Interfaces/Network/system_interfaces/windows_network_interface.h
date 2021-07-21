@@ -7,7 +7,7 @@
 #include <vector>
 #include <WinSock2.h>
 #include <WS2tcpip.h>
-int ip_protocol = IPPROTO_UDP;
+int ip_protocol = IPPROTO_TCP;
 int sock_type = SOCK_STREAM;
 class Windows_Network_Interface : public Network_Interface
 {
@@ -15,8 +15,8 @@ public:
 	Windows_Network_Interface();
 
 	void connect(ipv4_addr addr);
+	void initalize();
 	bool initalized();
-
 	
 private:
 	SOCKET ListenSocket = INVALID_SOCKET;

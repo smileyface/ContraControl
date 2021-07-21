@@ -1,8 +1,9 @@
 #include "test_utilities.h"
 #include "system_testings.h"
 
-#include "pch.h"
+#include "Network/system_interfaces/network_interface.h"
 
+#include "pch.h"
 
 #include <typeinfo>
 
@@ -61,4 +62,22 @@ void testing_util::device_utilities::check_validity(Device_Label label, bool exp
 	Device received_state = *model::get_device(label);
 
 	EXPECT_EQ(received_state.valid, expect_valid) << "Device validity is not correct";
+}
+
+void testing_util::network_utilities::check_initalized()
+{
+	try
+	{
+		EXPECT_TRUE(network::network_interface->initalized());
+	}
+	catch(NETWORK_INITALIZED_ERRORS e)
+	{
+		if (e == NETWORK_INITALIZED_ERRORS::ADAPTER_ERROR)
+			FAIL() << "Adapter Error";
+		if (e == NETWORK_INITALIZED_ERRORS::SOCKET_INVALID)
+			FAIL() << "Invalid Socket";
+		if (e == NETWORK_INITALIZED_ERRORS::INVALID_HOSTNAME)
+			FAIL() << "Invalid Hostname";
+
+	}
 }

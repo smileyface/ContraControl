@@ -19,7 +19,7 @@ namespace testing_util
 	}
 	namespace network_utilities
 	{
-
+		void check_initalized();
 	}
 }
 #endif

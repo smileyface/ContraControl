@@ -1,6 +1,13 @@
 #ifndef NETWORK_SYSTEM_INTERFACE
 #define NETWORK_SYSTEM_INTERFACE
 
+enum class NETWORK_INITALIZED_ERRORS
+{
+    ADAPTER_ERROR,
+    SOCKET_INVALID,
+    INVALID_HOSTNAME
+};
+
 struct ipv4_addr {
     union {
         struct {
@@ -23,6 +30,7 @@ struct ipv4_addr {
         S_un.S_un_b.s_b3 = b3;
         S_un.S_un_b.s_b4 = b4;
     }
+    ipv4_addr() {};
 };
 
 class Network_Interface
@@ -32,6 +40,7 @@ public:
     void set_client();
     virtual void connect(ipv4_addr addr) = 0;
     virtual bool initalized() = 0;
+    virtual void initalize() = 0;
 protected:
     bool is_server = false;
     ipv4_addr my_ip = { 0xff,0xff,0xff,0xff };

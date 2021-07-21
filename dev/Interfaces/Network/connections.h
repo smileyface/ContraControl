@@ -3,11 +3,10 @@
 
 #include "system_interfaces/network_interface.h"
 
-class Connection
+struct Connection
 {
 	ipv4_addr address;
-	int port;
-
+	int port = 656565;
 };
 
 typedef std::vector<Connection> Connection_List;

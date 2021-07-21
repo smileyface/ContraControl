@@ -105,7 +105,7 @@ public:
 		return device_ids;
 	}
 private:
-	Connection_List connections;
+	Connection connections;
 	Device_Id_Map devices;
 	std::map<Device_Name, Device_Id> name_to_id_map;
 	Node_Type my_type;
