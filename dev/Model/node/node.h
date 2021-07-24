@@ -53,6 +53,19 @@ public:
 		my_type = Node_Type::INVALID;
 		id_pool = 0;
 	}
+	void clear_node()
+	{
+		//for (auto iter = connections.begin(); iter != connections.end(); iter++)
+		//{
+		//	delete connections[iter->first];
+		//}
+		//for (auto iter = devices.begin(); iter != devices.end(); iter++)
+		//{
+		//	delete devices[iter->first];
+		//}
+		connections.clear();
+		devices.clear();
+	}
 	/**
 	 Add a Device to the node. 
 
@@ -104,17 +117,39 @@ public:
 		}
 		return device_ids;
 	}
+
+	void initalize_local_control(Node_Id id, Node_Type type)
+	{
+		my_id = id;
+		my_type = type;
+		network::init_network_interfaces();
+	}
+
+	Node* get_connection(Node_Id id)
+	{
+		if (connections.find(id) == connections.end())
+		{
+			throw NodeNotFoundException();
+		}
+		return connections[id];
+	}
+
+	void add_connection(Node_Type type, Node_Id id)
+	{
+		connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
+	}
+
+	Node_Id get_id()
+	{
+		return my_id;
+	}
 private:
-	Connection connections;
+	std::map<Node_Id, Node*> connections;
 	Device_Id_Map devices;
 	std::map<Device_Name, Device_Id> name_to_id_map;
 	Node_Type my_type;
 	Device_Id id_pool;
+	Node_Id my_id;
 };
-
-/**
- A map to hold a node by a given ID
- */
-typedef std::map<Node_Id, Node*> Node_Map;
 
 #endif // !MODEL_NODE_H

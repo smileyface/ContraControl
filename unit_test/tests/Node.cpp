@@ -8,6 +8,7 @@ namespace {
 	class NodeTest : public ::testing::Test {
 		virtual void SetUp() {
 			system_util::setup();
+			device_utilities::setup_node("Test_Node_Local", Node_Type::TEST);
 		}
 		virtual void TearDown() {
 			system_util::cleanup();
@@ -17,9 +18,8 @@ namespace {
 }
 TEST_F(NodeTest, Node_Exclusion)
 {
-	device_utilities::create_node("Test_Node_1");
 	device_utilities::create_node("Test_Node_2");
-	Device_Label dl = device_utilities::add_device("Test_Node_1", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
+	Device_Label dl = device_utilities::add_device("Test_Node_Local", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 
 	Device_Label dl_e("Test_Node_2", 0);
 	

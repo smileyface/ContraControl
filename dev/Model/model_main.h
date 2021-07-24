@@ -21,17 +21,13 @@
  */
 namespace model {
 	/**
-	 List of nodes known to the model.
-	 */
-	extern Node_Map nodes;
-	/**
 	 Is the model looping
 	 */
 	extern bool model_running;
 	/**
-	 The node ID where this model is running. Each node will have its own version of the model running on it.
+	 The node where this model is running. Each node will have its own version of the model running on it.
 	 */
-	extern Node_Id my_node_id;
+	extern Node my_node;
 	/**
 	 Actions to be completed on this step of the loop.
 	 */
@@ -90,5 +86,10 @@ namespace model {
 	 * \todo create a Node_Shut_Down network message.
 	 */
 	void clean_up();
+
+	/**
+	 * 
+	 */
+	void initalize_my_node(Node_Id id, Node_Type type);
 }
 #endif 

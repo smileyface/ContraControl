@@ -29,6 +29,11 @@ Channel_Device* device_utilities::get_nominal_tranistion_state(Transition* comma
 	return ds;
 }
 
+void device_utilities::setup_node(Node_Id id, Node_Type type)
+{
+	model::initalize_my_node(id, type);
+}
+
 void device_utilities::create_node(Node_Id id)
 {
 	model::create_node(Node_Type::TEST, id);

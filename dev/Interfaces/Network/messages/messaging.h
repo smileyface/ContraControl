@@ -19,5 +19,15 @@ struct MESSAGE
 { 
 };
 
+struct Message_String
+{
+	unsigned short length;
+	char* str;
+	Message_String(char* string)
+	{
+		memcpy(str, string, sizeof(string));
+		length = sizeof(string);
+	}
+};
 
 #endif // !NETWORK_MESSAGES

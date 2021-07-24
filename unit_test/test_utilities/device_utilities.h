@@ -15,6 +15,8 @@ namespace device_utilities
 	/*
 	MODEL MANIPULATION
 	*/
+
+	void setup_node(Node_Id, Node_Type);
 	/*
 	Create node in the model.
 	*/
@@ -31,6 +33,7 @@ namespace device_utilities
 	Device* finish_command(Device_Label label, Command* command);
 
 	void initalize_device(Device_Label label);
+
 }
 
 #include"../test_utilities/system_testings.h"
