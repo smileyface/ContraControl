@@ -19,4 +19,5 @@ struct MESSAGE
 { 
 };
 
+
 #endif // !NETWORK_MESSAGES

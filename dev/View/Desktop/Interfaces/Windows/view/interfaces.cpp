@@ -1,5 +1,5 @@
 #include "../../system_interface.h"
-#ifdef WIN32
+#ifdef _WIN32
 #include <Windows.h>
 #include "window.h"
 #include "../view/view_interface.h"

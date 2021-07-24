@@ -1,5 +1,5 @@
 #include "../../../Utilities/Utilities/system.h"
-#ifdef IS_UNIX
+#ifdef __linux__
 #ifndef NETWORK_LINUNX_INTERFACE
 #define NETWORK_LINUX_INTERFACE
 
@@ -10,7 +10,12 @@
 class Linux_Network_Interface : public Network_Interface
 {
 
-	void connect(ipv4_addr addr) {};
+	void connect(ipv4_addr addr);
+	bool initalized();
+	void initalize();
+	void clean_up();
+
+	void listen();
 };
 
 

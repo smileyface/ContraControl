@@ -11,13 +11,13 @@ bool model::model_running = true;
 
 Command_List model::step_actions;
 
-Node_Id model::my_node;
+Node_Id model::my_node_id;
 
 
 void model::initalize()
 {
 	model_timer.reset_clock();
-	my_node = "ALL";
+	my_node_id = "ALL";
 }
 
 Node* model::get_node(Node_Id id)

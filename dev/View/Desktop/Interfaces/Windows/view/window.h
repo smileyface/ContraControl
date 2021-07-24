@@ -5,7 +5,7 @@
 #include "../../common/window.h"
 #include "menu.h"
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <Windows.h>
 #endif // WIN32
 
@@ -28,7 +28,7 @@ public:
 	bool Windows_Interface::operator==(Windows_Interface h);
 
 protected:
-#ifdef WIN32
+#ifdef _WIN32
 	HWND handle;
 	HMENU main_menu;
 #endif // WIN32

@@ -31,7 +31,7 @@ namespace model {
 	/**
 	 The node ID where this model is running. Each node will have its own version of the model running on it.
 	 */
-	extern Node_Id my_node;
+	extern Node_Id my_node_id;
 	/**
 	 Actions to be completed on this step of the loop.
 	 */

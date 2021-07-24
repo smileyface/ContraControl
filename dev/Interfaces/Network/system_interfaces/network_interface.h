@@ -5,7 +5,9 @@ enum class NETWORK_INITALIZED_ERRORS
 {
     ADAPTER_ERROR,
     SOCKET_INVALID,
-    INVALID_HOSTNAME
+    INVALID_HOSTNAME,
+    ERROR_ON_SOCKET_BIND,
+    ERROR_ON_SOCKET_LISTEN
 };
 
 struct ipv4_addr {
@@ -38,12 +40,21 @@ class Network_Interface
 public:
     void set_server();
     void set_client();
-    virtual void connect(ipv4_addr addr) = 0;
     virtual bool initalized() = 0;
     virtual void initalize() = 0;
+    virtual void clean_up() = 0;
+
+    //Client Code
+    virtual void connect(ipv4_addr addr) = 0;
+    
+    //Server Code
+    virtual void server_start() = 0;
+
+   //Constants
+    const ipv4_addr localhost = ipv4_addr("127.0.0.1");
 protected:
     bool is_server = false;
-    ipv4_addr my_ip = { 0xff,0xff,0xff,0xff };
+    ipv4_addr my_ip = ipv4_addr("255.255.255.255");
 };
 
 namespace network
@@ -51,6 +62,7 @@ namespace network
     extern Network_Interface* network_interface;
 
     extern void init_network_interfaces();
+    extern void teardown_network_interfaces();
 }
 
 #endif

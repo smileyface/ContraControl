@@ -10,9 +10,11 @@ namespace {
 	class NetworkTest : public ::testing::Test {
 		virtual void SetUp() {
 			system_util::setup();
+			network::init_network_interfaces();
 		}
 		virtual void TearDown() {
 			system_util::cleanup();
+			network::teardown_network_interfaces();
 		}
 
 	};
@@ -20,6 +22,12 @@ namespace {
 TEST_F(NetworkTest, Network_SetUp)
 {
 	/** Start in server mode */
-	network::init_network_interfaces();
 	testing_util::network_utilities::check_initalized();
+}
+
+TEST_F(NetworkTest, Server_Start_Up)
+{
+	/** Start in server mode */
+	testing_util::network_utilities::check_initalized();
+	network::network_interface->server_start();
 }

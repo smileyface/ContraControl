@@ -5,13 +5,13 @@
 #include "../Utilities/Utilities/system.h"
 
 #include "Network/system_interfaces/network_interface.h"
-#ifdef WIN32
+#ifdef _WIN32
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 
 #include "Network/system_interfaces/windows_network_interface.h"
 #endif
-#ifdef UNIX
+#ifdef __linux__
 #include "Network/system_interfaces/linux_network_interface.h"
 #endif
 
@@ -55,25 +55,30 @@ ipv4_addr::ipv4_addr(char* str)
 
 void network::init_network_interfaces()
 {
-#ifdef WIN32
+#ifdef _WIN32
 	network::network_interface = new Windows_Network_Interface();
-	network_interface->initalize();
 #endif // IS_WIN32
-#ifdef IS_UNIX
+#ifdef __linux__
 	network::network_interface = new Linux_Network_Interface();
-#endif //IS_UNIX
-
+#endif //__linux__
+	network_interface->initalize();
 	network_is_init = true;
 }
 
+void network::teardown_network_interfaces()
+{
+	network::network_interface->clean_up();
+}
+
 /*This is where the Windows Network Interface object is defined*/
-#ifdef WIN32
+#ifdef _WIN32
 
 Windows_Network_Interface::Windows_Network_Interface()
 {
 	ListenSocket = INVALID_SOCKET;
 	strcpy(hostname, invalid_hostname.c_str());
 }
+
 
 void Windows_Network_Interface::initalize()
 {
@@ -96,7 +101,7 @@ void Windows_Network_Interface::initalize()
 			nCount++;
 		}
 	}
-	ListenSocket = socket(AF_INET, sock_type, ip_protocol);
+	ListenSocket = socket(sock_family, sock_type, ip_protocol);
 }
 
 bool Windows_Network_Interface::initalized()
@@ -116,14 +121,56 @@ bool Windows_Network_Interface::initalized()
 	return true;
 }
 
+void Windows_Network_Interface::clean_up()
+{
+	closesocket(ListenSocket);
+	WSACleanup();
+}
+
 void Windows_Network_Interface::connect(ipv4_addr addr)
 {
+	throw std::exception("Not Implemented");
+}
 
+void Windows_Network_Interface::server_start()
+{
+	sockaddr_in service;
+	//----------------------
+   // The sockaddr_in structure specifies the address family,
+   // IP address, and port for the socket that is being bound.
+	service.sin_family = sock_family;
+	service.sin_addr.s_addr = localhost.S_un.S_addr;
+	service.sin_port = htons(656565);
+
+	int iResult = bind(ListenSocket, (SOCKADDR*)&service, sizeof(service));
+	if (iResult == SOCKET_ERROR) {
+		throw NETWORK_INITALIZED_ERRORS::ERROR_ON_SOCKET_BIND;
+	}
+	//----------------------
+	// Listen for incoming connection requests 
+	// on the created socket. This is a blocking call.
+	if (listen(ListenSocket, SOMAXCONN) == SOCKET_ERROR)
+		throw NETWORK_INITALIZED_ERRORS::ERROR_ON_SOCKET_LISTEN; 
 }
 
 #endif // WIN32
 
 /*This is where the Linux Network Interface object is defined*/
-#ifdef UNIX
+#ifdef __linux__
 
-#endif //UNIX
+void Linux_Network_Interface::connect(ipv4_addr addr)
+{
+
+}
+
+void Linux_Network_Interface::initalize()
+{
+
+}
+
+bool Linux_Network_Interface::initalized()
+{
+	return false;
+}
+
+#endif //__linux__
