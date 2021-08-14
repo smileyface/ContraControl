@@ -45,5 +45,15 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif()
 
 add_executable(Static_Test ${DEVICE_TEST_FILES})
-target_link_libraries(Static_Test gtest_main Test_Utilities)
+target_link_libraries(Static_Test gtest_main gcov Test_Utilities)
 add_test(Devices Static_Test)
+
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
+
+
+if(CMAKE_COMPILER_IS_GNUCXX)
+    include(CodeCoverage.cmake)
+    append_coverage_compiler_flags()
+    setup_target_for_coverage_gcovr_html(Static_Test_coverage Static_Test coverage)
+endif()
