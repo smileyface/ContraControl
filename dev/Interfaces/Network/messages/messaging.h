@@ -29,7 +29,7 @@ struct Message_String
 {
 	unsigned short length;
 	char* str;
-	Message_String() { length = 0; str = "\0"; }
+	Message_String() { length = 0; str = '\0'; }
 	Message_String(const char* string)
 	{
 		std::memcpy(str, string, sizeof(string));

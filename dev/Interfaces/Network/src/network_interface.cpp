@@ -1,5 +1,4 @@
 #include <string>
-#include <vector>
 
 #include "../Utilities/Utilities/system.h"
 
@@ -31,27 +30,6 @@ unsigned char* Network_Interface::local_ip()
 	return my_ip.get_addr_bytes();
 }
 
-ipv4_addr::ipv4_addr(char* str)
-{
-	size_t pos = 0;
-	S_un = { 0,0,0,0 };
-	std::string str_addr(str);
-	std::vector<unsigned char> bytes;
-	while ((pos = str_addr.find(".")) != std::string::npos) {
-		char byte = atoi(str_addr.substr(0, pos).c_str());
-		bytes.push_back(static_cast<unsigned char>(byte));
-		str_addr.erase(0, pos + 1);
-	}
-	char byte = atoi(str_addr.c_str());
-	bytes.push_back(static_cast<unsigned char>(byte));
-	if (bytes.size() == 4)
-	{
-		S_un.S_un_b.s_b1 = bytes[0];
-		S_un.S_un_b.s_b2 = bytes[1];
-		S_un.S_un_b.s_b3 = bytes[2];
-		S_un.S_un_b.s_b4 = bytes[3];
-	}
-}
 
 void network::init_network_interfaces()
 {
@@ -84,22 +62,3 @@ void network::start_client()
 
 
 
-/*This is where the Linux Network Interface object is defined*/
-#ifdef __linux__
-
-void Linux_Network_Interface::connect_to_server(ipv4_addr addr)
-{
-
-}
-
-void Linux_Network_Interface::initalize()
-{
-
-}
-
-bool Linux_Network_Interface::initalized()
-{
-	return false;
-}
-
-#endif //__linux__
