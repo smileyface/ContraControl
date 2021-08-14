@@ -53,4 +53,15 @@ class InvalidCommandException : public std::exception
         return "Invalid command given";
     }
 };
+
+/**
+ \brief When a function has not been implemented.
+ */
+class UnimplementedFunctionException : public std::exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Function not implemented";
+    }
+};
 #endif

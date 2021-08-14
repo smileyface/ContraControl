@@ -11,7 +11,7 @@
 
 #include "../device.h"
 #include "../Utilities/Utilities/exceptions.h"
-#include "Network/connections.h"
+#include "Network/system_interfaces/network_interface.h"
 
 /**
  Type of node, such as UI, GENERIC_HARDWARE or R-PI

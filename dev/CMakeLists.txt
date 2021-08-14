@@ -5,6 +5,7 @@ project(ContraControlDev VERSION 0.0.5)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+find_package (Threads)
 
 add_subdirectory(Utilities)
 add_subdirectory(Interfaces)

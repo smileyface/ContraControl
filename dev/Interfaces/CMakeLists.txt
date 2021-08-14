@@ -51,11 +51,12 @@ target_include_directories(System_Interface
 
 
 set(NETWORK_INTERFACE_HEADERS
-                    Network/connections.h
+                    Network/messages.h
                     Network/system_interfaces/network_interface.h)
 set(NETWORK_INTERFACE_SOURCE
                     Network/src/connections.cpp
-                    Network/src/network_interface.cpp)
+                    Network/src/network_interface.cpp
+                    Network/src/windows_network_interface.cpp)
 set(NETWORK_WINDOWS_INTERFACE_HEADERS
                     Network/system_interfaces/windows_network_interface.h)
 set(NETWORK_UNIX_INTERFACE_HEADERS
@@ -64,7 +65,8 @@ set(NETWORK_MESSAGE_HEADERS
                     Network/messages/messaging.h
                     Network/messages/node_communication.h)
 set(NETWORK_MESSAGE_SOURCE
-                    Network/src/messaging.cpp)
+                    Network/src/messaging.cpp
+                    Network/src/send_message.cpp)
 
 add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE})
 target_include_directories(Network 
@@ -88,6 +90,7 @@ IF (CMAKE_HOST_WIN32)
                                 PRIVATE
                                 ${NETWORK_WINDOWS_INTERFACE_HEADERS})
     target_link_libraries(Network wsock32 ws2_32)
+    target_link_libraries(Network iphlpapi iphlpapi)
 
 ELSEIF (CMAKE_HOST_UNIX)
     target_include_directories(Network

@@ -1,8 +1,11 @@
 #include "messaging.h"
 
-struct NODE_HELLO : MESSAGE
-{ 
-	char addr[4]; 
-	Message_String id;
-};
-
+namespace Node_Messages
+{
+	struct NODE_HELLO : MESSAGE
+	{
+		unsigned char addr[4];
+		Message_String id;
+		NODE_HELLO(unsigned char* in_addr, const char* in_id);
+	};
+}

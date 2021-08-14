@@ -1,14 +1,10 @@
 #include <string>
-#include <stdlib.h>     /* atof */
 #include <vector>
 
 #include "../Utilities/Utilities/system.h"
 
 #include "Network/system_interfaces/network_interface.h"
 #ifdef _WIN32
-#include <WinSock2.h>
-#include <WS2tcpip.h>
-
 #include "Network/system_interfaces/windows_network_interface.h"
 #endif
 #ifdef __linux__
@@ -19,7 +15,6 @@
 Network_Interface* network::network_interface;
 
 bool network_is_init = false;
-const std::string invalid_hostname = "INVALID";
 
 void Network_Interface::set_client()
 {
@@ -29,6 +24,11 @@ void Network_Interface::set_client()
 void Network_Interface::set_server()
 {
 	is_server = true;
+}
+
+unsigned char* Network_Interface::local_ip()
+{
+	return my_ip.get_addr_bytes();
 }
 
 ipv4_addr::ipv4_addr(char* str)
@@ -70,95 +70,24 @@ void network::teardown_network_interfaces()
 	network::network_interface->clean_up();
 }
 
-/*This is where the Windows Network Interface object is defined*/
-#ifdef _WIN32
-
-Windows_Network_Interface::Windows_Network_Interface()
+void network::start_server()
 {
-	ListenSocket = INVALID_SOCKET;
-	strcpy(hostname, invalid_hostname.c_str());
+	network::network_interface->set_server();
+	network::network_interface->server_start();
+}
+
+void network::start_client()
+{
+	network::network_interface->set_client();
+	network::network_interface->scan_for_server();
 }
 
 
-void Windows_Network_Interface::initalize()
-{
-
-	WORD wVersionRequested = MAKEWORD(1, 1);
-	WSADATA wsaData;
-	PHOSTENT hostinfo;
-
-	if (WSAStartup(wVersionRequested, &wsaData) != 0)
-		throw - 1;
-	if (gethostname(hostname, sizeof(hostname)) != 0)
-		throw - 1;
-	if ((hostinfo = gethostbyname(hostname)) != NULL)
-	{
-		int nCount = 0;
-		while (hostinfo->h_addr_list[nCount])
-		{
-			local_ips.push_back(inet_ntoa(*(
-				struct in_addr*)hostinfo->h_addr_list[nCount]));
-			nCount++;
-		}
-	}
-	ListenSocket = socket(sock_family, sock_type, ip_protocol);
-}
-
-bool Windows_Network_Interface::initalized()
-{
-	if (local_ips.size() == 0)
-	{
-		throw NETWORK_INITALIZED_ERRORS::ADAPTER_ERROR;
-	}
-	else if (ListenSocket == INVALID_SOCKET)
-	{
-		throw NETWORK_INITALIZED_ERRORS::SOCKET_INVALID;
-	}
-	else if (hostname == invalid_hostname)
-	{
-		throw NETWORK_INITALIZED_ERRORS::INVALID_HOSTNAME;
-	}
-	return true;
-}
-
-void Windows_Network_Interface::clean_up()
-{
-	closesocket(ListenSocket);
-	WSACleanup();
-}
-
-void Windows_Network_Interface::connect(ipv4_addr addr)
-{
-	throw std::exception("Not Implemented");
-}
-
-void Windows_Network_Interface::server_start()
-{
-	sockaddr_in service;
-	//----------------------
-   // The sockaddr_in structure specifies the address family,
-   // IP address, and port for the socket that is being bound.
-	service.sin_family = sock_family;
-	service.sin_addr.s_addr = localhost.S_un.S_addr;
-	service.sin_port = htons(656565);
-
-	int iResult = bind(ListenSocket, (SOCKADDR*)&service, sizeof(service));
-	if (iResult == SOCKET_ERROR) {
-		throw NETWORK_INITALIZED_ERRORS::ERROR_ON_SOCKET_BIND;
-	}
-	//----------------------
-	// Listen for incoming connection requests 
-	// on the created socket. This is a blocking call.
-	if (listen(ListenSocket, SOMAXCONN) == SOCKET_ERROR)
-		throw NETWORK_INITALIZED_ERRORS::ERROR_ON_SOCKET_LISTEN; 
-}
-
-#endif // WIN32
 
 /*This is where the Linux Network Interface object is defined*/
 #ifdef __linux__
 
-void Linux_Network_Interface::connect(ipv4_addr addr)
+void Linux_Network_Interface::connect_to_server(ipv4_addr addr)
 {
 
 }
