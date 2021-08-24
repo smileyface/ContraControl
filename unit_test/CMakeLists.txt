@@ -55,8 +55,10 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_m
 SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
 
 include(CodeCoverage.cmake)
-append_coverage_compiler_flags()
-setup_target_for_coverage_gcovr_html(
-        NAME coverage
-        EXECUTABLE Static_Test
-        BASE_DIRECTORY "${PROJECT_SOURCE_DIR}/src")
+SETUP_TARGET_FOR_COVERAGE(
+		my_coverage_target  # Name for custom target.
+		Static_Test         # Name of the test driver executable that runs the tests.
+							# NOTE! This should always have a ZERO as exit code
+							# otherwise the coverage generation will not complete.
+		coverage            # Name of output directory.
+		)
