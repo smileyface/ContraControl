@@ -34,8 +34,8 @@ void Windows_Network_Interface::initalize()
 		int nCount = 0;
 		while (hostinfo->h_addr_list[nCount])
 		{
-			local_ips.push_back(inet_ntoa(*(
-				struct in_addr*)hostinfo->h_addr_list[nCount]));
+			local_ips.push_back(std::string(inet_ntoa(*(
+				struct in_addr*)hostinfo->h_addr_list[nCount])));
 			nCount++;
 		}
 	}
@@ -188,7 +188,7 @@ void Windows_Network_Interface::scan_for_server()
 	std::vector<std::thread> thread_queue;
 	for (int i = 0; i < possibilites.size(); i++)
 	{
-		thread_queue.emplace_back(&Windows_Network_Interface::connect_to_server, possibilites[i]);
+		//thread_queue.emplace_back(&Windows_Network_Interface::connect_to_server, possibilites[i]);
 	}
 	for (std::vector<std::thread>::iterator x = thread_queue.begin(); x != thread_queue.end(); x++)
 	{

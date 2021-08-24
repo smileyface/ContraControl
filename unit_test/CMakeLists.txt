@@ -50,15 +50,15 @@ add_test(NAME Controller_Tests COMMAND Controller_Tests)
 add_test(Devices Static_Test)
 
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
 
-SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+#SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
 
-include(CodeCoverage.cmake)
-SETUP_TARGET_FOR_COVERAGE_COBERTURA(
-		my_coverage_target  # Name for custom target.
-		Static_Test         # Name of the test driver executable that runs the tests.
+#include(CodeCoverage.cmake)
+#SETUP_TARGET_FOR_COVERAGE_COBERTURA(
+#		my_coverage_target  # Name for custom target.
+#		Static_Test         # Name of the test driver executable that runs the tests.
 							# NOTE! This should always have a ZERO as exit code
 							# otherwise the coverage generation will not complete.
-		coverage            # Name of output directory.
-		)
+#		coverage            # Name of output directory.
+#		)
