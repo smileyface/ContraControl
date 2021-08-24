@@ -45,15 +45,18 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif()
 
 add_executable(Static_Test ${DEVICE_TEST_FILES})
-target_link_libraries(Static_Test gtest_main gcov Test_Utilities)
+target_link_libraries(Static_Test gtest_main Test_Utilities)
+add_test(NAME Controller_Tests COMMAND Controller_Tests)
 add_test(Devices Static_Test)
 
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
 
+SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
 
-if(CMAKE_COMPILER_IS_GNUCXX)
-    include(CodeCoverage.cmake)
-    append_coverage_compiler_flags()
-    setup_target_for_coverage_gcovr_html(Static_Test_coverage Static_Test coverage)
-endif()
+include(CodeCoverage.cmake)
+append_coverage_compiler_flags()
+setup_target_for_coverage_gcovr_html(
+        NAME coverage
+        EXECUTABLE Static_Test
+        BASE_DIRECTORY "${PROJECT_SOURCE_DIR}/src")
