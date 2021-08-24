@@ -55,7 +55,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_m
 SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
 
 include(CodeCoverage.cmake)
-SETUP_TARGET_FOR_COVERAGE(
+SETUP_TARGET_FOR_COVERAGE_COBERTURA(
 		my_coverage_target  # Name for custom target.
 		Static_Test         # Name of the test driver executable that runs the tests.
 							# NOTE! This should always have a ZERO as exit code
