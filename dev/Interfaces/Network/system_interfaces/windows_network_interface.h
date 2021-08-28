@@ -10,6 +10,7 @@
 #include <WS2tcpip.h>
 
 #include "network_interface.h"
+extern struct addrinfo hints;
 const int ip_protocol = IPPROTO_TCP;
 const int sock_type = SOCK_STREAM;
 const int sock_family = AF_INET;
@@ -21,7 +22,7 @@ public:
 	void connect_to_server(ipv4_addr addr);
 	void scan_for_server();
 	void initalize();
-	bool initalized();
+	void initalized();
 	void clean_up();
 	
 	void server_start();

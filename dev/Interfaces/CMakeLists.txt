@@ -52,13 +52,16 @@ target_include_directories(System_Interface
 
 set(NETWORK_INTERFACE_HEADERS
                     Network/messages.h
-                    Network/system_interfaces/network_interface.h)
+                    Network/system_interfaces/network_interface.h
+                    Network/system_interfaces/types/ipv4_addr.h
+                    Network/system_interfaces/types/network_status_state.h)
 set(NETWORK_INTERFACE_SOURCE
                     Network/src/connections.cpp
                     Network/src/network_interface.cpp
                     Network/src/windows_network_interface.cpp
                     Network/src/linux_network_interface.cpp
-                    Network/src/ipv4_addr.cpp)
+                    Network/src/ipv4_addr.cpp
+                    Network/src/network_status_state.cpp)
 set(NETWORK_WINDOWS_INTERFACE_HEADERS
                     Network/system_interfaces/windows_network_interface.h)
 set(NETWORK_UNIX_INTERFACE_HEADERS

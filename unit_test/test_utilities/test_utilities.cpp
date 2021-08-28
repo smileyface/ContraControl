@@ -66,18 +66,20 @@ void testing_util::device_utilities::check_validity(Device_Label label, bool exp
 
 void testing_util::network_utilities::check_initalized()
 {
-	try
+	network::network_interface->initalized();
+	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::NETWORK_INITALIZED);
+	if (network::network_interface->get_status().status == NETWORK_STATUS::NETWORK_ERROR)
 	{
-		EXPECT_TRUE(network::network_interface->initalized());
-	}
-	catch(NETWORK_INITALIZED_ERRORS e)
-	{
-		if (e == NETWORK_INITALIZED_ERRORS::ADAPTER_ERROR)
+		switch (network::network_interface->get_status().error)
+		{
+		case NETWORK_ERRORS::ADAPTER_ERROR:
 			FAIL() << "Adapter Error";
-		if (e == NETWORK_INITALIZED_ERRORS::SOCKET_INVALID)
+		case NETWORK_ERRORS::SOCKET_INVALID:
 			FAIL() << "Invalid Socket";
-		if (e == NETWORK_INITALIZED_ERRORS::INVALID_HOSTNAME)
+		case NETWORK_ERRORS::INVALID_HOSTNAME:
 			FAIL() << "Invalid Hostname";
-
+		default:
+			FAIL() << "Unknown Network Error";
+		}
 	}
 }

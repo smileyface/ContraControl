@@ -3,18 +3,10 @@
 
 #include <string>
 #include "Network/messages.h"
+#include "types/network_status_state.h"
 
-const int DEFAULT_PORT = 65656;
+const unsigned short DEFAULT_PORT = 0xDCF5;
 const std::string invalid_hostname = "INVALID";
-
-enum class NETWORK_INITALIZED_ERRORS
-{
-    ADAPTER_ERROR,
-    SOCKET_INVALID,
-    INVALID_HOSTNAME,
-    ERROR_ON_SOCKET_BIND,
-    ERROR_ON_SOCKET_LISTEN
-};
 
 struct ipv4_addr {
     union {
@@ -48,9 +40,10 @@ class Network_Interface
 public:
     void set_server();
     void set_client();
-    virtual bool initalized() = 0;
+    virtual void initalized() = 0;
     virtual void initalize() = 0;
     virtual void clean_up() = 0;
+    Network_Status_State get_status();
 
     //getters
     unsigned char* local_ip();
@@ -67,7 +60,9 @@ public:
 protected:
     bool is_server = false;
     ipv4_addr my_ip = ipv4_addr("255.255.255.255");
-    char hostname[255];
+    std::string hostname;
+
+    Network_Status_State status_state;
 };
 
 namespace network
