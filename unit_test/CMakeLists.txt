@@ -46,7 +46,7 @@ endif()
 
 add_executable(Static_Test ${DEVICE_TEST_FILES})
 target_link_libraries(Static_Test gtest_main Test_Utilities)
-add_test(NAME Controller_Tests COMMAND Controller_Tests)
+#add_test(NAME Controller_Tests COMMAND Controller_Tests)
 add_test(Devices Static_Test)
 
 
