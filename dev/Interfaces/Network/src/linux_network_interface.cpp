@@ -12,12 +12,31 @@ void Linux_Network_Interface::connect_to_server(ipv4_addr addr)
 
 void Linux_Network_Interface::initalize()
 {
-	throw UnimplementedFunctionException();
+	serv_addr.sin_family = AF_INET;
+	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	serv_addr.sin_port = DEFAULT_PORT;
+
+	/* creates an UN-named socket inside the kernel and returns
+	* an integer known as socket descriptor
+	* This function takes domain/family as its first argument.
+	* For Internet family of IPv4 addresses we use AF_INET
+	*/
+	listenfd = socket(sock_family, sock_type, ip_protocol);
+	memset(&serv_addr, '0', sizeof(serv_addr));
+
+
+	/* The call to the function "bind()" assigns the details specified
+	 * in the structure 『serv_addr' to the socket created in the step above
+	 */
+	bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
+
+	server_running = false;
 }
 
 void Linux_Network_Interface::clean_up()
 {
-	throw UnimplementedFunctionException();
+	server_running = false;
+	close(listenfd);
 }
 
 void Linux_Network_Interface::scan_for_server()
@@ -25,44 +44,31 @@ void Linux_Network_Interface::scan_for_server()
 	throw UnimplementedFunctionException();
 }
 
-bool Linux_Network_Interface::initalized()
+void Linux_Network_Interface::initalized()
 {
-	return false;
+	if (listenfd > 0)
+	{
+		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
+	}
+	status_state.set_status(NETWORK_STATUS::NETWORK_INITALIZED);
 }
 
 void Linux_Network_Interface::server_start()
 {
-	int listenfd = 0, connfd = 0;
-	struct sockaddr_in serv_addr;
+	server_running = true;
 
-	char sendBuff[1025];
-	time_t ticks;
+}
 
-	/* creates an UN-named socket inside the kernel and returns
-	 * an integer known as socket descriptor
-	 * This function takes domain/family as its first argument.
-	 * For Internet family of IPv4 addresses we use AF_INET
-	 */
-	listenfd = socket(sock_family, sock_type, ip_protocol);
-	memset(&serv_addr, '0', sizeof(serv_addr));
-	memset(sendBuff, '0', sizeof(sendBuff));
-
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	serv_addr.sin_port = htons(DEFAULT_PORT);
-
-	/* The call to the function "bind()" assigns the details specified
-	 * in the structure 『serv_addr' to the socket created in the step above
-	 */
-	bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
-
+void Linux_Network_Interface::server_listen()
+{
 	/* The call to the function "listen()" with second argument as 10 specifies
 	 * maximum number of client connections that server will queue for this listening
 	 * socket.
 	 */
-	listen(listenfd, 10);
+		listen(listenfd, 10);
 
-	while (1)
+
+	while (server_running)
 	{
 		/* In the call to accept(), the server is put to sleep and when for an incoming
 		 * client request, the three way TCP handshake* is complete, the function accept()
@@ -70,15 +76,7 @@ void Linux_Network_Interface::server_start()
 		 */
 		connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
 
-		/* As soon as server gets a request from client, it prepares the date and time and
-		 * writes on the client socket through the descriptor returned by accept()
-		 */
-		ticks = time(NULL);
-		snprintf(sendBuff, sizeof(sendBuff), "%.24s\r\n", ctime(&ticks));
-		write(connfd, sendBuff, strlen(sendBuff));
-
-		close(connfd);
-		//sleep(1);
+		sleep(1);
 	}
 }
 

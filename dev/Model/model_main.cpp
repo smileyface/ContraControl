@@ -77,6 +77,7 @@ void model::stop_loop()
 void model::clean_up()
 {
 	my_node.clear_node();
+	network::teardown_network_interfaces();
 }
 
 void model::initalize_my_node(Node_Id id, Node_Type type)
