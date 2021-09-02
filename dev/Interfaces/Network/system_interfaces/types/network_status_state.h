@@ -19,6 +19,7 @@ enum class NETWORK_ERRORS : unsigned char
     ERROR_ON_SOCKET_BIND,
     ERROR_ON_SOCKET_LISTEN,
     SYSTEM_INTERFACE_ERROR,
+    SOCKET_BUSY
 };
 
 struct Network_Status_State

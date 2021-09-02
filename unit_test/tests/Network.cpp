@@ -50,6 +50,8 @@ TEST_F(NetworkTest, Client_Start_Up)
 		case NETWORK_ERRORS::ERROR_ON_SOCKET_BIND:
 			FAIL() << "Socket Bind Failed";
 			break;
+		case NETWORK_ERRORS::SOCKET_BUSY:
+			FAIL() << "Socket is Busy";
 		default:
 			FAIL() << "Unknown Error";
 		}
