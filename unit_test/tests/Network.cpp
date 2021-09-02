@@ -36,5 +36,16 @@ TEST_F(NetworkTest, Client_Start_Up)
 {
 	/** Start in server mode */
 	testing_util::network_utilities::check_initalized();
-	network::start_client();
+	try 
+	{
+		network::start_client();
+	}
+	catch (NetworkErrorException e)
+	{
+		switch (network::network_interface->get_status().error)
+		{
+		case NETWORK_ERRORS::SOCKET_INVALID:
+			FAIL() << "Invalid Socket";
+		}
+	}
 }

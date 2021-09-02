@@ -74,5 +74,6 @@ class NetworkErrorException : public std::exception
     {
         return "Network Error";
     }
+
 };
 #endif
