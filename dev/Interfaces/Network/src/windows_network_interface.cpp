@@ -93,10 +93,13 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr my_ip, Network_Status_State& st
 		{
 		case WSA_IO_PENDING:
 			status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
+			break;
 		case WSAENETDOWN:
 			status_state.set_error(NETWORK_ERRORS::NO_NETWORK_ERROR);
+			break;
 		default:
 			status_state.set_error(NETWORK_ERRORS::ERROR_ON_SOCKET_BIND);
+			break;
 		}
 		throw NetworkErrorException();
 	}
