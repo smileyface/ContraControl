@@ -36,5 +36,5 @@ TEST_F(NetworkTest, Client_Start_Up)
 {
 	/** Start in server mode */
 	testing_util::network_utilities::check_initalized();
-	network::start_client();
+	EXPECT_NO_THROW(network::start_client());
 }
