@@ -92,13 +92,13 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr my_ip, Network_Status_State& st
 	int nNumInterfaces = nBytesReturned / sizeof(INTERFACE_INFO);
 
 	ipv4_addr subnet_mask;
-	/*for (int i = 0; i < nNumInterfaces; ++i) {
+	for (int i = 0; i < nNumInterfaces; ++i) {
 
 		if (Windows_Network_Interface::ipv4_compare((sockaddr_in*)&(InterfaceList[i].iiAddress), my_ip))
 		{
-			subnet_mask = Windows_Network_Interface::convert_win_address((sockaddr_in*)&(InterfaceList[i].iiNetmask));
+			//subnet_mask = Windows_Network_Interface::convert_win_address((sockaddr_in*)&(InterfaceList[i].iiNetmask));
 		}
-	}*/
+	}
 	return subnet_mask;
 }
 
