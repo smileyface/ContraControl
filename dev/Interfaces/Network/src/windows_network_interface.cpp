@@ -94,10 +94,10 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr my_ip, Network_Status_State& st
 	ipv4_addr subnet_mask;
 	for (int i = 0; i < nNumInterfaces; ++i) {
 
-		if (Windows_Network_Interface::ipv4_compare((sockaddr_in*)&(InterfaceList[i].iiAddress), my_ip))
-		{
+		//if (Windows_Network_Interface::ipv4_compare((sockaddr_in*)&(InterfaceList[i].iiAddress), my_ip))
+		//{
 			//subnet_mask = Windows_Network_Interface::convert_win_address((sockaddr_in*)&(InterfaceList[i].iiNetmask));
-		}
+		//}
 	}
 	return subnet_mask;
 }
@@ -112,7 +112,7 @@ void blast_arp(ipv4_addr current, DWORD& status)
 std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Network_Status_State& status_state)
 {
 	ipv4_addr subnet_mask = get_subnet_mask(sock, my_addr, status_state);
-	/*ipv4_addr host_mask = ~get_subnet_mask(sock, my_addr, status_state).S_un.S_addr;
+	ipv4_addr host_mask = ~get_subnet_mask(sock, my_addr, status_state).S_un.S_addr;
 	ipv4_addr subnet = my_addr.S_un.S_addr & subnet_mask.S_un.S_addr;
 
 	std::map<ipv4_addr, DWORD> addresses;
@@ -142,7 +142,7 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 			thing.push_back(x->first);
 		}
 	}
-	return thing;*/
+	return thing;
 	return std::vector<ipv4_addr>();
 }
 
