@@ -46,6 +46,9 @@ TEST_F(NetworkTest, Client_Start_Up)
 		{
 		case NETWORK_ERRORS::SOCKET_INVALID:
 			FAIL() << "Invalid Socket";
+			break;
+		default:
+			FAIL() << "Unknown Error";
 		}
 	}
 }
