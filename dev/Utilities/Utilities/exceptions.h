@@ -64,4 +64,15 @@ class UnimplementedFunctionException : public std::exception
         return "Function not implemented";
     }
 };
+
+/**
+ \brief When the network struggles. See the network status_state for details.
+ */
+class NetworkErrorException : public std::exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Network Error";
+    }
+};
 #endif
