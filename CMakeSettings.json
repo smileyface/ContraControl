@@ -4,12 +4,11 @@
       "name": "x64-Debug",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "inheritEnvironments": [ "clang_cl_x64" ],
+      "inheritEnvironments": [ "msvc_x64" ],
       "buildRoot": "${projectDir}\\out\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "/D_CRT_NONSTDC_NO_WARNINGS",
-      "ctestCommandArgs": "",
-      "buildCommandArgs": "-fexceptions"
+      "ctestCommandArgs": ""
     },
     {
       "name": "RaspberryPi-Debug",

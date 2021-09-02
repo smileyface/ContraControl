@@ -143,6 +143,7 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 		}
 	}
 	return thing;*/
+	return std::vector<ipv4_addr>();
 }
 
 
