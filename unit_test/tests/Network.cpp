@@ -47,6 +47,9 @@ TEST_F(NetworkTest, Client_Start_Up)
 		case NETWORK_ERRORS::SOCKET_INVALID:
 			FAIL() << "Invalid Socket";
 			break;
+		case NETWORK_ERRORS::ERROR_ON_SOCKET_BIND:
+			FAIL() << "Socket Bind Failed";
+			break;
 		default:
 			FAIL() << "Unknown Error";
 		}
