@@ -52,6 +52,10 @@ TEST_F(NetworkTest, Client_Start_Up)
 			break;
 		case NETWORK_ERRORS::SOCKET_BUSY:
 			FAIL() << "Socket is Busy";
+			break;
+		case NETWORK_ERRORS::NO_NETWORK_ERROR:
+			FAIL() << "Network Subsystem has failed";
+			break;
 		default:
 			FAIL() << "Unknown Error";
 		}

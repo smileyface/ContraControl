@@ -89,14 +89,16 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr my_ip, Network_Status_State& st
 	unsigned long nBytesReturned;
 	if (WSAIoctl(sock, SIO_GET_INTERFACE_LIST, 0, 0, &InterfaceList,
 		sizeof(InterfaceList), &nBytesReturned, 0, 0) == SOCKET_ERROR) {
-		status_state.set_error(NETWORK_ERRORS::ERROR_ON_SOCKET_BIND);
 		switch (WSAGetLastError())
 		{
 		case WSA_IO_PENDING:
 			status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
+		case WSAENETDOWN:
+			status_state.set_error(NETWORK_ERRORS::NO_NETWORK_ERROR);
 		default:
-			throw NetworkErrorException();
+			status_state.set_error(NETWORK_ERRORS::ERROR_ON_SOCKET_BIND);
 		}
+		throw NetworkErrorException();
 	}
 	int nNumInterfaces = nBytesReturned / sizeof(INTERFACE_INFO);
 
