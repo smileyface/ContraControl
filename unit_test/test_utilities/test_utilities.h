@@ -20,6 +20,12 @@ namespace testing_util
 	namespace network_utilities
 	{
 		void check_initalized();
+		void exception_handle(NetworkErrorException e);
 	}
+}
+
+namespace network_test_util
+{
+	
 }
 #endif

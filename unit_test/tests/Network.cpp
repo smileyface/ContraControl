@@ -1,4 +1,3 @@
-#include "../test_utilities/device_utilities.h"
 #include "../test_utilities/system_testings.h"
 #include "../test_utilities/test_utilities.h"
 
@@ -29,7 +28,14 @@ TEST_F(NetworkTest, Server_Start_Up)
 {
 	/** Start in server mode */
 	testing_util::network_utilities::check_initalized();
-	network::start_server();
+	try
+	{
+		network::start_server();
+	}
+	catch (NetworkErrorException e)
+	{
+		testing_util::network_utilities::exception_handle(e);
+	}
 }
 
 TEST_F(NetworkTest, Client_Start_Up)
@@ -42,22 +48,6 @@ TEST_F(NetworkTest, Client_Start_Up)
 	}
 	catch (NetworkErrorException e)
 	{
-		switch (network::network_interface->get_status().error)
-		{
-		case NETWORK_ERRORS::SOCKET_INVALID:
-			FAIL() << "Invalid Socket";
-			break;
-		case NETWORK_ERRORS::ERROR_ON_SOCKET_BIND:
-			FAIL() << "Socket Bind Failed";
-			break;
-		case NETWORK_ERRORS::SOCKET_BUSY:
-			FAIL() << "Socket is Busy";
-			break;
-		case NETWORK_ERRORS::NO_NETWORK_ERROR:
-			FAIL() << "Network Subsystem has failed";
-			break;
-		default:
-			FAIL() << "Unknown Error";
-		}
+		testing_util::network_utilities::exception_handle(e);
 	}
 }

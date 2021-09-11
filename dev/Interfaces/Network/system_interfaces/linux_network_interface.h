@@ -27,7 +27,7 @@ class Linux_Network_Interface : public Network_Interface
 	void server_listen();
 
 private:
-	int listenfd = 0, connfd = 0;
+	int sock;
 	struct sockaddr_in serv_addr;
 	bool server_running;
 	std::map<ipv4_addr, int> accepted_connections;
