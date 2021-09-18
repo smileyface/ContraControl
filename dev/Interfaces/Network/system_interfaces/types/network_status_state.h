@@ -20,7 +20,8 @@ enum class NETWORK_ERRORS : unsigned char
     ERROR_ON_SOCKET_LISTEN,
     SYSTEM_INTERFACE_ERROR,
     SOCKET_BUSY,
-    SERVER_CANNOT_START
+    SERVER_CANNOT_START,
+    UNKNOWN_ERROR
 };
 
 struct Network_Status_State

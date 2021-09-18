@@ -29,6 +29,7 @@ struct ipv4_addr {
     unsigned char* get_addr_bytes();
     std::string get_as_string();
     bool operator<(const ipv4_addr& d) const;
+    void operator=(const unsigned long& D);
     /**
      * Specify the ++ operator for network sweeps. Must be specified to handle windows endian problems. Unix cound just treat this like a long
      */

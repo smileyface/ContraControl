@@ -34,7 +34,7 @@ TEST_F(NetworkTest, Server_Start_Up)
 	}
 	catch (NetworkErrorException e)
 	{
-		testing_util::network_utilities::exception_handle(e);
+		testing_util::network_utilities::exception_handle();
 	}
 }
 
@@ -48,6 +48,6 @@ TEST_F(NetworkTest, Client_Start_Up)
 	}
 	catch (NetworkErrorException e)
 	{
-		testing_util::network_utilities::exception_handle(e);
+		testing_util::network_utilities::exception_handle();
 	}
 }

@@ -13,7 +13,6 @@
 /*This is where the Network Interface object is defined */
 Network_Interface* network::network_interface;
 
-bool network_is_init = false;
 
 void Network_Interface::set_client()
 {
@@ -45,7 +44,6 @@ void network::init_network_interfaces()
 	network::network_interface = new Linux_Network_Interface();
 #endif //__linux__
 	network_interface->initalize();
-	network_is_init = true;
 }
 
 void network::teardown_network_interfaces()

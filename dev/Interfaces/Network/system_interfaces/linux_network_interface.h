@@ -8,8 +8,16 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <vector>	    //std::vector
 
 #include "network_interface.h"
+
+//COMMON TYPEDEFS
+
+typedef int SOCKET;
+typedef unsigned long DWORD;
+const unsigned long ERROR_NOT_FOUND = 1168L;
+
 
 const int ip_protocol = IPPROTO_TCP;
 const int sock_type = SOCK_STREAM;
@@ -27,10 +35,10 @@ class Linux_Network_Interface : public Network_Interface
 	void server_listen();
 
 private:
-	int sock;
+	SOCKET sock;
 	struct sockaddr_in serv_addr;
 	bool server_running;
-	std::map<ipv4_addr, int> accepted_connections;
+	std::map<ipv4_addr, SOCKET> accepted_connections;
 };
 
 

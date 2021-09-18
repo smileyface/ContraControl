@@ -204,15 +204,15 @@ void Windows_Network_Interface::scan_for_server()
 
 	std::vector<ipv4_addr> possibilites = scan_for_possibilities(sock, my_ip, status_state);
 
-	//std::vector<std::thread> thread_queue;
-	//for (int i = 0; i < possibilites.size(); i++)
-	//{
-	//	thread_queue.emplace_back(&Windows_Network_Interface::connect_to_server, this, possibilites[i]);
-	//}
-	//for (std::vector<std::thread>::iterator x = thread_queue.begin(); x != thread_queue.end(); x++)
-	//{
-	//	x->join();
-	//}
+	std::vector<std::thread> thread_queue;
+	for (int i = 0; i < possibilites.size(); i++)
+	{
+		thread_queue.emplace_back(&Windows_Network_Interface::connect_to_server, this, possibilites[i]);
+	}
+	for (std::vector<std::thread>::iterator x = thread_queue.begin(); x != thread_queue.end(); x++)
+	{
+		x->join();
+	}
 }
 
 void Windows_Network_Interface::server_start()

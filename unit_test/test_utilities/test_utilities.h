@@ -20,7 +20,7 @@ namespace testing_util
 	namespace network_utilities
 	{
 		void check_initalized();
-		void exception_handle(NetworkErrorException e);
+		void exception_handle();
 	}
 }
 

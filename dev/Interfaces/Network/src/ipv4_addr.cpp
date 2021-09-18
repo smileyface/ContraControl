@@ -63,6 +63,11 @@ bool ipv4_addr::operator<(const ipv4_addr& d) const
 {
 	return S_un.S_addr < d.S_un.S_addr;
 }
+void ipv4_addr::operator=(const unsigned long& D)
+{
+	S_un.S_addr = D;
+}
+
 std::string ipv4_addr::get_as_string()
 {
 	std::string addr_string = std::to_string(S_un.S_un_b.s_b1);
