@@ -6,32 +6,30 @@
 
 Timer model_timer;
 
-Node_Map model::nodes;
 bool model::model_running = true;
 
 Command_List model::step_actions;
 
-Node_Id model::my_node;
+Node model::my_node;
 
 
 void model::initalize()
 {
 	model_timer.reset_clock();
-	my_node = "ALL";
 }
 
 Node* model::get_node(Node_Id id)
 {
-	if (nodes.find(id) == nodes.end())
+	if (my_node.get_id() == id)
 	{
-		throw NodeNotFoundException();
+		return &my_node;
 	}
-	return model::nodes[id];
+	return my_node.get_connection(id);
 }
 
 void model::create_node(Node_Type type, Node_Id id)
 {
-	model::nodes.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
+	my_node.add_connection(type, id);
 }
 
 Device* model::get_device(Device_Label label)
@@ -39,7 +37,8 @@ Device* model::get_device(Device_Label label)
 	return model::get_node(label.get_node_id())->get_device(label.get_device_id());
 }
 
-template <class T>
+
+template <typename T>
 void mangle_model(T* command, Device* device)
 {
 	state_interfaces::mangle_state(command, device);
@@ -77,6 +76,12 @@ void model::stop_loop()
 
 void model::clean_up()
 {
-	model::nodes.clear();
+	my_node.clear_node();
+	network::teardown_network_interfaces();
+}
+
+void model::initalize_my_node(Node_Id id, Node_Type type)
+{
+	my_node.initalize_local_control(id, type);
 }
 

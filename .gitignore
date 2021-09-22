@@ -45,6 +45,7 @@ out/*
 
 #Testing Extras
 test/googletest*
+googletest-*
 Test
 
 #CMake Extras
@@ -60,4 +61,11 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
-/unit_test/googletest-src
+#VS Extras
+*.dir/Debug
+*.vcxproj.*
+*.vcxproj
+*.tlog
+Debug
+*.pdb
+*.sln

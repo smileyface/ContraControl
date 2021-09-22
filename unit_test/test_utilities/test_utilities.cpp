@@ -1,8 +1,9 @@
 #include "test_utilities.h"
 #include "system_testings.h"
 
-#include "pch.h"
+#include "Network/system_interfaces/network_interface.h"
 
+#include "pch.h"
 
 #include <typeinfo>
 
@@ -61,4 +62,43 @@ void testing_util::device_utilities::check_validity(Device_Label label, bool exp
 	Device received_state = *model::get_device(label);
 
 	EXPECT_EQ(received_state.valid, expect_valid) << "Device validity is not correct";
+}
+
+void testing_util::network_utilities::check_initalized()
+{
+	network::network_interface->initalized();
+	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::NETWORK_INITALIZED);
+	if (network::network_interface->get_status().status == NETWORK_STATUS::NETWORK_ERROR)
+	{
+
+	}
+}
+
+void testing_util::network_utilities::exception_handle()
+{
+	switch (network::network_interface->get_status().error)
+	{
+	case NETWORK_ERRORS::ADAPTER_ERROR:
+		FAIL() << "Adapter Error";
+		break;
+	case NETWORK_ERRORS::SOCKET_INVALID:
+		FAIL() << "Invalid Socket";
+		break;
+	case NETWORK_ERRORS::INVALID_HOSTNAME:
+		FAIL() << "Invalid Hostname";
+		break;
+	case NETWORK_ERRORS::ERROR_ON_SOCKET_BIND:
+		FAIL() << "Socket Bind Failed";
+		break;
+	case NETWORK_ERRORS::SOCKET_BUSY:
+		FAIL() << "Socket is Busy";
+		break;
+	case NETWORK_ERRORS::NO_NETWORK_ERROR:
+		FAIL() << "Network Subsystem has failed";
+		break;
+	case NETWORK_ERRORS::SERVER_CANNOT_START:
+		FAIL() << "Server Cannot Start";
+	default:
+		FAIL() << "Unknown Network Error";
+	}
 }

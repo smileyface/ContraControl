@@ -1,6 +1,6 @@
 ﻿set(DEVICE_TEST_FILES "tests/Gradient_Device.cpp" 
                       "tests/Switch_Device.cpp" 
-                      "tests/Node.cpp")
+                      "tests/Node.cpp" "tests/Network.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h" 
                            "test_utilities/system_testings.h" 
@@ -9,8 +9,8 @@ add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/test_utilities.h" 
                            "test_utilities/test_utilities.cpp" 
                            "test_utilities/device_utilities.h" 
-                           "test_utilities/device_utilities.cpp")
-target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface)
+                           "test_utilities/device_utilities.cpp"  )
+target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface Network)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -46,4 +46,19 @@ endif()
 
 add_executable(Static_Test ${DEVICE_TEST_FILES})
 target_link_libraries(Static_Test gtest_main Test_Utilities)
+#add_test(NAME Controller_Tests COMMAND Controller_Tests)
 add_test(Devices Static_Test)
+
+
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
+
+#SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+
+#include(CodeCoverage.cmake)
+#SETUP_TARGET_FOR_COVERAGE_COBERTURA(
+#		my_coverage_target  # Name for custom target.
+#		Static_Test         # Name of the test driver executable that runs the tests.
+							# NOTE! This should always have a ZERO as exit code
+							# otherwise the coverage generation will not complete.
+#		coverage            # Name of output directory.
+#		)
