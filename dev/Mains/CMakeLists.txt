@@ -1,0 +1,3 @@
+add_executable(Client_Headless client_headless.cpp)
+
+target_link_libraries(Client_Headless Utilities Model Controller System_Interface Network)

@@ -3,6 +3,11 @@
 #include "controller_main.h"
 #include "Interfaces/controller_interface.h"
 
+#include <thread>
+#include <mutex>
+
+std::thread controller_thread;
+std::mutex controller_mutex;
 
 Timer controller_timer;
 bool controller::controller_running = true;
@@ -12,6 +17,18 @@ void controller::initalize()
 {
 	controller_timer.reset_clock();
 }
+ 
+void loop()
+{
+	while (controller::controller_running)
+	{
+		controller::step();
+	}
+}
+void controller::start_controller()
+{
+
+}
 
 void controller::stop_controller()
 {
@@ -20,7 +37,9 @@ void controller::stop_controller()
 
 void controller::add_command(Timed_Command tc)
 {
+	controller_mutex.lock();
 	controller::controller_queue.push_back(tc);
+	controller_mutex.unlock();
 	std::sort(controller::controller_queue.begin(), controller::controller_queue.end(), [](Timed_Command a, Timed_Command b) {
 		return a < b;
 		});
