@@ -20,6 +20,8 @@ public:
 
 };
 
+void start_controller();
+
 /**
  Controller interface to the Model
  */

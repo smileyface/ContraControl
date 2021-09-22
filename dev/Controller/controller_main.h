@@ -37,7 +37,12 @@ namespace controller
 	void initalize();
 
 	/**
-	 * Add a Timed_Command to the sorted queue of commands.
+	 * Start the controller loop;
+	 */
+	void start_controller();
+
+	/**
+	 * Add a Timed_Command to the sorted queue of commands. Thread safe.
 	 * 
 	 * \param tc Command to add
 	 */
