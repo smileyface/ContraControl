@@ -32,50 +32,12 @@ void Windows_Network_Interface::initalize()
 {
 	WORD wVersionRequested = MAKEWORD(2, 2);
 	WSADATA wsaData;
-	struct addrinfo* hostinfo = NULL;
 
 	if (WSAStartup(wVersionRequested, &wsaData) != 0) {
 		status_state.set_error(NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR);
 		throw NetworkErrorException();
 	}
-	char* host = (char*)hostname.c_str();
-	while (WSAIsBlocking())
-	{
-		printf("Blocking");
-	}
-	gethostname(host, sizeof(host));
 
-	if (host == invalid_hostname)
-	{
-		switch(WSAGetLastError())
-		{
-			case WSAEFAULT:
-				status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
-			case WSANOTINITIALISED:
-				status_state.set_error(NETWORK_ERRORS::UNINITALIZED_INTERFACE);
-			case WSAEINPROGRESS:
-				status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
-			case WSAENETDOWN:
-				status_state.set_error(NETWORK_ERRORS::NO_NETWORK_ERROR);
-		}
-		throw NetworkErrorException();
-	}
-	std::string port = std::to_string(DEFAULT_PORT);
-	getaddrinfo(host, (char*)port.c_str(), &hints, &hostinfo);
-	int nCount = 0;
-	for(struct addrinfo* ptr = hostinfo; ptr != NULL; ptr = ptr->ai_next)
-	{
-		char addr[16];
-		struct sockaddr_in* sockaddr_ipv4 = (struct sockaddr_in*)ptr->ai_addr;
-		inet_ntop(AF_INET, &sockaddr_ipv4->sin_addr, addr, 16);
-		local_ips.push_back(std::string(addr));
-		nCount++;
-	}
-
-	if (local_ips.size() == 1)
-	{
-		my_ip = local_ips[0];
-	}
 	sock = socket(sock_family, sock_type, ip_protocol);
 	std::cout << sock << std::endl;
 }
@@ -155,7 +117,7 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 
 	std::vector<ipv4_addr> thing;
 	ipv4_addr subnet_mask = get_subnet_mask(sock, my_addr, status_state);
-	/*ipv4_addr host_mask = ~get_subnet_mask(sock, my_addr, status_state).S_un.S_addr;
+	ipv4_addr host_mask = ~get_subnet_mask(sock, my_addr, status_state).S_un.S_addr;
 	ipv4_addr subnet = my_addr.S_un.S_addr & subnet_mask.S_un.S_addr;
 
 	std::map<ipv4_addr, DWORD> addresses;
@@ -183,11 +145,52 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 		{
 			thing.push_back(x->first);
 		}
-	}*/
+	}
 	return thing;
 }
 
+ipv4_addr Windows_Network_Interface::set_my_ip()
+{
+	struct addrinfo* hostinfo = NULL;
+	char* host = (char*)hostname.c_str();
+	while (WSAIsBlocking())
+	{
+		printf("Blocking");
+	}
+	gethostname(host, sizeof(host));
 
+	if (host == invalid_hostname)
+	{
+		switch (WSAGetLastError())
+		{
+		case WSAEFAULT:
+			status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
+		case WSANOTINITIALISED:
+			status_state.set_error(NETWORK_ERRORS::UNINITALIZED_INTERFACE);
+		case WSAEINPROGRESS:
+			status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
+		case WSAENETDOWN:
+			status_state.set_error(NETWORK_ERRORS::NO_NETWORK_ERROR);
+		}
+		throw NetworkErrorException();
+	}
+	std::string port = std::to_string(DEFAULT_PORT);
+	getaddrinfo(host, (char*)port.c_str(), &hints, &hostinfo);
+	int nCount = 0;
+	for (struct addrinfo* ptr = hostinfo; ptr != NULL; ptr = ptr->ai_next)
+	{
+		char addr[16];
+		struct sockaddr_in* sockaddr_ipv4 = (struct sockaddr_in*)ptr->ai_addr;
+		inet_ntop(AF_INET, &sockaddr_ipv4->sin_addr, addr, 16);
+		local_ips.push_back(std::string(addr));
+		nCount++;
+	}
+
+	if (local_ips.size() == 1)
+	{
+		my_ip = local_ips[0];
+	}
+}
 
 void Windows_Network_Interface::connect_to_server(ipv4_addr addr)
 {
