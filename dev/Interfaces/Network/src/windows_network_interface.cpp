@@ -123,14 +123,14 @@ void blast_arp(ipv4_addr current, DWORD& status)
 {
 	ULONG MacAddr[2];       /* for 6-byte hardware addresses */
 	ULONG PhysAddrLen = 6;  /* default to length of six bytes */
-	status = SendARP(current.S_un.S_addr, 0, &MacAddr, &PhysAddrLen);
+	//status = SendARP(current.S_un.S_addr, 0, &MacAddr, &PhysAddrLen);
 }
 
 std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Network_Status_State& status_state)
 {
 
 	std::vector<ipv4_addr> thing;
-	/*ipv4_addr subnet_mask = get_subnet_mask(sock, my_addr, status_state);
+	ipv4_addr subnet_mask = get_subnet_mask(sock, my_addr, status_state);
 	ipv4_addr host_mask = ~get_subnet_mask(sock, my_addr, status_state).S_un.S_addr;
 	ipv4_addr subnet = my_addr.S_un.S_addr & subnet_mask.S_un.S_addr;
 
@@ -159,7 +159,7 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 		{
 			thing.push_back(x->first);
 		}
-	}*/
+	}
 	return thing;
 }
 
