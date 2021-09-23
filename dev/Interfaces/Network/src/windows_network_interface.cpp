@@ -43,7 +43,7 @@ void Windows_Network_Interface::initalize()
 	if (host == invalid_hostname)
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
-		return;
+		throw NetworkErrorException();
 	}
 	std::string port = std::to_string(DEFAULT_PORT);
 	getaddrinfo(host, (char*)port.c_str(), &hints, &hostinfo);
@@ -70,14 +70,17 @@ void Windows_Network_Interface::initalized()
 	if (local_ips.size() == 0)
 	{
 		status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
+		throw NetworkErrorException();
 	}
 	else if (sock == INVALID_SOCKET)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
+		throw NetworkErrorException();
 	}
 	else if (hostname == invalid_hostname)
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
+		throw NetworkErrorException();
 	}
 	status_state.set_status(NETWORK_STATUS::NETWORK_INITALIZED);
 }
