@@ -30,7 +30,7 @@ Windows_Network_Interface::Windows_Network_Interface()
 
 void Windows_Network_Interface::initalize()
 {
-	WORD wVersionRequested = MAKEWORD(2, 2);
+	WORD wVersionRequested = MAKEWORD(1, 1);
 	WSADATA wsaData;
 	struct addrinfo* hostinfo = NULL;
 
