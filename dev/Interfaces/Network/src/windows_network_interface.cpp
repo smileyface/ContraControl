@@ -39,24 +39,13 @@ void Windows_Network_Interface::initalize()
 	}
 
 	sock = socket(sock_family, sock_type, ip_protocol);
-	std::cout << sock << std::endl;
 }
 
 void Windows_Network_Interface::initalized()
 {
-	if (local_ips.size() == 0)
-	{
-		status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
-		throw NetworkErrorException();
-	}
-	else if (sock == INVALID_SOCKET)
+	if (sock == INVALID_SOCKET)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
-		throw NetworkErrorException();
-	}
-	else if (hostname == invalid_hostname)
-	{
-		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
 		throw NetworkErrorException();
 	}
 	status_state.set_status(NETWORK_STATUS::NETWORK_INITALIZED);
