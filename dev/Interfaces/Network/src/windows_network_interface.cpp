@@ -1,6 +1,8 @@
 /*This is where the Windows Network Interface object is defined*/
 #ifdef _WIN32
 
+#include <iostream>
+
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <iphlpapi.h>
@@ -58,6 +60,7 @@ void Windows_Network_Interface::initalize()
 		my_ip = local_ips[0];
 	}
 	sock = socket(sock_family, sock_type, ip_protocol);
+	std::cout << sock << std::endl;
 }
 
 void Windows_Network_Interface::initalized()
@@ -123,7 +126,7 @@ void blast_arp(ipv4_addr current, DWORD& status)
 {
 	ULONG MacAddr[2];       /* for 6-byte hardware addresses */
 	ULONG PhysAddrLen = 6;  /* default to length of six bytes */
-	//status = SendARP(current.S_un.S_addr, 0, &MacAddr, &PhysAddrLen);
+	status = SendARP(current.S_un.S_addr, 0, &MacAddr, &PhysAddrLen);
 }
 
 std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Network_Status_State& status_state)
