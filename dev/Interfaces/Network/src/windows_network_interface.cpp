@@ -131,7 +131,7 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 
 	std::vector<ipv4_addr> thing;
 	ipv4_addr subnet_mask = get_subnet_mask(sock, my_addr, status_state);
-	ipv4_addr host_mask = ~get_subnet_mask(sock, my_addr, status_state).S_un.S_addr;
+	/*ipv4_addr host_mask = ~get_subnet_mask(sock, my_addr, status_state).S_un.S_addr;
 	ipv4_addr subnet = my_addr.S_un.S_addr & subnet_mask.S_un.S_addr;
 
 	std::map<ipv4_addr, DWORD> addresses;
@@ -160,7 +160,7 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 			thing.push_back(x->first);
 		}
 	}
-	return thing;
+	return thing;*/
 }
 
 
@@ -206,14 +206,14 @@ void Windows_Network_Interface::scan_for_server()
 	std::vector<ipv4_addr> possibilites = scan_for_possibilities(sock, my_ip, status_state);
 
 	std::vector<std::thread> thread_queue;
-	for (int i = 0; i < possibilites.size(); i++)
+	/*for (int i = 0; i < possibilites.size(); i++)
 	{
 		thread_queue.emplace_back(&Windows_Network_Interface::connect_to_server, this, possibilites[i]);
 	}
 	for (std::vector<std::thread>::iterator x = thread_queue.begin(); x != thread_queue.end(); x++)
 	{
 		x->join();
-	}
+	}*/
 }
 
 void Windows_Network_Interface::server_start()
