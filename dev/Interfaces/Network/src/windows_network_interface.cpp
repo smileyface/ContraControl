@@ -159,8 +159,8 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 		{
 			thing.push_back(x->first);
 		}
-	}
-	return thing;*/
+	}*/
+	return thing;
 }
 
 
