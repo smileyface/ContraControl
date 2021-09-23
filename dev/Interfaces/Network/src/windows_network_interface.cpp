@@ -42,7 +42,15 @@ void Windows_Network_Interface::initalize()
 	gethostname(host, sizeof(host));
 	if (host == invalid_hostname)
 	{
-		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
+		switch(WSAGetLastError())
+		{
+			case WSAEFAULT:
+				status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
+			case WSANOTINITIALISED:
+				status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
+			case WSAEINPROGRESS:
+				status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
+		}
 		throw NetworkErrorException();
 	}
 	std::string port = std::to_string(DEFAULT_PORT);
