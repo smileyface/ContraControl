@@ -1,6 +1,8 @@
 /*This is where the Windows Network Interface object is defined*/
 #ifdef _WIN32
 
+#include <iostream>
+
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <iphlpapi.h>
@@ -30,49 +32,21 @@ void Windows_Network_Interface::initalize()
 {
 	WORD wVersionRequested = MAKEWORD(2, 2);
 	WSADATA wsaData;
-	struct addrinfo* hostinfo = NULL;
 
-	if (WSAStartup(wVersionRequested, &wsaData) != 0)
+	if (WSAStartup(wVersionRequested, &wsaData) != 0) {
 		status_state.set_error(NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR);
-	char* host = (char*)hostname.c_str();
-	gethostname(host, sizeof(host));
-	if (host == invalid_hostname)
-	{
-		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
-		return;
-	}
-	std::string port = std::to_string(DEFAULT_PORT);
-	getaddrinfo(host, (char*)port.c_str(), &hints, &hostinfo);
-	int nCount = 0;
-	for(struct addrinfo* ptr = hostinfo; ptr != NULL; ptr = ptr->ai_next)
-	{
-		char addr[16];
-		struct sockaddr_in* sockaddr_ipv4 = (struct sockaddr_in*)ptr->ai_addr;
-		inet_ntop(AF_INET, &sockaddr_ipv4->sin_addr, addr, 16);
-		local_ips.push_back(std::string(addr));
-		nCount++;
+		throw NetworkErrorException();
 	}
 
-	if (local_ips.size() == 1)
-	{
-		my_ip = local_ips[0];
-	}
 	sock = socket(sock_family, sock_type, ip_protocol);
 }
 
 void Windows_Network_Interface::initalized()
 {
-	if (local_ips.size() == 0)
-	{
-		status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
-	}
-	else if (sock == INVALID_SOCKET)
+	if (sock == INVALID_SOCKET)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
-	}
-	else if (hostname == invalid_hostname)
-	{
-		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
+		throw NetworkErrorException();
 	}
 	status_state.set_status(NETWORK_STATUS::NETWORK_INITALIZED);
 }
@@ -91,6 +65,7 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr my_ip, Network_Status_State& st
 		sizeof(InterfaceList), &nBytesReturned, 0, 0) == SOCKET_ERROR) {
 		switch (WSAGetLastError())
 		{
+		case WSAEINPROGRESS:
 		case WSA_IO_PENDING:
 			status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
 			break;
@@ -128,6 +103,8 @@ void blast_arp(ipv4_addr current, DWORD& status)
 
 std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Network_Status_State& status_state)
 {
+
+	std::vector<ipv4_addr> thing;
 	ipv4_addr subnet_mask = get_subnet_mask(sock, my_addr, status_state);
 	ipv4_addr host_mask = ~get_subnet_mask(sock, my_addr, status_state).S_un.S_addr;
 	ipv4_addr subnet = my_addr.S_un.S_addr & subnet_mask.S_un.S_addr;
@@ -151,7 +128,6 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 	{
 		x->join();
 	}
-	std::vector<ipv4_addr> thing;
 	for (std::map<ipv4_addr, DWORD>::iterator x = addresses.begin(); x != addresses.end(); x++)
 	{
 		if (addresses[x->first] == NO_ERROR || addresses[x->first] == ERROR_BUFFER_OVERFLOW)
@@ -162,7 +138,48 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 	return thing;
 }
 
+ipv4_addr Windows_Network_Interface::set_my_ip()
+{
+	struct addrinfo* hostinfo = NULL;
+	char* host = (char*)hostname.c_str();
+	while (WSAIsBlocking())
+	{
+		printf("Blocking");
+	}
+	gethostname(host, sizeof(host));
 
+	if (host == invalid_hostname)
+	{
+		switch (WSAGetLastError())
+		{
+		case WSAEFAULT:
+			status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
+		case WSANOTINITIALISED:
+			status_state.set_error(NETWORK_ERRORS::UNINITALIZED_INTERFACE);
+		case WSAEINPROGRESS:
+			status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
+		case WSAENETDOWN:
+			status_state.set_error(NETWORK_ERRORS::NO_NETWORK_ERROR);
+		}
+		throw NetworkErrorException();
+	}
+	std::string port = std::to_string(DEFAULT_PORT);
+	getaddrinfo(host, (char*)port.c_str(), &hints, &hostinfo);
+	int nCount = 0;
+	for (struct addrinfo* ptr = hostinfo; ptr != NULL; ptr = ptr->ai_next)
+	{
+		char addr[16];
+		struct sockaddr_in* sockaddr_ipv4 = (struct sockaddr_in*)ptr->ai_addr;
+		inet_ntop(AF_INET, &sockaddr_ipv4->sin_addr, addr, 16);
+		local_ips.push_back(std::string(addr));
+		nCount++;
+	}
+
+	if (local_ips.size() == 1)
+	{
+		my_ip = local_ips[0];
+	}
+}
 
 void Windows_Network_Interface::connect_to_server(ipv4_addr addr)
 {
@@ -205,14 +222,14 @@ void Windows_Network_Interface::scan_for_server()
 	std::vector<ipv4_addr> possibilites = scan_for_possibilities(sock, my_ip, status_state);
 
 	std::vector<std::thread> thread_queue;
-	for (int i = 0; i < possibilites.size(); i++)
+	/*for (int i = 0; i < possibilites.size(); i++)
 	{
 		thread_queue.emplace_back(&Windows_Network_Interface::connect_to_server, this, possibilites[i]);
 	}
 	for (std::vector<std::thread>::iterator x = thread_queue.begin(); x != thread_queue.end(); x++)
 	{
 		x->join();
-	}
+	}*/
 }
 
 void Windows_Network_Interface::server_start()

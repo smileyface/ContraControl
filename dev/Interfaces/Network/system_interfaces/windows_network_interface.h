@@ -19,6 +19,8 @@ class Windows_Network_Interface : public Network_Interface
 public:
 	Windows_Network_Interface();
 
+	ipv4_addr set_my_ip();
+
 	void connect_to_server(ipv4_addr addr);
 	void scan_for_server();
 	void initalize();

@@ -78,6 +78,12 @@ void testing_util::network_utilities::exception_handle()
 {
 	switch (network::network_interface->get_status().error)
 	{
+	case NETWORK_ERRORS::NO_NETWORK_ERROR:
+		FAIL() << "Network Subsystem has failed";
+		break;
+	case NETWORK_ERRORS::UNINITALIZED_INTERFACE:
+		FAIL() << "Unintalized Interface";
+		break;
 	case NETWORK_ERRORS::ADAPTER_ERROR:
 		FAIL() << "Adapter Error";
 		break;
@@ -90,15 +96,23 @@ void testing_util::network_utilities::exception_handle()
 	case NETWORK_ERRORS::ERROR_ON_SOCKET_BIND:
 		FAIL() << "Socket Bind Failed";
 		break;
+	case NETWORK_ERRORS::ERROR_ON_SOCKET_LISTEN:
+		FAIL() << "Error listening on socket";
+		break;
+	case NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR:
+		FAIL() << "Error grabbing the interface";
+		break;
 	case NETWORK_ERRORS::SOCKET_BUSY:
 		FAIL() << "Socket is Busy";
 		break;
-	case NETWORK_ERRORS::NO_NETWORK_ERROR:
-		FAIL() << "Network Subsystem has failed";
-		break;
 	case NETWORK_ERRORS::SERVER_CANNOT_START:
 		FAIL() << "Server Cannot Start";
+		break;
+
+	case NETWORK_ERRORS::UNKNOWN_ERROR:
+		FAIL() << "Unhandled Network Error";
+		break;
 	default:
-		FAIL() << "Unknown Network Error";
+		FAIL() << "Unknown Network Error ";
 	}
 }

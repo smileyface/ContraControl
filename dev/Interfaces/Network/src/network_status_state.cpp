@@ -3,7 +3,7 @@
 Network_Status_State::Network_Status_State()
 {
     status = NETWORK_STATUS::NETWORK_ERROR;
-    error = NETWORK_ERRORS::UNINITALIZED_INTERFACE;
+    error = NETWORK_ERRORS::UNKNOWN_ERROR;
 }
 void Network_Status_State::set_status(NETWORK_STATUS add_status)
 {

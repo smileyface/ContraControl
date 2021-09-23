@@ -49,6 +49,9 @@ public:
     //getters
     unsigned char* local_ip();
 
+    //setters
+    virtual ipv4_addr set_my_ip() = 0;
+
     //Client Code
     virtual void connect_to_server(ipv4_addr addr) = 0;
     virtual void scan_for_server() = 0;
