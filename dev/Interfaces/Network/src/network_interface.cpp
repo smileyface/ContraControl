@@ -43,6 +43,11 @@ void network::init_network_interfaces()
 #ifdef __linux__
 	network::network_interface = new Linux_Network_Interface();
 #endif //__linux__
+#ifdef _MAC
+	//For now, we'll just use the linux interface. 
+	network::network_interface = new Linux_Network_Interface();
+#endif // _MAC
+
 	network_interface->initalize();
 }
 
