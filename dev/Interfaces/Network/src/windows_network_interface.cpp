@@ -39,12 +39,11 @@ void Windows_Network_Interface::initalize()
 		throw NetworkErrorException();
 	}
 	char* host = (char*)hostname.c_str();
-	//Handle blocking calls
+	gethostname(host, sizeof(host));
 	while (WSAIsBlocking())
 	{
-		int loop = 0;
+		printf("Blocking");
 	}
-	gethostname(host, sizeof(host));
 	if (host == invalid_hostname)
 	{
 		switch(WSAGetLastError())
