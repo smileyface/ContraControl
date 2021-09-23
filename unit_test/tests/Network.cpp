@@ -6,7 +6,7 @@
 #include "Network/system_interfaces/network_interface.h"
 
 namespace {
-	class NetworkTest : public ::testing::Test {
+	class LocalNetworkTest : public ::testing::Test {
 		virtual void SetUp() {
 			system_util::setup();
 			network::init_network_interfaces();
@@ -18,13 +18,13 @@ namespace {
 
 	};
 }
-TEST_F(NetworkTest, Network_SetUp)
+TEST_F(LocalNetworkTest, Network_SetUp)
 {
 	/** Start in server mode */
 	testing_util::network_utilities::check_initalized();
 }
 
-TEST_F(NetworkTest, Server_Start_Up)
+TEST_F(LocalNetworkTest, Server_Start_Up)
 {
 	/** Start in server mode */
 	testing_util::network_utilities::check_initalized();
@@ -38,7 +38,7 @@ TEST_F(NetworkTest, Server_Start_Up)
 	}
 }
 
-TEST_F(NetworkTest, Client_Start_Up)
+TEST_F(LocalNetworkTest, Client_Start_Up)
 {
 	/** Start in server mode */
 	testing_util::network_utilities::check_initalized();
