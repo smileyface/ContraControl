@@ -64,7 +64,44 @@ void Linux_Network_Interface::connect_to_server(ipv4_addr addr)
 
 void Linux_Network_Interface::initalize()
 {
-	 /*THIS IS PROBABLY THE BEST WAY*/
+	/* creates an UN-named socket inside the kernel and returns
+	* an integer known as socket descriptor
+	* This function takes domain/family as its first argument.
+	* For Internet family of IPv4 addresses we use AF_INET
+	*/
+	sock = socket(sock_family, sock_type, ip_protocol);
+	memset(&serv_addr, '0', sizeof(serv_addr));
+
+	serv_addr.sin_family = sock_family;
+	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	serv_addr.sin_port = DEFAULT_PORT;
+	/* The call to the function "bind()" assigns the details specified
+	 * in the structure 『serv_addr' to the socket created in the step above
+	 */
+	int res = bind(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
+
+	if (res == -1)
+	{
+		switch (errno)
+		{
+
+		}
+	}
+
+
+	server_running = false;
+}
+
+void Linux_Network_Interface::clean_up()
+{
+	server_running = false;
+	pthread_join(server_thread, 0);
+	close(sock);
+}
+
+ipv4_addr Linux_Network_Interface::set_my_ip()
+{
+	/*THIS IS PROBABLY THE BEST WAY*/
 	////get my interface id (wlan0 for now)
 	//struct ifaddrs* interfaceArray = NULL;
 	//void* tempAddrPtr = NULL;
@@ -103,41 +140,6 @@ void Linux_Network_Interface::initalize()
 		ipv4_addr temp_addr(str_result);
 		my_ip = temp_addr;
 	}
-
-
-	/* creates an UN-named socket inside the kernel and returns
-	* an integer known as socket descriptor
-	* This function takes domain/family as its first argument.
-	* For Internet family of IPv4 addresses we use AF_INET
-	*/
-	sock = socket(sock_family, sock_type, ip_protocol);
-	memset(&serv_addr, '0', sizeof(serv_addr));
-
-	serv_addr.sin_family = sock_family;
-	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	serv_addr.sin_port = DEFAULT_PORT;
-	/* The call to the function "bind()" assigns the details specified
-	 * in the structure 『serv_addr' to the socket created in the step above
-	 */
-	int res = bind(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
-
-	if (res == -1)
-	{
-		switch (errno)
-		{
-
-		}
-	}
-
-
-	server_running = false;
-}
-
-void Linux_Network_Interface::clean_up()
-{
-	server_running = false;
-	pthread_join(server_thread, 0);
-	close(sock);
 }
 
 std::vector<ipv4_addr> blast_arp()
