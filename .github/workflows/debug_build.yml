@@ -54,6 +54,5 @@ jobs:
       shell: bash
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      port:56565
       run: ctest -C $BUILD_TYPE --verbose
 
