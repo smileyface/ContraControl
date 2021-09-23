@@ -101,6 +101,10 @@ void testing_util::network_utilities::exception_handle()
 		break;
 	case NETWORK_ERRORS::UNINITALIZED_INTERFACE:
 		FAIL() << "Unintalized Interface";
+		break;
+	case NETWORK_ERRORS::UNKNOWN_ERROR:
+		FAIL() << "Unhandled Network Error";
+		break;
 	default:
 		FAIL() << "Unknown Network Error ";
 	}
