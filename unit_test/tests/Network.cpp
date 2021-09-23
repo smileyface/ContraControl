@@ -8,8 +8,15 @@
 namespace {
 	class LocalNetworkTest : public ::testing::Test {
 		virtual void SetUp() {
-			system_util::setup();
-			network::init_network_interfaces();
+			try
+			{
+				system_util::setup();
+				network::init_network_interfaces();
+			}
+			catch (NetworkErrorException e)
+			{
+				testing_util::network_utilities::exception_handle();
+			}
 		}
 		virtual void TearDown() {
 			system_util::cleanup();
@@ -40,10 +47,10 @@ TEST_F(LocalNetworkTest, Server_Start_Up)
 
 TEST_F(LocalNetworkTest, Client_Start_Up)
 {
-	/** Start in server mode */
-	testing_util::network_utilities::check_initalized();
-	try 
+	/** Start in server mode */	
+	try
 	{
+		testing_util::network_utilities::check_initalized();
 		network::start_client();
 	}
 	catch (NetworkErrorException e)
