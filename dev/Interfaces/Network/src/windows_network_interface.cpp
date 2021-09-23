@@ -30,7 +30,7 @@ Windows_Network_Interface::Windows_Network_Interface()
 
 void Windows_Network_Interface::initalize()
 {
-	WORD wVersionRequested = MAKEWORD(1, 1);
+	WORD wVersionRequested = MAKEWORD(2, 2);
 	WSADATA wsaData;
 	struct addrinfo* hostinfo = NULL;
 
@@ -51,7 +51,7 @@ void Windows_Network_Interface::initalize()
 			case WSAEFAULT:
 				status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
 			case WSANOTINITIALISED:
-				status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
+				status_state.set_error(NETWORK_ERRORS::UNINITALIZED_INTERFACE);
 			case WSAEINPROGRESS:
 				status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
 			case WSAENETDOWN:

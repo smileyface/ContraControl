@@ -98,7 +98,10 @@ void testing_util::network_utilities::exception_handle()
 		break;
 	case NETWORK_ERRORS::SERVER_CANNOT_START:
 		FAIL() << "Server Cannot Start";
+		break;
+	case NETWORK_ERRORS::UNINITALIZED_INTERFACE:
+		FAIL() << "Unintalized Interface";
 	default:
-		FAIL() << "Unknown Network Error";
+		FAIL() << "Unknown Network Error ";
 	}
 }
