@@ -34,8 +34,10 @@ void Windows_Network_Interface::initalize()
 	WSADATA wsaData;
 	struct addrinfo* hostinfo = NULL;
 
-	if (WSAStartup(wVersionRequested, &wsaData) != 0)
+	if (WSAStartup(wVersionRequested, &wsaData) != 0) {
 		status_state.set_error(NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR);
+		throw NetworkErrorException();
+	}
 	char* host = (char*)hostname.c_str();
 	gethostname(host, sizeof(host));
 	if (host == invalid_hostname)
