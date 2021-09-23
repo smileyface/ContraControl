@@ -54,6 +54,8 @@ void Windows_Network_Interface::initalize()
 				status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
 			case WSAEINPROGRESS:
 				status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
+			case WSAENETDOWN:
+				status_state.set_error(NETWORK_ERRORS::NO_NETWORK_ERROR);
 		}
 		throw NetworkErrorException();
 	}
