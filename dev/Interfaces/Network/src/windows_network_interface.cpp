@@ -39,11 +39,12 @@ void Windows_Network_Interface::initalize()
 		throw NetworkErrorException();
 	}
 	char* host = (char*)hostname.c_str();
-	gethostname(host, sizeof(host));
 	while (WSAIsBlocking())
 	{
 		printf("Blocking");
 	}
+	gethostname(host, sizeof(host));
+
 	if (host == invalid_hostname)
 	{
 		switch(WSAGetLastError())
@@ -113,6 +114,7 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr my_ip, Network_Status_State& st
 		sizeof(InterfaceList), &nBytesReturned, 0, 0) == SOCKET_ERROR) {
 		switch (WSAGetLastError())
 		{
+		case WSAEINPROGRESS:
 		case WSA_IO_PENDING:
 			status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
 			break;
