@@ -23,7 +23,7 @@ public:
     unsigned char* local_ip();
 
     //setters
-    virtual ipv4_addr set_my_ip() = 0;
+    virtual void set_my_ip() = 0;
 
     //Client Code
     virtual void connect_to_server(ipv4_addr addr) = 0;

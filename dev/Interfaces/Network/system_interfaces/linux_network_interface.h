@@ -34,7 +34,7 @@ class Linux_Network_Interface : public Network_Interface
 	void server_start();
 	void server_listen();
 
-	ipv4_addr set_my_ip();
+	void set_my_ip();
 
 private:
 	SOCKET sock;

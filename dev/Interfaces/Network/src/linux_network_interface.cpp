@@ -1,6 +1,5 @@
 ﻿/*This is where the Linux Network Interface object is defined*/
 #ifdef __linux__
-#define _GNU_SOURCE
 #include <thread>         // std::thread
 #include <net/if.h>
 #include <iostream>
@@ -99,7 +98,7 @@ void Linux_Network_Interface::clean_up()
 	close(sock);
 }
 
-ipv4_addr Linux_Network_Interface::set_my_ip()
+void Linux_Network_Interface::set_my_ip()
 {
 	/*THIS IS PROBABLY THE BEST WAY*/
 	////get my interface id (wlan0 for now)
