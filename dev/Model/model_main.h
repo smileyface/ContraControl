@@ -88,7 +88,9 @@ namespace model {
 	void clean_up();
 
 	/**
-	 * 
+	 * Initalize the node that controls the local devices.
+	 * \param id Name of the local node.
+	 * \param type Type of node.
 	 */
 	void initalize_my_node(Node_Id id, Node_Type type);
 }
