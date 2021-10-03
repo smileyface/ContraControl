@@ -3,4 +3,10 @@ tasks:
 
 vscode:
   extensions:
-    - webfreak.debug@0.25.0:F9uLpAOde6r0l7rgMC8LTQ==
+    - bbenoist.doxygen
+    - cschlosser.doxdocgen
+    - twxs.cmake
+    - ms-vscode.cmake-tools
+    - jacqueslucke.gcov-viewer
+    - hbenl.test-adapter-converter
+    - hbenl.vscode-test-explorer
