@@ -38,6 +38,7 @@ public:
  *
  * \param position current device position.
  * \param elapsed_time time since transition started.
+ * \return This shouldn't return a thing, but Doxy thinks it does.
  */
 	virtual void transition(Channel position, double elapsed_time)
 	{
