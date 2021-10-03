@@ -26,14 +26,16 @@ public:
 class Controller_Interfaces::Model_Interface {
 public:
 	/**
-		Send a command to the model.
-		\param timed_command Command to send to the model.
-	 */
+	* Send a command to the model.
+	* \param timed_command Command to send to the model.
+	* \return This should not return anything, but Doxygen thinks it does.
+	*/
 	static void send_command(Timed_Command timed_command);
 
 	/**
-		 Add command to the controller timeline.
-		 \param timed_command Command to add to the timeline.
+	* Add command to the controller timeline.
+	* \param timed_command Command to add to the timeline.
+	* \return This should not return anything, but Doxygen thinks it does.
 	 */
 	static void request_command_add(Timed_Command timed_command);
 

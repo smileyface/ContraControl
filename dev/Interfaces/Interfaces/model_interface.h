@@ -24,15 +24,17 @@ public:
 class Model_Interfaces::Controller_Interface {
 public:
 	/**
-	 Add unique commands to the model. Will be run this loop.
-	 \param theCommand The command to run with label to device.
+	* Add unique commands to the model. Will be run this loop.
+	* \param theCommand The command to run with label to device.
+	* \return This should not return anything, but Doxygen thinks it does. 
 	 */
 	static void add_to_step(Model_Command theCommand);
 	/**
-	 Request to add a command to the Controller.
-	 \param theCommand Command to add to send to the Controller.
-	 \param seconds_to_execute  Seconds to append to the current time that the command will run on.
-	 \todo Make seconds_to_execute append to current time.
+	* Request to add a command to the Controller.
+	* \param theCommand Command to add to send to the Controller.
+	* \param seconds_to_execute  Seconds to append to the current time that the command will run on.
+	* \todo Make seconds_to_execute append to current time.
+	* \return This should not return anything, but Doxygen thinks it does.
 	 */
 	static void request_command(Model_Command theCommand, double seconds_to_execute);
 
