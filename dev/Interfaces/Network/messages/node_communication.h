@@ -1,3 +1,10 @@
+/*****************************************************************//**
+ * \file   node_communication.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   October 2021
+ *********************************************************************/
 #include "messaging.h"
 
 namespace Node_Messages

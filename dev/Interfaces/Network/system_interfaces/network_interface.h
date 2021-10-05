@@ -1,3 +1,10 @@
+/*****************************************************************//**
+ * \file   network_interface.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   October 2021
+ *********************************************************************/
 #ifndef NETWORK_SYSTEM_INTERFACE
 #define NETWORK_SYSTEM_INTERFACE
 
@@ -6,8 +13,8 @@
 #include "types/ipv4_addr.h"
 #include "types/network_status_state.h"
 
-const unsigned short DEFAULT_PORT = 0xDCF5;
-const std::string invalid_hostname = "INVALID";
+const unsigned short DEFAULT_PORT = 0xDCF5; ///<Port is 56565
+const std::string invalid_hostname = "INVALID"; ///<A marker for invalid hostnames
 
 /**
  * \brief Interface for handling network communication between Nodes.

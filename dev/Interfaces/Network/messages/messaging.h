@@ -1,9 +1,9 @@
-/*******************************************************************
+/*****************************************************************//**
  * \file   messaging.h
  * \brief  
  * 
  * \author kason
- * \date   September 2021
+ * \date   October 2021
  *********************************************************************/
 
 #ifndef NETWORK_MESSAGES
@@ -11,10 +11,15 @@
 
 #include <cstring>
 
+/**
+ * List of network messages
+ */
 enum class MESSAGES : char
 {
+	/** See Node_Messages::NODE_HELLO */
 	NODE_HELLO,
 	NODE_GOODBYE,
+	/** Undefined message. */
 	UNDEFINED
 };
 
@@ -103,7 +108,12 @@ struct Message_String
 	}
 };
 
-/** Create an array of bytes to be put in a network buffer based on a PACKED_MESSAGE. */
+/**
+ * Create an array of bytes to be put in a network buffer based on a PACKED_MESSAGE.
+ * 
+ * \return buffer of message.
+ * \todo Figure this out.
+ */
 unsigned char* pack();
 
 

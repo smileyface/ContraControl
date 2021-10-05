@@ -1,4 +1,11 @@
-#include "../../../Utilities/Utilities/system.h"
+/*****************************************************************//**
+ * \file   linux_network_interface.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   October 2021
+ *********************************************************************/
+
 #ifdef __linux__
 #ifndef NETWORK_LINUNX_INTERFACE
 #define NETWORK_LINUX_INTERFACE

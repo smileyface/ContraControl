@@ -1,4 +1,10 @@
-#include "../../../Utilities/Utilities/system.h"
+/*****************************************************************//**
+ * \file   windows_network_interface.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   October 2021
+ *********************************************************************/
 #ifdef _WIN32
 
 #ifndef NETWORK_WINDOWS_INTERFACE
@@ -14,6 +20,9 @@ extern struct addrinfo hints;
 const int ip_protocol = IPPROTO_TCP;
 const int sock_type = SOCK_STREAM;
 const int sock_family = AF_INET;
+/**
+ * Interface for a Windows system.
+ */
 class Windows_Network_Interface : public Network_Interface
 {
 public:
