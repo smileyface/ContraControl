@@ -1,0 +1,7 @@
+<map id="channel.h" name="channel.h">
+<area shape="rect" id="node1" title=" " alt="" coords="18,5,95,32"/>
+<area shape="rect" id="node2" href="$gradient_8h.html" title=" " alt="" coords="17,80,96,107"/>
+<area shape="rect" id="node3" href="$device_8h.html" title=" " alt="" coords="21,155,92,181"/>
+<area shape="rect" id="node4" href="$node_8h.html" title=" " alt="" coords="27,229,87,256"/>
+<area shape="rect" id="node5" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="5,304,108,331"/>
+</map>

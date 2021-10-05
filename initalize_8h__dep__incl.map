@@ -1,0 +1,9 @@
+<map id="initalize.h" name="initalize.h">
+<area shape="rect" id="node1" title=" " alt="" coords="109,5,184,32"/>
+<area shape="rect" id="node2" href="$commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="99,80,195,107"/>
+<area shape="rect" id="node3" href="$_interfaces_2types_2model__command_8h.html" title=" " alt="" coords="5,155,136,181"/>
+<area shape="rect" id="node5" href="$timed__command_8h.html" title=" " alt="" coords="160,155,288,181"/>
+<area shape="rect" id="node4" href="$model__interface_8h.html" title=" " alt="" coords="9,229,133,256"/>
+<area shape="rect" id="node6" href="$controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="160,229,280,256"/>
+<area shape="rect" id="node7" href="$controller__interface_8h.html" title=" " alt="" coords="305,229,447,256"/>
+</map>

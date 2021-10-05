@@ -1,0 +1,6 @@
+<map id="switch.h" name="switch.h">
+<area shape="rect" id="node1" title=" " alt="" coords="21,5,92,32"/>
+<area shape="rect" id="node2" href="$device_8h.html" title=" " alt="" coords="21,80,92,107"/>
+<area shape="rect" id="node3" href="$node_8h.html" title=" " alt="" coords="27,155,87,181"/>
+<area shape="rect" id="node4" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="5,229,108,256"/>
+</map>

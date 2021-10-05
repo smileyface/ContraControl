@@ -1,0 +1,17 @@
+<map id="controller_main.h" name="controller_main.h">
+<area shape="rect" id="node1" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="307,5,427,32"/>
+<area shape="rect" id="node2" href="$timed__command_8h.html" title=" " alt="" coords="215,80,366,121"/>
+<area shape="rect" id="node14" href="$_controller_2system_2timer_8h.html" title=" " alt="" coords="391,87,497,114"/>
+<area shape="rect" id="node3" title=" " alt="" coords="63,169,220,211"/>
+<area shape="rect" id="node4" href="$commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="244,169,351,211"/>
+<area shape="rect" id="node5" href="$initalize_8h.html" title=" " alt="" coords="5,266,203,293"/>
+<area shape="rect" id="node8" href="$on_8h.html" title=" " alt="" coords="162,348,318,375"/>
+<area shape="rect" id="node9" href="$off_8h.html" title=" " alt="" coords="278,266,434,293"/>
+<area shape="rect" id="node10" href="$linear__transition_8h.html" title=" " alt="" coords="459,259,651,300"/>
+<area shape="rect" id="node6" title=" " alt="" coords="31,348,86,375"/>
+<area shape="rect" id="node7" href="$command_8h.html" title=" " alt="" coords="249,423,348,449"/>
+<area shape="rect" id="node11" title=" " alt="" coords="429,348,488,375"/>
+<area shape="rect" id="node12" href="$transition_8h.html" title=" " alt="" coords="512,348,597,375"/>
+<area shape="rect" id="node13" href="$_interfaces_2_interfaces_2types_2channel_8h.html" title=" " alt="" coords="467,423,642,449"/>
+<area shape="rect" id="node15" title=" " alt="" coords="382,169,506,211"/>
+</map>
