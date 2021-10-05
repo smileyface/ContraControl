@@ -1,4 +1,11 @@
-#include "../../../Utilities/Utilities/system.h"
+/*****************************************************************//**
+ * \file   linux_network_interface.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   October 2021
+ *********************************************************************/
+
 #ifdef __linux__
 #ifndef NETWORK_LINUNX_INTERFACE
 #define NETWORK_LINUX_INTERFACE
@@ -34,7 +41,7 @@ class Linux_Network_Interface : public Network_Interface
 	void server_start();
 	void server_listen();
 
-	ipv4_addr set_my_ip();
+	void set_my_ip();
 
 private:
 	SOCKET sock;

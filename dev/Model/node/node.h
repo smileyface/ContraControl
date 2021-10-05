@@ -53,6 +53,9 @@ public:
 		my_type = Node_Type::INVALID;
 		id_pool = 0;
 	}
+	/**
+	 Get ready to destroy node.
+	 */
 	void clear_node()
 	{
 		//for (auto iter = connections.begin(); iter != connections.end(); iter++)
@@ -117,7 +120,11 @@ public:
 		}
 		return device_ids;
 	}
-
+	/**
+	 Make the identified node the local node.
+	 \param id The id of the local node
+	 \param type The type of node for the Viewer to determine how to display.
+	 */
 	void initalize_local_control(Node_Id id, Node_Type type)
 	{
 		my_id = id;
@@ -125,6 +132,12 @@ public:
 		network::init_network_interfaces();
 	}
 
+	/**
+	 * Get the node connected to the local node.
+	 * \param id Id of the node to get.
+	 * \return Pointer to the connected node.
+	 * \throw NodeNotFoundException If node is not a known connection.
+	 */
 	Node* get_connection(Node_Id id)
 	{
 		if (connections.find(id) == connections.end())
@@ -134,15 +147,25 @@ public:
 		return connections[id];
 	}
 
+	/**
+	 * Add node to known connections.
+	 * \param type Type of the node.
+	 * \param id The id of the node on the system.
+	 */
 	void add_connection(Node_Type type, Node_Id id)
 	{
 		connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
 	}
 
+	/**
+	 * Get the id of the local node.
+	 * \return The id.
+	 */
 	Node_Id get_id()
 	{
 		return my_id;
 	}
+
 private:
 	std::map<Node_Id, Node*> connections;
 	Device_Id_Map devices;

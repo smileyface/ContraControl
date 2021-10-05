@@ -15,6 +15,7 @@ MESSAGES PACKED_MESSAGE::get_message_enum_by_type()
 	{
 		return MESSAGES::NODE_HELLO;
 	}
+	return MESSAGES::UNDEFINED;
 }
 
 PACKED_MESSAGE::PACKED_MESSAGE(MESSAGE* in_message)

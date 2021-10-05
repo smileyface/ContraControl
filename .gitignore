@@ -41,7 +41,6 @@ build/*
 #CMake
 out/*
 .cache/*
-/dev/out/build/x64-Debug (default)
 
 #Testing Extras
 test/googletest*
@@ -69,3 +68,6 @@ _deps
 Debug
 *.pdb
 *.sln
+
+#Doxygen
+*/out/documents/*

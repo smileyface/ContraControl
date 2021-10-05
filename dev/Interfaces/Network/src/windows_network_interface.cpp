@@ -138,7 +138,7 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 	return thing;
 }
 
-ipv4_addr Windows_Network_Interface::set_my_ip()
+void Windows_Network_Interface::set_my_ip()
 {
 	struct addrinfo* hostinfo = NULL;
 	char* host = (char*)hostname.c_str();

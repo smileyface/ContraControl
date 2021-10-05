@@ -1,7 +1,7 @@
 #include <vector>
 #include <climits>
 
-#include "Network/system_interfaces/network_interface.h"
+#include "Network/system_interfaces/types/ipv4_addr.h"
 
 ipv4_addr::ipv4_addr()
 {
