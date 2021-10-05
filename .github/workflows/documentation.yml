@@ -17,7 +17,7 @@ jobs:
       uses: mattnotmitt/doxygen-action@v1.3.1
       with:
         doxyfile-path: .github/github_doxy #Errors on warnings
-    - run: "ls"
+    - run: "ls -a out"
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
