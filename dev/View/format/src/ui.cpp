@@ -25,4 +25,3 @@ void CC_Window_Tree_Interface::show_all()
 		view_tree[it->first]->display();
 	}
 }
-

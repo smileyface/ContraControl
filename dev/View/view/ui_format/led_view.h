@@ -2,8 +2,7 @@
 
 class LED_View : public Desktop_View
 {
-    virtual void on_destroy()
-    {};
+    virtual void on_destroy() {};
     virtual void on_paint() {};
     virtual void on_create() {};
     virtual void on_quit() {};

@@ -1,7 +1,7 @@
 #include "view.h"
 #include "../Interfaces/common/menu.h"
 
-class Main_View : public Desktop_View
+class Main_View : public View
 {
 public:
 	void create_menu()
