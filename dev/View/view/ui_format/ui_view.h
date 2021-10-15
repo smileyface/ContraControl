@@ -1,4 +1,4 @@
-#include "view.h"
+#include "../view.h"
 
 class UI_View : public View
 {

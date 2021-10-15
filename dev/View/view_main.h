@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "format/format.h"
-#include "../Interfaces/Interfaces/types/display_type_enum.h"
+#include "../Interfaces/Interfaces/enums/display_type_enum.h"
 
 namespace view
 {

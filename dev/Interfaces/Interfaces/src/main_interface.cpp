@@ -1,11 +1,10 @@
 #include "Interfaces/main_interface.h"
 
-#include "../Controller/controller_main.h"
+#include "Interfaces/controller_interface.h"
 #include "../View/view_main.h"
 void Main_Interfaces::Controller_Interface::start_controller()
 {
-	controller::initalize();
-	controller::controller_running = true;
+	Controller_Interfaces::Main_Interface::start_controller();
 }
 
 void Main_Interfaces::View_Interface::start_view()
@@ -16,5 +15,5 @@ void Main_Interfaces::View_Interface::start_view()
 
 void Main_Interfaces::View_Interface::add_display(DISPLAY_TYPES display)
 {
-	//view::add_display(display);
+	view::add_display(display);
 }

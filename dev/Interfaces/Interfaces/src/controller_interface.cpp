@@ -15,3 +15,9 @@ void Controller_Interfaces::Model_Interface::request_command_add(Timed_Command t
 {
 	controller::add_command(timed_command);
 }
+
+void Controller_Interfaces::Main_Interface::start_controller()
+{
+	controller::initalize();
+	controller::start_controller();
+}

@@ -93,5 +93,7 @@ namespace model {
 	 * \param type Type of node.
 	 */
 	void initalize_my_node(Node_Id id, Node_Type type);
+
+	void command_model(Model_Command command);
 }
 #endif 

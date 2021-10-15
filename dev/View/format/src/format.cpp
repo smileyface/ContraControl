@@ -1,4 +1,4 @@
-#include "..\format.h"
+#include "../format.h"
 
 void Format::add_view(std::string handle, View* view)
 {

@@ -1,5 +1,7 @@
 #include "model_main.h"
 
+#include <algorithm>
+
 #include "Logging/logging.h"
 #include "Interfaces/types/state.h"
 
@@ -85,3 +87,29 @@ void model::initalize_my_node(Node_Id id, Node_Type type)
 	my_node.initalize_local_control(id, type);
 }
 
+/**
+ *  \cond
+ */
+struct compare
+{
+	Model_Command key;
+	compare(Model_Command const& i) : key(i) {}
+	bool operator()(Model_Command const& i)
+	{
+		bool same_command = key.command == i.command;
+		bool same_device = key.label == i.label;
+		return same_command && same_device;
+	}
+};
+/**
+ * \endcond
+ */
+
+void model::command_model(Model_Command command)
+{
+	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(command));
+	if (found == model::step_actions.end() || model::step_actions.size() == 0)
+	{
+		model::step_actions.emplace_back(command);
+	}
+}

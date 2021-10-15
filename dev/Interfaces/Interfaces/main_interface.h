@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "types/display_type_enum.h"
+#include "enums/display_type_enum.h"
 /**
  * Interfaces from main functions
  */

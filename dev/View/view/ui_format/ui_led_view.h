@@ -1,4 +1,4 @@
-#include "view.h"
+#include "../view.h"
 
 class LED_View : public UI_View
 {

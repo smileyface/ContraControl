@@ -30,7 +30,7 @@ set(INTERFACE_HEADER_FILES
 set(INTERFACE_SOURCE_FILES 
                     Interfaces/src/controller_interface.cpp
                     Interfaces/src/model_interface.cpp
-                    Interfaces/src/main_interface.cpp)
+                    Interfaces/src/main_interface.cpp )
 set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/model_command.h 
                     Interfaces/types/timed_command.h 
@@ -38,7 +38,8 @@ set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/state.h
                     Interfaces/types/channel.h
                     Interfaces/types/command_interface.h
-                    Interfaces/types/display_type_enum.h)
+                    Interfaces/enums/display_type_enum.h
+                    Interfaces/enums/view_type_enum.h)
 
 add_library(System_Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
 target_include_directories(System_Interface 
@@ -51,7 +52,7 @@ target_include_directories(System_Interface
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Interfaces"
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Interfaces"
     PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-
+target_link_libraries(System_Interface PUBLIC Controller Model)
 
 set(NETWORK_INTERFACE_HEADERS
                     Network/messages.h
@@ -104,6 +105,7 @@ ELSEIF (CMAKE_HOST_UNIX)
     target_include_directories(Network
                                 PRIVATE
                                 ${NETWORK_UNIX_INTERFACE_HEADERS})
+    target_link_libraries(Network pthread)
 ENDIF()
 
 
