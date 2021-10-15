@@ -2,9 +2,13 @@
 
 class Console_Format : public Format
 {
-	std::map<std::string, View*> view_tree;
+public:
 	void initalize();
+	void start_format();
 	void add_view(std::string handle, View* view);
 
-	void show_all();
+	bool is_running();
+private:
+	bool format_running = false;
+	void console_display_thread();
 };

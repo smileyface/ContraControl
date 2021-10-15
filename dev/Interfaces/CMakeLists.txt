@@ -25,10 +25,12 @@ endif()
 set(INTERFACE_HEADER_FILES 
                     Interfaces/controller_interface.h
                     Interfaces/model_interface.h
-                    Interfaces/view_interface.h)
+                    Interfaces/view_interface.h 
+                    Interfaces/main_interface.h)
 set(INTERFACE_SOURCE_FILES 
-                    Interfaces/controller_interface.cpp
-                    Interfaces/model_interface.cpp)
+                    Interfaces/src/controller_interface.cpp
+                    Interfaces/src/model_interface.cpp
+                    Interfaces/src/main_interface.cpp)
 set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/model_command.h 
                     Interfaces/types/timed_command.h 

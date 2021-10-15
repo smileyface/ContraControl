@@ -1,7 +1,7 @@
 #include <algorithm>
 
-#include "model_interface.h"
-#include "controller_interface.h"
+#include "../model_interface.h"
+#include "../controller_interface.h"
 
 #include "../Model/model_main.h"
 #include "../Controller/controller_main.h"

@@ -17,10 +17,7 @@
 class Controller_Interfaces {
 public:
 	class Model_Interface;
-
 };
-
-void start_controller();
 
 /**
  Controller interface to the Model

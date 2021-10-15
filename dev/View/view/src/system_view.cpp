@@ -1,14 +1,18 @@
 #include <iostream>
 
-#include "../Views/system.h"
-void System_View::notify()
+#include "../console_format/console_system_view.h"
+void Console_System_View::notify()
 {
-	on_display();
+	stale = true;
 }
-void System_View::notify_with_message(char* msg)
+
+void Console_System_View::initalize()
 {
+
 }
-void System_View::on_display()
+
+
+/*void System_View::on_display()
 {
 	std::cout << "(" << system_id << ")";
-}
+}*/

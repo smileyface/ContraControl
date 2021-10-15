@@ -3,17 +3,19 @@
 
 class View
 {
+public:
+    virtual void notify() {};
+    virtual void initalize() {};
+    virtual void on_refresh() {};
+    virtual void on_display() {};
+    virtual void on_destroy() {};
+    virtual void on_paint() {};
+    virtual void on_create() {};
+    virtual void on_quit() {};
+    virtual void on_command(unsigned int command) {};
+    bool is_stale() { return stale; }
+protected:
     bool stale = true;
-    virtual void notify() = 0;
-    virtual void notify_with_message(char* msg) = 0;
-
-    virtual void initalize() = 0;
-    virtual void on_display() = 0;
-    virtual void on_destroy() = 0;
-    virtual void on_paint() = 0;
-    virtual void on_create() = 0;
-    virtual void on_quit() = 0;
-    virtual void on_command(unsigned int command) = 0;
 };
 
 struct RGB

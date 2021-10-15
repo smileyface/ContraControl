@@ -1,7 +1,6 @@
-#include "desktop_main.h"
+/*#include "desktop_main.h"
 
 
-std::map<std::string, Desktop_View*> CC_Window_Tree_Interface::view_tree;
 std::string CC_Window_Tree_Interface::main_window_handle = "Main";
 
 void CC_Window_Tree_Interface::initalize()
@@ -25,3 +24,4 @@ void CC_Window_Tree_Interface::show_all()
 		view_tree[it->first]->display();
 	}
 }
+*/
