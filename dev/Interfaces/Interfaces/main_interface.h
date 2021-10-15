@@ -2,6 +2,8 @@
 #define MAIN_CONTROLLER_INTERFACE_H
 
 #include <string>
+
+#include "types/display_type_enum.h"
 /**
  * Interfaces from main functions
  */
@@ -31,6 +33,7 @@ class Main_Interfaces::View_Interface
 {
 public:
 	static void start_view();
-	static void send_message_to_console(std::string msg);
+	static void add_display(DISPLAY_TYPES display);
+
 };
 #endif // !MODEL_CONTROLLER_INTERFACE_H

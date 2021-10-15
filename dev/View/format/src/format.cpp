@@ -2,7 +2,7 @@
 
 void Format::add_view(std::string handle, View* view)
 {
-	view_tree.insert(view);
+	view_tree[handle] = view;
 }
 
 void Format::update_views()

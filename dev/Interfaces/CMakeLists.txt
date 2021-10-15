@@ -37,7 +37,8 @@ set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/device_label.h
                     Interfaces/types/state.h
                     Interfaces/types/channel.h
-                    Interfaces/types/command_interface.h)
+                    Interfaces/types/command_interface.h
+                    Interfaces/types/display_type_enum.h)
 
 add_library(System_Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
 target_include_directories(System_Interface 

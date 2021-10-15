@@ -12,3 +12,9 @@ void Main_Interfaces::View_Interface::start_view()
 {
 	view::initalize();
 }
+
+
+void Main_Interfaces::View_Interface::add_display(DISPLAY_TYPES display)
+{
+	//view::add_display(display);
+}

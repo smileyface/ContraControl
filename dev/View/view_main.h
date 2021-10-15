@@ -1,22 +1,19 @@
-#ifndef VIEW_MAIN_H
-#define VIEW_MAIN_H
+#ifndef VIEW_EXECUTOR_H
+#define VIEW_EXECUTOR_H
 #include <vector>
 
 #include "format/format.h"
+#include "../Interfaces/Interfaces/types/display_type_enum.h"
 
 namespace view
 {
+	extern std::vector<Format*> list_of_formats;
+	extern bool view_running;
+
 	void initalize();
 	void start_view();
-	void add_display(int display);
-
-	std::vector<Format> list_of_formats;
-	bool view_running = false;
-
-	enum
-	{
-		Console_Display = 0
-	};
+	void add_display(DISPLAY_TYPES display);
 }
+
 
 #endif
