@@ -13,7 +13,12 @@ void Main_Interfaces::View_Interface::start_view()
 }
 
 
-void Main_Interfaces::View_Interface::add_display(DISPLAY_TYPES display)
+int Main_Interfaces::View_Interface::add_display(DISPLAY_TYPES display)
 {
 	view::add_display(display);
+}
+
+void Main_Interfaces::View_Interface::add_view(VIEW_TYPE_ENUM view)
+{
+
 }

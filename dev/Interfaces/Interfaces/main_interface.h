@@ -4,6 +4,7 @@
 #include <string>
 
 #include "enums/display_type_enum.h"
+#include "enums/view_type_enum.h"
 /**
  * Interfaces from main functions
  */
@@ -33,7 +34,8 @@ class Main_Interfaces::View_Interface
 {
 public:
 	static void start_view();
-	static void add_display(DISPLAY_TYPES display);
+	static int add_display(DISPLAY_TYPES display);
+	static void add_view(VIEW_TYPE_ENUM view);
 
 };
 #endif // !MODEL_CONTROLLER_INTERFACE_H
