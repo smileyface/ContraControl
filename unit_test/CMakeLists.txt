@@ -1,5 +1,4 @@
-﻿set(DEVICE_TEST_FILES "tests/Gradient_Device.cpp" 
-                      "tests/Switch_Device.cpp" 
+﻿set(DEVICE_TEST_FILES "tests/Device.cpp" 
                       "tests/Node.cpp" "tests/Network.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h" 

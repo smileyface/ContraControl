@@ -13,7 +13,5 @@
 #include "commands/common/initalize.h"
 #include "commands/device/on.h"
 #include "commands/device/off.h"
-//transition.h included by inheritance
-#include "commands/device/transitions/linear_transition.h"
 
 #endif // !COMMANDS_INCLUSION_H

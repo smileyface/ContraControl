@@ -46,20 +46,7 @@ namespace state_interfaces
 		case COMMAND_ENUM::OFF:
 			state->turn_off();
 			break;
-		case COMMAND_ENUM::TRANSITION:
-		case COMMAND_ENUM::LINEAR_TRANSITION:
-			command = static_cast<Transition*>(command);
-			state->turn_on();
-			//if not completed, you are transitioning
-			static_cast<Channel_Device*>(state)->transitioning = !command->completed();
-
-			if (state->get_device_type() >= DEVICE_IDENTIFIER::GRADIENT)
-			{
-				static_cast<Transition*>(command)->transition(*static_cast<Gradient_Device*>(state)->get_position_ptr());
-			}
-
 		}
-
 	}
 }
 #endif

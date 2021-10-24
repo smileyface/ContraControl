@@ -1,8 +1,5 @@
 set(MODEL_DEVICES_HEADER_FILES 
                     devices/device.h
-                    devices/gradient.h
-                    devices/switch.h
-                    devices/channel.h
                     device.h )
 
 set(MODEL_SYSTEM_HEADER_FILES
