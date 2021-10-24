@@ -1,7 +1,0 @@
-<map id="node_communication.h" name="node_communication.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,160,32"/>
-<area shape="rect" id="node2" href="$messages_8h.html" title=" " alt="" coords="37,80,129,107"/>
-<area shape="rect" id="node3" href="$network__interface_8h.html" title=" " alt="" coords="15,155,150,181"/>
-<area shape="rect" id="node4" href="$node_8h.html" title=" " alt="" coords="53,229,113,256"/>
-<area shape="rect" id="node5" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="31,304,134,331"/>
-</map>

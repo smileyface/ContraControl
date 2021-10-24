@@ -1,9 +1,0 @@
-<map id="device.h" name="device.h">
-<area shape="rect" id="node1" title=" " alt="" coords="57,5,128,32"/>
-<area shape="rect" id="node2" href="$_model_2devices_2channel_8h.html" title=" " alt="" coords="11,80,89,107"/>
-<area shape="rect" id="node7" href="$switch_8h.html" title=" " alt="" coords="108,155,179,181"/>
-<area shape="rect" id="node3" href="$gradient_8h.html" title=" " alt="" coords="5,155,84,181"/>
-<area shape="rect" id="node4" href="$device_8h.html" title=" " alt="" coords="59,229,129,256"/>
-<area shape="rect" id="node5" href="$node_8h.html" title=" " alt="" coords="64,304,124,331"/>
-<area shape="rect" id="node6" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="43,379,145,405"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="commands.h" name="commands.h">
-<area shape="rect" id="node1" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="99,5,195,32"/>
-<area shape="rect" id="node2" href="$_interfaces_2types_2model__command_8h.html" title=" " alt="" coords="5,80,136,107"/>
-<area shape="rect" id="node4" href="$timed__command_8h.html" title=" " alt="" coords="160,80,288,107"/>
-<area shape="rect" id="node3" href="$model__interface_8h.html" title=" " alt="" coords="9,155,133,181"/>
-<area shape="rect" id="node5" href="$controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="160,155,280,181"/>
-<area shape="rect" id="node6" href="$controller__interface_8h.html" title=" " alt="" coords="305,155,447,181"/>
-</map>
