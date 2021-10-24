@@ -10,7 +10,6 @@ namespace device_utilities
 	extern int device_in_use;
 
 	Device* get_nominal_state(DEVICE_IDENTIFIER device, Command* command);
-	Channel_Device* get_nominal_tranistion_state(Transition* command);
 	
 	/*
 	MODEL MANIPULATION

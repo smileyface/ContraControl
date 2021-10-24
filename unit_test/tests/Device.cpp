@@ -6,7 +6,7 @@
 
 
 namespace {
-	class Switch_Commands_Test : public ::testing::Test {
+	class Device_Commands_Test : public ::testing::Test {
 	protected:
 		Device_Label dl;
 		virtual void SetUp() {
@@ -21,7 +21,7 @@ namespace {
 
 	};
 
-	class Switch_Commands_Test_No_Init : public ::testing::Test {
+	class Device_Commands_Test_No_Init : public ::testing::Test {
 	protected:
 		Device_Label dl;
 		virtual void SetUp() {
@@ -36,33 +36,33 @@ namespace {
 	};
 }
 
-TEST_F(Switch_Commands_Test, Switch_Initalize) {
-	Switch_Device* ds = new Switch_Device();
+TEST_F(Device_Commands_Test, Device_Initalize) {
+	Device* ds = create_device_instance(Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Results"));
 	ds->initalized = true;
 	ds->valid = true;
 
 	testing_util::device_utilities::check_state(dl, ds);
 }
 
-TEST_F(Switch_Commands_Test, Switch_On) {
-	Switch_Device* ds = static_cast<Switch_Device*>(device_utilities::command_device(dl, new On()));
+TEST_F(Device_Commands_Test, Device_On) {
+	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
 	testing_util::device_utilities::check_state(dl, ds);
 	system_util::cleanup();
 }
 
-TEST_F(Switch_Commands_Test, Switch_Off) {
-	Switch_Device* ds = static_cast<Switch_Device*>(device_utilities::command_device(dl, new On()));
+TEST_F(Device_Commands_Test, Device_Off) {
+	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
 	testing_util::device_utilities::check_state(dl, ds);
 
-	ds = static_cast<Switch_Device*>(device_utilities::command_device(dl, new Off()));
+	ds = static_cast<Device*>(device_utilities::command_device(dl, new Off()));
 	testing_util::device_utilities::check_state(dl, ds);
 
 	system_util::cleanup();
 
 }
 
-TEST_F(Switch_Commands_Test_No_Init, Switch_Invalid) {
-	device_utilities::command_device(dl, new Transition(0, 0));
+TEST_F(Device_Commands_Test_No_Init, Device_Invalid) {
+	device_utilities::command_device(dl, new On());
 	testing_util::device_utilities::check_validity(dl, false);
 
 	system_util::cleanup();
