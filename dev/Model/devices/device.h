@@ -9,6 +9,9 @@
 #define MAIN_DEVICE_H
 
 #include <typeinfo> //typeid
+
+#include "Interfaces/types/device_label.h"
+#include "Interfaces/types/channel.h"
  /**
   *  A list of types of devices.
   */
@@ -47,6 +50,14 @@ class Device
 {
 public:
 	Device() { };
+	Device(DEVICE_IDENTIFIER type_of_device, int number_of_channels)
+	{
+		type = type_of_device;
+		for (int i = 0; i < number_of_channels; i++)
+		{
+			channels.push_back(UNUSED);
+		}
+	}
 	~Device() {};
 	/**
 	 * \return Numeric ID of the device. This is assigned by the system.
@@ -75,7 +86,7 @@ public:
 	/**
 	\return Type of device based off of the DEVICE_IDENTIFIER enum table.
 	*/
-	virtual DEVICE_IDENTIFIER get_device_type() { return DEVICE_IDENTIFIER::DEVICE; }
+	virtual DEVICE_IDENTIFIER get_device_type() { return type; }
 	/**
 	 * Set the name of the device.
 	 * \param new_name Incoming name of device.
@@ -165,6 +176,18 @@ public:
 	Validity bit for the device.
 	 */
 	bool valid = false;
+	/**
+	 Position of each channel. 1-255 range. 0 is reserved for unused channels
+	*/
+	std::vector<Channel> channels;
+
+	/**
+	 * Set channel value
+	 */
+	void set_channel(int channel, Channel value)
+	{
+		channels[channel] = value;
+	}
 protected:
 	/**
 	 ID of the device. This is a system assigned unique id.
@@ -175,7 +198,7 @@ protected:
 	 */
 	Device_Name device_name = "INVALID";
 
-
+	DEVICE_IDENTIFIER type = DEVICE_IDENTIFIER::DEVICE;
 };
 
 #endif

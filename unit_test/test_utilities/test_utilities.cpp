@@ -38,25 +38,6 @@ void testing_util::device_utilities::check_state(Device_Label device, Device* ex
 	EXPECT_EQ(received_state->power, expected_state->power) << "Device power is not correct";
 }
 
-void testing_util::device_utilities::check_state(Device_Label device, Channel_Device* expected_state)
-{
-	Channel_Device* received_state = dynamic_cast<Channel_Device*>(model::get_device(device));
-
-
-	EXPECT_EQ(received_state->valid, expected_state->valid) << "Device validity is not correct";
-	EXPECT_EQ(received_state->initalized, expected_state->initalized) << "Device is not initalized properly";
-	EXPECT_EQ(received_state->power, expected_state->power) << "Device power is not correct";
-	EXPECT_EQ(received_state->transitioning, expected_state->transitioning) << "Device transition is not correct";
-}
-
-void testing_util::device_utilities::check_position(Device_Label label, Channel position)
-{
-	Gradient_Device* c_dev = dynamic_cast<Gradient_Device*>(model::get_device(label));
-	EXPECT_EQ(c_dev->get_position(), position);
-}
-
-
-
 void testing_util::device_utilities::check_validity(Device_Label label, bool expect_valid)
 {
 	Device received_state = *model::get_device(label);

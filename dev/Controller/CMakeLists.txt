@@ -1,7 +1,5 @@
 set(CONTROLLER_HEADER_FILES 
                     commands/common/initalize.h
-                    commands/device/transitions/transition.h
-                    commands/device/transitions/linear_transition.h
                     commands/device/off.h
                     commands/device/on.h
                     commands/command.h

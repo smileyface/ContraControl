@@ -8,8 +8,6 @@ Device* device_utilities::get_nominal_state(DEVICE_IDENTIFIER device, Command* c
 	Device* ds = create_device_instance(Device_Creator((Device_Id)device, "Nominal"));
 	switch (command->get_id())
 	{
-	case COMMAND_ENUM::TRANSITION:
-		ds = get_nominal_tranistion_state(static_cast<Transition*>(command));
 	case COMMAND_ENUM::ON:
 		ds->power = true;
 	case COMMAND_ENUM::OFF:
@@ -19,13 +17,6 @@ Device* device_utilities::get_nominal_state(DEVICE_IDENTIFIER device, Command* c
 	case COMMAND_ENUM::INVALID:
 		break;
 	}
-	return ds;
-}
-
-Channel_Device* device_utilities::get_nominal_tranistion_state(Transition* command)
-{
-	Channel_Device* ds = new Channel_Device();
-	ds->transitioning = !command->completed();
 	return ds;
 }
 
