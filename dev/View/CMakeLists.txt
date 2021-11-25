@@ -14,6 +14,10 @@ set(VIEW_INCLUDES "view/view.h"
 set(VIEW_SOURCE "view/src/ui_view.cpp"
                 "view/src/system_view.cpp")
 
+set(VIEW_FACTORIES_INCLUDES "factories/view_factory.h")
+
+set(VIEW_FACTORIES_SOURCE "factories/src/view_factory.cpp")
+
 set(VIEW_TOOLKIT_INCLUDES "view/toolkit/dimensions.h"
                           "view/toolkit/interfaces.h"
                           "view/toolkit/menu.h"
@@ -34,6 +38,6 @@ IF (CMAKE_HOST_WIN32)
                                
 ENDIF()
 
-add_library(View_Library view_main.cpp view_main.h ${FORMAT_INCLUDES} ${VIEW_INCLUDES} ${VIEW_TOOLKIT_INCLUDES} view/views.h ${FORMAT_SOURCE} ${VIEW_SOURCE} ${VIEW_TOOLKIT_SOURCE} )
+add_library(View_Library view_main.cpp view_main.h ${FORMAT_INCLUDES} ${VIEW_INCLUDES} ${VIEW_FACTORIES_INCLUDES} ${VIEW_TOOLKIT_INCLUDES} view/views.h ${FORMAT_SOURCE} ${VIEW_SOURCE} ${VIEW_FACTORIES_SOURCE} ${VIEW_TOOLKIT_SOURCE} )
 
 target_link_libraries(View_Library PUBLIC  System_Interface Utilities) 

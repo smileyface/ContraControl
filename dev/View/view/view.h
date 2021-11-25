@@ -1,6 +1,9 @@
 #ifndef VIEW
 #define VIEW
 
+#include <vector>
+#include <string>
+
 class View
 {
 public:
@@ -24,5 +27,7 @@ struct RGB
 	unsigned char green;
 	unsigned char blue;
 };
+
+typedef std::string View_Handle;
 
 #endif

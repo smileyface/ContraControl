@@ -2,25 +2,19 @@
 #include <thread>
 
 #include "../console.h"
-
+#include "../../view/view.h"
+#include "../../factories/view_factory.h"
 
 void Console_Format::initalize()
 {
 	std::cout << "I LIVE" << std::endl;
+	add_view(VIEW_TYPE_ENUM::SYSTEM);
 }
 
-void Console_Format::add_view(std::string handle, View* view)
+void Console_Format::add_view(VIEW_TYPE_ENUM view)
 {
-	std::cout << "Adding view" << std::endl;
-	view_tree[handle] = view;
-}
-
-void Console_Format::console_display_thread()
-{
-	while (format_running)
-	{
-		update_views();
-	}
+	std::cout << "Adding view " << int(view) << std::endl;
+	view_list.push_back(view_factory(view, DISPLAY_TYPES::CONSOLE));
 }
 
 void Console_Format::start_format()
@@ -31,4 +25,12 @@ void Console_Format::start_format()
 bool Console_Format::is_running()
 {
 	return format_running;
+}
+
+void Console_Format::loop()
+{
+	while (format_running)
+	{
+		update_views();
+	}
 }

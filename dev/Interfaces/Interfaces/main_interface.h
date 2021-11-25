@@ -2,6 +2,7 @@
 #define MAIN_CONTROLLER_INTERFACE_H
 
 #include <string>
+#include <vector>
 
 #include "enums/display_type_enum.h"
 #include "enums/view_type_enum.h"
@@ -36,6 +37,7 @@ public:
 	static void start_view();
 	static int add_display(DISPLAY_TYPES display);
 	static void add_view(VIEW_TYPE_ENUM view);
+	static void initalize(std::vector<DISPLAY_TYPES> types);
 
 };
 #endif // !MODEL_CONTROLLER_INTERFACE_H

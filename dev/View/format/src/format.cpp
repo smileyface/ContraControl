@@ -1,27 +1,39 @@
-#include "../format.h"
+#include <map>
 
-void Format::add_view(std::string handle, View* view)
+#include "../format.h"
+#include "../View/view/view.h"
+#include "../../factories/view_factory.h"
+
+
+void Format::add_view(VIEW_TYPE_ENUM view)
 {
-	view_tree[handle] = view;
+	
 }
 
 void Format::update_views()
 {
-	for (auto i = view_tree.begin(); i != view_tree.end(); i++)
+	for (auto i = view_list.begin(); i != view_list.end(); i++)
 	{
-		if (i->second->is_stale())
+		View* r = (*i);
+		if (r->is_stale())
 		{
-			i->second->on_refresh();
-			i->second->on_paint();
-			i->second->on_display();
+			r->on_refresh();
+			r->on_paint();
+			r->on_display();
 		}
 	}
 }
 
 void Format::clean_views()
 {
-	for (auto i = view_tree.begin(); i != view_tree.end(); i++)
+	for (auto i = view_list.begin(); i != view_list.end(); i++)
 	{
-		i->second->on_destroy();
+		(*i)->on_destroy();
 	}
+}
+
+void Format::start_display()
+{
+	format_running = true;
+	loop();
 }
