@@ -1,4 +1,4 @@
-#include "interfaces.h"
+/*#include "interfaces.h"
 #include "system_interface.h"
 
 #ifdef _WIN32
@@ -25,4 +25,4 @@ Menu_Item* get_menu(std::string txt, Menu_Item::Menu_Types flg, unsigned int id)
 	return new Menu_Item(txt, flg, id);
 #endif
 	return NULL;
-}
+}*/

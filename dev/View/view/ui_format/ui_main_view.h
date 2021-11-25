@@ -1,7 +1,7 @@
-#include "view.h"
+/*#include "view.h"
 #include "../Interfaces/common/menu.h"
 
-class Main_View : public Desktop_View
+class Main_View : public UI_View
 {
 public:
 	void create_menu()
@@ -59,3 +59,4 @@ protected:
 		handle->initalize(dim);
 	}
 };
+*/

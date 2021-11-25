@@ -1,9 +1,8 @@
-#include "view.h"
+#include "../view.h"
 
-class LED_View : public Desktop_View
+class LED_View : public UI_View
 {
-    virtual void on_destroy()
-    {};
+    virtual void on_destroy() {};
     virtual void on_paint() {};
     virtual void on_create() {};
     virtual void on_quit() {};

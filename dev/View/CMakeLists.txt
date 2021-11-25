@@ -1,33 +1,43 @@
+set(FORMAT_INCLUDES "format/format.h"
+                    "format/console.h"
+                    "format/ui.h")
 
-set(COMMON_DESKTOP_VIEW_INCLUDE "Desktop/views.h"
-                                "Desktop/Views/view.h" 
-                                "Desktop/Views/led_view.h"
-                                "Desktop/Views/main_view.h" 
-                                "Desktop/Interfaces/interfaces.h"
-                                "Desktop/desktop_main.h" 
-                                "Desktop/Interfaces/system_interface.h")
+set(FORMAT_SOURCE "format/src/format.cpp"
+                   "format/src/console.cpp"
+                   "format/src/ui.cpp")
 
-set(COMMON_DESKTOP_INTERFACE_INCLUDE "Desktop/Interfaces/common/lib/dimensions.h")
+set(VIEW_INCLUDES "view/view.h"
+                  "view/ui_format/ui_view.h"
+                  "view/ui_format/ui_led_view.h"
+                  "view/ui_format/ui_main_view.h")
 
-set(COMMON_DESKTOP_VIEW_EXECUTABLES "Desktop/desktop_main.cpp" 
-                                    "Desktop/Interfaces/interfaces.cpp")
+set(VIEW_SOURCE "view/src/ui_view.cpp"
+                "view/src/system_view.cpp")
+
+set(VIEW_FACTORIES_INCLUDES "factories/view_factory.h")
+
+set(VIEW_FACTORIES_SOURCE "factories/src/view_factory.cpp")
+
+set(VIEW_TOOLKIT_INCLUDES "view/toolkit/dimensions.h"
+                          "view/toolkit/interfaces.h"
+                          "view/toolkit/menu.h"
+                          "view/toolkit/painter.h"
+                          "view/toolkit/window.h")
+
+set(VIEW_TOOLKIT_SOURCE "view/toolkit/src/interfaces.cpp")
 
 IF (CMAKE_HOST_WIN32)
+    set(WIN32_INTERFACE_INCLUDES "view/toolkit/windows/platform/framework.h"
+                                 "view/toolkit/windows/platform/Resource.h"
+                                 "view/toolkit/windows/platform/targetver.h")
 
-    set(WINDOWS_DESKTOP_VIEW_INCLUDES "Desktop/Interfaces/Windows/platform/framework.h"
-                                      "Desktop/Interfaces/Windows/platform/Resource.h"
-                                      "Desktop/Interfaces/Windows/platform/targetver.h"
-                                      "Desktop/Interfaces/Windows/view/view_interface.h" 
-                                      "Desktop/Interfaces/Windows/view/window.h" "Desktop/Interfaces/Windows/view/menu.h")
+    set(WIN32_TOOLKIT_INCLUDES "view/toolkit/windows/view/menu.h"
+                               "view/toolkit/windows/view/view_interface.h"
+                               "view/toolkit/windows/view/window.h")
 
-
-    set(WINDOWS_DESKTOP_VIEW_EXECUTABLES  "Desktop/Interfaces/Windows/view/interfaces.cpp" 
-                                          "Desktop/Interfaces/Windows/view/callback.cpp"
-                                          "Desktop/Interfaces/Windows/main.cpp")
-
-    add_executable(WIN_VIEWS WIN32 ${WINDOWS_DESKTOP_VIEW_EXECUTABLES} ${COMMON_DESKTOP_VIEW_EXECUTABLES} ${WINDOWS_DESKTOP_VIEW_INCLUDES} ${COMMON_DESKTOP_VIEW_INCLUDE} "Desktop/Interfaces/Windows/view/menu.h")
-
-    target_link_libraries(WIN_VIEWS PUBLIC System_Interface)
+                               
 ENDIF()
 
-                       
+add_library(View_Library view_main.cpp view_main.h ${FORMAT_INCLUDES} ${VIEW_INCLUDES} ${VIEW_FACTORIES_INCLUDES} ${VIEW_TOOLKIT_INCLUDES} view/views.h ${FORMAT_SOURCE} ${VIEW_SOURCE} ${VIEW_FACTORIES_SOURCE} ${VIEW_TOOLKIT_SOURCE} )
+
+target_link_libraries(View_Library PUBLIC  System_Interface Utilities) 

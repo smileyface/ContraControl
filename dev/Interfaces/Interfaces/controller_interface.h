@@ -17,7 +17,7 @@
 class Controller_Interfaces {
 public:
 	class Model_Interface;
-
+	class Main_Interface;
 };
 
 void start_controller();
@@ -41,6 +41,13 @@ public:
 	 */
 	static void request_command_add(Timed_Command timed_command);
 
+
 };
 
+
+class Controller_Interfaces::Main_Interface {
+public:
+	static void start_controller();
+
+};
 #endif // !MODEL_CONTROLLER_INTERFACE_H
