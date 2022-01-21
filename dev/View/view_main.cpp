@@ -9,15 +9,19 @@ int display_id = 0;
 
 void view::initalize()
 {
-
+	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
+	{
+		(*iterator)->initalize();
+	}
 }
 
 void view::start_view()
 {
-
-	list_of_formats[0]->add_view(VIEW_TYPE_ENUM::SYSTEM);
 	//THIS IS DEBUG LINE
-
+	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
+	{
+		(*iterator)->start_display();
+	}
 	//END DEBUG LINE
 }
 

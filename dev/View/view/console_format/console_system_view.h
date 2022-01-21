@@ -14,11 +14,12 @@ public:
     virtual void notify();
     virtual void on_display();
 
-    void display_message(std::string message);
+    void display_message();
     void set_system_id(std::string id);
 private:
 	std::string system_id;
     std::string message;
+    std::string message_level;
 };
 
 #endif

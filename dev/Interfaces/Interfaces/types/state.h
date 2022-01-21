@@ -47,6 +47,7 @@ namespace state_interfaces
 			state->turn_off();
 			break;
 		}
+		state->notify_view();
 	}
 }
 #endif

@@ -13,9 +13,12 @@ Timer controller_timer;
 bool controller::controller_running = true;
 Timed_List controller::controller_queue;
 
+System_Alerts* controller::controller_alert_interface;
+
 void controller::initalize()
 {
 	controller_timer.reset_clock();
+	controller_alert_interface = System_Alerts::get_instance();
 }
  
 void loop()
@@ -27,7 +30,7 @@ void loop()
 }
 void controller::start_controller()
 {
-
+	controller_alert_interface->push({ ALERT_PRIORITY::INFO, "Controller Started", "Controller" });
 }
 
 void controller::stop_controller()
