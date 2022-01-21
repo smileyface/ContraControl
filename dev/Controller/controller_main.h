@@ -12,6 +12,7 @@
 
 #include "Interfaces/types/timed_command.h"
 #include "system/timer.h"
+#include "Alerts/system_alerts.h"
 
 /**
  * Main brain of the controller. It keeps track of commands to send to the model, and when to send them
@@ -20,6 +21,7 @@
  */
 namespace controller
 {
+	static const char* subsystem_name = "Controller";
 	/**
 	 Is controller loop running
 	 */
@@ -62,6 +64,11 @@ namespace controller
 	 * Clear queues
 	 */
 	void clean_up();
+
+	/**
+	 * Message system
+	 */
+	extern System_Alerts* controller_alert_interface;
 }
 
 

@@ -20,3 +20,9 @@ void Model_Interfaces::Controller_Interface::request_command(Model_Command theCo
 	Timed_Command command(theCommand.command, theCommand.label, seconds_to_execute);
 	Controller_Interfaces::Model_Interface::request_command_add(command);
 }
+
+void Model_Interfaces::Main_Interface::start_model()
+{
+	model::initalize();
+	model::start_loop();
+}

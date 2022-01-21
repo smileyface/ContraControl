@@ -23,8 +23,8 @@ public:
 	virtual void loop() = 0;
 
 	std::vector<View*> view_list;
-private:
 	bool format_running = false;
+private:
 };
 
 #endif

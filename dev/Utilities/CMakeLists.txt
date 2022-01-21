@@ -7,16 +7,19 @@ if(NOT HOME)
 endif()
 
 set(UTILITIES_HEADER_FILES 
+                    "Alerts/system_alerts.h"
+                    "Alerts/consumers.h"
                     "Logging/log_item.h"
                     "Logging/logging.h"
                     "Utilities/save_reader.h"
                     "Utilities/timer.h"
                     "Utilities/utils.h"
                     "Utilities/system.h"
-                    "Utilities/exceptions.h")
+                    "Utilities/exceptions.h" )
 set(UTILITIES_SOURCE_FILES
                     "Logging/logging.cpp"
-                    "Utilities/save_reader.cpp")
+                    "Utilities/save_reader.cpp" 
+                    "src/system_alerts.cpp")
 
 add_library(Utilities STATIC ${UTILITIES_SOURCE_FILES} ${UTILITIES_HEADER_FILES} )
 target_include_directories(Utilities 

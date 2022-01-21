@@ -13,7 +13,7 @@ void Console_Format::initalize()
 
 void Console_Format::add_view(VIEW_TYPE_ENUM view)
 {
-	std::cout << "Adding view " << int(view) << std::endl;
+	std::cout << "Adding View: " << get_view_type_enum_as_string(view) << std::endl;
 	view_list.push_back(view_factory(view, DISPLAY_TYPES::CONSOLE));
 }
 

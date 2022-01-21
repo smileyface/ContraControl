@@ -16,6 +16,7 @@
 class Model_Interfaces {
 public:
 	class Controller_Interface;
+	class Main_Interface;
 };
 
 /**
@@ -38,6 +39,12 @@ public:
 	 */
 	static void request_command(Model_Command theCommand, double seconds_to_execute);
 
+};
+
+class Model_Interfaces::Main_Interface
+{
+public:
+	static void start_model();
 };
 
 #endif // !MODEL_COMMAND_INTERFACE

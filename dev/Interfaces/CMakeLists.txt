@@ -38,6 +38,7 @@ set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/state.h
                     Interfaces/types/channel.h
                     Interfaces/types/command_interface.h
+                    Interfaces/types/view_capable.h
                     Interfaces/enums/display_type_enum.h
                     Interfaces/enums/view_type_enum.h)
 

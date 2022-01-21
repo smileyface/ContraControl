@@ -16,7 +16,6 @@ public:
 
 
 private:
-	bool format_running = false;
 	void console_display_thread();
 };
 

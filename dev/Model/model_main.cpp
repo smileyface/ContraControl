@@ -7,17 +7,17 @@
 
 
 Timer model_timer;
-
 bool model::model_running = true;
-
 Command_List model::step_actions;
 
+System_Alerts* model::model_alert_interface;
 Node model::my_node;
 
 
 void model::initalize()
 {
 	model_timer.reset_clock();
+	model_alert_interface = System_Alerts::get_instance();
 }
 
 Node* model::get_node(Node_Id id)
@@ -68,13 +68,29 @@ void model::step()
 	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
 }
 
+void model_loop()
+{
+	while (model::model_running)
+	{
+		model::step();
+	}
+}
 
+void model::start_loop()
+{
+	model_running = true;
+	model_alert_interface->push(Alert(ALERT_PRIORITY::INFO, "Model Started", subsystem_name));
+
+	//TODO: Thread model loop
+}
 
 void model::stop_loop()
 {
 	model_running = false;
 	model::clean_up();
 }
+
+
 
 void model::clean_up()
 {

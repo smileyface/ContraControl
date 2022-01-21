@@ -4,9 +4,12 @@
 #include <vector>
 #include <string>
 
+#include "Interfaces/types/view_capable.h"
+
 class View
 {
 public:
+    void connect(View_Capable* item);
     virtual void notify() {};
     virtual void initalize() {};
     virtual void on_refresh() {};
