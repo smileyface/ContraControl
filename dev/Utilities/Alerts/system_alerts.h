@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 
+
+#include "Alerts/consumers.h"
+
 /**
  Level of the alert.
  */
@@ -43,12 +46,14 @@ class System_Alerts
 {
 public:
 	void push(Alert);
-	Alert pop();
+	std::vector<Alert> pop(Message_Consumer*);
 	static System_Alerts* get_instance();
 	int get_size_of_queue();
+	void register_consumer(Message_Consumer*);
 private:
 	System_Alerts();
-	std::vector<Alert> list_of_alerts;
+	std::vector<std::pair<Alert, Consumer_List>> list_of_alerts;
+	std::vector<Message_Consumer*> list_of_registered_consumers;
 	static System_Alerts* instance;
 
 };

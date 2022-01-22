@@ -24,4 +24,5 @@ void Model_Interfaces::Controller_Interface::request_command(Model_Command theCo
 void Model_Interfaces::Main_Interface::start_model()
 {
 	model::initalize();
+	model::start_loop();
 }

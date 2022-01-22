@@ -1,5 +1,6 @@
 #include "../Alerts/system_alerts.h"
 
+#include <algorithm>
 #include <mutex>
 #include <string>
 
@@ -49,21 +50,41 @@ System_Alerts::System_Alerts()
 void System_Alerts::push(Alert alert)
 {
 	std::lock_guard<std::mutex> guard(g_pages_mutex);
-	list_of_alerts.emplace_back(alert);
+	list_of_alerts.emplace_back(std::make_pair(alert, list_of_registered_consumers));
 }
 
-
-
-Alert System_Alerts::pop()
+bool remove_func(std::pair<Alert, Consumer_List> Alert_Data)
 {
-	if (list_of_alerts.size() == 0)
+	return Alert_Data.second.size() == 0;
+}
+
+std::vector<Alert> System_Alerts::pop(Message_Consumer* consumer)
+{
+	std::vector<Alert> list_of_captured_alerts;
+	for (int i = 0; i < list_of_alerts.size(); i++)
 	{
-		return Alert(false);
+		auto it = std::find(list_of_alerts[i].second.begin(), list_of_alerts[i].second.end(), consumer);
+
+		if (it != list_of_alerts[i].second.end())
+		{
+			list_of_captured_alerts.push_back(list_of_alerts[i].first);
+			list_of_alerts[i].second.erase(it);
+			
+		}
 	}
-	Alert grabbed_alert = list_of_alerts[0];
-	std::lock_guard<std::mutex> guard(g_pages_mutex);
-	list_of_alerts.erase(list_of_alerts.begin());
-	return grabbed_alert;
+	
+	auto it = std::remove_if(list_of_alerts.begin(), list_of_alerts.end(), remove_func);
+	list_of_alerts.erase(it, list_of_alerts.end());
+	return list_of_captured_alerts;
+}
+
+void System_Alerts::register_consumer(Message_Consumer* mc)
+{
+	list_of_registered_consumers.push_back(mc);
+	for (int i = 0; i < list_of_alerts.size(); i++)
+	{
+		list_of_alerts[i].second.push_back(mc);
+	}
 }
 
 System_Alerts* System_Alerts::get_instance()

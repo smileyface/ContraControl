@@ -4,6 +4,13 @@
 
 #include "Alerts/system_alerts.h"
 
+Console_System_View::Console_System_View()
+{
+	system_id = "System";
+	message_consumer = new Message_Consumer();
+	System_Alerts::get_instance()->register_consumer(message_consumer);
+}
+
 void Console_System_View::notify()
 {
 	stale = true;
@@ -16,11 +23,12 @@ void Console_System_View::display_message()
 
 void Console_System_View::on_display()
 {
-	for(Alert alert = System_Alerts::get_instance()->pop(); alert.valid_alert == true; alert = System_Alerts::get_instance()->pop())
+	std::vector<Alert> alerts = System_Alerts::get_instance()->pop(message_consumer);
+	for(auto alert = alerts.begin(); alert != alerts.end(); alert++)
 	{
-		message = alert.message;
-		system_id = alert.location;
-		message_level = alert_priority_as_string(alert.priority);
+		message = (*alert).message;
+		system_id = (*alert).location;
+		message_level = alert_priority_as_string((*alert).priority);
 		display_message();
 	}
 	stale = false;

@@ -21,7 +21,7 @@ void controller::initalize()
 	controller_alert_interface = System_Alerts::get_instance();
 }
  
-void loop()
+void controller_loop()
 {
 	while (controller::controller_running)
 	{
@@ -31,6 +31,8 @@ void loop()
 void controller::start_controller()
 {
 	controller_alert_interface->push(Alert(ALERT_PRIORITY::INFO, "Controller Started", subsystem_name));
+
+	//TODO: Thread controller loop
 }
 
 void controller::stop_controller()

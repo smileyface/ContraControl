@@ -83,6 +83,8 @@ namespace model {
 	 */
 	void stop_loop();
 
+	void start_loop();
+
 	/**
 	 * \brief Delete all nodes and send out a 'Node Shut Down' notice on the network
 	 * \todo create a Node_Shut_Down network message.
@@ -102,5 +104,6 @@ namespace model {
 	 * Message system
 	 */
 	extern System_Alerts* model_alert_interface;
+
 }
 #endif 

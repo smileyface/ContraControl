@@ -3,14 +3,13 @@
 #include <string>
 
 #include "console_view.h"
+#include "Alerts/consumers.h"
 
 class Console_System_View : public Console_View
 {
 public:
-    Console_System_View()
-    {
-        system_id = "System";
-    }
+    Console_System_View();
+
     virtual void notify();
     virtual void on_display();
 
@@ -20,6 +19,11 @@ private:
 	std::string system_id;
     std::string message;
     std::string message_level;
+
+    /**
+    * .Message Consumer
+    */
+    Message_Consumer* message_consumer;
 };
 
 #endif
