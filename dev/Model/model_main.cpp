@@ -1,10 +1,15 @@
 #include "model_main.h"
 
 #include <algorithm>
+#include <thread>
+#include <mutex>
 
 #include "Logging/logging.h"
 #include "Interfaces/types/state.h"
 
+
+std::thread model_thread;
+std::mutex model_mutex;
 
 Timer model_timer;
 bool model::model_running = true;
@@ -70,6 +75,7 @@ void model::step()
 
 void model_loop()
 {
+	model::model_alert_interface->push(Alert(ALERT_PRIORITY::DEBUG, "Loop thread has started", "Model"));
 	while (model::model_running)
 	{
 		model::step();
@@ -82,6 +88,7 @@ void model::start_loop()
 	model_alert_interface->push(Alert(ALERT_PRIORITY::INFO, "Model Started", subsystem_name));
 
 	//TODO: Thread model loop
+	model_thread = std::thread(model_loop);
 }
 
 void model::stop_loop()

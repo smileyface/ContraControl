@@ -34,7 +34,6 @@ void controller::start_controller()
 {
 	controller_alert_interface->push(Alert(ALERT_PRIORITY::INFO, "Controller Started", subsystem_name));
 
-	//TODO: Thread controller loop
 	controller_thread = std::thread(controller_loop);
 }
 
