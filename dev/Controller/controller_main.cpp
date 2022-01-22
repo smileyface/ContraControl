@@ -15,6 +15,7 @@ Timed_List controller::controller_queue;
 
 System_Alerts* controller::controller_alert_interface;
 
+
 void controller::initalize()
 {
 	controller_timer.reset_clock();
@@ -23,6 +24,7 @@ void controller::initalize()
  
 void controller_loop()
 {
+	controller::controller_alert_interface->push(Alert(ALERT_PRIORITY::DEBUG, "Loop thread has started", "Controller"));
 	while (controller::controller_running)
 	{
 		controller::step();
@@ -33,6 +35,7 @@ void controller::start_controller()
 	controller_alert_interface->push(Alert(ALERT_PRIORITY::INFO, "Controller Started", subsystem_name));
 
 	//TODO: Thread controller loop
+	controller_thread = std::thread(controller_loop);
 }
 
 void controller::stop_controller()
