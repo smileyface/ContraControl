@@ -1,25 +1,27 @@
-#include "..\Alerts\system_alerts.h"
+#include "../Alerts/system_alerts.h"
 
 #include <mutex>
+#include <string>
 
 std::mutex g_pages_mutex;
 
 char* alert_priority_as_string(ALERT_PRIORITY al)
 {
+	std::string level;
 	switch (al)
 	{
 	case ALERT_PRIORITY::SEVERE:
-		return "SEVERE";
+		level = "SEVERE";
 	case ALERT_PRIORITY::INFO:
-		return "INFO";
+		level = "INFO";
 	case ALERT_PRIORITY::ERROR:
-		return "ERROR";
+		level = "ERROR";
 	case ALERT_PRIORITY::DEBUG:
-		return "DEBUG";
+		level = "DEBUG";
 	default:
-		return "UNHANDLED PRIORITY";
+		level = "UNHANDLED PRIORITY";
 	}
-	return "UNHANDLED PRIORITY";
+	return &level[0];
 }
 
 System_Alerts* System_Alerts::instance;
