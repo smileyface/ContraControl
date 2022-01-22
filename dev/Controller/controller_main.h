@@ -21,6 +21,7 @@
  */
 namespace controller
 {
+	static const char* subsystem_name = "Controller";
 	/**
 	 Is controller loop running
 	 */

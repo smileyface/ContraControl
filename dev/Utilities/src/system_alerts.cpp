@@ -5,23 +5,39 @@
 
 std::mutex g_pages_mutex;
 
-char* alert_priority_as_string(ALERT_PRIORITY al)
+std::string alert_priority_as_string(ALERT_PRIORITY al)
 {
 	std::string level;
 	switch (al)
 	{
 	case ALERT_PRIORITY::SEVERE:
-		level = "SEVERE";
+		return "SEVERE";
 	case ALERT_PRIORITY::INFO:
-		level = "INFO";
+		return "INFO";
 	case ALERT_PRIORITY::ERROR:
-		level = "ERROR";
+		return "ERROR";
 	case ALERT_PRIORITY::DEBUG:
-		level = "DEBUG";
+		return "DEBUG";
 	default:
-		level = "UNHANDLED PRIORITY";
+		return "UNHANDLED PRIORITY";
 	}
-	return &level[0];
+	return level;
+}
+
+Alert::Alert(ALERT_PRIORITY pri, std::string msg, std::string loc)
+{
+	priority = pri;
+	message = msg;
+	location = loc;
+	valid_alert = true;
+}
+
+Alert::Alert(bool va)
+{
+	priority = ALERT_PRIORITY::INFO;
+	message = "";
+	location = "";
+	valid_alert = va;
 }
 
 System_Alerts* System_Alerts::instance;
@@ -36,12 +52,18 @@ void System_Alerts::push(Alert alert)
 	list_of_alerts.emplace_back(alert);
 }
 
+
+
 Alert System_Alerts::pop()
 {
+	if (list_of_alerts.size() == 0)
+	{
+		return Alert(false);
+	}
 	Alert grabbed_alert = list_of_alerts[0];
 	std::lock_guard<std::mutex> guard(g_pages_mutex);
 	list_of_alerts.erase(list_of_alerts.begin());
-	return list_of_alerts[0];
+	return grabbed_alert;
 }
 
 System_Alerts* System_Alerts::get_instance()

@@ -13,6 +13,7 @@ class Main_Interfaces
 {
 public:
 	class Controller_Interface;
+	class Model_Interface;
 	class View_Interface;
 };
 
@@ -26,6 +27,15 @@ public:
 	 * Let main start the controller.
 	 */
 	static void start_controller();
+};
+
+class Main_Interfaces::Model_Interface
+{
+public:
+	/**
+	 * .Let main initalize the model
+	 */
+	static void start_model();
 };
 
 /**

@@ -13,6 +13,7 @@
 
 #include "Interfaces/types/model_command.h"
 #include "node/node.h"
+#include "Alerts/system_alerts.h"
 
 /**
  * Main brain of the model. It keeps track of nodes and does actions such as looping, stepping through commands given from the Command_Interface, and sending nodes commands to run with devices.
@@ -20,6 +21,7 @@
  * \todo Include logging of model state.
  */
 namespace model {
+	static const char* subsystem_name = "Model";
 	/**
 	 Is the model looping
 	 */
@@ -95,5 +97,10 @@ namespace model {
 	void initalize_my_node(Node_Id id, Node_Type type);
 
 	void command_model(Model_Command command);
+
+	/**
+	 * Message system
+	 */
+	extern System_Alerts* model_alert_interface;
 }
 #endif 

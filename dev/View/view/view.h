@@ -22,7 +22,6 @@ public:
     bool is_stale() { return stale; }
 protected:
     bool stale = true;
-    View_Capable* my_item;
 };
 
 struct RGB

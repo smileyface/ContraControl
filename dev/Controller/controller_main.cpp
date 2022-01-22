@@ -30,7 +30,7 @@ void loop()
 }
 void controller::start_controller()
 {
-	controller_alert_interface->push({ ALERT_PRIORITY::INFO, "Controller Started", "Controller" });
+	controller_alert_interface->push(Alert(ALERT_PRIORITY::INFO, "Controller Started", subsystem_name));
 }
 
 void controller::stop_controller()

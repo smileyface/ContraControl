@@ -7,17 +7,18 @@
 
 
 Timer model_timer;
-
 bool model::model_running = true;
-
 Command_List model::step_actions;
 
+System_Alerts* model::model_alert_interface;
 Node model::my_node;
 
 
 void model::initalize()
 {
 	model_timer.reset_clock();
+	model_alert_interface = System_Alerts::get_instance();
+	model_alert_interface->push(Alert(ALERT_PRIORITY::INFO, "Model Initalized", subsystem_name));
 }
 
 Node* model::get_node(Node_Id id)
