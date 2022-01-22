@@ -19,7 +19,7 @@ set(UTILITIES_HEADER_FILES
 set(UTILITIES_SOURCE_FILES
                     "Logging/logging.cpp"
                     "Utilities/save_reader.cpp" 
-                    "src/system_alerts.cpp")
+                    "src/system_alerts.cpp" "src/consumers.cpp")
 
 add_library(Utilities STATIC ${UTILITIES_SOURCE_FILES} ${UTILITIES_HEADER_FILES} )
 target_include_directories(Utilities 

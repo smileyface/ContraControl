@@ -10,7 +10,6 @@ class Console_System_View : public Console_View
 public:
     Console_System_View();
 
-    virtual void notify();
     virtual void on_display();
 
     void display_message();

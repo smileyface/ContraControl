@@ -7,18 +7,13 @@
 Console_System_View::Console_System_View()
 {
 	system_id = "System";
-	message_consumer = new Message_Consumer();
+	message_consumer = new Message_Consumer(&stale);
 	System_Alerts::get_instance()->register_consumer(message_consumer);
-}
-
-void Console_System_View::notify()
-{
-	stale = true;
 }
 
 void Console_System_View::display_message()
 {
-	std::cout << "[" << message_level << "]\t(" << system_id << "):\t" << message << std::endl;
+	std::cout << "[" << message_level << "]\t(" << system_id << "):\t" << message << std::endl << std::flush;
 }
 
 void Console_System_View::on_display()
@@ -31,5 +26,4 @@ void Console_System_View::on_display()
 		message_level = alert_priority_as_string((*alert).priority);
 		display_message();
 	}
-	stale = false;
 }

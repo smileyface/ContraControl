@@ -51,6 +51,24 @@ void System_Alerts::push(Alert alert)
 {
 	std::lock_guard<std::mutex> guard(g_pages_mutex);
 	list_of_alerts.emplace_back(std::make_pair(alert, list_of_registered_consumers));
+	for (int i = 0; i < list_of_registered_consumers.size(); i++)
+	{
+		list_of_registered_consumers[i]->notify();
+	}
+	
+}
+
+Alert get_found_alert(Message_Consumer* consumer, std::pair<Alert, Consumer_List>& current_alert)
+{
+	auto it = std::find(current_alert.second.begin(), current_alert.second.end(), consumer);
+	Alert found_alert(false);
+	if (it != current_alert.second.end())
+	{
+		found_alert = current_alert.first;
+		std::lock_guard<std::mutex> guard(g_pages_mutex);
+		current_alert.second.erase(it);
+	}
+	return found_alert;
 }
 
 bool remove_func(std::pair<Alert, Consumer_List> Alert_Data)
@@ -61,20 +79,15 @@ bool remove_func(std::pair<Alert, Consumer_List> Alert_Data)
 std::vector<Alert> System_Alerts::pop(Message_Consumer* consumer)
 {
 	std::vector<Alert> list_of_captured_alerts;
+
 	for (int i = 0; i < list_of_alerts.size(); i++)
 	{
-		auto it = std::find(list_of_alerts[i].second.begin(), list_of_alerts[i].second.end(), consumer);
-
-		if (it != list_of_alerts[i].second.end())
-		{
-			list_of_captured_alerts.push_back(list_of_alerts[i].first);
-			list_of_alerts[i].second.erase(it);
-			
-		}
+		list_of_captured_alerts.push_back(get_found_alert(consumer, list_of_alerts[i]));
 	}
 	
 	auto it = std::remove_if(list_of_alerts.begin(), list_of_alerts.end(), remove_func);
 	list_of_alerts.erase(it, list_of_alerts.end());
+	consumer->freshen();
 	return list_of_captured_alerts;
 }
 
