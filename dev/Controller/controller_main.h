@@ -68,7 +68,7 @@ namespace controller
 	/**
 	 * Message system
 	 */
-	extern System_Alerts* controller_alert_interface;
+	extern System_Messages* controller_message_interface;
 }
 
 

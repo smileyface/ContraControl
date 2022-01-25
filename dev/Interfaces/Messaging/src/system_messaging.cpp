@@ -6,18 +6,18 @@
 
 std::mutex g_pages_mutex;
 
-std::string alert_priority_as_string(ALERT_PRIORITY al)
+std::string message_priority_as_string(MESSAGE_PRIORITY al)
 {
 	std::string level;
 	switch (al)
 	{
-	case ALERT_PRIORITY::SEVERE:
+	case MESSAGE_PRIORITY::SEVERE:
 		return "SEVERE";
-	case ALERT_PRIORITY::INFO:
+	case MESSAGE_PRIORITY::INFO:
 		return "INFO";
-	case ALERT_PRIORITY::ERROR:
+	case MESSAGE_PRIORITY::ERROR:
 		return "ERROR";
-	case ALERT_PRIORITY::DEBUG:
+	case MESSAGE_PRIORITY::DEBUG:
 		return "DEBUG";
 	default:
 		return "UNHANDLED PRIORITY";
@@ -25,32 +25,32 @@ std::string alert_priority_as_string(ALERT_PRIORITY al)
 	return level;
 }
 
-Alert::Alert(ALERT_PRIORITY pri, std::string msg, std::string loc)
+System_Message::System_Message(MESSAGE_PRIORITY pri, std::string msg, std::string loc)
 {
 	priority = pri;
 	message = msg;
 	location = loc;
-	valid_alert = true;
+	valid_message = true;
 }
 
-Alert::Alert(bool va)
+System_Message::System_Message(bool vm)
 {
-	priority = ALERT_PRIORITY::INFO;
+	priority = MESSAGE_PRIORITY::INFO;
 	message = "";
 	location = "";
-	valid_alert = va;
+	valid_message = vm;
 }
 
-System_Alerts* System_Alerts::instance;
+System_Messages* System_Messages::instance;
 
-System_Alerts::System_Alerts()
+System_Messages::System_Messages()
 {
 }
 
-void System_Alerts::push(Alert alert)
+void System_Messages::push(System_Message message)
 {
 	std::lock_guard<std::mutex> guard(g_pages_mutex);
-	list_of_alerts.emplace_back(std::make_pair(alert, list_of_registered_consumers));
+	list_of_message.emplace_back(std::make_pair(message, list_of_registered_consumers));
 	for (int i = 0; i < list_of_registered_consumers.size(); i++)
 	{
 		list_of_registered_consumers[i]->notify();
@@ -58,53 +58,53 @@ void System_Alerts::push(Alert alert)
 	
 }
 
-Alert get_found_alert(Message_Consumer* consumer, std::pair<Alert, Consumer_List>& current_alert)
+System_Message get_found_message(Message_Consumer* consumer, std::pair<System_Message, Consumer_List>& current_message)
 {
-	auto it = std::find(current_alert.second.begin(), current_alert.second.end(), consumer);
-	Alert found_alert(false);
-	if (it != current_alert.second.end())
+	auto it = std::find(current_message.second.begin(), current_message.second.end(), consumer);
+	System_Message found_message(false);
+	if (it != current_message.second.end())
 	{
-		found_alert = current_alert.first;
+		found_message = current_message.first;
 		std::lock_guard<std::mutex> guard(g_pages_mutex);
-		current_alert.second.erase(it);
+		current_message.second.erase(it);
 	}
-	return found_alert;
+	return found_message;
 }
 
-bool remove_func(std::pair<Alert, Consumer_List> Alert_Data)
+bool remove_func(std::pair<System_Message, Consumer_List> Message_Data)
 {
-	return Alert_Data.second.size() == 0;
+	return Message_Data.second.size() == 0;
 }
 
-std::vector<Alert> System_Alerts::pop(Message_Consumer* consumer)
+std::vector<System_Message> System_Messages::pop(Message_Consumer* consumer)
 {
-	std::vector<Alert> list_of_captured_alerts;
+	std::vector<System_Message> list_of_captured_message;
 
-	for (int i = 0; i < list_of_alerts.size(); i++)
+	for (int i = 0; i < list_of_message.size(); i++)
 	{
-		list_of_captured_alerts.push_back(get_found_alert(consumer, list_of_alerts[i]));
+		list_of_captured_message.push_back(get_found_message(consumer, list_of_message[i]));
 	}
 	
-	auto it = std::remove_if(list_of_alerts.begin(), list_of_alerts.end(), remove_func);
-	list_of_alerts.erase(it, list_of_alerts.end());
+	auto it = std::remove_if(list_of_message.begin(), list_of_message.end(), remove_func);
+	list_of_message.erase(it, list_of_message.end());
 	consumer->freshen();
-	return list_of_captured_alerts;
+	return list_of_captured_message;
 }
 
-void System_Alerts::register_consumer(Message_Consumer* mc)
+void System_Messages::register_consumer(Message_Consumer* mc)
 {
 	list_of_registered_consumers.push_back(mc);
-	for (int i = 0; i < list_of_alerts.size(); i++)
+	for (int i = 0; i < list_of_message.size(); i++)
 	{
-		list_of_alerts[i].second.push_back(mc);
+		list_of_message[i].second.push_back(mc);
 	}
 }
 
-System_Alerts* System_Alerts::get_instance()
+System_Messages* System_Messages::get_instance()
 {
 	if (instance == nullptr)
 	{
-		instance = new System_Alerts();
+		instance = new System_Messages();
 	}
 	return instance;
 }

@@ -103,7 +103,7 @@ namespace model {
 	/**
 	 * Message system
 	 */
-	extern System_Alerts* model_alert_interface;
+	extern System_Messages* model_message_interface;
 
 }
 #endif 

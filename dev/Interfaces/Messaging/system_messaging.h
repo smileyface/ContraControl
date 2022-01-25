@@ -1,5 +1,5 @@
-#ifndef SYSTEM_ALERTS_UTILITY_H
-#define SYSTEM_ALERTS_UTILITY_H
+#ifndef SYSTEM_MESSAGE_INTERFACE_H
+#define SYSTEM_MESSAGE_INTERFACE_H
 
 #include <vector>
 #include <string>
@@ -7,56 +7,57 @@
 #include "Messaging/consumers.h"
 
 /**
- Level of the alert.
+ Level of the message.
  */
-enum class ALERT_PRIORITY {
+enum class MESSAGE_PRIORITY {
 	/**
-	A program breaking error.
-	*/
-	SEVERE,
-	/**
-	Informational alert. For verbose logging.
-	*/
-	INFO,
-	/**
-	Debug alert. For very verbose logging.
+	Debug message. For very verbose logging.
 	*/
 	DEBUG,
 	/**
+	Informational message. For verbose logging.
+	*/
+	INFO,
+	/**
 	A non-program stopping error.
 	*/
-	ERROR
+	ERROR,
+	/**
+	A program breaking error.
+	*/
+	SEVERE
+
 };
 
-std::string alert_priority_as_string(ALERT_PRIORITY al);
+std::string message_priority_as_string(MESSAGE_PRIORITY al);
 
 
-struct Alert
+struct System_Message
 {
-	ALERT_PRIORITY priority;
+	MESSAGE_PRIORITY priority;
 	std::string message;
 	std::string location;
-	bool valid_alert;
-	Alert(ALERT_PRIORITY pri, std::string msg, std::string loc);
-	Alert(bool valid_alert);
+	bool valid_message;
+	System_Message(MESSAGE_PRIORITY pri, std::string msg, std::string loc);
+	System_Message(bool valid_message);
 };
 
-class System_Alerts
+class System_Messages
 {
 public:
-	void push(Alert);
-	std::vector<Alert> pop(Message_Consumer*);
-	static System_Alerts* get_instance();
+	void push(System_Message);
+	std::vector<System_Message> pop(Message_Consumer*);
+	static System_Messages* get_instance();
 	int get_size_of_queue();
 	void register_consumer(Message_Consumer*);
 private:
-	System_Alerts();
-	std::vector<std::pair<Alert, Consumer_List>> list_of_alerts;
+	System_Messages();
+	std::vector<std::pair<System_Message, Consumer_List>> list_of_message;
 	std::vector<Message_Consumer*> list_of_registered_consumers;
-	static System_Alerts* instance;
+	static System_Messages* instance;
 
 };
 
-#endif // !SYSTEM_ALERTS_UTILITY_H
+#endif // !SYSTEM_MESSAGE_INTERFACE_H
 
 
