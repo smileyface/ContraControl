@@ -48,6 +48,7 @@ public:
 class Controller_Interfaces::Main_Interface {
 public:
 	static void start_controller();
+	static void stop_controller();
 
 };
 #endif // !MODEL_CONTROLLER_INTERFACE_H

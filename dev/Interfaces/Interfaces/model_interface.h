@@ -45,6 +45,8 @@ class Model_Interfaces::Main_Interface
 {
 public:
 	static void start_model();
+	static void stop_model();
+	static void add_view(int view_type);
 };
 
 #endif // !MODEL_COMMAND_INTERFACE

@@ -37,3 +37,9 @@ void Format::start_display()
 	format_running = true;
 	looping_thread = new std::thread([this] {this->loop(); });
 }
+
+void Format::stop_display()
+{
+	format_running = false;
+	looping_thread->join();
+}

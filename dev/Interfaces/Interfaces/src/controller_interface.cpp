@@ -21,3 +21,9 @@ void Controller_Interfaces::Main_Interface::start_controller()
 	controller::initalize();
 	controller::start_controller();
 }
+
+void Controller_Interfaces::Main_Interface::stop_controller()
+{
+	controller::stop_controller();
+	controller::clean_up();
+}

@@ -17,12 +17,18 @@ void view::initalize()
 
 void view::start_view()
 {
-	//THIS IS DEBUG LINE
 	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
 	{
 		(*iterator)->start_display();
 	}
-	//END DEBUG LINE
+}
+
+void view::stop_view()
+{
+	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
+	{
+		(*iterator)->stop_display();
+	}
 }
 
 int view::add_display(DISPLAY_TYPES display)

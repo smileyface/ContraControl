@@ -12,6 +12,7 @@ namespace view
 
 	void initalize();
 	void start_view();
+	void stop_view();
 	int add_display(DISPLAY_TYPES display);
 }
 

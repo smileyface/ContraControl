@@ -53,7 +53,10 @@ void network::init_network_interfaces()
 
 void network::teardown_network_interfaces()
 {
-	network::network_interface->clean_up();
+	if (network::network_interface != nullptr)
+	{
+		network::network_interface->clean_up();
+	}
 }
 
 void network::start_server()

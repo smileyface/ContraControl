@@ -2,7 +2,7 @@
 
 #include "Interfaces/controller_interface.h"
 #include "Interfaces/model_interface.h"
-#include "../View/view_main.h"
+#include "Interfaces/view_interface.h"
 void Main_Interfaces::Controller_Interface::start_controller()
 {
 	Controller_Interfaces::Main_Interface::start_controller();
@@ -15,25 +15,25 @@ void Main_Interfaces::Model_Interface::start_model()
 
 void Main_Interfaces::View_Interface::start_view()
 {
-	view::start_view();
+	View_Interfaces::Main_Interface::start_view();
 }
 
-
-int Main_Interfaces::View_Interface::add_display(DISPLAY_TYPES display)
+void Main_Interfaces::Controller_Interface::stop_controller()
 {
-	 return view::add_display(display);
+	Controller_Interfaces::Main_Interface::stop_controller();
 }
 
-void Main_Interfaces::View_Interface::add_view(VIEW_TYPE_ENUM view)
+void Main_Interfaces::Model_Interface::stop_model()
 {
-	
+	Model_Interfaces::Main_Interface::stop_model();
 }
 
-void Main_Interfaces::View_Interface::initalize(std::vector<DISPLAY_TYPES> types)
+void Main_Interfaces::View_Interface::stop_view()
 {
-	for (std::vector<DISPLAY_TYPES>::iterator type = types.begin(); type != types.end(); type++)
-	{
-		view::add_display(*type);
-	}
-	view::initalize();
+	View_Interfaces::Main_Interface::stop_view();
+}
+
+void Main_Interfaces::View_Interface::add_view(int view)
+{
+	View_Interfaces::Main_Interface::add_view(view);
 }
