@@ -55,6 +55,27 @@ target_include_directories(System_Interface
     PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 target_link_libraries(System_Interface PUBLIC Controller Model)
 
+
+set(SYSTEM_MESSAGING_HEADER_FILES 
+                    Messaging/consumers.h
+                    Messaging/system_messaging.h)
+set(SYSTEM_MESSAGING_SOURCE_FILES 
+                    Messaging/src/consumers.cpp
+                    Messaging/src/system_messaging.cpp )
+
+add_library(System_Messaging ${SYSTEM_MESSAGING_SOURCE_FILES} ${SYSTEM_MESSAGING_HEADER_FILES})
+target_include_directories(System_Messaging 
+                            PUBLIC
+                                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"  
+                                "$<INSTALL_INTERFACE:${CMAKE_BINARY_DIR}/inc/System_Messaging>")
+# Set the output directory for build artifacts
+  set_target_properties(System_Messaging
+    PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Messaging"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Messaging"
+    PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+
 set(NETWORK_INTERFACE_HEADERS
                     Network/messages.h
                     Network/system_interfaces/network_interface.h
@@ -100,16 +121,19 @@ IF (CMAKE_HOST_WIN32)
                                 PRIVATE
                                 ${NETWORK_WINDOWS_INTERFACE_HEADERS})
     target_link_libraries(Network wsock32 ws2_32)
-    target_link_libraries(Network iphlpapi iphlpapi)
+    target_link_libraries(Network iphlpapi iphlpapi System_Messaging)
 
 ELSEIF (CMAKE_HOST_UNIX)
     target_include_directories(Network
                                 PRIVATE
                                 ${NETWORK_UNIX_INTERFACE_HEADERS})
-    target_link_libraries(Network pthread)
+    target_link_libraries(Network pthread System_Messaging)
 ENDIF()
+
+
 
 
 install(FILES ${NETWORK_INTERFACE_HEADERS} DESTINATION ${CMAKE_BINARY_DIR}/inc/Network)
 install(FILES ${INTERFACE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface)
 install(FILES ${INTERFACE_TYPE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface/type)
+install(FILES ${SYSTEM_MESSAGING_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/Messaging)

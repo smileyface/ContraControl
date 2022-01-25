@@ -40,4 +40,4 @@ ENDIF()
 
 add_library(View_Library view_main.cpp view_main.h ${FORMAT_INCLUDES} ${VIEW_INCLUDES} ${VIEW_FACTORIES_INCLUDES} ${VIEW_TOOLKIT_INCLUDES} view/views.h ${FORMAT_SOURCE} ${VIEW_SOURCE} ${VIEW_FACTORIES_SOURCE} ${VIEW_TOOLKIT_SOURCE} )
 
-target_link_libraries(View_Library PUBLIC  System_Interface Utilities) 
+target_link_libraries(View_Library PUBLIC  System_Interface System_Messaging Utilities) 

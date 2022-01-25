@@ -1,23 +1,28 @@
 #include "model_main.h"
 
 #include <algorithm>
+#include <thread>
+#include <mutex>
 
 #include "Logging/logging.h"
 #include "Interfaces/types/state.h"
+#include "Messaging/system_messaging.h"
 
+std::thread model_thread;
+std::mutex model_mutex;
 
 Timer model_timer;
 bool model::model_running = true;
 Command_List model::step_actions;
 
-System_Alerts* model::model_alert_interface;
+System_Messages* model::model_message_interface;
 Node model::my_node;
 
 
 void model::initalize()
 {
 	model_timer.reset_clock();
-	model_alert_interface = System_Alerts::get_instance();
+	model_message_interface = System_Messages::get_instance();
 }
 
 Node* model::get_node(Node_Id id)
@@ -70,6 +75,7 @@ void model::step()
 
 void model_loop()
 {
+	model::model_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG, "Loop thread has started", "Model"));
 	while (model::model_running)
 	{
 		model::step();
@@ -79,9 +85,10 @@ void model_loop()
 void model::start_loop()
 {
 	model_running = true;
-	model_alert_interface->push(Alert(ALERT_PRIORITY::INFO, "Model Started", subsystem_name));
+	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Started", subsystem_name));
 
 	//TODO: Thread model loop
+	model_thread = std::thread(model_loop);
 }
 
 void model::stop_loop()
