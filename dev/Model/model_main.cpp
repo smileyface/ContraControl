@@ -87,14 +87,13 @@ void model::start_loop()
 	model_running = true;
 	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Started", subsystem_name));
 
-	//TODO: Thread model loop
 	model_thread = std::thread(model_loop);
 }
 
 void model::stop_loop()
 {
+	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Stopped", subsystem_name));
 	model_running = false;
-	model::clean_up();
 }
 
 
@@ -103,6 +102,7 @@ void model::clean_up()
 {
 	my_node.clear_node();
 	network::teardown_network_interfaces();
+	model_thread.join();
 }
 
 void model::initalize_my_node(Node_Id id, Node_Type type)

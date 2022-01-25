@@ -33,13 +33,14 @@ void controller_loop()
 void controller::start_controller()
 {
 	controller_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Controller Started", subsystem_name));
-
 	controller_thread = std::thread(controller_loop);
 }
 
 void controller::stop_controller()
 {
+	controller_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Controller Stopped", subsystem_name));
 	controller_running = false;
+	controller_thread.join();
 }
 
 void controller::add_command(Timed_Command tc)

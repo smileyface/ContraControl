@@ -17,11 +17,6 @@ void Console_Format::add_view(VIEW_TYPE_ENUM view)
 	view_list.push_back(view_factory(view, DISPLAY_TYPES::CONSOLE));
 }
 
-void Console_Format::start_format()
-{
-	format_running = true;
-}
-
 bool Console_Format::is_running()
 {
 	return format_running;

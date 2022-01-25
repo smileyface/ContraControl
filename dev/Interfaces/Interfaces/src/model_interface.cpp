@@ -26,3 +26,9 @@ void Model_Interfaces::Main_Interface::start_model()
 	model::initalize();
 	model::start_loop();
 }
+
+void Model_Interfaces::Main_Interface::stop_model()
+{
+	model::stop_loop();
+	model::clean_up();
+}

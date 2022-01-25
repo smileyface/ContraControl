@@ -8,7 +8,6 @@ class Console_Format : public Format
 public:
 	void initalize();
 	DISPLAY_TYPES get_display_type() { return DISPLAY_TYPES::CONSOLE; };
-	void start_format();
 	void add_view(VIEW_TYPE_ENUM view);
 
 	bool is_running();

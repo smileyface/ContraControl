@@ -27,6 +27,7 @@ public:
 	 * Let main start the controller.
 	 */
 	static void start_controller();
+	static void stop_controller();
 };
 
 class Main_Interfaces::Model_Interface
@@ -36,6 +37,7 @@ public:
 	 * .Let main initalize the model
 	 */
 	static void start_model();
+	static void stop_model();
 };
 
 /**
@@ -45,8 +47,8 @@ class Main_Interfaces::View_Interface
 {
 public:
 	static void start_view();
-	static int add_display(DISPLAY_TYPES display);
-	static void add_view(VIEW_TYPE_ENUM view);
+	static void stop_view();
+	static void add_view(int view);
 	static void initalize(std::vector<DISPLAY_TYPES> types);
 
 };
