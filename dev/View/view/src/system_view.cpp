@@ -7,7 +7,7 @@
 Console_System_View::Console_System_View()
 {
 	system_id = "System";
-	message_consumer = new Message_Consumer(&stale);
+	message_consumer = new Message_Consumer(stale);
 	System_Messages::get_instance()->register_consumer(message_consumer);
 }
 

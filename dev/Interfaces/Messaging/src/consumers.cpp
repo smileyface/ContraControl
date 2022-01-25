@@ -1,8 +1,8 @@
 #include "Messaging/consumers.h"
 
-Message_Consumer::Message_Consumer(bool* notify)
+Message_Consumer::Message_Consumer(bool& notify)
 {
-	stale = notify;
+	stale = &notify;
 }
 void Message_Consumer::notify()
 {

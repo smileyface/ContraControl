@@ -1,7 +1,6 @@
 #ifndef SYSTEM_MESSAGE_INTERFACE_H
 #define SYSTEM_MESSAGE_INTERFACE_H
 
-#include <vector>
 #include <string>
 
 #include "Messaging/consumers.h"

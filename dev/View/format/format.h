@@ -2,6 +2,7 @@
 #define VIEW_FORMAT_INCLUDE_H
 
 #include <string>
+#include <thread>
 
 #include "Interfaces/enums/view_type_enum.h"
 #include "Interfaces/enums/display_type_enum.h"
@@ -24,6 +25,7 @@ public:
 
 	std::vector<View*> view_list;
 	bool format_running = false;
+	std::thread* looping_thread  = nullptr;
 private:
 };
 

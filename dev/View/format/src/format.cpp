@@ -35,5 +35,5 @@ void Format::clean_views()
 void Format::start_display()
 {
 	format_running = true;
-	loop();
+	looping_thread = new std::thread([this] {this->loop(); });
 }

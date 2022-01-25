@@ -4,7 +4,7 @@
 #include <vector>
 struct Message_Consumer
 {
-	Message_Consumer(bool* stale);
+	Message_Consumer(bool& stale);
 	void notify();
 	void freshen();
 

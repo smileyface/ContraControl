@@ -64,8 +64,8 @@ System_Message get_found_message(Message_Consumer* consumer, std::pair<System_Me
 	System_Message found_message(false);
 	if (it != current_message.second.end())
 	{
-		found_message = current_message.first;
 		std::lock_guard<std::mutex> guard(g_pages_mutex);
+		found_message = current_message.first;
 		current_message.second.erase(it);
 	}
 	return found_message;
