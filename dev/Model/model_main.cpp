@@ -102,7 +102,8 @@ void model::clean_up()
 {
 	my_node.clear_node();
 	network::teardown_network_interfaces();
-	model_thread.join();
+	if(model_thread.joinable())
+		model_thread.join();
 }
 
 void model::initalize_my_node(Node_Id id, Node_Type type)

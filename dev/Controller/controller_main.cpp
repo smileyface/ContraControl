@@ -40,7 +40,8 @@ void controller::stop_controller()
 {
 	controller_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Controller Stopped", subsystem_name));
 	controller_running = false;
-	controller_thread.join();
+	if(controller_thread.joinable())
+		controller_thread.join();
 }
 
 void controller::add_command(Timed_Command tc)
