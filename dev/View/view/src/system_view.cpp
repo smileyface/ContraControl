@@ -2,7 +2,7 @@
 
 #include "../console_format/console_system_view.h"
 
-#include "Alerts/system_alerts.h"
+#include "Messaging/system_messaging.h"
 
 Console_System_View::Console_System_View()
 {

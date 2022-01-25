@@ -13,7 +13,7 @@
 
 #include "Interfaces/types/model_command.h"
 #include "node/node.h"
-#include "Alerts/system_alerts.h"
+#include "Messaging/system_messaging.h"
 
 /**
  * Main brain of the model. It keeps track of nodes and does actions such as looping, stepping through commands given from the Command_Interface, and sending nodes commands to run with devices.

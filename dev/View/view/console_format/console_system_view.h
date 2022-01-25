@@ -3,7 +3,7 @@
 #include <string>
 
 #include "console_view.h"
-#include "Alerts/consumers.h"
+#include "Messaging/consumers.h"
 
 class Console_System_View : public Console_View
 {

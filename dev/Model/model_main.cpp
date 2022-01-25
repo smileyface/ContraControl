@@ -6,7 +6,7 @@
 
 #include "Logging/logging.h"
 #include "Interfaces/types/state.h"
-
+#include "Messaging/system_messaging.h"
 
 std::thread model_thread;
 std::mutex model_mutex;

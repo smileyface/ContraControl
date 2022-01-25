@@ -4,8 +4,7 @@
 #include <vector>
 #include <string>
 
-
-#include "Alerts/consumers.h"
+#include "Messaging/consumers.h"
 
 /**
  Level of the alert.
