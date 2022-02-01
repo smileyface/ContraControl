@@ -10,13 +10,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
-  build:
-    name: cppcheck-test
+  c-linter:
+    name: c-linter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-          
-      - name: C/C++ code linter (clang-tidy, clang-format, and cppcheck)
-        uses: ArtificialAmateur/cpp-linter-action@0.01
+      - name: c-linter
+        uses: ArtificialAmateur/clang-tidy-action@master
     env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
