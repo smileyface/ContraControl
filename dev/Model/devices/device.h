@@ -12,8 +12,6 @@
 
 #include "Interfaces/types/device_label.h"
 #include "Interfaces/types/channel.h"
-
-#include "Interfaces/types/view_capable.h"
  /**
   *  A list of types of devices.
   */
@@ -48,7 +46,7 @@ static uint16_t device_id_pool = 0;
  *  \endcond
  * An output.
  */
-class Device : public View_Capable
+class Device
 {
 public:
 	Device() { };

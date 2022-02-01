@@ -21,6 +21,9 @@
  */
 namespace controller
 {
+	/**
+	 * .The string of the namespace name. This is for locating Messages.
+	 */
 	static const char* subsystem_name = "Controller";
 	/**
 	 Is controller loop running

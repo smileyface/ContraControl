@@ -8,10 +8,6 @@
 * \todo rename to device_commands
 */
 /**
-* \dir transitions
-* \brief Commands to move a devices position.
-*/
-/**
 * \dir Controller/commands/common/
 * \brief Commands common to all devices.
 */
