@@ -20,7 +20,7 @@ jobs:
         uses: deep5050/cppcheck-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN}}
-          other_options: --bug-hunting --verbose
+          other_options: --bug-hunting --verbose --cppcheck-build-dir=dev
           
         
       - name: publish report    
