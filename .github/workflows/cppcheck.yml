@@ -16,15 +16,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
           
-      - name: cppcheck
-        uses: deep5050/cppcheck-action@main
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN}}
-          other_options: --bug-hunting --verbose --cppcheck-build-dir=dev
-          
-        
-      - name: publish report    
-        uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: 'cppcheck' # your branch name goes here
+      - name: C/C++ code linter (clang-tidy, clang-format, and cppcheck)
+        uses: ArtificialAmateur/cpp-linter-action@0.01
