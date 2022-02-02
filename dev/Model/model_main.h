@@ -106,7 +106,7 @@ namespace model {
 	 * \param id Name of the local node.
 	 * \param type Type of node.
 	 */
-	void initalize_my_node(Node_Id id, Node_Type type);
+	void initalize_my_node(Node_Id id);
 
 	/**
 	 * .Add a command to the Model from the an interface.

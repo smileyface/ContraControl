@@ -23,6 +23,7 @@ void model::initalize()
 {
 	model_timer.reset_clock();
 	model_message_interface = System_Messages::get_instance();
+	initalize_my_node("LOCAL");
 }
 
 Node* model::get_node(Node_Id id)
@@ -106,9 +107,9 @@ void model::clean_up()
 		model_thread.join();
 }
 
-void model::initalize_my_node(Node_Id id, Node_Type type)
+void model::initalize_my_node(Node_Id id)
 {
-	my_node.initalize_local_control(id, type);
+	my_node.initalize_local_control(id);
 }
 
 /**

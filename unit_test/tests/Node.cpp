@@ -8,7 +8,7 @@ namespace {
 	class NodeTest : public ::testing::Test {
 		virtual void SetUp() {
 			system_util::setup();
-			device_utilities::setup_node("Test_Node_Local", Node_Type::TEST);
+			device_utilities::setup_node("Test_Node_Local");
 		}
 		virtual void TearDown() {
 			system_util::cleanup();
