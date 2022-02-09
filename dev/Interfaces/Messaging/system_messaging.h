@@ -97,9 +97,9 @@ public:
 	 * Get the first message from the Message Relay for a Message Consumer.
 	 * 
 	 * \param mc Pointer to the consumer requesting to get its messages.
-	 * \return vector of messages on the relay for the requesting Consumer.
+	 * \return first message on the relay for the requesting Consumer.
 	 */
-	std::vector<System_Message> pop(Message_Consumer* mc);
+	System_Message pop(Message_Consumer* mc);
 	/**
 	 * Get instance of the singleton.
 	 * \return Instance of the message relay.

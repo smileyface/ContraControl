@@ -76,19 +76,38 @@ bool remove_func(std::pair<System_Message, Consumer_List> Message_Data)
 	return Message_Data.second.size() == 0;
 }
 
-std::vector<System_Message> System_Messages::pop(Message_Consumer* consumer)
+bool more_messages(Message_Consumer* consumer, std::vector<std::pair<System_Message, Consumer_List>> messages)
 {
-	std::vector<System_Message> list_of_captured_message;
+	for (int i = 0; i < messages.size(); i++)
+	{
+		auto it = std::find(messages[i].second.begin(), messages[i].second.end(), consumer);
+		if (it != messages[i].second.end())
+		{
+			return true;
+		}
+	} 
+	return false;
+}
 
+System_Message System_Messages::pop(Message_Consumer* consumer)
+{
+	System_Message message(false);
 	for (int i = 0; i < list_of_message.size(); i++)
 	{
-		list_of_captured_message.push_back(get_found_message(consumer, list_of_message[i]));
+		message = get_found_message(consumer, list_of_message[i]);
+		if (message.valid_message == true)
+		{
+			break;
+		}
 	}
 	
 	auto it = std::remove_if(list_of_message.begin(), list_of_message.end(), remove_func);
 	list_of_message.erase(it, list_of_message.end());
-	consumer->freshen();
-	return list_of_captured_message;
+
+	//if we don't have another message on the relay
+	if(!more_messages(consumer, list_of_message))
+		consumer->freshen();
+	return message;
 }
 
 void System_Messages::register_consumer(Message_Consumer* mc)
