@@ -104,7 +104,6 @@ namespace model {
 	/**
 	 * Initalize the node that controls the local devices.
 	 * \param id Name of the local node.
-	 * \param type Type of node.
 	 */
 	void initalize_my_node(Node_Id id);
 

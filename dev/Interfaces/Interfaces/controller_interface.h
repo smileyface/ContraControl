@@ -20,8 +20,6 @@ public:
 	class Main_Interface;
 };
 
-void start_controller();
-
 /**
  Controller interface to the Model
  */
@@ -44,7 +42,9 @@ public:
 
 };
 
-
+/**
+ Controller interface to the Main thread
+ */
 class Controller_Interfaces::Main_Interface {
 public:
 	static void start_controller();

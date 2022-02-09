@@ -123,7 +123,6 @@ public:
 	/**
 	 Make the identified node the local node.
 	 \param id The id of the local node
-	 \param type The type of node for the Viewer to determine how to display.
 	 */
 	void initalize_local_control(Node_Id id)
 	{

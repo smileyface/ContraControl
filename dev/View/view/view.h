@@ -5,7 +5,9 @@
 #include <string>
 
 /**
- * A way to view the model. This parent class is meant to be extended to handle a viewing interface, such as the console, a string of lights, or a windows UI. 
+ * \brief way to view a Device. 
+ * 
+ * This parent class is meant to be extended to handle a viewing interface looking at a specific device, such as a system message, or a channel state. 
  */
 class View
 {
@@ -40,6 +42,7 @@ public:
     virtual void on_quit() {};
     /**
      * Send a direct command to the View. To be handled in a callback.
+     * \param command Command to be sent to the View.
      */
     virtual void on_command(unsigned int command) {};
     /**
@@ -53,14 +56,5 @@ protected:
      */
     bool stale = true;
 };
-
-struct RGB
-{
-	unsigned char red;
-	unsigned char green;
-	unsigned char blue;
-};
-
-typedef std::string View_Handle;
 
 #endif

@@ -30,6 +30,9 @@ public:
 	static void stop_controller();
 };
 
+/**
+ * Main interfaces to the model.
+ */
 class Main_Interfaces::Model_Interface
 {
 public:

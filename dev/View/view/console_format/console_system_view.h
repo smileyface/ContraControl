@@ -5,6 +5,7 @@
 #include "console_view.h"
 #include "Messaging/consumers.h"
 
+/** View for System_Messages on the Console */
 class Console_System_View : public Console_View
 {
 public:
