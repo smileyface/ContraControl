@@ -1,84 +1,140 @@
 #include "model_main.h"
 
-#include "types.h"
-#include "../Interfaces/model_interface.h"
-#include "../Controller/Commands/common/initalize.h"
-#include "../Utilities/Logging/logging.h"
+#include <algorithm>
+#include <thread>
+#include <mutex>
+
+#include "Logging/logging.h"
+#include "Interfaces/types/state.h"
+#include "Messaging/system_messaging.h"
+
+std::thread model_thread;
+std::mutex model_mutex;
 
 Timer model_timer;
-
-std::map<Device_Name, Device*> model::known_devices;
 bool model::model_running = true;
+Command_List model::step_actions;
 
-std::vector<Model_Command> model::step_actions;
-std::map<Device_Id, Device_Name> model::id_map;
+System_Messages* model::model_message_interface;
+Node model::my_node;
 
-Device* model::get_device(Device_Id device_id)
-{
-	if (known_devices[id_map[device_id]] == nullptr)
-	{
-		Logger::getInstance()->addItem(LOG_PRIORITY::ERROR, "Invalid Device Id Called", "INVALID");
-		throw - 1;
-	}
-	return known_devices[id_map[device_id]];
-}
-
-Device* model::get_device(Device_Name device_name)
-{
-	return known_devices[device_name];
-}
 
 void model::initalize()
 {
-	std::map<Device_Name, Device*>::iterator it;
-	for (it = known_devices.begin(); it != known_devices.end(); it++) {
-		id_map[it->second->get_id()] = it->first;
-	}
+	model_timer.reset_clock();
+	model_message_interface = System_Messages::get_instance();
+	initalize_my_node("LOCAL");
 }
-void model::add_device(std::string name, Device* device)
+
+Node* model::get_node(Node_Id id)
 {
-	model::known_devices.emplace(name, device);
+	if (my_node.get_id() == id)
+	{
+		return &my_node;
+	}
+	return my_node.get_connection(id);
+}
+
+void model::create_node(Node_Type type, Node_Id id)
+{
+	my_node.add_connection(type, id);
+}
+
+Device* model::get_device(Device_Label label)
+{
+	return model::get_node(label.get_node_id())->get_device(label.get_device_id());
+}
+
+
+template <typename T>
+void mangle_model(T* command, Device* device)
+{
+	state_interfaces::mangle_state(command, device);
+
 }
 
 void model::step()
 {
-	std::vector<int> completed_index = model::run_commands();
+	for (Command_List::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
+	{
+		try 
+		{
+			mangle_model(it->command, model::get_device(it->label));
+			it->command->time_to_complete -= model_timer.get_elapsed_time();
 
-	for (size_t i = 0; i < completed_index.size(); i++) {
-		model::step_actions.erase(step_actions.begin() + completed_index[i]);
+		}
+		catch (std::exception&)
+		{
+			model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
+			std::rethrow_exception(std::current_exception());
+		}
 	}
+
 	model_timer.update_time();
+	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
+}
+
+void model_loop()
+{
+	model::model_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG, "Loop thread has started", "Model"));
+	while (model::model_running)
+	{
+		model::step();
+	}
+}
+
+void model::start_loop()
+{
+	model_running = true;
+	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Started", subsystem_name));
+
+	model_thread = std::thread(model_loop);
 }
 
 void model::stop_loop()
 {
+	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Stopped", subsystem_name));
 	model_running = false;
 }
 
+
+
 void model::clean_up()
 {
-	model::known_devices.erase(model::known_devices.begin(), model::known_devices.end());
+	my_node.clear_node();
+	network::teardown_network_interfaces();
+	if(model_thread.joinable())
+		model_thread.join();
 }
 
-std::vector<int> model::run_commands()
+void model::initalize_my_node(Node_Id id)
 {
-	std::vector<int> completed_index;
-	for (int i = 0; i < model::step_actions.size(); i++) {
-
-			model::get_device(model::step_actions[i].id)->run_command(model::step_actions[i].command);
-			model::system_commands(model::step_actions[i].command);
-			if(model::step_actions[i].command->completed())
-				completed_index.push_back(i);
-
-	}
-	return completed_index;
+	my_node.initalize_local_control(id);
 }
 
-void model::system_commands(Command* commands)
+/**
+ *  \cond
+ */
+struct compare
 {
-	if (commands->get_id() == COMMAND_ENUM::INITALIZE)
+	Model_Command key;
+	compare(Model_Command const& i) : key(i) {}
+	bool operator()(Model_Command const& i)
 	{
-		model::id_map.clear();
-		model::initalize();
+		bool same_command = key.command == i.command;
+		bool same_device = key.label == i.label;
+		return same_command && same_device;
+	}
+};
+/**
+ * \endcond
+ */
+
+void model::command_model(Model_Command command)
+{
+	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(command));
+	if (found == model::step_actions.end() || model::step_actions.size() == 0)
+	{
+		model::step_actions.emplace_back(command);
 	}
 }

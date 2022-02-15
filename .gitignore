@@ -41,10 +41,10 @@ build/*
 #CMake
 out/*
 .cache/*
-/dev/out/build/x64-Debug (default)
 
 #Testing Extras
 test/googletest*
+googletest-*
 Test
 
 #CMake Extras
@@ -60,3 +60,16 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+#VS Extras
+*.dir/Debug
+*.vcxproj.*
+*.vcxproj
+*.tlog
+Debug
+*.pdb
+*.sln
+
+#Doxygen
+*/out/documents/*
+/.github/check-cppcheck-build-dir
+/.github/check.cppcheck

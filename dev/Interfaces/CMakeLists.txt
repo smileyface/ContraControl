@@ -1,11 +1,139 @@
-set(INTERFACE_HEADER_FILES 
-                    controller_interface.h
-                    model_interface.h
-                    view_interface.h 
-                    common_objects.h)
-set(INTERFACE_SOURCE_FILES 
-                    controller_interface.cpp
-                    model_interface.cpp
-    )
+###############################
+#
+#Interface CMake build file.
+#
+###############################
 
-add_library(Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
+macro(print_all_variables)
+    message(STATUS "print_all_variables------------------------------------------{")
+    get_cmake_property(_variableNames VARIABLES)
+    foreach (_variableName ${_variableNames})
+        message(STATUS "${_variableName}=${${_variableName}}")
+    endforeach()
+    message(STATUS "print_all_variables------------------------------------------}")
+endmacro()
+
+
+if(NOT HOME)
+  if(WIN32)
+    string(REPLACE "\\" "/" HOME "$ENV{USERPROFILE}")
+  else()
+    set(HOME $ENV{HOME})
+  endif()
+endif()
+
+set(INTERFACE_HEADER_FILES 
+                    Interfaces/controller_interface.h
+                    Interfaces/model_interface.h
+                    Interfaces/view_interface.h 
+                    Interfaces/main_interface.h)
+set(INTERFACE_SOURCE_FILES 
+                    Interfaces/src/controller_interface.cpp
+                    Interfaces/src/model_interface.cpp
+                    Interfaces/src/main_interface.cpp  "Interfaces/src/view_interface.cpp")
+set(INTERFACE_TYPE_HEADER_FILES
+                    Interfaces/types/model_command.h 
+                    Interfaces/types/timed_command.h 
+                    Interfaces/types/device_label.h
+                    Interfaces/types/state.h
+                    Interfaces/types/channel.h
+                    Interfaces/types/command_interface.h
+                    Interfaces/types/view_capable.h
+                    Interfaces/enums/display_type_enum.h
+                    Interfaces/enums/view_type_enum.h)
+
+add_library(System_Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
+target_include_directories(System_Interface 
+                            PUBLIC
+                                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"  
+                                "$<INSTALL_INTERFACE:${CMAKE_BINARY_DIR}/inc/System_Interface>")
+# Set the output directory for build artifacts
+  set_target_properties(System_Interface
+    PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Interfaces"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Interfaces"
+    PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+target_link_libraries(System_Interface PUBLIC Controller Model)
+
+
+set(SYSTEM_MESSAGING_HEADER_FILES 
+                    Messaging/consumers.h
+                    Messaging/system_messaging.h)
+set(SYSTEM_MESSAGING_SOURCE_FILES 
+                    Messaging/src/consumers.cpp
+                    Messaging/src/system_messaging.cpp )
+
+add_library(System_Messaging ${SYSTEM_MESSAGING_SOURCE_FILES} ${SYSTEM_MESSAGING_HEADER_FILES})
+target_include_directories(System_Messaging 
+                            PUBLIC
+                                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"  
+                                "$<INSTALL_INTERFACE:${CMAKE_BINARY_DIR}/inc/System_Messaging>")
+# Set the output directory for build artifacts
+  set_target_properties(System_Messaging
+    PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Messaging"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Messaging"
+    PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+
+set(NETWORK_INTERFACE_HEADERS
+                    Network/messages.h
+                    Network/system_interfaces/network_interface.h
+                    Network/system_interfaces/types/ipv4_addr.h
+                    Network/system_interfaces/types/network_status_state.h)
+set(NETWORK_INTERFACE_SOURCE
+                    Network/src/connections.cpp
+                    Network/src/network_interface.cpp
+                    Network/src/windows_network_interface.cpp
+                    Network/src/linux_network_interface.cpp
+                    Network/src/ipv4_addr.cpp
+                    Network/src/network_status_state.cpp)
+set(NETWORK_WINDOWS_INTERFACE_HEADERS
+                    Network/system_interfaces/windows_network_interface.h)
+set(NETWORK_UNIX_INTERFACE_HEADERS
+                    Network/system_interfaces/unix_network_interface.h)
+set(NETWORK_MESSAGE_HEADERS
+                    Network/messages/messaging.h
+                    Network/messages/node_communication.h)
+set(NETWORK_MESSAGE_SOURCE
+                    Network/src/messaging.cpp
+                    Network/src/send_message.cpp)
+
+add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE})
+target_include_directories(Network 
+                            PUBLIC
+                                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"  
+                                "$<INSTALL_INTERFACE:${CMAKE_BINARY_DIR}/inc/Network>"
+                            PRIVATE ${NETWORK_MESSAGE_HEADERS})
+target_sources(Network
+               PRIVATE
+                 ${NETWORK_MESSAGE_SOURCE})
+
+# Set the output directory for build artifacts
+  set_target_properties(Network
+    PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Network"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Network"
+    PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+IF (CMAKE_HOST_WIN32)
+    target_include_directories(Network
+                                PRIVATE
+                                ${NETWORK_WINDOWS_INTERFACE_HEADERS})
+    target_link_libraries(Network wsock32 ws2_32)
+    target_link_libraries(Network iphlpapi iphlpapi System_Messaging)
+
+ELSEIF (CMAKE_HOST_UNIX)
+    target_include_directories(Network
+                                PRIVATE
+                                ${NETWORK_UNIX_INTERFACE_HEADERS})
+    target_link_libraries(Network pthread System_Messaging)
+ENDIF()
+
+
+
+
+install(FILES ${NETWORK_INTERFACE_HEADERS} DESTINATION ${CMAKE_BINARY_DIR}/inc/Network)
+install(FILES ${INTERFACE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface)
+install(FILES ${INTERFACE_TYPE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface/type)
+install(FILES ${SYSTEM_MESSAGING_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/Messaging)

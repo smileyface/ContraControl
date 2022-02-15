@@ -1,23 +1,17 @@
-
 set(MODEL_DEVICES_HEADER_FILES 
-                    devices/basic/device.h
-                    devices/basic/gradient.h
-                    devices/basic/switch.h
-                    devices/basic/channel.h
-                    devices/single_complex/audio.h
+                    devices/device.h
                     device.h )
 
 set(MODEL_SYSTEM_HEADER_FILES
                     system/timer.h)
 
-set(MODEL_STATE_HEADER_FILES
-                    state/state.h)
+set(MODEL_NODE_HEADER_FILES
+                    node/node.h)
+
 set(MODEL_HEADER_FILES 
-                    actions.h
-                    device.h
-                    types.h  "state/rgb.h")
+                    device.h)
+                    
 
-
-add_library(Model model_main.cpp ${MODEL_DEVICES_HEADER_FILES} ${MODEL_HEADER_FILES} ${MODEL_SYSTEM_HEADER_FILES})
-target_link_libraries(Model Utilities Interface)
+add_library(Model model_main.cpp ${MODEL_DEVICES_HEADER_FILES} ${MODEL_SYSTEM_HEADER_FILES} ${MODEL_NODE_HEADER_FILES} ${MODEL_HEADER_FILES})
+target_link_libraries(Model PUBLIC  System_Interface System_Messaging Utilities Network)
 set_property(TARGET Model PROPERTY CXX_STANDARD 11)
