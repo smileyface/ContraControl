@@ -15,7 +15,7 @@ namespace device_utilities
 	MODEL MANIPULATION
 	*/
 
-	void setup_node(Node_Id, Node_Type);
+	void setup_node(Node_Id);
 	/*
 	Create node in the model.
 	*/

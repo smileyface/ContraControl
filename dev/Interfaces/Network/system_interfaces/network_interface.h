@@ -8,7 +8,6 @@
 #ifndef NETWORK_SYSTEM_INTERFACE
 #define NETWORK_SYSTEM_INTERFACE
 
-#include <string>
 #include "Network/messages.h"
 #include "types/ipv4_addr.h"
 #include "types/network_status_state.h"

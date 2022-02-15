@@ -12,7 +12,6 @@ set(UTILITIES_HEADER_FILES
                     "Utilities/save_reader.h"
                     "Utilities/timer.h"
                     "Utilities/utils.h"
-                    "Utilities/system.h"
                     "Utilities/exceptions.h" )
 set(UTILITIES_SOURCE_FILES
                     "Logging/logging.cpp"

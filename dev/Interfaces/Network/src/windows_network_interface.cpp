@@ -219,9 +219,9 @@ void Windows_Network_Interface::connect_to_server(ipv4_addr addr)
 void Windows_Network_Interface::scan_for_server()
 {
 
-	std::vector<ipv4_addr> possibilites = scan_for_possibilities(sock, my_ip, status_state);
+	//std::vector<ipv4_addr> possibilites = scan_for_possibilities(sock, my_ip, status_state);
 
-	std::vector<std::thread> thread_queue;
+	//std::vector<std::thread> thread_queue;
 	/*for (int i = 0; i < possibilites.size(); i++)
 	{
 		thread_queue.emplace_back(&Windows_Network_Interface::connect_to_server, this, possibilites[i]);

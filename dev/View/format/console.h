@@ -1,16 +1,26 @@
+/*****************************************************************//**
+ * \file   console.h
+ * \brief
+ *
+ * \author kason
+ * \date   February 2022
+ *********************************************************************/
+
 #ifndef CONSOLE_DISPLAY_VIEW_H
 #define CONSOLE_DISPLAY_VIEW_H
 
 #include "format.h"
 
+/**
+ * Interface for Console UI.
+ */
 class Console_Format : public Format
 {
 public:
 	void initalize();
-	DISPLAY_TYPES get_display_type() { return DISPLAY_TYPES::CONSOLE; };
 	void add_view(VIEW_TYPE_ENUM view);
 
-	bool is_running();
+protected:
 	void loop();
 
 

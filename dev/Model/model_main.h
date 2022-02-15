@@ -21,6 +21,9 @@
  * \todo Include logging of model state.
  */
 namespace model {
+	/**
+	 * .The string of the namespace name. This is for locating Messages.
+	 */
 	static const char* subsystem_name = "Model";
 	/**
 	 Is the model looping
@@ -80,9 +83,16 @@ namespace model {
 
 	/**
 	 * \brief Start shutting down the model.
+	 * 
+	 * Shuts down the Model execution loop.
 	 */
 	void stop_loop();
 
+	/**
+	 * \brief Start up the Model loop.
+	 * 
+	 * Spawns a thread for the Model to be run in.
+	 */
 	void start_loop();
 
 	/**
@@ -94,10 +104,13 @@ namespace model {
 	/**
 	 * Initalize the node that controls the local devices.
 	 * \param id Name of the local node.
-	 * \param type Type of node.
 	 */
-	void initalize_my_node(Node_Id id, Node_Type type);
+	void initalize_my_node(Node_Id id);
 
+	/**
+	 * .Add a command to the Model from the an interface.
+	 * \param command The command to run.
+	 */
 	void command_model(Model_Command command);
 
 	/**

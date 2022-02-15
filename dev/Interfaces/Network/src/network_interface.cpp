@@ -1,7 +1,5 @@
 #include <string>
 
-#include "../Utilities/Utilities/system.h"
-
 #include "Network/system_interfaces/network_interface.h"
 #ifdef _WIN32
 #include "Network/system_interfaces/windows_network_interface.h"

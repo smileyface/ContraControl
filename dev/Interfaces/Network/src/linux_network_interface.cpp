@@ -184,7 +184,7 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr my_ip, Network_Status_State& st
 std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Network_Status_State& status_state)
 {
  	ipv4_addr subnet_mask = get_subnet_mask(sock, my_addr, status_state);
-	ipv4_addr host_mask = ~subnet_mask.S_un.S_addr;
+	//ipv4_addr host_mask = ~subnet_mask.S_un.S_addr;
 	ipv4_addr subnet = my_addr.S_un.S_addr & subnet_mask.S_un.S_addr;
 
 	std::map<ipv4_addr, DWORD> addresses;

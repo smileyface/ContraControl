@@ -71,3 +71,5 @@ Debug
 
 #Doxygen
 */out/documents/*
+/.github/check-cppcheck-build-dir
+/.github/check.cppcheck

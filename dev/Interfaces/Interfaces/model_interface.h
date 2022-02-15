@@ -41,12 +41,20 @@ public:
 
 };
 
+/**
+ Model interface to the Main Thread.
+ */
 class Model_Interfaces::Main_Interface
 {
 public:
+	/**
+	 * Starts the Model execution loop.
+	 */
 	static void start_model();
+	/**
+	 * Stops the Model execution loop.
+	 */
 	static void stop_model();
-	static void add_view(int view_type);
 };
 
 #endif // !MODEL_COMMAND_INTERFACE

@@ -12,8 +12,6 @@
 
 #include "Interfaces/types/device_label.h"
 #include "Interfaces/types/channel.h"
-
-#include "Interfaces/types/view_capable.h"
  /**
   *  A list of types of devices.
   */
@@ -48,10 +46,16 @@ static uint16_t device_id_pool = 0;
  *  \endcond
  * An output.
  */
-class Device : public View_Capable
+class Device
 {
 public:
+	/** Default constructor */
 	Device() { };
+	/**
+	 * Constructor that creates number of channels that the device has.
+	 *  \param type_of_device Device type for the views.
+	 * \param number_of_channels Channels to be added to this device type.
+	 */
 	Device(DEVICE_IDENTIFIER type_of_device, int number_of_channels)
 	{
 		type = type_of_device;
@@ -185,6 +189,8 @@ public:
 
 	/**
 	 * Set channel value
+	 * \param channel Channel to set the value of.
+	 * \param value Value to set Channel to.
 	 */
 	void set_channel(int channel, Channel value)
 	{
@@ -200,6 +206,7 @@ protected:
 	 */
 	Device_Name device_name = "INVALID";
 
+	/** Type of device. This is so the UI knows how to handle this device. */
 	DEVICE_IDENTIFIER type = DEVICE_IDENTIFIER::DEVICE;
 };
 

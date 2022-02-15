@@ -20,9 +20,9 @@ Device* device_utilities::get_nominal_state(DEVICE_IDENTIFIER device, Command* c
 	return ds;
 }
 
-void device_utilities::setup_node(Node_Id id, Node_Type type)
+void device_utilities::setup_node(Node_Id id)
 {
-	model::initalize_my_node(id, type);
+	model::initalize_my_node(id);
 }
 
 void device_utilities::create_node(Node_Id id)

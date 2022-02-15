@@ -123,12 +123,10 @@ public:
 	/**
 	 Make the identified node the local node.
 	 \param id The id of the local node
-	 \param type The type of node for the Viewer to determine how to display.
 	 */
-	void initalize_local_control(Node_Id id, Node_Type type)
+	void initalize_local_control(Node_Id id)
 	{
 		my_id = id;
-		my_type = type;
 		network::init_network_interfaces();
 	}
 

@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   main_interface.h
+ * \brief
+ *
+ * \author kason
+ * \date  February 2022
+ *********************************************************************/
+
 #ifndef MAIN_CONTROLLER_INTERFACE_H
 #define MAIN_CONTROLLER_INTERFACE_H
 
@@ -24,19 +32,24 @@ class Main_Interfaces::Controller_Interface
 {
 public:
 	/**
-	 * Let main start the controller.
+	 * Let main start the controller thread.
 	 */
 	static void start_controller();
+	/** Let main stop and join the controller thread. */
 	static void stop_controller();
 };
 
+/**
+ * Main interfaces to the model.
+ */
 class Main_Interfaces::Model_Interface
 {
 public:
 	/**
-	 * .Let main initalize the model
+	 * Let main start the model thread.
 	 */
 	static void start_model();
+	/** Let main stop and join the model thread. */
 	static void stop_model();
 };
 
@@ -46,10 +59,15 @@ public:
 class Main_Interfaces::View_Interface
 {
 public:
+	/** Allow the Main thread to start the View Threads.*/
 	static void start_view();
+	/** Allow the Main thread to stop and join all the Format threads */
 	static void stop_view();
+	/**
+	 * Add a view based on the DISPLAY_TYPES enum.
+	 * \param view Type of view to add. Reference the DISPLAY_TYPES enum for which value to pass.
+	 */
 	static void add_view(int view);
-	static void initalize(std::vector<DISPLAY_TYPES> types);
 
 };
 #endif // !MODEL_CONTROLLER_INTERFACE_H

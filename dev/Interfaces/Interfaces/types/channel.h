@@ -12,6 +12,9 @@
  */
 typedef unsigned char Channel;
 
+/**
+ * Value of a channel that is unusued. 
+ */
 const Channel UNUSED = 0;
 
 #endif
