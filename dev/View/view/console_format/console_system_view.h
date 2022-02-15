@@ -1,6 +1,13 @@
+/*****************************************************************//**
+ * \file   console_system_view.h
+ * \brief
+ *
+ * \author kason
+ * \date   February 2022
+ *********************************************************************/
+
 #ifndef CONSOLE_SYSTEM_VIEW_H
 #define CONSOLE_SYSTEM_VIEW_H
-#include <string>
 
 #include "console_view.h"
 #include "Messaging/consumers.h"
@@ -14,9 +21,6 @@ public:
     void on_display();
     void on_refresh();
     void on_paint();
-
-    void display_message();
-    void set_system_id(std::string id);
 private:
 	std::string system_id;
     std::string message;

@@ -1,7 +1,14 @@
+/*****************************************************************//**
+ * \file   view.h
+ * \brief 
+ *
+ * \author kason
+ * \date   February 2022
+ *********************************************************************/
+
 #ifndef VIEW
 #define VIEW
 
-#include <vector>
 #include <string>
 
 /**

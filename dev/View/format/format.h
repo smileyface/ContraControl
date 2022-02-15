@@ -1,7 +1,16 @@
+/*****************************************************************//**
+ * \file   format.h
+ * \brief
+ *
+ * \author kason
+ * \date   February 2022
+ *********************************************************************/
+
 #ifndef VIEW_FORMAT_INCLUDE_H
 #define VIEW_FORMAT_INCLUDE_H
 
-#include <string>
+
+#include <vector>
 #include <thread>
 
 #include "Interfaces/enums/view_type_enum.h"

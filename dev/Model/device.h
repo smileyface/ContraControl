@@ -11,7 +11,7 @@
 
 #include <map>    //std::map
 
-#include "Interfaces/types/device_label.h"
+//#include "Interfaces/types/device_label.h"
 
 #include "devices/device.h"
 //#include "devices/switch.h"

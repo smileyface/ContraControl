@@ -47,7 +47,9 @@ public:
  */
 class Controller_Interfaces::Main_Interface {
 public:
+	/** Allows the main thread to spawn a controller thread. */
 	static void start_controller();
+	/** Allows the main thread to stop and join the controller thread. */
 	static void stop_controller();
 
 };

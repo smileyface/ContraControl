@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   console.h
+ * \brief
+ *
+ * \author kason
+ * \date   February 2022
+ *********************************************************************/
+
 #ifndef CONSOLE_DISPLAY_VIEW_H
 #define CONSOLE_DISPLAY_VIEW_H
 

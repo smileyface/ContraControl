@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   view_interface.h
+ * \brief 
+ *
+ * \author kason
+ * \date   February 2022
+ *********************************************************************/
+
 #ifndef MODEL_VIEW_INTERFACE
 #define MODEL_VIEW_INTERFACE
 
