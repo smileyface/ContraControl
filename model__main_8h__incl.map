@@ -1,0 +1,25 @@
+<map id="model_main.h" name="model_main.h">
+<area shape="rect" id="node1" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="311,5,414,32"/>
+<area shape="rect" id="node2" href="$_model_2system_2timer_8h.html" title=" " alt="" coords="81,87,188,114"/>
+<area shape="rect" id="node4" title=" " alt="" coords="212,80,367,121"/>
+<area shape="rect" id="node5" href="$node_8h.html" title=" " alt="" coords="391,87,483,114"/>
+<area shape="rect" id="node21" href="$system__messaging_8h.html" title=" " alt="" coords="768,87,979,114"/>
+<area shape="rect" id="node3" title=" " alt="" coords="73,169,197,211"/>
+<area shape="rect" id="node6" href="$device_8h.html" title=" " alt="" coords="229,177,309,203"/>
+<area shape="rect" id="node12" title=" " alt="" coords="365,169,489,211"/>
+<area shape="rect" id="node13" href="$network__interface_8h.html" title=" " alt="" coords="513,169,695,211"/>
+<area shape="rect" id="node7" title=" " alt="" coords="139,266,186,293"/>
+<area shape="rect" id="node8" href="$devices_2device_8h.html" title=" " alt="" coords="210,266,329,293"/>
+<area shape="rect" id="node9" title=" " alt="" coords="5,355,72,382"/>
+<area shape="rect" id="node10" title=" " alt="" coords="96,348,253,389"/>
+<area shape="rect" id="node11" href="$channel_8h.html" title=" " alt="" coords="278,355,453,382"/>
+<area shape="rect" id="node14" href="$messages_8h.html" title=" " alt="" coords="373,266,518,293"/>
+<area shape="rect" id="node18" href="$ipv4__addr_8h.html" title=" " alt="" coords="543,266,665,293"/>
+<area shape="rect" id="node20" href="$network__status__state_8h.html" title=" " alt="" coords="689,259,836,300"/>
+<area shape="rect" id="node15" href="$node__communication_8h.html" title=" " alt="" coords="477,355,696,382"/>
+<area shape="rect" id="node16" href="$messaging_8h.html" title=" " alt="" coords="539,437,634,464"/>
+<area shape="rect" id="node17" title=" " alt="" coords="556,512,617,539"/>
+<area shape="rect" id="node19" title=" " alt="" coords="783,355,838,382"/>
+<area shape="rect" id="node22" href="$consumers_8h.html" title=" " alt="" coords="911,177,1073,203"/>
+<area shape="rect" id="node23" title=" " alt="" coords="963,266,1021,293"/>
+</map>
