@@ -16,3 +16,7 @@ This is a controller for various purposes. It is being designed for the purpose 
 - Various other fixes
 
 0.0.4 UI Generalizing
+- Initial sketch of UI.
+
+0.0.5
+This version adds Nodes, Networks, Messaging, and Threading. Nothing is in it's final design yet, thus continuing the designation NaughtNaught.
