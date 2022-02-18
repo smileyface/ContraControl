@@ -49,18 +49,19 @@ target_link_libraries(Static_Test gtest_main Test_Utilities)
 add_test(Devices Static_Test)
 
 
-#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
 
-#SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
 IF(CMAKE_COMPILER_IS_GNUCXX)
   include(CodeCoverage.cmake)
+
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
+
+  SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+
   SETUP_TARGET_FOR_COVERAGE_COBERTURA(
-		    my_coverage_target  # Name for custom target.
+        cov  # Name for custom target.
 		    Static_Test         # Name of the test driver executable that runs the tests.
 							    # NOTE! This should always have a ZERO as exit code
 							    # otherwise the coverage generation will not complete.
 		    coverage            # Name of output directory.
   )
 ENDIF() # NOT CMAKE_COMPILER_IS_GNUCXX
-
-
