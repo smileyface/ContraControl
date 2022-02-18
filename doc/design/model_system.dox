@@ -1,0 +1,12 @@
+/*!
+\page model_design Model
+The model is the programs view of the world.
+
+\section node_design Node
+Nodes represent a device that controls devices. It is generally a computer, such as a Raspberry Pi
+or Arduino. It can also be a Windows 10 desktop that sends commands to a Raspberry Pi that controls
+a string of lights, or series of servos. As such, a node can be connected to other nodes via network. 
+See \ref network_interface_design for more information.
+
+\section device_design Device
+*/

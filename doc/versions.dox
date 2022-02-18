@@ -11,12 +11,12 @@ Redesigned code layout for CMake.<br>
 Adding View interface for Windows.<br>
 Various other fixes
 
-\section naught_dot_four 0.0.4 *
+\section naught_dot_four 0.0.4 
 Unit testing.<br>
 More Windows view work.<br>
 Intersectional Interfaces.<br>
 
-\section naught_dot_five 0.0.5
+\section naught_dot_five 0.0.5 *
 Nodes. <br>
 Networking. <br>
 Documentation. (All except views, as updating will need to be done.)

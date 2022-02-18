@@ -1,0 +1,5 @@
+/*!
+\page view_design Viewer
+The view displays the programs model in a real way. It does that by talking to different output devices, such as a console, or a DMX interface. 
+The view also recieves input from a user and pushes it through the \ref control_design.
+*/

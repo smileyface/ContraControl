@@ -1,0 +1,18 @@
+/*! \mainpage My Personal Index Page
+
+Some general info.
+
+This manual is divided in the following sections:
+- \subpage intro
+- \subpage tov
+- \subpage design_doc
+- \subpage coding_standard
+*/
+
+/*! \page intro Introduction
+This page introduces the user to the topic.
+*/
+
+/*! \page coding_standard Standards
+WIP
+*/

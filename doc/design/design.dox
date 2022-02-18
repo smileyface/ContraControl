@@ -1,0 +1,16 @@
+/*! \page design_doc Design
+\section systems_design Systems
+
+ - \subpage model_design
+ - \subpage view_design
+ - \subpage control_design
+ - \subpage interfaces_design
+ - \subpage utilities_design
+ - \subpage main_thread_design
+
+\paragraph systems_design_introduction Introduction
+This software is made up of 6 systems working independantly of each other. There are 3 threaded Systems, 2 meta systems, and one  main system. <br>
+The 3 threaded systems are the \ref model_design, the \ref view_design, and the \ref control_design. They follow the standard MVC design pattern. They are entirely segregated from each other.
+They only interact through the \ref system_interface_design They can run independantly from each other, though to do so would not really do anything.<br> 
+
+*/
