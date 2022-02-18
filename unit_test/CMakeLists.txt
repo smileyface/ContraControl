@@ -50,7 +50,7 @@ add_test(Devices Static_Test)
 
 
 
-IF(CMAKE_COMPILER_IS_GNUCXX)
+IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
   include(CodeCoverage.cmake)
 
   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
