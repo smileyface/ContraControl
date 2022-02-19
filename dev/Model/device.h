@@ -38,6 +38,7 @@ inline Device* create_device_instance(Device_Creator creator)
 	case DEVICE_IDENTIFIER::GRADIENT:
 		the_device = new Device(DEVICE_IDENTIFIER::GRADIENT, 1);
 		break;
+	case DEVICE_IDENTIFIER::INVALID:
 	default:
 		the_device = new Device();
 	}

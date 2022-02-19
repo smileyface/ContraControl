@@ -30,13 +30,13 @@ enum class DEVICE_IDENTIFIER : Device_Id
 	*/
 	GRADIENT,
 	/**
-	Device with multiple channels
-	*/
-	CHANNEL,
-	/**
 	Device that controls audio
 	*/
-	AUDIO
+	AUDIO,
+	/**
+	 An invalid device
+	 */
+	 INVALID
 };
 /*!
  * \cond
