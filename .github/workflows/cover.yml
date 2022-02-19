@@ -6,6 +6,8 @@ name: Test Coverage
 on:
   pull_request:
     branches: [ version/** ]
+  push:
+    branches: [ testing*, master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
