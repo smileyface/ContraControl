@@ -55,9 +55,9 @@ add_test(Devices Static_Test)
 IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
   include(CodeCoverage.cmake)
 
-  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
+  #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
 
-  SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+  
 
   SETUP_TARGET_FOR_COVERAGE_COBERTURA(
         cov  # Name for custom target.
