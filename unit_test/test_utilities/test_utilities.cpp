@@ -46,6 +46,11 @@ void testing_util::device_utilities::check_validity(Device_Label label, bool exp
 	EXPECT_EQ(received_state.valid, expect_valid) << "Device validity is not correct";
 }
 
+void testing_util::device_utilities::check_type(Device_Label label, DEVICE_IDENTIFIER type)
+{
+	EXPECT_EQ(model::get_device(label)->get_device_type(), type) << "Device type is incorrect";
+}
+
 void testing_util::network_utilities::check_initalized()
 {
 	network::network_interface->initalized();

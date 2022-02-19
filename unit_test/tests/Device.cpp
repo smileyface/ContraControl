@@ -44,13 +44,23 @@ namespace {
 	};
 }
 
-
+//========================================
+//
+//        Switch Testing Block
+//
+//========================================
+TEST_F(Device_Switch_Test, Device_Created) {
+	testing_util::device_utilities::check_type(dl, DEVICE_IDENTIFIER::SWITCH);
+}
 TEST_F(Device_Switch_Test, Device_Invalid) {
 	testing_util::device_utilities::check_validity(dl, false);
 	device_utilities::initalize_device(dl);
 	testing_util::device_utilities::check_validity(dl, true);
 }
 
+TEST_F(Device_Gradient_Test, Device_Created) {
+	testing_util::device_utilities::check_type(dl, DEVICE_IDENTIFIER::GRADIENT);
+}
 TEST_F(Device_Gradient_Test, Device_Invalid) {
 	testing_util::device_utilities::check_validity(dl, false);
 	device_utilities::initalize_device(dl);
