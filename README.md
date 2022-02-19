@@ -1,4 +1,6 @@
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/smileyface/ContraControl)
+[![codecov](https://codecov.io/gh/smileyface/ContraControl/branch/master/graph/badge.svg?token=W9N7MQHPP6)](https://codecov.io/gh/smileyface/ContraControl)
+
 
 # ContraControl
 ## purpose
