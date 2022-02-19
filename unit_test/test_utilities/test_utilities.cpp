@@ -36,6 +36,7 @@ void testing_util::device_utilities::check_state(Device_Label device, Device* ex
 	EXPECT_EQ(received_state->valid, expected_state->valid) << "Device validity is not correct";
 	EXPECT_EQ(received_state->initalized, expected_state->initalized) << "Device is not initalized properly";
 	EXPECT_EQ(received_state->power, expected_state->power) << "Device power is not correct";
+
 }
 
 void testing_util::device_utilities::check_validity(Device_Label label, bool expect_valid)

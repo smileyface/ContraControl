@@ -6,6 +6,7 @@
 
 #include "Logging/logging.h"
 #include "Interfaces/types/state.h"
+#include "Network/system_interfaces/network_interface.h"
 #include "Messaging/system_messaging.h"
 
 std::thread model_thread;
