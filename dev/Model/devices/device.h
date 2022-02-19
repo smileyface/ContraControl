@@ -109,6 +109,16 @@ public:
 	 */
 	bool get_power();
 	/**
+	 Get if the device is initalized.
+	 \return if the device has been initalized
+	 */
+	bool is_initalized();
+	/**
+	 * Get if the device has been validated and not invalidated for any reason.
+	 * \return validation state of the device.
+	 */
+	bool is_valid();
+	/**
 	 Turn on the device.
 	 */
 	void turn_on();
@@ -122,6 +132,19 @@ public:
 	 * \param value Value to set Channel to.
 	 */
 	void set_channel(int channel, Channel value);
+
+protected:
+	/**
+	 ID of the device. This is a system assigned unique id.
+	 */
+	Device_Id id = INVALID_DEVICE;
+	/**
+	 Name of device. Mainly for human readability.
+	 */
+	Device_Name device_name = "INVALID";
+
+	/** Type of device. This is so the UI knows how to handle this device. */
+	DEVICE_IDENTIFIER type = DEVICE_IDENTIFIER::DEVICE;
 	/**
 	 Has the device been initalized.
 	 */
@@ -138,18 +161,6 @@ public:
 	 Position of each channel. 1-255 range. 0 is reserved for unused channels
 	*/
 	std::vector<Channel> channels;
-protected:
-	/**
-	 ID of the device. This is a system assigned unique id.
-	 */
-	Device_Id id = INVALID_DEVICE;
-	/**
-	 Name of device. Mainly for human readability.
-	 */
-	Device_Name device_name = "INVALID";
-
-	/** Type of device. This is so the UI knows how to handle this device. */
-	DEVICE_IDENTIFIER type = DEVICE_IDENTIFIER::DEVICE;
 };
 
 #endif

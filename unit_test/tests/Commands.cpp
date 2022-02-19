@@ -38,13 +38,13 @@ namespace {
 
 TEST_F(Device_Commands_Test, Device_Initalize) {
 	Device* ds = create_device_instance(Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Results"));
-	ds->initalized = true;
-	ds->valid = true;
+	ds->initalize("Test1");
 
 	testing_util::device_utilities::check_state(dl, ds);
 }
 
 TEST_F(Device_Commands_Test, Device_On) {
+	
 	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
 	testing_util::device_utilities::check_state(dl, ds);
 	system_util::cleanup();

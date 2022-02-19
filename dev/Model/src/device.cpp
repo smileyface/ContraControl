@@ -69,9 +69,19 @@ bool Device::get_power()
 	return power;
 }
 
+bool Device::is_initalized()
+{
+	return initalized;
+}
+
+bool Device::is_valid()
+{
+	return valid;
+}
+
 void Device::turn_on()
 {
-	if (initalized == false)
+	if (is_initalized() == false)
 	{
 		valid = false;
 		return;
@@ -81,7 +91,7 @@ void Device::turn_on()
 
 void Device::turn_off()
 {
-	if (initalized == false)
+	if (is_initalized() == false)
 	{
 		valid = false;
 		return;

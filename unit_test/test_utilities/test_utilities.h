@@ -23,6 +23,7 @@ namespace testing_util
 		void check_position(Device_Label label, Channel position);
 		void check_validity(Device_Label label, bool expect_valid);
 		void check_type(Device_Label label, DEVICE_IDENTIFIER id);
+		void check_power_for_real(Device_Label label);
 	}
 	namespace network_utilities
 	{

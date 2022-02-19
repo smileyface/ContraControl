@@ -33,9 +33,9 @@ void testing_util::device_utilities::check_state(Device_Label device, Device* ex
 {
 	Device* received_state = model::get_device(device);
 
-	EXPECT_EQ(received_state->valid, expected_state->valid) << "Device validity is not correct";
-	EXPECT_EQ(received_state->initalized, expected_state->initalized) << "Device is not initalized properly";
-	EXPECT_EQ(received_state->power, expected_state->power) << "Device power is not correct";
+	EXPECT_EQ(received_state->is_valid(), expected_state->is_valid()) << "Device validity is not correct";
+	EXPECT_EQ(received_state->is_initalized(), expected_state->is_initalized()) << "Device is not initalized properly";
+	EXPECT_EQ(received_state->get_power(), expected_state->get_power()) << "Device power is not correct";
 
 }
 
@@ -43,7 +43,7 @@ void testing_util::device_utilities::check_validity(Device_Label label, bool exp
 {
 	Device received_state = *model::get_device(label);
 
-	EXPECT_EQ(received_state.valid, expect_valid) << "Device validity is not correct";
+	EXPECT_EQ(received_state.is_valid(), expect_valid) << "Device validity is not correct";
 }
 
 void testing_util::device_utilities::check_type(Device_Label label, DEVICE_IDENTIFIER type)

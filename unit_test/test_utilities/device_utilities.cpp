@@ -9,11 +9,12 @@ Device* device_utilities::get_nominal_state(DEVICE_IDENTIFIER device, Command* c
 	switch (command->get_id())
 	{
 	case COMMAND_ENUM::ON:
-		ds->power = true;
+		ds->initalize("nominal");
+		ds->turn_on();
+		break;
 	case COMMAND_ENUM::OFF:
 	case COMMAND_ENUM::INITALIZE:
-		ds->initalized = true;
-		ds->valid = true;
+		ds->initalize("nominal");
 	case COMMAND_ENUM::INVALID:
 		break;
 	}
