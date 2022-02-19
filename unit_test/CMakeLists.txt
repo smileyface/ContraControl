@@ -1,5 +1,7 @@
 ﻿set(DEVICE_TEST_FILES "tests/Device.cpp" 
-                      "tests/Node.cpp" "tests/Network.cpp")
+                      "tests/Node.cpp" 
+                      "tests/Network.cpp"
+                      "tests/Commands.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h" 
                            "test_utilities/system_testings.h" 
