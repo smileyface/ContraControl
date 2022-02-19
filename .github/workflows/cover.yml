@@ -51,6 +51,7 @@ jobs:
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       run: cmake . -DRUN_COVER=true
+
       
     - name: Run
       shell: bash
