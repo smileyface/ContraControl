@@ -5,9 +5,9 @@ name: Test Coverage
 # Controls when the workflow will run
 on:
   pull_request:
-    branches: [ version/** ]
+    branches: [ master ]
   push:
-    branches: [ testing*, master ]
+    branches: [patch/**,  feature/** ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
