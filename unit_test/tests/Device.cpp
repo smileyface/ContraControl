@@ -24,7 +24,19 @@ namespace {
 		virtual void SetUp() {
 			system_util::setup();
 			device_utilities::setup_node("Test_Node_Local");
-			dl = device_utilities::add_device("Test_Node_Local", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
+			dl = device_utilities::add_device("Test_Node_Local", Device_Creator((int)DEVICE_IDENTIFIER::GRADIENT, "Test1"));
+		}
+		virtual void TearDown() {
+			system_util::cleanup();
+		}
+	};
+	class Device_Invalid_Test : public ::testing::Test {
+	protected:
+		Device_Label dl;
+		virtual void SetUp() {
+			system_util::setup();
+			device_utilities::setup_node("Test_Node_Local");
+			dl = device_utilities::add_device("Test_Node_Local", Device_Creator((int)DEVICE_IDENTIFIER::INVALID, "Test1"));
 		}
 		virtual void TearDown() {
 			system_util::cleanup();
@@ -34,15 +46,17 @@ namespace {
 
 
 TEST_F(Device_Switch_Test, Device_Invalid) {
-	device_utilities::command_device(dl, new On());
 	testing_util::device_utilities::check_validity(dl, false);
 	device_utilities::initalize_device(dl);
 	testing_util::device_utilities::check_validity(dl, true);
 }
 
 TEST_F(Device_Gradient_Test, Device_Invalid) {
-	device_utilities::command_device(dl, new On());
 	testing_util::device_utilities::check_validity(dl, false);
 	device_utilities::initalize_device(dl);
 	testing_util::device_utilities::check_validity(dl, true);
+}
+
+TEST_F(Device_Invalid_Test, Device_Invalid) {
+	testing_util::device_utilities::check_validity(dl, false);
 }
