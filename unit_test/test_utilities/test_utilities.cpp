@@ -51,6 +51,19 @@ void testing_util::device_utilities::check_type(Device_Label label, DEVICE_IDENT
 	EXPECT_EQ(model::get_device(label)->get_device_type(), type) << "Device type is incorrect";
 }
 
+void testing_util::node_utilities::check_for_device(Device_Label label)
+{
+	bool found = false;
+	for (int i = 0; i < model::get_node(label.get_node_id())->get_devices().size(); i++)
+	{
+		if (model::get_node(label.get_node_id())->get_devices()[i] == label.get_device_id())
+		{
+			found = true;
+		}
+	}
+	EXPECT_EQ(found, true);
+}
+
 void testing_util::network_utilities::check_initalized()
 {
 	network::network_interface->initalized();

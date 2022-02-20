@@ -6,7 +6,7 @@
 #include "../test_utilities/pch.h"
 
 namespace {
-	class NodeTest : public ::testing::Test {
+	class Node_Test : public ::testing::Test {
 		virtual void SetUp() {
 			system_util::setup();
 			node_utilities::start_test_environment();
@@ -17,7 +17,7 @@ namespace {
 
 	};
 }
-TEST_F(NodeTest, Node_Exclusion)
+TEST_F(Node_Test, Node_Exclusion)
 {
 	node_utilities::create_node("Test_Node_2");
 	Device_Label dl = node_utilities::add_device(node_utilities::local_node_handle, Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
@@ -30,15 +30,16 @@ TEST_F(NodeTest, Node_Exclusion)
 	ASSERT_THROW(device_utilities::command_device(dl_e2, new Off()), NodeNotFoundException);
 }
 
-TEST_F(NodeTest, Add_Devices)
+TEST_F(Node_Test, Add_Devices)
 {
+	Device_Label dl_n1_0 = node_utilities::add_device(node_utilities::local_node_handle, Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
+	testing_util::node_utilities::check_for_device(dl_n1_0);
+	Device_Label dl_n1_1 = node_utilities::add_device(node_utilities::local_node_handle, Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test2"));
+	testing_util::node_utilities::check_for_device(dl_n1_0);
+	testing_util::node_utilities::check_for_device(dl_n1_1);
+
 	node_utilities::create_node("Test_Node_2");
-	Device_Label dl = node_utilities::add_device(node_utilities::local_node_handle, Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
-
-	Device_Label dl_e("Test_Node_2", 0);
-	
-	ASSERT_THROW(device_utilities::command_device(dl_e, new On()), DeviceNotFoundException);
-
-	Device_Label dl_e2("Test_Fail", 0);
-	ASSERT_THROW(device_utilities::command_device(dl_e2, new Off()), NodeNotFoundException);
+	Device_Label dl_n2_0 = node_utilities::add_device("Test_Node_2", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test2"));
+	testing_util::node_utilities::check_for_device(dl_n2_0);
+	testing_util::node_utilities::check_for_device(dl_n1_0);
 }

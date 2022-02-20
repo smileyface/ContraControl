@@ -25,6 +25,10 @@ namespace testing_util
 		void check_type(Device_Label label, DEVICE_IDENTIFIER id);
 		void check_power_for_real(Device_Label label);
 	}
+	namespace node_utilities
+	{
+		void check_for_device(Device_Label label);
+	}
 	namespace network_utilities
 	{
 		void check_initalized();
