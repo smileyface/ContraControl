@@ -8,6 +8,7 @@
 namespace device_utilities
 {
 	extern int device_in_use;
+	extern Node_Id node_handle;
 
 	Device* get_nominal_state(DEVICE_IDENTIFIER device, Command* command);
 	
@@ -15,15 +16,11 @@ namespace device_utilities
 	MODEL MANIPULATION
 	*/
 
-	void setup_node(Node_Id);
-	/*
-	Create node in the model.
-	*/
-	void create_node(Node_Id);
+	void start_test_environment();
 	/*
 	Add a device to the given node in the model. Returns device name.
 	*/
-	Device_Label add_device(Node_Id, Device_Creator);
+	Device_Label add_device(Device_Creator);
 	/*
 	Command a device. Returns the nominal state associated with that command.
 	*/

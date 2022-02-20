@@ -10,7 +10,9 @@ add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/test_utilities.h" 
                            "test_utilities/test_utilities.cpp" 
                            "test_utilities/device_utilities.h" 
-                           "test_utilities/device_utilities.cpp"  )
+                           "test_utilities/device_utilities.cpp"  
+                           "test_utilities/node_utilities.h"
+                           "test_utilities/node_utilities.cpp")
 target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface Network)
 
 # Download and unpack googletest at configure time

@@ -3,6 +3,7 @@
 #include "module_mains.h"
 
 int device_utilities::device_in_use = 0;
+Node_Id device_utilities::node_handle = "Test_Node_1";
 Device* device_utilities::get_nominal_state(DEVICE_IDENTIFIER device, Command* command)
 {
 	Device* ds = create_device_instance(Device_Creator((Device_Id)device, "Nominal"));
@@ -21,20 +22,18 @@ Device* device_utilities::get_nominal_state(DEVICE_IDENTIFIER device, Command* c
 	return ds;
 }
 
-void device_utilities::setup_node(Node_Id id)
+void device_utilities::start_test_environment()
 {
-	model::initalize_my_node(id);
+	system_util::setup();
+	model::initalize_my_node(device_utilities::node_handle);
 }
 
-void device_utilities::create_node(Node_Id id)
-{
-	model::create_node(Node_Type::TEST, id);
-}
 
-Device_Label device_utilities::add_device(Node_Id id, Device_Creator creator)
+
+Device_Label device_utilities::add_device(Device_Creator creator)
 {
-	model::get_node(id)->register_device(creator);
-	return(Device_Label(id, model::get_node(id)->get_device(creator.second)->get_id()));
+	model::get_node(device_utilities::node_handle)->register_device(creator);
+	return(Device_Label(device_utilities::node_handle, model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()));
 }
 
 Device* device_utilities::command_device(Device_Label label, Command* command)
