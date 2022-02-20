@@ -12,6 +12,7 @@ namespace device_utilities
 	extern Node_Id node_handle;
 
 	Device* get_nominal_state(DEVICE_IDENTIFIER device, Command* command);
+	Device* get_nominal_state_no_init(DEVICE_IDENTIFIER device, Command* command);
 	
 	/*
 	MODEL MANIPULATION
@@ -26,6 +27,8 @@ namespace device_utilities
 	Command a device. Returns the nominal state associated with that command.
 	*/
 	Device* command_device(Device_Label label, Command* command);
+
+	Device* command_device_no_init(Device_Label label, Command* command);
 
 	Device* finish_command(Device_Label label, Command* command);
 

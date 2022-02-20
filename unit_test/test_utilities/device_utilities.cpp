@@ -7,17 +7,22 @@ Node_Id device_utilities::node_handle = "Test_Node_1";
 Device* device_utilities::get_nominal_state(DEVICE_IDENTIFIER device, Command* command)
 {
 	Device* ds = create_device_instance(Device_Creator((Device_Id)device, "Nominal"));
-	switch (command->get_id())
+
+	ds->initalize("nominal");
+	if (command->get_id() == COMMAND_ENUM::ON)
 	{
-	case COMMAND_ENUM::ON:
-		ds->initalize("nominal");
 		ds->turn_on();
-		break;
-	case COMMAND_ENUM::OFF:
-	case COMMAND_ENUM::INITALIZE:
-		ds->initalize("nominal");
-	case COMMAND_ENUM::INVALID:
-		break;
+	}
+	return ds;
+}
+
+Device* device_utilities::get_nominal_state_no_init(DEVICE_IDENTIFIER device, Command* command)
+{
+	Device* ds = create_device_instance(Device_Creator((Device_Id)device, "Nominal"));
+
+	if (command->get_id() == COMMAND_ENUM::ON)
+	{
+		ds->turn_on();
 	}
 	return ds;
 }
@@ -38,7 +43,15 @@ Device* device_utilities::command_device(Device_Label label, Command* command)
 {
 	controller::add_command(Timed_Command(command, label, 0));
 	system_util::step(1);
-	return get_nominal_state(model::get_device(label)->get_device_type(), command);
+	Device* ds = get_nominal_state(model::get_device(label)->get_device_type(), command);
+	return ds;
+}
+
+Device* device_utilities::command_device_no_init(Device_Label label, Command* command)
+{
+	controller::add_command(Timed_Command(command, label, 0));
+	system_util::step(1);
+	return get_nominal_state_no_init(model::get_device(label)->get_device_type(), command);
 }
 
 Device* device_utilities::finish_command(Device_Label label, Command* command)

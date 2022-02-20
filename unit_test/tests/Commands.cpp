@@ -42,10 +42,8 @@ TEST_F(Device_Commands_Test, Device_Initalize) {
 }
 
 TEST_F(Device_Commands_Test, Device_On) {
-	
 	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
 	testing_util::device_utilities::check_state(dl, ds);
-	system_util::cleanup();
 }
 
 TEST_F(Device_Commands_Test, Device_Off) {
@@ -54,7 +52,17 @@ TEST_F(Device_Commands_Test, Device_Off) {
 
 	ds = static_cast<Device*>(device_utilities::command_device(dl, new Off()));
 	testing_util::device_utilities::check_state(dl, ds);
+}
 
-	system_util::cleanup();
+TEST_F(Device_Commands_Test_No_Init, Device_On) {
+	Device* ds = static_cast<Device*>(device_utilities::command_device_no_init(dl, new On()));
+	testing_util::device_utilities::check_state(dl, ds);
+}
 
+TEST_F(Device_Commands_Test_No_Init, Device_Off) {
+	Device* ds = static_cast<Device*>(device_utilities::command_device_no_init(dl, new On()));
+	testing_util::device_utilities::check_state(dl, ds);
+
+	ds = static_cast<Device*>(device_utilities::command_device_no_init(dl, new Off()));
+	testing_util::device_utilities::check_state(dl, ds);
 }
