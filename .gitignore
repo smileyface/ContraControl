@@ -73,3 +73,4 @@ Debug
 */out/documents/*
 /.github/check-cppcheck-build-dir
 /.github/check.cppcheck
+coverage.xml
