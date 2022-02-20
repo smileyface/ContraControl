@@ -1,12 +1,22 @@
 #ifndef TESTING_NODE_UTILITIES
 #define TESTING_NODE_UTILITIES
+#include "../../dev/Model/node/node.h"
 
-namespace TESTING_NODE_UTILITIES
+namespace node_utilities
 {
+	extern Node_Id local_node_handle;
+	void start_test_environment();
     /*
 	Create node in the model.
 	*/
-	void create_node(Node_Id);
+	void create_node(Node_Id id);
+
+	/*
+	Add a device to the given node in the model. Returns device name.
+	*/
+	Device_Label add_device(Node_Id id, Device_Creator creator);
+
+	void setup_node(Node_Id id);
 }
 
 #endif

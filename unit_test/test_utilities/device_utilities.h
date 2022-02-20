@@ -1,9 +1,10 @@
 #ifndef TESTING_DEVICE_UTILITIES
 #define TESTING_DEVICE_UTILITIES
 
-#include "../../dev/Model/node/node.h"
 #include "../../dev/Controller/commands.h"
 #include "../../dev/Interfaces/Interfaces/types/device_label.h"
+#include "../../dev/Model/device.h"
+
 #include "pch.h"
 namespace device_utilities
 {

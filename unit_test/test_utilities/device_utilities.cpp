@@ -28,8 +28,6 @@ void device_utilities::start_test_environment()
 	model::initalize_my_node(device_utilities::node_handle);
 }
 
-
-
 Device_Label device_utilities::add_device(Device_Creator creator)
 {
 	model::get_node(device_utilities::node_handle)->register_device(creator);

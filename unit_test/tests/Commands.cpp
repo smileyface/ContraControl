@@ -10,9 +10,8 @@ namespace {
 	protected:
 		Device_Label dl;
 		virtual void SetUp() {
-			system_util::setup();
-			device_utilities::setup_node("Test_Node_Local");
-			dl = device_utilities::add_device("Test_Node_Local", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
+			device_utilities::start_test_environment();
+			dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 			device_utilities::initalize_device(dl);
 		}
 		virtual void TearDown() {
@@ -25,9 +24,8 @@ namespace {
 	protected:
 		Device_Label dl;
 		virtual void SetUp() {
-			system_util::setup();
-			device_utilities::setup_node("Test_Node_Local");
-			dl = device_utilities::add_device("Test_Node_Local", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
+			device_utilities::start_test_environment();
+			dl = device_utilities::add_device( Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 		}
 		virtual void TearDown() {
 			system_util::cleanup();
