@@ -108,29 +108,38 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_unimplemented_function_exception.html">   60</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_unimplemented_function_exception.html">UnimplementedFunctionException</a> : <span class="keyword">public</span> std::exception</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_invalid_device_exception.html">   60</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_invalid_device_exception.html">InvalidDeviceException</a> : <span class="keyword">public</span> std::exception</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* what() <span class="keyword">const</span> <span class="keywordflow">throw</span>()</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Function not implemented&quot;</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Device is of an invalid type&quot;</span>;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_network_error_exception.html">   71</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_network_error_exception.html">NetworkErrorException</a> : <span class="keyword">public</span> std::exception</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_unimplemented_function_exception.html">   71</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_unimplemented_function_exception.html">UnimplementedFunctionException</a> : <span class="keyword">public</span> std::exception</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* what() <span class="keyword">const</span> <span class="keywordflow">throw</span>()</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Network Error&quot;</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Function not implemented&quot;</span>;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="class_network_error_exception.html">   82</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_network_error_exception.html">NetworkErrorException</a> : <span class="keyword">public</span> std::exception</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* what() <span class="keyword">const</span> <span class="keywordflow">throw</span>()</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;Network Error&quot;</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_device_not_found_exception_html"><div class="ttname"><a href="class_device_not_found_exception.html">DeviceNotFoundException</a></div><div class="ttdoc">Exception node throws when attempting to access a device that does not exist.</div><div class="ttdef"><b>Definition:</b> exceptions.h:16</div></div>
 <div class="ttc" id="aclass_incorrect_state_type_exception_html"><div class="ttname"><a href="class_incorrect_state_type_exception.html">IncorrectStateTypeException</a></div><div class="ttdoc">Exception thrown when a command is given to a device that does not deal with the command....</div><div class="ttdef"><b>Definition:</b> exceptions.h:39</div></div>
 <div class="ttc" id="aclass_invalid_command_exception_html"><div class="ttname"><a href="class_invalid_command_exception.html">InvalidCommandException</a></div><div class="ttdoc">When the state mangler recieves an invalid command.</div><div class="ttdef"><b>Definition:</b> exceptions.h:50</div></div>
-<div class="ttc" id="aclass_network_error_exception_html"><div class="ttname"><a href="class_network_error_exception.html">NetworkErrorException</a></div><div class="ttdoc">When the network struggles. See the network status_state for details.</div><div class="ttdef"><b>Definition:</b> exceptions.h:72</div></div>
+<div class="ttc" id="aclass_invalid_device_exception_html"><div class="ttname"><a href="class_invalid_device_exception.html">InvalidDeviceException</a></div><div class="ttdoc">When attempting to change the state of an invalid device type.</div><div class="ttdef"><b>Definition:</b> exceptions.h:61</div></div>
+<div class="ttc" id="aclass_network_error_exception_html"><div class="ttname"><a href="class_network_error_exception.html">NetworkErrorException</a></div><div class="ttdoc">When the network struggles. See the network status_state for details.</div><div class="ttdef"><b>Definition:</b> exceptions.h:83</div></div>
 <div class="ttc" id="aclass_node_not_found_exception_html"><div class="ttname"><a href="class_node_not_found_exception.html">NodeNotFoundException</a></div><div class="ttdoc">Exception for when attempting to access a node that is non-existant.</div><div class="ttdef"><b>Definition:</b> exceptions.h:28</div></div>
-<div class="ttc" id="aclass_unimplemented_function_exception_html"><div class="ttname"><a href="class_unimplemented_function_exception.html">UnimplementedFunctionException</a></div><div class="ttdoc">When a function has not been implemented.</div><div class="ttdef"><b>Definition:</b> exceptions.h:61</div></div>
+<div class="ttc" id="aclass_unimplemented_function_exception_html"><div class="ttname"><a href="class_unimplemented_function_exception.html">UnimplementedFunctionException</a></div><div class="ttdoc">When a function has not been implemented.</div><div class="ttdef"><b>Definition:</b> exceptions.h:72</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

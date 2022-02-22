@@ -76,27 +76,28 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define VIEW_EXECUTOR_H</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="format_8h.html">format/format.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>view</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">extern</span> std::vector&lt;Format*&gt; <a class="code" href="view__main_8h.html#ac31a7e161ade26082a2107d6c4f81c8e">list_of_formats</a>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="view__main_8h.html#ab9e30d175e7eb5f83387a5b091213012">view_running</a>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#af07af31a9787398dbc5ca3454c3c1c2e">initalize</a>();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="view__main_8h.html#a586caa734da95bbace5b15297af51fa6">start_view</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="view__main_8h.html#a8335061396cdc1aab6d2bfc9368e58b9">stop_view</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="view__main_8h.html#a65814e5d87612d631a477a1777dbdb9f">add_display</a>(<a class="code" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a> display);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="namespaceview.html">   16</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceview.html">view</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">extern</span> std::vector&lt;Format*&gt; <a class="code" href="namespaceview.html#ac31a7e161ade26082a2107d6c4f81c8e">list_of_formats</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceview.html#ab9e30d175e7eb5f83387a5b091213012">view_running</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a6273c41711c44b28bc3a7a41c0930d8d">initalize</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a586caa734da95bbace5b15297af51fa6">start_view</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a8335061396cdc1aab6d2bfc9368e58b9">stop_view</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="namespaceview.html#a65814e5d87612d631a477a1777dbdb9f">add_display</a>(<a class="code" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a> display);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="adisplay__type__enum_8h_html_a276e342efd244f8591592e86219914ba"><div class="ttname"><a href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a></div><div class="ttdeci">DISPLAY_TYPES</div><div class="ttdef"><b>Definition:</b> display_type_enum.h:16</div></div>
 <div class="ttc" id="aformat_8h_html"><div class="ttname"><a href="format_8h.html">format.h</a></div></div>
-<div class="ttc" id="anamespacecontroller_html_af07af31a9787398dbc5ca3454c3c1c2e"><div class="ttname"><a href="namespacecontroller.html#af07af31a9787398dbc5ca3454c3c1c2e">controller::initalize</a></div><div class="ttdeci">void initalize()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:19</div></div>
-<div class="ttc" id="aview__main_8h_html_a586caa734da95bbace5b15297af51fa6"><div class="ttname"><a href="view__main_8h.html#a586caa734da95bbace5b15297af51fa6">view::start_view</a></div><div class="ttdeci">void start_view()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:18</div></div>
-<div class="ttc" id="aview__main_8h_html_a65814e5d87612d631a477a1777dbdb9f"><div class="ttname"><a href="view__main_8h.html#a65814e5d87612d631a477a1777dbdb9f">view::add_display</a></div><div class="ttdeci">int add_display(DISPLAY_TYPES display)</div><div class="ttdef"><b>Definition:</b> view_main.cpp:34</div></div>
-<div class="ttc" id="aview__main_8h_html_a8335061396cdc1aab6d2bfc9368e58b9"><div class="ttname"><a href="view__main_8h.html#a8335061396cdc1aab6d2bfc9368e58b9">view::stop_view</a></div><div class="ttdeci">void stop_view()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:26</div></div>
-<div class="ttc" id="aview__main_8h_html_ab9e30d175e7eb5f83387a5b091213012"><div class="ttname"><a href="view__main_8h.html#ab9e30d175e7eb5f83387a5b091213012">view::view_running</a></div><div class="ttdeci">bool view_running</div><div class="ttdef"><b>Definition:</b> view_main.cpp:7</div></div>
-<div class="ttc" id="aview__main_8h_html_ac31a7e161ade26082a2107d6c4f81c8e"><div class="ttname"><a href="view__main_8h.html#ac31a7e161ade26082a2107d6c4f81c8e">view::list_of_formats</a></div><div class="ttdeci">std::vector&lt; Format * &gt; list_of_formats</div><div class="ttdef"><b>Definition:</b> view_main.cpp:6</div></div>
+<div class="ttc" id="anamespaceview_html"><div class="ttname"><a href="namespaceview.html">view</a></div><div class="ttdef"><b>Definition:</b> view_main.h:17</div></div>
+<div class="ttc" id="anamespaceview_html_a586caa734da95bbace5b15297af51fa6"><div class="ttname"><a href="namespaceview.html#a586caa734da95bbace5b15297af51fa6">view::start_view</a></div><div class="ttdeci">void start_view()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:18</div></div>
+<div class="ttc" id="anamespaceview_html_a6273c41711c44b28bc3a7a41c0930d8d"><div class="ttname"><a href="namespaceview.html#a6273c41711c44b28bc3a7a41c0930d8d">view::initalize</a></div><div class="ttdeci">void initalize()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:10</div></div>
+<div class="ttc" id="anamespaceview_html_a65814e5d87612d631a477a1777dbdb9f"><div class="ttname"><a href="namespaceview.html#a65814e5d87612d631a477a1777dbdb9f">view::add_display</a></div><div class="ttdeci">int add_display(DISPLAY_TYPES display)</div><div class="ttdef"><b>Definition:</b> view_main.cpp:34</div></div>
+<div class="ttc" id="anamespaceview_html_a8335061396cdc1aab6d2bfc9368e58b9"><div class="ttname"><a href="namespaceview.html#a8335061396cdc1aab6d2bfc9368e58b9">view::stop_view</a></div><div class="ttdeci">void stop_view()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:26</div></div>
+<div class="ttc" id="anamespaceview_html_ab9e30d175e7eb5f83387a5b091213012"><div class="ttname"><a href="namespaceview.html#ab9e30d175e7eb5f83387a5b091213012">view::view_running</a></div><div class="ttdeci">bool view_running</div><div class="ttdef"><b>Definition:</b> view_main.cpp:7</div></div>
+<div class="ttc" id="anamespaceview_html_ac31a7e161ade26082a2107d6c4f81c8e"><div class="ttname"><a href="namespaceview.html#ac31a7e161ade26082a2107d6c4f81c8e">view::list_of_formats</a></div><div class="ttdeci">std::vector&lt; Format * &gt; list_of_formats</div><div class="ttdef"><b>Definition:</b> view_main.cpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

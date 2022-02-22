@@ -79,32 +79,32 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;system/timer.h&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="system__messaging_8h.html">Messaging/system_messaging.h</a>&quot;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="namespacecontroller.html">   22</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecontroller.html">controller</a></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* subsystem_name = <span class="stringliteral">&quot;Controller&quot;</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="namespacecontroller.html#acfa93d1e5a03bb764dd2ad7bfc4f14f5">controller_running</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">extern</span> <a class="code" href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a> <a class="code" href="namespacecontroller.html#a953795f75d08627b15b2b08b75e58305">controller_queue</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#af07af31a9787398dbc5ca3454c3c1c2e">initalize</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a815d20e50a745df9c1a4acf131d3e888">start_controller</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a931c22c31933423c6b50ad9c1ed5b936">add_command</a>(<a class="code" href="class_timed___command.html">Timed_Command</a> tc);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a376aeb0fcc9d5ea97aa94922c9ac8856">step</a>();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#aa5be140de5464a3afb01167950c9a570">stop_controller</a>();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a27c308484eee50eee14c47b4121bedf7">clean_up</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">extern</span> <a class="code" href="class_system___messages.html">System_Messages</a>* <a class="code" href="namespacecontroller.html#afced4041b0f6e1ef990e5746da46af2d">controller_message_interface</a>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="namespacecontroller.html">   21</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecontroller.html">controller</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* subsystem_name = <span class="stringliteral">&quot;Controller&quot;</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="namespacecontroller.html#acfa93d1e5a03bb764dd2ad7bfc4f14f5">controller_running</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">extern</span> <a class="code" href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a> <a class="code" href="namespacecontroller.html#a953795f75d08627b15b2b08b75e58305">controller_queue</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#af07af31a9787398dbc5ca3454c3c1c2e">initalize</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a815d20e50a745df9c1a4acf131d3e888">start_controller</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a931c22c31933423c6b50ad9c1ed5b936">add_command</a>(<a class="code" href="class_timed___command.html">Timed_Command</a> tc);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a376aeb0fcc9d5ea97aa94922c9ac8856">step</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#aa5be140de5464a3afb01167950c9a570">stop_controller</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a27c308484eee50eee14c47b4121bedf7">clean_up</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">extern</span> <a class="code" href="class_system___messages.html">System_Messages</a>* <a class="code" href="namespacecontroller.html#afced4041b0f6e1ef990e5746da46af2d">controller_message_interface</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_system___messages_html"><div class="ttname"><a href="class_system___messages.html">System_Messages</a></div><div class="ttdef"><b>Definition:</b> system_messaging.h:88</div></div>
 <div class="ttc" id="aclass_timed___command_html"><div class="ttname"><a href="class_timed___command.html">Timed_Command</a></div><div class="ttdef"><b>Definition:</b> timed_command.h:17</div></div>
-<div class="ttc" id="anamespacecontroller_html"><div class="ttname"><a href="namespacecontroller.html">controller</a></div><div class="ttdef"><b>Definition:</b> controller_main.h:23</div></div>
+<div class="ttc" id="anamespacecontroller_html"><div class="ttname"><a href="namespacecontroller.html">controller</a></div><div class="ttdef"><b>Definition:</b> controller_main.h:22</div></div>
 <div class="ttc" id="anamespacecontroller_html_a27c308484eee50eee14c47b4121bedf7"><div class="ttname"><a href="namespacecontroller.html#a27c308484eee50eee14c47b4121bedf7">controller::clean_up</a></div><div class="ttdeci">void clean_up()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:79</div></div>
 <div class="ttc" id="anamespacecontroller_html_a376aeb0fcc9d5ea97aa94922c9ac8856"><div class="ttname"><a href="namespacecontroller.html#a376aeb0fcc9d5ea97aa94922c9ac8856">controller::step</a></div><div class="ttdeci">void step()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:57</div></div>
 <div class="ttc" id="anamespacecontroller_html_a815d20e50a745df9c1a4acf131d3e888"><div class="ttname"><a href="namespacecontroller.html#a815d20e50a745df9c1a4acf131d3e888">controller::start_controller</a></div><div class="ttdeci">void start_controller()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:33</div></div>
