@@ -24,6 +24,10 @@ namespace device_utilities
 	*/
 	Device_Label add_device(Device_Creator);
 	/*
+	Remove device from a node;
+	*/
+	void remove_device(Device_Label);
+	/*
 	Command a device. Returns the nominal state associated with that command.
 	*/
 	Device* command_device(Device_Label label, Command* command);
