@@ -54,6 +54,11 @@ public:
 	void register_device(Device_Creator device);
 
 	/**
+	 * Remove a device from the node.
+	 * \param label A label to the device that needs removal.
+	 */
+	void remove_device(Device_Id label);
+	/**
 	 Return a pointer to a device requested by Device_Id
 
 	 \param device An Id struct that points to a specific device.

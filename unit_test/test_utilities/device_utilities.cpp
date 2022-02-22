@@ -39,6 +39,10 @@ Device_Label device_utilities::add_device(Device_Creator creator)
 	return(Device_Label(device_utilities::node_handle, model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()));
 }
 
+void device_utilities::remove_device(Device_Label label)
+{
+	model::get_node(label.get_node_id())->remove_device(label.get_device_id());
+}
 Device* device_utilities::command_device(Device_Label label, Command* command)
 {
 	controller::add_command(Timed_Command(command, label, 0));
