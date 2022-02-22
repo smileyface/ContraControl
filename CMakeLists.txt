@@ -6,6 +6,12 @@ project(ContraControl VERSION 0.0.5)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+set(RUN_COVER false CACHE BOOLEAN "Run code coverage")
+
+if(RUN_COVER)
+  SET(CMAKE_CXX_FLAGS "-fprofile-arcs -ftest-coverage -fPIC")
+endif()
+
 add_subdirectory(dev)
 
 enable_testing()

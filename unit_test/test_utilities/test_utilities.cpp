@@ -33,16 +33,35 @@ void testing_util::device_utilities::check_state(Device_Label device, Device* ex
 {
 	Device* received_state = model::get_device(device);
 
-	EXPECT_EQ(received_state->valid, expected_state->valid) << "Device validity is not correct";
-	EXPECT_EQ(received_state->initalized, expected_state->initalized) << "Device is not initalized properly";
-	EXPECT_EQ(received_state->power, expected_state->power) << "Device power is not correct";
+	EXPECT_EQ(received_state->is_valid(), expected_state->is_valid()) << "Device validity is not correct";
+	EXPECT_EQ(received_state->is_initalized(), expected_state->is_initalized()) << "Device is not initalized properly";
+	EXPECT_EQ(received_state->get_power(), expected_state->get_power()) << "Device power is not correct";
+
 }
 
 void testing_util::device_utilities::check_validity(Device_Label label, bool expect_valid)
 {
 	Device received_state = *model::get_device(label);
 
-	EXPECT_EQ(received_state.valid, expect_valid) << "Device validity is not correct";
+	EXPECT_EQ(received_state.is_valid(), expect_valid) << "Device validity is not correct";
+}
+
+void testing_util::device_utilities::check_type(Device_Label label, DEVICE_IDENTIFIER type)
+{
+	EXPECT_EQ(model::get_device(label)->get_device_type(), type) << "Device type is incorrect";
+}
+
+void testing_util::node_utilities::check_for_device(Device_Label label)
+{
+	bool found = false;
+	for (int i = 0; i < model::get_node(label.get_node_id())->get_devices().size(); i++)
+	{
+		if (model::get_node(label.get_node_id())->get_devices()[i] == label.get_device_id())
+		{
+			found = true;
+		}
+	}
+	EXPECT_EQ(found, true);
 }
 
 void testing_util::network_utilities::check_initalized()

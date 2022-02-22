@@ -7,6 +7,11 @@
 			"label": "Install Doxygen",
 			"type": "shell",
 			"command": "sudo apt-get install Doxygen"
+		},
+		{
+			"label": "Install gcov",
+			"type":"shell",
+			"command": "sudo apt-get update; sudo apt-get install python3.6; pip install gcovr"
 		}
 	]
 }

@@ -1,5 +1,7 @@
 ﻿set(DEVICE_TEST_FILES "tests/Device.cpp" 
-                      "tests/Node.cpp" "tests/Network.cpp")
+                      "tests/Node.cpp" 
+                      "tests/Network.cpp"
+                      "tests/Commands.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h" 
                            "test_utilities/system_testings.h" 
@@ -8,7 +10,9 @@ add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/test_utilities.h" 
                            "test_utilities/test_utilities.cpp" 
                            "test_utilities/device_utilities.h" 
-                           "test_utilities/device_utilities.cpp"  )
+                           "test_utilities/device_utilities.cpp"  
+                           "test_utilities/node_utilities.h"
+                           "test_utilities/node_utilities.cpp")
 target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface Network)
 
 # Download and unpack googletest at configure time
@@ -49,15 +53,19 @@ target_link_libraries(Static_Test gtest_main Test_Utilities)
 add_test(Devices Static_Test)
 
 
-#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
 
-#SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
+  include(CodeCoverage.cmake)
 
-#include(CodeCoverage.cmake)
-#SETUP_TARGET_FOR_COVERAGE_COBERTURA(
-#		my_coverage_target  # Name for custom target.
-#		Static_Test         # Name of the test driver executable that runs the tests.
-							# NOTE! This should always have a ZERO as exit code
-							# otherwise the coverage generation will not complete.
-#		coverage            # Name of output directory.
-#		)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
+
+  SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+
+  SETUP_TARGET_FOR_COVERAGE_COBERTURA(
+        cov  # Name for custom target.
+		    Static_Test         # Name of the test driver executable that runs the tests.
+							    # NOTE! This should always have a ZERO as exit code
+							    # otherwise the coverage generation will not complete.
+		    coverage            # Name of output directory.
+  )
+ENDIF() # NOT CMAKE_COMPILER_IS_GNUCXX

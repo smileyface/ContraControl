@@ -55,6 +55,17 @@ class InvalidCommandException : public std::exception
 };
 
 /**
+ \brief When attempting to change the state of an invalid device type
+ */
+class InvalidDeviceException : public std::exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Device is of an invalid type";
+    }
+};
+
+/**
  \brief When a function has not been implemented.
  */
 class UnimplementedFunctionException : public std::exception

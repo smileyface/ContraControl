@@ -10,6 +10,9 @@
 #define VIEW_EXECUTOR_H
 #include "format/format.h"
 
+/**
+ * An interface for every display.
+ */
 namespace view
 {
 	/**
