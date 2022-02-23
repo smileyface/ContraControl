@@ -20,10 +20,7 @@ class Initalize : public Command
 {
 public:
 	~Initalize() {};
-	Initalize(std::string device_common_name)
-	{
-		name = device_common_name;
-	}
+	Initalize(std::string device_common_name);
 	/**
 	 Name for the device to be initalized
 	 */

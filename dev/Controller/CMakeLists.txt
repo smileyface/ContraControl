@@ -9,7 +9,9 @@ set(CONTROLLER_HEADER_FILES
                     system/timer.h)
 
 set(CONTROLLER_SOURCE_FILES
-                    commands/src/transition.cpp)
+                    commands/src/transition.cpp
+                    commands/src/initalize.cpp
+                    commands/src/assign.cpp)
 
 add_library(Controller controller_main.cpp ${CONTROLLER_HEADER_FILES} ${CONTROLLER_SOURCE_FILES})
 

@@ -25,19 +25,11 @@ public:
 	/**
 	 Set channel 0 to a specific value.
 	 */
-	Assign(Channel new_value) 
-	{ 
-		channel = 0;
-		value = new_value; 
-	}
+	Assign(Channel new_value);
 	/**
 	 Set a channel to a specific value.
 	 */
-	Assign(int channel_number, Channel new_value) 
-	{ 
-		value = new_value; 
-		channel = channel_number;
-	}
+	Assign(int channel_number, Channel new_value);
 	~Assign() {};
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::ASSIGN; }
 
