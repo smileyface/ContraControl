@@ -31,13 +31,17 @@ TEST_F(Commands_Test, Device_Initalize) {
 	testing_util::device_utilities::check_state(dl, ds);
 }
 TEST_F(Commands_Test, Device_On) {
-	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize("Test1")));
+	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
+	testing_util::device_utilities::check_state(dl, ds);
+	ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize("Test1")));
 	ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
 	testing_util::device_utilities::check_state(dl, ds);
 }
 
 TEST_F(Commands_Test, Device_Off) {
-	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize("Test1")));
+	Device * ds = static_cast<Device*>(device_utilities::command_device(dl, new Off()));
+	testing_util::device_utilities::check_state(dl, ds);
+	ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize("Test1")));
 	ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
 	testing_util::device_utilities::check_state(dl, ds);
 
