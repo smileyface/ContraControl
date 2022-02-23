@@ -55,6 +55,15 @@ TEST_F(Device_Switch_Test, Device_Invalid) {
 	device_utilities::command_device(dl, new Initalize("Test1"));
 	testing_util::device_utilities::check_validity(dl, true);
 }
+TEST_F(Device_Switch_Test, Device_Removed) {
+	testing_util::device_utilities::check_type(dl, DEVICE_IDENTIFIER::SWITCH);
+	device_utilities::remove_device(dl);
+	EXPECT_THROW(testing_util::device_utilities::check_type(dl, DEVICE_IDENTIFIER::SWITCH), DeviceNotFoundException);
+}
+TEST_F(Device_Switch_Test, Device_Naming) {
+	device_utilities::command_device(dl, new Initalize("Test1"));
+	testing_util::device_utilities::check_name(dl, DEVICE_IDENTIFIER::SWITCH, "Test1");
+}
 
 TEST_F(Device_Gradient_Test, Device_Created) {
 	testing_util::device_utilities::check_type(dl, DEVICE_IDENTIFIER::GRADIENT);
@@ -63,6 +72,11 @@ TEST_F(Device_Gradient_Test, Device_Invalid) {
 	testing_util::device_utilities::check_validity(dl, false);
 	device_utilities::command_device(dl, new Initalize("Test1"));
 	testing_util::device_utilities::check_validity(dl, true);
+}
+TEST_F(Device_Gradient_Test, Device_Removed) {
+	testing_util::device_utilities::check_type(dl, DEVICE_IDENTIFIER::GRADIENT);
+	device_utilities::remove_device(dl);
+	EXPECT_THROW(testing_util::device_utilities::check_type(dl, DEVICE_IDENTIFIER::GRADIENT), DeviceNotFoundException);
 }
 
 TEST_F(Device_Invalid_Test, Device_Invalid) {

@@ -42,6 +42,9 @@ enum class DEVICE_IDENTIFIER : Device_Id
 	 */
 	 INVALID
 };
+
+std::string device_type_as_string(DEVICE_IDENTIFIER type);
+
 /*!
  * \cond
  */

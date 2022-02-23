@@ -26,6 +26,7 @@ namespace testing_util
 		void check_power_for_real(Device_Label label);
 		void check_channel(Device_Label label, int channel, Channel value);
 		void check_channel(Device_Label label, Channel value);
+		void check_name(Device_Label label, DEVICE_IDENTIFIER type, std::string name);
 	}
 	namespace node_utilities
 	{

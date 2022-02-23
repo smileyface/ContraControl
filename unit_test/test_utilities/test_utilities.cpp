@@ -61,6 +61,12 @@ void testing_util::device_utilities::check_channel(Device_Label label, Channel v
 	check_channel(label, 0, value);
 }
 
+void testing_util::device_utilities::check_name(Device_Label label, DEVICE_IDENTIFIER type, std::string name)
+{
+	EXPECT_EQ(model::get_device(label)->get_name(), name);
+	std::string device_full_name = device_type_as_string(type) + "::" + name;
+	EXPECT_EQ(model::get_device(label)->get_full_name(), device_full_name);
+}
 void testing_util::node_utilities::check_for_device(Device_Label label)
 {
 	bool found = false;
