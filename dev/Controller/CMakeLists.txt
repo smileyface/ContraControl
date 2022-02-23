@@ -2,7 +2,7 @@ set(CONTROLLER_HEADER_FILES
                     commands/common/initalize.h
                     commands/device/off.h
                     commands/device/on.h
-                    Commands/device/assign.h
+                    commands/device/assign.h
                     commands/command.h
                     commands.h
                     controller_main.h
