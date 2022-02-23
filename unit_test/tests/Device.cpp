@@ -16,10 +16,6 @@ namespace {
 		virtual void TearDown() {
 			system_util::cleanup();
 		}
-		
-		void initalize() {
-			device_utilities::initalize_device(dl);
-		}
 
 	};
 	class Device_Gradient_Test : public ::testing::Test {
@@ -56,7 +52,7 @@ TEST_F(Device_Switch_Test, Device_Created) {
 }
 TEST_F(Device_Switch_Test, Device_Invalid) {
 	testing_util::device_utilities::check_validity(dl, false);
-	initalize();
+	device_utilities::command_device(dl, new Initalize("Test1"));
 	testing_util::device_utilities::check_validity(dl, true);
 }
 
@@ -65,7 +61,7 @@ TEST_F(Device_Gradient_Test, Device_Created) {
 }
 TEST_F(Device_Gradient_Test, Device_Invalid) {
 	testing_util::device_utilities::check_validity(dl, false);
-	device_utilities::initalize_device(dl);
+	device_utilities::command_device(dl, new Initalize("Test1"));
 	testing_util::device_utilities::check_validity(dl, true);
 }
 

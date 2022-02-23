@@ -50,6 +50,8 @@ namespace state_interfaces
 		case COMMAND_ENUM::OFF:
 			state->turn_off();
 			break;
+		case COMMAND_ENUM::ASSIGN:
+			state->set_channel(static_cast<Assign*>(command)->channel, static_cast<Assign*>(command)->value);
 		}
 	}
 }

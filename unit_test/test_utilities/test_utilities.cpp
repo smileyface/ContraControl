@@ -51,6 +51,16 @@ void testing_util::device_utilities::check_type(Device_Label label, DEVICE_IDENT
 	EXPECT_EQ(model::get_device(label)->get_device_type(), type) << "Device type is incorrect";
 }
 
+void testing_util::device_utilities::check_channel(Device_Label label, int channel, Channel value)
+{
+	EXPECT_EQ(model::get_device(label)->get_channel(channel), value) << "Channel is incorrect";
+}
+
+void testing_util::device_utilities::check_channel(Device_Label label, Channel value)
+{
+	check_channel(label, 0, value);
+}
+
 void testing_util::node_utilities::check_for_device(Device_Label label)
 {
 	bool found = false;
@@ -63,6 +73,8 @@ void testing_util::node_utilities::check_for_device(Device_Label label)
 	}
 	EXPECT_EQ(found, true);
 }
+
+
 
 void testing_util::network_utilities::check_initalized()
 {

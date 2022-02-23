@@ -104,6 +104,11 @@ void Device::set_channel(int channel, Channel value)
 	channels[channel] = value;
 }
 
+Channel Device::get_channel(int channel)
+{
+	return channels[channel];
+}
+
 bool Device::operator==(const Device& ld)
 {
 	bool type_check = typeid(*this).name() == typeid(ld).name();

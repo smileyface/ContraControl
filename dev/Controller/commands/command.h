@@ -31,6 +31,10 @@ enum class COMMAND_ENUM :command_id
      */
 	OFF,
     /**
+     Assign value to a channel
+     */
+     ASSIGN,
+    /**
      Generic transition
      */
 	TRANSITION,

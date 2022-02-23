@@ -6,12 +6,16 @@
 #include "../../dev/Model/device.h"
 
 #include "pch.h"
+
+#include <map>
+
 namespace device_utilities
 {
 	extern int device_in_use;
 	extern Node_Id node_handle;
+	extern std::map<Device_Id, Device*> model_list;
 
-	Device* get_nominal_state(DEVICE_IDENTIFIER device, Command* command);
+	Device* get_nominal_state(Device_Id label, Command* command);
 	Device* get_nominal_state_no_init(DEVICE_IDENTIFIER device, Command* command);
 	
 	/*
@@ -35,9 +39,6 @@ namespace device_utilities
 	Device* command_device_no_init(Device_Label label, Command* command);
 
 	Device* finish_command(Device_Label label, Command* command);
-
-	void initalize_device(Device_Label label);
-
 }
 
 #include"../test_utilities/system_testings.h"

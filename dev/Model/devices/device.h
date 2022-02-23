@@ -132,6 +132,11 @@ public:
 	 * \param value Value to set Channel to.
 	 */
 	void set_channel(int channel, Channel value);
+	/**
+	 Get value of specific channel
+	 \return value of channel
+	 */
+	Channel get_channel(int channel);
 
 protected:
 	/**

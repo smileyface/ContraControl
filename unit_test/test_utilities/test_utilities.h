@@ -24,6 +24,8 @@ namespace testing_util
 		void check_validity(Device_Label label, bool expect_valid);
 		void check_type(Device_Label label, DEVICE_IDENTIFIER id);
 		void check_power_for_real(Device_Label label);
+		void check_channel(Device_Label label, int channel, Channel value);
+		void check_channel(Device_Label label, Channel value);
 	}
 	namespace node_utilities
 	{
