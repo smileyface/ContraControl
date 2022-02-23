@@ -30,6 +30,10 @@ enum class DEVICE_IDENTIFIER : Device_Id
 	*/
 	GRADIENT,
 	/**
+	 A 3 channel color device
+	 */
+	 RGB,
+	/**
 	Device that controls audio
 	*/
 	AUDIO,
