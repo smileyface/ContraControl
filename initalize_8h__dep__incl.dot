@@ -1,0 +1,19 @@
+digraph "initalize.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="initalize.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="commands.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$commands_8h.html",tooltip="A file to include to get all defined commands. To drop in a new command, you must add the command to ..."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="model_command.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_interfaces_2types_2model__command_8h.html",tooltip=" "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="model_interface.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$model__interface_8h.html",tooltip=" "];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="timed_command.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$timed__command_8h.html",tooltip=" "];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="controller_main.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$controller__main_8h.html",tooltip="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead."];
+  Node5 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="controller_interface.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$controller__interface_8h.html",tooltip=" "];
+}

@@ -8,5 +8,8 @@ var searchData=
   ['add_5fview_5',['add_view',['../class_main___interfaces_1_1_view___interface.html#aea41d93c9f8a65a3537dcc50f8c8b64a',1,'Main_Interfaces::View_Interface::add_view()'],['../class_view___interfaces_1_1_main___interface.html#ab509694f950f8deb5d9b7a87f7e14745',1,'View_Interfaces::Main_Interface::add_view()'],['../class_console___format.html#a686ad661315231dad1e62d5eac2df47a',1,'Console_Format::add_view()'],['../class_format.html#a9cf3e0abb38a558f323d6de46586d642',1,'Format::add_view()']]],
   ['additem_6',['addItem',['../class_logger.html#ab8c48e51dfe465741dfb06fb1fc91e65',1,'Logger']]],
   ['addr_7',['addr',['../struct_node___messages_1_1_n_o_d_e___h_e_l_l_o.html#a93c909a3f70b2f2c5ff54d20f3db60ef',1,'Node_Messages::NODE_HELLO']]],
-  ['audio_8',['AUDIO',['../devices_2device_8h.html#a90ca22d79dd3ad45ef7e225babdb2e70ae423b8bde9bfbfd7e9409b23b23aed91',1,'device.h']]]
+  ['assign_8',['Assign',['../class_assign.html',1,'Assign'],['../class_assign.html#a119ce6439ec2c98c5e57ee645bb48290',1,'Assign::Assign(Channel new_value)'],['../class_assign.html#a841bfa75e9545846c47b005c2f68b808',1,'Assign::Assign(int channel_number, Channel new_value)']]],
+  ['assign_9',['ASSIGN',['../command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1',1,'command.h']]],
+  ['assign_2eh_10',['assign.h',['../assign_8h.html',1,'']]],
+  ['audio_11',['AUDIO',['../devices_2device_8h.html#a90ca22d79dd3ad45ef7e225babdb2e70ae423b8bde9bfbfd7e9409b23b23aed91',1,'device.h']]]
 ];
