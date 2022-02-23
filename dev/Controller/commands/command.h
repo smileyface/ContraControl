@@ -63,12 +63,12 @@ public:
     /**
      * \return If time to complete is 0, Command has completed, therefore return true.
      */
-	virtual bool completed() { return time_to_complete <= 0.0; }
+    virtual bool completed();
     /**
      * Return Enum of the command. Mainly for Command indentification purposes.
      * \return Enum value of the command.
      */
-	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::INVALID; }
+    virtual COMMAND_ENUM get_id();
 private:
 };
 

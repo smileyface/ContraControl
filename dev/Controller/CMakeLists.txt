@@ -11,7 +11,8 @@ set(CONTROLLER_HEADER_FILES
 set(CONTROLLER_SOURCE_FILES
                     commands/src/transition.cpp
                     commands/src/initalize.cpp
-                    commands/src/assign.cpp)
+                    commands/src/assign.cpp
+                    commands/src/command.cpp)
 
 add_library(Controller controller_main.cpp ${CONTROLLER_HEADER_FILES} ${CONTROLLER_SOURCE_FILES})
 
