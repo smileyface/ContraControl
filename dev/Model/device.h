@@ -27,24 +27,7 @@
  * \return A pointer to the desired Devic
  */
 
-inline Device* create_device_instance(Device_Creator creator)
-{
-	Device* the_device;
-	switch ((DEVICE_IDENTIFIER)creator.first)
-	{
-	case DEVICE_IDENTIFIER::SWITCH:
-		the_device = new Device(DEVICE_IDENTIFIER::SWITCH, 0);
-		break;
-	case DEVICE_IDENTIFIER::GRADIENT:
-		the_device = new Device(DEVICE_IDENTIFIER::GRADIENT, 1);
-		break;
-	case DEVICE_IDENTIFIER::INVALID:
-	default:
-		the_device = new Device();
-	}
-	the_device->set_name(creator.second);
-	return the_device;
-}
+Device* create_device_instance(Device_Creator creator);
 /**
  Map of Id's that is indexed by unique Id's
  */

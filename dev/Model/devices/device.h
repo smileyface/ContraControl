@@ -30,6 +30,10 @@ enum class DEVICE_IDENTIFIER : Device_Id
 	*/
 	GRADIENT,
 	/**
+	 A 3 channel color device
+	 */
+	 RGB,
+	/**
 	Device that controls audio
 	*/
 	AUDIO,
@@ -132,6 +136,11 @@ public:
 	 * \param value Value to set Channel to.
 	 */
 	void set_channel(int channel, Channel value);
+	/**
+	 Get value of specific channel
+	 \return value of channel
+	 */
+	Channel get_channel(int channel);
 
 protected:
 	/**

@@ -13,5 +13,6 @@
 #include "commands/common/initalize.h"
 #include "commands/device/on.h"
 #include "commands/device/off.h"
+#include "commands/device/assign.h"
 
 #endif // !COMMANDS_INCLUSION_H
