@@ -6,29 +6,24 @@
 
 Device* create_device_instance(Device_Creator creator)
 {
-	try {
-		Device* the_device;
-		switch ((DEVICE_IDENTIFIER)creator.first)
-		{
-		case DEVICE_IDENTIFIER::SWITCH:
-			the_device = new Device(DEVICE_IDENTIFIER::SWITCH, 0);
-			break;
-		case DEVICE_IDENTIFIER::GRADIENT:
-			the_device = new Device(DEVICE_IDENTIFIER::GRADIENT, 1);
-			break;
-		case DEVICE_IDENTIFIER::RGB:
-			the_device = new Device(DEVICE_IDENTIFIER::RGB, 3);
-			break;
-		case DEVICE_IDENTIFIER::INVALID:
-		default:
-			the_device = new Device();
-		}
-		the_device->set_name(creator.second);
-		return the_device;
+	Device* the_device;
+	switch ((DEVICE_IDENTIFIER)creator.first)
+	{
+	case DEVICE_IDENTIFIER::SWITCH:
+		the_device = new Device(DEVICE_IDENTIFIER::SWITCH, 0);
+		break;
+	case DEVICE_IDENTIFIER::GRADIENT:
+		the_device = new Device(DEVICE_IDENTIFIER::GRADIENT, 1);
+		break;
+	case DEVICE_IDENTIFIER::RGB:
+		the_device = new Device(DEVICE_IDENTIFIER::RGB, 3);
+		break;
+	case DEVICE_IDENTIFIER::INVALID:
+	default:
+		the_device = new Device();
 	}
-	catch (const std::bad_alloc& e) {
-		throw InvalidDeviceException();
-	}
+	the_device->set_name(creator.second);
+	return the_device;
 }
 
 Device::Device()
