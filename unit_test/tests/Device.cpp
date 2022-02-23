@@ -115,3 +115,8 @@ TEST_F(Device_RGB_Test, Device_Naming) {
 TEST_F(Device_Invalid_Test, Device_Invalid) {
 	testing_util::device_utilities::check_validity(dl, false);
 }
+
+TEST_F(Device_Invalid_Test, Device_Naming) {
+	device_utilities::command_device(dl, new Initalize("Test1"));
+	testing_util::device_utilities::check_name(dl, DEVICE_IDENTIFIER::INVALID, "Test1");
+}
