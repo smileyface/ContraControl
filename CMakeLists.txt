@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(RUN_COVER false CACHE BOOLEAN "Run code coverage")
 
 if(RUN_COVER)
-  SET(CMAKE_CXX_FLAGS "-fprofile-arcs -ftest-coverage -fPIC")
+  SET(CMAKE_CXX_FLAGS "-fprofile-arcs -ftest-coverage -o0 -fPIC")
 endif()
 
 add_subdirectory(dev)
