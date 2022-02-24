@@ -36,7 +36,7 @@ namespace device_utilities
 	*/
 	Device* command_device(Device_Label label, Command* command);
 
-	Device* command_device_no_init(Device_Label label, Command* command);
+	void add_command(Device_Label label, Command* command);
 
 	Device* finish_command(Device_Label label, Command* command);
 }

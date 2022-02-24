@@ -64,3 +64,25 @@ TEST_F(Commands_Test, Device_Assign_Channel) {
 TEST_F(Commands_Test, Device_Invalid_Command) {
 	EXPECT_THROW(device_utilities::command_device(dl, new Command()), InvalidCommandException);
 }
+
+TEST_F(Commands_Test, Device_Duplicate_Command) {
+	device_utilities::command_device(dl, new Initalize("Test1"));
+	On* on = new On();
+	device_utilities::add_command(dl, on);
+	device_utilities::add_command(dl, new Off());
+	device_utilities::add_command(dl, on);
+	system_util::step(1);
+
+	Device* ds = new Device();
+	ds->initalize("tester");
+	ds->turn_off();
+	testing_util::device_utilities::check_state(dl, ds);
+
+	device_utilities::add_command(dl, new On());
+	device_utilities::add_command(dl, new Off());
+	device_utilities::add_command(dl, new On());
+	system_util::step(1);
+
+	ds->turn_on();
+	testing_util::device_utilities::check_state(dl, ds);
+}

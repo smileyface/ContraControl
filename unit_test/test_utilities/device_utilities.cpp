@@ -49,6 +49,12 @@ Device* device_utilities::command_device(Device_Label label, Command* command)
 	return ds;
 }
 
+void device_utilities::add_command(Device_Label label, Command* command)
+{
+	controller::add_command(Timed_Command(command, label, 0));
+	controller::step();
+}
+
 Device* device_utilities::finish_command(Device_Label label, Command* command)
 {
 	while (!command->completed())
