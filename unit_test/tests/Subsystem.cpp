@@ -7,11 +7,11 @@
 namespace {
 	class Subsystem_Test : public ::testing::Test {
 	protected:
-		Device_Label dl;
 		virtual void SetUp() {
+			model::initalize();
 		}
 		virtual void TearDown() {
-			system_utilities::cleanup();
+			model::clean_up();
 		}
 	};
 }

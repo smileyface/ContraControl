@@ -13,7 +13,7 @@ std::thread model_thread;
 std::mutex model_mutex;
 
 Timer model_timer;
-bool model::model_running = true;
+std::atomic<bool> model::model_running;
 Command_List model::step_actions;
 
 System_Messages* model::model_message_interface;
@@ -96,6 +96,7 @@ void model::stop_loop()
 {
 	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Stopped", subsystem_name));
 	model_running = false;
+	model_thread.join();
 }
 
 
@@ -104,8 +105,6 @@ void model::clean_up()
 {
 	my_node.clear_node();
 	network::teardown_network_interfaces();
-	if(model_thread.joinable())
-		model_thread.join();
 }
 
 void model::initalize_my_node(Node_Id id)
