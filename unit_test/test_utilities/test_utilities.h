@@ -9,7 +9,7 @@
 
 #include "../../dev/Utilities/Utilities/exceptions.h"
 
-namespace testing_util
+namespace testing_utilities
 {
 	void log_top_test(Command* command, Device* device);
 	void log_bottom_test(Command* command, Device* device);
@@ -37,10 +37,12 @@ namespace testing_util
 		void check_initalized();
 		void exception_handle();
 	}
-}
-
-namespace network_test_util
-{
-	
+	namespace subsystem_utilities
+	{
+		namespace model_utilities
+		{
+			void check_is_running(bool is_running);
+		}
+	}
 }
 #endif

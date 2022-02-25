@@ -10,16 +10,16 @@ namespace {
 		virtual void SetUp() {
 			try
 			{
-				system_util::setup();
+				system_utilities::setup();
 				network::init_network_interfaces();
 			}
 			catch (NetworkErrorException e)
 			{
-				testing_util::network_utilities::exception_handle();
+				testing_utilities::network_utilities::exception_handle();
 			}
 		}
 		virtual void TearDown() {
-			system_util::cleanup();
+			system_utilities::cleanup();
 			network::teardown_network_interfaces();
 		}
 
@@ -28,20 +28,20 @@ namespace {
 TEST_F(LocalNetworkTest, Network_SetUp)
 {
 	/** Start in server mode */
-	testing_util::network_utilities::check_initalized();
+	testing_utilities::network_utilities::check_initalized();
 }
 
 TEST_F(LocalNetworkTest, Server_Start_Up)
 {
 	/** Start in server mode */
-	testing_util::network_utilities::check_initalized();
+	testing_utilities::network_utilities::check_initalized();
 	try
 	{
 		network::start_server();
 	}
 	catch (NetworkErrorException e)
 	{
-		testing_util::network_utilities::exception_handle();
+		testing_utilities::network_utilities::exception_handle();
 	}
 }
 
@@ -50,11 +50,11 @@ TEST_F(LocalNetworkTest, Client_Start_Up)
 	/** Start in server mode */	
 	try
 	{
-		testing_util::network_utilities::check_initalized();
+		testing_utilities::network_utilities::check_initalized();
 		network::start_client();
 	}
 	catch (NetworkErrorException e)
 	{
-		testing_util::network_utilities::exception_handle();
+		testing_utilities::network_utilities::exception_handle();
 	}
 }

@@ -8,11 +8,11 @@
 namespace {
 	class Node_Test : public ::testing::Test {
 		virtual void SetUp() {
-			system_util::setup();
+			system_utilities::setup();
 			node_utilities::start_test_environment();
 		}
 		virtual void TearDown() {
-			system_util::cleanup();
+			system_utilities::cleanup();
 		}
 
 	};
@@ -33,13 +33,13 @@ TEST_F(Node_Test, Node_Exclusion)
 TEST_F(Node_Test, Add_Devices)
 {
 	Device_Label dl_n1_0 = node_utilities::add_device(node_utilities::local_node_handle, Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
-	testing_util::node_utilities::check_for_device(dl_n1_0);
+	testing_utilities::node_utilities::check_for_device(dl_n1_0);
 	Device_Label dl_n1_1 = node_utilities::add_device(node_utilities::local_node_handle, Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test2"));
-	testing_util::node_utilities::check_for_device(dl_n1_0);
-	testing_util::node_utilities::check_for_device(dl_n1_1);
+	testing_utilities::node_utilities::check_for_device(dl_n1_0);
+	testing_utilities::node_utilities::check_for_device(dl_n1_1);
 
 	node_utilities::create_node("Test_Node_2");
 	Device_Label dl_n2_0 = node_utilities::add_device("Test_Node_2", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test2"));
-	testing_util::node_utilities::check_for_device(dl_n2_0);
-	testing_util::node_utilities::check_for_device(dl_n1_0);
+	testing_utilities::node_utilities::check_for_device(dl_n2_0);
+	testing_utilities::node_utilities::check_for_device(dl_n1_0);
 }
