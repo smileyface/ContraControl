@@ -1,0 +1,5 @@
+<map id="View" name="View">
+<area shape="rect" id="node1" title="way to view a Device." alt="" coords="58,5,109,32"/>
+<area shape="rect" id="node2" href="$class_console___view.html" title=" " alt="" coords="31,80,136,107"/>
+<area shape="rect" id="node3" href="$class_console___system___view.html" title=" " alt="" coords="5,155,161,181"/>
+</map>

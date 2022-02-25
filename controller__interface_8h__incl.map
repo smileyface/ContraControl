@@ -1,0 +1,13 @@
+<map id="controller_interface.h" name="controller_interface.h">
+<area shape="rect" id="node1" title=" " alt="" coords="245,5,387,32"/>
+<area shape="rect" id="node2" href="$timed__command_8h.html" title=" " alt="" coords="235,80,397,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="160,155,317,196"/>
+<area shape="rect" id="node4" href="$commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="341,155,448,196"/>
+<area shape="rect" id="node5" href="$initalize_8h.html" title=" " alt="" coords="5,244,203,271"/>
+<area shape="rect" id="node8" href="$on_8h.html" title=" " alt="" coords="227,244,383,271"/>
+<area shape="rect" id="node9" href="$off_8h.html" title=" " alt="" coords="407,244,563,271"/>
+<area shape="rect" id="node10" href="$assign_8h.html" title=" " alt="" coords="587,244,767,271"/>
+<area shape="rect" id="node6" title=" " alt="" coords="77,319,131,345"/>
+<area shape="rect" id="node7" href="$command_8h.html" title=" " alt="" coords="345,319,444,345"/>
+<area shape="rect" id="node11" href="$channel_8h.html" title=" " alt="" coords="590,319,765,345"/>
+</map>
