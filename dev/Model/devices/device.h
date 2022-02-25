@@ -43,6 +43,11 @@ enum class DEVICE_IDENTIFIER : Device_Id
 	 INVALID
 };
 
+/**
+ * Represent DEVICE_IDENTIFIER enum as a string.
+ * \param type Device Identifier type.
+ * \return String representation.
+ */
 std::string device_type_as_string(DEVICE_IDENTIFIER type);
 
 /*!
