@@ -20,6 +20,10 @@ class Initalize : public Command
 {
 public:
 	~Initalize() {};
+	/**
+	 * Construct command with the name to give to the device.
+	 * \param device_common_name Common name of device.
+	 */
 	Initalize(std::string device_common_name);
 	/**
 	 Name for the device to be initalized

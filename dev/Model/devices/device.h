@@ -146,6 +146,7 @@ public:
 	void set_channel(int channel, Channel value);
 	/**
 	 Get value of specific channel
+	 \param channel Designation of channel that will be returning the value.
 	 \return value of channel
 	 */
 	Channel get_channel(int channel);
