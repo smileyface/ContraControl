@@ -1,3 +1,6 @@
+#include <thread>
+#include <chrono> 
+
 #include "system_testings.h"
 
 #include "../../dev/Model/model_main.h"
@@ -23,6 +26,11 @@ void system_utilities::step(int steps)
 		controller::step();
 		model::step();
 	}
+}
+
+void system_utilities::sleep_thread(int time_to_sleep)
+{
+	std::this_thread::sleep_for(std::chrono::seconds(time_to_sleep));
 }
 
 void system_utilities::model_utilities::start()

@@ -8,6 +8,8 @@ namespace system_utilities
 	void cleanup();
 
 	void step(int steps);
+
+	void sleep_thread(int wait_time);
 	namespace model_utilities
 	{
 		void start();
