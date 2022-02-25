@@ -25,7 +25,7 @@ Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 
 void device_utilities::start_test_environment()
 {
-	system_util::setup();
+	system_utilities::setup();
 	model::initalize_my_node(device_utilities::node_handle);
 }
 
@@ -44,17 +44,23 @@ void device_utilities::remove_device(Device_Label label)
 Device* device_utilities::command_device(Device_Label label, Command* command)
 {
 	controller::add_command(Timed_Command(command, label, 0));
-	system_util::step(1);
+	system_utilities::step(1);
 	Device* ds = get_nominal_state(label.get_device_id(), command);
 	return ds;
+}
+
+void device_utilities::add_command(Device_Label label, Command* command)
+{
+	controller::add_command(Timed_Command(command, label, 0));
+	controller::step();
 }
 
 Device* device_utilities::finish_command(Device_Label label, Command* command)
 {
 	while (!command->completed())
 	{
-		system_util::step(1);
+		system_utilities::step(1);
 	}
-	system_util::step(1);
+	system_utilities::step(1);
 	return get_nominal_state(label.get_device_id(), command);
 }

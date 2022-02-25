@@ -37,6 +37,7 @@ packages/*
 /dev/.vs
 bin/*
 build/*
+unit_test/Static_Test
 
 #CMake
 out/*

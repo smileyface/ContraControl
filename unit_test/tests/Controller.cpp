@@ -13,5 +13,5 @@ TEST(Controller_Tests, Gradient_Initalize) {
 
 	device_utilities::check_state(device, ds);
 
-	system_util::cleanup();*/
+	system_utilities::cleanup();*/
 }

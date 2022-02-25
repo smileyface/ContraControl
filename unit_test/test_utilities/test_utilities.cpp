@@ -7,29 +7,29 @@
 
 #include <typeinfo>
 
-void testing_util::log_top_test(Command* command, Device* device)
+void testing_utilities::log_top_test(Command* command, Device* device)
 {
 	Log_Entry topItem;
 	EXPECT_NO_THROW(topItem = sys_log::pop()) << "Nothing happened. Log empty";
 	EXPECT_EQ(topItem.device, device->get_full_name()) << "Wrong Device";
 }
 
-void testing_util::log_bottom_test(Command* command, Device* device)
+void testing_utilities::log_bottom_test(Command* command, Device* device)
 {
 	Log_Entry topItem;
 	topItem = sys_log::drop();
 }
 
-void testing_util::get_partial_on(Command* command, Device* device, double timeout)
+void testing_utilities::get_partial_on(Command* command, Device* device, double timeout)
 {
 	while (timeout > 0)
 	{
-		system_util::step(1);
+		system_utilities::step(1);
 		timeout -= model_timer.get_elapsed_time();
 	}
 }
 
-void testing_util::device_utilities::check_state(Device_Label device, Device* expected_state)
+void testing_utilities::device_utilities::check_state(Device_Label device, Device* expected_state)
 {
 	Device* received_state = model::get_device(device);
 
@@ -39,29 +39,35 @@ void testing_util::device_utilities::check_state(Device_Label device, Device* ex
 
 }
 
-void testing_util::device_utilities::check_validity(Device_Label label, bool expect_valid)
+void testing_utilities::device_utilities::check_validity(Device_Label label, bool expect_valid)
 {
 	Device received_state = *model::get_device(label);
 
 	EXPECT_EQ(received_state.is_valid(), expect_valid) << "Device validity is not correct";
 }
 
-void testing_util::device_utilities::check_type(Device_Label label, DEVICE_IDENTIFIER type)
+void testing_utilities::device_utilities::check_type(Device_Label label, DEVICE_IDENTIFIER type)
 {
 	EXPECT_EQ(model::get_device(label)->get_device_type(), type) << "Device type is incorrect";
 }
 
-void testing_util::device_utilities::check_channel(Device_Label label, int channel, Channel value)
+void testing_utilities::device_utilities::check_channel(Device_Label label, int channel, Channel value)
 {
 	EXPECT_EQ(model::get_device(label)->get_channel(channel), value) << "Channel is incorrect";
 }
 
-void testing_util::device_utilities::check_channel(Device_Label label, Channel value)
+void testing_utilities::device_utilities::check_channel(Device_Label label, Channel value)
 {
 	check_channel(label, 0, value);
 }
 
-void testing_util::node_utilities::check_for_device(Device_Label label)
+void testing_utilities::device_utilities::check_name(Device_Label label, DEVICE_IDENTIFIER type, std::string name)
+{
+	EXPECT_EQ(model::get_device(label)->get_name(), name);
+	std::string device_full_name = device_type_as_string(type) + "::" + name;
+	EXPECT_EQ(model::get_device(label)->get_full_name(), device_full_name);
+}
+void testing_utilities::node_utilities::check_for_device(Device_Label label)
 {
 	bool found = false;
 	for (int i = 0; i < model::get_node(label.get_node_id())->get_devices().size(); i++)
@@ -76,7 +82,7 @@ void testing_util::node_utilities::check_for_device(Device_Label label)
 
 
 
-void testing_util::network_utilities::check_initalized()
+void testing_utilities::network_utilities::check_initalized()
 {
 	network::network_interface->initalized();
 	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::NETWORK_INITALIZED);
@@ -86,7 +92,7 @@ void testing_util::network_utilities::check_initalized()
 	}
 }
 
-void testing_util::network_utilities::exception_handle()
+void testing_utilities::network_utilities::exception_handle()
 {
 	switch (network::network_interface->get_status().error)
 	{
@@ -127,4 +133,9 @@ void testing_util::network_utilities::exception_handle()
 	default:
 		FAIL() << "Unknown Network Error ";
 	}
+}
+
+void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)
+{
+	EXPECT_EQ(model::model_running, is_running);
 }

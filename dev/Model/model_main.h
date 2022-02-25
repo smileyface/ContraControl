@@ -8,6 +8,7 @@
 
 #ifndef MODEL_MAIN_H
 #define MODEL_MAIN_H
+#include <atomic>
 
 #include "system/timer.h"
 
@@ -27,7 +28,7 @@ namespace model {
 	/**
 	 Is the model looping
 	 */
-	extern bool model_running;
+	extern std::atomic<bool> model_running;
 	/**
 	 The node where this model is running. Each node will have its own version of the model running on it.
 	 */

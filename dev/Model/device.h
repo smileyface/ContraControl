@@ -14,9 +14,6 @@
 //#include "Interfaces/types/device_label.h"
 
 #include "devices/device.h"
-//#include "devices/switch.h"
-//#include "devices/gradient.h"
-//#include "devices/channel.h"
 
 
 
@@ -26,7 +23,6 @@
  * \param creator A struct containing information to create the desired Device.
  * \return A pointer to the desired Devic
  */
-
 Device* create_device_instance(Device_Creator creator);
 /**
  Map of Id's that is indexed by unique Id's

@@ -26,6 +26,22 @@ Device* create_device_instance(Device_Creator creator)
 	return the_device;
 }
 
+std::string device_type_as_string(DEVICE_IDENTIFIER type)
+{
+	switch (type)
+	{
+	case DEVICE_IDENTIFIER::SWITCH:
+		return "Switch";
+	case DEVICE_IDENTIFIER::GRADIENT:
+		return "Gradient";
+	case DEVICE_IDENTIFIER::RGB:
+		return "RGB";
+	case DEVICE_IDENTIFIER::INVALID:
+	default:
+		return "Invalid";
+	}
+}
+
 Device::Device()
 {
 
@@ -57,8 +73,7 @@ Device_Name Device::get_name()
 
 Device_Name Device::get_full_name()
 {
-	Device_Name device_name = typeid(*this).name();
-	return device_name.erase(0, 6) + "::" + get_name();
+	return device_type_as_string(type) + "::" + get_name();
 }
 
 DEVICE_IDENTIFIER Device::get_device_type() 

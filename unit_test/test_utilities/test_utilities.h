@@ -9,7 +9,7 @@
 
 #include "../../dev/Utilities/Utilities/exceptions.h"
 
-namespace testing_util
+namespace testing_utilities
 {
 	void log_top_test(Command* command, Device* device);
 	void log_bottom_test(Command* command, Device* device);
@@ -26,6 +26,7 @@ namespace testing_util
 		void check_power_for_real(Device_Label label);
 		void check_channel(Device_Label label, int channel, Channel value);
 		void check_channel(Device_Label label, Channel value);
+		void check_name(Device_Label label, DEVICE_IDENTIFIER type, std::string name);
 	}
 	namespace node_utilities
 	{
@@ -36,10 +37,12 @@ namespace testing_util
 		void check_initalized();
 		void exception_handle();
 	}
-}
-
-namespace network_test_util
-{
-	
+	namespace subsystem_utilities
+	{
+		namespace model_utilities
+		{
+			void check_is_running(bool is_running);
+		}
+	}
 }
 #endif
