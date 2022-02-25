@@ -22,5 +22,4 @@ TEST_F(Subsystem_Test, Model_Test_Loop)
 	testing_utilities::subsystem_utilities::model_utilities::check_is_running(true);
 	system_utilities::model_utilities::stop();
 	testing_utilities::subsystem_utilities::model_utilities::check_is_running(false);
-	system_utilities::cleanup();
 }
