@@ -80,7 +80,6 @@ Node* Node::get_connection(Node_Id id)
 	return connections[id];
 }
 
-
 void Node::add_connection(Node_Type type, Node_Id id)
 {
 	connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));

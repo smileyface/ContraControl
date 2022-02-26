@@ -101,12 +101,6 @@ public:
 	void set_id(Device_Id new_id);
 
 	/**
-	 * Check if type and name is the same
-	 * \param ld Device on the left side of the operator.
-	 * \return If they're the same.
-	 */
-	bool operator==(const Device& ld);
-	/**
 	 \return If device is valid.
 	 */
 	virtual bool validity_check();
