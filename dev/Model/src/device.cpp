@@ -73,7 +73,7 @@ Device_Name Device::get_name()
 
 Device_Name Device::get_full_name()
 {
-	return device_type_as_string(type) + "::" + get_name();
+	return device_type_as_string(type) + "::" + get_name() + "#" + std::to_string(get_id());
 }
 
 DEVICE_IDENTIFIER Device::get_device_type() 
@@ -146,11 +146,4 @@ void Device::set_channel(int channel, Channel value)
 Channel Device::get_channel(int channel)
 {
 	return channels[channel];
-}
-
-bool Device::operator==(const Device& ld)
-{
-	bool type_check = typeid(*this).name() == typeid(ld).name();
-	bool device_name = this->device_name == ld.device_name;
-	return type_check && device_name;
 }
