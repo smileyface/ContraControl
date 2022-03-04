@@ -25,10 +25,13 @@ typedef void* (*THREADFUNCPTR)(void*);
 
 pthread_t server_thread;
 
+
+
 ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask)
 {
 	return host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
 }
+
 
 NETWORK_ERRORS get_error_state()
 {
@@ -103,10 +106,16 @@ void Linux_Network_Interface::set_my_ip()
 	}
 
 	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next) {
-		if (ifa->ifa_addr == NULL || 
-			strcasecmp(interfaces.c_str(), ifa->ifa_name) ||
-			ifa->ifa_addr->sa_family != AF_INET)
+		if (ifa->ifa_addr == NULL)
 			continue;
+
+		if (strcasecmp(interfaces.c_str(), ifa->ifa_name))
+			continue;
+
+		/* IPv4 */
+		if (ifa->ifa_addr->sa_family != AF_INET)
+			continue;
+
 		getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host , NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
 
 		host_ip = ipv4_addr(host);
