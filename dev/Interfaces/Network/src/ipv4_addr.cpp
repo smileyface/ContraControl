@@ -10,6 +10,7 @@ ipv4_addr::ipv4_addr()
 
 ipv4_addr::ipv4_addr(std::string str_addr)
 {
+
 	size_t pos = 0;
 	S_un = { 0,0,0,0 };
 	std::vector<unsigned char> bytes;
@@ -20,6 +21,8 @@ ipv4_addr::ipv4_addr(std::string str_addr)
 	}
 	char byte = atoi(str_addr.c_str());
 	bytes.push_back(static_cast<unsigned char>(byte));
+
+
 	if (bytes.size() == 4)
 	{
 		S_un.S_un_b.s_b1 = bytes[0];
@@ -67,16 +70,25 @@ void ipv4_addr::operator=(const unsigned long& D)
 {
 	S_un.S_addr = D;
 }
-
+void ipv4_addr::operator=(const char* ca)
+{
+	if (sizeof(ca) > 4)
+	{
+		throw - 1;
+	}
+	S_un.S_un_b.s_b1 = ca[0];
+	S_un.S_un_b.s_b2 = ca[1];
+	S_un.S_un_b.s_b3 = ca[2];
+	S_un.S_un_b.s_b4 = ca[3];
+}
 std::string ipv4_addr::get_as_string()
 {
-	std::string addr_string = std::to_string(S_un.S_un_b.s_b1);
-	for (int i = 1; i < sizeof(S_un.S_un_b); i++)
-	{
-		addr_string.append(".");
-		addr_string.append(std::to_string(get_addr_bytes()[i]));
-	}
-	return addr_string;
+	char buffer[20];
+	sprintf(buffer, "%u.%u.%u.%u", S_un.S_un_b.s_b1,
+		S_un.S_un_b.s_b2,
+		S_un.S_un_b.s_b3,
+		S_un.S_un_b.s_b4);
+	return buffer;
 }
 
 unsigned char* ipv4_addr::get_addr_bytes()

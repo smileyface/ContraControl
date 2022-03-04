@@ -76,6 +76,12 @@ struct ipv4_addr {
      */
     void operator=(const unsigned long& D);
     /**
+     * \brief Set ipv4_addr with char array.
+     * 
+     * \param ca The address as a char array.
+     */
+    void operator=(const char* ca);
+    /**
      * \brief Specify the ++ operator for network sweeps.
      * 
      *  Must be specified to handle windows endian problems. Unix could just treat this like a long

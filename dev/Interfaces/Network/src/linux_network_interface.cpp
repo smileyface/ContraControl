@@ -1,5 +1,6 @@
 ﻿/*This is where the Linux Network Interface object is defined*/
 #ifdef __linux__
+#define _GNU_SOURCE
 #include <thread>         // std::thread
 #include <net/if.h>
 #include <iostream>
@@ -41,23 +42,47 @@ const std::vector<std::string> explode(const std::string& s, const char& c)
 	return v;
 }
 
+ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask)
+{
+	return host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
+}
+
+
+NETWORK_ERRORS get_error_state()
+{
+	std::cout << errno << std::endl;
+	switch (errno)
+	{
+	case EISCONN:
+		return NETWORK_ERRORS::SOCKET_BUSY;
+		break;
+	//This is only essential for using ipv6. So I'm ignoring.
+	case EAFNOSUPPORT:
+		break;
+	case EADDRINUSE:
+		return NETWORK_ERRORS::SOCKET_BUSY;
+	case EBADF:
+		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
+	case EINVAL:
+		return NETWORK_ERRORS::SOCKET_INVALID;
+	case ENOTSOCK:
+		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
+	case EACCES:
+		return NETWORK_ERRORS::ADAPTER_ERROR;
+	case EPROTONOSUPPORT:
+		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
+	default:
+		return NETWORK_ERRORS::UNKNOWN_ERROR;
+	}
+}
+
 void Linux_Network_Interface::connect_to_server(ipv4_addr addr)
 {
 	serv_addr.sin_addr.s_addr = inet_addr(addr.get_as_string().c_str());
 	int result = connect(sock, (struct sockaddr*)&serv_addr.sin_addr, sizeof(serv_addr));
 	if (result != 0)
 	{
-		switch (errno)
-		{
-		case EISCONN:
-			status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
-			break;
-			//This is only essential for using ipv6. So I'm ignoring.
-		case EAFNOSUPPORT:
-			break;
-		default:
-			status_state.set_error(NETWORK_ERRORS::UNKNOWN_ERROR);
-		}
+		status_state.set_error(get_error_state());
 	}
 }
 
@@ -69,24 +94,10 @@ void Linux_Network_Interface::initalize()
 	* For Internet family of IPv4 addresses we use AF_INET
 	*/
 	sock = socket(sock_family, sock_type, ip_protocol);
-	memset(&serv_addr, '0', sizeof(serv_addr));
+	
+	set_my_ip();
 
-	serv_addr.sin_family = sock_family;
-	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	serv_addr.sin_port = DEFAULT_PORT;
-	/* The call to the function "bind()" assigns the details specified
-	 * in the structure 『serv_addr' to the socket created in the step above
-	 */
-	int res = bind(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
-
-	if (res == -1)
-	{
-		switch (errno)
-		{
-
-		}
-	}
-
+	//broadcast_ip = get_broadcast(host_ip, );
 
 	server_running = false;
 }
@@ -100,29 +111,43 @@ void Linux_Network_Interface::clean_up()
 
 void Linux_Network_Interface::set_my_ip()
 {
-	/*THIS IS PROBABLY THE BEST WAY*/
-	////get my interface id (wlan0 for now)
-	//struct ifaddrs* interfaceArray = NULL;
-	//void* tempAddrPtr = NULL;
-	//int rc = 0, s;
-	//char host[1025];
-	//char addressOutputBuffer[INET_ADDRSTRLEN];
-	//rc = getifaddrs(&interfaceArray);
-	//for (auto current_address = interfaceArray; current_address != NULL; current_address = current_address->ifa_next)
-	//{
-	//	if (current_address->ifa_name == interfaces)
-	//	{
-	//		
-	//		 tempAddrPtr = &((struct sockaddr_in*)current_address->ifa_addr)->sin_addr;
-	//		 
+	struct ifaddrs* ifap, * ifa;
+	struct sockaddr_in* sa;
+	char* s;
+	int found = 0;
+	char host[NI_MAXHOST];
 
-	//		 s = getnameinfo(current_address->ifa_addr,
-	//			 (serv_addr.sin_family == AF_INET) ? sizeof(struct sockaddr_in) :
-	//			 sizeof(struct sockaddr_in6),
-	//			 host, 1025,
-	//			 NULL, 0, 0x02);
-	//	}
-	//}
+	if (getifaddrs(&ifap) == -1) {
+		perror("getifaddrs");
+		exit(EXIT_FAILURE);
+	}
+
+	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next) {
+		if (ifa->ifa_addr == NULL)
+			continue;
+
+		if (strcasecmp(interfaces.c_str(), ifa->ifa_name))
+			continue;
+
+		/* IPv4 */
+		if (ifa->ifa_addr->sa_family != AF_INET)
+			continue;
+		getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host , NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+
+		host_ip = ipv4_addr(host);
+
+		sa = (struct sockaddr_in*)ifa->ifa_netmask;
+		s = inet_ntoa(sa->sin_addr);
+
+		subnet_mask = s;
+
+		broadcast_ip = get_broadcast(host_ip, subnet_mask);
+		found = 1;
+	}
+
+	freeifaddrs(ifap);
+
+
 
 	/*THIS WILL DO FOR NOW*/
 	std::string cmd = "/sbin/ifconfig " + interfaces + " | awk '/inet /{ print $2;} '";
@@ -139,24 +164,6 @@ void Linux_Network_Interface::set_my_ip()
 		ipv4_addr temp_addr(str_result);
 		host_ip = temp_addr;
 	}
-}
-
-std::vector<ipv4_addr> blast_arp()
-{
-	const char* cmd = "ip neigh show";
-	std::array<char, 128> buffer;
-	std::vector<ipv4_addr> result;
-	std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
-	if (!pipe) {
-		throw std::runtime_error("popen() failed!");
-	}
-	while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-		if (explode(buffer.data(), ' ')[5].find("REACHABLE") != std::string::npos) 
-		{
-			result.emplace_back(explode(buffer.data(), ' ')[0]);
-		}
-	}
-	return result;
 }
 
 /**
@@ -181,34 +188,40 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip, Network_Status_State& 
 	return result;
 }
 
-std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Network_Status_State& status_state)
-{
- 	ipv4_addr subnet_mask = get_subnet_mask(sock, my_addr, status_state);
-	//ipv4_addr host_mask = ~subnet_mask.S_un.S_addr;
-	ipv4_addr subnet = my_addr.S_un.S_addr & subnet_mask.S_un.S_addr;
-
-	std::map<ipv4_addr, DWORD> addresses;
-	std::vector<ipv4_addr> possibilities = blast_arp();
-	
-	std::vector<ipv4_addr> thing;
-	for (int i = 0; i<possibilities.size(); i++)
-	{
-		ipv4_addr tester(possibilities[i].S_un.S_addr & subnet_mask.S_un.S_addr);
-		if ((possibilities[i].S_un.S_addr & subnet_mask.S_un.S_addr) == subnet.S_un.S_addr)
-		{
-			thing.push_back(possibilities[i]);
-		}
-	}
-	return thing;
-}
 
 void Linux_Network_Interface::scan_for_server()
 {
-	std::vector<ipv4_addr> possibilites = scan_for_possibilities(sock, host_ip, status_state);
-	for (int i = 0; i < possibilites.size(); i++)
+	//Broadcast NODE_HELLO
+	SOCKET broadcast_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	if (broadcast_sock < 0)
 	{
-		connect_to_server(possibilites[i]);
+		status_state.set_error(get_error_state());
+		throw NetworkErrorException();
 	}
+	sockaddr_in broad_addr;
+	memset(&broad_addr, '0', sizeof(&broad_addr));
+
+	broad_addr.sin_family = AF_INET;
+	broad_addr.sin_port = htons(DEFAULT_PORT);
+
+	int broadcastEnable = 1;
+	int ret = setsockopt(broadcast_sock, SOL_SOCKET, SO_BROADCAST, &broadcastEnable, sizeof(broadcastEnable));
+
+	//TODO: Turn this into a real node hello packet.
+	/*Testing things for now*/
+	char sendMSG[] = "NODE_HELLO";
+
+
+
+	char recvbuff[50] = "";
+
+	int recvbufflen = 50;
+
+	sendto(broadcast_sock, sendMSG, strlen(sendMSG) + 1, 0, (sockaddr*)&broad_addr, sizeof(broad_addr));
+	//send_periodic(broadcast_sock, NODE_HELLO, 2000, till_found);
+
+	close(broadcast_sock);
+
 }
 
 void Linux_Network_Interface::initalized()
