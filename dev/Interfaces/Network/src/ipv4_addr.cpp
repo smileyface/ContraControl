@@ -37,39 +37,16 @@ ipv4_addr::ipv4_addr(unsigned long l1)
 	S_un.S_addr = l1;
 }
 
-ipv4_addr::ipv4_addr(unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4)
-{
-	S_un.S_un_b.s_b1 = b1;
-	S_un.S_un_b.s_b2 = b2;
-	S_un.S_un_b.s_b3 = b3;
-	S_un.S_un_b.s_b4 = b4;
-}
-
-ipv4_addr ipv4_addr::operator++()
-{
-	if (this->S_un.S_un_b.s_b2 == 255 && this->S_un.S_un_b.s_b3 == 255 && this->S_un.S_un_b.s_b4 == 255)
-	{
-		this->S_un.S_un_b.s_b1++;
-	}
-	if (this->S_un.S_un_b.s_b3 == 255 && this->S_un.S_un_b.s_b4 == 255)
-	{
-		this->S_un.S_un_b.s_b2++;
-	}
-	if (this->S_un.S_un_b.s_b4 == 255)
-	{
-		this->S_un.S_un_b.s_b3++;
-	}
-	this->S_un.S_un_b.s_b4++;
-	return *this;
-}
 bool ipv4_addr::operator<(const ipv4_addr& d) const
 {
 	return S_un.S_addr < d.S_un.S_addr;
 }
+
 void ipv4_addr::operator=(const unsigned long& D)
 {
 	S_un.S_addr = D;
 }
+
 void ipv4_addr::operator=(const char* ca)
 {
 	S_un.S_un_b.s_b1 = ca[0];
@@ -77,6 +54,7 @@ void ipv4_addr::operator=(const char* ca)
 	S_un.S_un_b.s_b3 = ca[2];
 	S_un.S_un_b.s_b4 = ca[3];
 }
+
 std::string ipv4_addr::get_as_string()
 {
 	char buffer[20];

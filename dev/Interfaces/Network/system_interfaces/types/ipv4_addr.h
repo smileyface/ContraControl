@@ -31,14 +31,6 @@ struct ipv4_addr {
      */
     ipv4_addr(std::string string);
     /**
-     * Set address from byte, byte, byte, byte.
-     * \param b1 Byte 1 of address.
-     * \param b2 Byte 2 of address.
-     * \param b3 Byte 3 of address.
-     * \param b4 Byte 4 of address.
-     */
-    ipv4_addr(unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4);
-    /**
      * \brief Construct a new ipv4 addr object from unsigned long.
      * 
      * \param l1 A long that is the ipv4_addr. 
@@ -81,12 +73,4 @@ struct ipv4_addr {
      * \param ca The address as a char array.
      */
     void operator=(const char* ca);
-    /**
-     * \brief Specify the ++ operator for network sweeps.
-     * 
-     *  Must be specified to handle windows endian problems. Unix could just treat this like a long
-     *
-     * \return ipv4_addr 
-     */
-    ipv4_addr operator++();
 };
