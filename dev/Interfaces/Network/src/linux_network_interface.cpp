@@ -25,8 +25,6 @@ typedef void* (*THREADFUNCPTR)(void*);
 
 pthread_t server_thread;
 
-std::string interfaces = "wlan0";
-
 const std::vector<std::string> explode(const std::string& s, const char& c)
 {
 	std::string buff{ "" };
@@ -76,6 +74,11 @@ NETWORK_ERRORS get_error_state()
 	}
 }
 
+Linux_Network_Interface::Linux_Network_Interface()
+{
+	interfaces = "wlan0";
+}
+
 void Linux_Network_Interface::connect_to_server(ipv4_addr addr)
 {
 	serv_addr.sin_addr.s_addr = inet_addr(addr.get_as_string().c_str());
@@ -88,16 +91,9 @@ void Linux_Network_Interface::connect_to_server(ipv4_addr addr)
 
 void Linux_Network_Interface::initalize()
 {
-	/* creates an UN-named socket inside the kernel and returns
-	* an integer known as socket descriptor
-	* This function takes domain/family as its first argument.
-	* For Internet family of IPv4 addresses we use AF_INET
-	*/
 	sock = socket(sock_family, sock_type, ip_protocol);
 	
 	set_my_ip();
-
-	//broadcast_ip = get_broadcast(host_ip, );
 
 	server_running = false;
 }
@@ -146,48 +142,7 @@ void Linux_Network_Interface::set_my_ip()
 	}
 
 	freeifaddrs(ifap);
-
-
-
-	/*THIS WILL DO FOR NOW*/
-	std::string cmd = "/sbin/ifconfig " + interfaces + " | awk '/inet /{ print $2;} '";
-	std::array<char, 128> buffer;
-	ipv4_addr result;
-	std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
-	if (!pipe)
-	{
-		throw std::runtime_error("popen() failed!");
-	}
-	while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr)
-	{
-		std::string str_result(buffer.data());
-		ipv4_addr temp_addr(str_result);
-		host_ip = temp_addr;
-	}
 }
-
-/**
-* \todo handle multiple interfaces.
-*/
-ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip, Network_Status_State& status_state)
-{
-	std::string cmd = "/sbin/ifconfig " + interfaces + " | awk '/(M|m)ask(:)? /{ print $4;} '";
-	std::array<char, 128> buffer;
-	ipv4_addr result;
-	std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
-	if (!pipe) 
-	{
-		throw std::runtime_error("popen() failed!");
-	}
-	while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) 
-	{
-		std::string str_result(buffer.data());
-		ipv4_addr temp_addr(str_result);
-		result = temp_addr;
-	}
-	return result;
-}
-
 
 void Linux_Network_Interface::scan_for_server()
 {

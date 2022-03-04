@@ -22,6 +22,7 @@ const std::string invalid_hostname = "INVALID"; ///<A marker for invalid hostnam
 class Network_Interface
 {
 public:
+ 
     /**
      * \brief Initalize the interface.
      *
@@ -47,12 +48,6 @@ public:
      * \return Network_Status_State 
      */
     Network_Status_State get_status();
-    /**
-     * \brief Return the IP of the local node
-     * 
-     * \return ipv4 as 4 unsigned chars
-     */
-    unsigned char* local_ip();
 
     //setters
         /**
@@ -118,6 +113,10 @@ protected:
      * \brief State of the network interface.
      */
     Network_Status_State status_state;
+    /**
+     * Which interface are we using
+    */
+    std::string interfaces;
 };
 
 /**
