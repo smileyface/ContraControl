@@ -191,12 +191,12 @@ void Linux_Network_Interface::initalized()
 void Linux_Network_Interface::server_start()
 {
 	server_running = true;
-	int err = pthread_create(&server_thread, NULL, (THREADFUNCPTR)&Linux_Network_Interface::server_listen, new Linux_Network_Interface());
-	if (err)
-	{
-		status_state.set_error(NETWORK_ERRORS::SERVER_CANNOT_START);
-		throw NetworkErrorException();
-	}
+	//int err = pthread_create(&server_thread, NULL, (THREADFUNCPTR)&Linux_Network_Interface::server_listen, new Linux_Network_Interface());
+	//if (err)
+	//{
+	//	status_state.set_error(NETWORK_ERRORS::SERVER_CANNOT_START);
+	//	throw NetworkErrorException();
+	//}
 }
 
 void Linux_Network_Interface::server_listen()

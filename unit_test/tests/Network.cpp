@@ -43,10 +43,6 @@ TEST_F(LocalNetworkTest, Server_Start_Up)
 	{
 		testing_utilities::network_utilities::exception_handle();
 	}
-	catch (const std::exception& exc)
-	{
-		std::cerr << exc.what();
-	}
 }
 
 TEST_F(LocalNetworkTest, Client_Start_Up)
