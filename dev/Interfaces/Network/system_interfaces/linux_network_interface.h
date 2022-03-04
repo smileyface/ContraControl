@@ -32,6 +32,7 @@ const int sock_family = AF_INET;
 
 class Linux_Network_Interface : public Network_Interface
 {
+public:
 	Linux_Network_Interface();
 	void connect_to_server(ipv4_addr addr);
 	void scan_for_server();
