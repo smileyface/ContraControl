@@ -26,5 +26,5 @@ PACKED_MESSAGE::PACKED_MESSAGE(MESSAGE* in_message)
 
 unsigned char* pack()
 {
-	return '\0';
+	return 0;
 }
