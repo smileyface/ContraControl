@@ -21,10 +21,6 @@ void system_utilities::setup()
 		printf("Caught network exception");
 		testing_utilities::network_utilities::exception_handle();
 	}
-	catch (-1)
-	{
-
-	}
 	controller::initalize();
 }
 
