@@ -101,7 +101,15 @@ protected:
     /**
      * \brief The local node ip address.
      */
-    ipv4_addr my_ip = ipv4_addr("255.255.255.255");
+    ipv4_addr host_ip = localhost;
+    /**
+        \brief The ip address of the broadcast address.
+    */
+    ipv4_addr broadcast_ip = ipv4_addr("255.255.255.255");
+    /**
+     * \brief The subnet mask.
+     */
+    ipv4_addr subnet_mask = ipv4_addr("0.0.0.0");
     /**
      * \brief the interface name of the local node.
      */

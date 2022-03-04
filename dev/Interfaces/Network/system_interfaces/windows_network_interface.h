@@ -40,8 +40,7 @@ public:
 
 	static bool ipv4_compare(sockaddr_in* win_address, ipv4_addr gen_address)
 	{
-		//return win_address->sin_addr.S_un.S_addr == gen_address.S_un.S_addr;
-		return false;
+		return win_address->sin_addr.S_un.S_addr == gen_address.S_un.S_addr;
 	}
 	static ipv4_addr convert_win_address(sockaddr_in* win_address)
 	{

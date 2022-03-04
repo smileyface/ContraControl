@@ -137,7 +137,7 @@ void Linux_Network_Interface::set_my_ip()
 	{
 		std::string str_result(buffer.data());
 		ipv4_addr temp_addr(str_result);
-		my_ip = temp_addr;
+		host_ip = temp_addr;
 	}
 }
 
@@ -162,7 +162,7 @@ std::vector<ipv4_addr> blast_arp()
 /**
 * \todo handle multiple interfaces.
 */
-ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr my_ip, Network_Status_State& status_state)
+ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip, Network_Status_State& status_state)
 {
 	std::string cmd = "/sbin/ifconfig " + interfaces + " | awk '/(M|m)ask(:)? /{ print $4;} '";
 	std::array<char, 128> buffer;
@@ -204,7 +204,7 @@ std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Ne
 
 void Linux_Network_Interface::scan_for_server()
 {
-	std::vector<ipv4_addr> possibilites = scan_for_possibilities(sock, my_ip, status_state);
+	std::vector<ipv4_addr> possibilites = scan_for_possibilities(sock, host_ip, status_state);
 	for (int i = 0; i < possibilites.size(); i++)
 	{
 		connect_to_server(possibilites[i]);

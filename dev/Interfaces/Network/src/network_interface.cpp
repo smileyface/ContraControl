@@ -24,7 +24,7 @@ void Network_Interface::set_server()
 
 unsigned char* Network_Interface::local_ip()
 {
-	return my_ip.get_addr_bytes();
+	return host_ip.get_addr_bytes();
 }
 
 Network_Status_State Network_Interface::get_status()

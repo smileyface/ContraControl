@@ -126,7 +126,8 @@ void testing_utilities::network_utilities::exception_handle()
 	case NETWORK_ERRORS::SERVER_CANNOT_START:
 		FAIL() << "Server Cannot Start";
 		break;
-
+	case NETWORK_ERRORS::NETWORK_CODE_ERROR:
+		FAIL() << "Code is incorrect. Debug.";
 	case NETWORK_ERRORS::UNKNOWN_ERROR:
 		FAIL() << "Unhandled Network Error";
 		break;

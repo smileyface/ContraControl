@@ -16,17 +16,80 @@
 
 struct addrinfo hints;
 
+////////////////////////////////////////////////
+///				HELPER FUNCTIONS
+/// 
+///	These are to help with windows specific 
+/// networking. 
+////////////////////////////////////////////////
+
+NETWORK_ERRORS set_error_state()
+{
+	switch (WSAGetLastError())
+	{
+	case WSAEFAULT:
+		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
+	case WSANOTINITIALISED:
+		return NETWORK_ERRORS::UNINITALIZED_INTERFACE;
+	case WSAEINPROGRESS:
+		return NETWORK_ERRORS::SOCKET_BUSY;
+	case WSAENETDOWN:
+		return NETWORK_ERRORS::NO_NETWORK_ERROR;
+	case WSAENOTSOCK:
+		return NETWORK_ERRORS::SOCKET_INVALID;
+	case WSAEINVAL:
+		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
+	case WSAENOPROTOOPT:
+		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
+	default:
+		return NETWORK_ERRORS::UNKNOWN_ERROR;
+	}
+}
+
+ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask)
+{
+	return host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
+}
+
+ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip, Network_Status_State& status_state)
+{
+	INTERFACE_INFO InterfaceList[20];
+	unsigned long nBytesReturned;
+	if (WSAIoctl(sock, SIO_GET_INTERFACE_LIST, 0, 0, &InterfaceList,
+		sizeof(InterfaceList), &nBytesReturned, 0, 0) == SOCKET_ERROR) {
+		status_state.set_error(set_error_state());
+		throw NetworkErrorException();
+	}
+	int nNumInterfaces = nBytesReturned / sizeof(INTERFACE_INFO);
+
+	ipv4_addr subnet_mask;
+	for (int i = 0; i < nNumInterfaces; ++i) {
+
+		if (Windows_Network_Interface::ipv4_compare((sockaddr_in*)&(InterfaceList[i].iiAddress), host_ip))
+		{
+			subnet_mask = Windows_Network_Interface::convert_win_address((sockaddr_in*)&(InterfaceList[i].iiNetmask));
+		}
+	}
+	return subnet_mask;
+}
+
+////////////////////////////////////////////
+///  WINDOWS_NETWORK_INTERFACE DEFINITIONS
+/// 
+/// Definitions for member functions of 
+/// the Windows_Network_Interface class
+////////////////////////////////////////////
+
 Windows_Network_Interface::Windows_Network_Interface()
 {
 	sock = INVALID_SOCKET;
-	hostname= invalid_hostname;
+	hostname = invalid_hostname;
 
 	ZeroMemory(&hints, sizeof(hints));
 	hints.ai_family = sock_family;
 	hints.ai_socktype = sock_type;
 	hints.ai_protocol = ip_protocol;
 }
-
 
 void Windows_Network_Interface::initalize()
 {
@@ -39,6 +102,9 @@ void Windows_Network_Interface::initalize()
 	}
 
 	sock = socket(sock_family, sock_type, ip_protocol);
+	set_my_ip();
+	subnet_mask = get_subnet_mask(sock, host_ip, status_state);
+	broadcast_ip = get_broadcast(host_ip, subnet_mask);
 }
 
 void Windows_Network_Interface::initalized()
@@ -57,87 +123,6 @@ void Windows_Network_Interface::clean_up()
 	WSACleanup();
 }
 
-ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr my_ip, Network_Status_State& status_state)
-{
-	INTERFACE_INFO InterfaceList[20];
-	unsigned long nBytesReturned;
-	if (WSAIoctl(sock, SIO_GET_INTERFACE_LIST, 0, 0, &InterfaceList,
-		sizeof(InterfaceList), &nBytesReturned, 0, 0) == SOCKET_ERROR) {
-		switch (WSAGetLastError())
-		{
-		case WSAEINPROGRESS:
-		case WSA_IO_PENDING:
-			status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
-			break;
-		case WSAENETDOWN:
-			status_state.set_error(NETWORK_ERRORS::NO_NETWORK_ERROR);
-			break;
-		case WSAENOTSOCK:
-			status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
-			break;
-		default:
-			status_state.set_error(NETWORK_ERRORS::ERROR_ON_SOCKET_BIND);
-			break;
-		}
-		throw NetworkErrorException();
-	}
-	int nNumInterfaces = nBytesReturned / sizeof(INTERFACE_INFO);
-
-	ipv4_addr subnet_mask;
-	for (int i = 0; i < nNumInterfaces; ++i) {
-
-		if (Windows_Network_Interface::ipv4_compare((sockaddr_in*)&(InterfaceList[i].iiAddress), my_ip))
-		{
-			subnet_mask = Windows_Network_Interface::convert_win_address((sockaddr_in*)&(InterfaceList[i].iiNetmask));
-		}
-	}
-	return subnet_mask;
-}
-
-void blast_arp(ipv4_addr current, DWORD& status)
-{
-	ULONG MacAddr[2];       /* for 6-byte hardware addresses */
-	ULONG PhysAddrLen = 6;  /* default to length of six bytes */
-	status = SendARP(current.S_un.S_addr, 0, &MacAddr, &PhysAddrLen);
-}
-
-std::vector<ipv4_addr> scan_for_possibilities(SOCKET sock, ipv4_addr my_addr, Network_Status_State& status_state)
-{
-
-	std::vector<ipv4_addr> thing;
-	ipv4_addr subnet_mask = get_subnet_mask(sock, my_addr, status_state);
-	ipv4_addr host_mask = ~get_subnet_mask(sock, my_addr, status_state).S_un.S_addr;
-	ipv4_addr subnet = my_addr.S_un.S_addr & subnet_mask.S_un.S_addr;
-
-	std::map<ipv4_addr, DWORD> addresses;
-
-	ipv4_addr address;
-	ipv4_addr top_addr = (ULONG_MAX & host_mask.S_un.S_addr) | subnet.S_un.S_addr;
-	for (ipv4_addr i = subnet; i < top_addr; ++i)
-	{
-		address.S_un.S_addr = (i.S_un.S_addr & host_mask.S_un.S_addr) | subnet.S_un.S_addr;
-		addresses[address] = ERROR_NOT_FOUND;
-	}
-
-	std::vector<std::thread> thread_queue;
-	for (std::map<ipv4_addr, DWORD>::iterator x = addresses.begin(); x != addresses.end(); x++)
-	{
-		thread_queue.emplace_back(blast_arp, x->first, std::ref(addresses[x->first]));
-	}
-	for (std::vector<std::thread>::iterator x = thread_queue.begin(); x != thread_queue.end(); x++)
-	{
-		x->join();
-	}
-	for (std::map<ipv4_addr, DWORD>::iterator x = addresses.begin(); x != addresses.end(); x++)
-	{
-		if (addresses[x->first] == NO_ERROR || addresses[x->first] == ERROR_BUFFER_OVERFLOW)
-		{
-			thing.push_back(x->first);
-		}
-	}
-	return thing;
-}
-
 void Windows_Network_Interface::set_my_ip()
 {
 	struct addrinfo* hostinfo = NULL;
@@ -150,17 +135,7 @@ void Windows_Network_Interface::set_my_ip()
 
 	if (host == invalid_hostname)
 	{
-		switch (WSAGetLastError())
-		{
-		case WSAEFAULT:
-			status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
-		case WSANOTINITIALISED:
-			status_state.set_error(NETWORK_ERRORS::UNINITALIZED_INTERFACE);
-		case WSAEINPROGRESS:
-			status_state.set_error(NETWORK_ERRORS::SOCKET_BUSY);
-		case WSAENETDOWN:
-			status_state.set_error(NETWORK_ERRORS::NO_NETWORK_ERROR);
-		}
+		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
 		throw NetworkErrorException();
 	}
 	std::string port = std::to_string(DEFAULT_PORT);
@@ -177,7 +152,7 @@ void Windows_Network_Interface::set_my_ip()
 
 	if (local_ips.size() == 1)
 	{
-		my_ip = local_ips[0];
+		host_ip = local_ips[0];
 	}
 }
 
@@ -218,18 +193,42 @@ void Windows_Network_Interface::connect_to_server(ipv4_addr addr)
 
 void Windows_Network_Interface::scan_for_server()
 {
+	SOCKET broadcast_sock;
+	broadcast_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
-	//std::vector<ipv4_addr> possibilites = scan_for_possibilities(sock, my_ip, status_state);
 
-	//std::vector<std::thread> thread_queue;
-	/*for (int i = 0; i < possibilites.size(); i++)
+	sockaddr_in bcast_addr;
+	bcast_addr.sin_family = AF_INET;
+	bcast_addr.sin_port = htons(DEFAULT_PORT);
+	bcast_addr.sin_addr.s_addr = inet_addr(broadcast_ip.get_as_string().c_str());
+
+	if (broadcast_sock == INVALID_SOCKET)
 	{
-		thread_queue.emplace_back(&Windows_Network_Interface::connect_to_server, this, possibilites[i]);
+		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
+		throw NetworkErrorException();
 	}
-	for (std::vector<std::thread>::iterator x = thread_queue.begin(); x != thread_queue.end(); x++)
+
+	char broadcast_opt_true = '1';
+	if (setsockopt(broadcast_sock, SOL_SOCKET, SO_BROADCAST,(char *) &broadcast_opt_true, sizeof(broadcast_opt_true)) < 0)
 	{
-		x->join();
-	}*/
+		//cout << "Error in setting Broadcast option";
+		status_state.set_error(set_error_state());
+		closesocket(sock);
+		throw NetworkErrorException();
+
+	}
+	//TODO: Turn this into a real node hello packet.
+	/*Testing things for now*/
+	char sendMSG[] = "NODE_HELLO";
+
+
+
+	char recvbuff[50] = "";
+
+	int recvbufflen = 50;
+
+	sendto(broadcast_sock, sendMSG, strlen(sendMSG) + 1, 0, (sockaddr*)&bcast_addr, sizeof(bcast_addr));
+	//send_periodic(broadcast_sock, NODE_HELLO, 2000, till_found);
 }
 
 void Windows_Network_Interface::server_start()
