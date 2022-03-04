@@ -72,10 +72,6 @@ void ipv4_addr::operator=(const unsigned long& D)
 }
 void ipv4_addr::operator=(const char* ca)
 {
-	if (sizeof(ca) > 4)
-	{
-		throw - 1;
-	}
 	S_un.S_un_b.s_b1 = ca[0];
 	S_un.S_un_b.s_b2 = ca[1];
 	S_un.S_un_b.s_b3 = ca[2];
