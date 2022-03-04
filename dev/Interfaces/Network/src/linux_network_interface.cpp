@@ -103,14 +103,9 @@ void Linux_Network_Interface::set_my_ip()
 	}
 
 	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next) {
-		if (ifa->ifa_addr == NULL)
-			continue;
-
-		if (strcasecmp(interfaces.c_str(), ifa->ifa_name))
-			continue;
-
-		/* IPv4 */
-		if (ifa->ifa_addr->sa_family != AF_INET)
+		if (ifa->ifa_addr == NULL || 
+			strcasecmp(interfaces.c_str(), ifa->ifa_name) ||
+			ifa->ifa_addr->sa_family != AF_INET)
 			continue;
 		getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host , NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
 

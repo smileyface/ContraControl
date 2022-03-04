@@ -34,9 +34,9 @@ TEST_F(LocalNetworkTest, Network_SetUp)
 TEST_F(LocalNetworkTest, Server_Start_Up)
 {
 	/** Start in server mode */
-	testing_utilities::network_utilities::check_initalized();
 	try
 	{
+		testing_utilities::network_utilities::check_initalized();
 		network::start_server();
 	}
 	catch (NetworkErrorException e)
