@@ -34,7 +34,9 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Setup testing Network
-      run: docker network create --opt com.docker.network.bridge.name=wlan0 test-net
+      run: |
+        docker network create --opt com.docker.network.bridge.name=wlan0 test-net
+        ifconfig
 
     - name: Build
       shell: bash
