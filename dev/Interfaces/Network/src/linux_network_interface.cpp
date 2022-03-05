@@ -25,8 +25,6 @@ typedef void* (*THREADFUNCPTR)(void*);
 
 pthread_t server_thread;
 
-
-
 ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask)
 {
 	return host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;

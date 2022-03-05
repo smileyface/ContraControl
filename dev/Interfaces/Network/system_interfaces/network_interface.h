@@ -15,6 +15,12 @@
 const unsigned short DEFAULT_PORT = 0xDCF5; ///<Port is 56565
 const std::string invalid_hostname = "INVALID"; ///<A marker for invalid hostnames
 
+struct socket_maker
+{
+    int ip_protocol;
+    int sock_type;
+    int sock_family;
+};
 /**
  * \brief Interface for handling network communication between Nodes.
  * 
@@ -100,11 +106,11 @@ protected:
     /**
         \brief The ip address of the broadcast address.
     */
-    ipv4_addr broadcast_ip = ipv4_addr("255.255.255.255");
+    ipv4_addr broadcast_ip = ipv4_addr();
     /**
      * \brief The subnet mask.
      */
-    ipv4_addr subnet_mask = ipv4_addr("0.0.0.0");
+    ipv4_addr subnet_mask = ipv4_addr();
     /**
      * \brief the interface name of the local node.
      */
