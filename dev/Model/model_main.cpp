@@ -76,7 +76,7 @@ void model::step()
 
 void model_loop()
 {
-	model::model_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG, "Loop thread has started", "Model"));
+	model::model_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Loop thread has started", "Model"));
 	while (model::model_running)
 	{
 		model::step();
@@ -86,14 +86,14 @@ void model_loop()
 void model::start_loop()
 {
 	model_running = true;
-	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Started", subsystem_name));
+	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Model Started", subsystem_name));
 
 	model_thread = std::thread(model_loop);
 }
 
 void model::stop_loop()
 {
-	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Stopped", subsystem_name));
+	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Model Stopped", subsystem_name));
 	model_running = false;
 	model_thread.join();
 }

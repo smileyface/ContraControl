@@ -30,7 +30,8 @@ set(INTERFACE_HEADER_FILES
 set(INTERFACE_SOURCE_FILES 
                     Interfaces/src/controller_interface.cpp
                     Interfaces/src/model_interface.cpp
-                    Interfaces/src/main_interface.cpp  "Interfaces/src/view_interface.cpp")
+                    Interfaces/src/main_interface.cpp  
+                    Interfaces/src/view_interface.cpp)
 set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/model_command.h 
                     Interfaces/types/timed_command.h 

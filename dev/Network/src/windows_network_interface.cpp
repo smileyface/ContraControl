@@ -154,7 +154,7 @@ void Windows_Network_Interface::set_my_ip()
 	{
 		host_ip = local_ips[0];
 	}
-	//network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG, "Interface IP: " + hostname + ": " + host_ip.get_as_string(), "Network Initalizer"));
+	//network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + host_ip.get_as_string(), "Network Initalizer"));
 }
 
 void Windows_Network_Interface::connect_to_server(ipv4_addr addr)

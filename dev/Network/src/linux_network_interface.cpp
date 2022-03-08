@@ -18,8 +18,8 @@
 #include <unistd.h>
 #include <linux/if_link.h>
 
-#include "Network/system_interfaces/linux_network_interface.h"
-#include "../Utilities/Utilities/exceptions.h"
+#include "../system_interfaces/linux_network_interface.h"
+#include "Utilities/exceptions.h"
 
 typedef void* (*THREADFUNCPTR)(void*);
 
