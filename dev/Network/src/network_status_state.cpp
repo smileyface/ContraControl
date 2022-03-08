@@ -1,4 +1,4 @@
-#include "Network/system_interfaces/types/network_status_state.h"
+#include "../system_interfaces/types/network_status_state.h"
 
 Network_Status_State::Network_Status_State()
 {

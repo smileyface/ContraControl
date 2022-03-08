@@ -15,5 +15,6 @@ add_subdirectory(Interfaces)
 add_subdirectory(Controller)
 add_subdirectory(Model)
 add_subdirectory(View)
+add_subdirectory(Network)
 
 add_subdirectory(Mains)

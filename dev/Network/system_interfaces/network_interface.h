@@ -8,9 +8,11 @@
 #ifndef NETWORK_SYSTEM_INTERFACE
 #define NETWORK_SYSTEM_INTERFACE
 
-#include "Network/messages.h"
+#include "../messages.h"
 #include "types/ipv4_addr.h"
 #include "types/network_status_state.h"
+
+#include "Messaging/system_messaging.h"
 
 const unsigned short DEFAULT_PORT = 0xDCF5; ///<Port is 56565
 const std::string invalid_hostname = "INVALID"; ///<A marker for invalid hostnames
@@ -143,7 +145,7 @@ namespace network
     extern void teardown_network_interfaces();
     /**
      * \brief Send a message on the network interface.
-     * 
+     *
      * \param mesg Message to send
      */
     extern void send_message(MESSAGE* mesg);
@@ -156,6 +158,10 @@ namespace network
      * \brief Start interface as a client.
      */
     extern void start_client();
-}
+    /**
+    * Message system
+    */
+    //extern System_Messages* network_message_interface;
+};
 
 #endif

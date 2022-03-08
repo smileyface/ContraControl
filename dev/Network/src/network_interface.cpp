@@ -1,15 +1,16 @@
 #include <string>
 
-#include "Network/system_interfaces/network_interface.h"
+#include "../system_interfaces/network_interface.h"
 #ifdef _WIN32
-#include "Network/system_interfaces/windows_network_interface.h"
+#include "../system_interfaces/windows_network_interface.h"
 #endif
 #ifdef __linux__
-#include "Network/system_interfaces/linux_network_interface.h"
+#include "../system_interfaces/linux_network_interface.h"
 #endif
 
 /*This is where the Network Interface object is defined */
 Network_Interface* network::network_interface;
+//System_Messages* network::network_message_interface;
 
 
 void Network_Interface::set_client()
@@ -30,6 +31,7 @@ Network_Status_State Network_Interface::get_status()
 
 void network::init_network_interfaces()
 {
+	//network_message_interface = System_Messages::get_instance();
 #ifdef _WIN32
 	network::network_interface = new Windows_Network_Interface();
 #endif // IS_WIN32
