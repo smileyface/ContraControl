@@ -16,8 +16,3 @@ Network_Status_State Network_Interface::get_status()
 {
 	return status_state;
 }
-
-
-
-
-

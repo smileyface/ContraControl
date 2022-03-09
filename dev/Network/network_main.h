@@ -6,6 +6,10 @@
 namespace network
 {
     extern Network_Interface* network_interface; ///<Main interface object.
+    /**
+    * Message system
+    */
+    extern System_Messages* network_message_interface;
 
     /**
      * \brief Setup network interface as a system specific interface.
@@ -30,8 +34,5 @@ namespace network
      * \brief Start interface as a client.
      */
     extern void start_client();
-    /**
-    * Message system
-    */
-    extern System_Messages* network_message_interface;
+
 };

@@ -1,3 +1,6 @@
+#include <thread>
+#include <mutex>
+
 #include "network_main.h"
 #ifdef _WIN32
 #include "system_interfaces/windows_network_interface.h"
@@ -6,13 +9,18 @@
 #include "system_interfaces/linux_network_interface.h"
 #endif
 
-/*This is where the Network Interface object is defined */
+/*Externs*/
 Network_Interface* network::network_interface;
 System_Messages* network::network_message_interface;
 
+
+bool network_running = false;
+std::thread network_thread;
+std::mutex network_mutex;
+
 void network::init_network_interfaces()
 {
-	//network_message_interface = System_Messages::get_instance();
+	network_message_interface = System_Messages::get_instance();
 #ifdef _WIN32
 	network::network_interface = new Windows_Network_Interface();
 #endif // IS_WIN32
@@ -27,8 +35,27 @@ void network::init_network_interfaces()
 	network_interface->initalize();
 }
 
+void client_loop()
+{
+	while (network_running)
+	{
+
+	}
+}
+
+void server_loop()
+{
+	while (network_running)
+	{
+
+	}
+}
+
 void network::teardown_network_interfaces()
 {
+	network_running = false;
+	if(network_thread.joinable())
+		network_thread.join();
 	if (network::network_interface != nullptr)
 	{
 		network::network_interface->clean_up();
@@ -38,11 +65,13 @@ void network::teardown_network_interfaces()
 void network::start_server()
 {
 	network::network_interface->set_server();
-	network::network_interface->server_start();
+	network_running = true;
+	network_thread = std::thread(server_loop);
 }
 
 void network::start_client()
 {
 	network::network_interface->set_client();
-	network::network_interface->scan_for_server();
+	network_running = true;
+	network_thread = std::thread(client_loop);
 }
