@@ -3,7 +3,7 @@
 
 #include "../test_utilities/pch.h"
 
-#include "../../Network/system_interfaces/network_interface.h"
+#include "../../Network/network_main.h"
 
 namespace {
 	class LocalNetworkTest : public ::testing::Test {

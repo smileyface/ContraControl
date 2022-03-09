@@ -1,7 +1,7 @@
 #include "test_utilities.h"
 #include "system_testings.h"
 
-#include "../../Network/system_interfaces/network_interface.h"
+#include "../../Network/network_main.h"
 
 #include "pch.h"
 
