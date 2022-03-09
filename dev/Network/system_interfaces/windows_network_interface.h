@@ -16,10 +16,13 @@
 #include <WS2tcpip.h>
 
 #include "network_interface.h"
+#include "types/connections.h"
 extern struct addrinfo hints;
 const int ip_protocol = IPPROTO_TCP;
 const int sock_type = SOCK_STREAM;
 const int sock_family = AF_INET;
+
+
 /**
  * Interface for a Windows system.
  */
@@ -38,6 +41,8 @@ public:
 	
 	void server_start();
 
+	void send(std::string node_id, char* message);
+
 	static bool ipv4_compare(sockaddr_in* win_address, ipv4_addr gen_address)
 	{
 		return win_address->sin_addr.S_un.S_addr == gen_address.S_un.S_addr;
@@ -50,9 +55,6 @@ public:
 	}
 	
 private:
-	SOCKET sock = INVALID_SOCKET;
-    std::vector<ipv4_addr> local_ips;
-	std::map<ipv4_addr, SOCKET> accepted_connections;
 };
 
 

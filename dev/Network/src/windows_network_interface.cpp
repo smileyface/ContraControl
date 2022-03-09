@@ -13,6 +13,7 @@
 #include "../Utilities/Utilities/exceptions.h"
 
 #include "../system_interfaces/windows_network_interface.h"
+#include "../network_main.h"
 
 struct addrinfo hints;
 
@@ -82,7 +83,7 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip, Network_Status_State& 
 
 Windows_Network_Interface::Windows_Network_Interface()
 {
-	sock = INVALID_SOCKET;
+	local_connections::setup(connections);
 	hostname = invalid_hostname;
 
 	ZeroMemory(&hints, sizeof(hints));
@@ -101,15 +102,15 @@ void Windows_Network_Interface::initalize()
 		throw NetworkErrorException();
 	}
 
-	sock = socket(sock_family, sock_type, ip_protocol);
+	connections[local_connections::local].sock = socket(sock_family, sock_type, ip_protocol);
 	set_my_ip();
-	subnet_mask = get_subnet_mask(sock, host_ip, status_state);
-	broadcast_ip = get_broadcast(host_ip, subnet_mask);
+	subnet_mask = get_subnet_mask(connections[local_connections::local].sock, host_ip, status_state);
+	connections[local_connections::broadcast].address = get_broadcast(host_ip, subnet_mask);
 }
 
 void Windows_Network_Interface::initalized()
 {
-	if (sock == INVALID_SOCKET)
+	if (connections[local_connections::local].sock == INVALID_SOCKET)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
 		throw NetworkErrorException();
@@ -119,13 +120,17 @@ void Windows_Network_Interface::initalized()
 
 void Windows_Network_Interface::clean_up()
 {
-	closesocket(sock);
+	for (auto i = connections.begin(); i != connections.end(); ++i)
+	{
+		closesocket(i->second.sock);
+	}
 	WSACleanup();
 }
 
 void Windows_Network_Interface::set_my_ip()
 {
 	struct addrinfo* hostinfo = NULL;
+	std::vector<ipv4_addr> local_ips;
 	char* host = (char*)hostname.c_str();
 	while (WSAIsBlocking())
 	{
@@ -154,12 +159,30 @@ void Windows_Network_Interface::set_my_ip()
 	{
 		host_ip = local_ips[0];
 	}
-	//network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + host_ip.get_as_string(), "Network Initalizer"));
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + host_ip.get_as_string(), "Network Initalizer"));
+
+	connections[local_connections::broadcast].sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+
+	if (connections[local_connections::broadcast].sock == INVALID_SOCKET)
+	{
+		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
+		throw NetworkErrorException();
+	}
+
+	char broadcast_opt_true = '1';
+	if (setsockopt(connections[local_connections::broadcast].sock, SOL_SOCKET, SO_BROADCAST, (char*)&broadcast_opt_true, sizeof(broadcast_opt_true)) < 0)
+	{
+		status_state.set_error(set_error_state());
+		closesocket(connections[local_connections::broadcast].sock);
+		throw NetworkErrorException();
+
+	}
 }
 
 void Windows_Network_Interface::connect_to_server(ipv4_addr addr)
 {
-	struct addrinfo* result = NULL;
+/*	struct addrinfo* result = NULL;
 	int iResult;
 
 	// Resolve the server address and port
@@ -189,52 +212,17 @@ void Windows_Network_Interface::connect_to_server(ipv4_addr addr)
 		break;
 	}
 
-	freeaddrinfo(result);
+	freeaddrinfo(result);*/
 }
 
 void Windows_Network_Interface::scan_for_server()
 {
-	SOCKET broadcast_sock;
-	broadcast_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
-
-	sockaddr_in bcast_addr;
-	bcast_addr.sin_family = AF_INET;
-	bcast_addr.sin_port = htons(DEFAULT_PORT);
-	bcast_addr.sin_addr.s_addr = inet_addr(broadcast_ip.get_as_string().c_str());
-
-	if (broadcast_sock == INVALID_SOCKET)
-	{
-		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
-		throw NetworkErrorException();
-	}
-
-	char broadcast_opt_true = '1';
-	if (setsockopt(broadcast_sock, SOL_SOCKET, SO_BROADCAST,(char *) &broadcast_opt_true, sizeof(broadcast_opt_true)) < 0)
-	{
-		//cout << "Error in setting Broadcast option";
-		status_state.set_error(set_error_state());
-		closesocket(sock);
-		throw NetworkErrorException();
-
-	}
-	//TODO: Turn this into a real node hello packet.
-	/*Testing things for now*/
-	char sendMSG[] = "NODE_HELLO";
-
-
-
-	char recvbuff[50] = "";
-
-	int recvbufflen = 50;
-
-	sendto(broadcast_sock, sendMSG, strlen(sendMSG) + 1, 0, (sockaddr*)&bcast_addr, sizeof(bcast_addr));
-	//send_periodic(broadcast_sock, NODE_HELLO, 2000, till_found);
 }
 
 void Windows_Network_Interface::server_start()
 {
-	sockaddr_in service;
+	/*sockaddr_in service;
 	//----------------------
    // The sockaddr_in structure specifies the address family,
    // IP address, and port for the socket that is being bound.
@@ -250,7 +238,16 @@ void Windows_Network_Interface::server_start()
 	// Listen for incoming connection requests 
 	// on the created socket. This is a blocking call.
 	if (listen(sock, SOMAXCONN) == SOCKET_ERROR)
-		status_state.set_error(NETWORK_ERRORS::ERROR_ON_SOCKET_LISTEN);
+		status_state.set_error(NETWORK_ERRORS::ERROR_ON_SOCKET_LISTEN);*/
+}
+
+void Windows_Network_Interface::send(std::string node_id, char* message)
+{
+	sockaddr_in bcast_addr;
+	bcast_addr.sin_family = AF_INET;
+	bcast_addr.sin_port = htons(DEFAULT_PORT);
+	bcast_addr.sin_addr.s_addr = inet_addr(connections[node_id].address.get_as_string().c_str());
+	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*)&bcast_addr, sizeof(bcast_addr));
 }
 
 #endif // WIN32

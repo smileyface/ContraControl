@@ -3,7 +3,9 @@ set(NETWORK_INTERFACE_HEADERS
                     messages.h
                     system_interfaces/network_interface.h
                     system_interfaces/types/ipv4_addr.h
-                    system_interfaces/types/network_status_state.h)
+                    system_interfaces/types/network_status_state.h 
+                    system_interfaces/types/connections.h)
+
 set(NETWORK_INTERFACE_SOURCE
                     network_main.cpp
                     src/connections.cpp

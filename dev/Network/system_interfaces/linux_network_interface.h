@@ -18,10 +18,8 @@
 #include <vector>	    //std::vector
 
 #include "network_interface.h"
-
 //COMMON TYPEDEFS
 
-typedef int SOCKET;
 typedef unsigned long DWORD;
 const unsigned long ERROR_NOT_FOUND = 1168L;
 
@@ -43,13 +41,13 @@ public:
 	void server_start();
 	void server_listen();
 
+	void send(std::string node_id, char* message);
+
 	void set_my_ip();
 
 private:
-	SOCKET sock;
-	struct sockaddr_in serv_addr;
+	
 	bool server_running;
-	std::map<ipv4_addr, SOCKET> accepted_connections;
 };
 
 

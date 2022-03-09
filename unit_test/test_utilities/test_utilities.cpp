@@ -88,7 +88,7 @@ void testing_utilities::network_utilities::check_initalized()
 	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::NETWORK_INITALIZED);
 	if (network::network_interface->get_status().status == NETWORK_STATUS::NETWORK_ERROR)
 	{
-
+		exception_handle();
 	}
 }
 

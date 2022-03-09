@@ -9,8 +9,8 @@
 #define NETWORK_SYSTEM_INTERFACE
 
 #include "../messages.h"
-#include "types/ipv4_addr.h"
 #include "types/network_status_state.h"
+#include "types/connections.h"
 
 #include "Messaging/system_messaging.h"
 
@@ -58,9 +58,9 @@ public:
     Network_Status_State get_status();
 
     //setters
-        /**
-     * \brief Set the Node as server.
-     */
+    /**
+    * \brief Set the Node as server.
+    */
     void set_server();
     /**
      * \brief Set the Node as client.
@@ -91,6 +91,8 @@ public:
      */
     virtual void server_start() = 0;
 
+    //Communication Code
+    virtual void send(std::string node_id, char* message) = 0;
    //Constants
    /**
     * \brief localhost address
@@ -125,6 +127,10 @@ protected:
      * Which interface are we using
     */
     std::string interfaces;
+    /**
+     * Map of known connections
+     */
+    network_connection_list connections;
 };
 
 #endif

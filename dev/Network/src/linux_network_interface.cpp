@@ -62,22 +62,23 @@ NETWORK_ERRORS get_error_state()
 Linux_Network_Interface::Linux_Network_Interface()
 {
 	interfaces = "wlan0";
+	connections[local_connections::local] = connection();
+	connections[local_connections::broadcast] = connection();
 }
 
 void Linux_Network_Interface::connect_to_server(ipv4_addr addr)
 {
-	serv_addr.sin_addr.s_addr = inet_addr(addr.get_as_string().c_str());
+	/*serv_addr.sin_addr.s_addr = inet_addr(addr.get_as_string().c_str());
 	int result = connect(sock, (struct sockaddr*)&serv_addr.sin_addr, sizeof(serv_addr));
 	if (result != 0)
 	{
 		status_state.set_error(get_error_state());
-	}
+	}*/
 }
 
 void Linux_Network_Interface::initalize()
 {
-	sock = socket(sock_family, sock_type, ip_protocol);
-	
+	local_connections::setup(connections);
 	set_my_ip();
 
 	server_running = false;
@@ -87,7 +88,10 @@ void Linux_Network_Interface::clean_up()
 {
 	server_running = false;
 	pthread_join(server_thread, 0);
-	close(sock);
+	for (auto i = connections.begin(); i != connections.end(); ++i)
+	{
+		close(i->second.sock);
+	}
 }
 
 void Linux_Network_Interface::set_my_ip()
@@ -116,58 +120,35 @@ void Linux_Network_Interface::set_my_ip()
 
 		getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host , NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
 
-		host_ip = ipv4_addr(host);
-
 		sa = (struct sockaddr_in*)ifa->ifa_netmask;
 		s = inet_ntoa(sa->sin_addr);
 
 		subnet_mask = s;
 
-		broadcast_ip = get_broadcast(host_ip, subnet_mask);
+		connections[local_connections::local].address = ipv4_addr(host);
+
+		connections[local_connections::broadcast].address = get_broadcast(host_ip, subnet_mask);
 		found = 1;
 	}
-
+	//Broadcast NODE_HELLO
+	connections[local_connections::broadcast].sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	if (connections[local_connections::broadcast].sock < 0)
+	{
+		status_state.set_error(get_error_state());
+		throw NetworkErrorException();
+	}
 	freeifaddrs(ifap);
 }
 
 void Linux_Network_Interface::scan_for_server()
 {
-	//Broadcast NODE_HELLO
-	SOCKET broadcast_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	if (broadcast_sock < 0)
-	{
-		status_state.set_error(get_error_state());
-		throw NetworkErrorException();
-	}
-	sockaddr_in broad_addr;
-	memset(&broad_addr, '0', sizeof(&broad_addr));
-
-	broad_addr.sin_family = AF_INET;
-	broad_addr.sin_port = htons(DEFAULT_PORT);
-
-	int broadcastEnable = 1;
-	int ret = setsockopt(broadcast_sock, SOL_SOCKET, SO_BROADCAST, &broadcastEnable, sizeof(broadcastEnable));
-
-	//TODO: Turn this into a real node hello packet.
-	/*Testing things for now*/
-	char sendMSG[] = "NODE_HELLO";
-
-
-
-	char recvbuff[50] = "";
-
-	int recvbufflen = 50;
-
-	sendto(broadcast_sock, sendMSG, strlen(sendMSG) + 1, 0, (sockaddr*)&broad_addr, sizeof(broad_addr));
-	//send_periodic(broadcast_sock, NODE_HELLO, 2000, till_found);
-
-	close(broadcast_sock);
 
 }
 
 void Linux_Network_Interface::initalized()
 {
-	if (sock > 0)
+	if (connections[local_connections::local].sock > 0 &&
+		connections[local_connections::broadcast].sock > 0)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
 	}
@@ -191,9 +172,9 @@ void Linux_Network_Interface::server_listen()
 	 * maximum number of client connections that server will queue for this listening
 	 * socket.
 	 */
-		listen(sock, 10);
+		//listen(connections, 10);
 
-
+	/*
 	while (server_running)
 	{
 		sockaddr* address;
@@ -201,11 +182,23 @@ void Linux_Network_Interface::server_listen()
 		/* In the call to accept(), the server is put to sleep and when for an incoming
 		 * client request, the three way TCP handshake* is complete, the function accept()
 		 * wakes up and returns the socket descriptor representing the client socket.
-		 */
+		 
 		int connfd = accept(sock, address, &address_size);
 
 		sleep(1);
 	}
+	*/
+}
+
+void Linux_Network_Interface::send(std::string node_id, char* message)
+{
+	sockaddr_in broad_addr;
+	memset(&broad_addr, '0', sizeof(&broad_addr));
+
+	broad_addr.sin_family = AF_INET;
+	broad_addr.sin_port = htons(DEFAULT_PORT);
+	broad_addr.sin_addr.s_addr = inet_addr(connections[node_id].address.get_as_string().c_str());
+	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*)&broad_addr, sizeof(broad_addr));
 }
 
 #endif //__linux__
