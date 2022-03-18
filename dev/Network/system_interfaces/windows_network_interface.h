@@ -18,10 +18,7 @@
 #include "network_interface.h"
 #include "types/connections.h"
 extern struct addrinfo hints;
-const int ip_protocol = IPPROTO_TCP;
-const int sock_type = SOCK_STREAM;
-const int sock_family = AF_INET;
-
+extern WORD wVersionRequested;
 
 /**
  * Interface for a Windows system.
@@ -31,7 +28,7 @@ class Windows_Network_Interface : public Network_Interface
 public:
 	Windows_Network_Interface();
 
-	void set_my_ip();
+	void setup_connection(std::string connection_name, socket_maker maker);
 
 	void connect_to_server(ipv4_addr addr);
 	void scan_for_server();

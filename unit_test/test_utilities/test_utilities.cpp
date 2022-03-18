@@ -131,9 +131,18 @@ void testing_utilities::network_utilities::exception_handle()
 	case NETWORK_ERRORS::UNKNOWN_ERROR:
 		FAIL() << "Unhandled Network Error";
 		break;
+	case NETWORK_ERRORS::NETWORK_OPTION_ERROR:
+		FAIL() << "Invalid option error";
+		break;
 	default:
 		FAIL() << "Unknown Network Error ";
 	}
+}
+
+void testing_utilities::network_utilities::expect_exception(std::function<void()> function, NETWORK_ERRORS error)
+{
+	EXPECT_THROW(function(), NetworkErrorException) << "Network Error Exception did not throw";
+	EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 }
 
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)

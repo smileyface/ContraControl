@@ -66,10 +66,11 @@ public:
      * \brief Set the Node as client.
      */
     void set_client();
+    void set_hostname(std::string hostname);
     /**
      * \brief Set the my ip object. Does it from the ipconfig/ifconfig
      */
-    virtual void set_my_ip() = 0;
+    virtual void setup_connection(std::string connection_name, socket_maker maker) = 0;
 
     //Client Code
     /**
@@ -103,18 +104,6 @@ protected:
      * \brief Is the local node a server.
      */
     bool is_server = false;
-    /**
-     * \brief The local node ip address.
-     */
-    ipv4_addr host_ip = localhost;
-    /**
-        \brief The ip address of the broadcast address.
-    */
-    ipv4_addr broadcast_ip = ipv4_addr();
-    /**
-     * \brief The subnet mask.
-     */
-    ipv4_addr subnet_mask = ipv4_addr();
     /**
      * \brief the interface name of the local node.
      */

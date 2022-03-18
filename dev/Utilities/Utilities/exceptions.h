@@ -81,6 +81,7 @@ class UnimplementedFunctionException : public std::exception
  */
 class NetworkErrorException : public std::exception
 {
+public:
     virtual const char* what() const throw()
     {
         return "Network Error";

@@ -62,8 +62,7 @@ NETWORK_ERRORS get_error_state()
 Linux_Network_Interface::Linux_Network_Interface()
 {
 	interfaces = "wlan0";
-	connections[local_connections::local] = connection();
-	connections[local_connections::broadcast] = connection();
+	local_connections::setup(connections);
 }
 
 void Linux_Network_Interface::connect_to_server(ipv4_addr addr)
