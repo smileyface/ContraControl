@@ -8,13 +8,21 @@
 #ifndef NETWORK_SYSTEM_INTERFACE
 #define NETWORK_SYSTEM_INTERFACE
 
-#include "Network/messages.h"
-#include "types/ipv4_addr.h"
+#include "../messages.h"
 #include "types/network_status_state.h"
+#include "types/connections.h"
+
+#include "Messaging/system_messaging.h"
 
 const unsigned short DEFAULT_PORT = 0xDCF5; ///<Port is 56565
-const std::string invalid_hostname = "INVALID"; ///<A marker for invalid hostnames
+const std::string INVALID_HOSTNAME = "INVALID"; ///<A marker for invalid hostnames
 
+struct Socket_Maker
+{
+    int ip_protocol;
+    int sock_type;
+    int sock_family;
+};
 /**
  * \brief Interface for handling network communication between Nodes.
  * 
@@ -22,6 +30,7 @@ const std::string invalid_hostname = "INVALID"; ///<A marker for invalid hostnam
 class Network_Interface
 {
 public:
+ 
     /**
      * \brief Initalize the interface.
      *
@@ -47,46 +56,28 @@ public:
      * \return Network_Status_State 
      */
     Network_Status_State get_status();
-    /**
-     * \brief Return the IP of the local node
-     * 
-     * \return ipv4 as 4 unsigned chars
-     */
-    unsigned char* local_ip();
 
     //setters
-        /**
-     * \brief Set the Node as server.
-     */
+    /**
+    * \brief Set the Node as server.
+    */
     void set_server();
     /**
      * \brief Set the Node as client.
      */
     void set_client();
+    /** Set the hostname manually. */
+    void set_hostname(std::string hostname);
     /**
      * \brief Set the my ip object. Does it from the ipconfig/ifconfig
      */
-    virtual void set_my_ip() = 0;
+    virtual void setup_connection(Connection_Id connection_name, Socket_Maker maker) = 0;
 
-    //Client Code
-    /**
-     * \brief Connect to a server.
-     * 
-     * \param addr Address of server.
-     */
-    virtual void connect_to_server(ipv4_addr addr) = 0;
-    /**
-     * \brief Scan for a server to connect to.
-     * 
-     * \todo Do this through broadcast instead of an ARP blast.
-     */
-    virtual void scan_for_server() = 0;
-    
-    //Server Code
-    /**
-     * \brief Start the server in a thread
-     */
-    virtual void server_start() = 0;
+    //Communication Code
+    /** Send a message to a node */
+    virtual void send(Connection_Id Connection_Id, char* message) = 0;
+    /** Listen to a specific connection */
+    virtual char* listen(Connection_Id Connection_Id) = 0;
 
    //Constants
    /**
@@ -99,10 +90,6 @@ protected:
      */
     bool is_server = false;
     /**
-     * \brief The local node ip address.
-     */
-    ipv4_addr my_ip = ipv4_addr("255.255.255.255");
-    /**
      * \brief the interface name of the local node.
      */
     std::string hostname;
@@ -110,39 +97,14 @@ protected:
      * \brief State of the network interface.
      */
     Network_Status_State status_state;
+    /**
+     * Which interface are we using
+    */
+    std::string interfaces;
+    /**
+     * Map of known connections
+     */
+    Network_Connection_List connections;
 };
-
-/**
- * \brief Main network interface. Use this instead of creating a new Network_Interface object.
- * 
- */
-namespace network
-{
-    extern Network_Interface* network_interface; ///<Main interface object.
-
-    /**
-     * \brief Setup network interface as a system specific interface.
-     */
-    extern void init_network_interfaces();
-    /**
-     * \brief Teardown and clean up system specific network interface.
-     */
-    extern void teardown_network_interfaces();
-    /**
-     * \brief Send a message on the network interface.
-     * 
-     * \param mesg Message to send
-     */
-    extern void send_message(MESSAGE* mesg);
-
-    /**
-     * \brief Start interface as a server.
-     */
-    extern void start_server();
-    /**
-     * \brief Start interface as a client.
-     */
-    extern void start_client();
-}
 
 #endif

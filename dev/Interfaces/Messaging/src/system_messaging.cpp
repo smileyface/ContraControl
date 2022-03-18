@@ -11,13 +11,13 @@ std::string message_priority_as_string(MESSAGE_PRIORITY al)
 	std::string level;
 	switch (al)
 	{
-	case MESSAGE_PRIORITY::SEVERE:
+	case MESSAGE_PRIORITY::SEVERE_MESSAGE:
 		return "SEVERE";
-	case MESSAGE_PRIORITY::INFO:
+	case MESSAGE_PRIORITY::INFO_MESSAGE:
 		return "INFO";
-	case MESSAGE_PRIORITY::ERROR:
+	case MESSAGE_PRIORITY::ERROR_MESSAGE:
 		return "ERROR";
-	case MESSAGE_PRIORITY::DEBUG:
+	case MESSAGE_PRIORITY::DEBUG_MESSAGE:
 		return "DEBUG";
 	default:
 		return "UNHANDLED PRIORITY";
@@ -35,7 +35,7 @@ System_Message::System_Message(MESSAGE_PRIORITY pri, std::string msg, std::strin
 
 System_Message::System_Message(bool vm)
 {
-	priority = MESSAGE_PRIORITY::INFO;
+	priority = MESSAGE_PRIORITY::INFO_MESSAGE;
 	message = "";
 	location = "";
 	valid_message = vm;

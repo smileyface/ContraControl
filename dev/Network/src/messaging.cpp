@@ -23,3 +23,8 @@ PACKED_MESSAGE::PACKED_MESSAGE(MESSAGE* in_message)
 	header.message_id = get_message_enum_by_type();
 	message = in_message;
 }
+
+unsigned char* pack()
+{
+	return 0;
+}

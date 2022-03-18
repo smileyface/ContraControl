@@ -1,7 +1,7 @@
 #include "test_utilities.h"
 #include "system_testings.h"
 
-#include "Network/system_interfaces/network_interface.h"
+#include "../../Network/network_main.h"
 
 #include "pch.h"
 
@@ -88,7 +88,7 @@ void testing_utilities::network_utilities::check_initalized()
 	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::NETWORK_INITALIZED);
 	if (network::network_interface->get_status().status == NETWORK_STATUS::NETWORK_ERROR)
 	{
-
+		exception_handle();
 	}
 }
 
@@ -126,13 +126,31 @@ void testing_utilities::network_utilities::exception_handle()
 	case NETWORK_ERRORS::SERVER_CANNOT_START:
 		FAIL() << "Server Cannot Start";
 		break;
-
+	case NETWORK_ERRORS::NETWORK_CODE_ERROR:
+		FAIL() << "Code is incorrect. Debug.";
 	case NETWORK_ERRORS::UNKNOWN_ERROR:
 		FAIL() << "Unhandled Network Error";
+		break;
+	case NETWORK_ERRORS::NETWORK_OPTION_ERROR:
+		FAIL() << "Invalid option error";
 		break;
 	default:
 		FAIL() << "Unknown Network Error ";
 	}
+}
+
+void testing_utilities::network_utilities::expect_exception(std::function<void()> function, NETWORK_ERRORS error)
+{
+	try
+	{
+		function();
+	}
+	catch (NetworkErrorException& e)
+	{
+		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
+		return;
+	}
+	FAIL() << "Network Error Exception did not throw";
 }
 
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)

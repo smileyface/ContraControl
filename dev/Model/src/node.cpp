@@ -1,5 +1,4 @@
 #include "../node/node.h"
-#include "Network/system_interfaces/network_interface.h"
 
 #include "../Utilities/Utilities/exceptions.h"
 
@@ -68,7 +67,6 @@ Device_List Node::get_devices()
 void Node::initalize_local_control(Node_Id id)
 {
 	my_id = id;
-	network::init_network_interfaces();
 }
 
 Node* Node::get_connection(Node_Id id)

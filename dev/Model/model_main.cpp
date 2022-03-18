@@ -6,7 +6,6 @@
 
 #include "Logging/logging.h"
 #include "Interfaces/types/state.h"
-#include "Network/system_interfaces/network_interface.h"
 #include "Messaging/system_messaging.h"
 
 std::thread model_thread;
@@ -77,7 +76,7 @@ void model::step()
 
 void model_loop()
 {
-	model::model_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG, "Loop thread has started", "Model"));
+	model::model_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Loop thread has started", "Model"));
 	while (model::model_running)
 	{
 		model::step();
@@ -87,14 +86,14 @@ void model_loop()
 void model::start_loop()
 {
 	model_running = true;
-	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Started", subsystem_name));
+	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Model Started", subsystem_name));
 
 	model_thread = std::thread(model_loop);
 }
 
 void model::stop_loop()
 {
-	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Model Stopped", subsystem_name));
+	model_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Model Stopped", subsystem_name));
 	model_running = false;
 	model_thread.join();
 }
@@ -104,7 +103,6 @@ void model::stop_loop()
 void model::clean_up()
 {
 	my_node.clear_node();
-	network::teardown_network_interfaces();
 }
 
 void model::initalize_my_node(Node_Id id)

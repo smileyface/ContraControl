@@ -24,7 +24,7 @@ void controller::initalize()
  
 void controller_loop()
 {
-	controller::controller_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG, "Loop thread has started", "Controller"));
+	controller::controller_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Loop thread has started", "Controller"));
 	while (controller::controller_running)
 	{
 		controller::step();
@@ -32,13 +32,13 @@ void controller_loop()
 }
 void controller::start_controller()
 {
-	controller_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Controller Started", subsystem_name));
+	controller_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Controller Started", subsystem_name));
 	controller_thread = std::thread(controller_loop);
 }
 
 void controller::stop_controller()
 {
-	controller_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO, "Controller Stopped", subsystem_name));
+	controller_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Controller Stopped", subsystem_name));
 	controller_running = false;
 	if(controller_thread.joinable())
 		controller_thread.join();

@@ -19,19 +19,19 @@ enum class MESSAGE_PRIORITY {
 	/**
 	Debug message. For very verbose logging.
 	*/
-	DEBUG,
+	DEBUG_MESSAGE,
 	/**
 	Informational message. For verbose logging.
 	*/
-	INFO,
+	INFO_MESSAGE,
 	/**
 	A non-program stopping error.
 	*/
-	ERROR,
+	ERROR_MESSAGE,
 	/**
 	A program breaking error.
 	*/
-	SEVERE
+	SEVERE_MESSAGE
 
 };
 

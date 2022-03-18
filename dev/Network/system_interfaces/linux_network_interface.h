@@ -18,36 +18,32 @@
 #include <vector>	    //std::vector
 
 #include "network_interface.h"
-
 //COMMON TYPEDEFS
 
-typedef int SOCKET;
 typedef unsigned long DWORD;
 const unsigned long ERROR_NOT_FOUND = 1168L;
 
 
-const int ip_protocol = IPPROTO_TCP;
-const int sock_type = SOCK_STREAM;
-const int sock_family = AF_INET;
-
 class Linux_Network_Interface : public Network_Interface
 {
-	void connect_to_server(ipv4_addr addr);
-	void scan_for_server();
+public:
+	Linux_Network_Interface();
 	void initalized();
 	void initalize();
 	void clean_up();
+	void setup_connection(Connection_Id connection_name, Socket_Maker maker);
 
-	void server_start();
-	void server_listen();
 
-	void set_my_ip();
+	void send(std::string node_id, char* message);
+	char* listen(Connection_Id Connection_Id);
 
 private:
-	SOCKET sock;
-	struct sockaddr_in serv_addr;
+	ipv4_addr get_interface_addr();
+	ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip);
+	void setup_broadcast_socket(Connection& connect, ipv4_addr host_ip);
+	void setup_interface();
 	bool server_running;
-	std::map<ipv4_addr, SOCKET> accepted_connections;
+	struct ifaddrs* ifa;
 };
 
 

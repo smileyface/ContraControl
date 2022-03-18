@@ -18,19 +18,19 @@ enum class LOG_PRIORITY {
 	/**
 	 A program breaking error.
 	 */
-	SEVERE,
+	SEVERE_MESSAGE,
 	/**
 	 Informational log entry. For verbose logging.
 	 */
-	INFO,
+	INFO_MESSAGE,
 	/**
 	 Debug level entry. For very verbose logging.
 	 */
-	DEBUG,
+	DEBUG_MESSAGE,
 	/**
 	 A non-program stopping error. 
 	 */
-	ERROR
+	ERROR_MESSAGE
 };
 
 /**
@@ -40,7 +40,7 @@ class Log_Entry
 {
 public:
 	Log_Entry() {
-		priority = LOG_PRIORITY::ERROR;
+		priority = LOG_PRIORITY::ERROR_MESSAGE;
 		message = "NO MESSAGE";
 		device = "SYSTEM ERROR";
 	}

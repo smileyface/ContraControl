@@ -16,10 +16,10 @@
 #include <WS2tcpip.h>
 
 #include "network_interface.h"
+#include "types/connections.h"
 extern struct addrinfo hints;
-const int ip_protocol = IPPROTO_TCP;
-const int sock_type = SOCK_STREAM;
-const int sock_family = AF_INET;
+extern WORD wVersionRequested;
+
 /**
  * Interface for a Windows system.
  */
@@ -28,32 +28,25 @@ class Windows_Network_Interface : public Network_Interface
 public:
 	Windows_Network_Interface();
 
-	void set_my_ip();
+	void setup_connection(Connection_Id connection_name, Socket_Maker maker);
 
-	void connect_to_server(ipv4_addr addr);
-	void scan_for_server();
 	void initalize();
 	void initalized();
 	void clean_up();
-	
-	void server_start();
 
-	static bool ipv4_compare(sockaddr_in* win_address, ipv4_addr gen_address)
-	{
-		//return win_address->sin_addr.S_un.S_addr == gen_address.S_un.S_addr;
-		return false;
-	}
-	static ipv4_addr convert_win_address(sockaddr_in* win_address)
-	{
-		ipv4_addr gen_addr;
-		gen_addr.S_un.S_addr = win_address->sin_addr.S_un.S_addr;
-		return gen_addr;
-	}
+	void send(Connection_Id node_id, char* message);
+	char* listen(Connection_Id connection_name);
+
+
 	
 private:
-	SOCKET sock = INVALID_SOCKET;
-    std::vector<ipv4_addr> local_ips;
-	std::map<ipv4_addr, SOCKET> accepted_connections;
+	bool ipv4_compare(sockaddr_in* win_address, ipv4_addr gen_address);
+	ipv4_addr convert_win_address(sockaddr_in* win_address);
+	void setup_broadcast_socket(Connection& connect, ipv4_addr host_ip);
+	ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip);
+	ipv4_addr get_interface_address(std::string hostname, std::string interfaces);
+	ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask);
+	NETWORK_ERRORS set_error_state(int err_code = -1);
 };
 
 

@@ -2,12 +2,14 @@
 #define TESTING_UTILITIES_H
 
 #include <utility>
+#include <functional>
 
 #include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
 
 
 #include "../../dev/Utilities/Utilities/exceptions.h"
+#include "../../dev/Network/system_interfaces/types/network_status_state.h"
 
 namespace testing_utilities
 {
@@ -36,6 +38,7 @@ namespace testing_utilities
 	{
 		void check_initalized();
 		void exception_handle();
+		void expect_exception(std::function<void()> function, NETWORK_ERRORS error);
 	}
 	namespace subsystem_utilities
 	{

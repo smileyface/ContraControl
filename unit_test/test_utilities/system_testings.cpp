@@ -3,13 +3,24 @@
 
 #include "system_testings.h"
 
+#include "Utilities/exceptions.h"
+#include "test_utilities.h"
+
 #include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
 
 
 void system_utilities::setup()
 {
-	model::initalize();
+	try
+	{
+		model::initalize();
+	}
+	catch (NetworkErrorException)
+	{
+		printf("Caught network exception");
+		testing_utilities::network_utilities::exception_handle();
+	}
 	controller::initalize();
 }
 

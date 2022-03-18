@@ -18,6 +18,8 @@ enum class MESSAGES : char
 {
 	/** See Node_Messages::NODE_HELLO */
 	NODE_HELLO,
+	/** See Node_Messages::NODE_ACK */
+	NODE_ACK,
 	NODE_GOODBYE,
 	/** Undefined message. */
 	UNDEFINED

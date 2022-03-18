@@ -48,6 +48,10 @@ enum class NETWORK_ERRORS : unsigned char
     SOCKET_BUSY,
     /** Error starting server */
     SERVER_CANNOT_START,
+    /** A code error has occured and needs debugged. */
+    NETWORK_CODE_ERROR,
+    /** When an option is incorrect. */
+    NETWORK_OPTION_ERROR,
     /** Some unknown error has occured. */
     UNKNOWN_ERROR
 };
