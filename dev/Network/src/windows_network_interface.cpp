@@ -25,7 +25,7 @@ WORD wVersionRequested = MAKEWORD(2, 2);
 /// networking. 
 ////////////////////////////////////////////////
 
-NETWORK_ERRORS set_error_state(int err_code = -1)
+NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 {
 	if(err_code == -1)
 		err_code = WSAGetLastError();
@@ -54,11 +54,11 @@ NETWORK_ERRORS set_error_state(int err_code = -1)
 	}
 }
 
-ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask)
+ipv4_addr Windows_Network_Interface::get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask)
 {
 	return host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
 }
-ipv4_addr get_interface_address(std::string hostname, std::string interfaces, Network_Status_State& status_state)
+ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname, std::string interfaces)
 {
 	struct addrinfo* hostinfo = NULL;
 	std::vector<ipv4_addr> local_ips;
@@ -84,7 +84,7 @@ ipv4_addr get_interface_address(std::string hostname, std::string interfaces, Ne
 	}
 }
 
-ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip, Network_Status_State& status_state)
+ipv4_addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host_ip)
 {
 	INTERFACE_INFO InterfaceList[20];
 	unsigned long nBytesReturned;
@@ -106,7 +106,7 @@ ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip, Network_Status_State& 
 	return subnet_mask;
 }
 
-void setup_broadcast_socket(connection& connect, Network_Status_State& status_state, ipv4_addr host_ip)
+void Windows_Network_Interface::setup_broadcast_socket(connection& connect, ipv4_addr host_ip)
 {
 	if (connect.sock == INVALID_SOCKET)
 	{
@@ -125,6 +125,17 @@ void setup_broadcast_socket(connection& connect, Network_Status_State& status_st
 	}
 }
 
+ipv4_addr Windows_Network_Interface::convert_win_address(sockaddr_in* win_address)
+{
+	ipv4_addr gen_addr;
+	gen_addr.S_un.S_addr = win_address->sin_addr.S_un.S_addr;
+	return gen_addr;
+}
+
+bool Windows_Network_Interface::ipv4_compare(sockaddr_in* win_address, ipv4_addr gen_address)
+{
+	return win_address->sin_addr.S_un.S_addr == gen_address.S_un.S_addr;
+}
 ////////////////////////////////////////////
 ///  WINDOWS_NETWORK_INTERFACE DEFINITIONS
 /// 
@@ -180,14 +191,14 @@ void Windows_Network_Interface::clean_up()
 	WSACleanup();
 }
 
-void Windows_Network_Interface::setup_connection(std::string connection_name, socket_maker maker)
+void Windows_Network_Interface::setup_connection(connection_id connection_name, socket_maker maker)
 {
 	connections[connection_name].sock = socket(maker.sock_family, maker.sock_type, maker.ip_protocol);
 	if (connection_name == local_connections::broadcast)
 	{
-		ipv4_addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address, status_state);
+		ipv4_addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
 		connections[local_connections::broadcast].address = get_broadcast(connections[local_connections::local].address, subnet_mask);
-		setup_broadcast_socket(connections[local_connections::broadcast], status_state, connections[local_connections::local].address);
+		setup_broadcast_socket(connections[local_connections::broadcast], connections[local_connections::local].address);
 	}
 	if (connection_name == local_connections::local)
 	{
@@ -195,75 +206,20 @@ void Windows_Network_Interface::setup_connection(std::string connection_name, so
 		hints.ai_family = maker.sock_family;
 		hints.ai_socktype = maker.sock_type;
 		hints.ai_protocol = maker.ip_protocol;
-		connections[local_connections::local].address = get_interface_address(hostname, interfaces, status_state);
+		connections[local_connections::local].address = get_interface_address(hostname, interfaces);
 	}
 	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
 }
 
-void Windows_Network_Interface::connect_to_server(ipv4_addr addr)
-{
-/*	struct addrinfo* result = NULL;
-	int iResult;
 
-	// Resolve the server address and port
-	iResult = getaddrinfo(addr.get_as_string().c_str(), std::to_string(DEFAULT_PORT).c_str(), &hints, &result);
-	if (iResult != 0) {
-		status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
-	}
-
-	// Attempt to connect to an address until one succeeds
-	for (struct addrinfo* ptr = result; ptr != NULL; ptr = ptr->ai_next) {
-
-		// Create a SOCKET for connecting to server
-		accepted_connections[addr] = socket(ptr->ai_family, ptr->ai_socktype,
-											ptr->ai_protocol);
-		if (accepted_connections[addr] == INVALID_SOCKET) {
-			status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
-		}
-
-		// Connect to server.
-		iResult = connect(accepted_connections[addr], ptr->ai_addr, (int)ptr->ai_addrlen);
-		if (iResult == SOCKET_ERROR) {
-			closesocket(accepted_connections[addr]);
-			accepted_connections[addr] = INVALID_SOCKET;
-			continue;
-		}
-		status_state.set_status(NETWORK_STATUS::CLIENT_CONNECT);
-		break;
-	}
-
-	freeaddrinfo(result);*/
-}
-
-void Windows_Network_Interface::scan_for_server()
-{
-
-}
-
-void Windows_Network_Interface::server_start()
-{
-	/*sockaddr_in service;
-	//----------------------
-   // The sockaddr_in structure specifies the address family,
-   // IP address, and port for the socket that is being bound.
-	service.sin_family = sock_family;
-	service.sin_addr.s_addr = localhost.S_un.S_addr;
-	service.sin_port = htons(DEFAULT_PORT);
-
-	int iResult = bind(sock, (SOCKADDR*)&service, sizeof(service));
-	if (iResult == SOCKET_ERROR) {
-		status_state.set_error(NETWORK_ERRORS::ERROR_ON_SOCKET_BIND);
-	}
-	//----------------------
-	// Listen for incoming connection requests 
-	// on the created socket. This is a blocking call.
-	if (listen(sock, SOMAXCONN) == SOCKET_ERROR)
-		status_state.set_error(NETWORK_ERRORS::ERROR_ON_SOCKET_LISTEN);*/
-}
-
-void Windows_Network_Interface::send(std::string node_id, char* message)
+void Windows_Network_Interface::send(connection_id node_id, char* message)
 {
 	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*)&connections[node_id].address, sizeof(connections[node_id].address));
+}
+
+char* Windows_Network_Interface::listen(connection_id connection_id)
+{
+	return 0;
 }
 
 #endif // WIN32

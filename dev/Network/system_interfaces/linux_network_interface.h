@@ -33,15 +33,13 @@ class Linux_Network_Interface : public Network_Interface
 public:
 	Linux_Network_Interface();
 	void connect_to_server(ipv4_addr addr);
-	void scan_for_server();
 	void initalized();
 	void initalize();
 	void clean_up();
 
-	void server_start();
-	void server_listen();
 
 	void send(std::string node_id, char* message);
+	char* listen();
 
 	void set_my_ip();
 

@@ -66,34 +66,19 @@ public:
      * \brief Set the Node as client.
      */
     void set_client();
+    /** Set the hostname manually. */
     void set_hostname(std::string hostname);
     /**
      * \brief Set the my ip object. Does it from the ipconfig/ifconfig
      */
-    virtual void setup_connection(std::string connection_name, socket_maker maker) = 0;
-
-    //Client Code
-    /**
-     * \brief Connect to a server.
-     * 
-     * \param addr Address of server.
-     */
-    virtual void connect_to_server(ipv4_addr addr) = 0;
-    /**
-     * \brief Scan for a server to connect to.
-     * 
-     * \todo Do this through broadcast instead of an ARP blast.
-     */
-    virtual void scan_for_server() = 0;
-    
-    //Server Code
-    /**
-     * \brief Start the server in a thread
-     */
-    virtual void server_start() = 0;
+    virtual void setup_connection(connection_id connection_name, socket_maker maker) = 0;
 
     //Communication Code
-    virtual void send(std::string node_id, char* message) = 0;
+    /** Send a message to a node */
+    virtual void send(connection_id connection_id, char* message) = 0;
+    /** Listen to a specific connection */
+    virtual char* listen(connection_id connection_id) = 0;
+
    //Constants
    /**
     * \brief localhost address

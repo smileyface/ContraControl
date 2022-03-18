@@ -1,6 +1,8 @@
 #include <thread>
 #include <mutex>
 
+#include "messages.h"
+
 #include "network_main.h"
 #ifdef _WIN32
 #include "system_interfaces/windows_network_interface.h"
@@ -37,6 +39,7 @@ void network::init_network_interfaces()
 
 void client_loop()
 {
+	//call_and_response(NODE_HELLO, NODE_ACK, 2);
 	while (network_running)
 	{
 
@@ -47,7 +50,8 @@ void server_loop()
 {
 	while (network_running)
 	{
-
+		//listen on Broadcast for NODE_HELLO
+		//Once found, Send NODE_ACK
 	}
 }
 

@@ -20,12 +20,13 @@ struct connection
 		
 };
 
-typedef std::map<std::string, connection> network_connection_list;
+typedef std::string connection_id;
+typedef std::map<connection_id, connection> network_connection_list;
 
 namespace local_connections
 {
-	extern const std::string broadcast;
-	extern const std::string local;
+	extern const connection_id broadcast;
+	extern const connection_id local;
 
 	void setup(network_connection_list& list);
 

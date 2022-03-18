@@ -28,30 +28,25 @@ class Windows_Network_Interface : public Network_Interface
 public:
 	Windows_Network_Interface();
 
-	void setup_connection(std::string connection_name, socket_maker maker);
+	void setup_connection(connection_id connection_name, socket_maker maker);
 
-	void connect_to_server(ipv4_addr addr);
-	void scan_for_server();
 	void initalize();
 	void initalized();
 	void clean_up();
-	
-	void server_start();
 
-	void send(std::string node_id, char* message);
+	void send(connection_id node_id, char* message);
+	char* listen(connection_id connection_name);
 
-	static bool ipv4_compare(sockaddr_in* win_address, ipv4_addr gen_address)
-	{
-		return win_address->sin_addr.S_un.S_addr == gen_address.S_un.S_addr;
-	}
-	static ipv4_addr convert_win_address(sockaddr_in* win_address)
-	{
-		ipv4_addr gen_addr;
-		gen_addr.S_un.S_addr = win_address->sin_addr.S_un.S_addr;
-		return gen_addr;
-	}
+
 	
 private:
+	bool ipv4_compare(sockaddr_in* win_address, ipv4_addr gen_address);
+	ipv4_addr convert_win_address(sockaddr_in* win_address);
+	void setup_broadcast_socket(connection& connect, ipv4_addr host_ip);
+	ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip);
+	ipv4_addr get_interface_address(std::string hostname, std::string interfaces);
+	ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask);
+	NETWORK_ERRORS set_error_state(int err_code = -1);
 };
 
 
