@@ -23,28 +23,25 @@
 typedef unsigned long DWORD;
 const unsigned long ERROR_NOT_FOUND = 1168L;
 
-
-const int ip_protocol = IPPROTO_TCP;
-const int sock_type = SOCK_STREAM;
-const int sock_family = AF_INET;
-
 class Linux_Network_Interface : public Network_Interface
 {
 public:
 	Linux_Network_Interface();
-	void connect_to_server(ipv4_addr addr);
 	void initalized();
 	void initalize();
 	void clean_up();
+	void setup_connection(connection_id connection_name, socket_maker maker);
 
 
 	void send(std::string node_id, char* message);
-	char* listen();
+	char* listen(connection_id connection_id);
 
 	void set_my_ip();
 
 private:
-	
+	ipv4_addr get_interface_addr();
+	ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip);
+	void setup_broadcast_socket(connection& connect, ipv4_addr host_ip);
 	bool server_running;
 };
 
