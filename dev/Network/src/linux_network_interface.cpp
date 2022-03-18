@@ -146,23 +146,23 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 
 void Linux_Network_Interface::initalized()
 {
-	if (connections[local_connections::local].sock > 0 &&
-		connections[local_connections::broadcast].sock > 0)
+	if (hostname == INVALID_HOSTNAME)
+	{
+		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
+		throw NetworkErrorException();
+	}
+	if (connections[local_connections::local].sock < 0 &&
+		connections[local_connections::broadcast].sock < 0)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
+		throw NetworkErrorException();
 	}
 	status_state.set_status(NETWORK_STATUS::NETWORK_INITALIZED);
 }
 
 void Linux_Network_Interface::send(std::string node_id, char* message)
 {
-	sockaddr_in broad_addr;
-	memset(&broad_addr, '0', sizeof(&broad_addr));
-
-	broad_addr.sin_family = AF_INET;
-	broad_addr.sin_port = htons(DEFAULT_PORT);
-	broad_addr.sin_addr.s_addr = inet_addr(connections[node_id].address.get_as_string().c_str());
-	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*)&broad_addr, sizeof(broad_addr));
+	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*)&connections[node_id].address, sizeof(connections[node_id].address));
 }
 
 char* Linux_Network_Interface::listen(Connection_Id Connection_Id)

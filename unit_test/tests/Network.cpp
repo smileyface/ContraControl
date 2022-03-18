@@ -113,7 +113,15 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
 #endif
 
 #ifdef __linux__
+#include "../../Network/system_interfaces/linux_network_interface.h"
 TEST_F(EmptyLocalNetworkTest, Error_States_Linux)
 {
+	network::init_network_interfaces();
+	network::network_interface->set_hostname(INVALID_HOSTNAME);
+	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::INVALID_HOSTNAME);
+
+	network::init_network_interfaces();
+	network::network_interface->setup_connection(local_connections::local, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
+	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);
 }
 #endif
