@@ -23,6 +23,7 @@
 typedef unsigned long DWORD;
 const unsigned long ERROR_NOT_FOUND = 1168L;
 
+
 class Linux_Network_Interface : public Network_Interface
 {
 public:
@@ -39,6 +40,7 @@ public:
 private:
 	ipv4_addr get_interface_addr();
 	ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip);
+	void setup_broadcast_socket(Connection& connect, ipv4_addr host_ip);
 	void setup_interface();
 	bool server_running;
 	struct ifaddrs* ifa;

@@ -141,8 +141,16 @@ void testing_utilities::network_utilities::exception_handle()
 
 void testing_utilities::network_utilities::expect_exception(std::function<void()> function, NETWORK_ERRORS error)
 {
-	EXPECT_THROW(function(), NetworkErrorException) << "Network Error Exception did not throw";
-	EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
+	try
+	{
+		function();
+	}
+	catch (NetworkErrorException& e)
+	{
+		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
+		return;
+	}
+	FAIL() << "Network Error Exception did not throw";
 }
 
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)

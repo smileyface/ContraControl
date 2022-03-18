@@ -67,7 +67,7 @@ void Linux_Network_Interface::setup_interface()
 	}
 }
 
-NETWORK_ERRORS get_error_state()
+NETWORK_ERRORS set_error_state()
 {
 	switch (errno)
 	{
@@ -80,15 +80,17 @@ NETWORK_ERRORS get_error_state()
 	case EADDRINUSE:
 		return NETWORK_ERRORS::SOCKET_BUSY;
 	case EBADF:
-		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
-	case EINVAL:
 		return NETWORK_ERRORS::SOCKET_INVALID;
+	case EINVAL:
+		return NETWORK_ERRORS::NETWORK_OPTION_ERROR;
 	case ENOTSOCK:
 		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
 	case EACCES:
 		return NETWORK_ERRORS::ADAPTER_ERROR;
 	case EPROTONOSUPPORT:
 		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
+	case ENOPROTOOPT:
+		return NETWORK_ERRORS::NETWORK_OPTION_ERROR;
 	default:
 		return NETWORK_ERRORS::UNKNOWN_ERROR;
 	}
@@ -129,6 +131,19 @@ void Linux_Network_Interface::clean_up()
 	}
 }
 
+void Linux_Network_Interface::setup_broadcast_socket(Connection& connect, ipv4_addr host_ip)
+{
+	int broadcast_opt_true = 1;
+	if (setsockopt(connect.sock, SOL_SOCKET, SO_BROADCAST, &broadcast_opt_true, sizeof(broadcast_opt_true)) != 0)
+	{
+		status_state.set_error(set_error_state());
+		close(connect.sock);
+		connect.sock = INVALID_SOCKET;
+		throw NetworkErrorException();
+	}
+}
+
+
 void Linux_Network_Interface::setup_connection(Connection_Id connection_name, Socket_Maker maker)
 {
 	connections[connection_name].sock = socket(maker.sock_family, maker.sock_type, maker.ip_protocol);
@@ -136,6 +151,7 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 	{
 		ipv4_addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
 		connections[local_connections::broadcast].address = get_broadcast(connections[local_connections::local].address, subnet_mask);
+		setup_broadcast_socket(connections[local_connections::broadcast], connections[local_connections::local].address);
 	}
 	if (connection_name == local_connections::local)
 	{
@@ -151,7 +167,7 @@ void Linux_Network_Interface::initalized()
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
 		throw NetworkErrorException();
 	}
-	if (connections[local_connections::local].sock < 0 &&
+	if (connections[local_connections::local].sock < 0 ||
 		connections[local_connections::broadcast].sock < 0)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);

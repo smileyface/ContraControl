@@ -8,7 +8,7 @@
 #ifndef PROJECT_EXCEPTIONS_H
 #define PROJECT_EXCEPTIONS_H
 
-#include <exception>
+#include <stdexcept>
 /**
  \brief Exception node throws when attempting to access a device that does not exist.
  */
