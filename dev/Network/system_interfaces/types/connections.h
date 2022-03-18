@@ -13,22 +13,22 @@ typedef int SOCKET;
 const int INVALID_SOCKET = 0;
 #endif //__linux__
 
-struct connection
+struct Connection
 {
 	SOCKET sock = INVALID_SOCKET;
 	ipv4_addr address = 0;
 		
 };
 
-typedef std::string connection_id;
-typedef std::map<connection_id, connection> network_connection_list;
+typedef std::string Connection_Id;
+typedef std::map<Connection_Id, Connection> Network_Connection_List;
 
 namespace local_connections
 {
-	extern const connection_id broadcast;
-	extern const connection_id local;
+	extern const Connection_Id broadcast;
+	extern const Connection_Id local;
 
-	void setup(network_connection_list& list);
+	void setup(Network_Connection_List& list);
 
 }
 

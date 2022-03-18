@@ -1,22 +1,8 @@
 ﻿/*This is where the Linux Network Interface object is defined*/
 #ifdef __linux__
-#define _GNU_SOURCE
-#include <thread>         // std::thread
-#include <net/if.h>
-#include <iostream>
-#include <cstdio>
-#include <iostream>
-#include <memory>
-#include <climits>
-
-#include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <ifaddrs.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <linux/if_link.h>
 
 #include "../system_interfaces/linux_network_interface.h"
 #include "Utilities/exceptions.h"
@@ -33,51 +19,33 @@ ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask)
 
 ipv4_addr Linux_Network_Interface::get_interface_addr()
 {
-	struct ifaddrs* ifap, * ifa;
-	struct sockaddr_in* sa;
-	char* s;
-	int found = 0;
 	char host[NI_MAXHOST];
 
-	if (getifaddrs(&ifap) == -1) 
-	{
-		perror("getifaddrs");
-		exit(EXIT_FAILURE);
-	}
-
-	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next) 
-	{
-		if (ifa->ifa_addr == NULL)
-			continue;
-
-		if (strcasecmp(interfaces.c_str(), ifa->ifa_name))
-			continue;
-
-		/* IPv4 */
-		if (ifa->ifa_addr->sa_family != AF_INET)
-			continue;
-
-		getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
-		ipv4_addr(host);
-	}
-	return ipv4_addr();
+	getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+	return ipv4_addr(host);
 }
 
 ipv4_addr Linux_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host_ip)
 {
-	struct ifaddrs* ifap, * ifa;
-	struct sockaddr_in* sa;
 	char* s = "255.255.255.255";
 	int found = 0;
-	char host[NI_MAXHOST];
 
-	if (getifaddrs(&ifap) == -1) 
+	struct sockaddr_in* sa = (struct sockaddr_in*)ifa->ifa_netmask;
+	s = inet_ntoa(sa->sin_addr);
+	return ipv4_addr(s);
+}
+
+void Linux_Network_Interface::setup_interface()
+{
+	struct ifaddrs* ifap;
+	int found = 0;
+	if (getifaddrs(&ifap) == -1)
 	{
 		perror("getifaddrs");
 		exit(EXIT_FAILURE);
 	}
 
-	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next) 
+	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next)
 	{
 		if (ifa->ifa_addr == NULL)
 			continue;
@@ -89,16 +57,18 @@ ipv4_addr Linux_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host_i
 		if (ifa->ifa_addr->sa_family != AF_INET)
 			continue;
 
-		sa = (struct sockaddr_in*)ifa->ifa_netmask;
-		s = inet_ntoa(sa->sin_addr);
+		found = 1;
 	}
 	freeifaddrs(ifap);
-	return ipv4_addr(s);
+	if (found == 0)
+	{
+		status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
+		throw NetworkErrorException();
+	}
 }
 
 NETWORK_ERRORS get_error_state()
 {
-	std::cout << errno << std::endl;
 	switch (errno)
 	{
 	case EISCONN:
@@ -132,9 +102,18 @@ Linux_Network_Interface::Linux_Network_Interface()
 
 void Linux_Network_Interface::initalize()
 {
-	local_connections::setup(connections);
-	set_my_ip();
+	char hostname_temp[50];
+	int rc = gethostname(hostname_temp, sizeof(hostname_temp));
 
+	if (rc != 0) 
+	{
+		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
+		throw NetworkErrorException();
+	}
+	hostname = hostname_temp;
+
+	local_connections::setup(connections);
+	setup_interface();
 	server_running = false;
 	setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
 	setup_connection(local_connections::broadcast, { IPPROTO_UDP, SOCK_DGRAM, AF_INET });
@@ -150,7 +129,7 @@ void Linux_Network_Interface::clean_up()
 	}
 }
 
-void Linux_Network_Interface::setup_connection(connection_id connection_name, socket_maker maker)
+void Linux_Network_Interface::setup_connection(Connection_Id connection_name, Socket_Maker maker)
 {
 	connections[connection_name].sock = socket(maker.sock_family, maker.sock_type, maker.ip_protocol);
 	if (connection_name == local_connections::broadcast)
@@ -163,52 +142,6 @@ void Linux_Network_Interface::setup_connection(connection_id connection_name, so
 		connections[local_connections::local].address = get_interface_addr();
 	}
 	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
-
-}
-
-void Linux_Network_Interface::set_my_ip()
-{
-	struct ifaddrs* ifap, * ifa;
-	struct sockaddr_in* sa;
-	char* s;
-	int found = 0;
-	char host[NI_MAXHOST];
-
-	if (getifaddrs(&ifap) == -1) {
-		status_state.set_error(get_error_state());
-		throw NetworkErrorException();
-	}
-
-	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next) {
-		if (ifa->ifa_addr == NULL)
-			continue;
-
-		if (strcasecmp(interfaces.c_str(), ifa->ifa_name))
-			continue;
-
-		/* IPv4 */
-		if (ifa->ifa_addr->sa_family != AF_INET)
-			continue;
-
-		getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
-
-		sa = (struct sockaddr_in*)ifa->ifa_netmask;
-		s = inet_ntoa(sa->sin_addr);
-
-		ipv4_addr subnet_mask(s);
-
-		connections[local_connections::local].address = ipv4_addr(host);
-
-		connections[local_connections::broadcast].address = get_broadcast(connections[local_connections::local].address, subnet_mask);
-		found = 1;
-	}
-	//Broadcast NODE_HELLO
-	connections[local_connections::broadcast].sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	if (connections[local_connections::broadcast].sock < 0)
-	{
-		status_state.set_error(get_error_state());
-		throw NetworkErrorException();
-	}
 }
 
 void Linux_Network_Interface::initalized()
@@ -232,7 +165,7 @@ void Linux_Network_Interface::send(std::string node_id, char* message)
 	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*)&broad_addr, sizeof(broad_addr));
 }
 
-char* Linux_Network_Interface::listen(connection_id connection_id)
+char* Linux_Network_Interface::listen(Connection_Id Connection_Id)
 {
 
 }

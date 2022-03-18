@@ -106,7 +106,7 @@ ipv4_addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host
 	return subnet_mask;
 }
 
-void Windows_Network_Interface::setup_broadcast_socket(connection& connect, ipv4_addr host_ip)
+void Windows_Network_Interface::setup_broadcast_socket(Connection& connect, ipv4_addr host_ip)
 {
 	if (connect.sock == INVALID_SOCKET)
 	{
@@ -146,7 +146,7 @@ bool Windows_Network_Interface::ipv4_compare(sockaddr_in* win_address, ipv4_addr
 Windows_Network_Interface::Windows_Network_Interface()
 {
 	local_connections::setup(connections);
-	hostname = invalid_hostname;
+	hostname = INVALID_HOSTNAME;
 }
 
 void Windows_Network_Interface::initalize()
@@ -173,7 +173,7 @@ void Windows_Network_Interface::initalized()
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
 		throw NetworkErrorException();
 	}
-	if (hostname == invalid_hostname)
+	if (hostname == INVALID_HOSTNAME)
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
 		throw NetworkErrorException();
@@ -191,7 +191,7 @@ void Windows_Network_Interface::clean_up()
 	WSACleanup();
 }
 
-void Windows_Network_Interface::setup_connection(connection_id connection_name, socket_maker maker)
+void Windows_Network_Interface::setup_connection(Connection_Id connection_name, Socket_Maker maker)
 {
 	connections[connection_name].sock = socket(maker.sock_family, maker.sock_type, maker.ip_protocol);
 	if (connection_name == local_connections::broadcast)
@@ -212,12 +212,12 @@ void Windows_Network_Interface::setup_connection(connection_id connection_name, 
 }
 
 
-void Windows_Network_Interface::send(connection_id node_id, char* message)
+void Windows_Network_Interface::send(Connection_Id node_id, char* message)
 {
 	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*)&connections[node_id].address, sizeof(connections[node_id].address));
 }
 
-char* Windows_Network_Interface::listen(connection_id connection_id)
+char* Windows_Network_Interface::listen(Connection_Id Connection_Id)
 {
 	return 0;
 }

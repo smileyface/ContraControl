@@ -89,7 +89,7 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Initalized)
 {
 	wVersionRequested = MAKEWORD(2, 2);
 	network::init_network_interfaces();
-	network::network_interface->set_hostname(invalid_hostname);
+	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::INVALID_HOSTNAME);
 
 	network::init_network_interfaces();
@@ -107,7 +107,7 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Broadcast_Setup)
 
 TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
 {
-	network::network_interface->set_hostname(invalid_hostname);
+	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::INVALID_HOSTNAME);
 }
 #endif

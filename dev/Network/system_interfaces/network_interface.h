@@ -15,9 +15,9 @@
 #include "Messaging/system_messaging.h"
 
 const unsigned short DEFAULT_PORT = 0xDCF5; ///<Port is 56565
-const std::string invalid_hostname = "INVALID"; ///<A marker for invalid hostnames
+const std::string INVALID_HOSTNAME = "INVALID"; ///<A marker for invalid hostnames
 
-struct socket_maker
+struct Socket_Maker
 {
     int ip_protocol;
     int sock_type;
@@ -71,13 +71,13 @@ public:
     /**
      * \brief Set the my ip object. Does it from the ipconfig/ifconfig
      */
-    virtual void setup_connection(connection_id connection_name, socket_maker maker) = 0;
+    virtual void setup_connection(Connection_Id connection_name, Socket_Maker maker) = 0;
 
     //Communication Code
     /** Send a message to a node */
-    virtual void send(connection_id connection_id, char* message) = 0;
+    virtual void send(Connection_Id Connection_Id, char* message) = 0;
     /** Listen to a specific connection */
-    virtual char* listen(connection_id connection_id) = 0;
+    virtual char* listen(Connection_Id Connection_Id) = 0;
 
    //Constants
    /**
@@ -104,7 +104,7 @@ protected:
     /**
      * Map of known connections
      */
-    network_connection_list connections;
+    Network_Connection_List connections;
 };
 
 #endif

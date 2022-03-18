@@ -30,19 +30,18 @@ public:
 	void initalized();
 	void initalize();
 	void clean_up();
-	void setup_connection(connection_id connection_name, socket_maker maker);
+	void setup_connection(Connection_Id connection_name, Socket_Maker maker);
 
 
 	void send(std::string node_id, char* message);
-	char* listen(connection_id connection_id);
-
-	void set_my_ip();
+	char* listen(Connection_Id Connection_Id);
 
 private:
 	ipv4_addr get_interface_addr();
 	ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip);
-	void setup_broadcast_socket(connection& connect, ipv4_addr host_ip);
+	void setup_interface();
 	bool server_running;
+	struct ifaddrs* ifa;
 };
 
 
