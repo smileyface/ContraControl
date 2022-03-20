@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_5fc0168d11760b9445bd29fa15d9290f.html">dev</a></li><li class="navelem"><a class="el" href="dir_b24430d47ed6d6fe1994025fe28bec8f.html">Interfaces</a></li><li class="navelem"><a class="el" href="dir_90cbeea21a09a0177a74af90e33ee01e.html">Network</a></li><li class="navelem"><a class="el" href="dir_ed7cb84072da4a1d917298d6fab87aa2.html">system_interfaces</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_5fc0168d11760b9445bd29fa15d9290f.html">dev</a></li><li class="navelem"><a class="el" href="dir_1dcc0d9fc45fd19de401c499874a42e3.html">Network</a></li><li class="navelem"><a class="el" href="dir_484bf9b346e8d677bf50c6b8faf9ab56.html">system_interfaces</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -82,58 +82,53 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;WinSock2.h&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;WS2tcpip.h&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="network__interface_8h.html">network_interface.h</a>&quot;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">extern</span> <span class="keyword">struct </span>addrinfo hints;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> ip_protocol = IPPROTO_TCP;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> sock_type = SOCK_STREAM;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> sock_family = AF_INET;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;network_interface.h&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="connections_8h.html">types/connections.h</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">extern</span> <span class="keyword">struct </span>addrinfo hints;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">extern</span> WORD wVersionRequested;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span>Windows_Network_Interface : <span class="keyword">public</span> <a class="code" href="class_network___interface.html">Network_Interface</a></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    Windows_Network_Interface();</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a734e81f5b93dfd94f3785019fff2da92">set_my_ip</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a7bd14f0ef8dfa58df70bf90d1f94a251">setup_connection</a>(<a class="code" href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a> connection_name, <a class="code" href="_network_2system__interfaces_2network__interface_8h.html#struct_socket___maker">Socket_Maker</a> maker);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a28fcba5930dabc95fff604a84b4b1e7b">connect_to_server</a>(<a class="code" href="structipv4__addr.html">ipv4_addr</a> addr);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#aa3bb02cb7423b2d275fe8698fd1eb9c3">scan_for_server</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a540e7d37fcb1c7db74a13cbc6809de46">initalize</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a96baeb712c3c783aedaf2c47b75c9093">initalized</a>();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a8227dc332d516511252b268121600d9a">clean_up</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a1f6cda638cc165ed5c5579a194d7c30c">server_start</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a540e7d37fcb1c7db74a13cbc6809de46">initalize</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a96baeb712c3c783aedaf2c47b75c9093">initalized</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a8227dc332d516511252b268121600d9a">clean_up</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_network___interface.html#a9640355ca9e286f33724a5407735a5d8">send</a>(<a class="code" href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a> node_id, <span class="keywordtype">char</span>* message);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">char</span>* <a class="code" href="class_network___interface.html#aed240f6f41548b29b590391ddb46e69f">listen</a>(<a class="code" href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a> connection_name);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> ipv4_compare(sockaddr_in* win_address, <a class="code" href="structipv4__addr.html">ipv4_addr</a> gen_address)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="comment">//return win_address-&gt;sin_addr.S_un.S_addr == gen_address.S_un.S_addr;</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">static</span> <a class="code" href="structipv4__addr.html">ipv4_addr</a> convert_win_address(sockaddr_in* win_address)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="structipv4__addr.html">ipv4_addr</a> gen_addr;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        gen_addr.<a class="code" href="structipv4__addr.html#a60e51a013a59222fe689501954b41173">S_un</a>.S_addr = win_address-&gt;sin_addr.<a class="code" href="structipv4__addr.html#a60e51a013a59222fe689501954b41173">S_un</a>.S_addr;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> gen_addr;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    SOCKET sock = INVALID_SOCKET;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::vector&lt;ipv4_addr&gt; local_ips;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::map&lt;ipv4_addr, SOCKET&gt; accepted_connections;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_network___interface_html"><div class="ttname"><a href="class_network___interface.html">Network_Interface</a></div><div class="ttdoc">Interface for handling network communication between Nodes.</div><div class="ttdef"><b>Definition:</b> network_interface.h:23</div></div>
-<div class="ttc" id="aclass_network___interface_html_a1f6cda638cc165ed5c5579a194d7c30c"><div class="ttname"><a href="class_network___interface.html#a1f6cda638cc165ed5c5579a194d7c30c">Network_Interface::server_start</a></div><div class="ttdeci">virtual void server_start()=0</div><div class="ttdoc">Start the server in a thread.</div></div>
-<div class="ttc" id="aclass_network___interface_html_a28fcba5930dabc95fff604a84b4b1e7b"><div class="ttname"><a href="class_network___interface.html#a28fcba5930dabc95fff604a84b4b1e7b">Network_Interface::connect_to_server</a></div><div class="ttdeci">virtual void connect_to_server(ipv4_addr addr)=0</div><div class="ttdoc">Connect to a server.</div></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">bool</span> ipv4_compare(sockaddr_in* win_address, <a class="code" href="structipv4__addr.html">ipv4_addr</a> gen_address);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="structipv4__addr.html">ipv4_addr</a> convert_win_address(sockaddr_in* win_address);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> setup_broadcast_socket(<a class="code" href="connections_8h.html#struct_connection">Connection</a>&amp; connect, <a class="code" href="structipv4__addr.html">ipv4_addr</a> host_ip);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="structipv4__addr.html">ipv4_addr</a> get_subnet_mask(SOCKET sock, <a class="code" href="structipv4__addr.html">ipv4_addr</a> host_ip);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="structipv4__addr.html">ipv4_addr</a> get_interface_address(std::string hostname, std::string interfaces);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="structipv4__addr.html">ipv4_addr</a> get_broadcast(<a class="code" href="structipv4__addr.html">ipv4_addr</a> host_ip, <a class="code" href="structipv4__addr.html">ipv4_addr</a> net_mask);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416">NETWORK_ERRORS</a> set_error_state(<span class="keywordtype">int</span> err_code = -1);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_network_2system__interfaces_2network__interface_8h_html_struct_socket___maker"><div class="ttname"><a href="_network_2system__interfaces_2network__interface_8h.html#struct_socket___maker">Socket_Maker</a></div><div class="ttdef"><b>Definition:</b> Network/system_interfaces/network_interface.h:22</div></div>
+<div class="ttc" id="aclass_network___interface_html"><div class="ttname"><a href="class_network___interface.html">Network_Interface</a></div><div class="ttdoc">Interface for handling network communication between Nodes.</div><div class="ttdef"><b>Definition:</b> Network/system_interfaces/network_interface.h:35</div></div>
 <div class="ttc" id="aclass_network___interface_html_a540e7d37fcb1c7db74a13cbc6809de46"><div class="ttname"><a href="class_network___interface.html#a540e7d37fcb1c7db74a13cbc6809de46">Network_Interface::initalize</a></div><div class="ttdeci">virtual void initalize()=0</div><div class="ttdoc">Initalize the interface.</div></div>
-<div class="ttc" id="aclass_network___interface_html_a734e81f5b93dfd94f3785019fff2da92"><div class="ttname"><a href="class_network___interface.html#a734e81f5b93dfd94f3785019fff2da92">Network_Interface::set_my_ip</a></div><div class="ttdeci">virtual void set_my_ip()=0</div><div class="ttdoc">Set the my ip object. Does it from the ipconfig/ifconfig.</div></div>
+<div class="ttc" id="aclass_network___interface_html_a7bd14f0ef8dfa58df70bf90d1f94a251"><div class="ttname"><a href="class_network___interface.html#a7bd14f0ef8dfa58df70bf90d1f94a251">Network_Interface::setup_connection</a></div><div class="ttdeci">virtual void setup_connection(Connection_Id connection_id, Socket_Maker maker)=0</div><div class="ttdoc">setup a connection, either local or remote.</div></div>
 <div class="ttc" id="aclass_network___interface_html_a8227dc332d516511252b268121600d9a"><div class="ttname"><a href="class_network___interface.html#a8227dc332d516511252b268121600d9a">Network_Interface::clean_up</a></div><div class="ttdeci">virtual void clean_up()=0</div><div class="ttdoc">Close all interface objects.</div></div>
+<div class="ttc" id="aclass_network___interface_html_a9640355ca9e286f33724a5407735a5d8"><div class="ttname"><a href="class_network___interface.html#a9640355ca9e286f33724a5407735a5d8">Network_Interface::send</a></div><div class="ttdeci">virtual void send(Connection_Id connection_id, char *message)=0</div></div>
 <div class="ttc" id="aclass_network___interface_html_a96baeb712c3c783aedaf2c47b75c9093"><div class="ttname"><a href="class_network___interface.html#a96baeb712c3c783aedaf2c47b75c9093">Network_Interface::initalized</a></div><div class="ttdeci">virtual void initalized()=0</div><div class="ttdoc">Check if the interface is initalized.</div></div>
-<div class="ttc" id="aclass_network___interface_html_aa3bb02cb7423b2d275fe8698fd1eb9c3"><div class="ttname"><a href="class_network___interface.html#aa3bb02cb7423b2d275fe8698fd1eb9c3">Network_Interface::scan_for_server</a></div><div class="ttdeci">virtual void scan_for_server()=0</div><div class="ttdoc">Scan for a server to connect to.</div></div>
-<div class="ttc" id="anetwork__interface_8h_html"><div class="ttname"><a href="network__interface_8h.html">network_interface.h</a></div></div>
+<div class="ttc" id="aclass_network___interface_html_aed240f6f41548b29b590391ddb46e69f"><div class="ttname"><a href="class_network___interface.html#aed240f6f41548b29b590391ddb46e69f">Network_Interface::listen</a></div><div class="ttdeci">virtual char * listen(Connection_Id connection_id)=0</div></div>
+<div class="ttc" id="aconnections_8h_html"><div class="ttname"><a href="connections_8h.html">connections.h</a></div></div>
+<div class="ttc" id="aconnections_8h_html_a3d28a58fbf672c8a67dda4c4e251312d"><div class="ttname"><a href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a></div><div class="ttdeci">std::string Connection_Id</div><div class="ttdef"><b>Definition:</b> connections.h:36</div></div>
+<div class="ttc" id="aconnections_8h_html_struct_connection"><div class="ttname"><a href="connections_8h.html#struct_connection">Connection</a></div><div class="ttdef"><b>Definition:</b> connections.h:28</div></div>
+<div class="ttc" id="anetwork__status__state_8h_html_adc61e8f2859c67298cd289633daf6416"><div class="ttname"><a href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416">NETWORK_ERRORS</a></div><div class="ttdeci">NETWORK_ERRORS</div><div class="ttdef"><b>Definition:</b> network_status_state.h:30</div></div>
 <div class="ttc" id="astructipv4__addr_html"><div class="ttname"><a href="structipv4__addr.html">ipv4_addr</a></div><div class="ttdef"><b>Definition:</b> ipv4_addr.h:13</div></div>
-<div class="ttc" id="astructipv4__addr_html_a60e51a013a59222fe689501954b41173"><div class="ttname"><a href="structipv4__addr.html#a60e51a013a59222fe689501954b41173">ipv4_addr::S_un</a></div><div class="ttdeci">union ipv4_addr::@0 S_un</div><div class="ttdoc">Address structure.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

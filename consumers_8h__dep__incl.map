@@ -1,9 +1,11 @@
 <map id="consumers.h" name="consumers.h">
-<area shape="rect" id="node1" title=" " alt="" coords="208,5,304,32"/>
-<area shape="rect" id="node2" href="$system__messaging_8h.html" title=" " alt="" coords="96,80,240,107"/>
-<area shape="rect" id="node5" href="$console__system__view_8h.html" title=" " alt="" coords="264,80,424,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="289,5,385,32"/>
+<area shape="rect" id="node2" href="$system__messaging_8h.html" title=" " alt="" coords="177,80,321,107"/>
+<area shape="rect" id="node7" href="$console__system__view_8h.html" title=" " alt="" coords="369,80,529,107"/>
 <area shape="rect" id="node3" href="$controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="5,155,125,181"/>
 <area shape="rect" id="node4" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="150,155,253,181"/>
-<area shape="rect" id="node6" href="$views_8h.html" title=" " alt="" coords="311,155,377,181"/>
-<area shape="rect" id="node7" href="$view__factory_8h.html" title=" " alt="" coords="291,229,397,256"/>
+<area shape="rect" id="node5" href="$_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="277,155,411,181"/>
+<area shape="rect" id="node6" href="$network__main_8h.html" title=" " alt="" coords="285,229,398,256"/>
+<area shape="rect" id="node8" href="$views_8h.html" title=" " alt="" coords="440,155,507,181"/>
+<area shape="rect" id="node9" href="$view__factory_8h.html" title=" " alt="" coords="422,229,527,256"/>
 </map>

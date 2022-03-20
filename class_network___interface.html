@@ -76,13 +76,13 @@ $(function() {
 <p>Interface for handling network communication between Nodes.  
 </p>
 
-<p><code>#include &lt;<a class="el" href="network__interface_8h_source.html">network_interface.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_network_2system__interfaces_2network__interface_8h_source.html">network_interface.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Network_Interface:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_network___interface__coll__graph.png" border="0" usemap="#a_network___interface_coll__map" alt="Collaboration graph"/></div>
 <map name="a_network___interface_coll__map" id="a_network___interface_coll__map">
-<area shape="rect" title="Interface for handling network communication between Nodes." alt="" coords="89,109,218,136"/>
+<area shape="rect" title="Interface for handling network communication between Nodes." alt="" coords="89,95,218,121"/>
 <area shape="rect" href="struct_network___status___state.html" title="A container for displaying the state of the network." alt="" coords="5,5,160,32"/>
 <area shape="rect" href="structipv4__addr.html" title=" " alt="" coords="185,5,263,32"/>
 </map>
@@ -103,9 +103,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:ab177d1f50825378e9e2d6c1f997519f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_network___status___state.html">Network_Status_State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#ab177d1f50825378e9e2d6c1f997519f8">get_status</a> ()</td></tr>
 <tr class="memdesc:ab177d1f50825378e9e2d6c1f997519f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the status_state.  <a href="class_network___interface.html#ab177d1f50825378e9e2d6c1f997519f8">More...</a><br /></td></tr>
 <tr class="separator:ab177d1f50825378e9e2d6c1f997519f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3a6e50ed1bb2484d08b3c91da8c2411"><td class="memItemLeft" align="right" valign="top">unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#ac3a6e50ed1bb2484d08b3c91da8c2411">local_ip</a> ()</td></tr>
-<tr class="memdesc:ac3a6e50ed1bb2484d08b3c91da8c2411"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the IP of the local node.  <a href="class_network___interface.html#ac3a6e50ed1bb2484d08b3c91da8c2411">More...</a><br /></td></tr>
-<tr class="separator:ac3a6e50ed1bb2484d08b3c91da8c2411"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5517f3880cc738407f0b817a9b5e1fd3"><td class="memItemLeft" align="right" valign="top"><a id="a5517f3880cc738407f0b817a9b5e1fd3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a5517f3880cc738407f0b817a9b5e1fd3">set_server</a> ()</td></tr>
 <tr class="memdesc:a5517f3880cc738407f0b817a9b5e1fd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_node.html">Node</a> as server. <br /></td></tr>
@@ -114,20 +111,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a14e3b1a2e26c1d8b071c76b53beb097e">set_client</a> ()</td></tr>
 <tr class="memdesc:a14e3b1a2e26c1d8b071c76b53beb097e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_node.html">Node</a> as client. <br /></td></tr>
 <tr class="separator:a14e3b1a2e26c1d8b071c76b53beb097e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a734e81f5b93dfd94f3785019fff2da92"><td class="memItemLeft" align="right" valign="top"><a id="a734e81f5b93dfd94f3785019fff2da92"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a734e81f5b93dfd94f3785019fff2da92">set_my_ip</a> ()=0</td></tr>
-<tr class="memdesc:a734e81f5b93dfd94f3785019fff2da92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the my ip object. Does it from the ipconfig/ifconfig. <br /></td></tr>
-<tr class="separator:a734e81f5b93dfd94f3785019fff2da92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28fcba5930dabc95fff604a84b4b1e7b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a28fcba5930dabc95fff604a84b4b1e7b">connect_to_server</a> (<a class="el" href="structipv4__addr.html">ipv4_addr</a> addr)=0</td></tr>
-<tr class="memdesc:a28fcba5930dabc95fff604a84b4b1e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect to a server.  <a href="class_network___interface.html#a28fcba5930dabc95fff604a84b4b1e7b">More...</a><br /></td></tr>
-<tr class="separator:a28fcba5930dabc95fff604a84b4b1e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3bb02cb7423b2d275fe8698fd1eb9c3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#aa3bb02cb7423b2d275fe8698fd1eb9c3">scan_for_server</a> ()=0</td></tr>
-<tr class="memdesc:aa3bb02cb7423b2d275fe8698fd1eb9c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan for a server to connect to.  <a href="class_network___interface.html#aa3bb02cb7423b2d275fe8698fd1eb9c3">More...</a><br /></td></tr>
-<tr class="separator:aa3bb02cb7423b2d275fe8698fd1eb9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f6cda638cc165ed5c5579a194d7c30c"><td class="memItemLeft" align="right" valign="top"><a id="a1f6cda638cc165ed5c5579a194d7c30c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a1f6cda638cc165ed5c5579a194d7c30c">server_start</a> ()=0</td></tr>
-<tr class="memdesc:a1f6cda638cc165ed5c5579a194d7c30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server in a thread. <br /></td></tr>
-<tr class="separator:a1f6cda638cc165ed5c5579a194d7c30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b42d0b0c323aa8cf481820fb4a9aa8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a2b42d0b0c323aa8cf481820fb4a9aa8f">set_hostname</a> (std::string <a class="el" href="class_network___interface.html#a01fe93179cda08a10eadada7683100e2">hostname</a>)</td></tr>
+<tr class="separator:a2b42d0b0c323aa8cf481820fb4a9aa8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bd14f0ef8dfa58df70bf90d1f94a251"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a7bd14f0ef8dfa58df70bf90d1f94a251">setup_connection</a> (<a class="el" href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a> connection_id, <a class="el" href="_network_2system__interfaces_2network__interface_8h.html#struct_socket___maker">Socket_Maker</a> maker)=0</td></tr>
+<tr class="memdesc:a7bd14f0ef8dfa58df70bf90d1f94a251"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup a connection, either local or remote.  <a href="class_network___interface.html#a7bd14f0ef8dfa58df70bf90d1f94a251">More...</a><br /></td></tr>
+<tr class="separator:a7bd14f0ef8dfa58df70bf90d1f94a251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9640355ca9e286f33724a5407735a5d8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a9640355ca9e286f33724a5407735a5d8">send</a> (<a class="el" href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a> connection_id, char *message)=0</td></tr>
+<tr class="separator:a9640355ca9e286f33724a5407735a5d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed240f6f41548b29b590391ddb46e69f"><td class="memItemLeft" align="right" valign="top">virtual char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#aed240f6f41548b29b590391ddb46e69f">listen</a> (<a class="el" href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a> connection_id)=0</td></tr>
+<tr class="separator:aed240f6f41548b29b590391ddb46e69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -142,10 +134,6 @@ Protected Attributes</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a9e02e7d4ff228640a68c420bd07081ce">is_server</a> = false</td></tr>
 <tr class="memdesc:a9e02e7d4ff228640a68c420bd07081ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the local node a server. <br /></td></tr>
 <tr class="separator:a9e02e7d4ff228640a68c420bd07081ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4624175386c7aba9785c4d5d185d55d1"><td class="memItemLeft" align="right" valign="top"><a id="a4624175386c7aba9785c4d5d185d55d1"></a>
-<a class="el" href="structipv4__addr.html">ipv4_addr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a4624175386c7aba9785c4d5d185d55d1">my_ip</a> = <a class="el" href="structipv4__addr.html">ipv4_addr</a>(&quot;255.255.255.255&quot;)</td></tr>
-<tr class="memdesc:a4624175386c7aba9785c4d5d185d55d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The local node ip address. <br /></td></tr>
-<tr class="separator:a4624175386c7aba9785c4d5d185d55d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01fe93179cda08a10eadada7683100e2"><td class="memItemLeft" align="right" valign="top"><a id="a01fe93179cda08a10eadada7683100e2"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a01fe93179cda08a10eadada7683100e2">hostname</a></td></tr>
 <tr class="memdesc:a01fe93179cda08a10eadada7683100e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">the interface name of the local node. <br /></td></tr>
@@ -154,40 +142,12 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <a class="el" href="struct_network___status___state.html">Network_Status_State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a822e9bffe5e9e1060f0c848351c0bc86">status_state</a></td></tr>
 <tr class="memdesc:a822e9bffe5e9e1060f0c848351c0bc86"><td class="mdescLeft">&#160;</td><td class="mdescRight">State of the network interface. <br /></td></tr>
 <tr class="separator:a822e9bffe5e9e1060f0c848351c0bc86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e95d66e00001bb4f929b3da018ec2e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#ab7e95d66e00001bb4f929b3da018ec2e">interfaces</a></td></tr>
+<tr class="separator:ab7e95d66e00001bb4f929b3da018ec2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a449d67289f450c8c30dd0f2771640263"><td class="memItemLeft" align="right" valign="top"><a class="el" href="connections_8h.html#a323ec3fce6cd9734e5d5c3bebeb35702">Network_Connection_List</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___interface.html#a449d67289f450c8c30dd0f2771640263">connections</a></td></tr>
+<tr class="separator:a449d67289f450c8c30dd0f2771640263"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a28fcba5930dabc95fff604a84b4b1e7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28fcba5930dabc95fff604a84b4b1e7b">&#9670;&nbsp;</a></span>connect_to_server()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void Network_Interface::connect_to_server </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structipv4__addr.html">ipv4_addr</a>&#160;</td>
-          <td class="paramname"><em>addr</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">addr</td><td>Address of server. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="ab177d1f50825378e9e2d6c1f997519f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab177d1f50825378e9e2d6c1f997519f8">&#9670;&nbsp;</a></span>get_status()</h2>
 
@@ -258,26 +218,8 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 </div>
 </div>
-<a id="ac3a6e50ed1bb2484d08b3c91da8c2411"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3a6e50ed1bb2484d08b3c91da8c2411">&#9670;&nbsp;</a></span>local_ip()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned char * Network_Interface::local_ip </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>ipv4 as 4 unsigned chars </dd></dl>
-
-</div>
-</div>
-<a id="aa3bb02cb7423b2d275fe8698fd1eb9c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3bb02cb7423b2d275fe8698fd1eb9c3">&#9670;&nbsp;</a></span>scan_for_server()</h2>
+<a id="aed240f6f41548b29b590391ddb46e69f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed240f6f41548b29b590391ddb46e69f">&#9670;&nbsp;</a></span>listen()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -286,9 +228,10 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Network_Interface::scan_for_server </td>
+          <td class="memname">virtual char* Network_Interface::listen </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a>&#160;</td>
+          <td class="paramname"><em>connection_id</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -298,12 +241,178 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Do this through broadcast instead of an ARP blast. </dd></dl>
+<p>Listen to a specific connection.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection_id</td><td><a class="el" href="class_node.html">Node</a> to listen to messages from. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Message as array of bytes. </dd></dl>
+
+</div>
+</div>
+<a id="a9640355ca9e286f33724a5407735a5d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9640355ca9e286f33724a5407735a5d8">&#9670;&nbsp;</a></span>send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Network_Interface::send </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a>&#160;</td>
+          <td class="paramname"><em>connection_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Send a message to a node.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection_id</td><td><a class="el" href="class_node.html">Node</a> to send message to. </td></tr>
+    <tr><td class="paramname">message</td><td>Array of bytes to send to <a class="el" href="class_node.html">Node</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2b42d0b0c323aa8cf481820fb4a9aa8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b42d0b0c323aa8cf481820fb4a9aa8f">&#9670;&nbsp;</a></span>set_hostname()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network_Interface::set_hostname </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>hostname</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the hostname manually.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hostname</td><td>Name to set. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7bd14f0ef8dfa58df70bf90d1f94a251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bd14f0ef8dfa58df70bf90d1f94a251">&#9670;&nbsp;</a></span>setup_connection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Network_Interface::setup_connection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a>&#160;</td>
+          <td class="paramname"><em>connection_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_network_2system__interfaces_2network__interface_8h.html#struct_socket___maker">Socket_Maker</a>&#160;</td>
+          <td class="paramname"><em>maker</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection_id</td><td><a class="el" href="class_node.html">Node</a> to connect to. </td></tr>
+    <tr><td class="paramname">maker</td><td>Setup parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a449d67289f450c8c30dd0f2771640263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a449d67289f450c8c30dd0f2771640263">&#9670;&nbsp;</a></span>connections</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="connections_8h.html#a323ec3fce6cd9734e5d5c3bebeb35702">Network_Connection_List</a> Network_Interface::connections</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Map of known connections </p>
+
+</div>
+</div>
+<a id="ab7e95d66e00001bb4f929b3da018ec2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7e95d66e00001bb4f929b3da018ec2e">&#9670;&nbsp;</a></span>interfaces</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Network_Interface::interfaces</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Which interface are we using </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="network__interface_8h_source.html">network_interface.h</a></li>
+<li><a class="el" href="_network_2system__interfaces_2network__interface_8h_source.html">Network/system_interfaces/network_interface.h</a></li>
 <li>network_interface.cpp</li>
 </ul>
 </div><!-- contents -->

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['power_592',['power',['../class_device.html#ac1cad75d2b05b66659c00026a82a1ebe',1,'Device']]],
-  ['priority_593',['priority',['../struct_system___message.html#aa1d76b841a0726947a7816c68f8beed7',1,'System_Message::priority()'],['../class_log___entry.html#a8e5b21c7a9f8988e22f0a08d7657be7c',1,'Log_Entry::priority()']]]
+  ['name_621',['name',['../class_initalize.html#a4ac0c8d0720af216f4e38630a99e7216',1,'Initalize']]],
+  ['network_5finterface_622',['network_interface',['../namespacenetwork.html#a9b9b73adcbac7cea468436241e663c40',1,'network']]],
+  ['network_5fmessage_5finterface_623',['network_message_interface',['../namespacenetwork.html#a61539f3cda38ca13cab4419a718fc236',1,'network']]]
 ];

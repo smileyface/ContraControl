@@ -1,5 +1,7 @@
 <map id="system_messaging.h" name="system_messaging.h">
-<area shape="rect" id="node1" title=" " alt="" coords="61,5,205,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="129,5,273,32"/>
 <area shape="rect" id="node2" href="$controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="5,80,125,107"/>
 <area shape="rect" id="node3" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="150,80,253,107"/>
+<area shape="rect" id="node4" href="$_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="277,80,411,107"/>
+<area shape="rect" id="node5" href="$network__main_8h.html" title=" " alt="" coords="287,155,401,181"/>
 </map>
