@@ -30,10 +30,23 @@ namespace Node_Messages
 		NODE_HELLO(unsigned char* in_addr, const char* in_id);
 	};
 
+	/**
+	* Server acknowleging a client and requesting connection.
+	* |      |      |
+	* |:----:|:----:|
+	* |0     |  1-n |
+	* |ipv4  | name |
+	*/
 	struct NODE_ACK : MESSAGE
 	{
-		Message_String id;
-		int alias_int;
+		bool is_server;///<Is the responding node a server.
+		Message_String id;///<Name of the responding node.
+		/**
+		 * Constructor
+		 * \param in_is_server Is the responding node a server.
+		 * \param in_id The human readable name of the node.
+		 */
+		NODE_ACK(bool in_is_server, const char* in_id);
 	};
 }
 #endif

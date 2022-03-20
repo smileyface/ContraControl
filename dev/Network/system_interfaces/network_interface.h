@@ -17,10 +17,14 @@
 const unsigned short DEFAULT_PORT = 0xDCF5; ///<Port is 56565
 const std::string INVALID_HOSTNAME = "INVALID"; ///<A marker for invalid hostnames
 
+/** Protocol, type and family for a socket. */
 struct Socket_Maker
 {
+    /** Protocol for socket connection. */
     int ip_protocol;
+    /** Type of the socket. */
     int sock_type;
+    /** Family of data. */
     int sock_family;
 };
 /**
@@ -66,18 +70,35 @@ public:
      * \brief Set the Node as client.
      */
     void set_client();
-    /** Set the hostname manually. */
+    /**
+     * Set the hostname manually.
+     * 
+     * \param hostname Name to set.
+     */
     void set_hostname(std::string hostname);
     /**
-     * \brief Set the my ip object. Does it from the ipconfig/ifconfig
+     * \brief setup a connection, either local or remote.
+     * 
+     * \param connection_id Node to connect to.
+     * \param maker Setup parameters.
      */
-    virtual void setup_connection(Connection_Id connection_name, Socket_Maker maker) = 0;
+    virtual void setup_connection(Connection_Id connection_id, Socket_Maker maker) = 0;
 
     //Communication Code
-    /** Send a message to a node */
-    virtual void send(Connection_Id Connection_Id, char* message) = 0;
-    /** Listen to a specific connection */
-    virtual char* listen(Connection_Id Connection_Id) = 0;
+    /**
+     * Send a message to a node.
+     * 
+     * \param connection_id Node to send message to.
+     * \param message Array of bytes to send to Node.
+     */
+    virtual void send(Connection_Id connection_id, char* message) = 0;
+    /**
+     * Listen to a specific connection.
+     * 
+     * \param connection_id Node to listen to messages from.
+     * \return Message as array of bytes.
+     */
+    virtual char* listen(Connection_Id connection_id) = 0;
 
    //Constants
    /**
