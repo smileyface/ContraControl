@@ -35,7 +35,6 @@ jobs:
       # Create a testing network called wlan0
       run: |
         docker network create --opt com.docker.network.bridge.name=wlan0 test-net
-        ifconfig
 
     - name: Configure CMake
       # Use a bash shell so we can use the same syntax for environment variable
