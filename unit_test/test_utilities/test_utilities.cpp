@@ -145,7 +145,7 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 	{
 		function();
 	}
-	catch (NetworkErrorException& e)
+	catch (NetworkErrorException)
 	{
 		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 		return;

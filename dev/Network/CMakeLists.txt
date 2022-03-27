@@ -25,7 +25,7 @@ set(NETWORK_MESSAGE_SOURCE
                     src/messaging.cpp
                     src/send_message.cpp)
 
-add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE})
+add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE} ${NETWORK_MESSAGE_HEADERS} ${NETWORK_MESSAGE_SOURCE})
 target_include_directories(Network 
                            PUBLIC 
                                 ${CMAKE_CURRENT_SOURCE_DIR}/network)

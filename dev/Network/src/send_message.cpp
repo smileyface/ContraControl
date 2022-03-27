@@ -1,7 +1,7 @@
-#include "Network/system_interfaces/network_interface.h"
+#include "../system_interfaces/network_interface.h"
 #include "../Utilities/Utilities/exceptions.h"
 
-void network::send_message(MESSAGE* message)
+/*/void network::send_message(MESSAGE* message)
 {
 	throw UnimplementedFunctionException();
-}
+}*/

@@ -35,6 +35,7 @@ void network::init_network_interfaces()
 #endif // _MAC
 
 	network_interface->initalize();
+	generate_crc_table();
 }
 
 void client_loop()

@@ -86,7 +86,7 @@ ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname,
 
 ipv4_addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host_ip)
 {
-	INTERFACE_INFO InterfaceList[20];
+	INTERFACE_INFO InterfaceList[20] = { 0 };
 	unsigned long nBytesReturned;
 	if (WSAIoctl(sock, SIO_GET_INTERFACE_LIST, 0, 0, &InterfaceList,
 		sizeof(InterfaceList), &nBytesReturned, 0, 0) == SOCKET_ERROR) {
