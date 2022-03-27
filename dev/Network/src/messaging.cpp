@@ -64,7 +64,7 @@ void generate_crc_table()
 		/*
 		 * Perform modulo-2 division, a bit at a time.
 		 */
-		for (uint8_t bit = 8; bit > 0; --bit)
+		for (byte bit = 8; bit > 0; --bit)
 		{
 			/*
 			 * Try to divide the current data bit.
