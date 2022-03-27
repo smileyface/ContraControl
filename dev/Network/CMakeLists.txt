@@ -23,7 +23,8 @@ set(NETWORK_MESSAGE_HEADERS
                     messages/node_communication.h)
 set(NETWORK_MESSAGE_SOURCE
                     src/messaging.cpp
-                    src/send_message.cpp)
+                    src/send_message.cpp 
+                    src/node_messages.cpp)
 
 add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE} ${NETWORK_MESSAGE_HEADERS} ${NETWORK_MESSAGE_SOURCE})
 target_include_directories(Network 

@@ -43,16 +43,22 @@ namespace Node_Messages
 	* |0          |  1-n |
 	* |is_server  | name |
 	*/
-	struct NODE_ACK : public MESSAGE
+	class NODE_ACK : public MESSAGE
 	{
-		bool is_server;///<Is the responding node a server.
-		Message_String id;///<Name of the responding node.
+	public:
 		/**
 		* Constructor
 		* \param in_is_server Is the responding node a server.
 		* \param in_id The human readable name of the node.
 		*/
 		NODE_ACK(bool in_is_server, const char* in_id);
+
+		std::vector<byte> pack();
+		size_t size();
+
+	private:
+		bool is_server;///<Is the responding node a server.
+		Message_String id;///<Name of the responding node.
 	};
 }
 #endif

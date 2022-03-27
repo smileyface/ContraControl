@@ -5,45 +5,15 @@
 
 byte crc_sum_Table[256];
 
-
-Node_Messages::NODE_HELLO::NODE_HELLO(byte* in_addr, const char* in_id)
-{
-	id = Message_String(in_id);
-	std::memcpy(addr, in_addr, sizeof(addr));
-}
-
-std::vector<byte> Node_Messages::NODE_HELLO::pack()
-{
-	std::vector<byte> packet;
-	packet.push_back(addr[0]);
-	packet.push_back(addr[1]);
-	packet.push_back(addr[2]);
-	packet.push_back(addr[3]);
-	packet.push_back(id.length);
-	for (int i = 0; i < id.length; i++)
-	{
-		packet.push_back((unsigned char)id.str[i]);
-	}
-
-	return packet;
-}
-
-size_t Node_Messages::NODE_HELLO::size()
-{
-	return sizeof(addr)-1 + sizeof(id.length)-1 + id.length;
-}
-
-Node_Messages::NODE_ACK::NODE_ACK(bool in_is_server, const char* in_id)
-{
-	is_server = in_is_server;
-	id = Message_String(in_id);
-}
-
 MESSAGES PACKED_MESSAGE::get_message_enum_by_type()
 {
 	if (typeid(*message) == typeid(Node_Messages::NODE_HELLO))
 	{
 		return MESSAGES::NODE_HELLO;
+	}
+	else if (typeid(*message) == typeid(Node_Messages::NODE_ACK))
+	{
+		return MESSAGES::NODE_ACK;
 	}
 	return MESSAGES::UNDEFINED;
 }

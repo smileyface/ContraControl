@@ -4,7 +4,6 @@
 #include "../test_utilities/pch.h"
 
 #include "../../Network/network_main.h"
-#include "../../Network/messages.h"
 #ifdef _WIN32
 #include "../../Network/system_interfaces/windows_network_interface.h"
 #endif // _WIN32
@@ -31,10 +30,24 @@ namespace {
 			system_utilities::cleanup();
 			network::teardown_network_interfaces();
 		}
-
 	};
-}
-namespace {
+	class NetworkMessagingTest : public ::testing::Test {
+		virtual void SetUp() {
+			try
+			{
+				system_utilities::setup();
+				network::init_network_interfaces();
+			}
+			catch (NetworkErrorException e)
+			{
+				testing_utilities::network_utilities::exception_handle();
+			}
+		}
+		virtual void TearDown() {
+			system_utilities::cleanup();
+			network::teardown_network_interfaces();
+		}
+	};
 	class EmptyLocalNetworkTest : public ::testing::Test {
 		virtual void SetUp() {
 
@@ -126,11 +139,3 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
 #endif // !_WIN32
 }
 
-TEST_F(LocalNetworkTest, test_structure)
-{
-	ipv4_addr address("192.168.86.3");
-	std::string node_name = "Test_Node";
-	Node_Messages::NODE_HELLO message(address.get_addr_bytes(), node_name.c_str());
-	PACKED_MESSAGE p_message(&message);
-	EXPECT_EQ(p_message.get_packet().size(), p_message.get_packet()[2]);
-}
