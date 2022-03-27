@@ -31,10 +31,19 @@ jobs:
       # We'll use this as our working directory for all subsequent commands
       run: cmake -E make_directory ${{runner.workspace}}/build
 
-    - name: Setup testing Network
+    - name: Setup testing Network (Linux)
       # Create a testing network called wlan0
+      if: runner.os == 'Linux'
       run: |
         docker network create --opt com.docker.network.bridge.name=wlan0 test-net
+        ifconfig
+
+    - name: Setup testing Network (Windows)
+      # Create a testing network called wlan0
+      if: runner.os == 'Windows'
+      run: |
+        docker network create -d "nat" --subnet "192.168.0.0/24" my_nat
+        ipconfig /all
 
     - name: Configure CMake
       # Use a bash shell so we can use the same syntax for environment variable
