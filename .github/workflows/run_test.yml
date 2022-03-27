@@ -2,7 +2,7 @@ name: Run Tests
 
 on:
     pull_request:
-        branches: [master]
+        branches: [master, version/**]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
