@@ -60,5 +60,15 @@ namespace Node_Messages
 		bool is_server;///<Is the responding node a server.
 		Message_String id;///<Name of the responding node.
 	};
+
+	/** A future message added for test failures. Will be implemented by 0.0.6 */
+	class NODE_CONNECT : public MESSAGE
+	{
+	public:
+		NODE_CONNECT();
+		std::vector<byte> pack();
+		size_t size();
+	private:
+	};
 }
 #endif

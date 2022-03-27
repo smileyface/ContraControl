@@ -13,18 +13,15 @@ std::vector<byte> Node_Messages::NODE_HELLO::pack()
 	packet.push_back(addr[1]);
 	packet.push_back(addr[2]);
 	packet.push_back(addr[3]);
-	packet.push_back(id.length);
-	for (int i = 0; i < id.length; i++)
-	{
-		packet.push_back((unsigned char)id.str[i]);
-	}
+	std::vector<byte> string_as_byte = id.pack();
+	packet.insert(packet.end(), string_as_byte.begin(), string_as_byte.end());
 
 	return packet;
 }
 
 size_t Node_Messages::NODE_HELLO::size()
 {
-	return sizeof(addr) - 1 + sizeof(id.length) - 1 + id.length;
+	return sizeof(addr) + sizeof(id.length) + id.length;
 }
 
 Node_Messages::NODE_ACK::NODE_ACK(bool in_is_server, const char* in_id)
@@ -37,14 +34,28 @@ std::vector<byte> Node_Messages::NODE_ACK::pack()
 {
 	std::vector<byte> packet;
 	packet.push_back(is_server);
-	packet.push_back(id.length);
-	for (int i = 0; i < id.length; i++)
-	{
-		packet.push_back((unsigned char)id.str[i]);
-	}
+	std::vector<byte> string_as_byte = id.pack();
+	packet.insert(packet.end(), string_as_byte.begin(), string_as_byte.end());
 	return packet;
 }
 size_t Node_Messages::NODE_ACK::size()
 {
-	return sizeof(is_server) - 1 + sizeof(id.length) - 1 + id.length;
+	return sizeof(is_server) + sizeof(id.length) + id.length;
+}
+
+
+Node_Messages::NODE_CONNECT::NODE_CONNECT()
+{
+
+}
+
+std::vector<byte> Node_Messages::NODE_CONNECT::pack()
+{
+	std::vector<byte> packet; 
+	return packet;
+}
+
+size_t Node_Messages::NODE_CONNECT::size()
+{
+	return 0;
 }

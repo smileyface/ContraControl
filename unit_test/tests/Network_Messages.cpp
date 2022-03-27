@@ -43,3 +43,11 @@ TEST_F(NetworkMessagingTest, Message_NODE_ACK)
 	EXPECT_EQ(1, p_message.get_packet()[1]);
 	EXPECT_EQ(p_message.get_packet().size(), p_message.get_packet()[2]);
 }
+
+TEST_F(NetworkMessagingTest, Message_NODE_UNDEF)
+{
+	Node_Messages::NODE_CONNECT message;
+	PACKED_MESSAGE p_message(&message);
+	EXPECT_EQ(255, p_message.get_packet()[1]);
+	EXPECT_EQ(p_message.get_packet().size(), p_message.get_packet()[2]);
+}

@@ -17,7 +17,7 @@ typedef unsigned char byte;
 /**
  * List of network messages
  */
-enum class MESSAGES : char
+enum class MESSAGES : byte
 {
 	/** See Node_Messages::NODE_HELLO */
 	NODE_HELLO,
@@ -25,7 +25,7 @@ enum class MESSAGES : char
 	NODE_ACK,
 	NODE_GOODBYE,
 	/** Undefined message. */
-	UNDEFINED
+	UNDEFINED = 255
 };
 
 /**
@@ -42,7 +42,7 @@ struct MESSAGE_HEADER
 	/** Which message is being sent */
 	MESSAGES message_id = MESSAGES::UNDEFINED; 
 	/** How long the message is. Starts as the size of the header and footer. */
-	unsigned short length = 6; 
+	byte length = 6; 
 	std::vector<byte> pack();
 };
 
@@ -121,10 +121,10 @@ private:
 struct Message_String
 {
 	/** Length of the string */
-	unsigned short length;
+	byte length;
 	/** The string */
 	char* str = 0;
-	Message_String() { length = 0; str= ""; }
+	Message_String() { length = 0;}
 	/**
 	 * String creator
 	 * @param string The string to be contained in the container.
@@ -134,6 +134,8 @@ struct Message_String
 		length = sizeof(string)+1;
 		str = (char*) string;
 	}
+
+	std::vector<byte> pack();
 };
 
 #endif // !NETWORK_MESSAGES

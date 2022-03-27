@@ -119,3 +119,14 @@ std::vector<byte> PACKED_MESSAGE::get_packet()
 {
 	return packet;
 }
+
+std::vector<byte> Message_String::pack()
+{
+	std::vector<byte> packet;
+	packet.push_back(length);
+	for (int i = 0; i < length; i++)
+	{
+		packet.push_back((unsigned char)str[i]);
+	}
+	return packet;
+}
