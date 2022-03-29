@@ -31,6 +31,7 @@ PACKED_MESSAGE::PACKED_MESSAGE(MESSAGE* in_message)
 
 	footer = MESSAGE_FOOTER(packet);
 	std::vector<byte> packed_footer = footer.pack();
+
 	packet.insert(packet.end(), packed_footer.begin(), packed_footer.end());
 }
 
