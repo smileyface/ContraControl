@@ -252,7 +252,7 @@ void Windows_Network_Interface::initalize()
 	}
 
 	char* host = (char*)hostname.c_str();
-	err = gethostname(host, sizeof(host));
+	err = gethostname(host, 50);
 	if (err != 0)
 	{
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Error getting hostname", "Initalized"));
