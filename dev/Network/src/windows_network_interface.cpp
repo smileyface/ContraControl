@@ -246,16 +246,17 @@ void Windows_Network_Interface::initalize()
 	WSADATA wsaData;
 	int err = WSAStartup(wVersionRequested, &wsaData);
 	if (err != 0) {
-		status_state.set_error(set_error_state(err));
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Error starting WSA", "Initalized"));
+		status_state.set_error(set_error_state(err));
 		throw NetworkErrorException();
 	}
 
 	char* host = (char*)hostname.c_str();
-	if (gethostname(host, sizeof(host)) != 0)
+	err = gethostname(host, sizeof(host));
+	if (err != 0)
 	{
-		status_state.set_error(set_error_state(err));
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Error getting hostname", "Initalized"));
+		status_state.set_error(set_error_state(err));
 		throw NetworkErrorException();
 	}
 	hostname = host;
