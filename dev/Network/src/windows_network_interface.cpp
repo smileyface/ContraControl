@@ -90,7 +90,7 @@ ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname,
 	PIP_ADAPTER_ADDRESSES pAddresses = NULL;
     PIP_ADAPTER_ADDRESSES pCurrAddresses = NULL;
 	PMIB_IPADDRTABLE pIPAddrTable;
-	MIB_IPADDRROW found_ip;
+	MIB_IPADDRROW found_ip = MIB_IPADDRROW();
 
     struct sockaddr_in* sockaddr_ipv4 = 0;
     // Allocate a 15 KB buffer to start with.
@@ -150,13 +150,16 @@ ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname,
 
 	for (PIP_ADAPTER_ADDRESSES pCurrAddresses = pAddresses; pCurrAddresses; pCurrAddresses = pCurrAddresses->Next)
 	{
-		IN_ADDR IPAddr;
-		if (found_ip.dwAddr != MIB_IPADDRROW().dwAddr && pCurrAddresses->FriendlyName == a)
+		IN_ADDR IPAddr{};
+		if (found_ip.dwAddr != MAXDWORD && pCurrAddresses->FriendlyName == a)
 		{
 			std::wstring thing(pCurrAddresses->FriendlyName);
 			std::string friend_name = std::string(thing.begin(), thing.end());
 			IPAddr.S_un.S_addr = (u_long)pIPAddrTable->table[i].dwAddr;
-			std::string message = friend_name + ": " + inet_ntoa(IPAddr);
+			char str[INET_ADDRSTRLEN];
+			// now get it back and print it
+			inet_ntop(AF_INET, &(IPAddr), str, INET_ADDRSTRLEN);
+			std::string message = friend_name + ": " + str;
 			network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, message, "Local interface connection"));
 		}
 	}
