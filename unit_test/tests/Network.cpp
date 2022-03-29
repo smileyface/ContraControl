@@ -131,11 +131,11 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Broadcast_Setup)
 #endif // !_WIN32
 }
 
-TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
+/*TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
 {
 #ifdef _WIN32
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::INVALID_HOSTNAME);
 #endif // !_WIN32
-}
+}*/
 

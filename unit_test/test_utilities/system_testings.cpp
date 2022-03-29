@@ -1,5 +1,6 @@
 #include <thread>
 #include <chrono> 
+#include <iostream>
 
 #include "system_testings.h"
 
@@ -9,6 +10,8 @@
 #include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
 
+Message_Consumer* message_consumer = 0;
+bool stale;
 
 void system_utilities::setup()
 {
@@ -22,12 +25,41 @@ void system_utilities::setup()
 		testing_utilities::network_utilities::exception_handle();
 	}
 	controller::initalize();
+	message_consumer = new Message_Consumer(stale);
+	System_Messages::get_instance()->register_consumer(message_consumer);
 }
 
 void system_utilities::cleanup() 
 {
 		controller::clean_up();
 		model::clean_up();
+		for (System_Message mess = System_Messages::get_instance()->pop(message_consumer); mess.valid_message == true; mess = System_Messages::get_instance()->pop(message_consumer))
+		{
+			int level = (int)MESSAGE_PRIORITY::INFO_MESSAGE;
+#ifdef DEBUG
+			level = (int)MESSAGE_PRIORITY::DEBUG_MESSAGE;
+#endif // DEBUG
+			
+			if ((int)mess.priority < level)
+			{
+				continue;
+			}
+			std::string priority_string;
+			if (mess.priority == MESSAGE_PRIORITY::ERROR_MESSAGE)
+			{
+				std::cout << "[  \u001b[33mERROR\u001b[0m   ]";
+			}
+			else if (mess.priority == MESSAGE_PRIORITY::INFO_MESSAGE)
+			{
+				std::cout << "[  INFO    ]";
+			}
+			else
+			{
+				std::cout << "[  " << message_priority_as_string(mess.priority) << "   ]";
+			}
+			std::cout << " (" << mess.location << ") " << mess.message << std::endl << std::flush;
+		}
+		System_Messages::get_instance()->deregister_consumer(message_consumer);
 }
 
 void system_utilities::step(int steps)

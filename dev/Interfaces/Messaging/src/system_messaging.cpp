@@ -119,6 +119,12 @@ void System_Messages::register_consumer(Message_Consumer* mc)
 	}
 }
 
+void System_Messages::deregister_consumer(Message_Consumer* mc)
+{
+	auto consumer = std::find(list_of_registered_consumers.begin(), list_of_registered_consumers.end(), mc);
+	list_of_registered_consumers.erase(consumer);
+}
+
 System_Messages* System_Messages::get_instance()
 {
 	if (instance == nullptr)

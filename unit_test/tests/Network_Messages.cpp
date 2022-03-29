@@ -7,6 +7,7 @@
 #include "../../Network/messages.h"
 namespace {
 	class NetworkMessagingTest : public ::testing::Test {
+
 		virtual void SetUp() {
 			try
 			{

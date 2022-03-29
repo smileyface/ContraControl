@@ -128,6 +128,7 @@ void testing_utilities::network_utilities::exception_handle()
 		break;
 	case NETWORK_ERRORS::NETWORK_CODE_ERROR:
 		FAIL() << "Code is incorrect. Debug.";
+		break;
 	case NETWORK_ERRORS::UNKNOWN_ERROR:
 		FAIL() << "Unhandled Network Error";
 		break;

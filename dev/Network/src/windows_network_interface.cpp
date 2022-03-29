@@ -15,6 +15,12 @@
 #include "../system_interfaces/windows_network_interface.h"
 #include "../network_main.h"
 
+#define WORKING_BUFFER_SIZE 15000
+#define MAX_TRIES 3
+
+#define MALLOC(x) HeapAlloc(GetProcessHeap(), 0, (x))
+#define FREE(x) HeapFree(GetProcessHeap(), 0, (x))
+
 struct addrinfo hints;
 WORD wVersionRequested = MAKEWORD(2, 2);
 
@@ -60,28 +66,108 @@ ipv4_addr Windows_Network_Interface::get_broadcast(ipv4_addr host_ip, ipv4_addr 
 }
 ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname, std::string interfaces)
 {
-	struct addrinfo* hostinfo = NULL;
-	std::vector<ipv4_addr> local_ips;
+    /* Declare and initialize variables */
 
-	std::string port = std::to_string(DEFAULT_PORT);
-	if (getaddrinfo(hostname.c_str(), (char*)port.c_str(), &hints, &hostinfo) != 0)
-	{
-		status_state.set_error(set_error_state());
-		throw NetworkErrorException();
+    DWORD dwSize = 0;
+    DWORD dwRetVal = 0;
+
+    unsigned int i = 0;
+
+	std::wstring a(interfaces.begin(), interfaces.end());
+
+    // Set the flags to pass to GetAdaptersAddresses
+    ULONG flags = GAA_FLAG_INCLUDE_PREFIX;
+
+    // default to unspecified address family (both)
+    ULONG family = AF_INET;
+
+    LPVOID lpMsgBuf = NULL;
+
+    ULONG outBufLen = 0;
+    ULONG Iterations = 0;
+
+	PIP_ADAPTER_ADDRESSES pAddresses = NULL;
+    PIP_ADAPTER_ADDRESSES pCurrAddresses = NULL;
+	PMIB_IPADDRTABLE pIPAddrTable;
+	MIB_IPADDRROW found_ip;
+
+    struct sockaddr_in* sockaddr_ipv4 = 0;
+    // Allocate a 15 KB buffer to start with.
+    outBufLen = WORKING_BUFFER_SIZE;
+
+    pAddresses = (IP_ADAPTER_ADDRESSES*)MALLOC(outBufLen);
+	pIPAddrTable = (MIB_IPADDRTABLE*)MALLOC(sizeof(MIB_IPADDRTABLE));
+    if (pAddresses == NULL) {
+        printf
+        ("Memory allocation failed for IP_ADAPTER_ADDRESSES struct\n");
+        exit(1);
+    }
+
+	if (pIPAddrTable) {
+		// Make an initial call to GetIpAddrTable to get the
+		// necessary size into the dwSize variable
+		if (GetIpAddrTable(pIPAddrTable, &dwSize, 0) ==
+			ERROR_INSUFFICIENT_BUFFER) {
+			FREE(pIPAddrTable);
+			pIPAddrTable = (MIB_IPADDRTABLE*)MALLOC(dwSize);
+
+		}
+		if (pIPAddrTable == NULL) {
+			status_state.set_error(NETWORK_ERRORS::UNINITALIZED_INTERFACE);
+			network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Unable to get IP Address Table", "Getting IP Addr Table"));
+			throw NetworkErrorException();
+		}
 	}
-	int nCount = 0;
-	for (struct addrinfo* ptr = hostinfo; ptr != NULL; ptr = ptr->ai_next)
-	{
-		char addr[16];
-		struct sockaddr_in* sockaddr_ipv4 = (struct sockaddr_in*)ptr->ai_addr;
-		inet_ntop(AF_INET, &sockaddr_ipv4->sin_addr, addr, 16);
-		local_ips.push_back(std::string(addr));
-		nCount++;
+
+	if ((dwRetVal = GetIpAddrTable(pIPAddrTable, &dwSize, 0)) != NO_ERROR) {
+		printf("GetIpAddrTable failed with error %d\n", dwRetVal);
+		if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, dwRetVal, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),       // Default language
+			(LPTSTR)&lpMsgBuf, 0, NULL)) {
+			status_state.set_error(NETWORK_ERRORS::UNKNOWN_ERROR);
+			network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, (LPTSTR)lpMsgBuf, "Getting IP Addr Table"));
+			LocalFree(lpMsgBuf);
+		}
 	}
-	if (local_ips.size() == 1)
+
+	if ((int)pIPAddrTable->dwNumEntries == 1)
 	{
-		return local_ips[0];
+		found_ip = pIPAddrTable->table[0];
 	}
+	else if ((int)pIPAddrTable->dwNumEntries == 2 && pIPAddrTable->table[1].dwAddr == ipv4_addr("127.0.0.1").S_un.S_addr)
+	{
+		found_ip = pIPAddrTable->table[0];
+	}
+	
+    dwRetVal =
+        GetAdaptersAddresses(family, flags, NULL, pAddresses, &outBufLen);
+
+
+    if (dwRetVal == ERROR_BUFFER_OVERFLOW) {
+        FREE(pAddresses);
+        pAddresses = NULL;
+    }
+
+	for (PIP_ADAPTER_ADDRESSES pCurrAddresses = pAddresses; pCurrAddresses; pCurrAddresses = pCurrAddresses->Next)
+	{
+		IN_ADDR IPAddr;
+		if (found_ip.dwAddr != MIB_IPADDRROW().dwAddr && pCurrAddresses->FriendlyName == a)
+		{
+			std::wstring thing(pCurrAddresses->FriendlyName);
+			std::string friend_name = std::string(thing.begin(), thing.end());
+			IPAddr.S_un.S_addr = (u_long)pIPAddrTable->table[i].dwAddr;
+			std::string message = friend_name + ": " + inet_ntoa(IPAddr);
+			network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, message, "Local interface connection"));
+		}
+	}
+    if (pAddresses) 
+    {
+        FREE(pAddresses);
+    }
+	if (pIPAddrTable) {
+		FREE(pIPAddrTable);
+		pIPAddrTable = NULL;
+	}
+    return ipv4_addr(found_ip.dwAddr);
 }
 
 ipv4_addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host_ip)
@@ -103,6 +189,7 @@ ipv4_addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host
 			subnet_mask = Windows_Network_Interface::convert_win_address((sockaddr_in*)&(InterfaceList[i].iiNetmask));
 		}
 	}
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Subnet Mask: " + subnet_mask.get_as_string(), "Subnet Mask Finder"));
 	return subnet_mask;
 }
 
@@ -111,6 +198,7 @@ void Windows_Network_Interface::setup_broadcast_socket(Connection& connect, ipv4
 	if (connect.sock == INVALID_SOCKET)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Broadcast Sock Invalid", "Broadcast Socket check"));
 		throw NetworkErrorException();
 	}
 
@@ -118,6 +206,7 @@ void Windows_Network_Interface::setup_broadcast_socket(Connection& connect, ipv4
 	if (setsockopt(connect.sock, SOL_SOCKET, SO_BROADCAST, (char*)&broadcast_opt_true, sizeof(broadcast_opt_true)) < 0)
 	{
 		status_state.set_error(set_error_state());
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Issue setting up broadcast socket", "Broadcast setsockopt"));
 		closesocket(connect.sock);
 		connect.sock = INVALID_SOCKET;
 		throw NetworkErrorException();
@@ -147,6 +236,8 @@ Windows_Network_Interface::Windows_Network_Interface()
 {
 	local_connections::setup(connections);
 	hostname = INVALID_HOSTNAME;
+
+	interfaces = "Ethernet";
 }
 
 void Windows_Network_Interface::initalize()
@@ -159,11 +250,16 @@ void Windows_Network_Interface::initalize()
 	}
 
 	char* host = (char*)hostname.c_str();
-	gethostname(host, sizeof(host));
+	if (gethostname(host, sizeof(host)) != 0)
+	{
+		status_state.set_error(set_error_state(err));
+		throw NetworkErrorException();
+	}
 	hostname = host;
 
 	setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
 	setup_connection(local_connections::broadcast, { IPPROTO_UDP, SOCK_DGRAM, AF_INET });
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
 }
 
 void Windows_Network_Interface::initalized()
@@ -208,7 +304,6 @@ void Windows_Network_Interface::setup_connection(Connection_Id connection_name, 
 		hints.ai_protocol = maker.ip_protocol;
 		connections[local_connections::local].address = get_interface_address(hostname, interfaces);
 	}
-	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
 }
 
 

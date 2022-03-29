@@ -110,6 +110,8 @@ public:
 	 * \param mc Add a Message_Consumer to the list of known consumers. You must do this before you are able to recieve messages.
 	 */
 	void register_consumer(Message_Consumer* mc);
+
+	void deregister_consumer(Message_Consumer* mc);
 private:
 	System_Messages();
 	std::vector<std::pair<System_Message, Consumer_List>> list_of_message;
