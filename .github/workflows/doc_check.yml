@@ -1,9 +1,9 @@
-name: Documentation
+name: Documentation Check
 
 on:
-  push:
+  pull_request:
     branches:
-      [master]
+      [version/**]
 
 jobs:
   document:
@@ -17,10 +17,4 @@ jobs:
       uses: mattnotmitt/doxygen-action@v1.3.1
       with:
         doxyfile-path: .github/github_doxy #Errors on warnings
-    - run: "ls -a out/documents/html/"
     - run: "test -f out/documents/html/index.html && echo 'we good' || exit 1"
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: './out/documents/html'

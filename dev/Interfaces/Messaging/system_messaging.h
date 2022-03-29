@@ -111,6 +111,11 @@ public:
 	 */
 	void register_consumer(Message_Consumer* mc);
 
+	/**
+	 * Remove consumer from the consumer list. The system that owns this consumer will not be able to recieve messages while deregistered.
+	 * Any messages sent while not registered will just be missed.
+	 * \param mc Consumer to be removed from the list.
+	 */
 	void deregister_consumer(Message_Consumer* mc);
 private:
 	System_Messages();

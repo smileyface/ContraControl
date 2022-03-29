@@ -30,7 +30,7 @@ PACKED_MESSAGE::PACKED_MESSAGE(MESSAGE* in_message)
 	packet.insert(packet.end(), packed_body.begin(), packed_body.end());
 
 	footer = MESSAGE_FOOTER(packet);
-	std::vector<byte> packed_footer = footer.pack(packet);
+	std::vector<byte> packed_footer = footer.pack();
 	packet.insert(packet.end(), packed_footer.begin(), packed_footer.end());
 }
 
@@ -107,7 +107,7 @@ MESSAGE_FOOTER::MESSAGE_FOOTER(std::vector<byte> message)
 	chk2 = remainder;
 }
 
-std::vector<byte> MESSAGE_FOOTER::pack(std::vector<byte> message)
+std::vector<byte> MESSAGE_FOOTER::pack()
 {
 	std::vector<byte> packet;
 	packet.push_back(chk1);
