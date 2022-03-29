@@ -154,6 +154,13 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 	FAIL() << "Network Error Exception did not throw";
 }
 
+void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)
+{
+	EXPECT_EQ(0x65, p_message[0]) << "Invalid Packet Header";
+	EXPECT_EQ(message_id, p_message[1]) << "Incorrect Message Id";
+	EXPECT_EQ(size, p_message[2]) << "Incorrect Packet Size";
+}
+
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)
 {
 	EXPECT_EQ(model::model_running, is_running);

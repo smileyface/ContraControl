@@ -32,8 +32,7 @@ TEST_F(NetworkMessagingTest, Message_NODE_HELLO)
 	std::string node_name = "Test_Node";
 	Node_Messages::NODE_HELLO message(address.get_addr_bytes(), node_name.c_str());
 	PACKED_MESSAGE p_message(&message);
-	EXPECT_EQ(0, p_message.get_packet()[1]);
-	EXPECT_EQ(p_message.get_packet().size(), p_message.get_packet()[2]);
+	testing_utilities::network_utilities::network_message_utilities::check_header(0, p_message.get_packet().size(), p_message.get_packet());
 }
 
 TEST_F(NetworkMessagingTest, Message_NODE_ACK)
@@ -41,14 +40,12 @@ TEST_F(NetworkMessagingTest, Message_NODE_ACK)
 	std::string node_name = "Test_Node";
 	Node_Messages::NODE_ACK message(true, node_name.c_str());
 	PACKED_MESSAGE p_message(&message);
-	EXPECT_EQ(1, p_message.get_packet()[1]);
-	EXPECT_EQ(p_message.get_packet().size(), p_message.get_packet()[2]);
+	testing_utilities::network_utilities::network_message_utilities::check_header(1, p_message.get_packet().size(), p_message.get_packet());
 }
 
 TEST_F(NetworkMessagingTest, Message_NODE_UNDEF)
 {
 	Node_Messages::NODE_CONNECT message;
 	PACKED_MESSAGE p_message(&message);
-	EXPECT_EQ(255, p_message.get_packet()[1]);
-	EXPECT_EQ(p_message.get_packet().size(), p_message.get_packet()[2]);
+	testing_utilities::network_utilities::network_message_utilities::check_header(255, p_message.get_packet().size(), p_message.get_packet());
 }
