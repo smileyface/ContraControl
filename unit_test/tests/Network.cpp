@@ -4,7 +4,6 @@
 #include "../test_utilities/pch.h"
 
 #include "../../Network/network_main.h"
-#include "../../Network/system_interfaces/windows_network_interface.h"
 #ifdef _WIN32
 #include "../../Network/system_interfaces/windows_network_interface.h"
 #endif // _WIN32
@@ -12,6 +11,7 @@
 #include "../../Network/system_interfaces/linux_network_interface.h"
 #endif
 
+#define ARRAY_LENGTH(array) (sizeof(array)/sizeof((array)[0]))
 
 namespace {
 	class LocalNetworkTest : public ::testing::Test {
@@ -30,10 +30,24 @@ namespace {
 			system_utilities::cleanup();
 			network::teardown_network_interfaces();
 		}
-
 	};
-}
-namespace {
+	class NetworkMessagingTest : public ::testing::Test {
+		virtual void SetUp() {
+			try
+			{
+				system_utilities::setup();
+				network::init_network_interfaces();
+			}
+			catch (NetworkErrorException e)
+			{
+				testing_utilities::network_utilities::exception_handle();
+			}
+		}
+		virtual void TearDown() {
+			system_utilities::cleanup();
+			network::teardown_network_interfaces();
+		}
+	};
 	class EmptyLocalNetworkTest : public ::testing::Test {
 		virtual void SetUp() {
 
@@ -117,10 +131,11 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Broadcast_Setup)
 #endif // !_WIN32
 }
 
-TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
+/*TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
 {
 #ifdef _WIN32
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::INVALID_HOSTNAME);
 #endif // !_WIN32
-}
+}*/
+

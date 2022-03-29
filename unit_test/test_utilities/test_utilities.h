@@ -1,6 +1,8 @@
 #ifndef TESTING_UTILITIES_H
 #define TESTING_UTILITIES_H
 
+#define DEBUG
+
 #include <utility>
 #include <functional>
 
@@ -39,6 +41,10 @@ namespace testing_utilities
 		void check_initalized();
 		void exception_handle();
 		void expect_exception(std::function<void()> function, NETWORK_ERRORS error);
+		namespace network_message_utilities
+		{
+			void check_header(int message_id, int size, std::vector<unsigned char> p_message);
+		}
 	}
 	namespace subsystem_utilities
 	{

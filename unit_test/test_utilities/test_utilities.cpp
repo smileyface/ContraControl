@@ -128,6 +128,7 @@ void testing_utilities::network_utilities::exception_handle()
 		break;
 	case NETWORK_ERRORS::NETWORK_CODE_ERROR:
 		FAIL() << "Code is incorrect. Debug.";
+		break;
 	case NETWORK_ERRORS::UNKNOWN_ERROR:
 		FAIL() << "Unhandled Network Error";
 		break;
@@ -145,12 +146,19 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 	{
 		function();
 	}
-	catch (NetworkErrorException& e)
+	catch (NetworkErrorException)
 	{
 		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 		return;
 	}
 	FAIL() << "Network Error Exception did not throw";
+}
+
+void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)
+{
+	EXPECT_EQ(0x65, p_message[0]) << "Invalid Packet Header";
+	EXPECT_EQ(message_id, p_message[1]) << "Incorrect Message Id";
+	EXPECT_EQ(size, p_message[2]) << "Incorrect Packet Size";
 }
 
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)
