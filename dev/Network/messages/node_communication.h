@@ -9,6 +9,7 @@
 #define NETWORK_NODE_MESSAGES
 #include "messaging.h"
 
+
 namespace Node_Messages
 {
 	/**
@@ -21,6 +22,7 @@ namespace Node_Messages
 	class NODE_HELLO : public MESSAGE
 	{
 	public:
+		NODE_HELLO() {};
 		/**Constructor
 		* \param in_addr The ip address of the node.
 		* \param in_id The human readable name of the node.
@@ -28,10 +30,11 @@ namespace Node_Messages
 		NODE_HELLO(unsigned char* in_addr, const char* in_id);
 
 		std::vector<byte> pack();
+		void unpack(std::vector<byte> packet);
 		size_t size();
 
 	private:
-		unsigned char addr[4]; ///<The ip address of the node
+		byte addr[4]; ///<The ip address of the node
 		Message_String id; ///<The name of the node
 
 	};
@@ -54,6 +57,7 @@ namespace Node_Messages
 		NODE_ACK(bool in_is_server, const char* in_id);
 
 		std::vector<byte> pack();
+		void unpack(std::vector<byte> packet);
 		size_t size();
 
 	private:
@@ -67,6 +71,7 @@ namespace Node_Messages
 	public:
 		NODE_CONNECT();
 		std::vector<byte> pack();
+		void unpack(std::vector<byte> packet);
 		size_t size();
 	private:
 	};

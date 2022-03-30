@@ -45,6 +45,13 @@ std::vector<byte> MESSAGE_HEADER::pack()
 	return packet;
 }
 
+void MESSAGE_HEADER::unpack(std::vector<byte> byte_array_message)
+{
+	message_start = byte_array_message[0];
+	message_id = (MESSAGES) byte_array_message[1];
+	length = byte_array_message[2];
+}
+
 #define WIDTH  (8 * sizeof(byte))
 #define TOPBIT (1 << (WIDTH - 1))
 #define POLYNOMIAL 0xD8  /* 11011 followed by 0's */
@@ -89,16 +96,16 @@ void generate_crc_table()
 }
 
 
-MESSAGE_FOOTER::MESSAGE_FOOTER(std::vector<byte> message)
+MESSAGE_FOOTER::MESSAGE_FOOTER(std::vector<byte> head_and_body)
 {
 	byte data = 0;
 	byte remainder = 0;
 	/*
 	 * Divide the message by the polynomial, a byte at a time.
 	 */
-	for (int byte = 0; byte < message.size(); ++byte)
+	for (int byte = 0; byte < head_and_body.size(); ++byte)
 	{
-		data = message[byte] ^ (remainder >> (WIDTH - 8));
+		data = head_and_body[byte] ^ (remainder >> (WIDTH - 8));
 		remainder = crc_sum_Table[data] ^ (remainder << 8);
 	}
 	/*
@@ -116,9 +123,26 @@ std::vector<byte> MESSAGE_FOOTER::pack()
 	return packet;
 }
 
+void MESSAGE_FOOTER::unpack(std::vector<byte>)
+{
+}
+
 std::vector<byte> PACKED_MESSAGE::get_packet()
 {
 	return packet;
+}
+
+PACKED_MESSAGE::PACKED_MESSAGE(std::vector<byte> pack)
+{
+	packet = pack;
+	header.unpack(packet);
+	switch (header.message_id)
+	{
+	case MESSAGES::NODE_HELLO:
+		message = new Node_Messages::NODE_HELLO();
+	}
+	message->unpack(packet);
+	footer.unpack(packet);
 }
 
 std::vector<byte> Message_String::pack()
@@ -131,3 +155,5 @@ std::vector<byte> Message_String::pack()
 	}
 	return packet;
 }
+
+

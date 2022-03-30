@@ -33,6 +33,8 @@ TEST_F(NetworkMessagingTest, Message_NODE_HELLO)
 	Node_Messages::NODE_HELLO message(address.get_addr_bytes(), node_name.c_str());
 	PACKED_MESSAGE p_message(&message);
 	testing_utilities::network_utilities::network_message_utilities::check_header(0, p_message.get_packet().size(), p_message.get_packet());
+	std::vector<byte> dummy_packet = { 101, 0, 15, 192, 168, 86, 3, 5, 84, 101, 115, 116, 95, 95, 152 };
+	PACKED_MESSAGE b_message(dummy_packet);
 }
 
 TEST_F(NetworkMessagingTest, Message_NODE_ACK)
