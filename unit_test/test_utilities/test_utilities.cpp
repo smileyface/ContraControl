@@ -161,6 +161,39 @@ void testing_utilities::network_utilities::network_message_utilities::check_head
 	EXPECT_EQ(size, p_message[2]) << "Incorrect Packet Size";
 }
 
+void testing_utilities::network_utilities::network_message_utilities::compare_messages(PACKED_MESSAGE m1, PACKED_MESSAGE m2)
+{
+	MESSAGE_HEADER p_header, b_header;
+	MESSAGE p_body, b_body;
+	MESSAGE_FOOTER p_footer, b_footer;
+	m1.get_message(p_header, p_body, p_footer);
+	m2.get_message(b_header, b_body, b_footer);
+	if (p_body.size() != b_body.size())
+	{
+		FAIL() << "Body sizes are not the same";
+		return;
+	}
+	for (int i = 0; i < p_body.get_message().size(); i++)
+	{
+		if (typeid(p_body[i]) == typeid(Network_Address))
+		{
+			ipv4_addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
+			ipv4_addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
+			EXPECT_EQ(p_addr.S_un.S_addr, b_addr.S_un.S_addr) << "Addresses in position " << i << " are not the same";
+		}
+		else if (typeid(p_body[i]) == typeid(Network_String))
+		{
+			std::string p_str = dynamic_cast<Network_String*>(&p_body[1])->get_data().second;
+			std::string b_str = dynamic_cast<Network_String*>(&b_body[1])->get_data().second;
+			EXPECT_EQ(p_str, b_str) <<"String in position" << i << "are not the same";
+			Byte p_length = dynamic_cast<Network_String*>(&p_body[1])->get_data().first;
+			Byte b_length = dynamic_cast<Network_String*>(&b_body[1])->get_data().first;
+			EXPECT_EQ(p_length, b_length) << "Length value of String in position" << i << "are not the same";;
+		}
+	}
+
+}
+
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)
 {
 	EXPECT_EQ(model::model_running, is_running);

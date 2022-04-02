@@ -5,6 +5,10 @@
  * \author kason
  * \date   September 2021
  *********************************************************************/
+#ifndef NETWORK_TYPE_IPV4_ADDR
+#define NETWORK_TYPE_IPV4_ADDR
+
+
 #include <string>
 
 /**
@@ -72,5 +76,10 @@ struct ipv4_addr {
      * 
      * \param ca The address as a char array.
      */
-    void operator=(const char* ca);
+    void operator=(const unsigned char* ca);
+
+    bool operator==(const ipv4_addr ad);
 };
+
+
+#endif // !NETWORK_TYPE_IPV4_ADDR

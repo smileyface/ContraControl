@@ -30,24 +30,24 @@ TEST_F(NetworkMessagingTest, Message_NODE_HELLO)
 {
 	ipv4_addr address("192.168.86.3");
 	std::string node_name = "Test_Node";
-	Node_Messages::NODE_HELLO message(address.get_addr_bytes(), node_name.c_str());
-	PACKED_MESSAGE p_message(&message);
+	MESSAGE message = Node_Messages::Network_Message_Factory(MESSAGES::NODE_HELLO);
+	message[0] = address;
+	message[1] = node_name;
+	PACKED_MESSAGE p_message(message);
 	testing_utilities::network_utilities::network_message_utilities::check_header(0, p_message.get_packet().size(), p_message.get_packet());
-	std::vector<byte> dummy_packet = { 101, 0, 15, 192, 168, 86, 3, 5, 84, 101, 115, 116, 95, 95, 152 };
-	PACKED_MESSAGE b_message(dummy_packet);
+	PACKED_MESSAGE b_message(p_message.get_packet());
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
 }
 
 TEST_F(NetworkMessagingTest, Message_NODE_ACK)
 {
-	std::string node_name = "Test_Node";
-	Node_Messages::NODE_ACK message(true, node_name.c_str());
-	PACKED_MESSAGE p_message(&message);
-	testing_utilities::network_utilities::network_message_utilities::check_header(1, p_message.get_packet().size(), p_message.get_packet());
+	/*std::string node_name = "Test_Node";
+	MESSAGE message = Node_Messages::Network_Message_Factory(MESSAGES::NODE_ACK);
+	PACKED_MESSAGE p_message(message);
+	testing_utilities::network_utilities::network_message_utilities::check_header(1, p_message.get_packet().size(), p_message.get_packet());*/
 }
 
 TEST_F(NetworkMessagingTest, Message_NODE_UNDEF)
 {
-	Node_Messages::NODE_CONNECT message;
-	PACKED_MESSAGE p_message(&message);
-	testing_utilities::network_utilities::network_message_utilities::check_header(255, p_message.get_packet().size(), p_message.get_packet());
+
 }

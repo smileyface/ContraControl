@@ -47,12 +47,17 @@ void ipv4_addr::operator=(const unsigned long& D)
 	S_un.S_addr = D;
 }
 
-void ipv4_addr::operator=(const char* ca)
+void ipv4_addr::operator=(const unsigned char* ca)
 {
 	S_un.S_un_b.s_b1 = ca[0];
 	S_un.S_un_b.s_b2 = ca[1];
 	S_un.S_un_b.s_b3 = ca[2];
 	S_un.S_un_b.s_b4 = ca[3];
+}
+
+bool ipv4_addr::operator==(const ipv4_addr ad)
+{
+	return S_un.S_addr == ad.S_un.S_addr;
 }
 
 std::string ipv4_addr::get_as_string()
