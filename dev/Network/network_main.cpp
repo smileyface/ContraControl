@@ -33,7 +33,6 @@ void network::init_network_interfaces()
 	//For now, we'll just use the linux interface. 
 	network::network_interface = new Linux_Network_Interface();
 #endif // _MAC
-
 	network_interface->initalize();
 	generate_crc_table();
 }
@@ -79,4 +78,10 @@ void network::start_client()
 	network::network_interface->set_client();
 	network_running = true;
 	network_thread = std::thread(client_loop);
+}
+
+void network::set_interface(std::string i)
+{
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Resetting Interface to " + i, "network::set_interface"));
+	network_interface->set_interface(i);
 }

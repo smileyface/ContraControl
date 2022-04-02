@@ -33,6 +33,8 @@ WORD wVersionRequested = MAKEWORD(2, 2);
 
 NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 {
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Error code " + std::to_string(err_code) + " thrown", "Windows Network Error Handle"));
+
 	if(err_code == -1)
 		err_code = WSAGetLastError();
 	switch (err_code)
@@ -56,7 +58,6 @@ NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 	case WSAHOST_NOT_FOUND:
 		return NETWORK_ERRORS::INVALID_HOSTNAME;
 	default:
-		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Unknown error code " + std::to_string(err_code) + " thrown", "Windows Network Error Handle"));
 		return NETWORK_ERRORS::UNKNOWN_ERROR;
 	}
 }

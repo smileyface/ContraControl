@@ -3,6 +3,8 @@
 
 #include "../test_utilities/pch.h"
 
+#include <cstdlib>
+
 #include "../../Network/network_main.h"
 #include "../../Network/messages.h"
 namespace {
@@ -11,8 +13,14 @@ namespace {
 		virtual void SetUp() {
 			try
 			{
+
 				system_utilities::setup();
 				network::init_network_interfaces();
+				std::string i;
+				if (std::getenv("CI"))
+				{
+					network::set_interface("nat");
+				}
 			}
 			catch (NetworkErrorException e)
 			{

@@ -42,4 +42,6 @@ namespace network
      */
     extern void start_client();
 
+    extern void set_interface(std::string i);
+
 };

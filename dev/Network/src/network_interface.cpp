@@ -12,6 +12,12 @@ void Network_Interface::set_hostname(std::string host)
 	hostname = host;
 }
 
+void Network_Interface::set_interface(std::string i)
+{
+	interfaces = i;
+	initalize();
+}
+
 void Network_Interface::set_server()
 {
 	is_server = true;

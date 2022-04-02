@@ -100,6 +100,8 @@ public:
      */
     virtual char* listen(Connection_Id connection_id) = 0;
 
+    void set_interface(std::string i);
+
    //Constants
    /**
     * \brief localhost address
