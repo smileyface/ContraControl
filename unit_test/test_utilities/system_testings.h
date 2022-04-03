@@ -6,6 +6,7 @@ namespace system_utilities
 	void setup();
 
 	void cleanup();
+	void print_messages();
 
 	void step(int steps);
 

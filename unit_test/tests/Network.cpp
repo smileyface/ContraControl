@@ -19,7 +19,18 @@ namespace {
 			try
 			{
 				system_utilities::setup();
-				network::init_network_interfaces();
+				std::string i;
+				if (std::getenv("CI") != NULL)
+				{
+					std::cout << "On a CI Machine" << std::endl;
+					network::init_network_interfaces("nat");
+				}
+				else
+				{
+					std::cout << "Not on a CI machine" << std::endl;
+					network::init_network_interfaces();
+				}
+				
 			}
 			catch (NetworkErrorException e)
 			{
@@ -36,7 +47,17 @@ namespace {
 			try
 			{
 				system_utilities::setup();
-				network::init_network_interfaces();
+				std::string i;
+				if (std::getenv("CI") != NULL)
+				{
+					std::cout << "On a CI Machine" << std::endl;
+					network::init_network_interfaces("nat");
+				}
+				else
+				{
+					std::cout << "Not on a CI machine" << std::endl;
+					network::init_network_interfaces();
+				}
 			}
 			catch (NetworkErrorException e)
 			{

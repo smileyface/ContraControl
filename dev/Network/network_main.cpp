@@ -37,6 +37,24 @@ void network::init_network_interfaces()
 	generate_crc_table();
 }
 
+void network::init_network_interfaces(std::string interfaces)
+{
+	network_message_interface = System_Messages::get_instance();
+#ifdef _WIN32
+	network::network_interface = new Windows_Network_Interface();
+#endif // IS_WIN32
+#ifdef __linux__
+	network::network_interface = new Linux_Network_Interface();
+#endif //__linux__
+#ifdef _MAC
+	//For now, we'll just use the linux interface. 
+	network::network_interface = new Linux_Network_Interface();
+#endif // _MAC
+	network_interface->set_interface(interfaces);
+	network_interface->initalize();
+	generate_crc_table();
+}
+
 void client_loop()
 {
 	//call_and_response(NODE_HELLO, NODE_ACK, 2);
@@ -82,6 +100,5 @@ void network::start_client()
 
 void network::set_interface(std::string i)
 {
-	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Resetting Interface to " + i, "network::set_interface"));
 	network_interface->set_interface(i);
 }

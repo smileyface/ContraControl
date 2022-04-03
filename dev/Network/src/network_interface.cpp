@@ -1,5 +1,5 @@
 #include <string>
-
+#include <iostream>
 #include "../system_interfaces/network_interface.h"
 
 void Network_Interface::set_client()
@@ -15,7 +15,7 @@ void Network_Interface::set_hostname(std::string host)
 void Network_Interface::set_interface(std::string i)
 {
 	interfaces = i;
-	initalize();
+	std::cout << interfaces << std::endl;
 }
 
 void Network_Interface::set_server()

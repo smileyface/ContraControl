@@ -4,6 +4,7 @@
 #include "../test_utilities/pch.h"
 
 #include <cstdlib>
+#include <iostream>
 
 #include "../../Network/network_main.h"
 #include "../../Network/messages.h"
@@ -13,13 +14,16 @@ namespace {
 		virtual void SetUp() {
 			try
 			{
-
 				system_utilities::setup();
-				network::init_network_interfaces();
-				std::string i;
-				if (std::getenv("CI"))
+				if (std::getenv("CI") != NULL)
 				{
-					network::set_interface("nat");
+					std::cout << "On a CI Machine" << std::endl;
+					network::init_network_interfaces("nat");
+				}
+				else
+				{
+					std::cout << "Not on a CI machine" << std::endl;
+					network::init_network_interfaces();
 				}
 			}
 			catch (NetworkErrorException e)

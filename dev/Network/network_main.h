@@ -22,6 +22,8 @@ namespace network
      * \brief Setup network interface as a system specific interface.
      */
     extern void init_network_interfaces();
+
+    extern void init_network_interfaces(std::string interfaces);
     /**
      * \brief Teardown and clean up system specific network interface.
      */

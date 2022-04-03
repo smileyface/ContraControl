@@ -35,7 +35,7 @@ jobs:
       # Create a testing network called wlan0
       if: runner.os == 'Linux'
       run: |
-        docker network create --opt com.docker.network.bridge.name=nat test-net
+        docker network create -d "nat" --subnet "192.168.0.0/24" my_nat
         ifconfig
 
     - name: Setup testing Network (Windows)

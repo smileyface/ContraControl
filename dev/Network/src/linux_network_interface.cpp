@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <ifaddrs.h>
+#include <iostream>
 
 #include "../system_interfaces/linux_network_interface.h"
 #include "Utilities/exceptions.h"
@@ -22,6 +23,12 @@ ipv4_addr Linux_Network_Interface::get_interface_addr()
 	char host[NI_MAXHOST];
 
 	getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+
+	struct addrinfo* p;
+	char s[INET_ADDRSTRLEN];
+	inet_ntop(ifa->ifa_addr->sa_family, (struct sockaddr*)ifa->ifa_addr->sa_data, s, sizeof s);
+
+	std::cout << s << " == " << interfaces << std::endl;
 	return ipv4_addr(host);
 }
 
@@ -44,7 +51,6 @@ void Linux_Network_Interface::setup_interface()
 		perror("getifaddrs");
 		exit(EXIT_FAILURE);
 	}
-
 	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next)
 	{
 		if (ifa->ifa_addr == NULL)
@@ -106,7 +112,6 @@ void Linux_Network_Interface::initalize()
 {
 	char hostname_temp[50];
 	int rc = gethostname(hostname_temp, sizeof(hostname_temp));
-
 	if (rc != 0) 
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
