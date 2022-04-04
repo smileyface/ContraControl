@@ -1,6 +1,8 @@
 #ifndef SYSTEM_TESTING_UTIL_H
 #define SYSTEM_TESTING_UTIL_H
 
+#include "../../dev/Interfaces/Messaging/system_messaging.h"
+
 namespace system_utilities
 {
 	void setup();
@@ -16,6 +18,7 @@ namespace system_utilities
 		void start();
 		void stop();
 	}
+	extern System_Messages* testing_messges;
 }
 
 #endif

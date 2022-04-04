@@ -22,12 +22,12 @@ namespace {
 				std::string i;
 				if (std::getenv("CI") != NULL)
 				{
-					std::cout << "On a CI Machine" << std::endl;
+					system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "On a CI machine", "Test Setup"));
 					network::init_network_interfaces("nat");
 				}
 				else
 				{
-					std::cout << "Not on a CI machine" << std::endl;
+					system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Not on a CI machine", "Test Setup"));
 					network::init_network_interfaces();
 				}
 				
@@ -124,7 +124,7 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Initialize_System_Interface_Error)
 {
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);
 	wVersionRequested = MAKEWORD(0, 0);
-	testing_utilities::network_utilities::expect_exception(network::init_network_interfaces, NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR);
+	testing_utilities::network_utilities::expect_exception([]() {network::init_network_interfaces(); }, NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR);
 	wVersionRequested = MAKEWORD(2, 2);
 }
 #endif
@@ -144,8 +144,8 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Broadcast_Setup)
 {
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::SOCKET_INVALID);
-	network::init_network_interfaces();
 #endif // !_WIN32
+	network::init_network_interfaces();
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::SOCKET_INVALID);
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_TCP, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::NETWORK_OPTION_ERROR);

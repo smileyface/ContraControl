@@ -12,21 +12,24 @@
 
 Message_Consumer* message_consumer = 0;
 bool stale;
+System_Messages* system_utilities::testing_messges = 0;
 
 void system_utilities::setup()
 {
 	try
 	{
 		model::initalize();
+		controller::initalize();
 	}
 	catch (NetworkErrorException)
 	{
 		printf("Caught network exception");
 		testing_utilities::network_utilities::exception_handle();
 	}
-	controller::initalize();
 	message_consumer = new Message_Consumer(stale);
 	System_Messages::get_instance()->register_consumer(message_consumer);
+	testing_messges = System_Messages::get_instance();
+
 }
 
 void system_utilities::print_messages()

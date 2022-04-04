@@ -28,7 +28,7 @@ ipv4_addr Linux_Network_Interface::get_interface_addr()
 	char s[INET_ADDRSTRLEN];
 	inet_ntop(ifa->ifa_addr->sa_family, (struct sockaddr*)ifa->ifa_addr->sa_data, s, sizeof s);
 
-	std::cout << s << " == " << interfaces << std::endl;
+	std::cout << host << " == " << interfaces << std::endl;
 	return ipv4_addr(host);
 }
 
