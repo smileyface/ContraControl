@@ -131,7 +131,14 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Initialize_System_Interface_Error)
 
 TEST_F(EmptyLocalNetworkTest, Error_States_Initalized)
 {
-	network::init_network_interfaces();
+	try
+	{
+		network::init_network_interfaces();
+	}
+	catch (NetworkErrorException e)
+	{
+		testing_utilities::network_utilities::exception_handle();
+	}
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::INVALID_HOSTNAME);
 

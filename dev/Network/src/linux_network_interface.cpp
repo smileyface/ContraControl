@@ -50,6 +50,12 @@ void Linux_Network_Interface::setup_interface()
 	ifa = ifap;
 	while (ifa && !found)
 	{
+		if (ifa->ifa_addr->sa_family == AF_INET)
+		{
+			char host[NI_MAXHOST];
+			getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+			System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, std::string(ifa->ifa_name) + " " + host, "Finding Interface"));
+		}
 		if (ifa->ifa_addr != NULL && strcasecmp(interfaces.c_str(), ifa->ifa_name) == 0 && ifa->ifa_addr->sa_family == AF_INET)
 		{
 			found = 1;
@@ -61,14 +67,9 @@ void Linux_Network_Interface::setup_interface()
 	freeifaddrs(ifap);
 	if (found == 0)
 	{
+		System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "No Adapter Found", "Finding Interface"));
 		status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
 		throw NetworkErrorException();
-	}
-	else
-	{
-		char host[NI_MAXHOST];
-		getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
-		System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, std::string(ifa->ifa_name) + " " + host, "Finding Interface"));
 	}
 }
 

@@ -94,6 +94,7 @@ void testing_utilities::network_utilities::check_initalized()
 
 void testing_utilities::network_utilities::exception_handle()
 {
+	system_utilities::print_messages();
 	switch (network::network_interface->get_status().error)
 	{
 	case NETWORK_ERRORS::NO_NETWORK_ERROR:
@@ -182,7 +183,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		{
 			ipv4_addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
 			ipv4_addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
-			EXPECT_EQ(p_addr.S_un.S_addr, b_addr.S_un.S_addr) << "Addresses in position " << i << " are not the same\n" << p_addr.get_as_string() << " vs " << b_addr.get_as_string();
+			EXPECT_EQ(p_addr.get_as_string(), b_addr.get_as_string()) << "Addresses in position " << i << " are not the same\n" << p_addr.get_as_string() << " vs " << b_addr.get_as_string();
 		}
 		else if (typeid(p_body[i]) == typeid(Network_String))
 		{
