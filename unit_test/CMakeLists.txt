@@ -61,7 +61,7 @@ IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
 
   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
 
-  SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+  SET(CMAKE_CXX_FLAGS "-O1 -g -fno-omit-frame-pointer -fno-optimize-sibling-calls -fprofile-arcs -ftest-coverage -fno-inline -fPIC")
 
   SETUP_TARGET_FOR_COVERAGE_COBERTURA(
         cov  # Name for custom target.

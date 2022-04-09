@@ -33,10 +33,13 @@ jobs:
         pip install gcovr
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Setup testing Network
+    - name: Setup testing Network (Linux)
+      # Create a testing network called wlan0
+      if: runner.os == 'Linux'
       run: |
-        docker network create --opt com.docker.network.bridge.name=wlan0 test-net
+        docker network create --opt com.docker.network.bridge.name=nat test-net --subnet "192.168.0.0/24"
         ifconfig
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Build
       shell: bash
