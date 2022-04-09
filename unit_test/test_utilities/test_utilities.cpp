@@ -135,6 +135,9 @@ void testing_utilities::network_utilities::exception_handle()
 	case NETWORK_ERRORS::NETWORK_OPTION_ERROR:
 		FAIL() << "Invalid option error";
 		break;
+	case NETWORK_ERRORS::ADDRESS_ERROR:
+		FAIL() << "Address is invalid";
+		break;
 	default:
 		FAIL() << "Unknown Network Error ";
 	}

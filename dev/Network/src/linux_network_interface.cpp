@@ -24,11 +24,7 @@ ipv4_addr Linux_Network_Interface::get_interface_addr()
 
 	getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
 
-	struct addrinfo* p;
-	char s[INET_ADDRSTRLEN];
-	inet_ntop(ifa->ifa_addr->sa_family, (struct sockaddr*)ifa->ifa_addr->sa_data, s, sizeof s);
-
-	std::cout << host << " == " << interfaces << std::endl;
+	System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, std::string(ifa->ifa_name) + " " + host, "Setting Interface Address"));
 	return ipv4_addr(host);
 }
 
@@ -51,25 +47,28 @@ void Linux_Network_Interface::setup_interface()
 		perror("getifaddrs");
 		exit(EXIT_FAILURE);
 	}
-	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next)
+	ifa = ifap;
+	while (ifa && !found)
 	{
-		if (ifa->ifa_addr == NULL)
-			continue;
-
-		if (strcasecmp(interfaces.c_str(), ifa->ifa_name))
-			continue;
-
-		/* IPv4 */
-		if (ifa->ifa_addr->sa_family != AF_INET)
-			continue;
-
-		found = 1;
+		if (ifa->ifa_addr != NULL && strcasecmp(interfaces.c_str(), ifa->ifa_name) == 0 && ifa->ifa_addr->sa_family == AF_INET)
+		{
+			found = 1;
+			break;
+		}
+		ifa = ifa->ifa_next;
 	}
+
 	freeifaddrs(ifap);
 	if (found == 0)
 	{
 		status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
 		throw NetworkErrorException();
+	}
+	else
+	{
+		char host[NI_MAXHOST];
+		getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+		System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, std::string(ifa->ifa_name) + " " + host, "Finding Interface"));
 	}
 }
 
@@ -161,6 +160,11 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 	if (connection_name == local_connections::local)
 	{
 		connections[local_connections::local].address = get_interface_addr();
+		if (connections[local_connections::local].address.S_un.S_addr == 0)
+		{
+			status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
+			throw NetworkErrorException();
+		}
 	}
 	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
 }
