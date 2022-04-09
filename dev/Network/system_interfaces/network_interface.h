@@ -99,7 +99,10 @@ public:
      * \return Message as array of bytes.
      */
     virtual char* listen(Connection_Id connection_id) = 0;
-
+    /**
+     * \brief Setup network interface as a given interface.
+     * \param i Given interface.
+     */
     void set_interface(std::string i);
 
    //Constants

@@ -11,8 +11,15 @@
 
 #include "types/network_message_types.h"
 
-namespace Node_Messages
+/** Node Messages utilities */
+namespace node_messages
 {
+	/**
+	 * Create a message container.
+	 * 
+	 * \param message type of message to create.
+	 * \return created message.
+	 */
 	MESSAGE Network_Message_Factory(MESSAGES message);
 }
 #endif

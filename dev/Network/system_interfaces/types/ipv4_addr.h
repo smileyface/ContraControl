@@ -78,6 +78,12 @@ struct ipv4_addr {
      */
     void operator=(const unsigned char* ca);
 
+    /**
+     * \brief Compare 2 ipv4_addrs.
+     * 
+     * \param ad Address to compare.
+     * \return equal compare.
+     */
     bool operator==(const ipv4_addr ad);
 };
 

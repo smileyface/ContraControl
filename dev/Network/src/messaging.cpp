@@ -34,7 +34,7 @@ PACKED_MESSAGE::PACKED_MESSAGE(Byte_Array pack)
 {
 	packet = pack;
 	header.unpack(packet);
-	message = Node_Messages::Network_Message_Factory(header.message_id);
+	message = node_messages::Network_Message_Factory(header.message_id);
 	message.unpack(packet, sizeof(header));
 	footer.unpack(packet);
 }

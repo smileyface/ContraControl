@@ -42,7 +42,7 @@ TEST_F(NetworkMessagingTest, Message_NODE_HELLO)
 {
 	ipv4_addr address("192.168.86.3");
 	std::string node_name = "Test_Node";
-	MESSAGE message = Node_Messages::Network_Message_Factory(MESSAGES::NODE_HELLO);
+	MESSAGE message = node_messages::Network_Message_Factory(MESSAGES::NODE_HELLO);
 	message[0] = address;
 	message[1] = node_name;
 	PACKED_MESSAGE p_message(message);

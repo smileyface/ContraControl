@@ -1,3 +1,10 @@
+/*******************************************************************//**
+ * \file   network_message_footer.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   April 2022
+ *********************************************************************/
 /** A CRC table for fast checksum lookups. */
 extern Byte crc_sum_Table[256];
 
@@ -32,7 +39,12 @@ struct MESSAGE_FOOTER
 	 */
 	std::vector<Byte> pack();
 
-	void unpack(std::vector<Byte>);
+	/**
+	 * Expand the MESSAGE_FOOTER to the 2 byte object. 
+	 * 
+	 * \param sum Array of bytes to put in the 2 byte objects.
+	 */
+	void unpack(std::vector<Byte> sum);
 
 
 private:

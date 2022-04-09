@@ -27,6 +27,12 @@ public:
 	/** Default constructor. Set type to UNDEFINED */
 	MESSAGE();
 
+	/**
+	 * Create a message.
+	 * 
+	 * \param message_type Type of message created.
+	 * \param types the types of data contained in the message.
+	 */
 	MESSAGE(MESSAGES message_type, std::vector<Network_Messaging_Type*> types);
 	/**
 	 * Boil the MESSAGE down to an array of bytes that can be padded with a header and footer and shipped on the network.
@@ -41,11 +47,28 @@ public:
 	 */
 	size_t size();
 
-	void unpack(std::vector<Byte>, int header_size);
+	/**
+	 * Convert array of bytes into the given message.
+	 * 
+	 * \param message Array of bytes to convert.
+	 * \param header_size Size of the message header so that the header can be removed.
+	 */
+	void unpack(std::vector<Byte> message, int header_size);
 
+	/**
+	 * \return type of the message.
+	 */
 	MESSAGES get_type();
+	/**
+	 * \return array of message data.
+	 */
 	std::vector<Network_Messaging_Type*> get_message();
 
+	/**
+	 * Get a specific data in the array of message data.
+	 * \param index Index of data to get
+	 * \return Data.
+	 */
 	Network_Messaging_Type& operator[](int index);
 private:
 	std::vector<Network_Messaging_Type*> message;
@@ -70,6 +93,10 @@ struct PACKED_MESSAGE
 	 */
 	PACKED_MESSAGE(MESSAGE message);
 
+	/**
+	 * Constructor that sets the message data by a packet.
+	 * \param pack A packet to be unpacked into the message type.
+	 */
 	PACKED_MESSAGE(Byte_Array pack);
 
 
@@ -78,6 +105,13 @@ struct PACKED_MESSAGE
 	 * \return byte packet.
 	 */
 	std::vector<Byte> get_packet();
+
+	/**
+	 * Get individual components of a packed message.
+	 * \param head Reference to a message header. This param will contain the messages header.
+	 * \param mess Reference to a message body. This param will contain the messages data.
+	 * \param foot Reference to a message footer. This param will contain the messages footer.
+	 */
 	void get_message(MESSAGE_HEADER& head, MESSAGE& mess, MESSAGE_FOOTER& foot);
 private:
 	/** Header */

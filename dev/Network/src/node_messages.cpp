@@ -1,6 +1,6 @@
 #include "../messages/node_communication.h"
 
-MESSAGE Node_Messages::Network_Message_Factory(MESSAGES message)
+MESSAGE node_messages::Network_Message_Factory(MESSAGES message)
 {
 	switch (message)
 	{

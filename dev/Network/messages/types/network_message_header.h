@@ -1,8 +1,15 @@
+/*******************************************************************//**
+ * \file   network_message_header.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   April 2022
+ *********************************************************************/
+
 #ifndef NETWORK_MESSAGE_HEADER
 #define NETWORK_MESSAGE_HEADER
 
 #include "network_type.h"
-#include "messages.h"
 
 /**
  * Header for message packets
@@ -28,6 +35,11 @@ struct MESSAGE_HEADER
 	*/
 	std::vector<Byte> pack();
 
+	/**
+	 * Expand the MESSAGE_HEADER to the object.
+	 *
+	 * \param byte_array_message Array of bytes to put in the objects.
+	 */
 	void unpack(std::vector<Byte> byte_array_message);
 };
 
