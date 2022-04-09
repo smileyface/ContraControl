@@ -16,26 +16,7 @@
 namespace {
 	class LocalNetworkTest : public ::testing::Test {
 		virtual void SetUp() {
-			try
-			{
-				system_utilities::setup();
-				std::string i;
-				if (std::getenv("CI") != NULL)
-				{
-					system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "On a CI machine", "Test Setup"));
-					network::init_network_interfaces("nat");
-				}
-				else
-				{
-					system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Not on a CI machine", "Test Setup"));
-					network::init_network_interfaces();
-				}
-				
-			}
-			catch (NetworkErrorException e)
-			{
-				testing_utilities::network_utilities::exception_handle();
-			}
+			system_utilities::network_utilities::setup();
 		}
 		virtual void TearDown() {
 			system_utilities::cleanup();
@@ -44,25 +25,7 @@ namespace {
 	};
 	class NetworkMessagingTest : public ::testing::Test {
 		virtual void SetUp() {
-			try
-			{
-				system_utilities::setup();
-				std::string i;
-				if (std::getenv("CI") != NULL)
-				{
-					std::cout << "On a CI Machine" << std::endl;
-					network::init_network_interfaces("nat");
-				}
-				else
-				{
-					std::cout << "Not on a CI machine" << std::endl;
-					network::init_network_interfaces();
-				}
-			}
-			catch (NetworkErrorException e)
-			{
-				testing_utilities::network_utilities::exception_handle();
-			}
+			system_utilities::network_utilities::setup();
 		}
 		virtual void TearDown() {
 			system_utilities::cleanup();
@@ -71,14 +34,15 @@ namespace {
 	};
 	class EmptyLocalNetworkTest : public ::testing::Test {
 		virtual void SetUp() {
-
+			system_utilities::setup_messaging();
 		}
 		virtual void TearDown() {
-
 		}
 
 	};
 }
+
+
 TEST_F(LocalNetworkTest, Network_SetUp)
 {
 	/** Start in server mode */
@@ -131,18 +95,11 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Initialize_System_Interface_Error)
 
 TEST_F(EmptyLocalNetworkTest, Error_States_Initalized)
 {
-	try
-	{
-		network::init_network_interfaces();
-	}
-	catch (NetworkErrorException e)
-	{
-		testing_utilities::network_utilities::exception_handle();
-	}
+	system_utilities::network_utilities::setup();
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::INVALID_HOSTNAME);
 
-	network::init_network_interfaces();
+	system_utilities::network_utilities::setup();
 	network::network_interface->setup_connection(local_connections::local, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);
 }
@@ -152,7 +109,7 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Broadcast_Setup)
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::SOCKET_INVALID);
 #endif // !_WIN32
-	network::init_network_interfaces();
+	system_utilities::network_utilities::setup();
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::SOCKET_INVALID);
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_TCP, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::NETWORK_OPTION_ERROR);

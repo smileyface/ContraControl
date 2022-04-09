@@ -68,7 +68,7 @@ void Linux_Network_Interface::setup_interface()
 	if (found == 0)
 	{
 		System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "No Adapter Found", "Finding Interface"));
-		status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
+		status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
 		throw NetworkErrorException();
 	}
 }

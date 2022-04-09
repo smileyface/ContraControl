@@ -10,6 +10,14 @@
 #include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
 
+#include "../../Network/network_main.h"
+#ifdef _WIN32
+#include "../../Network/system_interfaces/windows_network_interface.h"
+#endif // _WIN32
+#ifdef __linux__
+#include "../../Network/system_interfaces/linux_network_interface.h"
+#endif
+
 Message_Consumer* message_consumer = 0;
 bool stale;
 System_Messages* system_utilities::testing_messges = 0;
@@ -26,10 +34,15 @@ void system_utilities::setup()
 		printf("Caught network exception");
 		testing_utilities::network_utilities::exception_handle();
 	}
+	setup_messaging();
+
+}
+
+void system_utilities::setup_messaging()
+{
 	message_consumer = new Message_Consumer(stale);
 	System_Messages::get_instance()->register_consumer(message_consumer);
 	testing_messges = System_Messages::get_instance();
-
 }
 
 void system_utilities::print_messages()
@@ -92,4 +105,27 @@ void system_utilities::model_utilities::start()
 void system_utilities::model_utilities::stop()
 {
 	model::stop_loop();
+}
+
+void system_utilities::network_utilities::setup()
+{
+	try
+	{
+		system_utilities::setup();
+		std::string i;
+		if (std::getenv("CI") != NULL)
+		{
+			std::cout << "On a CI Machine" << std::endl;
+			network::init_network_interfaces("nat");
+		}
+		else
+		{
+			std::cout << "Not on a CI machine" << std::endl;
+			network::init_network_interfaces();
+		}
+	}
+	catch (NetworkErrorException e)
+	{
+		testing_utilities::network_utilities::exception_handle();
+	}
 }
