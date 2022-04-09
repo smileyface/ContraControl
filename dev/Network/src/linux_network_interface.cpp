@@ -156,6 +156,7 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 		ipv4_addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
 		connections[local_connections::broadcast].address = get_broadcast(connections[local_connections::local].address, subnet_mask);
 		setup_broadcast_socket(connections[local_connections::broadcast], connections[local_connections::local].address);
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Broadcast IP: " + connections[local_connections::broadcast].address.get_as_string(), "Network Initalizer"));
 	}
 	if (connection_name == local_connections::local)
 	{
@@ -165,8 +166,9 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 			status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
 			throw NetworkErrorException();
 		}
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
 	}
-	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
+	
 }
 
 void Linux_Network_Interface::initalized()
