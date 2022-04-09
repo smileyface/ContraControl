@@ -115,12 +115,12 @@ void system_utilities::network_utilities::setup()
 		std::string i;
 		if (std::getenv("CI") != NULL)
 		{
-			std::cout << "On a CI Machine" << std::endl;
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "On a CI machine", "Test Setup"));
 			network::init_network_interfaces("nat");
 		}
 		else
 		{
-			std::cout << "Not on a CI machine" << std::endl;
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Not on a CI machine", "Test Setup"));
 			network::init_network_interfaces();
 		}
 	}
