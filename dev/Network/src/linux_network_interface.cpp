@@ -70,6 +70,8 @@ void Linux_Network_Interface::setup_interface()
 	if (found == 0)
 	{
 		System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "No Adapter Found", "Finding Interface"));
+		status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
+		throw NetworkErrorException();
 	}
 }
 
@@ -104,7 +106,7 @@ NETWORK_ERRORS set_error_state()
 
 Linux_Network_Interface::Linux_Network_Interface()
 {
-	interfaces = "wlan0";
+	interfaces = "lo";
 	local_connections::setup(connections);
 }
 
@@ -162,18 +164,6 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 	if (connection_name == local_connections::local)
 	{
 		connections[local_connections::local].address = get_interface_addr();
-		if (connections[local_connections::local].address.S_un.S_addr == 0)
-		{
-			network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "IP Address invalid. Attempting Loopback", "Network Initalizer"));
-			interfaces = "lo";
-			connections[local_connections::local].address = get_interface_addr();
-			if (connections[local_connections::local].address.S_un.S_addr == 0)
-			{
-				network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Loopback failed. Throwing", "Network Initalizer"));
-				status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
-				throw NetworkErrorException();
-			}
-		}
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
 	}
 	
