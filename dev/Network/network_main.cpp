@@ -72,6 +72,7 @@ void network::teardown_network_interfaces()
 	{
 		network::network_interface->clean_up();
 	}
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Network interface torndown", "Network Interfaces Teardown"));
 }
 
 void network::start_server()

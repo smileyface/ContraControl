@@ -71,7 +71,7 @@ void system_utilities::print_messages()
 		{
 			std::cout << "[  " << message_priority_as_string(mess.priority) << "   ]";
 		}
-		std::cout << " (" << mess.location << ") " << mess.message << std::endl << std::flush;
+		std::cout << " (" << mess.location << ")\t\t " << mess.message << std::endl << std::flush;
 	}
 	System_Messages::get_instance()->deregister_consumer(message_consumer);
 }
