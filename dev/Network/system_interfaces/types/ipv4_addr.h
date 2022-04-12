@@ -57,20 +57,7 @@ struct ipv4_addr {
      * \return std::string 
      */
     std::string get_as_string();
-    /**
-     * \brief Compare IPV4_addr for list generation and sorting
-     * 
-     * \param d ipv4_addr to compare to
-     * \return true by comparing longs
-     * \return false by comparing longs
-     */
-    bool operator<(const ipv4_addr& d) const;
-    /**
-     * \brief Set ipv4_addr with unsigned long.
-     * 
-     * \param D The address as unsigned long.
-     */
-    void operator=(const unsigned long& D);
+
     /**
      * \brief Set ipv4_addr with char array.
      * 
