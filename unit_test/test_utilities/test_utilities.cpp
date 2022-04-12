@@ -194,12 +194,40 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		}
 		else if (typeid(p_body[i]) == typeid(Network_String))
 		{
-			std::string p_str = dynamic_cast<Network_String*>(&p_body[1])->get_data().second;
-			std::string b_str = dynamic_cast<Network_String*>(&b_body[1])->get_data().second;
+			std::string p_str = dynamic_cast<Network_String*>(&p_body[i])->get_data().second;
+			std::string b_str = dynamic_cast<Network_String*>(&b_body[i])->get_data().second;
 			EXPECT_EQ(p_str, b_str) <<"String in position" << i << "are not the same";
-			Byte p_length = dynamic_cast<Network_String*>(&p_body[1])->get_data().first;
-			Byte b_length = dynamic_cast<Network_String*>(&b_body[1])->get_data().first;
-			EXPECT_EQ(p_length, b_length) << "Length value of String in position" << i << "are not the same";;
+			Byte p_length = dynamic_cast<Network_String*>(&p_body[i])->get_data().first;
+			Byte b_length = dynamic_cast<Network_String*>(&b_body[i])->get_data().first;
+			EXPECT_EQ(p_length, b_length) << "Length value of String in position" << i << "are not the same";
+		}
+		else if (typeid(p_body[i]) == typeid(Network_Bool))
+		{
+			bool p_str = dynamic_cast<Network_Bool*>(&p_body[i])->get_data();
+			bool b_str = dynamic_cast<Network_Bool*>(&b_body[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Boolean in position" << i << "are not the same";
+		}
+		else if (typeid(p_body[i]) == typeid(Network_Byte))
+		{
+			Byte p_str = dynamic_cast<Network_Byte*>(&p_body[i])->get_data();
+			Byte b_str = dynamic_cast<Network_Byte*>(&b_body[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Byte in position" << i << "are not the same";
+		}
+		else if (typeid(p_body[i]) == typeid(Network_Percent))
+		{
+			float p_str = dynamic_cast<Network_Percent*>(&p_body[i])->get_data();
+			float b_str = dynamic_cast<Network_Percent*>(&b_body[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Percent in position" << i << "are not the same";
+		}
+		else if (typeid(p_body[i]) == typeid(Network_Word))
+		{
+			short p_str = dynamic_cast<Network_Word*>(&p_body[i])->get_data();
+			short b_str = dynamic_cast<Network_Word*>(&b_body[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Word in position" << i << "are not the same";
+		}
+		else
+		{
+			FAIL() << "Type is not handled by test";
 		}
 	}
 

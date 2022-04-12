@@ -1,6 +1,7 @@
 #include "../messages/types/basic_types.h"
 
 #include <stdexcept>
+#include <math.h>
 
 Byte Network_Byte::size()
 {
@@ -31,6 +32,11 @@ void Network_Byte::operator=(Byte assigner)
 	number = assigner;
 }
 
+Byte Network_Byte::get_data()
+{
+	return number;
+}
+
 Byte Network_Word::size()
 {
 	return 2;
@@ -40,9 +46,9 @@ Byte_Array Network_Word::pack()
 {
 	if (number > INT16_MIN && number < INT16_MAX)
 	{
-		Byte high = number & 0xff00;
-		Byte low = number & 0x00ff;
-		return { low, high };
+		Byte high = (number>>8)%256;
+		Byte low = number % 256;
+		return { high, low };
 	}
 	else
 	{
@@ -53,15 +59,19 @@ Byte_Array Network_Word::pack()
 
 void Network_Word::unpack(Byte_Array& byte_string)
 {
-	signed short result = 0;
-	result = (result << 8) + byte_string[1]; // heigh byte
-	result = (result << 8) + byte_string[0]; // low byte
+	number = 0;
+	number = short(((byte_string[0] << 8) & 0xff00) | (byte_string[1] & 0xff));
 	byte_string.erase(byte_string.begin(), byte_string.begin()+1);
 }
 
 void Network_Word::operator=(int assigner)
 {
 	number = assigner;
+}
+
+short Network_Word::get_data()
+{
+	return number;
 }
 
 Byte Network_String::size()
@@ -89,6 +99,7 @@ void Network_String::unpack(Byte_Array& byte_string)
 	{
 		message += byte_string[i];
 	}
+	byte_string.erase(byte_string.begin(), byte_string.begin() + length);
 }
 
 void Network_String::operator=(std::string assigner)
@@ -109,8 +120,7 @@ Byte Network_Bool::size()
 
 Byte_Array Network_Bool::pack()
 {
-	Byte_Array packet(boolean);
-	return packet;
+	return { boolean };
 }
 
 void Network_Bool::unpack(Byte_Array& byte_string)
@@ -122,6 +132,15 @@ void Network_Bool::unpack(Byte_Array& byte_string)
 void Network_Bool::operator=(bool assigner)
 {
 	boolean = assigner;
+}
+
+bool Network_Bool::get_data()
+{
+	if (boolean == 0)
+	{
+		return false;
+	}
+	return true;
 }
 
 Byte Network_Address::size()
@@ -155,4 +174,33 @@ void Network_Address::operator=(ipv4_addr assigner)
 ipv4_addr Network_Address::get_data()
 {
 	return address;
+}
+
+Byte Network_Percent::size()
+{
+	return sizeof(integer) + sizeof(decimal);
+}
+
+Byte_Array Network_Percent::pack()
+{
+	return { integer, decimal };
+}
+
+void Network_Percent::unpack(Byte_Array& byte_string)
+{
+	integer = byte_string[0];
+	decimal = byte_string[1];
+
+	byte_string.erase(byte_string.begin(), byte_string.begin() + 2);
+}
+
+void Network_Percent::operator=(float assigner)
+{
+	integer = trunc(assigner);
+	decimal = trunc((assigner - integer)*100);
+}
+
+float Network_Percent::get_data()
+{
+	return integer + (decimal/100.0f);
 }
