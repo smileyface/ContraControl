@@ -183,7 +183,14 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		{
 			ipv4_addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
 			ipv4_addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
-			EXPECT_EQ(p_addr.get_as_string(), b_addr.get_as_string()) << "Addresses in position " << i << " are not the same\n" << p_addr.get_as_string() << " vs " << b_addr.get_as_string();
+			if (p_addr == b_addr)
+			{
+				SUCCEED();
+			}
+			else
+			{
+				FAIL() << "Addresses in position " << i << " are not the same\n" << p_addr.get_as_string() << " vs " << b_addr.get_as_string();
+			}
 		}
 		else if (typeid(p_body[i]) == typeid(Network_String))
 		{

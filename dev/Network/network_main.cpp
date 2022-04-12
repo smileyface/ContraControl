@@ -39,20 +39,10 @@ void network::init_network_interfaces()
 
 void network::init_network_interfaces(std::string interfaces)
 {
-	network_message_interface = System_Messages::get_instance();
-#ifdef _WIN32
-	network::network_interface = new Windows_Network_Interface();
-#endif // IS_WIN32
-#ifdef __linux__
-	network::network_interface = new Linux_Network_Interface();
-#endif //__linux__
-#ifdef _MAC
-	//For now, we'll just use the linux interface. 
-	network::network_interface = new Linux_Network_Interface();
-#endif // _MAC
+	init_network_interfaces();
+	network_interface->clean_up();
 	network_interface->set_interface(interfaces);
 	network_interface->initalize();
-	generate_crc_table();
 }
 
 void client_loop()

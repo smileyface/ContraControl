@@ -57,7 +57,10 @@ void ipv4_addr::operator=(const unsigned char* ca)
 
 bool ipv4_addr::operator==(const ipv4_addr ad)
 {
-	return S_un.S_addr == ad.S_un.S_addr;
+	return S_un.S_un_b.s_b1 == ad.S_un.S_un_b.s_b1 &&
+		   S_un.S_un_b.s_b2 == ad.S_un.S_un_b.s_b2 &&
+		   S_un.S_un_b.s_b3 == ad.S_un.S_un_b.s_b3 &&
+		   S_un.S_un_b.s_b4 == ad.S_un.S_un_b.s_b4;
 }
 
 std::string ipv4_addr::get_as_string()
