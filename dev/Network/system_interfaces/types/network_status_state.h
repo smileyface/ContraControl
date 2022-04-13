@@ -52,6 +52,8 @@ enum class NETWORK_ERRORS : unsigned char
     NETWORK_CODE_ERROR,
     /** When an option is incorrect. */
     NETWORK_OPTION_ERROR,
+    /** When the IP address returns an invalid addres */
+    ADDRESS_ERROR,
     /** Some unknown error has occured. */
     UNKNOWN_ERROR
 };

@@ -92,52 +92,47 @@ void testing_utilities::network_utilities::check_initalized()
 	}
 }
 
-void testing_utilities::network_utilities::exception_handle()
+std::string get_string_of_error(NETWORK_ERRORS errors)
 {
-	switch (network::network_interface->get_status().error)
+	switch (errors)
 	{
 	case NETWORK_ERRORS::NO_NETWORK_ERROR:
-		FAIL() << "Network Subsystem has failed";
-		break;
+		return "Network Subsystem has failed";
 	case NETWORK_ERRORS::UNINITALIZED_INTERFACE:
-		FAIL() << "Unintalized Interface";
-		break;
+		return "Unintalized Interface";
 	case NETWORK_ERRORS::ADAPTER_ERROR:
-		FAIL() << "Adapter Error";
-		break;
+		return "Adapter Error";
 	case NETWORK_ERRORS::SOCKET_INVALID:
-		FAIL() << "Invalid Socket";
-		break;
+		return "Invalid Socket";
 	case NETWORK_ERRORS::INVALID_HOSTNAME:
-		FAIL() << "Invalid Hostname";
-		break;
+		return "Invalid Hostname";
 	case NETWORK_ERRORS::ERROR_ON_SOCKET_BIND:
-		FAIL() << "Socket Bind Failed";
-		break;
+		return "Socket Bind Failed";
 	case NETWORK_ERRORS::ERROR_ON_SOCKET_LISTEN:
-		FAIL() << "Error listening on socket";
-		break;
+		return "Error listening on socket";
 	case NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR:
-		FAIL() << "Error grabbing the interface";
-		break;
+		return "Error grabbing the interface";
 	case NETWORK_ERRORS::SOCKET_BUSY:
-		FAIL() << "Socket is Busy";
-		break;
+		return "Socket is Busy";
 	case NETWORK_ERRORS::SERVER_CANNOT_START:
-		FAIL() << "Server Cannot Start";
-		break;
+		return "Server Cannot Start";
 	case NETWORK_ERRORS::NETWORK_CODE_ERROR:
-		FAIL() << "Code is incorrect. Debug.";
-		break;
+		return "Code is incorrect. Debug.";
 	case NETWORK_ERRORS::UNKNOWN_ERROR:
-		FAIL() << "Unhandled Network Error";
-		break;
+		return "Unhandled Network Error";
 	case NETWORK_ERRORS::NETWORK_OPTION_ERROR:
-		FAIL() << "Invalid option error";
-		break;
+		return "Invalid option error";
+	case NETWORK_ERRORS::ADDRESS_ERROR:
+		return "Address is invalid";
 	default:
-		FAIL() << "Unknown Network Error ";
+		return "Unknown Network Error ";
 	}
+}
+
+void testing_utilities::network_utilities::exception_handle()
+{
+	system_utilities::print_messages();
+	FAIL() << get_string_of_error(network::network_interface->get_status().error);
 }
 
 void testing_utilities::network_utilities::expect_exception(std::function<void()> function, NETWORK_ERRORS error)
@@ -151,7 +146,8 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 		return;
 	}
-	FAIL() << "Network Error Exception did not throw";
+	system_utilities::print_messages();
+	FAIL() << "Network Error Exception did not throw\nExpected " + get_string_of_error(error);
 }
 
 void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)
@@ -159,6 +155,74 @@ void testing_utilities::network_utilities::network_message_utilities::check_head
 	EXPECT_EQ(0x65, p_message[0]) << "Invalid Packet Header";
 	EXPECT_EQ(message_id, p_message[1]) << "Incorrect Message Id";
 	EXPECT_EQ(size, p_message[2]) << "Incorrect Packet Size";
+}
+
+void testing_utilities::network_utilities::network_message_utilities::compare_messages(PACKED_MESSAGE m1, PACKED_MESSAGE m2)
+{
+	MESSAGE_HEADER p_header, b_header;
+	MESSAGE p_body, b_body;
+	MESSAGE_FOOTER p_footer, b_footer;
+	m1.get_message(p_header, p_body, p_footer);
+	m2.get_message(b_header, b_body, b_footer);
+	if (p_body.size() != b_body.size())
+	{
+		FAIL() << "Body sizes are not the same";
+		return;
+	}
+	for (int i = 0; i < p_body.get_message().size(); i++)
+	{
+		if (typeid(p_body[i]) == typeid(Network_Address))
+		{
+			ipv4_addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
+			ipv4_addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
+			if (p_addr == b_addr)
+			{
+				SUCCEED();
+			}
+			else
+			{
+				FAIL() << "Addresses in position " << i << " are not the same\n" << p_addr.get_as_string() << " vs " << b_addr.get_as_string();
+			}
+		}
+		else if (typeid(p_body[i]) == typeid(Network_String))
+		{
+			std::string p_str = dynamic_cast<Network_String*>(&p_body[i])->get_data().second;
+			std::string b_str = dynamic_cast<Network_String*>(&b_body[i])->get_data().second;
+			EXPECT_EQ(p_str, b_str) <<"String in position" << i << "are not the same";
+			Byte p_length = dynamic_cast<Network_String*>(&p_body[i])->get_data().first;
+			Byte b_length = dynamic_cast<Network_String*>(&b_body[i])->get_data().first;
+			EXPECT_EQ(p_length, b_length) << "Length value of String in position" << i << "are not the same";
+		}
+		else if (typeid(p_body[i]) == typeid(Network_Bool))
+		{
+			bool p_str = dynamic_cast<Network_Bool*>(&p_body[i])->get_data();
+			bool b_str = dynamic_cast<Network_Bool*>(&b_body[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Boolean in position" << i << "are not the same";
+		}
+		else if (typeid(p_body[i]) == typeid(Network_Byte))
+		{
+			Byte p_str = dynamic_cast<Network_Byte*>(&p_body[i])->get_data();
+			Byte b_str = dynamic_cast<Network_Byte*>(&b_body[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Byte in position" << i << "are not the same";
+		}
+		else if (typeid(p_body[i]) == typeid(Network_Percent))
+		{
+			float p_str = dynamic_cast<Network_Percent*>(&p_body[i])->get_data();
+			float b_str = dynamic_cast<Network_Percent*>(&b_body[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Percent in position" << i << "are not the same";
+		}
+		else if (typeid(p_body[i]) == typeid(Network_Word))
+		{
+			short p_str = dynamic_cast<Network_Word*>(&p_body[i])->get_data();
+			short b_str = dynamic_cast<Network_Word*>(&b_body[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Word in position" << i << "are not the same";
+		}
+		else
+		{
+			FAIL() << "Type is not handled by test";
+		}
+	}
+
 }
 
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)

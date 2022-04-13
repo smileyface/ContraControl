@@ -12,6 +12,7 @@
 
 #include "../../dev/Utilities/Utilities/exceptions.h"
 #include "../../dev/Network/system_interfaces/types/network_status_state.h"
+#include "../../dev/Network/messages/messaging.h"
 
 namespace testing_utilities
 {
@@ -44,6 +45,7 @@ namespace testing_utilities
 		namespace network_message_utilities
 		{
 			void check_header(int message_id, int size, std::vector<unsigned char> p_message);
+			void compare_messages(PACKED_MESSAGE m1, PACKED_MESSAGE m2);
 		}
 	}
 	namespace subsystem_utilities

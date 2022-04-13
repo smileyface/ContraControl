@@ -3,7 +3,7 @@
                       "tests/Network.cpp"
                       "tests/Commands.cpp" 
                       "tests/Subsystem.cpp" 
-                      "tests/Network_Messages.cpp")
+                      "tests/Network_Messages.cpp" "tests/Errors.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h" 
                            "test_utilities/system_testings.h" 
@@ -61,7 +61,7 @@ IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
 
   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
 
-  SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+  SET(CMAKE_CXX_FLAGS "-O1 -g -fno-omit-frame-pointer -fno-optimize-sibling-calls -fprofile-arcs -ftest-coverage -fno-inline -fPIC")
 
   SETUP_TARGET_FOR_COVERAGE_COBERTURA(
         cov  # Name for custom target.

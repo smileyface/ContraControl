@@ -13,20 +13,26 @@ set(NETWORK_INTERFACE_SOURCE
                     src/windows_network_interface.cpp
                     src/linux_network_interface.cpp
                     src/ipv4_addr.cpp
-                    src/network_status_state.cpp)
+                    src/network_status_state.cpp 
+                    src/network_type.cpp)
 set(NETWORK_WINDOWS_INTERFACE_HEADERS
                     system_interfaces/windows_network_interface.h)
 set(NETWORK_UNIX_INTERFACE_HEADERS
                     system_interfaces/unix_network_interface.h)
 set(NETWORK_MESSAGE_HEADERS
                     messages/messaging.h
-                    messages/node_communication.h)
+                    messages/node_communication.h 
+                    messages/types/network_message_types.h 
+                    messages/types/network_message_header.h
+                    messages/types/network_message_footer.h 
+                    messages/types/messages.h)
 set(NETWORK_MESSAGE_SOURCE
                     src/messaging.cpp
                     src/send_message.cpp 
-                    src/node_messages.cpp)
+                    src/node_messages.cpp
+                    src/basic_types.cpp)
 
-add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE} ${NETWORK_MESSAGE_HEADERS} ${NETWORK_MESSAGE_SOURCE})
+add_library(Network ${NETWORK_INTERFACE_HEADERS} ${NETWORK_INTERFACE_SOURCE} ${NETWORK_MESSAGE_HEADERS} ${NETWORK_MESSAGE_SOURCE} )
 target_include_directories(Network 
                            PUBLIC 
                                 ${CMAKE_CURRENT_SOURCE_DIR}/network)

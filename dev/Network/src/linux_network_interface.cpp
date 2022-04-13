@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <ifaddrs.h>
+#include <iostream>
 
 #include "../system_interfaces/linux_network_interface.h"
 #include "Utilities/exceptions.h"
@@ -22,6 +23,8 @@ ipv4_addr Linux_Network_Interface::get_interface_addr()
 	char host[NI_MAXHOST];
 
 	getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+
+	System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, std::string(ifa->ifa_name) + " " + host, "Setting Interface Address"));
 	return ipv4_addr(host);
 }
 
@@ -45,24 +48,29 @@ void Linux_Network_Interface::setup_interface()
 		exit(EXIT_FAILURE);
 	}
 
-	for (ifa = ifap; ifa && !found; ifa = ifa->ifa_next)
+	System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface trying to find is " + interfaces, "Finding Interface"));
+	ifa = ifap;
+	while (ifa && !found)
 	{
-		if (ifa->ifa_addr == NULL)
-			continue;
-
-		if (strcasecmp(interfaces.c_str(), ifa->ifa_name))
-			continue;
-
-		/* IPv4 */
-		if (ifa->ifa_addr->sa_family != AF_INET)
-			continue;
-
-		found = 1;
+		if (ifa->ifa_addr->sa_family == AF_INET)
+		{
+			char host[NI_MAXHOST];
+			getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+			System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, std::string(ifa->ifa_name) + " " + host, "Finding Interface"));
+		}
+		if (ifa->ifa_addr != NULL && strcasecmp(interfaces.c_str(), ifa->ifa_name) == 0 && ifa->ifa_addr->sa_family == AF_INET)
+		{
+			found = 1;
+			break;
+		}
+		ifa = ifa->ifa_next;
 	}
+
 	freeifaddrs(ifap);
 	if (found == 0)
 	{
-		status_state.set_error(NETWORK_ERRORS::ADAPTER_ERROR);
+		System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "No Adapter Found", "Finding Interface"));
+		status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
 		throw NetworkErrorException();
 	}
 }
@@ -98,7 +106,7 @@ NETWORK_ERRORS set_error_state()
 
 Linux_Network_Interface::Linux_Network_Interface()
 {
-	interfaces = "wlan0";
+	interfaces = "lo";
 	local_connections::setup(connections);
 }
 
@@ -106,7 +114,6 @@ void Linux_Network_Interface::initalize()
 {
 	char hostname_temp[50];
 	int rc = gethostname(hostname_temp, sizeof(hostname_temp));
-
 	if (rc != 0) 
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
@@ -152,12 +159,14 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 		ipv4_addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
 		connections[local_connections::broadcast].address = get_broadcast(connections[local_connections::local].address, subnet_mask);
 		setup_broadcast_socket(connections[local_connections::broadcast], connections[local_connections::local].address);
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Broadcast IP: " + connections[local_connections::broadcast].address.get_as_string(), "Network Initalizer"));
 	}
 	if (connection_name == local_connections::local)
 	{
 		connections[local_connections::local].address = get_interface_addr();
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
 	}
-	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
+	
 }
 
 void Linux_Network_Interface::initalized()

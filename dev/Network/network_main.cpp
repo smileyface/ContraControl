@@ -33,9 +33,16 @@ void network::init_network_interfaces()
 	//For now, we'll just use the linux interface. 
 	network::network_interface = new Linux_Network_Interface();
 #endif // _MAC
-
 	network_interface->initalize();
 	generate_crc_table();
+}
+
+void network::init_network_interfaces(std::string interfaces)
+{
+	init_network_interfaces();
+	network_interface->clean_up();
+	network_interface->set_interface(interfaces);
+	network_interface->initalize();
 }
 
 void client_loop()
@@ -65,6 +72,7 @@ void network::teardown_network_interfaces()
 	{
 		network::network_interface->clean_up();
 	}
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Network interface torndown", "Network Interfaces Teardown"));
 }
 
 void network::start_server()
@@ -79,4 +87,9 @@ void network::start_client()
 	network::network_interface->set_client();
 	network_running = true;
 	network_thread = std::thread(client_loop);
+}
+
+void network::set_interface(std::string i)
+{
+	network_interface->set_interface(i);
 }

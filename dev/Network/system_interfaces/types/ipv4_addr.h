@@ -5,6 +5,10 @@
  * \author kason
  * \date   September 2021
  *********************************************************************/
+#ifndef NETWORK_TYPE_IPV4_ADDR
+#define NETWORK_TYPE_IPV4_ADDR
+
+
 #include <string>
 
 /**
@@ -53,24 +57,22 @@ struct ipv4_addr {
      * \return std::string 
      */
     std::string get_as_string();
-    /**
-     * \brief Compare IPV4_addr for list generation and sorting
-     * 
-     * \param d ipv4_addr to compare to
-     * \return true by comparing longs
-     * \return false by comparing longs
-     */
-    bool operator<(const ipv4_addr& d) const;
-    /**
-     * \brief Set ipv4_addr with unsigned long.
-     * 
-     * \param D The address as unsigned long.
-     */
-    void operator=(const unsigned long& D);
+
     /**
      * \brief Set ipv4_addr with char array.
      * 
      * \param ca The address as a char array.
      */
-    void operator=(const char* ca);
+    void operator=(const unsigned char* ca);
+
+    /**
+     * \brief Compare 2 ipv4_addrs.
+     * 
+     * \param ad Address to compare.
+     * \return equal compare.
+     */
+    bool operator==(const ipv4_addr ad);
 };
+
+
+#endif // !NETWORK_TYPE_IPV4_ADDR

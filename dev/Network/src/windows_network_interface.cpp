@@ -33,6 +33,8 @@ WORD wVersionRequested = MAKEWORD(2, 2);
 
 NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 {
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Error code " + std::to_string(err_code) + " thrown", "Windows Network Error Handle"));
+
 	if(err_code == -1)
 		err_code = WSAGetLastError();
 	switch (err_code)
@@ -56,7 +58,6 @@ NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 	case WSAHOST_NOT_FOUND:
 		return NETWORK_ERRORS::INVALID_HOSTNAME;
 	default:
-		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Unknown error code " + std::to_string(err_code) + " thrown", "Windows Network Error Handle"));
 		return NETWORK_ERRORS::UNKNOWN_ERROR;
 	}
 }
@@ -99,9 +100,9 @@ ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname,
     pAddresses = (IP_ADAPTER_ADDRESSES*)MALLOC(outBufLen);
 	pIPAddrTable = (MIB_IPADDRTABLE*)MALLOC(sizeof(MIB_IPADDRTABLE));
     if (pAddresses == NULL) {
-        printf
-        ("Memory allocation failed for IP_ADAPTER_ADDRESSES struct\n");
-        exit(1);
+		status_state.set_error(NETWORK_ERRORS::NETWORK_CODE_ERROR);
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Unable to create address location", "Address Memory Allocation"));
+		throw NetworkErrorException();
     }
 
 	if (pIPAddrTable) {
@@ -127,6 +128,7 @@ ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname,
 			status_state.set_error(NETWORK_ERRORS::UNKNOWN_ERROR);
 			network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, (LPTSTR)lpMsgBuf, "Getting IP Addr Table"));
 			LocalFree(lpMsgBuf);
+			throw NetworkErrorException();
 		}
 	}
 
@@ -143,9 +145,13 @@ ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname,
         GetAdaptersAddresses(family, flags, NULL, pAddresses, &outBufLen);
 
 
-    if (dwRetVal == ERROR_BUFFER_OVERFLOW) {
+    if (dwRetVal != 0) 
+	{
+		status_state.set_error(set_error_state(dwRetVal));
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Cannot get adapter address", "Getting IP Addr Table"));
         FREE(pAddresses);
         pAddresses = NULL;
+		throw NetworkErrorException();
     }
 
 	for (PIP_ADAPTER_ADDRESSES pCurrAddresses = pAddresses; pCurrAddresses; pCurrAddresses = pCurrAddresses->Next)
@@ -205,7 +211,6 @@ void Windows_Network_Interface::setup_broadcast_socket(Connection& connect, ipv4
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Broadcast Sock Invalid", "Broadcast Socket check"));
 		throw NetworkErrorException();
 	}
-
 	char broadcast_opt_true = '1';
 	if (setsockopt(connect.sock, SOL_SOCKET, SO_BROADCAST, (char*)&broadcast_opt_true, sizeof(broadcast_opt_true)) < 0)
 	{

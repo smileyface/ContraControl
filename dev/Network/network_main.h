@@ -22,6 +22,12 @@ namespace network
      * \brief Setup network interface as a system specific interface.
      */
     extern void init_network_interfaces();
+
+    /**
+     * \brief Setup network interface as a given interface.
+     * \param interfaces Given interface.
+     */
+    extern void init_network_interfaces(std::string interfaces);
     /**
      * \brief Teardown and clean up system specific network interface.
      */
@@ -41,5 +47,10 @@ namespace network
      * \brief Start interface as a client.
      */
     extern void start_client();
+    /**
+     * \brief Set interface from external source.
+     * \param i Interface to set as source.
+     */
+    extern void set_interface(std::string i);
 
 };
