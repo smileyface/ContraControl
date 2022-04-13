@@ -92,56 +92,47 @@ void testing_utilities::network_utilities::check_initalized()
 	}
 }
 
+std::string get_string_of_error(NETWORK_ERRORS errors)
+{
+	switch (errors)
+	{
+	case NETWORK_ERRORS::NO_NETWORK_ERROR:
+		return "Network Subsystem has failed";
+	case NETWORK_ERRORS::UNINITALIZED_INTERFACE:
+		return "Unintalized Interface";
+	case NETWORK_ERRORS::ADAPTER_ERROR:
+		return "Adapter Error";
+	case NETWORK_ERRORS::SOCKET_INVALID:
+		return "Invalid Socket";
+	case NETWORK_ERRORS::INVALID_HOSTNAME:
+		return "Invalid Hostname";
+	case NETWORK_ERRORS::ERROR_ON_SOCKET_BIND:
+		return "Socket Bind Failed";
+	case NETWORK_ERRORS::ERROR_ON_SOCKET_LISTEN:
+		return "Error listening on socket";
+	case NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR:
+		return "Error grabbing the interface";
+	case NETWORK_ERRORS::SOCKET_BUSY:
+		return "Socket is Busy";
+	case NETWORK_ERRORS::SERVER_CANNOT_START:
+		return "Server Cannot Start";
+	case NETWORK_ERRORS::NETWORK_CODE_ERROR:
+		return "Code is incorrect. Debug.";
+	case NETWORK_ERRORS::UNKNOWN_ERROR:
+		return "Unhandled Network Error";
+	case NETWORK_ERRORS::NETWORK_OPTION_ERROR:
+		return "Invalid option error";
+	case NETWORK_ERRORS::ADDRESS_ERROR:
+		return "Address is invalid";
+	default:
+		return "Unknown Network Error ";
+	}
+}
+
 void testing_utilities::network_utilities::exception_handle()
 {
 	system_utilities::print_messages();
-	switch (network::network_interface->get_status().error)
-	{
-	case NETWORK_ERRORS::NO_NETWORK_ERROR:
-		FAIL() << "Network Subsystem has failed";
-		break;
-	case NETWORK_ERRORS::UNINITALIZED_INTERFACE:
-		FAIL() << "Unintalized Interface";
-		break;
-	case NETWORK_ERRORS::ADAPTER_ERROR:
-		FAIL() << "Adapter Error";
-		break;
-	case NETWORK_ERRORS::SOCKET_INVALID:
-		FAIL() << "Invalid Socket";
-		break;
-	case NETWORK_ERRORS::INVALID_HOSTNAME:
-		FAIL() << "Invalid Hostname";
-		break;
-	case NETWORK_ERRORS::ERROR_ON_SOCKET_BIND:
-		FAIL() << "Socket Bind Failed";
-		break;
-	case NETWORK_ERRORS::ERROR_ON_SOCKET_LISTEN:
-		FAIL() << "Error listening on socket";
-		break;
-	case NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR:
-		FAIL() << "Error grabbing the interface";
-		break;
-	case NETWORK_ERRORS::SOCKET_BUSY:
-		FAIL() << "Socket is Busy";
-		break;
-	case NETWORK_ERRORS::SERVER_CANNOT_START:
-		FAIL() << "Server Cannot Start";
-		break;
-	case NETWORK_ERRORS::NETWORK_CODE_ERROR:
-		FAIL() << "Code is incorrect. Debug.";
-		break;
-	case NETWORK_ERRORS::UNKNOWN_ERROR:
-		FAIL() << "Unhandled Network Error";
-		break;
-	case NETWORK_ERRORS::NETWORK_OPTION_ERROR:
-		FAIL() << "Invalid option error";
-		break;
-	case NETWORK_ERRORS::ADDRESS_ERROR:
-		FAIL() << "Address is invalid";
-		break;
-	default:
-		FAIL() << "Unknown Network Error ";
-	}
+	FAIL() << get_string_of_error(network::network_interface->get_status().error);
 }
 
 void testing_utilities::network_utilities::expect_exception(std::function<void()> function, NETWORK_ERRORS error)
@@ -155,7 +146,8 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 		return;
 	}
-	FAIL() << "Network Error Exception did not throw";
+	system_utilities::print_messages();
+	FAIL() << "Network Error Exception did not throw\nExpected " + get_string_of_error(error);
 }
 
 void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)

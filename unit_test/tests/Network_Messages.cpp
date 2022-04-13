@@ -12,24 +12,7 @@ namespace {
 	class NetworkMessagingCreationTest : public ::testing::Test {
 
 		virtual void SetUp() {
-			try
-			{
-				system_utilities::setup();
-				if (std::getenv("CI") != NULL)
-				{
-					system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "On a CI machine", "Test Setup"));
-					network::init_network_interfaces("nat");
-				}
-				else
-				{
-					system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Not on a CI machine", "Test Setup"));
-					network::init_network_interfaces();
-				}
-			}
-			catch (NetworkErrorException e)
-			{
-				testing_utilities::network_utilities::exception_handle();
-			}
+			system_utilities::setup();
 		}
 		virtual void TearDown() {
 			system_utilities::cleanup();

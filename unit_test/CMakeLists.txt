@@ -3,7 +3,7 @@
                       "tests/Network.cpp"
                       "tests/Commands.cpp" 
                       "tests/Subsystem.cpp" 
-                      "tests/Network_Messages.cpp")
+                      "tests/Network_Messages.cpp" "tests/Errors.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h" 
                            "test_utilities/system_testings.h" 
