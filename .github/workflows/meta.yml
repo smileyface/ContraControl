@@ -1,6 +1,10 @@
 name: Meta Tasks
 
 on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [patch/**,  feature/** ]
   workflow_dispatch:
 
 jobs:
