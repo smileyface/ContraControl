@@ -55,5 +55,9 @@ namespace testing_utilities
 			void check_is_running(bool is_running);
 		}
 	}
+	namespace error_utilities
+	{
+		void check_override_failure(std::function<void()> function);
+	}
 }
 #endif

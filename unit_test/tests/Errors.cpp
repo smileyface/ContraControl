@@ -64,3 +64,17 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
 #endif // !_WIN32
 }
 */
+
+TEST_F(EmptyLocalNetworkTest, Messaging_Types_Unimplemented)
+{
+
+	MESSAGE message = node_messages::Network_Message_Factory(MESSAGES::NODE_HELLO);
+	testing_utilities::error_utilities::check_override_failure ([message]()mutable {message[0] = -110; });
+	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[0] = std::string("hi"); });
+	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[0] = Byte(32); });
+	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[0] = 33.92f; });
+	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[0] = true; });
+	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[1] = ipv4_addr(); });
+	//testing_utilities::error_utilities::check_override([]() {Network_Address* type; type = Byte(32);  });
+	//testing_utilities::error_utilities::check_override([]() {Network_Address* type; type = -100;  });
+}
