@@ -34,6 +34,6 @@ namespace node_messages
 	 * \param incoming Incoming message body
 	 * \return Outgoing message
 	 */
-	Network_Message network_communication_tree(MESSAGES type, Network_Message incoming);
+	void network_client_state_machine();
 }
 #endif

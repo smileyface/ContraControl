@@ -105,6 +105,23 @@ public:
      */
     void set_interface(std::string i);
 
+    /**
+     * \brief Set status of the interface.
+     * \param i Status to set the interface state to.
+     */
+    void set_network_state(NETWORK_STATUS status);
+
+    /**
+     * \param connection Name of the desired connection.
+     * \return Desired Connection.
+     */
+    Connection get_connection(Connection_Id connection);
+
+    /**
+     * \return Hostname of local.
+     */
+    std::string get_hostname();
+
    //Constants
    /**
     * \brief localhost address

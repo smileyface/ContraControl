@@ -2,6 +2,7 @@
 #include <mutex>
 
 #include "messages.h"
+#include "messages/node_communication.h"
 
 #include "network_main.h"
 #ifdef _WIN32
@@ -47,10 +48,11 @@ void network::init_network_interfaces(std::string interfaces)
 
 void client_loop()
 {
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Starting Client Loop", "Client Loop"));
 	//call_and_response(NODE_HELLO, NODE_ACK, 2);
 	while (network_running)
 	{
-
+		node_messages::network_client_state_machine();
 	}
 }
 
@@ -73,6 +75,11 @@ void network::teardown_network_interfaces()
 		network::network_interface->clean_up();
 	}
 	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Network interface torndown", "Network Interfaces Teardown"));
+}
+
+Network_Message network::listen_for_message(Connection_Id src, MESSAGES listen_for)
+{
+	return Network_Message();
 }
 
 void network::start_server()
@@ -98,4 +105,5 @@ void network::send_message(Connection_Id dest, Network_Message outgoing)
 {
 	Packed_Message packed_outgoing(outgoing);
 	network_interface->send(dest, reinterpret_cast<char*>(packed_outgoing.get_packet().data()));
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Sending message " + get_message_type_string(packed_outgoing.get_message_type()) + " to " + dest, "Network Send"));
 }

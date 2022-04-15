@@ -14,13 +14,16 @@ Network_Message node_messages::network_message_factory(MESSAGES message)
 	}
 }
 
-Network_Message node_messages::network_communication_tree(MESSAGES type, Network_Message incoming)
+void node_messages::network_client_state_machine()
 {
-	switch (type)
+	switch (network::network_interface->get_status().status)
 	{
-	case MESSAGES::NODE_HELLO:
-		Network_Message outgoing = network_message_factory(MESSAGES::NODE_ACK);
-		network::send_message(local_connections::broadcast, outgoing);
+	case NETWORK_STATUS::NETWORK_INITALIZED:
+		Network_Message hello = node_messages::network_message_factory(MESSAGES::NODE_HELLO);
+		hello[0] = network::network_interface->get_connection(local_connections::local).address;
+		hello[1] = network::network_interface->get_hostname();
+		network::send_message(local_connections::broadcast, hello);
+		network::network_interface->set_network_state(NETWORK_STATUS::CLIENT_WAIT);
+		break;
 	}
-	return Network_Message();
 }

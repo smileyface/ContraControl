@@ -143,6 +143,11 @@ void Packed_Message::get_message(Message_Header& head, Network_Message& mess, Me
 	foot = footer;
 }
 
+MESSAGES Packed_Message::get_message_type()
+{
+	return header.message_id;
+}
+
 
 
 Network_Message::Network_Message()
@@ -200,4 +205,19 @@ std::vector<Network_Messaging_Type*> Network_Message::get_message()
 Network_Messaging_Type& Network_Message::operator[](int index)
 {
 	return *message[index];
+}
+
+std::string get_message_type_string(MESSAGES type)
+{
+	switch (type)
+	{
+	case MESSAGES::NODE_HELLO:
+		return "Node Hello";
+	case MESSAGES::NODE_ACK:
+		return "Node Acknowledge";
+	case MESSAGES::NODE_GOODBYE:
+		return "Node Goodbye";
+	default:
+		return "Undefined Message";
+	}
 }

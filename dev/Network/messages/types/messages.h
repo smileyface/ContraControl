@@ -24,5 +24,8 @@ enum class MESSAGES : Byte
 	UNDEFINED = 255
 };
 
+std::string get_message_type_string(MESSAGES type);
+
+
 #endif // !NETWORK_MESSAGES_ENUM_TYPE
 

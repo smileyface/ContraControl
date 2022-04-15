@@ -113,6 +113,11 @@ struct Packed_Message
 	 * \param foot Reference to a message footer. This param will contain the messages footer.
 	 */
 	void get_message(Message_Header& head, Network_Message& mess, Message_Footer& foot);
+
+	/**
+	 * \return what this message is.
+	 */
+	MESSAGES get_message_type();
 private:
 	/** Header */
 	Message_Header header;

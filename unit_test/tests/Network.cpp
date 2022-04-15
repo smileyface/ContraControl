@@ -3,6 +3,9 @@
 
 #include "../test_utilities/pch.h"
 
+#include <chrono>
+#include <thread>
+
 #include "../../Network/network_main.h"
 #ifdef _WIN32
 #include "../../Network/system_interfaces/windows_network_interface.h"
@@ -22,16 +25,6 @@ namespace {
 			network::teardown_network_interfaces();
 			system_utilities::cleanup();
 		}
-	};
-	class EmptyLocalNetworkTest : public ::testing::Test {
-		virtual void SetUp() {
-			system_utilities::setup_messaging();
-		}
-		virtual void TearDown() {
-			network::teardown_network_interfaces();
-			system_utilities::cleanup();
-		}
-
 	};
 }
 
@@ -68,6 +61,8 @@ TEST_F(LocalNetworkTest, Client_Start_Up)
 	{
 		testing_utilities::network_utilities::check_initalized();
 		network::start_client();
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+		//TODO Add a localhost listener
 	}
 	catch (NetworkErrorException e)
 	{
