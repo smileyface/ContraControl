@@ -93,3 +93,9 @@ void network::set_interface(std::string i)
 {
 	network_interface->set_interface(i);
 }
+
+void network::send_message(Connection_Id dest, Network_Message outgoing)
+{
+	Packed_Message packed_outgoing(outgoing);
+	network_interface->send(dest, reinterpret_cast<char*>(packed_outgoing.get_packet().data()));
+}

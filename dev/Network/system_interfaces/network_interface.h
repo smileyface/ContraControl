@@ -109,7 +109,7 @@ public:
    /**
     * \brief localhost address
     */
-    const ipv4_addr localhost = ipv4_addr("127.0.0.1");
+    const IPV4_Addr localhost = IPV4_Addr("127.0.0.1");
 protected:
     /**
      * \brief Is the local node a server.

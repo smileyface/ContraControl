@@ -62,11 +62,11 @@ NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 	}
 }
 
-ipv4_addr Windows_Network_Interface::get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask)
+IPV4_Addr Windows_Network_Interface::get_broadcast(IPV4_Addr host_ip, IPV4_Addr net_mask)
 {
 	return host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
 }
-ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname, std::string interfaces)
+IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname, std::string interfaces)
 {
     /* Declare and initialize variables */
 
@@ -136,7 +136,7 @@ ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname,
 	{
 		found_ip = pIPAddrTable->table[0];
 	}
-	else if ((int)pIPAddrTable->dwNumEntries == 2 && pIPAddrTable->table[1].dwAddr == ipv4_addr("127.0.0.1").S_un.S_addr)
+	else if ((int)pIPAddrTable->dwNumEntries == 2 && pIPAddrTable->table[1].dwAddr == IPV4_Addr("127.0.0.1").S_un.S_addr)
 	{
 		found_ip = pIPAddrTable->table[0];
 	}
@@ -177,10 +177,10 @@ ipv4_addr Windows_Network_Interface::get_interface_address(std::string hostname,
 		FREE(pIPAddrTable);
 		pIPAddrTable = NULL;
 	}
-    return ipv4_addr(found_ip.dwAddr);
+    return IPV4_Addr(found_ip.dwAddr);
 }
 
-ipv4_addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host_ip)
+IPV4_Addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, IPV4_Addr host_ip)
 {
 	INTERFACE_INFO InterfaceList[20] = { 0 };
 	unsigned long nBytesReturned;
@@ -191,7 +191,7 @@ ipv4_addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host
 	}
 	int nNumInterfaces = nBytesReturned / sizeof(INTERFACE_INFO);
 
-	ipv4_addr subnet_mask;
+	IPV4_Addr subnet_mask;
 	for (int i = 0; i < nNumInterfaces; ++i) {
 
 		if (Windows_Network_Interface::ipv4_compare((sockaddr_in*)&(InterfaceList[i].iiAddress), host_ip))
@@ -203,7 +203,7 @@ ipv4_addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host
 	return subnet_mask;
 }
 
-void Windows_Network_Interface::setup_broadcast_socket(Connection& connect, ipv4_addr host_ip)
+void Windows_Network_Interface::setup_broadcast_socket(Connection& connect, IPV4_Addr host_ip)
 {
 	if (connect.sock == INVALID_SOCKET)
 	{
@@ -223,14 +223,14 @@ void Windows_Network_Interface::setup_broadcast_socket(Connection& connect, ipv4
 	}
 }
 
-ipv4_addr Windows_Network_Interface::convert_win_address(sockaddr_in* win_address)
+IPV4_Addr Windows_Network_Interface::convert_win_address(sockaddr_in* win_address)
 {
-	ipv4_addr gen_addr;
+	IPV4_Addr gen_addr;
 	gen_addr.S_un.S_addr = win_address->sin_addr.S_un.S_addr;
 	return gen_addr;
 }
 
-bool Windows_Network_Interface::ipv4_compare(sockaddr_in* win_address, ipv4_addr gen_address)
+bool Windows_Network_Interface::ipv4_compare(sockaddr_in* win_address, IPV4_Addr gen_address)
 {
 	return win_address->sin_addr.S_un.S_addr == gen_address.S_un.S_addr;
 }
@@ -304,7 +304,7 @@ void Windows_Network_Interface::setup_connection(Connection_Id connection_name, 
 	connections[connection_name].sock = socket(maker.sock_family, maker.sock_type, maker.ip_protocol);
 	if (connection_name == local_connections::broadcast)
 	{
-		ipv4_addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
+		IPV4_Addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
 		connections[local_connections::broadcast].address = get_broadcast(connections[local_connections::local].address, subnet_mask);
 		setup_broadcast_socket(connections[local_connections::broadcast], connections[local_connections::local].address);
 	}

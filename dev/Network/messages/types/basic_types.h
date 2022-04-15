@@ -106,14 +106,14 @@ public:
 	Byte size();
 	Byte_Array pack();
 	void unpack(Byte_Array&);
-	void operator=(ipv4_addr);
+	void operator=(IPV4_Addr);
 	/**
 	 * Return the address.
 	 * \return data.
 	 */
-	ipv4_addr get_data();
+	IPV4_Addr get_data();
 private:
-	ipv4_addr address;
+	IPV4_Addr address;
 };
 
 #endif

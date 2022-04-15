@@ -35,9 +35,10 @@ namespace network
     /**
      * \brief Send a message on the network interface.
      *
+     * \param dest Node to send this message to.
      * \param mesg Message to send
      */
-    extern void send_message(MESSAGE* mesg);
+    extern void send_message(Connection_Id dest, Network_Message mesg);
 
     /**
      * \brief Start interface as a server.

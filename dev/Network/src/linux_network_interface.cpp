@@ -13,29 +13,29 @@ typedef void* (*THREADFUNCPTR)(void*);
 
 pthread_t server_thread;
 
-ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask)
+IPV4_Addr get_broadcast(IPV4_Addr host_ip, IPV4_Addr net_mask)
 {
 	return host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
 }
 
-ipv4_addr Linux_Network_Interface::get_interface_addr()
+IPV4_Addr Linux_Network_Interface::get_interface_addr()
 {
 	char host[NI_MAXHOST];
 
 	getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
 
 	System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, std::string(ifa->ifa_name) + " " + host, "Setting Interface Address"));
-	return ipv4_addr(host);
+	return IPV4_Addr(host);
 }
 
-ipv4_addr Linux_Network_Interface::get_subnet_mask(SOCKET sock, ipv4_addr host_ip)
+IPV4_Addr Linux_Network_Interface::get_subnet_mask(SOCKET sock, IPV4_Addr host_ip)
 {
 	char* s = "255.255.255.255";
 	int found = 0;
 
 	struct sockaddr_in* sa = (struct sockaddr_in*)ifa->ifa_netmask;
 	s = inet_ntoa(sa->sin_addr);
-	return ipv4_addr(s);
+	return IPV4_Addr(s);
 }
 
 void Linux_Network_Interface::setup_interface()
@@ -138,7 +138,7 @@ void Linux_Network_Interface::clean_up()
 	}
 }
 
-void Linux_Network_Interface::setup_broadcast_socket(Connection& connect, ipv4_addr host_ip)
+void Linux_Network_Interface::setup_broadcast_socket(Connection& connect, IPV4_Addr host_ip)
 {
 	int broadcast_opt_true = 1;
 	if (setsockopt(connect.sock, SOL_SOCKET, SO_BROADCAST, &broadcast_opt_true, sizeof(broadcast_opt_true)) != 0)
@@ -156,7 +156,7 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 	connections[connection_name].sock = socket(maker.sock_family, maker.sock_type, maker.ip_protocol);
 	if (connection_name == local_connections::broadcast)
 	{
-		ipv4_addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
+		IPV4_Addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
 		connections[local_connections::broadcast].address = get_broadcast(connections[local_connections::local].address, subnet_mask);
 		setup_broadcast_socket(connections[local_connections::broadcast], connections[local_connections::local].address);
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Broadcast IP: " + connections[local_connections::broadcast].address.get_as_string(), "Network Initalizer"));

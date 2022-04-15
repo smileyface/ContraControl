@@ -14,7 +14,7 @@
 /**
  * Common container for ipv4 address. This is a platform independant container.
  */
-struct ipv4_addr {
+struct IPV4_Addr {
     union {
         struct {
             unsigned char s_b1; ///<Byte 1
@@ -33,18 +33,18 @@ struct ipv4_addr {
      * 
      * \param string String to be split into bytes and put into S_un_b
      */
-    ipv4_addr(std::string string);
+    IPV4_Addr(std::string string);
     /**
      * \brief Construct a new ipv4 addr object from unsigned long.
      * 
-     * \param l1 A long that is the ipv4_addr. 
+     * \param l1 A long that is the IPV4_Addr. 
      */
-    ipv4_addr(unsigned long l1);
+    IPV4_Addr(unsigned long l1);
     /**
      * \brief Construct a new ipv4 addr object.
      * 
      */
-    ipv4_addr();
+    IPV4_Addr();
     /**
      * \brief Get the address byte by byte
      * 
@@ -52,14 +52,14 @@ struct ipv4_addr {
      */
     unsigned char* get_addr_bytes();
     /**
-     * \brief Get the ipv4_addr as string
+     * \brief Get the IPV4_Addr as string
      * 
      * \return std::string 
      */
     std::string get_as_string();
 
     /**
-     * \brief Set ipv4_addr with char array.
+     * \brief Set IPV4_Addr with char array.
      * 
      * \param ca The address as a char array.
      */
@@ -71,7 +71,7 @@ struct ipv4_addr {
      * \param ad Address to compare.
      * \return equal compare.
      */
-    bool operator==(const ipv4_addr ad);
+    bool operator==(const IPV4_Addr ad);
 };
 
 

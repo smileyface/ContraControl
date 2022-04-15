@@ -38,9 +38,9 @@ public:
 	char* listen(Connection_Id Connection_Id);
 
 private:
-	ipv4_addr get_interface_addr();
-	ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip);
-	void setup_broadcast_socket(Connection& connect, ipv4_addr host_ip);
+	IPV4_Addr get_interface_addr();
+	IPV4_Addr get_subnet_mask(SOCKET sock, IPV4_Addr host_ip);
+	void setup_broadcast_socket(Connection& connect, IPV4_Addr host_ip);
 	void setup_interface();
 	bool server_running;
 	struct ifaddrs* ifa;

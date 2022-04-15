@@ -2,14 +2,14 @@
 
 #include "../Utilities/Utilities/exceptions.h"
 
-Node::Node(Node_Type type)
+Node::Node(NODE_TYPE type)
 {
 	my_type = type;
 	id_pool = 0;
 }
 Node::Node()
 {
-	my_type = Node_Type::INVALID;
+	my_type = NODE_TYPE::INVALID;
 	id_pool = 0;
 }
 
@@ -78,7 +78,7 @@ Node* Node::get_connection(Node_Id id)
 	return connections[id];
 }
 
-void Node::add_connection(Node_Type type, Node_Id id)
+void Node::add_connection(NODE_TYPE type, Node_Id id)
 {
 	connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
 }

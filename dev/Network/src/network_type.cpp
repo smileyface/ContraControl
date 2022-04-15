@@ -1,7 +1,7 @@
 #include "../messages/types/network_type.h"
 #include "Utilities/exceptions.h"
 
-void Network_Messaging_Type::operator=(ipv4_addr)
+void Network_Messaging_Type::operator=(IPV4_Addr)
 {
 	throw UnimplementedFunctionException();
 }

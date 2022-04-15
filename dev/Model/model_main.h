@@ -53,7 +53,7 @@ namespace model {
 	 * \param type Type of node based off of Enum
 	 * \param id Identifier of the node that model will refer to it as.
 	 */
-	void create_node(Node_Type, Node_Id);
+	void create_node(NODE_TYPE, Node_Id);
 
 	/**
 	 * \brief A short circut for getting a device on a node using a node ID and device ID

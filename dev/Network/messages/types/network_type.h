@@ -42,7 +42,7 @@ public:
 	 * Set data to i.
 	 * \param i value to set data to.
 	 */
-	virtual void operator=(ipv4_addr i);
+	virtual void operator=(IPV4_Addr i);
 	/**
 	 * Set data to i.
 	 * \param i value to set data to.

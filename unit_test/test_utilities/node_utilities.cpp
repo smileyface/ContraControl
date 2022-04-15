@@ -11,7 +11,7 @@ void node_utilities::start_test_environment()
 
 void node_utilities::create_node(Node_Id id)
 {
-	model::create_node(Node_Type::TEST, id);
+	model::create_node(NODE_TYPE::TEST, id);
 }
 
 Device_Label node_utilities::add_device(Node_Id id, Device_Creator creator)
