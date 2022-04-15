@@ -46,6 +46,7 @@ namespace network
      * \todo make this use the network recieve buffer.
      * \param src The connection that will be sending this message.
      * \param listen_for Message to watch out for.
+     * \return Message when heard
      */
     extern Network_Message listen_for_message(Connection_Id src, MESSAGES listen_for);
 

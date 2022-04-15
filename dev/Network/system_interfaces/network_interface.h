@@ -107,7 +107,7 @@ public:
 
     /**
      * \brief Set status of the interface.
-     * \param i Status to set the interface state to.
+     * \param status Status to set the interface state to.
      */
     void set_network_state(NETWORK_STATUS status);
 

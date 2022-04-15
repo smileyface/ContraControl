@@ -19,6 +19,7 @@ enum class MESSAGES : Byte
 	NODE_HELLO,
 	/** See Node_Messages::NODE_ACK */
 	NODE_ACK,
+	/** See Node_Messages::NODE_GOODBYE */
 	NODE_GOODBYE,
 	/** Undefined message. */
 	UNDEFINED = 255
