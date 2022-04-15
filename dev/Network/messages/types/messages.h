@@ -25,6 +25,11 @@ enum class MESSAGES : Byte
 	UNDEFINED = 255
 };
 
+/**
+ * Get MESSAGES enum value in a human readable form.
+ * \param type MESSAGES value to convert to human readable.
+ * \return Human readable.
+ */
 std::string get_message_type_string(MESSAGES type);
 
 
