@@ -76,3 +76,8 @@ TEST_F(EmptyLocalNetworkTest, Messaging_Types_Unimplemented)
 	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[0] = true; });
 	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[1] = IPV4_Addr(); });
 }
+
+TEST_F(EmptyLocalNetworkTest, Unfound_Address)
+{
+	testing_utilities::network_utilities::expect_exception([]() { network::init_network_interfaces("errors"); }, NETWORK_ERRORS::ADDRESS_ERROR);
+}

@@ -1,7 +1,7 @@
 #ifndef TESTING_UTILITIES_H
 #define TESTING_UTILITIES_H
 
-#define DEBUG
+//#define DEBUG
 
 #include <utility>
 #include <functional>

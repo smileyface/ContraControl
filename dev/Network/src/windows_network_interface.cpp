@@ -91,56 +91,14 @@ IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname,
 	PIP_ADAPTER_ADDRESSES pAddresses = NULL;
     PIP_ADAPTER_ADDRESSES pCurrAddresses = NULL;
 	PMIB_IPADDRTABLE pIPAddrTable;
-	MIB_IPADDRROW found_ip = MIB_IPADDRROW();
+	IPV4_Addr found_ip;
 
     struct sockaddr_in* sockaddr_ipv4 = 0;
     // Allocate a 15 KB buffer to start with.
     outBufLen = WORKING_BUFFER_SIZE;
 
     pAddresses = (IP_ADAPTER_ADDRESSES*)MALLOC(outBufLen);
-	pIPAddrTable = (MIB_IPADDRTABLE*)MALLOC(sizeof(MIB_IPADDRTABLE));
-    if (pAddresses == NULL) {
-		status_state.set_error(NETWORK_ERRORS::NETWORK_CODE_ERROR);
-		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Unable to create address location", "Address Memory Allocation"));
-		throw NetworkErrorException();
-    }
 
-	if (pIPAddrTable) {
-		// Make an initial call to GetIpAddrTable to get the
-		// necessary size into the dwSize variable
-		if (GetIpAddrTable(pIPAddrTable, &dwSize, 0) ==
-			ERROR_INSUFFICIENT_BUFFER) {
-			FREE(pIPAddrTable);
-			pIPAddrTable = (MIB_IPADDRTABLE*)MALLOC(dwSize);
-
-		}
-		if (pIPAddrTable == NULL) {
-			status_state.set_error(NETWORK_ERRORS::UNINITALIZED_INTERFACE);
-			network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Unable to get IP Address Table", "Getting IP Addr Table"));
-			throw NetworkErrorException();
-		}
-	}
-
-	if ((dwRetVal = GetIpAddrTable(pIPAddrTable, &dwSize, 0)) != NO_ERROR) {
-		printf("GetIpAddrTable failed with error %d\n", dwRetVal);
-		if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, dwRetVal, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),       // Default language
-			(LPTSTR)&lpMsgBuf, 0, NULL)) {
-			status_state.set_error(NETWORK_ERRORS::UNKNOWN_ERROR);
-			network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, (LPTSTR)lpMsgBuf, "Getting IP Addr Table"));
-			LocalFree(lpMsgBuf);
-			throw NetworkErrorException();
-		}
-	}
-
-	if ((int)pIPAddrTable->dwNumEntries == 1)
-	{
-		found_ip = pIPAddrTable->table[0];
-	}
-	else if ((int)pIPAddrTable->dwNumEntries == 2 && pIPAddrTable->table[1].dwAddr == IPV4_Addr("127.0.0.1").S_un.S_addr)
-	{
-		found_ip = pIPAddrTable->table[0];
-	}
-	
     dwRetVal =
         GetAdaptersAddresses(family, flags, NULL, pAddresses, &outBufLen);
 
@@ -157,27 +115,28 @@ IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname,
 	for (PIP_ADAPTER_ADDRESSES pCurrAddresses = pAddresses; pCurrAddresses; pCurrAddresses = pCurrAddresses->Next)
 	{
 		IN_ADDR IPAddr{};
-		if (found_ip.dwAddr != MAXDWORD && pCurrAddresses->FriendlyName == a)
+		if (found_ip == ULONG_MAX && pCurrAddresses->FriendlyName == a && pCurrAddresses->FirstUnicastAddress->Address.lpSockaddr->sa_family == family)
 		{
 			std::wstring thing(pCurrAddresses->FriendlyName);
 			std::string friend_name = std::string(thing.begin(), thing.end());
-			IPAddr.S_un.S_addr = (u_long)pIPAddrTable->table[i].dwAddr;
+			sockaddr_in* address = (sockaddr_in*)pCurrAddresses->FirstUnicastAddress->Address.lpSockaddr;
+			found_ip.S_un.S_addr = address->sin_addr.S_un.S_addr;
 			char str[INET_ADDRSTRLEN];
 			// now get it back and print it
-			inet_ntop(AF_INET, &(IPAddr), str, INET_ADDRSTRLEN);
-			std::string message = friend_name + ": " + str;
+			std::string message = friend_name + ": " + found_ip.get_as_string();
 			network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, message, "Local interface connection"));
 		}
+	}
+	if (found_ip == ULONG_MAX)
+	{
+		status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
+		throw NetworkErrorException();
 	}
     if (pAddresses) 
     {
         FREE(pAddresses);
     }
-	if (pIPAddrTable) {
-		FREE(pIPAddrTable);
-		pIPAddrTable = NULL;
-	}
-    return IPV4_Addr(found_ip.dwAddr);
+    return found_ip;
 }
 
 IPV4_Addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, IPV4_Addr host_ip)
