@@ -15,7 +15,9 @@ pthread_t server_thread;
 
 IPV4_Addr get_broadcast(IPV4_Addr host_ip, IPV4_Addr net_mask)
 {
-	return host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
+	IPV4_Addr bcast;
+	bcast = host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
+	return bcast;
 }
 
 IPV4_Addr Linux_Network_Interface::get_interface_addr()
