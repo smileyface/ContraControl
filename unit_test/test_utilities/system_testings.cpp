@@ -120,7 +120,7 @@ void system_utilities::network_utilities::setup()
 			network::init_network_interfaces("nat");
 #endif // __linux
 #ifdef _WIN32
-			network::init_network_interfaces("vEthernet(nat)");
+			network::init_network_interfaces("vEthernet (nat)");
 #endif
 
 			
