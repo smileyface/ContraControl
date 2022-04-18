@@ -70,6 +70,8 @@ IPV4_Addr Windows_Network_Interface::get_broadcast(IPV4_Addr host_ip, IPV4_Addr 
 }
 IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname, std::string interfaces)
 {
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Searching for " + interfaces, "Interface Finding"));
+
     /* Declare and initialize variables */
 
     DWORD dwRetVal = 0;
