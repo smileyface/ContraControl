@@ -115,9 +115,11 @@ IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname,
 	for (PIP_ADAPTER_ADDRESSES pCurrAddresses = pAddresses; pCurrAddresses; pCurrAddresses = pCurrAddresses->Next)
 	{
 		IN_ADDR IPAddr{};
+		std::wstring thing(pCurrAddresses->FriendlyName);
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface " + std::string(thing.begin(), thing.end()) + " found", "Interface Finding"));
 		if (found_ip == ULONG_MAX && pCurrAddresses->FriendlyName == a && pCurrAddresses->FirstUnicastAddress->Address.lpSockaddr->sa_family == family)
 		{
-			std::wstring thing(pCurrAddresses->FriendlyName);
+			
 			std::string friend_name = std::string(thing.begin(), thing.end());
 			sockaddr_in* address = (sockaddr_in*)pCurrAddresses->FirstUnicastAddress->Address.lpSockaddr;
 			found_ip.S_un.S_addr = address->sin_addr.S_un.S_addr;
