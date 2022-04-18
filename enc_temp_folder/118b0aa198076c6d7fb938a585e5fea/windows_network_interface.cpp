@@ -114,8 +114,7 @@ IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname,
 	{
 		IN_ADDR IPAddr{};
 		std::wstring thing(pCurrAddresses->FriendlyName);
-		std::wstring dns(pCurrAddresses->DnsSuffix);
-		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface " + std::string(thing.begin(), thing.end()) + " found with DNS suffix: " + std::string(dns.begin(), dns.end()), "Interface Finding"));
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface " + std::string(thing.begin(), thing.end()) + " found", "Interface Finding"));
 		if (found_ip == INVALID_ADDRESS && pCurrAddresses->FriendlyName == a && pCurrAddresses->FirstUnicastAddress->Address.lpSockaddr->sa_family == family)
 		{
 			std::string friend_name = std::string(thing.begin(), thing.end());

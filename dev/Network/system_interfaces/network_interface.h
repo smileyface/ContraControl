@@ -75,7 +75,7 @@ public:
      * 
      * \param hostname Name to set.
      */
-    void set_hostname(std::string hostname);
+    void set_hostname(const std::string& hostname);
     /**
      * \brief setup a connection, either local or remote.
      * 
@@ -103,7 +103,7 @@ public:
      * \brief Setup network interface as a given interface.
      * \param i Given interface.
      */
-    void set_interface(std::string i);
+    void set_interface(const std::string& i);
 
     /**
      * \brief Set status of the interface.

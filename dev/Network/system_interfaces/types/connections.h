@@ -29,7 +29,7 @@ struct Connection
 	/** Socket to communicate through. Type is different for Windows v. Linux */
 	SOCKET sock = INVALID_SOCKET;
 	/** Address of the remote node. */
-	IPV4_Addr address = 0;
+	IPV4_Addr address = INVALID_ADDRESS;
 };
 
 /** A handle for a connection to the remote node. Should correlate to \ref Node_Id. */

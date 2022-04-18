@@ -8,9 +8,19 @@ IPV4_Addr::IPV4_Addr()
 	S_un.S_addr = ULONG_MAX;
 }
 
-IPV4_Addr::IPV4_Addr(std::string str_addr)
+IPV4_Addr::IPV4_Addr(const char* string)
 {
+	operator=(string);
+}
 
+IPV4_Addr::IPV4_Addr(unsigned long l1)
+{
+	operator=(l1);
+}
+
+void IPV4_Addr::operator=(const char* string)
+{
+	std::string str_addr = std::string(string);
 	size_t pos = 0;
 	S_un = { 0,0,0,0 };
 	std::vector<unsigned char> bytes;
@@ -32,7 +42,8 @@ IPV4_Addr::IPV4_Addr(std::string str_addr)
 	}
 }
 
-IPV4_Addr::IPV4_Addr(unsigned long l1)
+
+void IPV4_Addr::operator=(unsigned long l1)
 {
 	S_un.S_addr = l1;
 }

@@ -7,12 +7,12 @@ void Network_Interface::set_client()
 	is_server = false;
 }
 
-void Network_Interface::set_hostname(std::string host)
+void Network_Interface::set_hostname(const std::string& host)
 {
 	hostname = host;
 }
 
-void Network_Interface::set_interface(std::string i)
+void Network_Interface::set_interface(const std::string& i)
 {
 	interfaces = i;
 	//The network messenger interface is not set up yet.

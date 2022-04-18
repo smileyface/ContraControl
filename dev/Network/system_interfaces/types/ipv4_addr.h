@@ -29,22 +29,23 @@ struct IPV4_Addr {
         unsigned long S_addr; ///<Address as long
     } S_un; ///<Address structure
     /**
-     * \brief Construct a new ipv4 addr object from string
-     * 
-     * \param string String to be split into bytes and put into S_un_b
-     */
-    IPV4_Addr(std::string string);
-    /**
-     * \brief Construct a new ipv4 addr object from unsigned long.
-     * 
-     * \param l1 A long that is the IPV4_Addr. 
-     */
-    IPV4_Addr(unsigned long l1);
-    /**
      * \brief Construct a new ipv4 addr object.
      * 
      */
     IPV4_Addr();
+
+    /**
+    * \brief Construct a new ipv4 addr object from string
+    *
+    * \param string String to be split into bytes and put into S_un_b
+    */
+    explicit IPV4_Addr(const char* string);
+    /**
+     * \brief Construct a new ipv4 addr object from unsigned long.
+     *
+     * \param l1 A long that is the IPV4_Addr.
+     */
+    explicit IPV4_Addr(unsigned long l1);
     /**
      * \brief Get the address byte by byte
      * 
@@ -57,13 +58,26 @@ struct IPV4_Addr {
      * \return std::string 
      */
     std::string get_as_string();
-
+    /**
+    * \brief Construct a new ipv4 addr object from string
+    *
+    * \param string String to be split into bytes and put into S_un_b
+    */
+    void operator=(const char* string);
+    /**
+     * \brief Construct a new ipv4 addr object from unsigned long.
+     *
+     * \param l1 A long that is the IPV4_Addr.
+     */
+    void operator=(unsigned long l1);
     /**
      * \brief Set IPV4_Addr with char array.
      * 
      * \param ca The address as a char array.
      */
     void operator=(const unsigned char* ca);
+
+
 
     /**
      * \brief Compare 2 ipv4_addrs.
@@ -74,5 +88,9 @@ struct IPV4_Addr {
     bool operator==(const IPV4_Addr ad);
 };
 
+/**
+ * Constant for an invalid ipv4 address
+ */
+const IPV4_Addr INVALID_ADDRESS = IPV4_Addr();
 
 #endif // !NETWORK_TYPE_IPV4_ADDR
