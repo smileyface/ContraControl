@@ -21,11 +21,11 @@
 /**
  * Base class for other messages.
  */
-class MESSAGE 
+class Network_Message 
 {
 public:
 	/** Default constructor. Set type to UNDEFINED */
-	MESSAGE();
+	Network_Message();
 
 	/**
 	 * Create a message.
@@ -33,15 +33,15 @@ public:
 	 * \param message_type Type of message created.
 	 * \param types the types of data contained in the message.
 	 */
-	MESSAGE(MESSAGES message_type, std::vector<Network_Messaging_Type*> types);
+	Network_Message(MESSAGES message_type, std::vector<Network_Messaging_Type*> types);
 	/**
-	 * Boil the MESSAGE down to an array of bytes that can be padded with a header and footer and shipped on the network.
+	 * Boil the Network_Message down to an array of bytes that can be padded with a header and footer and shipped on the network.
 	 * 
 	 * \return Byte array of the message.
 	 */
 	std::vector<Byte> pack();
 	/**
-	 * Size of the array of bytes produced by MESSAGE::pack()
+	 * Size of the array of bytes produced by Network_Message::pack()
 	 * 
 	 * \return Size of array.
 	 */
@@ -82,22 +82,22 @@ private:
  * |  01-24  | 25-n  | n+1-n+16|
  * |  Header |Message|  Footer |
  */
-struct PACKED_MESSAGE
+struct Packed_Message
 {
 
-	PACKED_MESSAGE() {  };
+	Packed_Message() {  };
 
 	/**
-	 * Constructor that sets a message up by accepting a MESSAGE type.
+	 * Constructor that sets a message up by accepting a Network_Message type.
 	 * \param message Message to be the main body of the message sent on the network.
 	 */
-	PACKED_MESSAGE(MESSAGE message);
+	Packed_Message(Network_Message message);
 
 	/**
 	 * Constructor that sets the message data by a packet.
 	 * \param pack A packet to be unpacked into the message type.
 	 */
-	PACKED_MESSAGE(Byte_Array pack);
+	Packed_Message(Byte_Array pack);
 
 
 	/**
@@ -112,16 +112,21 @@ struct PACKED_MESSAGE
 	 * \param mess Reference to a message body. This param will contain the messages data.
 	 * \param foot Reference to a message footer. This param will contain the messages footer.
 	 */
-	void get_message(MESSAGE_HEADER& head, MESSAGE& mess, MESSAGE_FOOTER& foot);
+	void get_message(Message_Header& head, Network_Message& mess, Message_Footer& foot);
+
+	/**
+	 * \return what this message is.
+	 */
+	MESSAGES get_message_type();
 private:
 	/** Header */
-	MESSAGE_HEADER header;
+	Message_Header header;
 	/** Message to pack */
-	MESSAGE message;
+	Network_Message message;
 	/** Message as a packed string */
 	std::vector<Byte> packet;
 	/** Footer, mainly checksums */
-	MESSAGE_FOOTER footer;
+	Message_Footer footer;
 
 	/**
 	* Get MESSAGES based on byte 2 of the header.

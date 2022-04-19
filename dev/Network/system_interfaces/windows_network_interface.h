@@ -40,12 +40,12 @@ public:
 
 	
 private:
-	bool ipv4_compare(sockaddr_in* win_address, ipv4_addr gen_address);
-	ipv4_addr convert_win_address(sockaddr_in* win_address);
-	void setup_broadcast_socket(Connection& connect, ipv4_addr host_ip);
-	ipv4_addr get_subnet_mask(SOCKET sock, ipv4_addr host_ip);
-	ipv4_addr get_interface_address(std::string hostname, std::string interfaces);
-	ipv4_addr get_broadcast(ipv4_addr host_ip, ipv4_addr net_mask);
+	bool ipv4_compare(sockaddr_in* win_address, IPV4_Addr gen_address);
+	IPV4_Addr convert_win_address(sockaddr_in* win_address);
+	void setup_broadcast_socket(Connection& connect, IPV4_Addr host_ip);
+	IPV4_Addr get_subnet_mask(SOCKET sock, IPV4_Addr host_ip);
+	IPV4_Addr get_interface_address(std::string hostname, std::string interfaces);
+	IPV4_Addr get_broadcast(IPV4_Addr host_ip, IPV4_Addr net_mask);
 	NETWORK_ERRORS set_error_state(int err_code = -1);
 };
 

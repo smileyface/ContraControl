@@ -75,7 +75,7 @@ public:
      * 
      * \param hostname Name to set.
      */
-    void set_hostname(std::string hostname);
+    void set_hostname(const std::string& hostname);
     /**
      * \brief setup a connection, either local or remote.
      * 
@@ -103,13 +103,30 @@ public:
      * \brief Setup network interface as a given interface.
      * \param i Given interface.
      */
-    void set_interface(std::string i);
+    void set_interface(const std::string& i);
+
+    /**
+     * \brief Set status of the interface.
+     * \param status Status to set the interface state to.
+     */
+    void set_network_state(NETWORK_STATUS status);
+
+    /**
+     * \param connection Name of the desired connection.
+     * \return Desired Connection.
+     */
+    Connection get_connection(Connection_Id connection);
+
+    /**
+     * \return Hostname of local.
+     */
+    std::string get_hostname();
 
    //Constants
    /**
     * \brief localhost address
     */
-    const ipv4_addr localhost = ipv4_addr("127.0.0.1");
+    const IPV4_Addr localhost = IPV4_Addr("127.0.0.1");
 protected:
     /**
      * \brief Is the local node a server.

@@ -166,12 +166,12 @@ void Network_Address::unpack(Byte_Array& byte_string)
 	byte_string.erase(byte_string.begin(), byte_string.begin() + 4);
 }
 
-void Network_Address::operator=(ipv4_addr assigner)
+void Network_Address::operator=(IPV4_Addr assigner)
 {
 	address = assigner;
 }
 
-ipv4_addr Network_Address::get_data()
+IPV4_Addr Network_Address::get_data()
 {
 	return address;
 }

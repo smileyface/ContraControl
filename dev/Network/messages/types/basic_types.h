@@ -26,7 +26,7 @@ public:
 	*/
 	Byte get_data();
 private:
-	Byte number;
+	Byte number = 0;
 };
 
 /** A word to send over the network. This value can be negative. */
@@ -43,7 +43,7 @@ public:
 	*/
 	short get_data();
 private:
-	short number;
+	short number = 0;
 };
 
 /** A percentage to send over the network. There is an integer and a decimal. */
@@ -60,8 +60,8 @@ public:
 	*/
 	float get_data();
 private:
-	Byte integer;
-	Byte decimal;
+	Byte integer = 0;
+	Byte decimal = 0;
 };
 
 /** A string to send over the network. There is a byte for size and then that many bytes following. */
@@ -78,8 +78,8 @@ public:
 	 */
 	std::pair<Byte, std::string> get_data();
 private:
-	unsigned char length;
-	std::string message;
+	unsigned char length = 0;
+	std::string message = "";
 };
 
 /** A boolean to send over the network. This is a byte to save work with bit shifting. */
@@ -96,7 +96,7 @@ public:
 	*/
 	bool get_data();
 private:
-	Byte boolean;
+	Byte boolean = false;
 };
 
 /** An IPV4 address to send over the network. It's a series of 4 bytes. */
@@ -106,14 +106,14 @@ public:
 	Byte size();
 	Byte_Array pack();
 	void unpack(Byte_Array&);
-	void operator=(ipv4_addr);
+	void operator=(IPV4_Addr);
 	/**
 	 * Return the address.
 	 * \return data.
 	 */
-	ipv4_addr get_data();
+	IPV4_Addr get_data();
 private:
-	ipv4_addr address;
+	IPV4_Addr address = IPV4_Addr();
 };
 
 #endif

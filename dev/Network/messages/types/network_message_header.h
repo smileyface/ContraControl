@@ -18,7 +18,7 @@
  * |  01-08  |09-16 |   17-24  |
  * |pkt start|msg id|pkt length|
  */
-struct MESSAGE_HEADER
+struct Message_Header
 {
 	/** Beginning bit for the message */
 	Byte message_start = 0x65;
@@ -28,7 +28,7 @@ struct MESSAGE_HEADER
 	Byte length = 6;
 
 	/**
-	* Boil the MESSAGE_HEADER down to an array of bytes that slapped at the beginning of a MESSAGE and sent across the network.
+	* Boil the Message_Header down to an array of bytes that slapped at the beginning of a Network_Message and sent across the network.
 	* It is mostly metadata about the message being sent.
 	*
 	* \return Byte array of the header.
@@ -36,7 +36,7 @@ struct MESSAGE_HEADER
 	std::vector<Byte> pack();
 
 	/**
-	 * Expand the MESSAGE_HEADER to the object.
+	 * Expand the Message_Header to the object.
 	 *
 	 * \param byte_array_message Array of bytes to put in the objects.
 	 */

@@ -157,11 +157,11 @@ void testing_utilities::network_utilities::network_message_utilities::check_head
 	EXPECT_EQ(size, p_message[2]) << "Incorrect Packet Size";
 }
 
-void testing_utilities::network_utilities::network_message_utilities::compare_messages(PACKED_MESSAGE m1, PACKED_MESSAGE m2)
+void testing_utilities::network_utilities::network_message_utilities::compare_messages(Packed_Message m1, Packed_Message m2)
 {
-	MESSAGE_HEADER p_header, b_header;
-	MESSAGE p_body, b_body;
-	MESSAGE_FOOTER p_footer, b_footer;
+	Message_Header p_header, b_header;
+	Network_Message p_body, b_body;
+	Message_Footer p_footer, b_footer;
 	m1.get_message(p_header, p_body, p_footer);
 	m2.get_message(b_header, b_body, b_footer);
 	if (p_body.size() != b_body.size())
@@ -173,8 +173,8 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 	{
 		if (typeid(p_body[i]) == typeid(Network_Address))
 		{
-			ipv4_addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
-			ipv4_addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
+			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
+			IPV4_Addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
 			if (p_addr == b_addr)
 			{
 				SUCCEED();
@@ -228,4 +228,22 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)
 {
 	EXPECT_EQ(model::model_running, is_running);
+}
+
+void testing_utilities::error_utilities::check_override_failure(std::function<void()> function)
+{
+	try
+	{
+		function();
+	}
+	catch (UnimplementedFunctionException)
+	{
+		SUCCEED();
+		return;
+	}
+	catch (...)
+	{
+		FAIL() << "Wrong exception thrown";
+	}
+	FAIL() << "No exception thrown";
 }

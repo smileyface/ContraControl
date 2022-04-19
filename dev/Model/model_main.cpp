@@ -35,7 +35,7 @@ Node* model::get_node(Node_Id id)
 	return my_node.get_connection(id);
 }
 
-void model::create_node(Node_Type type, Node_Id id)
+void model::create_node(NODE_TYPE type, Node_Id id)
 {
 	my_node.add_connection(type, id);
 }

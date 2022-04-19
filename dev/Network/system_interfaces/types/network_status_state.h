@@ -17,6 +17,10 @@ enum class NETWORK_STATUS : unsigned char
     NETWORK_ERROR,
     /** Network is initalized */
     NETWORK_INITALIZED,
+    /** Client has started, but has not connected to server yet. */
+    CLIENT_AWAKE,
+    /** Client is waiting for server to send a response */
+    CLIENT_WAIT,
     /** Client is connected */
     CLIENT_CONNECT,
     /** Server is listening for clients */
