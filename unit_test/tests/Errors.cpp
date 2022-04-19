@@ -12,7 +12,7 @@
 #endif
 
 namespace {
-	class EmptyLocalNetworkTest : public ::testing::Test {
+	class Network_Error_Test : public ::testing::Test {
 		virtual void SetUp() {
 			system_utilities::setup_messaging();
 		}
@@ -25,7 +25,7 @@ namespace {
 
 /** System Specific interfaces */
 #ifdef _WIN32
-TEST_F(EmptyLocalNetworkTest, Error_States_Initialize_System_Interface_Error)
+TEST_F(Network_Error_Test, Error_States_Initialize_System_Interface_Error)
 {
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);
 	wVersionRequested = MAKEWORD(0, 0);
@@ -35,7 +35,7 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Initialize_System_Interface_Error)
 #endif
 
 
-TEST_F(EmptyLocalNetworkTest, Error_States_Initalized)
+TEST_F(Network_Error_Test, Error_States_Initalized)
 {
 	system_utilities::network_utilities::setup();
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
@@ -46,7 +46,7 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Initalized)
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);
 }
 
-TEST_F(EmptyLocalNetworkTest, Error_States_Broadcast_Setup)
+TEST_F(Network_Error_Test, Error_States_Broadcast_Setup)
 {
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::SOCKET_INVALID);
@@ -65,7 +65,7 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
 }
 */
 
-TEST_F(EmptyLocalNetworkTest, Messaging_Types_Unimplemented)
+TEST_F(Network_Error_Test, Messaging_Types_Unimplemented)
 {
 
 	Network_Message message = node_messages::network_message_factory(MESSAGES::NODE_HELLO);
@@ -77,7 +77,7 @@ TEST_F(EmptyLocalNetworkTest, Messaging_Types_Unimplemented)
 	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[1] = IPV4_Addr(); });
 }
 
-TEST_F(EmptyLocalNetworkTest, Unfound_Address)
+TEST_F(Network_Error_Test, Unfound_Address)
 {
 	testing_utilities::network_utilities::expect_exception([]() { network::init_network_interfaces("errors"); }, NETWORK_ERRORS::ADDRESS_ERROR);
 }

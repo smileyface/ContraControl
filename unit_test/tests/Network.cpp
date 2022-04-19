@@ -17,7 +17,7 @@
 #define ARRAY_LENGTH(array) (sizeof(array)/sizeof((array)[0]))
 
 namespace {
-	class LocalNetworkTest : public ::testing::Test {
+	class Local_Network_Test : public ::testing::Test {
 		virtual void SetUp() {
 			system_utilities::network_utilities::setup();
 		}
@@ -29,13 +29,13 @@ namespace {
 }
 
 
-TEST_F(LocalNetworkTest, Network_SetUp)
+TEST_F(Local_Network_Test, Network_SetUp)
 {
 	/** Start in server mode */
 	testing_utilities::network_utilities::check_initalized();
 }
 
-TEST_F(LocalNetworkTest, Server_Start_Up)
+TEST_F(Local_Network_Test, Server_Start_Up)
 {
 	/** Start in server mode */
 	try
@@ -54,7 +54,7 @@ TEST_F(LocalNetworkTest, Server_Start_Up)
 	}
 }
 
-TEST_F(LocalNetworkTest, Client_Start_Up)
+TEST_F(Local_Network_Test, Client_Start_Up)
 {
 	/** Start in server mode */	
 	try

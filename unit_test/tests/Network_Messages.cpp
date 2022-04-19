@@ -9,7 +9,7 @@
 #include "../../Network/network_main.h"
 #include "../../Network/messages.h"
 namespace {
-	class NetworkMessagingCreationTest : public ::testing::Test {
+	class Network_Messaging_Test : public ::testing::Test {
 
 		virtual void SetUp() {
 			system_utilities::setup();
@@ -21,7 +21,7 @@ namespace {
 	};
 }
 
-TEST_F(NetworkMessagingCreationTest, Message_Type)
+TEST_F(Network_Messaging_Test, Message_Type)
 {
 	IPV4_Addr address;
 	std::string node_name = "Test_Node";
@@ -38,7 +38,7 @@ TEST_F(NetworkMessagingCreationTest, Message_Type)
 	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
 }
 
-TEST_F(NetworkMessagingCreationTest, Message_NODE_HELLO)
+TEST_F(Network_Messaging_Test, Message_NODE_HELLO)
 {
 	IPV4_Addr address("127.0.0.1");
 	std::string node_name = "Test_Node";
@@ -51,7 +51,7 @@ TEST_F(NetworkMessagingCreationTest, Message_NODE_HELLO)
 	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
 }
 
-TEST_F(NetworkMessagingCreationTest, Message_NODE_ACK)
+TEST_F(Network_Messaging_Test, Message_NODE_ACK)
 {
 	std::string node_name = "Test_Node";
 	Network_Message message = node_messages::network_message_factory(MESSAGES::NODE_ACK);
@@ -62,7 +62,7 @@ TEST_F(NetworkMessagingCreationTest, Message_NODE_ACK)
 	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
 }
 
-TEST_F(NetworkMessagingCreationTest, Message_NODE_UNDEF)
+TEST_F(Network_Messaging_Test, Message_NODE_UNDEF)
 {
 
 }
