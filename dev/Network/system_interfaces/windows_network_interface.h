@@ -1,7 +1,7 @@
 /*****************************************************************//**
  * \file   windows_network_interface.h
- * \brief  
- * 
+ * \brief
+ *
  * \author kason
  * \date   October 2021
  *********************************************************************/
@@ -35,10 +35,8 @@ public:
 	void clean_up();
 
 	void send(Connection_Id node_id, char* message);
-	char* listen(Connection_Id connection_name);
+	Byte_Array receive(SOCKET socket, int size_to_recieve);
 
-
-	
 private:
 	bool ipv4_compare(sockaddr_in* win_address, IPV4_Addr gen_address);
 	IPV4_Addr convert_win_address(sockaddr_in* win_address);
@@ -48,7 +46,6 @@ private:
 	IPV4_Addr get_broadcast(IPV4_Addr host_ip, IPV4_Addr net_mask);
 	NETWORK_ERRORS set_error_state(int err_code = -1);
 };
-
 
 #endif
 #endif

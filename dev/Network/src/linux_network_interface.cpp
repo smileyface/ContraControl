@@ -35,7 +35,7 @@ IPV4_Addr Linux_Network_Interface::get_subnet_mask(SOCKET sock, IPV4_Addr host_i
 	char* s = "255.255.255.255";
 	int found = 0;
 
-	struct sockaddr_in* sa = (struct sockaddr_in*)ifa->ifa_netmask;
+	struct sockaddr_in* sa = (struct sockaddr_in*) ifa->ifa_netmask;
 	s = inet_ntoa(sa->sin_addr);
 	return IPV4_Addr(s);
 }
@@ -44,7 +44,7 @@ void Linux_Network_Interface::setup_interface()
 {
 	struct ifaddrs* ifap;
 	int found = 0;
-	if (getifaddrs(&ifap) == -1)
+	if(getifaddrs(&ifap) == -1)
 	{
 		perror("getifaddrs");
 		exit(EXIT_FAILURE);
@@ -52,15 +52,15 @@ void Linux_Network_Interface::setup_interface()
 
 	System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface trying to find is " + interfaces, "Finding Interface"));
 	ifa = ifap;
-	while (ifa && !found)
+	while(ifa && !found)
 	{
-		if (ifa->ifa_addr->sa_family == AF_INET)
+		if(ifa->ifa_addr->sa_family == AF_INET)
 		{
 			char host[NI_MAXHOST];
 			getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
 			System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, std::string(ifa->ifa_name) + " " + host, "Finding Interface"));
 		}
-		if (ifa->ifa_addr != NULL && strcasecmp(interfaces.c_str(), ifa->ifa_name) == 0 && ifa->ifa_addr->sa_family == AF_INET)
+		if(ifa->ifa_addr != NULL && strcasecmp(interfaces.c_str(), ifa->ifa_name) == 0 && ifa->ifa_addr->sa_family == AF_INET)
 		{
 			found = 1;
 			break;
@@ -69,7 +69,7 @@ void Linux_Network_Interface::setup_interface()
 	}
 
 	freeifaddrs(ifap);
-	if (found == 0)
+	if(found == 0)
 	{
 		System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "No Adapter Found", "Finding Interface"));
 		status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
@@ -79,12 +79,12 @@ void Linux_Network_Interface::setup_interface()
 
 NETWORK_ERRORS set_error_state()
 {
-	switch (errno)
+	switch(errno)
 	{
 	case EISCONN:
 		return NETWORK_ERRORS::SOCKET_BUSY;
 		break;
-	//This is only essential for using ipv6. So I'm ignoring.
+		//This is only essential for using ipv6. So I'm ignoring.
 	case EAFNOSUPPORT:
 		break;
 	case EADDRINUSE:
@@ -116,7 +116,7 @@ void Linux_Network_Interface::initalize()
 {
 	char hostname_temp[50];
 	int rc = gethostname(hostname_temp, sizeof(hostname_temp));
-	if (rc != 0) 
+	if(rc != 0)
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
 		throw NetworkErrorException();
@@ -134,7 +134,7 @@ void Linux_Network_Interface::clean_up()
 {
 	server_running = false;
 	pthread_join(server_thread, 0);
-	for (auto i = connections.begin(); i != connections.end(); ++i)
+	for(auto i = connections.begin(); i != connections.end(); ++i)
 	{
 		close(i->second.sock);
 	}
@@ -143,7 +143,7 @@ void Linux_Network_Interface::clean_up()
 void Linux_Network_Interface::setup_broadcast_socket(Connection& connect, IPV4_Addr host_ip)
 {
 	int broadcast_opt_true = 1;
-	if (setsockopt(connect.sock, SOL_SOCKET, SO_BROADCAST, &broadcast_opt_true, sizeof(broadcast_opt_true)) != 0)
+	if(setsockopt(connect.sock, SOL_SOCKET, SO_BROADCAST, &broadcast_opt_true, sizeof(broadcast_opt_true)) != 0)
 	{
 		status_state.set_error(set_error_state());
 		close(connect.sock);
@@ -152,34 +152,32 @@ void Linux_Network_Interface::setup_broadcast_socket(Connection& connect, IPV4_A
 	}
 }
 
-
 void Linux_Network_Interface::setup_connection(Connection_Id connection_name, Socket_Maker maker)
 {
 	connections[connection_name].sock = socket(maker.sock_family, maker.sock_type, maker.ip_protocol);
-	if (connection_name == local_connections::broadcast)
+	if(connection_name == local_connections::broadcast)
 	{
 		IPV4_Addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
 		connections[local_connections::broadcast].address = get_broadcast(connections[local_connections::local].address, subnet_mask);
 		setup_broadcast_socket(connections[local_connections::broadcast], connections[local_connections::local].address);
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Broadcast IP: " + connections[local_connections::broadcast].address.get_as_string(), "Network Initalizer"));
 	}
-	if (connection_name == local_connections::local)
+	if(connection_name == local_connections::local)
 	{
 		connections[local_connections::local].address = get_interface_addr();
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
 	}
-	
 }
 
 void Linux_Network_Interface::initalized()
 {
-	if (hostname == INVALID_HOSTNAME)
+	if(hostname == INVALID_HOSTNAME)
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
 		throw NetworkErrorException();
 	}
-	if (connections[local_connections::local].sock < 0 ||
-		connections[local_connections::broadcast].sock < 0)
+	if(connections[local_connections::local].sock < 0 ||
+	   connections[local_connections::broadcast].sock < 0)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
 		throw NetworkErrorException();
@@ -189,12 +187,15 @@ void Linux_Network_Interface::initalized()
 
 void Linux_Network_Interface::send(std::string node_id, char* message)
 {
-	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*)&connections[node_id].address, sizeof(connections[node_id].address));
+	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*) &connections[node_id].address, sizeof(connections[node_id].address));
 }
 
-char* Linux_Network_Interface::listen(Connection_Id Connection_Id)
+Byte_Array Linux_Network_Interface::receive(SOCKET socket, int size_to_recieve)
 {
-
+	char buffer[256];
+	int result = recv(socket, buffer, 256, 0);
+	Byte_Array buff(buffer, buffer + size_to_recieve);
+	return buff;
 }
 
 #endif //__linux__
