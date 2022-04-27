@@ -173,7 +173,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 	for(int i = 0; i < p_body.get_message().size(); i++)
 	{
 		std::string types = str_type(p_body[i]);
-		if(types == "class Network_Address")
+		if(types == typeid(Network_Address).name())
 		{
 			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
 			IPV4_Addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
