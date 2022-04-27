@@ -6,8 +6,8 @@
                       "tests/Network_Messages.cpp" "tests/Errors.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h" 
-                           "test_utilities/system_testings.h" 
-                           "test_utilities/system_testings.cpp"  
+                           "test_utilities/system_utilities.h" 
+                           "test_utilities/system_utilities.cpp"  
                            "test_utilities/module_mains.h" 
                            "test_utilities/test_utilities.h" 
                            "test_utilities/test_utilities.cpp" 
