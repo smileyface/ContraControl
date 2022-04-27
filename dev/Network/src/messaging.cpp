@@ -10,7 +10,7 @@ Packed_Message::Packed_Message(Network_Message in_message)
 	message = in_message;
 	header.message_id = in_message.get_type();
 	size_t size = sizeof(header) + message.size() + sizeof(footer);
-	if (size > 255)
+	if(size > 255)
 	{
 		//TODO: throw an error of invalid packet
 	}
@@ -43,7 +43,7 @@ std::vector<Byte> Message_Header::pack()
 {
 	std::vector<Byte> packet;
 	packet.push_back(message_start);
-	packet.push_back((Byte)message_id);
+	packet.push_back((Byte) message_id);
 	packet.push_back(length);
 
 	return packet;
@@ -66,7 +66,7 @@ void generate_crc_table()
 	/*
 	 * Compute the remainder of each possible dividend.
 	 */
-	for (int dividend = 0; dividend < 256; ++dividend)
+	for(int dividend = 0; dividend < 256; ++dividend)
 	{
 		/*
 		 * Start with the dividend followed by zeros.
@@ -76,12 +76,12 @@ void generate_crc_table()
 		/*
 		 * Perform modulo-2 division, a bit at a time.
 		 */
-		for (Byte bit = 8; bit > 0; --bit)
+		for(Byte bit = 8; bit > 0; --bit)
 		{
 			/*
 			 * Try to divide the current data bit.
 			 */
-			if (remainder & TOPBIT)
+			if(remainder & TOPBIT)
 			{
 				remainder = (remainder << 1) ^ POLYNOMIAL;
 			}
@@ -96,9 +96,7 @@ void generate_crc_table()
 		 */
 		crc_sum_Table[dividend] = remainder;
 	}
-
 }
-
 
 Message_Footer::Message_Footer(std::vector<Byte> head_and_body)
 {
@@ -107,7 +105,7 @@ Message_Footer::Message_Footer(std::vector<Byte> head_and_body)
 	/*
 	 * Divide the message by the polynomial, a byte at a time.
 	 */
-	for (int byte = 0; byte < head_and_body.size(); ++byte)
+	for(int byte = 0; byte < head_and_body.size(); ++byte)
 	{
 		data = head_and_body[byte] ^ (remainder >> (WIDTH - 8));
 		remainder = crc_sum_Table[data] ^ (remainder << 8);
@@ -128,8 +126,7 @@ std::vector<Byte> Message_Footer::pack()
 }
 
 void Message_Footer::unpack(std::vector<Byte>)
-{
-}
+{ }
 
 std::vector<Byte> Packed_Message::get_packet()
 {
@@ -148,8 +145,6 @@ MESSAGES Packed_Message::get_message_type()
 	return header.message_id;
 }
 
-
-
 Network_Message::Network_Message()
 {
 	type = MESSAGES::UNDEFINED;
@@ -164,7 +159,7 @@ Network_Message::Network_Message(MESSAGES message_type, std::vector<Network_Mess
 std::vector<Byte> Network_Message::pack()
 {
 	Byte_Array packet;
-	for (int i = 0; i < message.size(); i++)
+	for(int i = 0; i < message.size(); i++)
 	{
 		Byte_Array sub_packet = message[i]->pack();
 		packet.insert(packet.end(), sub_packet.begin(), sub_packet.end());
@@ -175,7 +170,7 @@ std::vector<Byte> Network_Message::pack()
 size_t Network_Message::size()
 {
 	size_t message_size = 0;
-	for (int i = 0; i < message.size(); i++)
+	for(int i = 0; i < message.size(); i++)
 	{
 		message_size += message[i]->size();
 	}
@@ -186,7 +181,7 @@ void Network_Message::unpack(std::vector<Byte> byte_array, int header_size)
 {
 	//Remove Header
 	byte_array.erase(byte_array.begin(), byte_array.begin() + header_size);
-	for (int i = 0; i < message.size(); i++)
+	for(int i = 0; i < message.size(); i++)
 	{
 		message[i]->unpack(byte_array);
 	}
@@ -209,7 +204,7 @@ Network_Messaging_Type& Network_Message::operator[](int index)
 
 std::string get_message_type_string(MESSAGES type)
 {
-	switch (type)
+	switch(type)
 	{
 	case MESSAGES::NODE_HELLO:
 		return "Node Hello";

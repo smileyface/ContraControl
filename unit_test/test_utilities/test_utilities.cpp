@@ -186,7 +186,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 				FAIL() << "Addresses in position " << i << " are not the same\n" << p_addr.get_as_string() << " vs " << b_addr.get_as_string();
 			}
 		}
-		else if(types == "class Network_String")
+		else if(types == typeid(Network_String).name())
 		{
 			std::string p_str = dynamic_cast<Network_String*>(&p_body[i])->get_data().second;
 			std::string b_str = dynamic_cast<Network_String*>(&b_body[i])->get_data().second;
@@ -195,25 +195,25 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 			Byte b_length = dynamic_cast<Network_String*>(&b_body[i])->get_data().first;
 			EXPECT_EQ(p_length, b_length) << "Length value of String in position" << i << "are not the same";
 		}
-		else if(types == "class Network_Bool")
+		else if(types == typeid(Network_Bool).name())
 		{
 			bool p_str = dynamic_cast<Network_Bool*>(&p_body[i])->get_data();
 			bool b_str = dynamic_cast<Network_Bool*>(&b_body[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Boolean in position" << i << "are not the same";
 		}
-		else if(types == "class Network_Byte")
+		else if(types == typeid(Network_Byte).name())
 		{
 			Byte p_str = dynamic_cast<Network_Byte*>(&p_body[i])->get_data();
 			Byte b_str = dynamic_cast<Network_Byte*>(&b_body[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Byte in position" << i << "are not the same";
 		}
-		else if(types == "class Network_Percent")
+		else if(types == typeid(Network_Percent).name())
 		{
 			float p_str = dynamic_cast<Network_Percent*>(&p_body[i])->get_data();
 			float b_str = dynamic_cast<Network_Percent*>(&b_body[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Percent in position" << i << "are not the same";
 		}
-		else if(types == "class Network_Word")
+		else if(types == typeid(Network_Word).name())
 		{
 			short p_str = dynamic_cast<Network_Word*>(&p_body[i])->get_data();
 			short b_str = dynamic_cast<Network_Word*>(&b_body[i])->get_data();
@@ -221,7 +221,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		}
 		else
 		{
-			FAIL() << "Type is not handled by test";
+			FAIL() << "Type " + types + " is not handled by test";
 		}
 	}
 }

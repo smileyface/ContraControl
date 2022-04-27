@@ -1,5 +1,5 @@
 #include <thread>
-#include <chrono> 
+#include <chrono>
 #include <iostream>
 
 #include "system_utilities.h"
@@ -29,13 +29,12 @@ void system_utilities::setup()
 		model::initalize();
 		controller::initalize();
 	}
-	catch (NetworkErrorException)
+	catch(NetworkErrorException)
 	{
 		printf("Caught network exception");
 		testing_utilities::network_utilities::exception_handle();
 	}
 	setup_messaging();
-
 }
 
 void system_utilities::setup_messaging()
@@ -47,23 +46,23 @@ void system_utilities::setup_messaging()
 
 void system_utilities::print_messages()
 {
-	for (System_Message mess = System_Messages::get_instance()->pop(message_consumer); mess.valid_message == true; mess = System_Messages::get_instance()->pop(message_consumer))
+	for(System_Message mess = System_Messages::get_instance()->pop(message_consumer); mess.valid_message == true; mess = System_Messages::get_instance()->pop(message_consumer))
 	{
-		int level = (int)MESSAGE_PRIORITY::INFO_MESSAGE;
-#ifdef DEBUG
-		level = (int)MESSAGE_PRIORITY::DEBUG_MESSAGE;
-#endif // DEBUG
+		int level = (int) MESSAGE_PRIORITY::INFO_MESSAGE;
+	#ifdef DEBUG
+		level = (int) MESSAGE_PRIORITY::DEBUG_MESSAGE;
+	#endif // DEBUG
 
-		if ((int)mess.priority < level)
+		if((int) mess.priority < level)
 		{
 			continue;
 		}
 		std::string priority_string;
-		if (mess.priority == MESSAGE_PRIORITY::ERROR_MESSAGE)
+		if(mess.priority == MESSAGE_PRIORITY::ERROR_MESSAGE)
 		{
 			std::cout << "[  \u001b[33mERROR\u001b[0m   ]";
 		}
-		else if (mess.priority == MESSAGE_PRIORITY::INFO_MESSAGE)
+		else if(mess.priority == MESSAGE_PRIORITY::INFO_MESSAGE)
 		{
 			std::cout << "[  INFO    ]";
 		}
@@ -75,17 +74,17 @@ void system_utilities::print_messages()
 	}
 }
 
-void system_utilities::cleanup() 
+void system_utilities::cleanup()
 {
-		controller::clean_up();
-		model::clean_up();
-		print_messages();
-		testing_messges->deregister_consumer(message_consumer);
+	controller::clean_up();
+	model::clean_up();
+	print_messages();
+	testing_messges->deregister_consumer(message_consumer);
 }
 
 void system_utilities::step(int steps)
 {
-	for (int i = 0; i < steps; i++)
+	for(int i = 0; i < steps; i++)
 	{
 		controller::step();
 		model::step();
@@ -113,17 +112,15 @@ void system_utilities::network_utilities::setup()
 	{
 		system_utilities::setup();
 		std::string i;
-		if (std::getenv("CI") != NULL)
+		if(std::getenv("CI") != NULL)
 		{
 			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "On a CI machine", "Test Setup"));
-#ifdef __linux__
+		#ifdef __linux__
 			network::init_network_interfaces("nat");
-#endif // __linux
-#ifdef _WIN32
+		#endif // __linux
+		#ifdef _WIN32
 			network::init_network_interfaces("vEthernet (nat)");
-#endif
-
-			
+		#endif
 		}
 		else
 		{
@@ -131,7 +128,7 @@ void system_utilities::network_utilities::setup()
 			network::init_network_interfaces();
 		}
 	}
-	catch (NetworkErrorException e)
+	catch(NetworkErrorException e)
 	{
 		testing_utilities::network_utilities::exception_handle();
 	}

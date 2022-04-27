@@ -8,13 +8,16 @@
 
 #include "../../Network/network_main.h"
 #include "../../Network/messages.h"
-namespace {
-	class Network_Messaging_Test : public ::testing::Test {
-
-		virtual void SetUp() {
+namespace
+{
+	class Network_Messaging_Test : public ::testing::Test
+	{
+		virtual void SetUp()
+		{
 			system_utilities::setup();
 		}
-		virtual void TearDown() {
+		virtual void TearDown()
+		{
 			system_utilities::cleanup();
 			network::teardown_network_interfaces();
 		}
@@ -63,6 +66,4 @@ TEST_F(Network_Messaging_Test, Message_NODE_ACK)
 }
 
 TEST_F(Network_Messaging_Test, Message_NODE_UNDEF)
-{
-
-}
+{ }
