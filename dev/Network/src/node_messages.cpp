@@ -32,7 +32,7 @@ void node_messages::network_client_state_machine()
 
 void node_messages::listen_for_messages()
 {
-	while(network::is_running)
+	while(network::is_running())
 	{
 	}
 }

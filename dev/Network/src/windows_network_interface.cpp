@@ -84,16 +84,11 @@ IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname,
 	// default to unspecified address family (both)
 	ULONG family = AF_INET;
 
-	LPVOID lpMsgBuf = NULL;
-
 	ULONG outBufLen = 0;
-	ULONG Iterations = 0;
 
 	PIP_ADAPTER_ADDRESSES pAddresses = NULL;
-	PIP_ADAPTER_ADDRESSES pCurrAddresses = NULL;
 	IPV4_Addr found_ip;
 
-	struct sockaddr_in* sockaddr_ipv4 = 0;
 	// Allocate a 15 KB buffer to start with.
 	outBufLen = WORKING_BUFFER_SIZE;
 
@@ -113,7 +108,6 @@ IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname,
 
 	for(PIP_ADAPTER_ADDRESSES pCurrAddresses = pAddresses; pCurrAddresses; pCurrAddresses = pCurrAddresses->Next)
 	{
-		IN_ADDR IPAddr {};
 		std::wstring thing(pCurrAddresses->FriendlyName);
 		std::wstring dns(pCurrAddresses->DnsSuffix);
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface " + std::string(thing.begin(), thing.end()) + " found", "Interface Finding"));
@@ -141,7 +135,7 @@ IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname,
 
 IPV4_Addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, IPV4_Addr host_ip)
 {
-	INTERFACE_INFO InterfaceList[20] = { 0 };
+	INTERFACE_INFO InterfaceList[20] = { { 0 } };
 	unsigned long nBytesReturned;
 	if(WSAIoctl(sock, SIO_GET_INTERFACE_LIST, 0, 0, &InterfaceList,
 	   sizeof(InterfaceList), &nBytesReturned, 0, 0) == SOCKET_ERROR)
@@ -280,14 +274,14 @@ void Windows_Network_Interface::setup_connection(Connection_Id connection_name, 
 
 void Windows_Network_Interface::send(Connection_Id node_id, char* message)
 {
-	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*) &connections[node_id].address, sizeof(connections[node_id].address));
+	sendto(connections[node_id].sock, message, strlen(message) + 1, 0, (sockaddr*) &connections[node_id].address, static_cast<int>(sizeof(connections[node_id].address)));
 }
 
 Byte_Array Windows_Network_Interface::receive(SOCKET socket, int size_to_recieve)
 {
 	char buffer[256];
 	int result = recv(socket, buffer, 256, 0);
-	Byte_Array buff(buffer, buffer + size_to_recieve);
+	Byte_Array buff(result, result + size_to_recieve);
 	return buff;
 }
 

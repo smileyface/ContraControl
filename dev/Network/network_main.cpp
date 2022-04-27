@@ -102,7 +102,7 @@ void network::set_interface(std::string i)
 
 bool network::is_running()
 {
-	return is_running;
+	return network_running;
 }
 
 void network::send_message(Connection_Id dest, Network_Message outgoing)
