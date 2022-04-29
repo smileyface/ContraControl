@@ -115,18 +115,12 @@ void system_utilities::network_utilities::setup()
 		if(std::getenv("CI") != NULL)
 		{
 			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "On a CI machine", "Test Setup"));
-		#ifdef __linux__
-			network::init_network_interfaces("nat");
-		#endif // __linux
-		#ifdef _WIN32
-			network::init_network_interfaces("vEthernet (nat)");
-		#endif
 		}
 		else
 		{
 			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Not on a CI machine", "Test Setup"));
-			network::init_network_interfaces();
 		}
+		network::init_network_interfaces();
 	}
 	catch(NetworkErrorException e)
 	{
