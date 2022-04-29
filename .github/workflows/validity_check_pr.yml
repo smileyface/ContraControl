@@ -39,7 +39,7 @@ jobs:
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       run: |
-        cmake --build . --config $BUILD_TYPE
+        cmake --build . --config $BUILD_TYPE --target Static_Test
 
     - name: "Tar action"
       uses: a7ul/tar-action@v1.1.0
