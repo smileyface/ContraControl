@@ -49,7 +49,7 @@ void client_loop()
 {
 	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Starting Client Loop", "Client Loop"));
 	//call_and_response(NODE_HELLO, NODE_ACK, 2);
-	while(network_running)
+	while(network::is_running())
 	{
 		node_messages::network_client_state_machine();
 	}
@@ -57,7 +57,7 @@ void client_loop()
 
 void server_loop()
 {
-	while(network_running)
+	while(network::is_running())
 	{
 		//listen on Broadcast for NODE_HELLO
 		//Once found, Send NODE_ACK

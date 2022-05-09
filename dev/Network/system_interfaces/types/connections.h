@@ -21,6 +21,17 @@ typedef int SOCKET;
 const int INVALID_SOCKET = 0;
 #endif //__linux__
 
+/** State of reception of message */
+enum class RECIEVE_STATE
+{
+	/** Ready to recieve a message and finding the start byte */
+	READY,
+	/** Header has been recieved */
+	HEADER_RECIEVED,
+	/** Full message has been recieved */
+	MESSAGE_RECIEVED
+};
+
 /**
  * A network connection container. To be paired with a Connection_Id for a full description of a connection to a remote node.
  */
@@ -30,6 +41,8 @@ struct Connection
 	SOCKET sock = INVALID_SOCKET;
 	/** Address of the remote node. */
 	IPV4_Addr address = INVALID_ADDRESS;
+	/** State of reception */
+	RECIEVE_STATE rec = RECIEVE_STATE::READY;
 };
 
 /** A handle for a connection to the remote node. Should correlate to \ref Node_Id. */

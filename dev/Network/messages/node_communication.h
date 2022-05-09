@@ -10,6 +10,7 @@
 #include "messaging.h"
 
 #include "types/network_message_types.h"
+#include "../system_interfaces/types/connections.h"
 
  /** Node Messages utilities */
 namespace node_messages
@@ -36,6 +37,6 @@ namespace node_messages
 	 */
 	void network_client_state_machine();
 
-	void listen_for_messages();
+	void listen_for_messages_on_sock(Connection& sock);
 }
 #endif

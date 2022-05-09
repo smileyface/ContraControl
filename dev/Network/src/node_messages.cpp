@@ -30,9 +30,17 @@ void node_messages::network_client_state_machine()
 	}
 }
 
-void node_messages::listen_for_messages()
+void node_messages::listen_for_messages_on_sock(Connection& sock)
 {
+	Packed_Message mess;
 	while(network::is_running())
 	{
+		Byte_Array recieved = network::network_interface->receive(sock.sock, 1);
+		if(recieved[0] != 0x65)
+		{
+			continue;
+		}
+		Byte_Array rec_header = network::network_interface->receive(sock.sock, 2);
+		Byte_Array message = network::network_interface->receive(sock.sock, rec_header[1] - 3);
 	}
 }
