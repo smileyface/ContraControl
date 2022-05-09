@@ -84,6 +84,13 @@ public:
 	 */
 	virtual void setup_connection(Connection_Id connection_id, Socket_Maker maker) = 0;
 
+	/**
+	 * \brief Bind to a connection
+	 *
+	 * \param connection_id Node to connect to.
+	 * \param maker Setup parameters.
+	 */
+	virtual void bind_connection(Connection_Id connection_name, Socket_Maker make) = 0;
 	//Communication Code
 	/**
 	 * Send a message to a node.
@@ -116,11 +123,6 @@ public:
 	 * \return Desired Connection.
 	 */
 	Connection get_connection(Connection_Id connection);
-
-	/**
-	 * Recieve for the first 3 bytes in a packet, then recieve the remainder of the packet.
-	 */
-	Packed_Message scan_for_message();
 
 	/**
 	 * \return Hostname of local.

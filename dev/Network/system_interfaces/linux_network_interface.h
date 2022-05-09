@@ -31,6 +31,7 @@ public:
 	void initalize();
 	void clean_up();
 	void setup_connection(Connection_Id connection_name, Socket_Maker maker);
+	void bind_connection(Connection_Id connection_name, Socket_Maker make);
 
 	void send(std::string node_id, char* message);
 	Byte_Array receive(SOCKET socket, int size_to_recieve);

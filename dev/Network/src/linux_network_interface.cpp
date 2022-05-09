@@ -169,6 +169,15 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 	}
 }
 
+void Linux_Network_Interface::bind_connection(Connection_Id connection_name, Socket_Maker maker)
+{
+	sockaddr_in clientService;
+	clientService.sin_family = AF_INET;
+	clientService.sin_addr.s_addr = connections[connection_name].address.S_un.S_addr;
+	clientService.sin_port = htons(DEFAULT_PORT);
+	bind(connections[connection_name].sock, (struct sockaddr*) &clientService, sizeof(clientService));
+}
+
 void Linux_Network_Interface::initalized()
 {
 	if(hostname == INVALID_HOSTNAME)

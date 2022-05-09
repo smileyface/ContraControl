@@ -33,10 +33,10 @@ WORD wVersionRequested = MAKEWORD(2, 2);
 
 NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 {
-	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Error code " + std::to_string(err_code) + " thrown", "Windows Network Error Handle"));
-
 	if(err_code == -1)
 		err_code = WSAGetLastError();
+
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Error code " + std::to_string(err_code) + " thrown", "Windows Network Error Handle"));
 	switch(err_code)
 	{
 	case WSAEFAULT:
@@ -57,6 +57,8 @@ NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 		return NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR;
 	case WSAHOST_NOT_FOUND:
 		return NETWORK_ERRORS::INVALID_HOSTNAME;
+	case WSAEADDRNOTAVAIL:
+		return NETWORK_ERRORS::ADDRESS_ERROR;
 	default:
 		return NETWORK_ERRORS::UNKNOWN_ERROR;
 	}
@@ -264,11 +266,22 @@ void Windows_Network_Interface::setup_connection(Connection_Id connection_name, 
 	}
 	if(connection_name == local_connections::local)
 	{
-		ZeroMemory(&hints, sizeof(hints));
-		hints.ai_family = maker.sock_family;
-		hints.ai_socktype = maker.sock_type;
-		hints.ai_protocol = maker.ip_protocol;
 		connections[local_connections::local].address = get_interface_address(hostname, interfaces);
+	}
+}
+
+void Windows_Network_Interface::bind_connection(Connection_Id connection_name, Socket_Maker maker)
+{
+	sockaddr_in clientService = { 0 };
+	clientService.sin_family = maker.sock_family;
+	clientService.sin_addr.s_addr = connections[connection_name].address.S_un.S_addr;
+	clientService.sin_port = htons(DEFAULT_PORT);
+	int res = bind(connections[connection_name].sock, (SOCKADDR*) &clientService, sizeof(clientService));
+	if(res != 0)
+	{
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Bind failed", "Binding"));
+		status_state.set_error(set_error_state());
+		throw NetworkErrorException();
 	}
 }
 

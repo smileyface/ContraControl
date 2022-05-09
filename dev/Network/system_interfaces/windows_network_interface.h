@@ -29,6 +29,7 @@ public:
 	Windows_Network_Interface();
 
 	void setup_connection(Connection_Id connection_name, Socket_Maker maker);
+	void bind_connection(Connection_Id connection_name, Socket_Maker make);
 
 	void initalize();
 	void initalized();
