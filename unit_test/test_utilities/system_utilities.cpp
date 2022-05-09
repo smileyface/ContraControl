@@ -10,13 +10,7 @@
 #include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
 
-#include "../../Network/network_main.h"
-#ifdef _WIN32
-#include "../../Network/system_interfaces/windows_network_interface.h"
-#endif // _WIN32
-#ifdef __linux__
-#include "../../Network/system_interfaces/linux_network_interface.h"
-#endif
+
 
 Message_Consumer* message_consumer = 0;
 bool stale;
@@ -35,6 +29,15 @@ void system_utilities::setup()
 		testing_utilities::network_utilities::exception_handle();
 	}
 	setup_messaging();
+
+	if(IS_CI)
+	{
+		system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "On a CI machine", "Test Setup"));
+	}
+	else
+	{
+		system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Not on a CI machine", "Test Setup"));
+	}
 }
 
 void system_utilities::setup_messaging()
@@ -104,26 +107,4 @@ void system_utilities::model_utilities::start()
 void system_utilities::model_utilities::stop()
 {
 	model::stop_loop();
-}
-
-void system_utilities::network_utilities::setup()
-{
-	try
-	{
-		system_utilities::setup();
-		std::string i;
-		if(std::getenv("CI") != NULL)
-		{
-			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "On a CI machine", "Test Setup"));
-		}
-		else
-		{
-			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Not on a CI machine", "Test Setup"));
-		}
-		network::init_network_interfaces();
-	}
-	catch(NetworkErrorException e)
-	{
-		testing_utilities::network_utilities::exception_handle();
-	}
 }

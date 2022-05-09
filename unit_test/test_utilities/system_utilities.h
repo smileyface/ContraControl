@@ -27,10 +27,7 @@ namespace system_utilities
 		void start();
 		void stop();
 	}
-	namespace network_utilities
-	{
-		void setup();
-	}
+
 	extern System_Messages* testing_messges;
 }
 

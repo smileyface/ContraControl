@@ -1,5 +1,6 @@
 #include "../test_utilities/system_utilities.h"
 #include "../test_utilities/test_utilities.h"
+#include "../test_utilities/network_utiliies.h"
 
 #include "../test_utilities/pch.h"
 
@@ -37,11 +38,11 @@ TEST_F(Network_Error_Test, Error_States_Initialize_System_Interface_Error)
 
 TEST_F(Network_Error_Test, Error_States_Initalized)
 {
-	system_utilities::network_utilities::setup();
+	network_utilities::setup();
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::INVALID_HOSTNAME);
 
-	system_utilities::network_utilities::setup();
+	network_utilities::setup();
 	network::network_interface->setup_connection(local_connections::local, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);
 }
@@ -51,7 +52,7 @@ TEST_F(Network_Error_Test, Error_States_Broadcast_Setup)
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::SOCKET_INVALID);
 #endif // !_WIN32
-	system_utilities::network_utilities::setup();
+	network_utilities::setup();
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::SOCKET_INVALID);
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_TCP, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::NETWORK_OPTION_ERROR);

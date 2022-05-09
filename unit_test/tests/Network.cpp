@@ -1,5 +1,6 @@
 #include "../test_utilities/system_utilities.h"
 #include "../test_utilities/test_utilities.h"
+#include "../test_utilities/network_utiliies.h"
 
 #include "../test_utilities/pch.h"
 
@@ -19,7 +20,8 @@
 namespace {
 	class Local_Network_Test : public ::testing::Test {
 		virtual void SetUp() {
-			system_utilities::network_utilities::setup();
+			system_utilities::setup();
+			network_utilities::setup();
 		}
 		virtual void TearDown() {
 			network::teardown_network_interfaces();
