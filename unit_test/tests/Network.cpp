@@ -17,19 +17,22 @@
 
 #define ARRAY_LENGTH(array) (sizeof(array)/sizeof((array)[0]))
 
-namespace {
-	class Local_Network_Test : public ::testing::Test {
-		virtual void SetUp() {
+namespace
+{
+	class Local_Network_Test : public ::testing::Test
+	{
+		virtual void SetUp()
+		{
 			system_utilities::setup();
 			network_utilities::setup();
 		}
-		virtual void TearDown() {
+		virtual void TearDown()
+		{
 			network::teardown_network_interfaces();
 			system_utilities::cleanup();
 		}
 	};
 }
-
 
 TEST_F(Local_Network_Test, Network_SetUp)
 {
@@ -45,12 +48,12 @@ TEST_F(Local_Network_Test, Server_Start_Up)
 		testing_utilities::network_utilities::check_initalized();
 		network::start_server();
 	}
-	catch (NetworkErrorException e)
+	catch(NetworkErrorException e)
 	{
 		std::cout << "Server Start Up exception caught";
 		testing_utilities::network_utilities::exception_handle();
 	}
-	catch (const std::exception& exc)
+	catch(const std::exception& exc)
 	{
 		std::cerr << exc.what();
 	}
@@ -58,7 +61,7 @@ TEST_F(Local_Network_Test, Server_Start_Up)
 
 TEST_F(Local_Network_Test, Client_Start_Up)
 {
-	/** Start in server mode */	
+	/** Start in server mode */
 	try
 	{
 		testing_utilities::network_utilities::check_initalized();
@@ -66,9 +69,20 @@ TEST_F(Local_Network_Test, Client_Start_Up)
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		//TODO Add a localhost listener
 	}
-	catch (NetworkErrorException e)
+	catch(NetworkErrorException e)
 	{
 		testing_utilities::network_utilities::exception_handle();
 	}
 }
 
+TEST_F(Local_Network_Test, Socket_Bind)
+{
+	try
+	{
+		network::network_interface->bind_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
+	}
+	catch(NetworkErrorException e)
+	{
+		testing_utilities::network_utilities::exception_handle();
+	}
+}

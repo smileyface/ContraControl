@@ -128,6 +128,7 @@ void Linux_Network_Interface::initalize()
 	server_running = false;
 	setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
 	setup_connection(local_connections::broadcast, { IPPROTO_UDP, SOCK_DGRAM, AF_INET });
+	bind_connection(local_connections::broadcast, { IPPROTO_UDP, SOCK_DGRAM, AF_INET });
 }
 
 void Linux_Network_Interface::clean_up()

@@ -27,3 +27,8 @@ void network_utilities::setup()
 	}
 	//test_sock = socket(maker.sock_family, maker.sock_type, maker.ip_protocol);
 }
+
+void network_utilities::cleanup()
+{
+	network::network_interface->clean_up();
+}

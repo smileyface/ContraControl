@@ -59,6 +59,8 @@ NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 		return NETWORK_ERRORS::INVALID_HOSTNAME;
 	case WSAEADDRNOTAVAIL:
 		return NETWORK_ERRORS::ADDRESS_ERROR;
+	case WSAEADDRINUSE:
+		return NETWORK_ERRORS::ADDRESS_ERROR;
 	default:
 		return NETWORK_ERRORS::UNKNOWN_ERROR;
 	}
@@ -276,6 +278,7 @@ void Windows_Network_Interface::bind_connection(Connection_Id connection_name, S
 	clientService.sin_family = maker.sock_family;
 	clientService.sin_addr.s_addr = connections[connection_name].address.S_un.S_addr;
 	clientService.sin_port = htons(DEFAULT_PORT);
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Binding to address " + connections[connection_name].address.get_as_string(), "Binding"));
 	int res = bind(connections[connection_name].sock, (SOCKADDR*) &clientService, sizeof(clientService));
 	if(res != 0)
 	{

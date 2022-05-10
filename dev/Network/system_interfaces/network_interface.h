@@ -83,7 +83,6 @@ public:
 	 * \param maker Setup parameters.
 	 */
 	virtual void setup_connection(Connection_Id connection_id, Socket_Maker maker) = 0;
-
 	/**
 	 * \brief Bind to a connection
 	 *
