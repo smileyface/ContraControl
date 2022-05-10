@@ -128,7 +128,6 @@ void Linux_Network_Interface::initalize()
 	server_running = false;
 	setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
 	setup_connection(local_connections::broadcast, { IPPROTO_UDP, SOCK_DGRAM, AF_INET });
-	bind_connection(local_connections::broadcast, { IPPROTO_UDP, SOCK_DGRAM, AF_INET });
 }
 
 void Linux_Network_Interface::clean_up()
@@ -176,7 +175,13 @@ void Linux_Network_Interface::bind_connection(Connection_Id connection_name, Soc
 	clientService.sin_family = AF_INET;
 	clientService.sin_addr.s_addr = connections[connection_name].address.S_un.S_addr;
 	clientService.sin_port = htons(DEFAULT_PORT);
-	bind(connections[connection_name].sock, (struct sockaddr*) &clientService, sizeof(clientService));
+	int res = bind(connections[connection_name].sock, (struct sockaddr*) &clientService, sizeof(clientService));
+	if(res < 0)
+	{
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Bind failed", "Binding"));
+		status_state.set_error(set_error_state());
+		throw NetworkErrorException();
+	}
 }
 
 void Linux_Network_Interface::initalized()

@@ -86,8 +86,6 @@ TEST_F(Network_Error_Test, Error_States_Broadcast_Setup)
 /*
 TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
 {
-#ifdef _WIN32
-#endif // !_WIN32
 }
 */
 
@@ -127,7 +125,7 @@ TEST_F(Network_Error_Test, Unfound_Address)
 															   network::init_network_interfaces("errors");
 														   }, NETWORK_ERRORS::ADDRESS_ERROR);
 }
-
+#ifdef _WIN32
 TEST_F(Network_Error_Test, Bind_To_Invalid_Address)
 {
 	network_utilities::setup();
@@ -136,3 +134,4 @@ TEST_F(Network_Error_Test, Bind_To_Invalid_Address)
 															   network::network_interface->bind_connection(local_connections::broadcast, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
 														   }, NETWORK_ERRORS::ADDRESS_ERROR);
 }
+#endif // !_WIN32
