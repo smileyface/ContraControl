@@ -26,6 +26,8 @@ struct Socket_Maker
 	int sock_type;
 	/** Family of data. */
 	int sock_family;
+	/** Connection address */
+	IPV4_Addr address;
 };
 /**
  * \brief Interface for handling network communication between Nodes.

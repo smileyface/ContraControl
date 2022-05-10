@@ -101,6 +101,8 @@ NETWORK_ERRORS set_error_state()
 		return NETWORK_ERRORS::NETWORK_CODE_ERROR;
 	case ENOPROTOOPT:
 		return NETWORK_ERRORS::NETWORK_OPTION_ERROR;
+	case EADDRNOTAVAIL:
+		return NETWORK_ERRORS::ADDRESS_ERROR;
 	default:
 		return NETWORK_ERRORS::UNKNOWN_ERROR;
 	}
@@ -162,10 +164,14 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 		setup_broadcast_socket(connections[local_connections::broadcast], connections[local_connections::local].address);
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Broadcast IP: " + connections[local_connections::broadcast].address.get_as_string(), "Network Initalizer"));
 	}
-	if(connection_name == local_connections::local)
+	else if(connection_name == local_connections::local)
 	{
 		connections[local_connections::local].address = get_interface_addr();
 		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interface IP: " + hostname + ": " + connections[local_connections::local].address.get_as_string(), "Network Initalizer"));
+	}
+	else
+	{
+		connections[connection_name].address = maker.address;
 	}
 }
 
