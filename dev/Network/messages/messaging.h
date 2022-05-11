@@ -110,6 +110,9 @@ struct Packed_Message
 	 */
 	MESSAGES get_message_type();
 
+	/**
+	 * \return Length of message as read by the header.
+	 */
 	int size();
 
 private:
@@ -129,6 +132,9 @@ private:
 	MESSAGES get_message_enum_by_type();
 };
 
+/**
+ * A message recieved from the network.
+ */
 struct Unpacked_Message
 {
 	/**
@@ -136,9 +142,17 @@ struct Unpacked_Message
  * \param pack A packet to be unpacked into the message type.
  */
 	Unpacked_Message(Byte_Array pack);
-
+	/**
+	 * \return Header of the message.
+	 */
 	Message_Header get_header();
+	/**
+	 * \return Footer of the message.
+	 */
 	Message_Footer get_footer();
+	/**
+	 * \return Message body.
+	 */
 	Network_Message get_message();
 
 private:

@@ -88,8 +88,8 @@ public:
 	/**
 	 * \brief Bind to a connection
 	 *
-	 * \param connection_id Node to connect to.
-	 * \param maker Setup parameters.
+	 * \param connection_name Node to connect to.
+	 * \param make Setup parameters.
 	 */
 	virtual void bind_connection(Connection_Id connection_name, Socket_Maker make) = 0;
 	//Communication Code
@@ -103,8 +103,9 @@ public:
 	/**
 	 * Listen to a specific connection.
 	 *
-	 * \param connection_id Node to listen to messages from.
-	 * \return Message as array of bytes.
+	 * \param socket Socket to get data from
+	 * \param size_to_recieve number of bytes to recieve
+	 * \return Recieved bytes
 	 */
 	virtual Byte_Array receive(SOCKET socket, int size_to_recieve) = 0;
 	/**

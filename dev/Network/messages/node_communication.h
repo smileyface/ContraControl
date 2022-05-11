@@ -37,6 +37,11 @@ namespace node_messages
 	 */
 	void network_client_state_machine();
 
-	void listen_for_messages_on_sock(Connection sock);
+	/**
+	 * Start a thread for listening to all messages on a socket. All messages get pasted to a buffer.
+	 *
+	 * \param node Node connection to get messages from.
+	 */
+	void listen_for_messages_from_node(Connection node);
 }
 #endif

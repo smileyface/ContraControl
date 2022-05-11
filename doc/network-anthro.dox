@@ -5,6 +5,6 @@
 <b> Client </b> <i> starts up and broadcasts to everyone</i>: Hello! I'm awake and am located at here.<br>
 <b> All Servers</b>: Hello Client. I will check if I'm your server. <br>
 <b> Connection Server</b>: Client, I am your server. I am located here. Connect to me please.<br>
-\subsection net-anthro-client-connect-connecting-server-is-online Connecting Server is Already Online.
+\subsection net-anthro-client-connect-connecting-server-is-not-online Connecting Server is Not Online.
 
 */

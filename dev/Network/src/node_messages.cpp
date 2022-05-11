@@ -30,7 +30,7 @@ void node_messages::network_client_state_machine()
 	}
 }
 
-void node_messages::listen_for_messages_on_sock(Connection sock)
+void node_messages::listen_for_messages_from_node(Connection sock)
 {
 	while(network::is_running())
 	{
