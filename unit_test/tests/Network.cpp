@@ -86,3 +86,16 @@ TEST_F(Local_Network_Test, Socket_Bind)
 		testing_utilities::network_utilities::exception_handle();
 	}
 }
+
+TEST_F(Local_Network_Test, Listen)
+{
+	try
+	{
+		network::listen_for_message(local_connections::local, MESSAGES::NODE_HELLO);
+	}
+	catch(NetworkErrorException e)
+	{
+		testing_utilities::network_utilities::exception_handle();
+	}
+
+}

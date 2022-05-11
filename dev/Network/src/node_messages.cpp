@@ -1,7 +1,7 @@
 #include "../messages/node_communication.h"
 #include "../network_main.h"
 
-std::pair<MESSAGES, Network_Message> message_buffer[8];
+std::vector<std::pair<MESSAGES, Network_Message>> message_buffer;
 
 Network_Message node_messages::network_message_factory(MESSAGES message)
 {
@@ -30,9 +30,8 @@ void node_messages::network_client_state_machine()
 	}
 }
 
-void node_messages::listen_for_messages_on_sock(Connection& sock)
+void node_messages::listen_for_messages_on_sock(Connection sock)
 {
-	Packed_Message mess;
 	while(network::is_running())
 	{
 		Byte_Array recieved = network::network_interface->receive(sock.sock, 1);
@@ -42,5 +41,8 @@ void node_messages::listen_for_messages_on_sock(Connection& sock)
 		}
 		Byte_Array rec_header = network::network_interface->receive(sock.sock, 2);
 		Byte_Array message = network::network_interface->receive(sock.sock, rec_header[1] - 3);
+		message.insert(message.begin(), rec_header.begin(), rec_header.end());
+		Unpacked_Message p_message(message);
+		message_buffer.push_back(std::make_pair(p_message.get_header().message_id, p_message.get_message()));
 	}
 }

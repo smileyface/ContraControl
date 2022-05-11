@@ -78,6 +78,9 @@ void network::teardown_network_interfaces()
 
 Network_Message network::listen_for_message(Connection_Id src, MESSAGES listen_for)
 {
+	node_messages::listen_for_messages_on_sock(network_interface->get_connection(src));
+
+
 	return Network_Message();
 }
 

@@ -158,25 +158,20 @@ void testing_utilities::network_utilities::network_message_utilities::check_head
 	EXPECT_EQ(size, p_message[2]) << "Incorrect Packet Size";
 }
 
-void testing_utilities::network_utilities::network_message_utilities::compare_messages(Packed_Message m1, Packed_Message m2)
+void testing_utilities::network_utilities::network_message_utilities::compare_messages(Unpacked_Message b, Network_Message p)
 {
-	Message_Header p_header, b_header;
-	Network_Message p_body, b_body;
-	Message_Footer p_footer, b_footer;
-	m1.get_message(p_header, p_body, p_footer);
-	m2.get_message(b_header, b_body, b_footer);
-	if(p_body.size() != b_body.size())
+	if(p.size() != b.get_message().size())
 	{
 		FAIL() << "Body sizes are not the same";
 		return;
 	}
-	for(int i = 0; i < p_body.get_message().size(); i++)
+	for(int i = 0; i < p.number_of_fields(); i++)
 	{
-		std::string types = str_type(p_body[i]);
+		std::string types = str_type(p[i]);
 		if(types == typeid(Network_Address).name())
 		{
-			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
-			IPV4_Addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
+			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&p[i])->get_data();
+			IPV4_Addr b_addr = dynamic_cast<Network_Address*>(&b.get_message()[i])->get_data();
 			if(p_addr == b_addr)
 			{
 				SUCCEED();
@@ -188,35 +183,35 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		}
 		else if(types == typeid(Network_String).name())
 		{
-			std::string p_str = dynamic_cast<Network_String*>(&p_body[i])->get_data().second;
-			std::string b_str = dynamic_cast<Network_String*>(&b_body[i])->get_data().second;
+			std::string p_str = dynamic_cast<Network_String*>(&p[i])->get_data().second;
+			std::string b_str = dynamic_cast<Network_String*>(&b.get_message()[i])->get_data().second;
 			EXPECT_EQ(p_str, b_str) << "String in position" << i << "are not the same";
-			Byte p_length = dynamic_cast<Network_String*>(&p_body[i])->get_data().first;
-			Byte b_length = dynamic_cast<Network_String*>(&b_body[i])->get_data().first;
+			Byte p_length = dynamic_cast<Network_String*>(&p[i])->get_data().first;
+			Byte b_length = dynamic_cast<Network_String*>(&b.get_message()[i])->get_data().first;
 			EXPECT_EQ(p_length, b_length) << "Length value of String in position" << i << "are not the same";
 		}
 		else if(types == typeid(Network_Bool).name())
 		{
-			bool p_str = dynamic_cast<Network_Bool*>(&p_body[i])->get_data();
-			bool b_str = dynamic_cast<Network_Bool*>(&b_body[i])->get_data();
+			bool p_str = dynamic_cast<Network_Bool*>(&p[i])->get_data();
+			bool b_str = dynamic_cast<Network_Bool*>(&b.get_message()[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Boolean in position" << i << "are not the same";
 		}
 		else if(types == typeid(Network_Byte).name())
 		{
-			Byte p_str = dynamic_cast<Network_Byte*>(&p_body[i])->get_data();
-			Byte b_str = dynamic_cast<Network_Byte*>(&b_body[i])->get_data();
+			Byte p_str = dynamic_cast<Network_Byte*>(&p[i])->get_data();
+			Byte b_str = dynamic_cast<Network_Byte*>(&b.get_message()[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Byte in position" << i << "are not the same";
 		}
 		else if(types == typeid(Network_Percent).name())
 		{
-			float p_str = dynamic_cast<Network_Percent*>(&p_body[i])->get_data();
-			float b_str = dynamic_cast<Network_Percent*>(&b_body[i])->get_data();
+			float p_str = dynamic_cast<Network_Percent*>(&p[i])->get_data();
+			float b_str = dynamic_cast<Network_Percent*>(&b.get_message()[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Percent in position" << i << "are not the same";
 		}
 		else if(types == typeid(Network_Word).name())
 		{
-			short p_str = dynamic_cast<Network_Word*>(&p_body[i])->get_data();
-			short b_str = dynamic_cast<Network_Word*>(&b_body[i])->get_data();
+			short p_str = dynamic_cast<Network_Word*>(&p[i])->get_data();
+			short b_str = dynamic_cast<Network_Word*>(&b.get_message()[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Word in position" << i << "are not the same";
 		}
 		else

@@ -37,6 +37,6 @@ namespace node_messages
 	 */
 	void network_client_state_machine();
 
-	void listen_for_messages_on_sock(Connection& sock);
+	void listen_for_messages_on_sock(Connection sock);
 }
 #endif

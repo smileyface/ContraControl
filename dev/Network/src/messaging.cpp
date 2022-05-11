@@ -30,15 +30,6 @@ Packed_Message::Packed_Message(Network_Message in_message)
 	packet.insert(packet.end(), packed_footer.begin(), packed_footer.end());
 }
 
-Packed_Message::Packed_Message(Byte_Array pack)
-{
-	packet = pack;
-	header.unpack(packet);
-	message = node_messages::network_message_factory(header.message_id);
-	message.unpack(packet, sizeof(header));
-	footer.unpack(packet);
-}
-
 std::vector<Byte> Message_Header::pack()
 {
 	std::vector<Byte> packet;
@@ -133,16 +124,14 @@ std::vector<Byte> Packed_Message::get_packet()
 	return packet;
 }
 
-void Packed_Message::get_message(Message_Header& head, Network_Message& mess, Message_Footer& foot)
-{
-	head = header;
-	mess = message;
-	foot = footer;
-}
-
 MESSAGES Packed_Message::get_message_type()
 {
 	return header.message_id;
+}
+
+int Packed_Message::size()
+{
+	return header.length;
 }
 
 Network_Message::Network_Message()
@@ -177,6 +166,11 @@ size_t Network_Message::size()
 	return message_size;
 }
 
+int Network_Message::number_of_fields()
+{
+	return message.size();
+}
+
 void Network_Message::unpack(std::vector<Byte> byte_array, int header_size)
 {
 	//Remove Header
@@ -200,6 +194,30 @@ std::vector<Network_Messaging_Type*> Network_Message::get_message()
 Network_Messaging_Type& Network_Message::operator[](int index)
 {
 	return *message[index];
+}
+
+Unpacked_Message::Unpacked_Message(Byte_Array packed_message)
+{
+	packet = packed_message;
+	header.unpack(packet);
+	message = node_messages::network_message_factory(header.message_id);
+	message.unpack(packet, sizeof(header));
+	footer.unpack(packet);
+}
+
+Message_Header Unpacked_Message::get_header()
+{
+	return header;
+}
+
+Message_Footer Unpacked_Message::get_footer()
+{
+	return footer;
+}
+
+Network_Message Unpacked_Message::get_message()
+{
+	return message;
 }
 
 std::string get_message_type_string(MESSAGES type)

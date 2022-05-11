@@ -45,7 +45,7 @@ namespace testing_utilities
 		namespace network_message_utilities
 		{
 			void check_header(int message_id, int size, std::vector<unsigned char> p_message);
-			void compare_messages(Packed_Message m1, Packed_Message m2);
+			void compare_messages(Unpacked_Message b, Network_Message p);
 		}
 	}
 	namespace subsystem_utilities

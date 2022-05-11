@@ -37,8 +37,8 @@ TEST_F(Network_Messaging_Test, Message_Type)
 	message[5] = -100;
 	Packed_Message p_message(message);
 	testing_utilities::network_utilities::network_message_utilities::check_header(255, p_message.get_packet().size(), p_message.get_packet());
-	Packed_Message b_message(p_message.get_packet());
-	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
+	Unpacked_Message b_message(p_message.get_packet());
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(b_message, message);
 }
 
 TEST_F(Network_Messaging_Test, Message_NODE_HELLO)
@@ -50,8 +50,8 @@ TEST_F(Network_Messaging_Test, Message_NODE_HELLO)
 	message[1] = node_name;
 	Packed_Message p_message(message);
 	testing_utilities::network_utilities::network_message_utilities::check_header(0, p_message.get_packet().size(), p_message.get_packet());
-	Packed_Message b_message(p_message.get_packet());
-	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
+	Unpacked_Message b_message(p_message.get_packet());
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(b_message, message);
 }
 
 TEST_F(Network_Messaging_Test, Message_NODE_ACK)
@@ -61,8 +61,8 @@ TEST_F(Network_Messaging_Test, Message_NODE_ACK)
 	message[0] = node_name;
 	Packed_Message p_message(message);
 	testing_utilities::network_utilities::network_message_utilities::check_header(1, p_message.get_packet().size(), p_message.get_packet());
-	Packed_Message b_message(p_message.get_packet());
-	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
+	Unpacked_Message b_message(p_message.get_packet());
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(b_message, message);
 }
 
 TEST_F(Network_Messaging_Test, Message_NODE_UNDEF)
