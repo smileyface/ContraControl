@@ -185,34 +185,34 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		{
 			std::string p_str = dynamic_cast<Network_String*>(&p[i])->get_data().second;
 			std::string b_str = dynamic_cast<Network_String*>(&b.get_message()[i])->get_data().second;
-			EXPECT_EQ(p_str, b_str) << "String in position" << i << "are not the same";
+			EXPECT_EQ(p_str, b_str) << "String in position " << i << " are not the same";
 			Byte p_length = dynamic_cast<Network_String*>(&p[i])->get_data().first;
 			Byte b_length = dynamic_cast<Network_String*>(&b.get_message()[i])->get_data().first;
-			EXPECT_EQ(p_length, b_length) << "Length value of String in position" << i << "are not the same";
+			EXPECT_EQ(p_length, b_length) << "Length value of String in position " << i << " are not the same";
 		}
 		else if(types == typeid(Network_Bool).name())
 		{
 			bool p_str = dynamic_cast<Network_Bool*>(&p[i])->get_data();
 			bool b_str = dynamic_cast<Network_Bool*>(&b.get_message()[i])->get_data();
-			EXPECT_EQ(p_str, b_str) << "Boolean in position" << i << "are not the same";
+			EXPECT_EQ(p_str, b_str) << "Boolean in position " << i << " are not the same";
 		}
 		else if(types == typeid(Network_Byte).name())
 		{
 			Byte p_str = dynamic_cast<Network_Byte*>(&p[i])->get_data();
 			Byte b_str = dynamic_cast<Network_Byte*>(&b.get_message()[i])->get_data();
-			EXPECT_EQ(p_str, b_str) << "Byte in position" << i << "are not the same";
+			EXPECT_EQ(p_str, b_str) << "Byte in position " << i << " are not the same";
 		}
 		else if(types == typeid(Network_Percent).name())
 		{
 			float p_str = dynamic_cast<Network_Percent*>(&p[i])->get_data();
 			float b_str = dynamic_cast<Network_Percent*>(&b.get_message()[i])->get_data();
-			EXPECT_EQ(p_str, b_str) << "Percent in position" << i << "are not the same";
+			EXPECT_EQ(p_str, b_str) << "Percent in position " << i << " are not the same";
 		}
 		else if(types == typeid(Network_Word).name())
 		{
 			short p_str = dynamic_cast<Network_Word*>(&p[i])->get_data();
 			short b_str = dynamic_cast<Network_Word*>(&b.get_message()[i])->get_data();
-			EXPECT_EQ(p_str, b_str) << "Word in position" << i << "are not the same";
+			EXPECT_EQ(p_str, b_str) << "Word in position " << i << " are not the same";
 		}
 		else
 		{
@@ -240,29 +240,30 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 				EXPECT_EQ(p.get_packet()[current_position], p_addr.get_addr_bytes()[j]) << "Addresses in position " << i << " are not the same\n";
 				current_position++;
 			}
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "address: " + p_addr.get_as_string(), "compare messages"));
 		}
 		else if(types == typeid(Network_String).name())
 		{
 			Byte p_length = dynamic_cast<Network_String*>(&m[i])->get_data().first;
-			EXPECT_EQ(p_length, p.get_packet()[current_position]) << "Length value of String in position" << i << "are not the same";
+			EXPECT_EQ(p_length, p.get_packet()[current_position]) << "Length value of String in position " << i << " are not the same";
 			current_position++;
 			std::string p_str = dynamic_cast<Network_String*>(&m[i])->get_data().second;
 			for(int j = 0; j < p_str.size(); j++)
 			{
-				EXPECT_EQ(p.get_packet()[current_position], p_str[j]) << "String in position" << i << "are not the same";
+				EXPECT_EQ(p.get_packet()[current_position], p_str[j]) << "String in position " << i << " are not the same";
 				current_position++;
 			}
 		}
 		else if(types == typeid(Network_Bool).name())
 		{
 			bool p_bool = dynamic_cast<Network_Bool*>(&m[i])->get_data();
-			EXPECT_EQ(p_bool, p.get_packet()[current_position]) << "Boolean in position" << i << "are not the same";
+			EXPECT_EQ(p_bool, p.get_packet()[current_position]) << "Boolean in position " << i << " are not the same";
 			current_position++;
 		}
 		else if(types == typeid(Network_Byte).name())
 		{
 			Byte p_byte = dynamic_cast<Network_Byte*>(&m[i])->get_data();
-			EXPECT_EQ(p_byte, p.get_packet()[current_position]) << "Byte in position" << i << "are not the same";
+			EXPECT_EQ(p_byte, p.get_packet()[current_position]) << "Byte in position " << i << " are not the same";
 			current_position++;
 		}
 		else if(types == typeid(Network_Percent).name())
@@ -271,14 +272,14 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 			float s_per = p.get_packet()[current_position];
 			current_position++;
 			s_per += p.get_packet()[current_position] / 100.0;
-			EXPECT_EQ(p_per, s_per) << "Percent in position" << i << "are not the same";
+			EXPECT_EQ(p_per, s_per) << "Percent in position " << i << " are not the same";
 			current_position++;
 		}
 		else if(types == typeid(Network_Word).name())
 		{
 			short number = short(((p.get_packet()[current_position] << 8) & 0xff00) | (p.get_packet()[current_position + 1] & 0xff));
 			short p_str = dynamic_cast<Network_Word*>(&m[i])->get_data();
-			EXPECT_EQ(number, p_str);
+			EXPECT_EQ(number, p_str) << "Word in position " << i << " are not the same";
 			current_position += 2;
 		}
 		else
