@@ -237,33 +237,32 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&m[i])->get_data();
 			for(int j = 0; j < sizeof(IPV4_Addr); j++)
 			{
-				EXPECT_EQ(p.get_packet()[current_position], p_addr.get_addr_bytes()[j]) << "Addresses in position " << i << " are not the same\n";
+				EXPECT_EQ(p.get_packet()[current_position], p_addr.get_addr_bytes()[j]) << "Address at byte " << current_position << " for field " << i << " are not the same\n";
 				current_position++;
 			}
-			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "address: " + p_addr.get_as_string(), "compare messages"));
 		}
 		else if(types == typeid(Network_String).name())
 		{
 			Byte p_length = dynamic_cast<Network_String*>(&m[i])->get_data().first;
-			EXPECT_EQ(p_length, p.get_packet()[current_position]) << "Length value of String in position " << i << " are not the same";
+			EXPECT_EQ(p_length, p.get_packet()[current_position]) << "Length value of String at byte " << current_position << " for field " << i << " are not the same";
 			current_position++;
 			std::string p_str = dynamic_cast<Network_String*>(&m[i])->get_data().second;
 			for(int j = 0; j < p_str.size(); j++)
 			{
-				EXPECT_EQ(p.get_packet()[current_position], p_str[j]) << "String in position " << i << " are not the same";
+				EXPECT_EQ(p.get_packet()[current_position], p_str[j]) << "Character at byte " << current_position << " for field " << i << " are not the same";
 				current_position++;
 			}
 		}
 		else if(types == typeid(Network_Bool).name())
 		{
 			bool p_bool = dynamic_cast<Network_Bool*>(&m[i])->get_data();
-			EXPECT_EQ(p_bool, p.get_packet()[current_position]) << "Boolean in position " << i << " are not the same";
+			EXPECT_EQ(p_bool, p.get_packet()[current_position]) << "Boolean at byte " << current_position << " for field " << i << " are not the same";
 			current_position++;
 		}
 		else if(types == typeid(Network_Byte).name())
 		{
 			Byte p_byte = dynamic_cast<Network_Byte*>(&m[i])->get_data();
-			EXPECT_EQ(p_byte, p.get_packet()[current_position]) << "Byte in position " << i << " are not the same";
+			EXPECT_EQ(p_byte, p.get_packet()[current_position]) << "Byte at byte " << current_position << " for field " << i << " are not the same";
 			current_position++;
 		}
 		else if(types == typeid(Network_Percent).name())
