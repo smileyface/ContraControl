@@ -236,7 +236,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		{
 			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Address found at byte " + std::to_string(current_position), "Packed message compare"));
 			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&m[i])->get_data();
-			for(int j = 0; j < sizeof(IPV4_Addr); j++)
+			for(int j = 0; j < 4; j++)
 			{
 				EXPECT_EQ(p.get_packet()[current_position], p_addr.get_addr_bytes()[j]) << "Address at byte " << current_position << " for field " << i << " are not the same\n";
 				current_position++;
