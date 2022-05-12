@@ -279,6 +279,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 			short number = short(((p.get_packet()[current_position] << 8) & 0xff00) | (p.get_packet()[current_position + 1] & 0xff));
 			short p_str = dynamic_cast<Network_Word*>(&m[i])->get_data();
 			EXPECT_EQ(number, p_str);
+			current_position += 2;
 		}
 		else
 		{
