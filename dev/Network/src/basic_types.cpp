@@ -36,17 +36,9 @@ Byte Network_Word::size()
 
 Byte_Array Network_Word::pack()
 {
-	if(number > INT16_MIN && number < INT16_MAX)
-	{
-		Byte high = (number >> 8) % 256;
-		Byte low = number % 256;
-		return { high, low };
-	}
-	else
-	{
-		throw std::length_error("");
-	}
-	return Byte_Array();
+	Byte high = (number >> 8) % 256;
+	Byte low = number % 256;
+	return { high, low };
 }
 
 void Network_Word::unpack(Byte_Array& byte_string)

@@ -65,10 +65,6 @@ public:
 	 * \return type of the message.
 	 */
 	MESSAGES get_type();
-	/**
-	 * \return array of message data in an immutable way.
-	 */
-	std::vector<Network_Messaging_Type*> get_message();
 
 	/**
 	 * Get a specific data in the array of message data.

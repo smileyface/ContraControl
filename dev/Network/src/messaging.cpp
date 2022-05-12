@@ -116,8 +116,12 @@ std::vector<Byte> Message_Footer::pack()
 	return packet;
 }
 
-void Message_Footer::unpack(std::vector<Byte>)
-{ }
+void Message_Footer::unpack(std::vector<Byte> pack)
+{
+	Byte sum_byte_1_index = pack.size() - 2;
+	chk1 = pack[sum_byte_1_index];
+	chk2 = pack[sum_byte_1_index + 1];
+}
 
 std::vector<Byte> Packed_Message::get_packet()
 {
@@ -184,11 +188,6 @@ void Network_Message::unpack(std::vector<Byte> byte_array, int header_size)
 MESSAGES Network_Message::get_type()
 {
 	return type;
-}
-
-std::vector<Network_Messaging_Type*> Network_Message::get_message()
-{
-	return message;
 }
 
 Network_Messaging_Type& Network_Message::operator[](int index)
