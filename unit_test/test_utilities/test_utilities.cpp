@@ -234,6 +234,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		std::string types = str_type(m[i]);
 		if(types == typeid(Network_Address).name())
 		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Address found", "Packed message compare"));
 			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&m[i])->get_data();
 			for(int j = 0; j < sizeof(IPV4_Addr); j++)
 			{
@@ -243,6 +244,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		}
 		else if(types == typeid(Network_String).name())
 		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "String found", "Packed message compare"));
 			Byte p_length = dynamic_cast<Network_String*>(&m[i])->get_data().first;
 			EXPECT_EQ(p_length, p.get_packet()[current_position]) << "Length value of String at byte " << current_position << " for field " << i << " are not the same";
 			current_position++;
@@ -255,18 +257,21 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		}
 		else if(types == typeid(Network_Bool).name())
 		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Bool found", "Packed message compare"));
 			bool p_bool = dynamic_cast<Network_Bool*>(&m[i])->get_data();
 			EXPECT_EQ(p_bool, p.get_packet()[current_position]) << "Boolean at byte " << current_position << " for field " << i << " are not the same";
 			current_position++;
 		}
 		else if(types == typeid(Network_Byte).name())
 		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Byte found", "Packed message compare"));
 			Byte p_byte = dynamic_cast<Network_Byte*>(&m[i])->get_data();
 			EXPECT_EQ(p_byte, p.get_packet()[current_position]) << "Byte at byte " << current_position << " for field " << i << " are not the same";
 			current_position++;
 		}
 		else if(types == typeid(Network_Percent).name())
 		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Percent found", "Packed message compare"));
 			float p_per = dynamic_cast<Network_Percent*>(&m[i])->get_data();
 			float s_per = p.get_packet()[current_position];
 			current_position++;
@@ -276,6 +281,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 		}
 		else if(types == typeid(Network_Word).name())
 		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Word found", "Packed message compare"));
 			short number = short(((p.get_packet()[current_position] << 8) & 0xff00) | (p.get_packet()[current_position + 1] & 0xff));
 			short p_str = dynamic_cast<Network_Word*>(&m[i])->get_data();
 			EXPECT_EQ(number, p_str) << "Word in position " << i << " are not the same";
