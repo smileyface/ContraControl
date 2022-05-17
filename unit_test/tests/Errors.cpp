@@ -50,13 +50,13 @@ TEST_F(Network_Error_Test, Error_States_Initialize_System_Interface_Error)
 
 TEST_F(Network_Error_Test, Error_States_Initalized)
 {
-	/*network_utilities::setup();
+	network_utilities::setup();
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([] ()
 														   {
 															   network::network_interface->initalized();
 														   }, NETWORK_ERRORS::INVALID_HOSTNAME);
-	network_utilities::cleanup();*/
+	network_utilities::cleanup();
 
 	network_utilities::setup();
 	testing_utilities::network_utilities::expect_exception([] ()
@@ -132,11 +132,9 @@ TEST_F(Network_Error_Test, Unfound_Address)
 }
 TEST_F(Network_Error_Test, Bind_To_Invalid_Address)
 {
-	network_utilities::setup();
 	testing_utilities::network_utilities::expect_exception([] ()
 														   {
 															   IPV4_Addr test_address("255.0.255.0");
 															   network::network_interface->setup_connection("Tester", { IPPROTO_TCP, SOCK_STREAM, AF_INET, test_address });
 														   }, NETWORK_ERRORS::ADDRESS_ERROR);
-	network_utilities::cleanup();
 }
