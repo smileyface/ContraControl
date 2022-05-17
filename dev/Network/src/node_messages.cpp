@@ -32,7 +32,7 @@ void node_messages::network_client_state_machine()
 
 void node_messages::listen_for_messages_from_node(Connection sock)
 {
-	while(network::is_running())
+	while(sock.rec != RECIEVE_STATE::CLOSE_CONNECTION && network::is_running())
 	{
 		Byte_Array recieved = network::network_interface->receive(sock.sock, 1);
 		if(recieved[0] != 0x65)

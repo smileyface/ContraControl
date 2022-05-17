@@ -1,9 +1,11 @@
 ﻿/*This is where the Linux Network Interface object is defined*/
 #ifdef __linux__
 #include <sys/socket.h>
+#include <poll.h>
 #include <netdb.h>
 #include <ifaddrs.h>
 #include <iostream>
+#include <stdlib.h>
 
 #include "../system_interfaces/linux_network_interface.h"
 #include "Utilities/exceptions.h"
@@ -15,8 +17,8 @@ pthread_t server_thread;
 
 IPV4_Addr get_broadcast(IPV4_Addr host_ip, IPV4_Addr net_mask)
 {
-	IPV4_Addr bcast;
-	bcast = host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
+	IPV4_Addr bcast("0.0.0.0");
+	//bcast = host_ip.S_un.S_addr | ~net_mask.S_un.S_addr;
 	return bcast;
 }
 
@@ -127,7 +129,6 @@ void Linux_Network_Interface::initalize()
 
 	local_connections::setup(connections);
 	setup_interface();
-	server_running = false;
 	setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
 	setup_connection(local_connections::broadcast, { IPPROTO_UDP, SOCK_DGRAM, AF_INET });
 }
@@ -157,6 +158,12 @@ void Linux_Network_Interface::setup_broadcast_socket(Connection& connect, IPV4_A
 void Linux_Network_Interface::setup_connection(Connection_Id connection_name, Socket_Maker maker)
 {
 	connections[connection_name].sock = socket(maker.sock_family, maker.sock_type, maker.ip_protocol);
+	if(connections[connection_name].sock == -1)
+	{
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Invalid socket for " + connection_name, "Setup Connection"));
+		status_state.set_error(set_error_state());
+		throw NetworkErrorException();
+	}
 	if(connection_name == local_connections::broadcast)
 	{
 		IPV4_Addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
@@ -173,14 +180,17 @@ void Linux_Network_Interface::setup_connection(Connection_Id connection_name, So
 	{
 		connections[connection_name].address = maker.address;
 	}
+	bind_connection(connection_name, maker);
 }
 
 void Linux_Network_Interface::bind_connection(Connection_Id connection_name, Socket_Maker maker)
 {
 	sockaddr_in clientService;
-	clientService.sin_family = AF_INET;
+	clientService.sin_family = maker.sock_family;
 	clientService.sin_addr.s_addr = connections[connection_name].address.S_un.S_addr;
 	clientService.sin_port = htons(DEFAULT_PORT);
+	int reuse_opt_true = 1;
+	setsockopt(connections[connection_name].sock, SOL_SOCKET, SO_REUSEADDR, &reuse_opt_true, sizeof(reuse_opt_true));
 	int res = bind(connections[connection_name].sock, (struct sockaddr*) &clientService, sizeof(clientService));
 	if(res < 0)
 	{
@@ -213,6 +223,22 @@ void Linux_Network_Interface::send(std::string node_id, char* message)
 
 Byte_Array Linux_Network_Interface::receive(SOCKET socket, int size_to_recieve)
 {
+	int num_open_fds, rc;
+	struct pollfd fds[200];
+	memset(fds, 0, sizeof(fds));
+	fds[0].fd = socket;
+	fds[0].events = POLLIN;
+	rc = poll(fds, 1, 0);
+	if(rc == 0)
+	{
+		return { 0 };
+	}
+	if(rc == -1)
+	{
+		status_state.set_error(set_error_state());
+		throw NetworkErrorException();
+	}
+
 	char buffer[256];
 	int result = recv(socket, buffer, 256, 0);
 	Byte_Array buff(buffer, buffer + size_to_recieve);

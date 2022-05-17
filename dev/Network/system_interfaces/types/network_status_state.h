@@ -50,6 +50,8 @@ enum class NETWORK_ERRORS : unsigned char
     SYSTEM_INTERFACE_ERROR,
     /** The socket is busy. Not a fatal error. */
     SOCKET_BUSY,
+    /** The socket is not connected. */
+    SOCKET_DISCONNECTED,
     /** Error starting server */
     SERVER_CANNOT_START,
     /** A code error has occured and needs debugged. */

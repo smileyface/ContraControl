@@ -115,6 +115,8 @@ std::string get_string_of_error(NETWORK_ERRORS errors)
 		return "Error grabbing the interface";
 	case NETWORK_ERRORS::SOCKET_BUSY:
 		return "Socket is Busy";
+	case NETWORK_ERRORS::SOCKET_DISCONNECTED:
+		return "Socket is not connected";
 	case NETWORK_ERRORS::SERVER_CANNOT_START:
 		return "Server Cannot Start";
 	case NETWORK_ERRORS::NETWORK_CODE_ERROR:

@@ -75,27 +75,15 @@ TEST_F(Local_Network_Test, Client_Start_Up)
 	}
 }
 
-TEST_F(Local_Network_Test, Socket_Bind)
-{
-	try
-	{
-		network::network_interface->bind_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
-	}
-	catch(NetworkErrorException e)
-	{
-		testing_utilities::network_utilities::exception_handle();
-	}
-}
-
 TEST_F(Local_Network_Test, Listen)
 {
 	try
 	{
-		network::listen_for_message(local_connections::local, MESSAGES::NODE_HELLO);
+		network::start_server();
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 	catch(NetworkErrorException e)
 	{
 		testing_utilities::network_utilities::exception_handle();
 	}
-
 }

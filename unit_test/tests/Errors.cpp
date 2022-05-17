@@ -33,6 +33,10 @@ TEST_F(Network_Error_Test, Error_States_Initialize_System_Interface_Error)
 {
 	testing_utilities::network_utilities::expect_exception([] ()
 														   {
+															   network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
+														   }, NETWORK_ERRORS::UNINITALIZED_INTERFACE);
+	testing_utilities::network_utilities::expect_exception([] ()
+														   {
 															   network::network_interface->initalized();
 														   }, NETWORK_ERRORS::SOCKET_INVALID);
 	wVersionRequested = MAKEWORD(0, 0);
@@ -55,33 +59,32 @@ TEST_F(Network_Error_Test, Error_States_Initalized)
 	network_utilities::cleanup();
 
 	network_utilities::setup();
-	network::network_interface->setup_connection(local_connections::local, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
 	testing_utilities::network_utilities::expect_exception([] ()
 														   {
-															   network::network_interface->initalized();
-														   }, NETWORK_ERRORS::SOCKET_INVALID);
+															   network::network_interface->setup_connection(local_connections::local, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
+														   }, NETWORK_ERRORS::NETWORK_OPTION_ERROR);
+
+	network_utilities::cleanup();
 }
 
 TEST_F(Network_Error_Test, Error_States_Broadcast_Setup)
 {
-#ifdef _WIN32
-	testing_utilities::network_utilities::expect_exception([] ()
+	network_utilities::setup();
+
+/*	testing_utilities::network_utilities::expect_exception([] ()
 														   {
 															   network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
 														   }, NETWORK_ERRORS::SOCKET_INVALID);
 	network_utilities::cleanup();
-#endif // !_WIN32
-	network_utilities::setup();
-	testing_utilities::network_utilities::expect_exception([] ()
-														   {
-															   network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
-														   }, NETWORK_ERRORS::SOCKET_INVALID);
+
+	network_utilities::setup();*/
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([] ()
 														   {
 															   network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
 														   }, NETWORK_ERRORS::NETWORK_OPTION_ERROR);
-#endif // !_WIN32
+#endif
+	network_utilities::cleanup();
 }
 /*
 TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
@@ -127,10 +130,10 @@ TEST_F(Network_Error_Test, Unfound_Address)
 }
 TEST_F(Network_Error_Test, Bind_To_Invalid_Address)
 {
-	IPV4_Addr test_address("255.0.255.0");
-	network::network_interface->setup_connection("Tester", { IPPROTO_TCP, SOCK_STREAM, AF_INET, test_address });
 	testing_utilities::network_utilities::expect_exception([] ()
 														   {
-															   network::network_interface->bind_connection("Tester", { IPPROTO_TCP, SOCK_STREAM, AF_INET });
+															   IPV4_Addr test_address("255.0.255.0");
+															   network::network_interface->setup_connection("Tester", { IPPROTO_TCP, SOCK_STREAM, AF_INET, test_address });
 														   }, NETWORK_ERRORS::ADDRESS_ERROR);
+	network_utilities::cleanup();
 }

@@ -57,8 +57,12 @@ void client_loop()
 
 void server_loop()
 {
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Starting Server Loop", "Client Loop"));
+	//start listening on broadcast
+	network::listen_for_messages(local_connections::broadcast);
 	while(network::is_running())
 	{
+		network::listen_for_message(local_connections::broadcast, MESSAGES::NODE_HELLO);
 		//listen on Broadcast for NODE_HELLO
 		//Once found, Send NODE_ACK
 	}
@@ -78,9 +82,11 @@ void network::teardown_network_interfaces()
 
 Network_Message network::listen_for_message(Connection_Id src, MESSAGES listen_for)
 {
-	node_messages::listen_for_messages_from_node(network_interface->get_connection(src));
-
 	return Network_Message();
+}
+void network::listen_for_messages(Connection_Id src)
+{
+	node_messages::listen_for_messages_from_node(network_interface->get_connection(src));
 }
 
 void network::start_server()
