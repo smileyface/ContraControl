@@ -81,7 +81,9 @@ void Linux_Network_Interface::setup_interface()
 
 NETWORK_ERRORS set_error_state()
 {
-	switch(errno)
+	int err_code = errno;
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Error code " + std::to_string(err_code) + " thrown", "Windows Network Error Handle"));
+	switch(err_code)
 	{
 	case EISCONN:
 		return NETWORK_ERRORS::SOCKET_BUSY;
