@@ -123,13 +123,16 @@ TEST_F(Network_Error_Test, Messaging_Types_Unimplemented)
 
 TEST_F(Network_Error_Test, Unfound_Address)
 {
+	network_utilities::setup();
 	testing_utilities::network_utilities::expect_exception([] ()
 														   {
 															   network::init_network_interfaces("errors");
 														   }, NETWORK_ERRORS::ADDRESS_ERROR);
+	network_utilities::cleanup();
 }
 TEST_F(Network_Error_Test, Bind_To_Invalid_Address)
 {
+	network_utilities::setup();
 	testing_utilities::network_utilities::expect_exception([] ()
 														   {
 															   IPV4_Addr test_address("255.0.255.0");
