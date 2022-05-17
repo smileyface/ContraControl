@@ -50,13 +50,13 @@ TEST_F(Network_Error_Test, Error_States_Initialize_System_Interface_Error)
 
 TEST_F(Network_Error_Test, Error_States_Initalized)
 {
-	network_utilities::setup();
+	/*network_utilities::setup();
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([] ()
 														   {
 															   network::network_interface->initalized();
 														   }, NETWORK_ERRORS::INVALID_HOSTNAME);
-	network_utilities::cleanup();
+	network_utilities::cleanup();*/
 
 	network_utilities::setup();
 	testing_utilities::network_utilities::expect_exception([] ()

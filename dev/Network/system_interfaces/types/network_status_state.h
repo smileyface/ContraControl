@@ -61,7 +61,7 @@ enum class NETWORK_ERRORS : unsigned char
     /** When the IP address returns an invalid addres */
     ADDRESS_ERROR,
     /** Some unknown error has occured. */
-    UNKNOWN_ERROR
+    UNKNOWN_ERROR = 255
 };
 
 /**
