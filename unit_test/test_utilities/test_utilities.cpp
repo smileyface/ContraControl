@@ -6,6 +6,8 @@
 #include "pch.h"
 
 #include <typeinfo>
+#include  <chrono>
+#include <algorithm>
 
 template <typename T> char const* str_type(T const& obj)
 {
@@ -151,6 +153,18 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 	}
 	system_utilities::print_messages();
 	FAIL() << "Network Error Exception did not throw\nExpected " + get_string_of_error(error);
+}
+
+void testing_utilities::network_utilities::expect_message(MESSAGES message, int seconds_timeout)
+{
+	auto start = std::chrono::high_resolution_clock::now();
+	while(std::chrono::high_resolution_clock::now() < std::chrono::milliseconds(seconds_timeout*1000) + start)
+	{
+		//TODO: check for message in buffers
+		//if(netwo)
+
+	}
+	FAIL() << "Expected message not recieved";
 }
 
 void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)

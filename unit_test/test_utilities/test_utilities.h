@@ -41,6 +41,7 @@ namespace testing_utilities
 		void check_initalized();
 		void exception_handle();
 		void expect_exception(std::function<void()> function, NETWORK_ERRORS error);
+		void expect_message(MESSAGES message, int seconds_timeout);
 		namespace network_message_utilities
 		{
 			void check_header(int message_id, int size, std::vector<unsigned char> p_message);

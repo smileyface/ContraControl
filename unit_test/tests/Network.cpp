@@ -28,8 +28,8 @@ namespace
 		}
 		virtual void TearDown()
 		{
-			network::teardown_network_interfaces();
 			system_utilities::cleanup();
+			network_utilities::cleanup();
 		}
 	};
 }
@@ -81,9 +81,17 @@ TEST_F(Local_Network_Test, Listen)
 	{
 		network::start_server();
 		std::this_thread::sleep_for(std::chrono::seconds(1));
+		std::vector<char> test_message = { 0x65, 0x08, 0x00, 0x7F, 0x00, 0x00, 0x01, 0x01, 0x32, 0x00, 0x00 };
+		network_utilities::send_broadcast_message(test_message);
+		testing_utilities::network_utilities::expect_message(MESSAGES::NODE_HELLO, 2);
 	}
 	catch(NetworkErrorException e)
 	{
 		testing_utilities::network_utilities::exception_handle();
 	}
+}
+
+TEST_F(Local_Network_Test, Shut_Down_Connection)
+{
+
 }

@@ -73,8 +73,8 @@ NETWORK_ERRORS Windows_Network_Interface::set_error_state(int err_code)
 //TODO: Make a send and recieve broadcast socket.
 IPV4_Addr Windows_Network_Interface::get_broadcast(IPV4_Addr host_ip, IPV4_Addr net_mask)
 {
-	IPV4_Addr bcast(INADDR_ANY);
-	//bcast = host_ip.S_un.S_addr | ~net_mask.S_un.S_addr; Do the general one for now.
+	IPV4_Addr bcast("127.0.0.0");
+	//bcast = host_ip.S_un.S_addr | ~net_mask.S_un.S_addr; //Do the general one for now.
 	return bcast;
 }
 IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname, std::string interfaces)
@@ -265,6 +265,13 @@ void Windows_Network_Interface::setup_connection(Connection_Id connection_name, 
 		status_state.set_error(set_error_state());
 		throw NetworkErrorException();
 	}
+	char reuse_opt_true = '1';
+	if(setsockopt(connections[connection_name].sock, SOL_SOCKET, SO_REUSEADDR, &reuse_opt_true, sizeof(reuse_opt_true)) < 0)
+	{
+		network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, "Setting reuse for " + connection_name, "Setup Connection"));
+		status_state.set_error(set_error_state());
+		throw NetworkErrorException();
+	}
 	if(connection_name == local_connections::broadcast)
 	{
 		IPV4_Addr subnet_mask = get_subnet_mask(connections[local_connections::local].sock, connections[local_connections::local].address);
@@ -303,14 +310,14 @@ void Windows_Network_Interface::send(Connection_Id node_id, char* message)
 
 Byte_Array Windows_Network_Interface::receive(SOCKET socket, int size_to_recieve)
 {
-	struct pollfd fds;
+	struct pollfd fds{};
 	fds.fd = socket;
 	fds.events = POLLRDNORM;
 	if(WSAPoll(&fds, 1, 20) == 0)
 	{
 		return { 0 };
 	}
-	sockaddr_in from;
+	sockaddr_in from{};
 	int size = sizeof(from);
 	char buffer[256];
 	int result = recvfrom(socket, buffer, size_to_recieve, 0, reinterpret_cast<SOCKADDR*>(&from), &size);
