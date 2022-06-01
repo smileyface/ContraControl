@@ -3,6 +3,14 @@
 
 #include "../../dev/Interfaces/Messaging/system_messaging.h"
 
+#ifdef CI
+const bool IS_CI = true;
+#else
+const bool IS_CI = false;
+#endif // CI
+
+
+
 namespace system_utilities
 {
 	void setup();
@@ -19,10 +27,7 @@ namespace system_utilities
 		void start();
 		void stop();
 	}
-	namespace network_utilities
-	{
-		void setup();
-	}
+
 	extern System_Messages* testing_messges;
 }
 

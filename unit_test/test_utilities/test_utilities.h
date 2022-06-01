@@ -9,7 +9,6 @@
 #include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
 
-
 #include "../../dev/Utilities/Utilities/exceptions.h"
 #include "../../dev/Network/system_interfaces/types/network_status_state.h"
 #include "../../dev/Network/messages/messaging.h"
@@ -42,10 +41,14 @@ namespace testing_utilities
 		void check_initalized();
 		void exception_handle();
 		void expect_exception(std::function<void()> function, NETWORK_ERRORS error);
+		void expect_message(MESSAGES message, int seconds_timeout);
 		namespace network_message_utilities
 		{
 			void check_header(int message_id, int size, std::vector<unsigned char> p_message);
-			void compare_messages(Packed_Message m1, Packed_Message m2);
+			void compare_header(Packed_Message p, Unpacked_Message u);
+			void compare_footer(Packed_Message p, Unpacked_Message u);
+			void compare_messages(Unpacked_Message b, Network_Message m);
+			void compare_messages(Packed_Message p, Network_Message m);
 		}
 	}
 	namespace subsystem_utilities

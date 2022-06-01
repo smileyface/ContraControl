@@ -1,7 +1,7 @@
 /******************************************************************//**
  * \file   connections.h
- * \brief  
- * 
+ * \brief
+ *
  * \author kason
  * \date   March 2022
  *********************************************************************/
@@ -16,10 +16,23 @@
 #include <WinSock2.h>
 #endif // IS_WIN32
 #ifdef __linux__
-/** A rename for the file descriptor to the Windows SOCKET. This makes both systems work more similarly. */
+ /** A rename for the file descriptor to the Windows SOCKET. This makes both systems work more similarly. */
 typedef int SOCKET;
 const int INVALID_SOCKET = 0;
 #endif //__linux__
+
+/** State of reception of message */
+enum class RECIEVE_STATE
+{
+	/** Ready to recieve a message and finding the start byte */
+	READY,
+	/** Header has been recieved */
+	HEADER_RECIEVED,
+	/** Full message has been recieved */
+	MESSAGE_RECIEVED,
+	/** Close Connection */
+	CLOSE_CONNECTION
+};
 
 /**
  * A network connection container. To be paired with a Connection_Id for a full description of a connection to a remote node.
@@ -30,6 +43,8 @@ struct Connection
 	SOCKET sock = INVALID_SOCKET;
 	/** Address of the remote node. */
 	IPV4_Addr address = INVALID_ADDRESS;
+	/** State of reception */
+	RECIEVE_STATE rec = RECIEVE_STATE::READY;
 };
 
 /** A handle for a connection to the remote node. Should correlate to \ref Node_Id. */
@@ -49,8 +64,6 @@ namespace local_connections
 	 * \param list Reference to a nodes connection list.
 	 */
 	void setup(Network_Connection_List& list);
-
 }
-
 
 #endif // !NETWORK_CONNECTION_TYPE_H

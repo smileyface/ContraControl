@@ -10,15 +10,7 @@ Byte Network_Byte::size()
 
 Byte_Array Network_Byte::pack()
 {
-	if (number < 256)
-	{
-		return { (Byte)number };
-	}
-	else
-	{
-		throw std::length_error("");
-	}
-	return Byte_Array();
+	return { (Byte) number };
 }
 
 void Network_Byte::unpack(Byte_Array& byte_string)
@@ -44,24 +36,16 @@ Byte Network_Word::size()
 
 Byte_Array Network_Word::pack()
 {
-	if (number > INT16_MIN && number < INT16_MAX)
-	{
-		Byte high = (number>>8)%256;
-		Byte low = number % 256;
-		return { high, low };
-	}
-	else
-	{
-		throw std::length_error("");
-	}
-	return Byte_Array();
+	Byte high = (number >> 8) % 256;
+	Byte low = number % 256;
+	return { high, low };
 }
 
 void Network_Word::unpack(Byte_Array& byte_string)
 {
 	number = 0;
 	number = short(((byte_string[0] << 8) & 0xff00) | (byte_string[1] & 0xff));
-	byte_string.erase(byte_string.begin(), byte_string.begin()+1);
+	byte_string.erase(byte_string.begin(), byte_string.begin() + 1);
 }
 
 void Network_Word::operator=(int assigner)
@@ -84,9 +68,9 @@ Byte_Array Network_String::pack()
 	Byte_Array packet;
 	packet.push_back(length);
 	//removes the null termination.
-	for (int i = 0; i < length; i++)
+	for(int i = 0; i < length; i++)
 	{
-		packet.push_back((unsigned char)message[i]);
+		packet.push_back((unsigned char) message[i]);
 	}
 	return packet;
 }
@@ -95,7 +79,7 @@ void Network_String::unpack(Byte_Array& byte_string)
 {
 	length = byte_string[0];
 	byte_string.erase(byte_string.begin());
-	for (int i = 0; i < length; i++)
+	for(int i = 0; i < length; i++)
 	{
 		message += byte_string[i];
 	}
@@ -136,7 +120,7 @@ void Network_Bool::operator=(bool assigner)
 
 bool Network_Bool::get_data()
 {
-	if (boolean == 0)
+	if(boolean == 0)
 	{
 		return false;
 	}
@@ -151,7 +135,7 @@ Byte Network_Address::size()
 Byte_Array Network_Address::pack()
 {
 	Byte_Array packet;
-	for (int i = 0; i < size(); i++)
+	for(int i = 0; i < size(); i++)
 	{
 		packet.push_back(address.get_addr_bytes()[i]);
 	}
@@ -196,11 +180,11 @@ void Network_Percent::unpack(Byte_Array& byte_string)
 
 void Network_Percent::operator=(float assigner)
 {
-	integer = trunc(assigner);
-	decimal = trunc((assigner - integer)*100);
+	integer = static_cast<Byte>(trunc(assigner));
+	decimal = trunc((assigner - integer) * 100);
 }
 
 float Network_Percent::get_data()
 {
-	return integer + (decimal/100.0f);
+	return integer + (decimal / 100.0f);
 }

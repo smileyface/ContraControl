@@ -1,7 +1,7 @@
 /*****************************************************************//**
  * \file   exceptions.h
- * \brief  
- * 
+ * \brief
+ *
  * \author kason
  * \date   June 2021
  *********************************************************************/
@@ -9,15 +9,15 @@
 #define PROJECT_EXCEPTIONS_H
 
 #include <stdexcept>
-/**
- \brief Exception node throws when attempting to access a device that does not exist.
- */
+ /**
+  \brief Exception node throws when attempting to access a device that does not exist.
+  */
 class DeviceNotFoundException : public std::exception
 {
-    virtual const char* what() const throw()
-    {
-        return "Device is not on node";
-    }
+	virtual const char* what() const throw()
+	{
+		return "Device is not on node";
+	}
 };
 
 /**
@@ -26,10 +26,10 @@ class DeviceNotFoundException : public std::exception
 
 class NodeNotFoundException : public std::exception
 {
-    virtual const char* what() const throw()
-    {
-        return "Node is unknown";
-    }
+	virtual const char* what() const throw()
+	{
+		return "Node is unknown";
+	}
 };
 
 /**
@@ -37,10 +37,10 @@ class NodeNotFoundException : public std::exception
  */
 class IncorrectStateTypeException : public std::exception
 {
-    virtual const char* what() const throw()
-    {
-        return "Incorrect state attempting to be mangled";
-    }
+	virtual const char* what() const throw()
+	{
+		return "Incorrect state attempting to be mangled";
+	}
 };
 
 /**
@@ -48,10 +48,10 @@ class IncorrectStateTypeException : public std::exception
  */
 class InvalidCommandException : public std::exception
 {
-    virtual const char* what() const throw()
-    {
-        return "Invalid command given";
-    }
+	virtual const char* what() const throw()
+	{
+		return "Invalid command given";
+	}
 };
 
 /**
@@ -59,10 +59,10 @@ class InvalidCommandException : public std::exception
  */
 class InvalidDeviceException : public std::exception
 {
-    virtual const char* what() const throw()
-    {
-        return "Device is of an invalid type";
-    }
+	virtual const char* what() const throw()
+	{
+		return "Device is of an invalid type";
+	}
 };
 
 /**
@@ -70,10 +70,10 @@ class InvalidDeviceException : public std::exception
  */
 class UnimplementedFunctionException : public std::exception
 {
-    virtual const char* what() const throw()
-    {
-        return "Function not implemented";
-    }
+	virtual const char* what() const throw()
+	{
+		return "Function not implemented";
+	}
 };
 
 /**
@@ -82,15 +82,14 @@ class UnimplementedFunctionException : public std::exception
 class NetworkErrorException : public std::exception
 {
 public:
-    /**
-     * Austin 3:16 says:
-     * 
-     * \return String of message
-     */
-    virtual const char* what() const throw()
-    {
-        return "Network Error";
-    }
-
+	/**
+	 * Austin 3:16 says:
+	 *
+	 * \return String of message
+	 */
+	virtual const char* what() const throw()
+	{
+		return "Network Error";
+	}
 };
 #endif

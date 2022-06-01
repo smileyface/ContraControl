@@ -1,4 +1,4 @@
-#include "../test_utilities/system_testings.h"
+#include "../test_utilities/system_utilities.h"
 #include "../test_utilities/test_utilities.h"
 
 #include "../test_utilities/pch.h"
@@ -8,13 +8,16 @@
 
 #include "../../Network/network_main.h"
 #include "../../Network/messages.h"
-namespace {
-	class Network_Messaging_Test : public ::testing::Test {
-
-		virtual void SetUp() {
+namespace
+{
+	class Network_Messaging_Test : public ::testing::Test
+	{
+		virtual void SetUp()
+		{
 			system_utilities::setup();
 		}
-		virtual void TearDown() {
+		virtual void TearDown()
+		{
 			system_utilities::cleanup();
 			network::teardown_network_interfaces();
 		}
@@ -34,8 +37,11 @@ TEST_F(Network_Messaging_Test, Message_Type)
 	message[5] = -100;
 	Packed_Message p_message(message);
 	testing_utilities::network_utilities::network_message_utilities::check_header(255, p_message.get_packet().size(), p_message.get_packet());
-	Packed_Message b_message(p_message.get_packet());
-	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
+	Unpacked_Message b_message(p_message.get_packet());
+	testing_utilities::network_utilities::network_message_utilities::compare_header(p_message, b_message);
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(b_message, message);
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, message);
+	testing_utilities::network_utilities::network_message_utilities::compare_footer(p_message, b_message);
 }
 
 TEST_F(Network_Messaging_Test, Message_NODE_HELLO)
@@ -47,8 +53,11 @@ TEST_F(Network_Messaging_Test, Message_NODE_HELLO)
 	message[1] = node_name;
 	Packed_Message p_message(message);
 	testing_utilities::network_utilities::network_message_utilities::check_header(0, p_message.get_packet().size(), p_message.get_packet());
-	Packed_Message b_message(p_message.get_packet());
-	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
+	Unpacked_Message b_message(p_message.get_packet());
+	testing_utilities::network_utilities::network_message_utilities::compare_header(p_message, b_message);
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(b_message, message);
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, message);
+	testing_utilities::network_utilities::network_message_utilities::compare_footer(p_message, b_message);
 }
 
 TEST_F(Network_Messaging_Test, Message_NODE_ACK)
@@ -58,11 +67,12 @@ TEST_F(Network_Messaging_Test, Message_NODE_ACK)
 	message[0] = node_name;
 	Packed_Message p_message(message);
 	testing_utilities::network_utilities::network_message_utilities::check_header(1, p_message.get_packet().size(), p_message.get_packet());
-	Packed_Message b_message(p_message.get_packet());
-	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
+	Unpacked_Message b_message(p_message.get_packet());
+	testing_utilities::network_utilities::network_message_utilities::compare_header(p_message, b_message);
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(b_message, message);
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, message);
+	testing_utilities::network_utilities::network_message_utilities::compare_footer(p_message, b_message);
 }
 
 TEST_F(Network_Messaging_Test, Message_NODE_UNDEF)
-{
-
-}
+{ }

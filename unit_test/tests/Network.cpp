@@ -1,5 +1,6 @@
-#include "../test_utilities/system_testings.h"
+#include "../test_utilities/system_utilities.h"
 #include "../test_utilities/test_utilities.h"
+#include "../test_utilities/network_utiliies.h"
 
 #include "../test_utilities/pch.h"
 
@@ -16,18 +17,22 @@
 
 #define ARRAY_LENGTH(array) (sizeof(array)/sizeof((array)[0]))
 
-namespace {
-	class Local_Network_Test : public ::testing::Test {
-		virtual void SetUp() {
-			system_utilities::network_utilities::setup();
+namespace
+{
+	class Local_Network_Test : public ::testing::Test
+	{
+		virtual void SetUp()
+		{
+			system_utilities::setup();
+			network_utilities::setup();
 		}
-		virtual void TearDown() {
-			network::teardown_network_interfaces();
+		virtual void TearDown()
+		{
 			system_utilities::cleanup();
+			network_utilities::cleanup();
 		}
 	};
 }
-
 
 TEST_F(Local_Network_Test, Network_SetUp)
 {
@@ -43,12 +48,12 @@ TEST_F(Local_Network_Test, Server_Start_Up)
 		testing_utilities::network_utilities::check_initalized();
 		network::start_server();
 	}
-	catch (NetworkErrorException e)
+	catch(NetworkErrorException e)
 	{
 		std::cout << "Server Start Up exception caught";
 		testing_utilities::network_utilities::exception_handle();
 	}
-	catch (const std::exception& exc)
+	catch(const std::exception& exc)
 	{
 		std::cerr << exc.what();
 	}
@@ -56,7 +61,7 @@ TEST_F(Local_Network_Test, Server_Start_Up)
 
 TEST_F(Local_Network_Test, Client_Start_Up)
 {
-	/** Start in server mode */	
+	/** Start in server mode */
 	try
 	{
 		testing_utilities::network_utilities::check_initalized();
@@ -64,9 +69,29 @@ TEST_F(Local_Network_Test, Client_Start_Up)
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		//TODO Add a localhost listener
 	}
-	catch (NetworkErrorException e)
+	catch(NetworkErrorException e)
 	{
 		testing_utilities::network_utilities::exception_handle();
 	}
 }
 
+TEST_F(Local_Network_Test, Listen)
+{
+	try
+	{
+		network::start_server();
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+		std::vector<char> test_message = { 0x65, 0x08, 0x00, 0x7F, 0x00, 0x00, 0x01, 0x01, 0x32, 0x00, 0x00 };
+		network_utilities::send_broadcast_message(test_message);
+		testing_utilities::network_utilities::expect_message(MESSAGES::NODE_HELLO, 2);
+	}
+	catch(NetworkErrorException e)
+	{
+		testing_utilities::network_utilities::exception_handle();
+	}
+}
+
+TEST_F(Local_Network_Test, Shut_Down_Connection)
+{
+
+}

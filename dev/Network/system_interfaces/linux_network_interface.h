@@ -1,7 +1,7 @@
 /*****************************************************************//**
  * \file   linux_network_interface.h
- * \brief  
- * 
+ * \brief
+ *
  * \author kason
  * \date   October 2021
  *********************************************************************/
@@ -18,11 +18,10 @@
 #include <vector>	    //std::vector
 
 #include "network_interface.h"
-//COMMON TYPEDEFS
+ //COMMON TYPEDEFS
 
 typedef unsigned long DWORD;
 const unsigned long ERROR_NOT_FOUND = 1168L;
-
 
 class Linux_Network_Interface : public Network_Interface
 {
@@ -32,10 +31,10 @@ public:
 	void initalize();
 	void clean_up();
 	void setup_connection(Connection_Id connection_name, Socket_Maker maker);
-
+	void bind_connection(Connection_Id connection_name, Socket_Maker make);
 
 	void send(std::string node_id, char* message);
-	char* listen(Connection_Id Connection_Id);
+	Byte_Array receive(SOCKET socket, int size_to_recieve);
 
 private:
 	IPV4_Addr get_interface_addr();
@@ -45,7 +44,6 @@ private:
 	bool server_running;
 	struct ifaddrs* ifa;
 };
-
 
 #endif
 #endif

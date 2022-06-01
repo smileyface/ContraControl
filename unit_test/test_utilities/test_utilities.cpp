@@ -1,12 +1,18 @@
 #include "test_utilities.h"
-#include "system_testings.h"
+#include "system_utilities.h"
 
 #include "../../Network/network_main.h"
 
 #include "pch.h"
 
 #include <typeinfo>
+#include  <chrono>
+#include <algorithm>
 
+template <typename T> char const* str_type(T const& obj)
+{
+	return typeid(obj).name();
+}
 void testing_utilities::log_top_test(Command* command, Device* device)
 {
 	Log_Entry topItem;
@@ -22,7 +28,7 @@ void testing_utilities::log_bottom_test(Command* command, Device* device)
 
 void testing_utilities::get_partial_on(Command* command, Device* device, double timeout)
 {
-	while (timeout > 0)
+	while(timeout > 0)
 	{
 		system_utilities::step(1);
 		timeout -= model_timer.get_elapsed_time();
@@ -36,7 +42,6 @@ void testing_utilities::device_utilities::check_state(Device_Label device, Devic
 	EXPECT_EQ(received_state->is_valid(), expected_state->is_valid()) << "Device validity is not correct";
 	EXPECT_EQ(received_state->is_initalized(), expected_state->is_initalized()) << "Device is not initalized properly";
 	EXPECT_EQ(received_state->get_power(), expected_state->get_power()) << "Device power is not correct";
-
 }
 
 void testing_utilities::device_utilities::check_validity(Device_Label label, bool expect_valid)
@@ -70,9 +75,9 @@ void testing_utilities::device_utilities::check_name(Device_Label label, DEVICE_
 void testing_utilities::node_utilities::check_for_device(Device_Label label)
 {
 	bool found = false;
-	for (int i = 0; i < model::get_node(label.get_node_id())->get_devices().size(); i++)
+	for(int i = 0; i < model::get_node(label.get_node_id())->get_devices().size(); i++)
 	{
-		if (model::get_node(label.get_node_id())->get_devices()[i] == label.get_device_id())
+		if(model::get_node(label.get_node_id())->get_devices()[i] == label.get_device_id())
 		{
 			found = true;
 		}
@@ -80,13 +85,11 @@ void testing_utilities::node_utilities::check_for_device(Device_Label label)
 	EXPECT_EQ(found, true);
 }
 
-
-
 void testing_utilities::network_utilities::check_initalized()
 {
 	network::network_interface->initalized();
 	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::NETWORK_INITALIZED);
-	if (network::network_interface->get_status().status == NETWORK_STATUS::NETWORK_ERROR)
+	if(network::network_interface->get_status().status == NETWORK_STATUS::NETWORK_ERROR)
 	{
 		exception_handle();
 	}
@@ -94,7 +97,7 @@ void testing_utilities::network_utilities::check_initalized()
 
 std::string get_string_of_error(NETWORK_ERRORS errors)
 {
-	switch (errors)
+	switch(errors)
 	{
 	case NETWORK_ERRORS::NO_NETWORK_ERROR:
 		return "Network Subsystem has failed";
@@ -114,6 +117,8 @@ std::string get_string_of_error(NETWORK_ERRORS errors)
 		return "Error grabbing the interface";
 	case NETWORK_ERRORS::SOCKET_BUSY:
 		return "Socket is Busy";
+	case NETWORK_ERRORS::SOCKET_DISCONNECTED:
+		return "Socket is not connected";
 	case NETWORK_ERRORS::SERVER_CANNOT_START:
 		return "Server Cannot Start";
 	case NETWORK_ERRORS::NETWORK_CODE_ERROR:
@@ -141,13 +146,25 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 	{
 		function();
 	}
-	catch (NetworkErrorException)
+	catch(NetworkErrorException)
 	{
 		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 		return;
 	}
 	system_utilities::print_messages();
 	FAIL() << "Network Error Exception did not throw\nExpected " + get_string_of_error(error);
+}
+
+void testing_utilities::network_utilities::expect_message(MESSAGES message, int seconds_timeout)
+{
+	auto start = std::chrono::high_resolution_clock::now();
+	while(std::chrono::high_resolution_clock::now() < std::chrono::milliseconds(seconds_timeout*1000) + start)
+	{
+		//TODO: check for message in buffers
+		//if(netwo)
+
+	}
+	FAIL() << "Expected message not recieved";
 }
 
 void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)
@@ -157,25 +174,21 @@ void testing_utilities::network_utilities::network_message_utilities::check_head
 	EXPECT_EQ(size, p_message[2]) << "Incorrect Packet Size";
 }
 
-void testing_utilities::network_utilities::network_message_utilities::compare_messages(Packed_Message m1, Packed_Message m2)
+void testing_utilities::network_utilities::network_message_utilities::compare_messages(Unpacked_Message b, Network_Message p)
 {
-	Message_Header p_header, b_header;
-	Network_Message p_body, b_body;
-	Message_Footer p_footer, b_footer;
-	m1.get_message(p_header, p_body, p_footer);
-	m2.get_message(b_header, b_body, b_footer);
-	if (p_body.size() != b_body.size())
+	if(p.size() != b.get_message().size())
 	{
 		FAIL() << "Body sizes are not the same";
 		return;
 	}
-	for (int i = 0; i < p_body.get_message().size(); i++)
+	for(int i = 0; i < p.number_of_fields(); i++)
 	{
-		if (typeid(p_body[i]) == typeid(Network_Address))
+		std::string types = str_type(p[i]);
+		if(types == typeid(Network_Address).name())
 		{
-			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
-			IPV4_Addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
-			if (p_addr == b_addr)
+			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&p[i])->get_data();
+			IPV4_Addr b_addr = dynamic_cast<Network_Address*>(&b.get_message()[i])->get_data();
+			if(p_addr == b_addr)
 			{
 				SUCCEED();
 			}
@@ -184,45 +197,133 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 				FAIL() << "Addresses in position " << i << " are not the same\n" << p_addr.get_as_string() << " vs " << b_addr.get_as_string();
 			}
 		}
-		else if (typeid(p_body[i]) == typeid(Network_String))
+		else if(types == typeid(Network_String).name())
 		{
-			std::string p_str = dynamic_cast<Network_String*>(&p_body[i])->get_data().second;
-			std::string b_str = dynamic_cast<Network_String*>(&b_body[i])->get_data().second;
-			EXPECT_EQ(p_str, b_str) <<"String in position" << i << "are not the same";
-			Byte p_length = dynamic_cast<Network_String*>(&p_body[i])->get_data().first;
-			Byte b_length = dynamic_cast<Network_String*>(&b_body[i])->get_data().first;
-			EXPECT_EQ(p_length, b_length) << "Length value of String in position" << i << "are not the same";
+			std::string p_str = dynamic_cast<Network_String*>(&p[i])->get_data().second;
+			std::string b_str = dynamic_cast<Network_String*>(&b.get_message()[i])->get_data().second;
+			EXPECT_EQ(p_str, b_str) << "String in position " << i << " are not the same";
+			Byte p_length = dynamic_cast<Network_String*>(&p[i])->get_data().first;
+			Byte b_length = dynamic_cast<Network_String*>(&b.get_message()[i])->get_data().first;
+			EXPECT_EQ(p_length, b_length) << "Length value of String in position " << i << " are not the same";
 		}
-		else if (typeid(p_body[i]) == typeid(Network_Bool))
+		else if(types == typeid(Network_Bool).name())
 		{
-			bool p_str = dynamic_cast<Network_Bool*>(&p_body[i])->get_data();
-			bool b_str = dynamic_cast<Network_Bool*>(&b_body[i])->get_data();
-			EXPECT_EQ(p_str, b_str) << "Boolean in position" << i << "are not the same";
+			bool p_str = dynamic_cast<Network_Bool*>(&p[i])->get_data();
+			bool b_str = dynamic_cast<Network_Bool*>(&b.get_message()[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Boolean in position " << i << " are not the same";
 		}
-		else if (typeid(p_body[i]) == typeid(Network_Byte))
+		else if(types == typeid(Network_Byte).name())
 		{
-			Byte p_str = dynamic_cast<Network_Byte*>(&p_body[i])->get_data();
-			Byte b_str = dynamic_cast<Network_Byte*>(&b_body[i])->get_data();
-			EXPECT_EQ(p_str, b_str) << "Byte in position" << i << "are not the same";
+			Byte p_str = dynamic_cast<Network_Byte*>(&p[i])->get_data();
+			Byte b_str = dynamic_cast<Network_Byte*>(&b.get_message()[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Byte in position " << i << " are not the same";
 		}
-		else if (typeid(p_body[i]) == typeid(Network_Percent))
+		else if(types == typeid(Network_Percent).name())
 		{
-			float p_str = dynamic_cast<Network_Percent*>(&p_body[i])->get_data();
-			float b_str = dynamic_cast<Network_Percent*>(&b_body[i])->get_data();
-			EXPECT_EQ(p_str, b_str) << "Percent in position" << i << "are not the same";
+			float p_str = dynamic_cast<Network_Percent*>(&p[i])->get_data();
+			float b_str = dynamic_cast<Network_Percent*>(&b.get_message()[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Percent in position " << i << " are not the same";
 		}
-		else if (typeid(p_body[i]) == typeid(Network_Word))
+		else if(types == typeid(Network_Word).name())
 		{
-			short p_str = dynamic_cast<Network_Word*>(&p_body[i])->get_data();
-			short b_str = dynamic_cast<Network_Word*>(&b_body[i])->get_data();
-			EXPECT_EQ(p_str, b_str) << "Word in position" << i << "are not the same";
+			short p_str = dynamic_cast<Network_Word*>(&p[i])->get_data();
+			short b_str = dynamic_cast<Network_Word*>(&b.get_message()[i])->get_data();
+			EXPECT_EQ(p_str, b_str) << "Word in position " << i << " are not the same";
 		}
 		else
 		{
-			FAIL() << "Type is not handled by test";
+			FAIL() << "Type " + types + " is not handled by test";
 		}
 	}
+}
 
+void testing_utilities::network_utilities::network_message_utilities::compare_messages(Packed_Message p, Network_Message m)
+{
+	if(p.size() != m.size() + sizeof(Message_Header) + sizeof(Message_Footer))
+	{
+		FAIL() << "Message sizes are not the same";
+		return;
+	}
+	int current_position = sizeof(Message_Header);
+	for(int i = 0; i < m.number_of_fields(); i++)
+	{
+		std::string types = str_type(m[i]);
+		if(types == typeid(Network_Address).name())
+		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Address found at byte " + std::to_string(current_position), "Packed message compare"));
+			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&m[i])->get_data();
+			for(int j = 0; j < 4; j++)
+			{
+				EXPECT_EQ(p.get_packet()[current_position], p_addr.get_addr_bytes()[j]) << "Address at byte " << current_position << " for field " << i << " are not the same\n";
+				current_position++;
+			}
+		}
+		else if(types == typeid(Network_String).name())
+		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "String found at byte " + std::to_string(current_position), "Packed message compare"));
+			Byte p_length = dynamic_cast<Network_String*>(&m[i])->get_data().first;
+			EXPECT_EQ(p_length, p.get_packet()[current_position]) << "Length value of String at byte " << current_position << " for field " << i << " are not the same";
+			current_position++;
+			std::string p_str = dynamic_cast<Network_String*>(&m[i])->get_data().second;
+			for(int j = 0; j < p_str.size(); j++)
+			{
+				EXPECT_EQ(p.get_packet()[current_position], p_str[j]) << "Character at byte " << current_position << " for field " << i << " are not the same";
+				current_position++;
+			}
+		}
+		else if(types == typeid(Network_Bool).name())
+		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Bool found at byte " + std::to_string(current_position), "Packed message compare"));
+			bool p_bool = dynamic_cast<Network_Bool*>(&m[i])->get_data();
+			EXPECT_EQ(p_bool, p.get_packet()[current_position]) << "Boolean at byte " << current_position << " for field " << i << " are not the same";
+			current_position++;
+		}
+		else if(types == typeid(Network_Byte).name())
+		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Byte found at byte " + std::to_string(current_position), "Packed message compare"));
+			Byte p_byte = dynamic_cast<Network_Byte*>(&m[i])->get_data();
+			EXPECT_EQ(p_byte, p.get_packet()[current_position]) << "Byte at byte " << current_position << " for field " << i << " are not the same";
+			current_position++;
+		}
+		else if(types == typeid(Network_Percent).name())
+		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Percent found at byte " + std::to_string(current_position), "Packed message compare"));
+			float p_per = dynamic_cast<Network_Percent*>(&m[i])->get_data();
+			float s_per = p.get_packet()[current_position];
+			current_position++;
+			s_per += p.get_packet()[current_position] / 100.0;
+			EXPECT_EQ(p_per, s_per) << "Percent in position " << i << " are not the same";
+			current_position++;
+		}
+		else if(types == typeid(Network_Word).name())
+		{
+			system_utilities::testing_messges->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Word found at byte " + std::to_string(current_position), "Packed message compare"));
+			short number = short(((p.get_packet()[current_position] << 8) & 0xff00) | (p.get_packet()[current_position + 1] & 0xff));
+			short p_str = dynamic_cast<Network_Word*>(&m[i])->get_data();
+			EXPECT_EQ(number, p_str) << "Word in position " << i << " are not the same";
+			current_position += 2;
+		}
+		else
+		{
+			FAIL() << "Type " + types + " is not handled by test";
+		}
+	}
+}
+
+void testing_utilities::network_utilities::network_message_utilities::compare_header(Packed_Message p, Unpacked_Message u)
+{
+	EXPECT_EQ(p.get_packet()[0], u.get_header().message_start);
+	EXPECT_EQ(p.get_packet()[1], static_cast<Byte>(u.get_header().message_id));
+	EXPECT_EQ(p.get_packet()[2], u.get_header().length);
+}
+
+void testing_utilities::network_utilities::network_message_utilities::compare_footer(Packed_Message p, Unpacked_Message u)
+{
+	Byte sum_byte_1_index = p.size() - 2;
+	Byte sum_byte_2_index = p.size() - 1;
+
+	EXPECT_EQ(p.get_packet()[sum_byte_1_index], u.get_footer().chk1);
+	EXPECT_EQ(p.get_packet()[sum_byte_2_index], u.get_footer().chk2);
 }
 
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)
@@ -236,12 +337,12 @@ void testing_utilities::error_utilities::check_override_failure(std::function<vo
 	{
 		function();
 	}
-	catch (UnimplementedFunctionException)
+	catch(UnimplementedFunctionException)
 	{
 		SUCCEED();
 		return;
 	}
-	catch (...)
+	catch(...)
 	{
 		FAIL() << "Wrong exception thrown";
 	}

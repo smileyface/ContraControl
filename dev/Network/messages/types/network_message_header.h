@@ -1,7 +1,7 @@
 /*******************************************************************//**
  * \file   network_message_header.h
- * \brief  
- * 
+ * \brief
+ *
  * \author kason
  * \date   April 2022
  *********************************************************************/
@@ -11,13 +11,13 @@
 
 #include "network_type.h"
 
-/**
- * Header for message packets
- * |         |      |          |
- * |:-------:|:----:|:--------:|
- * |  01-08  |09-16 |   17-24  |
- * |pkt start|msg id|pkt length|
- */
+ /**
+  * Header for message packets
+  * |         |      |          |
+  * |:-------:|:----:|:--------:|
+  * |  01-08  |09-16 |   17-24  |
+  * |pkt start|msg id|pkt length|
+  */
 struct Message_Header
 {
 	/** Beginning bit for the message */

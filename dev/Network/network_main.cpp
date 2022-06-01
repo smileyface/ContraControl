@@ -16,7 +16,6 @@
 Network_Interface* network::network_interface;
 System_Messages* network::network_message_interface;
 
-
 bool network_running = false;
 std::thread network_thread;
 std::mutex network_mutex;
@@ -31,7 +30,7 @@ void network::init_network_interfaces()
 	network::network_interface = new Linux_Network_Interface();
 #endif //__linux__
 #ifdef _MAC
-	//For now, we'll just use the linux interface. 
+	//For now, we'll just use the linux interface.
 	network::network_interface = new Linux_Network_Interface();
 #endif // _MAC
 	network_interface->initalize();
@@ -50,7 +49,7 @@ void client_loop()
 {
 	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Starting Client Loop", "Client Loop"));
 	//call_and_response(NODE_HELLO, NODE_ACK, 2);
-	while (network_running)
+	while(network::is_running())
 	{
 		node_messages::network_client_state_machine();
 	}
@@ -58,8 +57,12 @@ void client_loop()
 
 void server_loop()
 {
-	while (network_running)
+	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Starting Server Loop", "Client Loop"));
+	//start listening on broadcast
+	network::listen_for_messages(local_connections::broadcast);
+	while(network::is_running())
 	{
+		network::listen_for_message(local_connections::broadcast, MESSAGES::NODE_HELLO);
 		//listen on Broadcast for NODE_HELLO
 		//Once found, Send NODE_ACK
 	}
@@ -70,7 +73,7 @@ void network::teardown_network_interfaces()
 	network_running = false;
 	if(network_thread.joinable())
 		network_thread.join();
-	if (network::network_interface != nullptr)
+	if(network::network_interface != nullptr)
 	{
 		network::network_interface->clean_up();
 	}
@@ -80,6 +83,10 @@ void network::teardown_network_interfaces()
 Network_Message network::listen_for_message(Connection_Id src, MESSAGES listen_for)
 {
 	return Network_Message();
+}
+void network::listen_for_messages(Connection_Id src)
+{
+	node_messages::listen_for_messages_from_node(network_interface->get_connection(src));
 }
 
 void network::start_server()
@@ -99,6 +106,11 @@ void network::start_client()
 void network::set_interface(std::string i)
 {
 	network_interface->set_interface(i);
+}
+
+bool network::is_running()
+{
+	return network_running;
 }
 
 void network::send_message(Connection_Id dest, Network_Message outgoing)

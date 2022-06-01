@@ -1,7 +1,7 @@
 /*****************************************************************//**
  * \file   node_communication.h
- * \brief  
- * 
+ * \brief
+ *
  * \author kason
  * \date   October 2021
  *********************************************************************/
@@ -10,30 +10,38 @@
 #include "messaging.h"
 
 #include "types/network_message_types.h"
+#include "../system_interfaces/types/connections.h"
 
-/** Node Messages utilities */
+ /** Node Messages utilities */
 namespace node_messages
 {
 	/**
 	 * Create a message container.
-	 * 
+	 *
 	 * \param message type of message to create.
 	 * \return created message.
 	 */
 	Network_Message network_message_factory(MESSAGES message);
 	/**
 	 * Using subsystem interfaces, populate the outgoing message.
-	 * 
+	 *
 	 * \param message Message to format.
 	 */
 	void network_message_populate(Network_Message& message);
 	/**
 	 * Main communication brain. This will probably need to be split into Client tree and Server tree.
-	 * 
+	 *
 	 * \param type Incoming message type
 	 * \param incoming Incoming message body
 	 * \return Outgoing message
 	 */
 	void network_client_state_machine();
+
+	/**
+	 * Start a thread for listening to all messages on a socket. All messages get pasted to a buffer.
+	 *
+	 * \param node Node connection to get messages from.
+	 */
+	void listen_for_messages_from_node(Connection node);
 }
 #endif
