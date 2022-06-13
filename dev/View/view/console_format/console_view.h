@@ -12,6 +12,18 @@
 
 class Console_View : public View
 {
+public:
+	struct Console_State
+	{
+		enum
+		{
+			INPUT = 0,
+			OUTPUT = 1
+		};
+		int current_state = OUTPUT;
+	};
+	Console_State state;
+private:
 };
 
 #endif

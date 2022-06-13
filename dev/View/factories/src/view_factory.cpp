@@ -11,6 +11,11 @@ View* view_factory(VIEW_TYPE_ENUM type, DISPLAY_TYPES display)
 			return new Console_Log_View();
 		else
 			throw UnimplementedFunctionException();
+	case VIEW_TYPE_ENUM::POPUP_OPTION:
+		if(display == DISPLAY_TYPES::CONSOLE)
+			return new Console_Option_Popup();
+		else
+			throw UnimplementedFunctionException();
 	default:
 		throw UnimplementedFunctionException();
 	}

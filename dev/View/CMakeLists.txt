@@ -6,13 +6,20 @@ set(FORMAT_SOURCE "format/src/format.cpp"
                    "format/src/console.cpp"
                    "format/src/ui.cpp")
 
+set(CONSOLE_FORMAT_VIEWS_INCLUDES "view/console_format/console_view.h"
+                                  "view/console_format/console_system_view.h"
+                                  "view/console_format/console_option_popup.h")
+
 set(VIEW_INCLUDES "view/view.h"
+                  "view/views.h"
+                  ${CONSOLE_FORMAT_VIEWS_INCLUDES}
                   "view/ui_format/ui_view.h"
                   "view/ui_format/ui_led_view.h"
                   "view/ui_format/ui_main_view.h")
 
 set(VIEW_SOURCE "view/src/ui_view.cpp"
-                "view/src/system_view.cpp")
+                "view/src/system_view.cpp"
+                "view/src/option_popup.cpp")
 
 set(VIEW_FACTORIES_INCLUDES "factories/view_factory.h")
 
@@ -35,9 +42,8 @@ IF (CMAKE_HOST_WIN32)
                                "view/toolkit/windows/view/view_interface.h"
                                "view/toolkit/windows/view/window.h")
 
-                               
 ENDIF()
 
-add_library(View_Library view_main.cpp view_main.h ${FORMAT_INCLUDES} ${VIEW_INCLUDES} ${VIEW_FACTORIES_INCLUDES} ${VIEW_TOOLKIT_INCLUDES} view/views.h ${FORMAT_SOURCE} ${VIEW_SOURCE} ${VIEW_FACTORIES_SOURCE} ${VIEW_TOOLKIT_SOURCE} )
+add_library(View_Library view_main.cpp view_main.h ${FORMAT_INCLUDES} ${VIEW_INCLUDES} ${VIEW_FACTORIES_INCLUDES} ${VIEW_TOOLKIT_INCLUDES}  ${FORMAT_SOURCE} ${VIEW_SOURCE} ${VIEW_FACTORIES_SOURCE} ${VIEW_TOOLKIT_SOURCE} )
 
-target_link_libraries(View_Library PUBLIC  System_Interface System_Messaging Utilities) 
+target_link_libraries(View_Library PUBLIC  System_Interface System_Messaging Utilities)
