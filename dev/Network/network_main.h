@@ -13,10 +13,10 @@
 namespace network
 {
     extern Network_Interface* network_interface; ///<Main interface object.
-    /**
-    * Message system
-    */
-    extern System_Messages* network_message_interface;
+     /**
+     * .The string of the namespace name. This is for locating Messages.
+     */
+    static const char* subsystem_name = "Network";
 
     /**
      * \brief Setup network interface as a system specific interface.

@@ -14,8 +14,6 @@
 
 /*Externs*/
 Network_Interface* network::network_interface;
-System_Messages* network::network_message_interface;
-
 
 bool network_running = false;
 std::thread network_thread;
@@ -23,7 +21,6 @@ std::mutex network_mutex;
 
 void network::init_network_interfaces()
 {
-	network_message_interface = System_Messages::get_instance();
 #ifdef _WIN32
 	network::network_interface = new Windows_Network_Interface();
 #endif // IS_WIN32
@@ -31,7 +28,7 @@ void network::init_network_interfaces()
 	network::network_interface = new Linux_Network_Interface();
 #endif //__linux__
 #ifdef _MAC
-	//For now, we'll just use the linux interface. 
+	//For now, we'll just use the linux interface.
 	network::network_interface = new Linux_Network_Interface();
 #endif // _MAC
 	network_interface->initalize();
@@ -48,9 +45,9 @@ void network::init_network_interfaces(std::string interfaces)
 
 void client_loop()
 {
-	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Starting Client Loop", "Client Loop"));
+	LOG_INFO("Starting Client Loop", "Client Loop");
 	//call_and_response(NODE_HELLO, NODE_ACK, 2);
-	while (network_running)
+	while(network_running)
 	{
 		node_messages::network_client_state_machine();
 	}
@@ -58,7 +55,7 @@ void client_loop()
 
 void server_loop()
 {
-	while (network_running)
+	while(network_running)
 	{
 		//listen on Broadcast for NODE_HELLO
 		//Once found, Send NODE_ACK
@@ -70,11 +67,11 @@ void network::teardown_network_interfaces()
 	network_running = false;
 	if(network_thread.joinable())
 		network_thread.join();
-	if (network::network_interface != nullptr)
+	if(network::network_interface != nullptr)
 	{
 		network::network_interface->clean_up();
 	}
-	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::INFO_MESSAGE, "Network interface torndown", "Network Interfaces Teardown"));
+	LOG_INFO("Network Interface torndown", "Network");
 }
 
 Network_Message network::listen_for_message(Connection_Id src, MESSAGES listen_for)
@@ -105,5 +102,5 @@ void network::send_message(Connection_Id dest, Network_Message outgoing)
 {
 	Packed_Message packed_outgoing(outgoing);
 	network_interface->send(dest, reinterpret_cast<char*>(packed_outgoing.get_packet().data()));
-	network::network_message_interface->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Sending message " + get_message_type_string(packed_outgoing.get_message_type()) + " to " + dest, "Network Send"));
+	LOG_DEBUG("Sending message " + get_message_type_string(packed_outgoing.get_message_type()) + " to " + dest);
 }

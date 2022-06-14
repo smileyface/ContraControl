@@ -9,7 +9,7 @@ namespace system_utilities
 	void setup_messaging();
 
 	void cleanup();
-	void print_messages();
+	void print_log_messages();
 
 	void step(int steps);
 
@@ -23,7 +23,6 @@ namespace system_utilities
 	{
 		void setup();
 	}
-	extern System_Messages* testing_messges;
 }
 
 #endif

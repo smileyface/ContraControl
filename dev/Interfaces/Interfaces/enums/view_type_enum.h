@@ -15,7 +15,7 @@
 enum class VIEW_TYPE_ENUM
 {
 	/** A System View Type. Mainly for System_Messages */
-	SYSTEM
+	LOG
 };
 
 /**
@@ -27,8 +27,8 @@ static char* get_view_type_enum_as_string(VIEW_TYPE_ENUM view_type)
 {
 	switch (view_type)
 	{
-	case VIEW_TYPE_ENUM::SYSTEM:
-		return "System";
+	case VIEW_TYPE_ENUM::LOG:
+		return "Log";
 	}
 	return "";
 }

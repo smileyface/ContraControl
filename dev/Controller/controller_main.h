@@ -66,11 +66,6 @@ namespace controller
 	 * Clear queues
 	 */
 	void clean_up();
-
-	/**
-	 * Message system
-	 */
-	extern System_Messages* controller_message_interface;
 }
 
 

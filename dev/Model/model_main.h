@@ -113,10 +113,5 @@ namespace model {
 	 */
 	void command_model(Model_Command command);
 
-	/**
-	 * Message system
-	 */
-	extern System_Messages* model_message_interface;
-
 }
 #endif 
