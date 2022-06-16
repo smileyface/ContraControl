@@ -75,7 +75,8 @@ Internal_Message* Message_Relay::pop(Message_Consumer* consumer)
 		if(message != 0)
 		{
 			auto it = std::remove_if(list_of_message.begin(), list_of_message.end(), remove_func);
-			list_of_message.erase(it, list_of_message.end());
+			if(it != list_of_message.end())
+				list_of_message.erase(it);
 
 			//if the consumer doesn't have another message on the relay
 			if(!more_messages(consumer, list_of_message))
@@ -91,7 +92,10 @@ void Message_Relay::register_consumer(Message_Consumer* mc)
 	list_of_registered_consumers.push_back(mc);
 	for(int i = 0; i < list_of_message.size(); i++)
 	{
-		list_of_message[i].second.push_back(mc);
+		if(mc->correct_type(list_of_message[i].first))
+		{
+			list_of_message[i].second.push_back(mc);
+		}
 	}
 }
 
@@ -99,6 +103,16 @@ void Message_Relay::deregister_consumer(Message_Consumer* mc)
 {
 	auto consumer = std::find(list_of_registered_consumers.begin(), list_of_registered_consumers.end(), mc);
 	list_of_registered_consumers.erase(consumer);
+	for(int i = 0; i < list_of_message.size(); i++)
+	{
+		Internal_Message* message = get_found_message(mc, list_of_message[i]);
+		if(message != 0)
+		{
+			auto it = std::remove_if(list_of_message.begin(), list_of_message.end(), remove_func);
+			if(it != list_of_message.end())
+				list_of_message.erase(it);
+		}
+	}
 }
 
 Message_Relay* Message_Relay::get_instance()

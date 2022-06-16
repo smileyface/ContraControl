@@ -38,8 +38,18 @@ void system_utilities::setup()
 
 void system_utilities::setup_messaging()
 {
-	message_consumer = new Message_Consumer(stale, new Logging_Message());
-	Message_Relay::get_instance()->register_consumer(message_consumer);
+	if(message_consumer == 0)
+	{
+		message_consumer = new Message_Consumer(stale, new Logging_Message());
+		Message_Relay::get_instance()->register_consumer(message_consumer);
+	}
+}
+
+void system_utilities::teardown_messaging()
+{
+	print_log_messages();
+	Message_Relay::get_instance()->deregister_consumer(message_consumer);
+	message_consumer = 0;
 }
 
 void system_utilities::print_log_messages()
@@ -58,11 +68,11 @@ void system_utilities::print_log_messages()
 		std::string priority_string;
 		if(mess->get_priority() == MESSAGE_PRIORITY::ERROR_MESSAGE)
 		{
-			std::cout << "[  \u001b[33mERROR\u001b[0m   ]";
+			std::cout << "[  \u001b[33m" + mess->get_priority_string() + "\u001b[0m]";
 		}
 		else if(mess->get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE)
 		{
-			std::cout << "[  INFO    ]";
+			std::cout << "[  " + mess->get_priority_string() + "    ]";
 		}
 		else
 		{
@@ -76,8 +86,7 @@ void system_utilities::cleanup()
 {
 	controller::clean_up();
 	model::clean_up();
-	print_log_messages();
-	Message_Relay::get_instance()->deregister_consumer(message_consumer);
+	teardown_messaging();
 }
 
 void system_utilities::step(int steps)

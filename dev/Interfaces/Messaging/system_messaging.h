@@ -52,6 +52,7 @@ public:
 	 * \param mc Consumer to be removed from the list.
 	 */
 	void deregister_consumer(Message_Consumer* mc);
+
 private:
 	Message_Relay();
 	std::vector<std::pair<Internal_Message*, Consumer_List>> list_of_message;
