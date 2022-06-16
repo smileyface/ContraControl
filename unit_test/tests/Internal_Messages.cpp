@@ -2,7 +2,7 @@
 
 #include "../test_utilities/pch.h"
 
-#include "../../dev/Interfaces/Messaging/system_messaging.h"
+#include "../../dev/Interfaces/Messaging/message_relay.h"
 
 namespace
 {

@@ -65,11 +65,11 @@ set(INTERNAL_MESSAGE_TYPES_SOURCE_FILES
 set(SYSTEM_MESSAGING_HEADER_FILES
                     ${INTERNAL_MESSAGE_TYPES_HEADER_FILES}
                     Messaging/consumers.h
-                    Messaging/system_messaging.h)
+                    Messaging/message_relay.h)
 set(SYSTEM_MESSAGING_SOURCE_FILES
                     ${INTERNAL_MESSAGE_TYPES_SOURCE_FILES}
                     Messaging/src/consumers.cpp
-                    Messaging/src/system_messaging.cpp )
+                    Messaging/src/message_relay.cpp )
 
 add_library(System_Messaging ${SYSTEM_MESSAGING_SOURCE_FILES} ${SYSTEM_MESSAGING_HEADER_FILES})
 target_include_directories(System_Messaging

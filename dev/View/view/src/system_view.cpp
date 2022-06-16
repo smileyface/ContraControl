@@ -2,7 +2,7 @@
 
 #include "../console_format/console_system_view.h"
 
-#include "Messaging/system_messaging.h"
+#include "Messaging/message_relay.h"
 
 Console_Log_View::Console_Log_View()
 {

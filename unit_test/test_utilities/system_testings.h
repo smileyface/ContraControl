@@ -1,7 +1,7 @@
 #ifndef SYSTEM_TESTING_UTIL_H
 #define SYSTEM_TESTING_UTIL_H
 
-#include "../../dev/Interfaces/Messaging/system_messaging.h"
+#include "../../dev/Interfaces/Messaging/message_relay.h"
 
 namespace system_utilities
 {
