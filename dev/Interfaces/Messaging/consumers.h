@@ -18,6 +18,7 @@ struct Message_Consumer
 	/**
 	 * Set consumer up with a flag that determines if it's got a message available
 	 * \param stale Reference to the message indicator flag.
+	 * \param message_type Type of messages to be consumed.
 	 */
 	Message_Consumer(bool& stale, Internal_Message* message_type);
 	/**
@@ -33,7 +34,7 @@ struct Message_Consumer
 	 * \param message Internal_Message to check against.
 	 * \return Is this message the correct type.
 	 */
-	bool correct_type(Internal_Message* mess);
+	bool correct_type(Internal_Message* message);
 
 private:
 	bool* stale;

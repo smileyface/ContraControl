@@ -62,11 +62,29 @@ private:
 };
 
 //MACROS.
+/**
+ * String supporting macro
+ */
 #define S1(x) #x
+ /**
+  * String supporting macro
+  */
 #define S2(x) S1(x)
+  /**
+   * Macro to get the file trace of a line
+   */
 #define LOCATION __FILE__ ":" S2(__LINE__)
+   /**
+	* Add a debugging log message.
+	*/
 #define LOG_DEBUG(message) Message_Relay::get_instance()->push(new Logging_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, message, LOCATION));
+	/**
+	 * Add an informational log message.
+	 */
 #define LOG_INFO(message, location) Message_Relay::get_instance()->push(new Logging_Message(MESSAGE_PRIORITY::INFO_MESSAGE, message, location));
+	 /**
+	  * Add an error state log message.
+	  */
 #define LOG_ERROR(message, location) Message_Relay::get_instance()->push(new Logging_Message(MESSAGE_PRIORITY::ERROR_MESSAGE, message, location));
 
 #endif // !SYSTEM_MESSAGE_INTERFACE_H
