@@ -12,22 +12,36 @@ Message_Relay* Message_Relay::instance;
 Message_Relay::Message_Relay()
 { }
 
+Consumer_List Message_Relay::get_message_consumers(Internal_Message* message)
+{
+	Consumer_List registered_consumers;
+	for(auto i = list_of_registered_consumers.begin(); i != list_of_registered_consumers.end(); ++i)
+	{
+		if((*i)->correct_type(message))
+		{
+			registered_consumers.push_back(*i);
+		}
+	}
+	return registered_consumers;
+}
+
 void Message_Relay::push(Internal_Message* message)
 {
 	std::lock_guard<std::mutex> guard(g_pages_mutex);
-	list_of_message.emplace_back(std::make_pair(message, list_of_registered_consumers));
-	for(int i = 0; i < list_of_registered_consumers.size(); i++)
+	Consumer_List registered_consumers = get_message_consumers(message);
+	list_of_message.emplace_back(std::make_pair(message, registered_consumers));
+	for(int i = 0; i < registered_consumers.size(); i++)
 	{
-		list_of_registered_consumers[i]->notify();
+		registered_consumers[i]->notify();
 	}
 }
 
 Internal_Message* get_found_message(Message_Consumer* consumer, std::pair<Internal_Message*, Consumer_List>& current_message)
 {
+	std::lock_guard<std::mutex> guard(g_pages_mutex);
 	auto it = std::find(current_message.second.begin(), current_message.second.end(), consumer);
 	if(it != current_message.second.end())
 	{
-		std::lock_guard<std::mutex> guard(g_pages_mutex);
 		Internal_Message* found_message = current_message.first;
 		current_message.second.erase(it);
 		return found_message;

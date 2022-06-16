@@ -64,7 +64,7 @@ public:
 	 * Create an empty message with a defined validity.
 	 * \param valid_message Desired validity to set message to.
 	 */
-	Logging_Message(bool valid_message);
+	Logging_Message();
 
 	void placeholder()
 	{ };

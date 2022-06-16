@@ -12,8 +12,7 @@
 
 #include "Messaging/consumers.h"
  //Messaging types
-#include "Messaging/message_types/internal_message_type.h"
-#include "Messaging/message_types/logging_message.h"
+#include "internal_messages.h"
 
 /**
  * Message relay system as a singleton.
@@ -58,6 +57,8 @@ private:
 	std::vector<std::pair<Internal_Message*, Consumer_List>> list_of_message;
 	std::vector<Message_Consumer*> list_of_registered_consumers;
 	static Message_Relay* instance;
+
+	Consumer_List get_message_consumers(Internal_Message* message);
 };
 
 //MACROS.

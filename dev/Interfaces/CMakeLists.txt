@@ -57,6 +57,7 @@ target_include_directories(System_Interface
 target_link_libraries(System_Interface PUBLIC Controller Model)
 
 set(INTERNAL_MESSAGE_TYPES_HEADER_FILES
+                    Messaging/internal_messages.h
                     Messaging/message_types/internal_message_type.h
                     Messaging/message_types/logging_message.h)
 set(INTERNAL_MESSAGE_TYPES_SOURCE_FILES

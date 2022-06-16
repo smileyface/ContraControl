@@ -1,12 +1,14 @@
 #include "Messaging/message_types/logging_message.h"
 
-
 Logging_Message::Logging_Message(MESSAGE_PRIORITY pri, std::string msg, std::string loc)
 {
 	priority = pri;
 	message = msg;
 	location = loc;
 }
+
+Logging_Message::Logging_Message()
+{ }
 
 std::string message_priority_as_string(MESSAGE_PRIORITY al)
 {
@@ -46,6 +48,3 @@ MESSAGE_PRIORITY Logging_Message::get_priority()
 {
 	return priority;
 }
-
-
-

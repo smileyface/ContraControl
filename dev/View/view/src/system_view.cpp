@@ -7,7 +7,7 @@
 Console_Log_View::Console_Log_View()
 {
 	system_id = "System";
-	message_consumer = new Message_Consumer(stale);
+	message_consumer = new Message_Consumer(stale, new Logging_Message());
 	Message_Relay::get_instance()->register_consumer(message_consumer);
 }
 
