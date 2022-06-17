@@ -1,18 +1,18 @@
-﻿set(DEVICE_TEST_FILES "tests/Device.cpp" 
-                      "tests/Node.cpp" 
+﻿set(DEVICE_TEST_FILES "tests/Device.cpp"
+                      "tests/Node.cpp"
                       "tests/Network.cpp"
-                      "tests/Commands.cpp" 
-                      "tests/Subsystem.cpp" 
-                      "tests/Network_Messages.cpp" "tests/Errors.cpp")
+                      "tests/Commands.cpp"
+                      "tests/Subsystem.cpp"
+                      "tests/Network_Messages.cpp" "tests/Errors.cpp" "tests/Internal_Messages.cpp")
 
-add_library(Test_Utilities "test_utilities/pch.h" 
-                           "test_utilities/system_testings.h" 
-                           "test_utilities/system_testings.cpp"  
-                           "test_utilities/module_mains.h" 
-                           "test_utilities/test_utilities.h" 
-                           "test_utilities/test_utilities.cpp" 
-                           "test_utilities/device_utilities.h" 
-                           "test_utilities/device_utilities.cpp"  
+add_library(Test_Utilities "test_utilities/pch.h"
+                           "test_utilities/system_testings.h"
+                           "test_utilities/system_testings.cpp"
+                           "test_utilities/module_mains.h"
+                           "test_utilities/test_utilities.h"
+                           "test_utilities/test_utilities.cpp"
+                           "test_utilities/device_utilities.h"
+                           "test_utilities/device_utilities.cpp"
                            "test_utilities/node_utilities.h"
                            "test_utilities/node_utilities.cpp")
 target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface Network)
@@ -53,8 +53,6 @@ add_executable(Static_Test ${DEVICE_TEST_FILES})
 target_link_libraries(Static_Test gtest_main Test_Utilities)
 #add_test(NAME Controller_Tests COMMAND Controller_Tests)
 add_test(Devices Static_Test)
-
-
 
 IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
   include(CodeCoverage.cmake)

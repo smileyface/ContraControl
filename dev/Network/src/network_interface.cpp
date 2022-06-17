@@ -15,8 +15,7 @@ void Network_Interface::set_hostname(const std::string& host)
 void Network_Interface::set_interface(const std::string& i)
 {
 	interfaces = i;
-	//The network messenger interface is not set up yet.
-	System_Messages::get_instance()->push(System_Message(MESSAGE_PRIORITY::DEBUG_MESSAGE, "Interfaces is " + i, "Set Network Interface"));
+	LOG_DEBUG("Interfaces is " + i);
 }
 
 void Network_Interface::set_network_state(NETWORK_STATUS status)

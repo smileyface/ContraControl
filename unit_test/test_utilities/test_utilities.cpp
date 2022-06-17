@@ -7,22 +7,9 @@
 
 #include <typeinfo>
 
-void testing_utilities::log_top_test(Command* command, Device* device)
-{
-	Log_Entry topItem;
-	EXPECT_NO_THROW(topItem = sys_log::pop()) << "Nothing happened. Log empty";
-	EXPECT_EQ(topItem.device, device->get_full_name()) << "Wrong Device";
-}
-
-void testing_utilities::log_bottom_test(Command* command, Device* device)
-{
-	Log_Entry topItem;
-	topItem = sys_log::drop();
-}
-
 void testing_utilities::get_partial_on(Command* command, Device* device, double timeout)
 {
-	while (timeout > 0)
+	while(timeout > 0)
 	{
 		system_utilities::step(1);
 		timeout -= model_timer.get_elapsed_time();
@@ -36,7 +23,6 @@ void testing_utilities::device_utilities::check_state(Device_Label device, Devic
 	EXPECT_EQ(received_state->is_valid(), expected_state->is_valid()) << "Device validity is not correct";
 	EXPECT_EQ(received_state->is_initalized(), expected_state->is_initalized()) << "Device is not initalized properly";
 	EXPECT_EQ(received_state->get_power(), expected_state->get_power()) << "Device power is not correct";
-
 }
 
 void testing_utilities::device_utilities::check_validity(Device_Label label, bool expect_valid)
@@ -70,9 +56,9 @@ void testing_utilities::device_utilities::check_name(Device_Label label, DEVICE_
 void testing_utilities::node_utilities::check_for_device(Device_Label label)
 {
 	bool found = false;
-	for (int i = 0; i < model::get_node(label.get_node_id())->get_devices().size(); i++)
+	for(int i = 0; i < model::get_node(label.get_node_id())->get_devices().size(); i++)
 	{
-		if (model::get_node(label.get_node_id())->get_devices()[i] == label.get_device_id())
+		if(model::get_node(label.get_node_id())->get_devices()[i] == label.get_device_id())
 		{
 			found = true;
 		}
@@ -80,13 +66,11 @@ void testing_utilities::node_utilities::check_for_device(Device_Label label)
 	EXPECT_EQ(found, true);
 }
 
-
-
 void testing_utilities::network_utilities::check_initalized()
 {
 	network::network_interface->initalized();
 	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::NETWORK_INITALIZED);
-	if (network::network_interface->get_status().status == NETWORK_STATUS::NETWORK_ERROR)
+	if(network::network_interface->get_status().status == NETWORK_STATUS::NETWORK_ERROR)
 	{
 		exception_handle();
 	}
@@ -94,7 +78,7 @@ void testing_utilities::network_utilities::check_initalized()
 
 std::string get_string_of_error(NETWORK_ERRORS errors)
 {
-	switch (errors)
+	switch(errors)
 	{
 	case NETWORK_ERRORS::NO_NETWORK_ERROR:
 		return "Network Subsystem has failed";
@@ -131,7 +115,7 @@ std::string get_string_of_error(NETWORK_ERRORS errors)
 
 void testing_utilities::network_utilities::exception_handle()
 {
-	system_utilities::print_messages();
+	system_utilities::print_log_messages();
 	FAIL() << get_string_of_error(network::network_interface->get_status().error);
 }
 
@@ -141,12 +125,12 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 	{
 		function();
 	}
-	catch (NetworkErrorException)
+	catch(NetworkErrorException)
 	{
 		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 		return;
 	}
-	system_utilities::print_messages();
+	system_utilities::print_log_messages();
 	FAIL() << "Network Error Exception did not throw\nExpected " + get_string_of_error(error);
 }
 
@@ -164,18 +148,18 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 	Message_Footer p_footer, b_footer;
 	m1.get_message(p_header, p_body, p_footer);
 	m2.get_message(b_header, b_body, b_footer);
-	if (p_body.size() != b_body.size())
+	if(p_body.size() != b_body.size())
 	{
 		FAIL() << "Body sizes are not the same";
 		return;
 	}
-	for (int i = 0; i < p_body.get_message().size(); i++)
+	for(int i = 0; i < p_body.get_message().size(); i++)
 	{
-		if (typeid(p_body[i]) == typeid(Network_Address))
+		if(typeid(p_body[i]) == typeid(Network_Address))
 		{
 			IPV4_Addr p_addr = dynamic_cast<Network_Address*>(&p_body[i])->get_data();
 			IPV4_Addr b_addr = dynamic_cast<Network_Address*>(&b_body[i])->get_data();
-			if (p_addr == b_addr)
+			if(p_addr == b_addr)
 			{
 				SUCCEED();
 			}
@@ -184,34 +168,34 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 				FAIL() << "Addresses in position " << i << " are not the same\n" << p_addr.get_as_string() << " vs " << b_addr.get_as_string();
 			}
 		}
-		else if (typeid(p_body[i]) == typeid(Network_String))
+		else if(typeid(p_body[i]) == typeid(Network_String))
 		{
 			std::string p_str = dynamic_cast<Network_String*>(&p_body[i])->get_data().second;
 			std::string b_str = dynamic_cast<Network_String*>(&b_body[i])->get_data().second;
-			EXPECT_EQ(p_str, b_str) <<"String in position" << i << "are not the same";
+			EXPECT_EQ(p_str, b_str) << "String in position" << i << "are not the same";
 			Byte p_length = dynamic_cast<Network_String*>(&p_body[i])->get_data().first;
 			Byte b_length = dynamic_cast<Network_String*>(&b_body[i])->get_data().first;
 			EXPECT_EQ(p_length, b_length) << "Length value of String in position" << i << "are not the same";
 		}
-		else if (typeid(p_body[i]) == typeid(Network_Bool))
+		else if(typeid(p_body[i]) == typeid(Network_Bool))
 		{
 			bool p_str = dynamic_cast<Network_Bool*>(&p_body[i])->get_data();
 			bool b_str = dynamic_cast<Network_Bool*>(&b_body[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Boolean in position" << i << "are not the same";
 		}
-		else if (typeid(p_body[i]) == typeid(Network_Byte))
+		else if(typeid(p_body[i]) == typeid(Network_Byte))
 		{
 			Byte p_str = dynamic_cast<Network_Byte*>(&p_body[i])->get_data();
 			Byte b_str = dynamic_cast<Network_Byte*>(&b_body[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Byte in position" << i << "are not the same";
 		}
-		else if (typeid(p_body[i]) == typeid(Network_Percent))
+		else if(typeid(p_body[i]) == typeid(Network_Percent))
 		{
 			float p_str = dynamic_cast<Network_Percent*>(&p_body[i])->get_data();
 			float b_str = dynamic_cast<Network_Percent*>(&b_body[i])->get_data();
 			EXPECT_EQ(p_str, b_str) << "Percent in position" << i << "are not the same";
 		}
-		else if (typeid(p_body[i]) == typeid(Network_Word))
+		else if(typeid(p_body[i]) == typeid(Network_Word))
 		{
 			short p_str = dynamic_cast<Network_Word*>(&p_body[i])->get_data();
 			short b_str = dynamic_cast<Network_Word*>(&b_body[i])->get_data();
@@ -222,7 +206,6 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 			FAIL() << "Type is not handled by test";
 		}
 	}
-
 }
 
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)
@@ -236,12 +219,12 @@ void testing_utilities::error_utilities::check_override_failure(std::function<vo
 	{
 		function();
 	}
-	catch (UnimplementedFunctionException)
+	catch(UnimplementedFunctionException)
 	{
 		SUCCEED();
 		return;
 	}
-	catch (...)
+	catch(...)
 	{
 		FAIL() << "Wrong exception thrown";
 	}

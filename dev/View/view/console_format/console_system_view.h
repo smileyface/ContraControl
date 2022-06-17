@@ -6,17 +6,17 @@
  * \date   February 2022
  *********************************************************************/
 
-#ifndef CONSOLE_SYSTEM_VIEW_H
-#define CONSOLE_SYSTEM_VIEW_H
+#ifndef CONSOLE_LOG_VIEW_H
+#define CONSOLE_LOG_VIEW_H
 
 #include "console_view.h"
 #include "Messaging/consumers.h"
 
 /** View for System_Messages on the Console */
-class Console_System_View : public Console_View
+class Console_Log_View : public Console_View
 {
 public:
-    Console_System_View();
+    Console_Log_View();
 
     void on_display();
     void on_refresh();

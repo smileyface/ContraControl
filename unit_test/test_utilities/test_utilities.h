@@ -9,15 +9,12 @@
 #include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
 
-
 #include "../../dev/Utilities/Utilities/exceptions.h"
 #include "../../dev/Network/system_interfaces/types/network_status_state.h"
 #include "../../dev/Network/messages/messaging.h"
 
 namespace testing_utilities
 {
-	void log_top_test(Command* command, Device* device);
-	void log_bottom_test(Command* command, Device* device);
 	void get_partial_on(Command* command, Device* device, double timeout);
 
 	extern std::pair<int, int> test_point_succeeded_ratio;
