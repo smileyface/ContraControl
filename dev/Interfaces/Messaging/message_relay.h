@@ -1,5 +1,5 @@
 /*****************************************************************//**
- * \file   system_messaging.h
+ * \file   message_relay.h
  * \brief
  *
  * \author kason
