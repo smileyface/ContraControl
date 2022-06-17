@@ -12,7 +12,6 @@ Logging_Message::Logging_Message()
 
 std::string message_priority_as_string(MESSAGE_PRIORITY al)
 {
-	std::string level;
 	switch(al)
 	{
 	case MESSAGE_PRIORITY::SEVERE_MESSAGE:
@@ -26,7 +25,6 @@ std::string message_priority_as_string(MESSAGE_PRIORITY al)
 	default:
 		return "UNHANDLED PRIORITY";
 	}
-	return level;
 }
 
 std::string Logging_Message::get_message()

@@ -37,6 +37,9 @@ TEST_F(Internal_Message_Test, Logging_Levels_Test)
 	Message_Relay::get_instance()->push(new Logging_Message(MESSAGE_PRIORITY::SEVERE_MESSAGE, "Test Kaboom", "Test Script"));
 	message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(consumer));
 	EXPECT_EQ(message->get_priority_string(), "SEVERE");
+	Message_Relay::get_instance()->push(new Logging_Message(MESSAGE_PRIORITY(255), "Test Kaboom", "Test Script"));
+	message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(consumer));
+	EXPECT_EQ(message->get_priority_string(), "UNHANDLED PRIORITY");
 }
 
 TEST_F(Internal_Message_Test, Multiple_Consumer)
@@ -46,5 +49,6 @@ TEST_F(Internal_Message_Test, Multiple_Consumer)
 	LOG_DEBUG("Test Debug");
 	Message_Relay::get_instance()->register_consumer(con_two);
 	Logging_Message* message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(con_two));
+	message->placeholder();
 	EXPECT_EQ(message->get_message(), "Test Debug");
 }
