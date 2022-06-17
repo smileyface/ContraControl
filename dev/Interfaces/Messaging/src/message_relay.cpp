@@ -117,7 +117,7 @@ void Message_Relay::deregister_consumer(Message_Consumer* mc)
 
 Message_Relay* Message_Relay::get_instance()
 {
-	if(instance == nullptr)
+	if(instance == NULL)
 	{
 		instance = new Message_Relay();
 	}
