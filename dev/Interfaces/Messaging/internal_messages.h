@@ -11,5 +11,9 @@
 
  //#include "internal_message_type.h"
 #include "message_types/logging_message.h"
+//#include "message_types/view_messages/view_subsystem_message.h"
+#include "message_types/view_messages/view_request/option_popup_message.h"
+
+
 
 #endif
