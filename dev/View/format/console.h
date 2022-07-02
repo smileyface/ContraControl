@@ -11,9 +11,9 @@
 
 #include "format.h"
 
-/**
- * Interface for Console UI.
- */
+ /**
+  * Interface for Console UI.
+  */
 class Console_Format : public Format
 {
 public:
@@ -22,7 +22,6 @@ public:
 
 protected:
 	void loop();
-
 
 private:
 	void console_display_thread();
