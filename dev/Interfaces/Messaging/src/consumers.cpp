@@ -1,5 +1,5 @@
 #include "Messaging/consumers.h"
-
+#include "../Utilities/Utilities/tools/classes.h"
 #include <typeinfo>
 
 Message_Consumer::Message_Consumer(bool& notify, Internal_Message* mess)
@@ -19,5 +19,12 @@ void Message_Consumer::freshen()
 
 bool Message_Consumer::correct_type(Internal_Message* mess)
 {
-	return typeid(mess) == typeid(message_type);
+	if(instanceof<Logging_Message>(message_type) && instanceof<Logging_Message>(mess))
+	{
+		return true;
+	}
+	if(instanceof<Option_Popup_Message>(message_type) && instanceof<Option_Popup_Message>(mess))
+	{
+		return true;
+	}
 }
