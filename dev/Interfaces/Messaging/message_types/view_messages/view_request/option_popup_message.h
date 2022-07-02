@@ -11,7 +11,8 @@
 class Option_Popup_Message : public View_Subsystem_Message
 {
 public:
-	void placeholder();
+	void placeholder()
+	{ };
 private:
 	std::vector<std::string> options;
 };
