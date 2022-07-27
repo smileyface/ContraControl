@@ -3,7 +3,10 @@
                       "tests/Network.cpp"
                       "tests/Commands.cpp"
                       "tests/Subsystem.cpp"
-                      "tests/Network_Messages.cpp" "tests/Errors.cpp" "tests/Internal_Messages.cpp")
+                      "tests/Network_Messages.cpp" 
+                      "tests/Errors.cpp" 
+                      "tests/Internal_Messages.cpp"
+                      "tests/Command_View_Message.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/system_testings.h"
@@ -15,7 +18,7 @@ add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/device_utilities.cpp"
                            "test_utilities/node_utilities.h"
                            "test_utilities/node_utilities.cpp")
-target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface Network)
+target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller View_Library System_Interface Network )
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
