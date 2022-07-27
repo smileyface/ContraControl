@@ -1,5 +1,5 @@
 /*******************************************************************//**
- * \file   view_message.h
+ * \file   view_subsystem_message.h
  * \brief
  *
  * \author kason
