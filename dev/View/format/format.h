@@ -36,7 +36,7 @@ public:
 	 * Add a new view to the format.
 	 * \param view Type of view to add.
 	 */
-	virtual void add_view(VIEW_TYPE_ENUM view);
+	virtual View* add_view(VIEW_TYPE_ENUM view);
 	/**
 	 * \brief Update all stale views.
 	 *
@@ -45,6 +45,10 @@ public:
 	 * For a device, it's that the state has changed in some meaningful way.
 	 */
 	void update_views();
+
+	void process_internal_messages();
+
+	std::vector<View_Subsystem_Message*> get_internal_messages();
 	/**
 	 * \brief Destroy all views
 	 *

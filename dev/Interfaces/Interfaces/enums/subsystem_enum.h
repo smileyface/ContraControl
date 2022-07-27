@@ -1,20 +1,21 @@
 /*******************************************************************//**
  * \file   subsystem_enum.h
- * \brief  
- * 
+ * \brief
+ *
  * \author kason
  * \date   June 2022
  *********************************************************************/
 
-#ifndef SUBSYSTEM_ENUM_TYPE
-#define SUBSYSTEM_ENUM_TYPE
+#ifndef SUBSYSTEM_ENUM_DECL_TYPE
+#define SUBSYSTEM_ENUM_DECL_TYPE
 
 enum class SUBSYSTEM_ID_ENUM
 {
 	CONTROLLER,
 	MODEL,
 	NETWORK,
-	VIEW
+	VIEW,
+	TEST
 };
 
 #endif

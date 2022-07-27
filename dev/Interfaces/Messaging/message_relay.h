@@ -35,6 +35,23 @@ public:
 	 * \return first message on the relay for the requesting Consumer.
 	 */
 	Internal_Message* pop(Message_Consumer* mc);
+
+	/**
+	 * Get if there are messages for the consumer in the relay.
+	 *
+	 * \param mc Pointer to the consumer requesting to get its messages.
+	 * \return number of messages in the relay
+	 */
+	int number_of_messages(Message_Consumer* mc);
+
+	/**
+	 * Get an instance of the first message in the front of the list.
+	 *
+	 * \param mc Pointer to the consumer requesting to get its messages.
+	 * \return instance of the first message
+	 */
+	Internal_Message* front(Message_Consumer* mc);
+
 	/**
 	 * Get instance of the singleton.
 	 * \return Instance of the message relay.

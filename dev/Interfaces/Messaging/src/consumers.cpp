@@ -27,4 +27,5 @@ bool Message_Consumer::correct_type(Internal_Message* mess)
 	{
 		return true;
 	}
+	return false;
 }

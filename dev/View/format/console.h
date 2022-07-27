@@ -18,7 +18,7 @@ class Console_Format : public Format
 {
 public:
 	void initalize();
-	void add_view(VIEW_TYPE_ENUM view);
+	View* add_view(VIEW_TYPE_ENUM view);
 
 protected:
 	void loop();

@@ -87,6 +87,34 @@ Internal_Message* Message_Relay::pop(Message_Consumer* consumer)
 	return 0;
 }
 
+int Message_Relay::number_of_messages(Message_Consumer* mc)
+{
+	int number_of_messages = 0;
+	for(int i = 0; i < list_of_message.size(); i++)
+	{
+		Internal_Message* message = get_found_message(mc, list_of_message[i]);
+		if(message != 0)
+		{
+			number_of_messages++;
+		}
+	}
+	return number_of_messages;
+}
+
+Internal_Message* Message_Relay::front(Message_Consumer* mc)
+{
+	int number_of_messages = 0;
+	for(int i = 0; i < list_of_message.size(); i++)
+	{
+		Internal_Message* message = get_found_message(mc, list_of_message[i]);
+		if(message != 0)
+		{
+			return message;
+		}
+	}
+	return 0;
+}
+
 void Message_Relay::register_consumer(Message_Consumer* mc)
 {
 	list_of_registered_consumers.push_back(mc);
