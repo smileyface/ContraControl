@@ -19,11 +19,15 @@ void Message_Consumer::freshen()
 
 bool Message_Consumer::correct_type(Internal_Message* mess)
 {
+	if(message_type == nullptr)
+	{
+		return false;
+	}
 	if(instanceof<Logging_Message>(message_type) && instanceof<Logging_Message>(mess))
 	{
 		return true;
 	}
-	if(instanceof<Option_Popup_Message>(message_type) && instanceof<Option_Popup_Message>(mess))
+	if(instanceof<View_Subsystem_Message>(message_type) && instanceof<View_Subsystem_Message>(mess))
 	{
 		return true;
 	}
