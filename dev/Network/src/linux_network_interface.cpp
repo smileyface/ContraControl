@@ -32,7 +32,7 @@ IPV4_Addr Linux_Network_Interface::get_interface_addr()
 
 IPV4_Addr Linux_Network_Interface::get_subnet_mask(SOCKET sock, IPV4_Addr host_ip)
 {
-	char* s = "255.255.255.255";
+	char* s = (char*)"255.255.255.255";
 	int found = 0;
 
 	struct sockaddr_in* sa = (struct sockaddr_in*) ifa->ifa_netmask;

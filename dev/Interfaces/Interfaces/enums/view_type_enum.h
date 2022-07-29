@@ -30,10 +30,10 @@ static char* get_view_type_enum_as_string(VIEW_TYPE_ENUM view_type)
 	switch(view_type)
 	{
 	case VIEW_TYPE_ENUM::LOG:
-		return "Log";
+		return (char*) "Log";
 	case VIEW_TYPE_ENUM::POPUP_OPTION:
-		return "Option Popup";
+		return (char*) "Option Popup";
 	}
-	return "";
+	return (char*)"";
 }
 #endif
