@@ -69,10 +69,8 @@ public:
 	* Is the View out of touch with the model?
 	* \return If the View is out of touch.
 	*/
-	bool is_stale()
-	{
-		return stale;
-	}
+	virtual bool is_stale() = 0;
+	
 protected:
 	/**
 	 * State of the View's grasp on reality

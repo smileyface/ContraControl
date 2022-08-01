@@ -15,7 +15,7 @@ set(VIEW_INCLUDES view/view.h
                   ${CONSOLE_FORMAT_VIEWS_INCLUDES}
                   view/ui_format/ui_view.h
                   view/ui_format/ui_led_view.h
-                  view/ui_format/ui_main_view.h)
+                  view/ui_format/ui_main_view.h "view/view_type/option_view_type.h")
 
 set(VIEW_SOURCE view/src/ui_view.cpp
                 view/src/log_view.cpp

@@ -22,7 +22,7 @@ struct Message_Consumer
 	 * \param stale Reference to the message indicator flag.
 	 * \param message_type Type of messages to be consumed.
 	 */
-	Message_Consumer(bool* stale, const Internal_Message* message_type);
+	Message_Consumer(const Internal_Message* message_type);
 	/**
 	 * Notify the containing object that a message has been recieved.
 	 */
@@ -38,6 +38,11 @@ struct Message_Consumer
 	 */
 	bool correct_type(Internal_Message* message);
 
+	/**
+	 * Is the consumer stale (has it been notified)
+	 * \return Is the consumer notified
+	 */
+	bool is_stale();
 private:
 	bool* stale = 0;
 	const Internal_Message* message_type = 0;

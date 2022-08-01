@@ -72,8 +72,6 @@ protected:
 	std::thread* looping_thread = nullptr;
 	/** Consume view messages */
 	Message_Consumer* format_consumer = 0;
-	/** Staleness of the consumer */
-	bool consumer_staleness = true;
 private:
 };
 

@@ -10,8 +10,8 @@ namespace
 	class Command_View_Message_Test : public ::testing::Test
 	{
 	public:
-		Message_Consumer* logging_messages = new Message_Consumer(&found, new Logging_Message());
-		Message_Consumer* option_consumer = new Message_Consumer(&found, new Option_Popup_Message());
+		Message_Consumer* logging_messages = new Message_Consumer(new Logging_Message());
+		Message_Consumer* option_consumer = new Message_Consumer(new Option_Popup_Message());
 		bool found = false;
 		virtual void SetUp()
 		{
@@ -42,8 +42,9 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	view::initalize();
 	view::start_view();
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+
 	Message_Relay::get_instance()->push(opm);
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	bool message_in_view = false;
 	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
 	{

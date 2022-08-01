@@ -5,9 +5,9 @@
 bool true_ptr = true;
 bool false_ptr = false;
 
-Message_Consumer::Message_Consumer(bool* notify, const Internal_Message* mess)
+Message_Consumer::Message_Consumer( const Internal_Message* mess)
 {
-	stale = notify;
+	stale = &false_ptr;
 	message_type = mess;
 }
 void Message_Consumer::notify()
@@ -18,6 +18,11 @@ void Message_Consumer::notify()
 void Message_Consumer::freshen()
 {
 	stale = &false_ptr;
+}
+
+bool Message_Consumer::is_stale()
+{
+	return *(stale);
 }
 
 bool Message_Consumer::correct_type(Internal_Message* mess)

@@ -39,6 +39,11 @@ void Console_Option_Popup::on_input()
 	}
 }
 
+bool Console_Option_Popup::is_stale()
+{
+	return false;
+}
+
 void Console_Option_Popup::set_options(std::vector<std::string> list_of_options)
 {
 	options = list_of_options;

@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "console_view.h"
+#include "../view_type/option_view_type.h"
 
 class Console_Option_Popup : public Console_View
 {
@@ -23,6 +24,7 @@ public:
 	void set_options(std::vector<std::string> list);
 	int get_option();
 
+	bool is_stale();
 private:
 	int choice = -1;
 	std::vector<std::string> options;
