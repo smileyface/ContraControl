@@ -56,12 +56,14 @@ public:
     * Is the View out of touch with the model?
     * \return If the View is out of touch.
     */
-    bool is_stale() { return stale; }
+    bool is_stale() { return view_stale; }
 protected:
     /**
      * State of the View's grasp on reality
      */
-    bool stale = true;
+    bool view_stale = true;
+
+    //Message_Consumer* view_consumer;
 };
 
 #endif
