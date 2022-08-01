@@ -10,7 +10,6 @@
 #define CONSOLE_LOG_VIEW_H
 
 #include "console_view.h"
-#include "../view_type/log_view_type.h"
 #include "Messaging/consumers.h"
 
 /** View for System_Messages on the Console */
@@ -30,7 +29,7 @@ private:
     std::string message_;
     std::string message_level;
 
-    
+    std::string painted_message;
 };
 
 #endif

@@ -21,11 +21,16 @@ set(VIEW_INCLUDES view/view.h
                   view/ui_format/ui_led_view.h
                   view/ui_format/ui_main_view.h)
 
-set(VIEW_SOURCE view/src/ui_view.cpp
-                view/src/log_view.cpp
-                view/src/option_popup.cpp)
+set(VIEW_INCLUDES "view/view.h"
+                  "view/ui_format/ui_view.h"
+                  "view/ui_format/ui_led_view.h"
+                  "view/ui_format/ui_main_view.h" 
+                  "view/console_format/console_log_view.h"
+                  "view/console_format/console_view.h"
+                  "view/view_type/log_view_type.h")
 
-set(VIEW_FACTORIES_INCLUDES factories/view_factory.h)
+set(VIEW_SOURCE "view/src/ui_view.cpp"
+                "view/src/log_view.cpp")
 
 set(VIEW_FACTORIES_SOURCE factories/src/view_factory.cpp)
 
