@@ -13,7 +13,7 @@ namespace
 		bool found;
 		virtual void SetUp()
 		{
-			consumer = new Message_Consumer(found, new Logging_Message());
+			consumer = new Message_Consumer(&found, new Logging_Message());
 			Message_Relay::get_instance()->register_consumer(consumer);
 		}
 		virtual void TearDown()
@@ -45,7 +45,7 @@ TEST_F(Internal_Message_Test, Logging_Levels_Test)
 TEST_F(Internal_Message_Test, Multiple_Consumer)
 {
 	Message_Consumer* con_two;
-	con_two = new Message_Consumer(found, new Logging_Message());
+	con_two = new Message_Consumer(&found, new Logging_Message());
 	LOG_DEBUG("Test Debug");
 	Message_Relay::get_instance()->register_consumer(con_two);
 	Logging_Message* message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(con_two));

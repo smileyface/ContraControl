@@ -31,7 +31,7 @@ public:
 	 * Initalize the Format. Generally includes an alive message and adding system messages.
 	 */
 	virtual void initalize() = 0;
-	void initalize_format();
+	virtual void initalize_format();
 	/**
 	 * Add a new view to the format.
 	 * \param view Type of view to add.
@@ -71,9 +71,9 @@ protected:
 	/** Thread that is handling the loop */
 	std::thread* looping_thread = nullptr;
 	/** Consume view messages */
-	Message_Consumer* format_consumer;
+	Message_Consumer* format_consumer = 0;
 	/** Staleness of the consumer */
-	bool consumer_staleness;
+	bool consumer_staleness = true;
 private:
 };
 

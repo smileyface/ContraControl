@@ -9,7 +9,8 @@
 
 void Console_Format::initalize()
 {
-	Format::initalize_format();
+	format_consumer = new Message_Consumer(&consumer_staleness, Message_Types::VIEW_SUBSYSTEM);
+	Message_Relay::get_instance()->register_consumer(format_consumer);
 	LOG_INFO("Console On Line", "Console Format");
 	add_view(VIEW_TYPE_ENUM::LOG);
 }

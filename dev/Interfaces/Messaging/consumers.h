@@ -10,6 +10,8 @@
 
 #include <vector>
 #include "internal_messages.h"
+
+
  /**
   * An object for declaring that the containing object wants to be notified of a change, or recieve a message sent.
   */
@@ -20,7 +22,7 @@ struct Message_Consumer
 	 * \param stale Reference to the message indicator flag.
 	 * \param message_type Type of messages to be consumed.
 	 */
-	Message_Consumer(bool& stale, Internal_Message* message_type);
+	Message_Consumer(bool* stale, const Internal_Message* message_type);
 	/**
 	 * Notify the containing object that a message has been recieved.
 	 */
@@ -37,8 +39,8 @@ struct Message_Consumer
 	bool correct_type(Internal_Message* message);
 
 private:
-	bool* stale;
-	Internal_Message* message_type;
+	bool* stale = 0;
+	const Internal_Message* message_type = 0;
 };
 /**
  * List of a message consumer. For use in message producers.

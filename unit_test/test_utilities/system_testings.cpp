@@ -40,7 +40,7 @@ void system_utilities::setup_messaging()
 {
 	if(message_consumer == 0)
 	{
-		message_consumer = new Message_Consumer(stale, new Logging_Message());
+		message_consumer = new Message_Consumer(&stale, new Logging_Message());
 		Message_Relay::get_instance()->register_consumer(message_consumer);
 	}
 }

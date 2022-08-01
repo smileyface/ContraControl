@@ -7,7 +7,7 @@
 Console_Log_View::Console_Log_View()
 {
 	system_id = "System";
-	message_consumer = new Message_Consumer(stale, new Logging_Message());
+	message_consumer = new Message_Consumer(&stale, new Logging_Message());
 	Message_Relay::get_instance()->register_consumer(message_consumer);
 }
 
@@ -17,6 +17,7 @@ void Console_Log_View::on_refresh()
 	message = messages->get_message();
 	system_id = messages->get_location();
 	message_level = messages->get_priority_string();
+	
 }
 void Console_Log_View::on_display()
 {

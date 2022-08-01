@@ -1,0 +1,1 @@
+OpenCppCoverage.exe --sources=dev* --excluded_sources=unit_test* --working_dir=C:\Users\kason\source\repos\ContraControl\out\ --continue_after_cpp_exception -- C:\Users\kason\source\repos\ContraControl\out\build\x64-Debug\unit_test\Static_Test.exe

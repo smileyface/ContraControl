@@ -10,8 +10,8 @@ namespace
 	class Command_View_Message_Test : public ::testing::Test
 	{
 	public:
-		Message_Consumer* logging_messages = new Message_Consumer(found, new Logging_Message());
-		Message_Consumer* option_consumer = new Message_Consumer(found, new Option_Popup_Message());
+		Message_Consumer* logging_messages = new Message_Consumer(&found, new Logging_Message());
+		Message_Consumer* option_consumer = new Message_Consumer(&found, new Option_Popup_Message());
 		bool found = false;
 		virtual void SetUp()
 		{
@@ -29,7 +29,7 @@ namespace
 TEST_F(Command_View_Message_Test, Send_Option)
 {
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, { "Hello", "It's", "Me" }));
-	EXPECT_TRUE(found);
+	EXPECT_FALSE(found);
 	Option_Popup_Message* opm = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(option_consumer));
 	EXPECT_FALSE(found);
 	EXPECT_EQ(opm->get_sender(), SUBSYSTEM_ID_ENUM::TEST);
@@ -41,8 +41,9 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 	view::initalize();
 	view::start_view();
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(10000));
 	Message_Relay::get_instance()->push(opm);
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	bool message_in_view = false;
 	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
 	{

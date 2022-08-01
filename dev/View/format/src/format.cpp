@@ -13,8 +13,7 @@ View* Format::add_view(VIEW_TYPE_ENUM view)
 
 void Format::initalize_format()
 {
-	format_consumer = new Message_Consumer(consumer_staleness, new View_Subsystem_Message());
-	Message_Relay::get_instance()->register_consumer(format_consumer);
+
 }
 
 void Format::update_views()

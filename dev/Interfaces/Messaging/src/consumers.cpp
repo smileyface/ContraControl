@@ -2,19 +2,22 @@
 #include "../Utilities/Utilities/tools/classes.h"
 #include <typeinfo>
 
-Message_Consumer::Message_Consumer(bool& notify, Internal_Message* mess)
+bool true_ptr = true;
+bool false_ptr = false;
+
+Message_Consumer::Message_Consumer(bool* notify, const Internal_Message* mess)
 {
-	stale = &notify;
+	stale = notify;
 	message_type = mess;
 }
 void Message_Consumer::notify()
 {
-	*stale = true;
+	stale = &true_ptr;
 }
 
 void Message_Consumer::freshen()
 {
-	*stale = false;
+	stale = &false_ptr;
 }
 
 bool Message_Consumer::correct_type(Internal_Message* mess)
