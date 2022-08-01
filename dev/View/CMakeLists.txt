@@ -7,7 +7,7 @@ set(FORMAT_SOURCE format/src/format.cpp
                   format/src/ui.cpp)
 
 set(CONSOLE_FORMAT_VIEWS_INCLUDES view/console_format/console_view.h
-                                  view/console_format/console_system_view.h
+                                  view/console_format/console_log_view.h
                                   view/console_format/console_option_popup.h)
 
 set(VIEW_INCLUDES view/view.h
@@ -18,7 +18,7 @@ set(VIEW_INCLUDES view/view.h
                   view/ui_format/ui_main_view.h)
 
 set(VIEW_SOURCE view/src/ui_view.cpp
-                view/src/system_view.cpp
+                view/src/log_view.cpp
                 view/src/option_popup.cpp)
 
 set(VIEW_FACTORIES_INCLUDES factories/view_factory.h)

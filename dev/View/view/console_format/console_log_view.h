@@ -1,5 +1,5 @@
 /*****************************************************************//**
- * \file   console_system_view.h
+ * \file   console_log_view.h
  * \brief
  *
  * \author kason
@@ -10,10 +10,11 @@
 #define CONSOLE_LOG_VIEW_H
 
 #include "console_view.h"
+#include "../view_type/log_view_type.h"
 #include "Messaging/consumers.h"
 
 /** View for System_Messages on the Console */
-class Console_Log_View : public Console_View
+class Console_Log_View : public Console_View, public Log_View_Type
 {
 public:
     Console_Log_View();
@@ -23,14 +24,10 @@ public:
     void on_paint();
 private:
 	std::string system_id;
-    std::string message;
+    std::string message_;
     std::string message_level;
 
     std::string painted_message;
-    /**
-    * .Message Consumer
-    */
-    Message_Consumer* message_consumer;
 };
 
 #endif
