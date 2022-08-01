@@ -10,7 +10,7 @@
 #define VIEWS_LIST_H
 
 //#include "console_format/console_view.h"
-#include "console_format/console_system_view.h"
+#include "console_format/console_log_view.h"
 
 #include "ui_format/ui_view.h"
 #include "ui_format/ui_main_view.h"
