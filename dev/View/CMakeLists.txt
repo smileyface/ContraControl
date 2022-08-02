@@ -6,6 +6,7 @@ set(FORMAT_SOURCE format/src/format.cpp
                   format/src/console.cpp
                   format/src/ui.cpp)
 
+
 set(CONSOLE_FORMAT_VIEWS_INCLUDES view/console_format/console_view.h
                                   view/console_format/console_log_view.h
                                   view/console_format/console_option_popup.h)

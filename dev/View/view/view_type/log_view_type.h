@@ -31,5 +31,6 @@ protected:
 	* .Message Consumer
 	*/
 	Message_Consumer* log_consumer;
+
 };
 #endif // !VIEW_LOG_VIEW_TYPE

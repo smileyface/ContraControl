@@ -76,6 +76,7 @@ protected:
 	 * State of the View's grasp on reality
 	 */
 	bool stale = true;
+
 };
 
 #endif
