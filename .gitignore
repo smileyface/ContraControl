@@ -47,6 +47,7 @@ out/*
 test/googletest*
 googletest-*
 Test
+CoverageReport*
 
 #CMake Extras
 CMakeLists.txt.user

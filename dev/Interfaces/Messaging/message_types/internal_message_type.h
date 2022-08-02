@@ -15,6 +15,8 @@
 class Internal_Message
 {
 public:
+	virtual ~Internal_Message()
+	{ };
 	/** This will be replaced when I come up with more messaging design */
 	virtual void placeholder() = 0;
 };

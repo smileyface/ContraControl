@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   view_type_enum.h
- * \brief 
+ * \brief
  *
  * \author kason
  * \date   February 2022
@@ -9,13 +9,15 @@
 #ifndef VIEW_TYPE_ENUM_H
 #define VIEW_TYPE_ENUM_H
 
-/**
- * Identifier for View Type
- */
+ /**
+  * Identifier for View Type
+  */
 enum class VIEW_TYPE_ENUM
 {
 	/** A System View Type. Mainly for System_Messages */
-	LOG
+	LOG,
+	/** An optional popup. */
+	POPUP_OPTION
 };
 
 /**
@@ -25,11 +27,13 @@ enum class VIEW_TYPE_ENUM
  */
 static char* get_view_type_enum_as_string(VIEW_TYPE_ENUM view_type)
 {
-	switch (view_type)
+	switch(view_type)
 	{
 	case VIEW_TYPE_ENUM::LOG:
-		return "Log";
+		return (char*) "Log";
+	case VIEW_TYPE_ENUM::POPUP_OPTION:
+		return (char*) "Option Popup";
 	}
-	return "";
+	return (char*)"";
 }
 #endif

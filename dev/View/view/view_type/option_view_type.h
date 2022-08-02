@@ -1,5 +1,5 @@
 /*****************************************************************//**
- * \file   log_view_type.h
+ * \file   option_view_type.h
  * \brief
  *
  * \author kason
@@ -11,26 +11,25 @@
 
 #include "Messaging/consumers.h"
 
-/** A UI type for viewing logs*/
-class Log_View_Type
+ /** A UI type for nandling options*/
+class Option_View_Type
 {
 public:
-	Log_View_Type();
+	Option_View_Type();
 	/**The log message captured from the message relay.*/
 	struct MESSAGE
 	{
-		std::string MESSAGE;///<Log message.
-		std::string LOC;///<Location message was sent from.
-		std::string LEVEL;///<Level of log.
+		std::vector<std::string> OPTIONS;///<Log message.
 	} message;///<Instance of the captured message.
 	/**Get the log message from the message relay.*/
 	void get_message();
 
-protected:    
+protected:
 	/**
 	* .Message Consumer
 	*/
-	Message_Consumer* log_consumer;
-
+	Message_Consumer* option_consumer;
+	/** Stale view*/
+	bool option_stale = true;
 };
 #endif // !VIEW_LOG_VIEW_TYPE

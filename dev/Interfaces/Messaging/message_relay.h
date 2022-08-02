@@ -31,10 +31,27 @@ public:
 	/**
 	 * Get the first message from the Message Relay for a Message Consumer.
 	 *
-	 * \param mc Pointer to the consumer requesting to get its messages.
+	 * \param consumer Pointer to the consumer requesting to get its messages.
 	 * \return first message on the relay for the requesting Consumer.
 	 */
-	Internal_Message* pop(Message_Consumer* mc);
+	Internal_Message* pop(Message_Consumer* consumer);
+
+	/**
+	 * Get if there are messages for the consumer in the relay.
+	 *
+	 * \param consumer Pointer to the consumer requesting to get its messages.
+	 * \return number of messages in the relay
+	 */
+	int number_of_messages(Message_Consumer* consumer);
+
+	/**
+	 * Get an instance of the first message in the front of the list.
+	 *
+	 * \param consumer Pointer to the consumer requesting to get its messages.
+	 * \return instance of the first message
+	 */
+	Internal_Message* front(Message_Consumer* consumer);
+
 	/**
 	 * Get instance of the singleton.
 	 * \return Instance of the message relay.
@@ -42,16 +59,16 @@ public:
 	static Message_Relay* get_instance();
 	/**
 	 * Register consumer for message consumption.
-	 * \param mc Add a Message_Consumer to the list of known consumers. You must do this before you are able to recieve messages.
+	 * \param consumer Add a Message_Consumer to the list of known consumers. You must do this before you are able to recieve messages.
 	 */
-	void register_consumer(Message_Consumer* mc);
+	void register_consumer(Message_Consumer* consumer);
 
 	/**
 	 * Remove consumer from the consumer list. The system that owns this consumer will not be able to recieve messages while deregistered.
 	 * Any messages sent while not registered will just be missed.
-	 * \param mc Consumer to be removed from the list.
+	 * \param consumer Consumer to be removed from the list.
 	 */
-	void deregister_consumer(Message_Consumer* mc);
+	void deregister_consumer(Message_Consumer* consumer);
 
 private:
 	Message_Relay();

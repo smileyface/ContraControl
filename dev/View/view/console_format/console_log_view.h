@@ -22,6 +22,10 @@ public:
     void on_display();
     void on_refresh();
     void on_paint();
+
+
+    bool is_stale();
+
 private:
 	std::string system_id;
     std::string message_;

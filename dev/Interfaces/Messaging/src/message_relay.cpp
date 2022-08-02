@@ -4,10 +4,10 @@
 #include <mutex>
 #include <string>
 
-#include "Messaging/message_types/logging_message.h"
-
 std::mutex g_pages_mutex;
 Message_Relay* Message_Relay::instance;
+
+
 
 Message_Relay::Message_Relay()
 { }
@@ -29,6 +29,7 @@ void Message_Relay::push(Internal_Message* message)
 {
 	std::lock_guard<std::mutex> guard(g_pages_mutex);
 	Consumer_List registered_consumers = get_message_consumers(message);
+	
 	list_of_message.emplace_back(std::make_pair(message, registered_consumers));
 	for(int i = 0; i < registered_consumers.size(); i++)
 	{
@@ -75,12 +76,43 @@ Internal_Message* Message_Relay::pop(Message_Consumer* consumer)
 		if(message != 0)
 		{
 			auto it = std::remove_if(list_of_message.begin(), list_of_message.end(), remove_func);
+			g_pages_mutex.lock();
 			if(it != list_of_message.end())
 				list_of_message.erase(it);
+				
 
 			//if the consumer doesn't have another message on the relay
 			if(!more_messages(consumer, list_of_message))
 				consumer->freshen();
+			g_pages_mutex.unlock();
+			return message;
+		}
+	}
+	return 0;
+}
+
+int Message_Relay::number_of_messages(Message_Consumer* mc)
+{
+	int number_of_messages = 0;
+	for(int i = 0; i < list_of_message.size(); i++)
+	{
+		Internal_Message* message = get_found_message(mc, list_of_message[i]);
+		if(message != 0)
+		{
+			number_of_messages++;
+		}
+	}
+	return number_of_messages;
+}
+
+Internal_Message* Message_Relay::front(Message_Consumer* mc)
+{
+	int number_of_messages = 0;
+	for(int i = 0; i < list_of_message.size(); i++)
+	{
+		Internal_Message* message = get_found_message(mc, list_of_message[i]);
+		if(message != 0)
+		{
 			return message;
 		}
 	}
@@ -123,3 +155,8 @@ Message_Relay* Message_Relay::get_instance()
 	}
 	return instance;
 }
+
+
+const Logging_Message* Message_Types::LOGGING = new Logging_Message();
+const View_Subsystem_Message* Message_Types::VIEW_SUBSYSTEM = new View_Subsystem_Message();
+const Option_Popup_Message* Message_Types::OPTION_POPUP_REQUEST = new Option_Popup_Message();
