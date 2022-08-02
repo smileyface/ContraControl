@@ -47,6 +47,8 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 	view::initalize();
 	view::start_view();
+
+
 	Message_Relay::get_instance()->push(opm);
 	system_utilities::keyboard_utilities::Keyboard keyboard;
 	//NEED TO ADD BUFFER INPUT INTERFACE
@@ -63,8 +65,8 @@ TEST_F(Command_View_Message_Test, Send_Option)
 		}
 	}
 	EXPECT_EQ(message_in_view, true);
-	
-	
+
+
 
 	view::stop_view();
 }

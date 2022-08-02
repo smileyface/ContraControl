@@ -62,6 +62,11 @@ void Console_Option_Popup::on_query()
 			LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
 		}
 
+		if(input < 1 || input > options.size() + 1)
+		{
+			std::cerr << "Sorry, the number is out of range." << std::endl;
+			continue;
+		}
 		choice = input;
 		break;
 	}

@@ -31,7 +31,6 @@ protected:
 	* .Message Consumer
 	*/
 	Message_Consumer* log_consumer;
-	/** Stale view*/
-	bool log_stale = true;
+
 };
 #endif // !VIEW_LOG_VIEW_TYPE
