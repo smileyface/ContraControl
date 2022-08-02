@@ -14,6 +14,7 @@
 #include "console_view.h"
 #include "../view_type/option_view_type.h"
 
+/** A popup on the console for getting feedback from users */
 class Console_Option_Popup : public Console_View
 {
 public:
@@ -21,7 +22,15 @@ public:
 	void on_refresh();
 	void on_paint();
 	void on_input();
+	/**
+	 * Set options for the popup.
+	 * 
+	 * \param list List of options.
+	 */
 	void set_options(std::vector<std::string> list);
+	/**
+	 * \return the selected option.
+	 */
 	int get_option();
 
 	bool is_stale();

@@ -25,7 +25,11 @@ class View_Interface_Base
 {
 public:
 	/**
+	* 
+	* This was never implemented. Will remain until these interfaces are replaced by internal messages
+	* \param list_of_choices List to add to the popup.
 	 * \return Option chosen
+	 * 
 	 */
 	static int create_option_popup(std::vector<std::string> list_of_choices);
 };

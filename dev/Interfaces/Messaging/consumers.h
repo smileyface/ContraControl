@@ -19,7 +19,6 @@ struct Message_Consumer
 {
 	/**
 	 * Set consumer up with a flag that determines if it's got a message available
-	 * \param stale Reference to the message indicator flag.
 	 * \param message_type Type of messages to be consumed.
 	 */
 	Message_Consumer(const Internal_Message* message_type);

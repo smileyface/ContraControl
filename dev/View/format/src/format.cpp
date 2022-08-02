@@ -11,11 +11,6 @@ View* Format::add_view(VIEW_TYPE_ENUM view)
 	return 0;
 }
 
-void Format::initalize_format()
-{
-
-}
-
 void Format::update_views()
 {
 	for(auto i = view_list.begin(); i != view_list.end(); i++)

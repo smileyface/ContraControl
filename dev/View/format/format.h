@@ -31,10 +31,10 @@ public:
 	 * Initalize the Format. Generally includes an alive message and adding system messages.
 	 */
 	virtual void initalize() = 0;
-	virtual void initalize_format();
 	/**
 	 * Add a new view to the format.
 	 * \param view Type of view to add.
+	 * \return Pointer to the newly created view
 	 */
 	virtual View* add_view(VIEW_TYPE_ENUM view);
 	/**
@@ -46,9 +46,11 @@ public:
 	 */
 	void update_views();
 
+	/**
+	 * \brief Get messages from the Int
+	 */
 	void process_internal_messages();
 
-	std::vector<View_Subsystem_Message*> get_internal_messages();
 	/**
 	 * \brief Destroy all views
 	 *
