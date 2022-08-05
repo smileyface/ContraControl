@@ -29,6 +29,9 @@ public:
 	};
 	/** Access to the input/output state of the console */
 	Console_State state;
+
+protected:
+	std::string painted_message;
 private:
 };
 

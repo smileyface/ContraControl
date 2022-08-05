@@ -45,9 +45,14 @@ public:
 	virtual void on_paint()
 	{ };
 	/**
-	 * Called when input recieved.
+	 * Called when input recieved. Generally for handling the results of on_query().
 	 */
 	virtual void on_input()
+	{ };
+	/**
+	 * Called when waiting on input from the user. Is a blocking call.
+	 */
+	virtual void on_query()
 	{ };
 	/**
 	 * Create the View and any containers required. Called after initalized.
@@ -70,6 +75,9 @@ public:
 	* \return If the View is out of touch.
 	*/
 	virtual bool is_stale() = 0;
+
+	/** Has the view been commanded to quit */
+	virtual bool quit() = 0;
 	
 protected:
 	/**

@@ -43,7 +43,7 @@ struct Message_Consumer
 	 */
 	bool is_stale();
 private:
-	bool* stale = 0;
+	bool stale = false;
 	const Internal_Message* message_type = 0;
 };
 /**

@@ -28,7 +28,7 @@ namespace
 
 TEST_F(Command_View_Message_Test, Send_Option)
 {
-	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, { "Hello", "It's", "Me" }));
+	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
 	EXPECT_FALSE(found);
 	Option_Popup_Message* opm = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(option_consumer));
 	EXPECT_FALSE(found);
@@ -42,9 +42,8 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	view::initalize();
 	view::start_view();
 
-
 	Message_Relay::get_instance()->push(opm);
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(600000));
 	bool message_in_view = false;
 	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
 	{
@@ -56,8 +55,6 @@ TEST_F(Command_View_Message_Test, Send_Option)
 		}
 	}
 	EXPECT_EQ(message_in_view, true);
-
-
 
 	view::stop_view();
 }

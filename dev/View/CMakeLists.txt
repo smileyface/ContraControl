@@ -6,16 +6,20 @@ set(FORMAT_SOURCE format/src/format.cpp
                   format/src/console.cpp
                   format/src/ui.cpp)
 
+set(VIEW_TYPE_INCLUDES view/view_type/option_view_type.h
+                       view/view_type/log_view_type.h)
+
 set(CONSOLE_FORMAT_VIEWS_INCLUDES view/console_format/console_view.h
                                   view/console_format/console_log_view.h
                                   view/console_format/console_option_popup.h)
 
 set(VIEW_INCLUDES view/view.h
                   view/views.h
+                  ${VIEW_TYPE_INCLUDES}
                   ${CONSOLE_FORMAT_VIEWS_INCLUDES}
                   view/ui_format/ui_view.h
                   view/ui_format/ui_led_view.h
-                  view/ui_format/ui_main_view.h "view/view_type/option_view_type.h")
+                  view/ui_format/ui_main_view.h)
 
 set(VIEW_SOURCE view/src/ui_view.cpp
                 view/src/log_view.cpp

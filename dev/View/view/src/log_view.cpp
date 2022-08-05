@@ -42,3 +42,8 @@ bool Console_Log_View::is_stale()
 {
 	return log_consumer->is_stale();
 }
+
+bool Console_Log_View::quit()
+{
+	return false;
+}
