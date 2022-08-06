@@ -5,6 +5,11 @@
 #include "../../dev/Interfaces/Messaging/message_relay.h"
 #include "../../dev/View/view_main.h"
 
+#include <sstream>
+#include <stdio.h>
+
+
+
 namespace
 {
 	class Command_View_Message_Test : public ::testing::Test
@@ -41,9 +46,9 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 	view::initalize();
 	view::start_view();
-
+	std::cin.putback('0');
 	Message_Relay::get_instance()->push(opm);
-	std::this_thread::sleep_for(std::chrono::milliseconds(600000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	bool message_in_view = false;
 	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
 	{
@@ -55,6 +60,8 @@ TEST_F(Command_View_Message_Test, Send_Option)
 		}
 	}
 	EXPECT_EQ(message_in_view, true);
+
+	
 
 	view::stop_view();
 }

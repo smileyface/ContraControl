@@ -9,11 +9,11 @@
 #ifndef MESSAGE_TYPE_OPTION_POPUP_RESPONSE_MESSAGE
 #define MESSAGE_TYPE_OPTION_POPUP_RESPONSE_MESSAGE
 
-#include "../view_subsystem_message.h"
-#include "option_popup_message.h"
+#include "../response_message.h"
+#include "../../view_messages/view_request/option_popup_message.h"
 
 /** Message to respond to Option_Popup_Message with. Will contain the selected option. */
-class Option_Popup_Response_Message : public View_Subsystem_Message
+class Option_Popup_Response_Message : public Response_Message
 {
 public:
 	Option_Popup_Response_Message();
@@ -29,7 +29,8 @@ public:
 	int get_selection();
 
 	/** Checks if we are responding to the correct message */
-	bool this_message(Option_Popup_Message* check_message);
+	virtual bool this_message(Option_Popup_Message* check_message);
+
 private:
 	int selection_;
 	Option_Popup_Message* responding_message_;
