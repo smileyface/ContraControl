@@ -8,16 +8,21 @@ class Key_Press_Interface
 {
 public:
 	Key_Press_Interface();
+	Key_Press_Interface(int index);
 	bool poll();
 
-	std::function<void()> on_press;
-	std::function<void()> on_release;
-	std::function<void()> on_hold;
+	std::function<void()> on_press = [](){};
+	std::function<void()> on_release = [] ()
+	{ };
+	std::function<void()> on_hold = [] ()
+	{ };
 
 	void operator=(const int new_val);
+	bool operator==(const Key_Press_Interface check_val);
 private:
 	bool pressed = false;
 	int val;
+	int index_ = -1;
 };
 typedef Key_Press_Interface KPI;
 

@@ -3,7 +3,8 @@
 #include <string>
 
 #ifdef _WIN32
-#include "../sys_interface/windows_input_interface.h"
+#include <Windows.h>
+#include "../sys_interface/windows_keyboard.h"
 #endif
 #ifdef __linux__
 #include "../sys_interface/linux_keyboard.h"
@@ -12,14 +13,13 @@
 
 Keyboard_Buffer_Input::Keyboard_Buffer_Input()
 {
+	block = false;
 #ifdef _WIN32
-#include <conio.h>
-#include <Windows.h>
-	Keyboard_Interface* keyboard = new Windows_Keyboard();
+	keyboard = new Windows_Keyboard();
 #endif // _WIN32
 
 #ifdef __linux__
-	Keyboard_Interface* keyboard = new Linux_Keyboard();
+	keyboard = new Linux_Keyboard();
 #endif
 
 }

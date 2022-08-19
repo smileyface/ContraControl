@@ -13,6 +13,8 @@
 #include "keyboard_interface.h"
 
 
+
+
 class Windows_Keyboard : public Keyboard_Interface
 {
 public:
@@ -20,6 +22,12 @@ public:
 	~Windows_Keyboard();
 	void readEv();
 	short getKeyState(short key);
+
+protected:
+private:
+	bool keyboard_present;
+
+	void initalize_codes();
 };
 
 

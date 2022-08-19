@@ -1,4 +1,5 @@
 #include <thread>
+#include <functional>   // std::mem_fn
 
 #include "../sys_interface/keyboard_interface.h"
 std::thread keyboard_thread;
@@ -22,4 +23,16 @@ void Keyboard_Interface::start_listening()
 								  {
 									  this->loop();
 								  });
+}
+
+void Keyboard_Interface::set_on_press(KPI key, std::function<void()> func)
+{
+	for(auto& it : code_map)
+	{
+		if(it.second == key)
+		{
+			it.second.on_press = func;
+			return;
+		}
+	}
 }

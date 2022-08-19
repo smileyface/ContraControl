@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <linux/input-event-codes.h>
 
-void initalize_codes()
+void Linux_Keyboard::initalize_codes()
 {
 	code_map[KEY_A] = KEY::A;
 	code_map[KEY_B] = KEY::B;

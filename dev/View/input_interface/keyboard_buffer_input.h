@@ -14,7 +14,6 @@
 #include "sys_interface/keyboard_interface.h"
 
 
-
 class Keyboard_Buffer_Input
 {
 public:

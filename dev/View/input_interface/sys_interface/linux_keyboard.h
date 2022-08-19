@@ -20,6 +20,12 @@ struct keyboard_state
 
 class Linux_Keyboard : public Keyboard_Interface
 {
+public:
+	Linux_Keyboard();
+	~Linux_Keyboard();
+	void readEv();
+	short getKeyState(short key);
+protected:
 private:
 	pthread_t thread;
 	bool active;
@@ -29,12 +35,7 @@ private:
 	char name[256];
 	bool keyboard_present;
 
-protected:
-public:
-	Linux_Keyboard();
-	~Linux_Keyboard();
-	void readEv();
-	short getKeyState(short key);
+	void initalize_codes();
 };
 
 #endif
