@@ -45,6 +45,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo chmod +666 /dev/uinput
+        ls -l /dev/uinput
 
     - name: Build
       shell: bash
