@@ -24,6 +24,10 @@ namespace system_utilities
 	{
 		void setup();
 	}
+	namespace keyboard_utilities
+	{
+		void press_button(int key);
+	}
 }
 
 #endif

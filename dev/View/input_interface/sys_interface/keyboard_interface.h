@@ -17,6 +17,7 @@ public:
 	Keyboard_Interface();
 	virtual ~Keyboard_Interface();
 	void start_listening();
+	void stop_listening();
 
 	virtual void readEv() = 0;
 	bool get_keyboard_present();

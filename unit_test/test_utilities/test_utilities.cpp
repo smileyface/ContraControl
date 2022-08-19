@@ -7,6 +7,8 @@
 
 #include <typeinfo>
 
+const int TIMEOUT_TIME = 5;
+
 void testing_utilities::get_partial_on(Command* command, Device* device, double timeout)
 {
 	while(timeout > 0)
@@ -230,3 +232,56 @@ void testing_utilities::error_utilities::check_override_failure(std::function<vo
 	}
 	FAIL() << "No exception thrown";
 }
+#ifdef _WIN32
+char get_char_from_kpi(KPI key)
+{
+	if(key == KEY::A)
+		return 'A';
+	else if(key == KEY::B)
+		return 'B';
+	//TODO: Finish this
+	return 255;
+}
+#endif
+
+#ifdef __linux__
+#include <linux/input.h>
+char get_char_from_kpi(KPI key)
+{
+	if(key == KEY::A)
+		return KEY_A;
+	else if(key == KEY::B)
+		return KEY_B;
+	//TODO: Finish this
+	return 255;
+}
+#endif
+
+void testing_utilities::input_utilities::wait_for_keypress(KPI key)
+{
+	Keyboard_Buffer_Input buffer;
+	bool is_pressed = false;
+	buffer.keyboard->start_listening();
+	buffer.keyboard->set_on_press(key, [&is_pressed] () mutable
+								  {
+									  is_pressed = true;
+								  });
+
+	int sleep_time = 0;
+	while(!is_pressed && sleep_time < TIMEOUT_TIME)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		sleep_time++;
+	}
+	if(!is_pressed && sleep_time >= TIMEOUT_TIME)
+	{
+		//try to push the button ourselves
+		system_utilities::keyboard_utilities::press_button(get_char_from_kpi(key));
+	}
+
+	EXPECT_TRUE(is_pressed);
+
+	buffer.keyboard->stop_listening();
+}
+
+

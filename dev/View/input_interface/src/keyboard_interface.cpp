@@ -25,6 +25,12 @@ void Keyboard_Interface::start_listening()
 								  });
 }
 
+void Keyboard_Interface::stop_listening()
+{
+	active = false;
+	keyboard_thread.join();
+}
+
 void Keyboard_Interface::set_on_press(KPI key, std::function<void()> func)
 {
 	for(auto& it : code_map)

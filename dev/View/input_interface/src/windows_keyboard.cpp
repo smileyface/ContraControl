@@ -88,8 +88,6 @@ void Windows_Keyboard::readEv()
 			code_map[i] = GetKeyState(i) & 0x8000;
 		}
 	}
-
-	
 }
 
 short Windows_Keyboard::getKeyState(short key)

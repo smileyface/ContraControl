@@ -13,6 +13,7 @@
 #include "../../dev/Utilities/Utilities/exceptions.h"
 #include "../../dev/Network/system_interfaces/types/network_status_state.h"
 #include "../../dev/Network/messages/messaging.h"
+#include "../../dev/View/input_interface/keyboard_buffer_input.h"
 
 namespace testing_utilities
 {
@@ -56,6 +57,10 @@ namespace testing_utilities
 	namespace error_utilities
 	{
 		void check_override_failure(std::function<void()> function);
+	}
+	namespace input_utilities
+	{
+		void wait_for_keypress(KPI key);
 	}
 }
 #endif
