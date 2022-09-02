@@ -78,7 +78,7 @@ void system_utilities::print_log_messages()
 		std::string priority_string;
 		if(mess->get_priority() == MESSAGE_PRIORITY::ERROR_MESSAGE)
 		{
-			std::cout << "[  \u001b[33m" + mess->get_priority_string() + "\u001b[0m]";
+			std::cout << "[  \u001b[33m" + mess->get_priority_string() + "\u001b[0m   ]";
 		}
 		else if(mess->get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE)
 		{
