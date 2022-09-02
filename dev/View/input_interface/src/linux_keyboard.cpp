@@ -98,6 +98,7 @@ bool Linux_Keyboard::connect_to_keyboard(std::string path_to_keyboard)
 	{
 		keyboard_present = false;
 	}
+	return keyboard_present;
 }
 
 void Linux_Keyboard::readEv()

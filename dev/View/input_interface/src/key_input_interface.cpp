@@ -1,7 +1,6 @@
 #include "../sys_interface/key_input_interface.h"
 
 #include <vector>
-#include <iostream>
 
 KPI KEY::A(1);
 KPI KEY::B(2);
