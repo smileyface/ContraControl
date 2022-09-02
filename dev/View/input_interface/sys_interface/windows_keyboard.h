@@ -12,9 +12,7 @@
 
 #include "keyboard_interface.h"
 
-
-
-
+/** Keyboard interface for windows */
 class Windows_Keyboard : public Keyboard_Interface
 {
 public:
