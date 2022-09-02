@@ -276,12 +276,12 @@ void testing_utilities::input_utilities::wait_for_keypress(KPI key)
 								  });
 
 	int sleep_time = 0;
-	/*/while(!is_pressed && sleep_time < TIMEOUT_TIME)
+	while(!is_pressed && sleep_time < TIMEOUT_TIME)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 		sleep_time++;
-	}*/
-	if(!is_pressed/* && sleep_time >= TIMEOUT_TIME*/)
+	}
+	if(!is_pressed && sleep_time >= TIMEOUT_TIME)
 	{
 		//try to push the button ourselves
 		system_utilities::keyboard_utilities::press_button(get_char_from_kpi(key));
