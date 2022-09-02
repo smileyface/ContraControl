@@ -8,7 +8,6 @@
 #include <pthread.h>
 #include <linux/input.h>
 
-#include "key_input_interface.h"
 #include "keyboard_interface.h"
 
 #define KEYBOARD_DEV "/dev/input/event0"
@@ -23,19 +22,19 @@ class Linux_Keyboard : public Keyboard_Interface
 public:
 	Linux_Keyboard();
 	~Linux_Keyboard();
+	bool connect_to_keyboard(std::string path_to_keyboard);
 	void readEv();
 	short getKeyState(short key);
+
+	void initalize_codes();
 protected:
 private:
 	pthread_t thread;
-	bool active;
 	int keyboard_fd;
 	input_event* keyboard_ev;
 	keyboard_state* keyboard_st;
 	char name[256];
-	bool keyboard_present;
 
-	void initalize_codes();
 };
 
 #endif

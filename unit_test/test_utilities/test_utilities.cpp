@@ -9,6 +9,9 @@
 
 const int TIMEOUT_TIME = 5;
 
+
+Keyboard_Buffer_Input buffer;
+
 void testing_utilities::get_partial_on(Command* command, Device* device, double timeout)
 {
 	while(timeout > 0)
@@ -232,6 +235,8 @@ void testing_utilities::error_utilities::check_override_failure(std::function<vo
 	}
 	FAIL() << "No exception thrown";
 }
+
+
 #ifdef _WIN32
 char get_char_from_kpi(KPI key)
 {
@@ -257,9 +262,12 @@ char get_char_from_kpi(KPI key)
 }
 #endif
 
+void dummy_func()
+{ }
+
 void testing_utilities::input_utilities::wait_for_keypress(KPI key)
 {
-	Keyboard_Buffer_Input buffer;
+	buffer.keyboard->initalize_codes();
 	bool is_pressed = false;
 	buffer.keyboard->start_listening();
 	buffer.keyboard->set_on_press(key, [&is_pressed] () mutable
@@ -268,20 +276,23 @@ void testing_utilities::input_utilities::wait_for_keypress(KPI key)
 								  });
 
 	int sleep_time = 0;
-	while(!is_pressed && sleep_time < TIMEOUT_TIME)
+	/*/while(!is_pressed && sleep_time < TIMEOUT_TIME)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 		sleep_time++;
-	}
-	if(!is_pressed && sleep_time >= TIMEOUT_TIME)
+	}*/
+	if(!is_pressed/* && sleep_time >= TIMEOUT_TIME*/)
 	{
 		//try to push the button ourselves
 		system_utilities::keyboard_utilities::press_button(get_char_from_kpi(key));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	}
 
 	EXPECT_TRUE(is_pressed);
-
 	buffer.keyboard->stop_listening();
 }
 
-
+void testing_utilities::input_utilities::connect_keyboard(std::string path_to_keyboard)
+{
+	buffer.keyboard->connect_to_keyboard(path_to_keyboard);
+}

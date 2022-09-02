@@ -5,6 +5,7 @@
 
 #include <Windows.h>
 #include <vector>
+#include <string>
 
 UINT nDevices;
 
@@ -60,7 +61,6 @@ void Windows_Keyboard::initalize_codes()
 
 Windows_Keyboard::Windows_Keyboard()
 {
-	initalize_codes();
 	if(GetRawInputDeviceList(NULL, &nDevices, sizeof(RAWINPUTDEVICELIST)) != 0)
 	{
 	}
@@ -77,6 +77,11 @@ Windows_Keyboard::Windows_Keyboard()
 Windows_Keyboard::~Windows_Keyboard()
 {
 
+}
+
+bool Windows_Keyboard::connect_to_keyboard(std::string location_of_keyboard)
+{
+	return true;
 }
 
 void Windows_Keyboard::readEv()

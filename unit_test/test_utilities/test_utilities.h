@@ -60,7 +60,9 @@ namespace testing_utilities
 	}
 	namespace input_utilities
 	{
+		void setup_keyboard();
 		void wait_for_keypress(KPI key);
+		void connect_keyboard(std::string path_to_keyboard);
 	}
 }
 #endif

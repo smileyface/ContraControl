@@ -93,10 +93,7 @@ void Key_Press_Interface::operator=(const int new_val)
 Key_Press_Interface::Key_Press_Interface(int index)
 { 
     on_press = [] ()
-    {
-        printf("indexed button pressed");
-        fflush(stdout);
-    };
+    {  };
     on_release = [] ()
     { };
     on_hold = [] ()

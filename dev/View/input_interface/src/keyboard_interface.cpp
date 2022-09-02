@@ -19,7 +19,7 @@ void Keyboard_Interface::loop()
 
 void Keyboard_Interface::start_listening()
 {
-	keyboard_thread = std::thread([this]
+	keyboard_thread = std::thread([this]()
 								  {
 									  this->loop();
 								  });

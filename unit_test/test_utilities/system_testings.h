@@ -26,6 +26,8 @@ namespace system_utilities
 	}
 	namespace keyboard_utilities
 	{
+		void setup();
+		void tear_down();
 		void press_button(int key);
 	}
 }

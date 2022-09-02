@@ -5,6 +5,11 @@
 
 #include <unistd.h>
 #include <linux/input-event-codes.h>
+#include <mutex>
+
+std::mutex keyboard_mutex;
+
+
 
 void Linux_Keyboard::initalize_codes()
 {
@@ -59,23 +64,13 @@ void Linux_Keyboard::initalize_codes()
 
 Linux_Keyboard::Linux_Keyboard()
 {
-	initalize_codes();
 	active = true;
 	keyboard_fd = 0;
 	keyboard_ev = new input_event();
 	keyboard_st = new keyboard_state();
-	keyboard_fd = open(KEYBOARD_DEV, O_RDONLY | O_NONBLOCK);
-	if(keyboard_fd > 0)
-	{
-		ioctl(keyboard_fd, EVIOCGNAME(256), name);
-		std::cout << "   Name: " << name << std::endl;
-		active = true;
-		keyboard_present = true;
-	}
-	else
-	{
-		keyboard_present = false;
-	}
+
+	connect_to_keyboard(KEYBOARD_DEV);
+
 }
 
 Linux_Keyboard::~Linux_Keyboard()
@@ -91,6 +86,20 @@ Linux_Keyboard::~Linux_Keyboard()
 	keyboard_fd = 0;
 }
 
+bool Linux_Keyboard::connect_to_keyboard(std::string path_to_keyboard)
+{
+	if((keyboard_fd = open(path_to_keyboard.c_str(), O_RDONLY | O_NONBLOCK)) > 0)
+	{
+		ioctl(keyboard_fd, EVIOCGNAME(256), name);
+		active = true;
+		keyboard_present = true;
+	}
+	else
+	{
+		keyboard_present = false;
+	}
+}
+
 void Linux_Keyboard::readEv()
 {
 	int bytes = read(keyboard_fd, keyboard_ev, sizeof(*keyboard_ev));
@@ -98,6 +107,7 @@ void Linux_Keyboard::readEv()
 	{
 		if(keyboard_ev->type & EV_KEY)
 		{
+			std::lock_guard<std::mutex> lock(keyboard_mutex);
 			code_map[keyboard_ev->code] = keyboard_ev->value;
 		}
 	}

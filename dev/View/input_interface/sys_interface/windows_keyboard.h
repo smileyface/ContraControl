@@ -20,6 +20,9 @@ class Windows_Keyboard : public Keyboard_Interface
 public:
 	Windows_Keyboard();
 	~Windows_Keyboard();
+	bool connect_to_keyboard(std::string path_to_keyboard);
+	void initalize_codes();
+
 	void readEv();
 	short getKeyState(short key);
 
@@ -27,7 +30,6 @@ protected:
 private:
 	bool keyboard_present;
 
-	void initalize_codes();
 };
 
 

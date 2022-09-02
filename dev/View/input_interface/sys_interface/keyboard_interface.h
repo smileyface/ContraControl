@@ -10,12 +10,18 @@
 #define INTERFACE_KEYBOARD_INTERFACE
 
 #include "key_input_interface.h"
+#include <string>
 
 class Keyboard_Interface
 {
 public:
 	Keyboard_Interface();
 	virtual ~Keyboard_Interface();
+
+	virtual void initalize_codes() = 0;
+
+	virtual bool connect_to_keyboard(std::string path_to_keyboard) = 0;
+
 	void start_listening();
 	void stop_listening();
 
@@ -25,11 +31,10 @@ public:
 
 protected:
 	std::map<int, KPI> code_map;
-private:
 	bool active;
-	bool keyboard_present;	
+	bool keyboard_present;
+private:
 	void loop();
-	virtual void initalize_codes() = 0;
 
 
 };

@@ -16,7 +16,16 @@
 #include "../../Network/system_interfaces/windows_network_interface.h"
 #endif // _WIN32
 #ifdef __linux__
+#include <stdio.h>
+#include <fcntl.h>
+#include <termios.h>
+#include <linux/input.h>
+#include <linux/uinput.h>
+#include <linux/uhid.h>
+#include <sstream>
 #include "../../Network/system_interfaces/linux_network_interface.h"
+
+int fd = 0;
 #endif
 
 Message_Consumer* message_consumer = 0;
@@ -142,6 +151,56 @@ void system_utilities::network_utilities::setup()
 	}
 }
 
+#ifdef __linux__
+void enable_keys(int fd)
+{
+	ioctl(fd, UI_SET_EVBIT, EV_KEY);
+	ioctl(fd, UI_SET_KEYBIT, KEY_A);
+}
+#endif
+
+void system_utilities::keyboard_utilities::setup()
+{
+	system_utilities::setup();
+#ifdef __linux__
+	struct uinput_setup usetup;
+	if((fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK)) > 0)
+	{
+		enable_keys(fd);
+		memset(&usetup, 0, sizeof(usetup));
+		usetup.id.bustype = BUS_USB;
+		usetup.id.vendor = 0x03f0; /* sample vendor */
+		usetup.id.product = 0x050c; /* sample product */
+		strcpy(usetup.name, "5219 Wireless Keyboard");
+
+		ioctl(fd, UI_DEV_SETUP, &usetup);
+		ioctl(fd, UI_DEV_CREATE);
+		sleep(1);
+		testing_utilities::input_utilities::connect_keyboard("/dev/input/event0");
+		return;
+	}
+	else
+	{
+		int why_i_failed = errno;
+		if(why_i_failed == EACCES)
+		{
+			LOG_ERROR("Permission Denied", "Connect UInput");
+		}
+		else
+			LOG_INFO("Direct connect failed cause of : " + std::to_string(why_i_failed), "Connect Keyboard");
+	}
+#endif
+}
+
+void system_utilities::keyboard_utilities::tear_down()
+{
+	system_utilities::cleanup();
+#ifdef __linux__
+	ioctl(fd, UI_DEV_DESTROY);
+	close(fd);
+#endif
+}
+
 #ifdef _WIN32
 void system_utilities::keyboard_utilities::press_button(int key)
 {
@@ -167,29 +226,10 @@ void system_utilities::keyboard_utilities::press_button(int key)
 #endif
 
 #ifdef __linux__
-#include <stdio.h>
-#include <fcntl.h>
-#include <termios.h>
-#include <linux/input.h>
-#include <linux/uinput.h>
-#include <linux/uhid.h>
-#include <sstream>
 
 #define EV_PRESSED 1
 #define EV_RELEASED 0
 #define EV_REPEAT 2
-
-char* device = "/dev/input/event0";
-char* uinput_path = "/dev/uinput";
-char* uhid_path = "/dev/uhid";
-
-int fd = 0;
-
-void enable_keys(int fd)
-{
-	ioctl(fd, UI_SET_EVBIT, EV_KEY);
-	ioctl(fd, UI_SET_KEYBIT, KEY_A);
-}
 
 static unsigned char rdesc [] = {
 	0x05, 0x01,	/* USAGE_PAGE (Generic Desktop) */
@@ -237,7 +277,25 @@ static unsigned char rdesc [] = {
 	0x91, 0x01,		/* Output (Cnst,Var,Abs) */
 	0xc0,		/* END_COLLECTION */
 };
+void emit(int fd, int type, int code, int val)
+{
+	struct input_event ie;
+	memset(&ie, 0, sizeof(ie));
 
+	ie.type = type;
+	ie.code = code;
+	ie.value = val;
+	/* timestamp values below are ignored */
+	ie.time.tv_sec = 0;
+	ie.time.tv_usec = 0;
+
+	int ret = write(fd, &ie, sizeof(ie));
+	if(ret < 0)
+	{
+		int err = errno;
+		LOG_ERROR(std::to_string(err), "Virtual keyboard emit");
+	}
+}
 static int uhid_write(int fd, const struct uhid_event* ev)
 {
 	ssize_t ret;
@@ -277,106 +335,18 @@ static int create(int fd)
 	return uhid_write(fd, &ev);
 }
 
-void get_keyboard_file_descriptor()
-{
-	if(fd != 0)
-	{
-		return;
-	}
-	// Write a key to the keyboard buffer
-	if((fd = open(device, O_RDWR)) > 0)
-	{
-		return;
-	}
-	else
-	{
-		int why_i_failed = errno;
-		if(why_i_failed == ENOENT)
-		{
-			LOG_INFO("No keyboard directly connected", "Connect Keyboard");
-		}
-		else
-			LOG_INFO("Direct connect failed cause of : " + std::to_string(why_i_failed), "Connect Keyboard");
-	}
-	struct uinput_setup usetup;
-	if((fd = open(uinput_path, O_WRONLY | O_NONBLOCK)) > 0)
-	{
-		enable_keys(fd);
-		memset(&usetup, 0, sizeof(usetup));
-		usetup.id.bustype = BUS_USB;
-		usetup.id.vendor = 0x03f0; /* sample vendor */
-		usetup.id.product = 0x050c; /* sample product */
-		strcpy(usetup.name, "5219 Wireless Keyboard");
-
-		ioctl(fd, UI_DEV_SETUP, &usetup);
-		ioctl(fd, UI_DEV_CREATE);
-		sleep(1);
-	}
-	else
-	{
-		int why_i_failed = errno;
-		if(why_i_failed == EACCES)
-		{
-			LOG_ERROR("Permission Denied", "Connect UInput");
-		}
-		else
-			LOG_INFO("Direct connect failed cause of : " + std::to_string(why_i_failed), "Connect Keyboard");
-	}
-	int ret;
-	struct termios state;
-	ret = tcgetattr(STDIN_FILENO, &state);
-	if(ret)
-	{
-		fprintf(stderr, "Cannot get tty state\n");
-	}
-	else
-	{
-		state.c_lflag &= ~ICANON;
-		state.c_cc[VMIN] = 1;
-		ret = tcsetattr(STDIN_FILENO, TCSANOW, &state);
-		if(ret)
-			fprintf(stderr, "Cannot set tty state\n");
-	}
-	if((fd = open(uhid_path, O_RDWR | O_CLOEXEC)) > 0)
-	{
-		
-		ret = create(fd);
-		if(ret)
-		{
-			close(fd);
-		}
-	}
-	else
-	{
-		int why_i_failed = errno;
-		if(why_i_failed == EACCES)
-		{
-			LOG_ERROR("Permission Denied", "Connect UHID");
-		}
-		else
-			LOG_INFO("Direct connect failed cause of : " + std::to_string(why_i_failed), "Connect Keyboard");
-	}
-}
 
 void system_utilities::keyboard_utilities::press_button(int key)
 {
-	get_keyboard_file_descriptor();
 	// Write a key to the keyboard buffer
 	if(fd > 0)
 	{
 		struct input_event event;
+		emit(fd, EV_KEY, key, 1);
+		emit(fd, EV_SYN, SYN_REPORT, 0);
+		emit(fd, EV_KEY, key, 0);
+		emit(fd, EV_SYN, SYN_REPORT, 0);
 
-		// Press a key (stuff the keyboard with a keypress)
-		event.type = EV_KEY;
-		event.value = EV_PRESSED;
-		event.code = key;
-		write(fd, &event, sizeof(struct input_event));
-
-		// Release the key
-		event.value = EV_RELEASED;
-		event.code = key;
-		write(fd, &event, sizeof(struct input_event));
-		close(fd);
 	}
 }
 
