@@ -24,14 +24,12 @@ public:
 	 */
 	virtual void initalize_codes() = 0;
 
-
 	/**
 	 * Connect to the physical or vitrual keyboard.
-	 * \param path_to_keyboard Keyboard to connect to
 	 * 
-	 * \return whether connection is successful
+	 * \return whether connection is successful 
 	 */
-	virtual bool connect_to_keyboard(std::string path_to_keyboard) = 0;
+	virtual bool connect_to_keyboard() = 0;
 
 	/**
 	 * Start listening for input from the modeled keyboard 

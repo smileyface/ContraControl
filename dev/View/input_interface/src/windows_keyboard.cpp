@@ -61,6 +61,16 @@ void Windows_Keyboard::initalize_codes()
 
 Windows_Keyboard::Windows_Keyboard()
 {
+	connect_to_keyboard();
+}
+
+Windows_Keyboard::~Windows_Keyboard()
+{
+
+}
+
+bool Windows_Keyboard::connect_to_keyboard()
+{
 	if(GetRawInputDeviceList(NULL, &nDevices, sizeof(RAWINPUTDEVICELIST)) != 0)
 	{
 	}
@@ -72,16 +82,7 @@ Windows_Keyboard::Windows_Keyboard()
 	{
 		keyboard_present = true;
 	}
-}
-
-Windows_Keyboard::~Windows_Keyboard()
-{
-
-}
-
-bool Windows_Keyboard::connect_to_keyboard(std::string location_of_keyboard)
-{
-	return true;
+	return keyboard_present;
 }
 
 void Windows_Keyboard::readEv()

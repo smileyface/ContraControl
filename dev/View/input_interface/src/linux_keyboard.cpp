@@ -73,37 +73,8 @@ Linux_Keyboard::Linux_Keyboard()
 	keyboard_ev = new input_event();
 	keyboard_st = new keyboard_state();
 
-	struct dirent* entry = nullptr;
-	DIR* dp = nullptr;
 
-	dp = opendir("/dev/input");
-
-	if(dp != nullptr)
-	{
-		std::regex e("(event)(.\\d)");
-		while((entry = readdir(dp)))
-		{
-
-			std::string s(entry->d_name);
-			if(std::regex_match(s, e))
-			{
-				printf("%s\n", entry->d_name);
-			}
-		}
-	}
-
-	closedir(dp);
-	auto event_file = event_eligible.begin();
-	while(event_file != event_eligible.end());
-	{
-		if(!connect_to_keyboard(*event_file))
-		{
-			LOG_INFO(*event_file + " not having a useful file descriptor", "Keyboard finder");
-			event_file++;
-		}
-		
-	}
-
+	connect_to_keyboard();
 }
 
 Linux_Keyboard::~Linux_Keyboard()
@@ -117,6 +88,42 @@ Linux_Keyboard::~Linux_Keyboard()
 	delete keyboard_st;
 	delete keyboard_ev;
 	keyboard_fd = 0;
+}
+
+bool Linux_Keyboard::connect_to_keyboard()
+{
+	struct dirent* entry = nullptr;
+	DIR* dp = nullptr;
+
+	dp = opendir("/dev/input");
+
+	if(dp != nullptr)
+	{
+		std::regex e("event(\\d)");
+		while((entry = readdir(dp)))
+		{
+
+			std::string s(entry->d_name);
+			if(std::regex_match(s, e))
+			{
+				event_eligible.push_back(s);
+				printf("%s\n", entry->d_name);
+			}
+		}
+	}
+
+	closedir(dp);
+	bool keyboard_present = false;
+	for(int i = 0; i < event_eligible.size(); i++)
+	{
+		std::string location = "/dev/input/" + event_eligible[i];
+		keyboard_present = connect_to_keyboard(location);
+		if(keyboard_present)
+		{
+			break;
+		}
+		LOG_INFO(location + " not having a useful file descriptor", "Keyboard finder");
+	}
 }
 
 bool Linux_Keyboard::connect_to_keyboard(std::string path_to_keyboard)

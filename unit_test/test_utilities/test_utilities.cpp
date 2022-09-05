@@ -468,5 +468,5 @@ void testing_utilities::input_utilities::wait_for_keypress(KPI key)
 
 void testing_utilities::input_utilities::connect_keyboard(std::string path_to_keyboard)
 {
-	buffer.keyboard->connect_to_keyboard(path_to_keyboard);
+	buffer.keyboard->connect_to_keyboard();
 }
