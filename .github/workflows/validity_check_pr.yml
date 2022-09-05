@@ -66,9 +66,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
     steps:
-    - uses: actions/checkout@v2
-
-    - uses: actions/download-artifact@v2
+    - name: Get Artifacts 
+      uses: actions/download-artifact@v2
       with:
        name: my-artifact-test-${{runner.os}}
        path: .
@@ -101,21 +100,28 @@ jobs:
         
     - name: Attempt Permissions fix
       if: runner.os == 'Linux'
+      
       run: |
         sudo chmod +666 /dev/uinput
-        sudo apt install gdb
-        
-    - name: Debug
-      uses: lhotari/action-upterm@v1
-      with:
-        ## limits ssh access and adds the ssh public key for the user which triggered the workflow
-        limit-access-to-actor: true
-        ## limits ssh access and adds the ssh public keys of the listed GitHub users
-        limit-access-to-users: smileyface
+        sudo usermod -a -G input runner
+        sudo su runner
+        cat /etc/group | grep input
+        groups
+        id
+        #sudo apt install gdb
+
+
+        #
+#    - name: Debug
+#      uses: lhotari/action-upterm@v1
+#      with:
+#       ## limits ssh access and adds the ssh public key for the user which triggered the workflow
+#        limit-access-to-actor: true
+#        ## limits ssh access and adds the ssh public keys of the listed GitHub users
+#        limit-access-to-users: smileyface
 
     - name: Unit Testing
       working-directory: ${{runner.workspace}}/build/unit_test
-      shell: bash
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: |

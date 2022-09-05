@@ -107,7 +107,6 @@ bool Linux_Keyboard::connect_to_keyboard()
 			if(std::regex_match(s, e))
 			{
 				event_eligible.push_back(s);
-				printf("%s\n", entry->d_name);
 			}
 		}
 	}
@@ -134,7 +133,7 @@ bool Linux_Keyboard::connect_to_keyboard(std::string path_to_keyboard)
 		ioctl(keyboard_fd, EVIOCGNAME(256), name);
 		active = true;
 		keyboard_present = true;
-		LOG_INFO(path_to_keyboard + "found", "Keyboard connection");
+		LOG_INFO(path_to_keyboard + " found", "Keyboard connection");
 	}
 	else
 	{
