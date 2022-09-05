@@ -18,7 +18,6 @@
 
 #include "keyboard_interface.h"
 
-#define KEYBOARD_DEV "/dev/input/event0"
 
 struct keyboard_state
 {

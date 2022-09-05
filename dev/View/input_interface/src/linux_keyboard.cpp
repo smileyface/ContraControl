@@ -2,14 +2,18 @@
 
 #include "../sys_interface/linux_keyboard.h"
 #include "../sys_interface/key_input_interface.h"
+#include "Messaging/message_relay.h"
 
 #include <unistd.h>
 #include <linux/input-event-codes.h>
 #include <mutex>
+#include <regex>
+
+#include <dirent.h>
 
 std::mutex keyboard_mutex;
 
-
+std::vector<std::string> event_eligible;
 
 void Linux_Keyboard::initalize_codes()
 {
@@ -69,7 +73,36 @@ Linux_Keyboard::Linux_Keyboard()
 	keyboard_ev = new input_event();
 	keyboard_st = new keyboard_state();
 
-	connect_to_keyboard(KEYBOARD_DEV);
+	struct dirent* entry = nullptr;
+	DIR* dp = nullptr;
+
+	dp = opendir("/dev/input");
+
+	if(dp != nullptr)
+	{
+		std::regex e("(event)(.\\d)");
+		while((entry = readdir(dp)))
+		{
+
+			std::string s(entry->d_name);
+			if(std::regex_match(s, e))
+			{
+				printf("%s\n", entry->d_name);
+			}
+		}
+	}
+
+	closedir(dp);
+	auto event_file = event_eligible.begin();
+	while(event_file != event_eligible.end());
+	{
+		if(!connect_to_keyboard(*event_file))
+		{
+			LOG_INFO(*event_file + " not having a useful file descriptor", "Keyboard finder");
+			event_file++;
+		}
+		
+	}
 
 }
 
@@ -93,6 +126,7 @@ bool Linux_Keyboard::connect_to_keyboard(std::string path_to_keyboard)
 		ioctl(keyboard_fd, EVIOCGNAME(256), name);
 		active = true;
 		keyboard_present = true;
+		LOG_INFO(path_to_keyboard + "found", "Keyboard connection");
 	}
 	else
 	{
