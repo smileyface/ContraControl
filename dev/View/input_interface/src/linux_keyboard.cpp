@@ -124,6 +124,7 @@ bool Linux_Keyboard::connect_to_keyboard()
 		}
 		LOG_INFO(location + " not having a useful file descriptor", "Keyboard finder");
 	}
+	return keyboard_present;
 }
 
 bool Linux_Keyboard::connect_to_keyboard(std::string path_to_keyboard)
