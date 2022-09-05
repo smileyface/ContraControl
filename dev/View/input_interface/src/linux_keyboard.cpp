@@ -138,6 +138,8 @@ bool Linux_Keyboard::connect_to_keyboard(std::string path_to_keyboard)
 	}
 	else
 	{
+		std::string error_as_string = std::strerror(errno);
+		LOG_DEBUG(path_to_keyboard + " failed because of error code " + error_as_string);
 		keyboard_present = false;
 	}
 	return keyboard_present;
