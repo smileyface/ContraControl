@@ -31,6 +31,16 @@ int fd = 0;
 Message_Consumer* message_consumer = 0;
 bool stale;
 
+bool system_utilities::CI = false;
+#ifdef _WIN32
+bool system_utilities::LINUX = false;
+bool system_utilities::WINDOWS = true;
+#endif
+#ifdef __linux__
+bool system_utilities::LINUX = true;
+bool system_utilities::WINDOWS = false;
+#endif
+
 void system_utilities::setup()
 {
 	try
