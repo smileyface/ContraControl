@@ -78,7 +78,7 @@ jobs:
       id: extract
       with:
         command: x
-        cwd: ${{runner.workspace}}/..
+        cwd: ${{runner.workspace}}
         files: build.tar.gz
 
     - name: Setup testing Network (Linux)
