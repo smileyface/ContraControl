@@ -78,7 +78,7 @@ jobs:
       id: extract
       with:
         command: x
-        cwd: ${{runner.workspace}}
+        cwd: ${{runner.workspace}}/..
         files: build.tar.gz
 
     - name: Setup testing Network (Linux)
@@ -96,12 +96,12 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         docker network create -d "nat" --subnet "192.168.0.0/24" my_nat
-        cd ${{runner.workspace}}
+        cd ${{runner.workspace}}/build/unit_test/${{BUILD_TYPE}}
+       # mv ${{runner.workspace}}/build/unit_test/${{BUILD_TYPE}}/Static_Test.exe ${{runner.workspace}}/build/unit_test/Static_Test.exe
         ls 
         
     - name: Attempt Permissions fix
       if: runner.os == 'Linux'
-      
       run: |
         sudo chmod +666 /dev/uinput
         sudo usermod -a -G input runner
