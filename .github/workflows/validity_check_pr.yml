@@ -36,7 +36,6 @@ jobs:
 
     - name: Build Check
       working-directory: ${{runner.workspace}}/build
-      shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       run: |
         cmake --build . --config $BUILD_TYPE
@@ -54,7 +53,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: my-artifact-test-${{runner.os}}
-        path: .*Static_Test.*
+        path: build.tar.gz
     
   Test:
     timeout-minutes: 30
@@ -118,7 +117,7 @@ jobs:
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: |
-        ctest -C $BUILD_TYPE --verbose
+        ctest --verbose
         
   
   Document:
