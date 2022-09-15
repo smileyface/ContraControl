@@ -54,7 +54,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: my-artifact-test-${{runner.os}}
-        path: Static_Test.*
+        path: .*Static_Test.*
     
   Test:
     timeout-minutes: 30
