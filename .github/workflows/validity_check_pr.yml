@@ -66,8 +66,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
     steps:
-    - name: Get Artifacts 
-      uses: actions/download-artifact@v2
+    - uses: actions/checkout@v2
+
+    - uses: actions/download-artifact@v2
       with:
        name: my-artifact-test-${{runner.os}}
        path: .
@@ -96,26 +97,18 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         docker network create -d "nat" --subnet "192.168.0.0/24" my_nat
-        cd ${{runner.workspace}}/build/unit_test/Debug
-        ls 
+        ipconfig /all
         
     - name: Attempt Permissions fix
       if: runner.os == 'Linux'
       run: |
         sudo chmod +666 /dev/uinput
-        sudo usermod -a -G input runner
-        sudo su runner
-        cat /etc/group | grep input
-        groups
-        id
-        #sudo apt install gdb
-
-
-        #
+        sudo apt install gdb
+        
 #    - name: Debug
 #      uses: lhotari/action-upterm@v1
 #      with:
-#       ## limits ssh access and adds the ssh public key for the user which triggered the workflow
+#        ## limits ssh access and adds the ssh public key for the user which triggered the workflow
 #        limit-access-to-actor: true
 #        ## limits ssh access and adds the ssh public keys of the listed GitHub users
 #        limit-access-to-users: smileyface
