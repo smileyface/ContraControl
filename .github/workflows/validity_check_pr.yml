@@ -97,7 +97,6 @@ jobs:
       run: |
         docker network create -d "nat" --subnet "192.168.0.0/24" my_nat
         cd ${{runner.workspace}}/build/unit_test/Debug
-        #mv ${{runner.workspace}}/build/unit_test/${{BUILD_TYPE}}/Static_Test.exe ${{runner.workspace}}/build/unit_test/Static_Test.exe
         ls 
         
     - name: Attempt Permissions fix
