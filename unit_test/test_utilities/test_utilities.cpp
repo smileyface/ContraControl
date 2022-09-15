@@ -7,6 +7,11 @@
 
 #include <typeinfo>
 
+const int TIMEOUT_TIME = 5;
+
+
+Keyboard_Buffer_Input buffer;
+
 void testing_utilities::get_partial_on(Command* command, Device* device, double timeout)
 {
 	while(timeout > 0)
@@ -229,4 +234,239 @@ void testing_utilities::error_utilities::check_override_failure(std::function<vo
 		FAIL() << "Wrong exception thrown";
 	}
 	FAIL() << "No exception thrown";
+}
+
+
+#ifdef _WIN32
+char get_char_from_kpi(KPI key)
+{
+	if(key == KEY::A)
+		return 'A';
+	else if(key == KEY::B)
+		return 'B';
+	else if(key == KEY::C)
+		return 'C';
+	else if(key == KEY::D)
+		return 'D';
+	else if(key == KEY::E)
+		return 'E';
+	else if(key == KEY::F)
+		return 'F';
+	else if(key == KEY::G)
+		return 'G';
+	else if(key == KEY::H)
+		return 'H';
+	else if(key == KEY::I)
+		return 'I';
+	else if(key == KEY::J)
+		return 'J';
+	else if(key == KEY::K)
+		return 'K';
+	else if(key == KEY::L)
+		return 'L';
+	else if(key == KEY::M)
+		return 'M';
+	else if(key == KEY::N)
+		return 'N';
+	else if(key == KEY::O)
+		return 'O';
+	else if(key == KEY::P)
+		return 'P';
+	else if(key == KEY::Q)
+		return 'Q';
+	else if(key == KEY::R)
+		return 'R';
+	else if(key == KEY::S)
+		return 'S';
+	else if(key == KEY::T)
+		return 'T';
+	else if(key == KEY::U)
+		return 'U';
+	else if(key == KEY::V)
+		return 'V';
+	else if(key == KEY::W)
+		return 'W';
+	else if(key == KEY::X)
+		return 'X';
+	else if(key == KEY::Y)
+		return 'Y'; 
+	else if(key == KEY::Z)
+		return 'Z';
+	else if(key == KEY::NUM_0)
+		return '0';
+	else if(key == KEY::NUM_1)
+		return '1';
+	else if(key == KEY::NUM_2)
+		return '2';
+	else if(key == KEY::NUM_3)
+		return '3';
+	else if(key == KEY::NUM_4)
+		return '4';
+	else if(key == KEY::NUM_5)
+		return '5';
+	else if(key == KEY::NUM_6)
+		return '6';
+	else if(key == KEY::NUM_7)
+		return '7';
+	else if(key == KEY::NUM_8)
+		return '8';
+	else if(key == KEY::NUM_9)
+		return '9';
+	else if(key == KEY::NUM_PAD::NUM_0)
+		return VK_NUMPAD0;
+	else if(key == KEY::NUM_PAD::NUM_1)
+		return VK_NUMPAD1;
+	else if(key == KEY::NUM_PAD::NUM_2)
+		return VK_NUMPAD2;
+	else if(key == KEY::NUM_PAD::NUM_3)
+		return VK_NUMPAD3;
+	else if(key == KEY::NUM_PAD::NUM_4)
+		return VK_NUMPAD4;
+	else if(key == KEY::NUM_PAD::NUM_5)
+		return VK_NUMPAD5;
+	else if(key == KEY::NUM_PAD::NUM_6)
+		return VK_NUMPAD6;
+	else if(key == KEY::NUM_PAD::NUM_7)
+		return VK_NUMPAD7;
+	else if(key == KEY::NUM_PAD::NUM_8)
+		return VK_NUMPAD8;
+	else if(key == KEY::NUM_PAD::NUM_9)
+		return VK_NUMPAD9;
+	return 255;
+}
+#endif
+
+#ifdef __linux__
+#include <linux/input.h>
+char get_char_from_kpi(KPI key)
+{
+	if(key == KEY::A)
+		return KEY_A;
+	else if(key == KEY::B)
+		return KEY_B;
+	else if(key == KEY::C)
+		return KEY_C;
+	else if(key == KEY::D)
+		return KEY_D;
+	else if(key == KEY::E)
+		return KEY_E;
+	else if(key == KEY::F)
+		return KEY_F;
+	else if(key == KEY::G)
+		return KEY_G;
+	else if(key == KEY::H)
+		return KEY_H;
+	else if(key == KEY::I)
+		return KEY_I;
+	else if(key == KEY::J)
+		return KEY_J;
+	else if(key == KEY::K)
+		return KEY_K;
+	else if(key == KEY::L)
+		return KEY_L;
+	else if(key == KEY::M)
+		return KEY_M;
+	else if(key == KEY::N)
+		return KEY_N;
+	else if(key == KEY::O)
+		return KEY_O;
+	else if(key == KEY::P)
+		return KEY_P;
+	else if(key == KEY::Q)
+		return KEY_Q;
+	else if(key == KEY::R)
+		return KEY_R;
+	else if(key == KEY::S)
+		return KEY_S;
+	else if(key == KEY::T)
+		return KEY_T;
+	else if(key == KEY::U)
+		return KEY_U;
+	else if(key == KEY::V)
+		return KEY_V;
+	else if(key == KEY::W)
+		return KEY_W;
+	else if(key == KEY::X)
+		return KEY_X;
+	else if(key == KEY::Y)
+		return KEY_Y;
+	else if(key == KEY::Z)
+		return KEY_Z;
+	else if(key == KEY::NUM_0)
+		return KEY_0;
+	else if(key == KEY::NUM_1)
+		return KEY_1;
+	else if(key == KEY::NUM_2)
+		return KEY_2;
+	else if(key == KEY::NUM_3)
+		return KEY_3;
+	else if(key == KEY::NUM_4)
+		return KEY_4;
+	else if(key == KEY::NUM_5)
+		return KEY_5;
+	else if(key == KEY::NUM_6)
+		return KEY_6;
+	else if(key == KEY::NUM_7)
+		return KEY_7;
+	else if(key == KEY::NUM_8)
+		return KEY_8;
+	else if(key == KEY::NUM_9)
+		return KEY_9;
+	else if(key == KEY::NUM_PAD::NUM_0)
+		return KEY_KP0;
+	else if(key == KEY::NUM_PAD::NUM_1)
+		return KEY_KP1;
+	else if(key == KEY::NUM_PAD::NUM_2)
+		return KEY_KP2;
+	else if(key == KEY::NUM_PAD::NUM_3)
+		return KEY_KP3;
+	else if(key == KEY::NUM_PAD::NUM_4)
+		return KEY_KP4;
+	else if(key == KEY::NUM_PAD::NUM_5)
+		return KEY_KP5;
+	else if(key == KEY::NUM_PAD::NUM_6)
+		return KEY_KP6;
+	else if(key == KEY::NUM_PAD::NUM_7)
+		return KEY_KP7;
+	else if(key == KEY::NUM_PAD::NUM_8)
+		return KEY_KP8;
+	else if(key == KEY::NUM_PAD::NUM_9)
+		return KEY_KP9;
+	return 255;
+}
+#endif
+
+void dummy_func()
+{ }
+
+void testing_utilities::input_utilities::wait_for_keypress(KPI key)
+{
+	buffer.keyboard->initalize_codes();
+	bool is_pressed = false;
+	buffer.keyboard->start_listening();
+	buffer.keyboard->set_on_press(key, [&is_pressed] () mutable
+								  {
+									  is_pressed = true;
+								  });
+
+	int sleep_time = 0;
+	while(!is_pressed && sleep_time < TIMEOUT_TIME)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		sleep_time++;
+	}
+	if(!is_pressed && sleep_time >= TIMEOUT_TIME)
+	{
+		//try to push the button ourselves
+		system_utilities::keyboard_utilities::press_button(get_char_from_kpi(key));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	}
+
+	EXPECT_TRUE(is_pressed);
+	buffer.keyboard->stop_listening();
+}
+
+void testing_utilities::input_utilities::connect_keyboard(std::string path_to_keyboard)
+{
+	buffer.keyboard->connect_to_keyboard();
 }

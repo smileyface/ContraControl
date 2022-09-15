@@ -15,6 +15,9 @@ namespace system_utilities
 	void step(int steps);
 
 	void sleep_thread(int wait_time);
+	extern bool CI;
+	extern bool LINUX;
+	extern bool WINDOWS;
 	namespace model_utilities
 	{
 		void start();
@@ -23,6 +26,12 @@ namespace system_utilities
 	namespace network_utilities
 	{
 		void setup();
+	}
+	namespace keyboard_utilities
+	{
+		void setup();
+		void tear_down();
+		void press_button(int key);
 	}
 }
 

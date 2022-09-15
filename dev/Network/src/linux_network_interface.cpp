@@ -104,6 +104,7 @@ NETWORK_ERRORS set_error_state()
 	default:
 		return NETWORK_ERRORS::UNKNOWN_ERROR;
 	}
+	return NETWORK_ERRORS::UNKNOWN_ERROR;
 }
 
 Linux_Network_Interface::Linux_Network_Interface()
@@ -191,6 +192,8 @@ void Linux_Network_Interface::send(std::string node_id, char* message)
 }
 
 char* Linux_Network_Interface::listen(Connection_Id Connection_Id)
-{ }
+{ 
+	return 0;
+}
 
 #endif //__linux__

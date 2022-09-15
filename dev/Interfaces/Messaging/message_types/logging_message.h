@@ -1,3 +1,10 @@
+/*****************************************************************//**
+ * \file   logging_message.h
+ * \brief  
+ * 
+ * \author kason
+ * \date   June 2022
+ *********************************************************************/
 #ifndef LOGGING_MESSAGE_TYPE
 #define LOGGING_MESSAGE_TYPE
 #include <string>
