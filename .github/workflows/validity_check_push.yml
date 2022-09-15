@@ -43,6 +43,11 @@ jobs:
       run: |
         docker network create --opt com.docker.network.bridge.name=nat test-net --subnet "192.168.0.0/24"
         ifconfig
+        
+    - name: Attempt Permissions fix
+      if: runner.os == 'Linux'
+      run: |
+        sudo chmod +666 /dev/uinput
 
     - name: Setup testing Network (Windows)
       # Create a testing network called wlan0

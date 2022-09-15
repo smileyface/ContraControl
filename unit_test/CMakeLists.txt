@@ -6,7 +6,7 @@
                       "tests/Network_Messages.cpp" 
                       "tests/Errors.cpp" 
                       "tests/Internal_Messages.cpp"
-                      "tests/Command_View_Message.cpp")
+                      "tests/Command_View_Message.cpp" "tests/Input_System.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/system_testings.h"

@@ -40,6 +40,12 @@ jobs:
         docker network create --opt com.docker.network.bridge.name=nat test-net --subnet "192.168.0.0/24"
         ifconfig
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
+    - name: Attempt Permissions fix
+      if: runner.os == 'Linux'
+      run: |
+        sudo chmod +666 /dev/uinput
+        ls -l /dev/uinput
 
     - name: Build
       shell: bash
