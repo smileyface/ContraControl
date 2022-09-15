@@ -96,6 +96,7 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         docker network create -d "nat" --subnet "192.168.0.0/24" my_nat
+        ls
         
     - name: Attempt Permissions fix
       if: runner.os == 'Linux'
