@@ -112,6 +112,12 @@ namespace KEY
 	extern KPI NUM_7; ///<7 numrow common code
 	extern KPI NUM_8; ///<8 numrow common code
 	extern KPI NUM_9; ///<9 numrow common code
+
+	extern KPI ENTER;
+	extern KPI L_SHIFT;
+	extern KPI L_CTRL;
+	extern KPI L_ALT;
+	extern KPI TAB;
 }
 
 

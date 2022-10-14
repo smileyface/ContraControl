@@ -57,6 +57,10 @@ void Windows_Keyboard::initalize_codes()
 	code_map[VK_NUMPAD7] = KEY::NUM_PAD::NUM_7;
 	code_map[VK_NUMPAD8] = KEY::NUM_PAD::NUM_8;
 	code_map[VK_NUMPAD9] = KEY::NUM_PAD::NUM_9;
+	code_map[VK_RETURN] = KEY::ENTER;
+	code_map[VK_LSHIFT] = KEY::L_SHIFT;
+	code_map[VK_LMENU] = KEY::L_ALT;
+	code_map[VK_LCONTROL] = KEY::L_CTRL;
 }
 
 Windows_Keyboard::Windows_Keyboard()

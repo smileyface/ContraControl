@@ -9,6 +9,7 @@
 #ifndef VIEW_CONSOLE_VIEW_H
 #define VIEW_CONSOLE_VIEW_H
 #include "../view.h"
+#include "../../input_interface/keyboard_buffer_input.h"
 
 /** A view to display on the console. */
 class Console_View : public View
@@ -32,6 +33,7 @@ public:
 
 protected:
 	std::string painted_message;
+	Keyboard_Buffer_Input keyboard;
 private:
 };
 
