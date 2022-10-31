@@ -12,6 +12,12 @@
 #include <functional>
 #include <map>
 
+enum class KEY_STATE
+{
+	PRESSED,
+	RELEASED
+};
+
 /** Interface for individual keys */
 class Key_Press_Interface
 {
@@ -53,11 +59,13 @@ public:
 private:
 	bool pressed = false;
 	int val;
+	char code;
 	int index_ = -1;
 };
 /** Shorthand for Key_Press_Interface */
 typedef Key_Press_Interface KPI;
 
+char KPI_to_acsii(std::pair<KPI, KEY_STATE> key_to_convert);
 
 /** Common codes for keys */
 namespace KEY

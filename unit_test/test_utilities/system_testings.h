@@ -2,6 +2,7 @@
 #define SYSTEM_TESTING_UTIL_H
 
 #include "../../dev/Interfaces/Messaging/message_relay.h"
+#include "../../dev/View/input_interface/keyboard_buffer_input.h"
 
 namespace system_utilities
 {
@@ -29,6 +30,20 @@ namespace system_utilities
 	}
 	namespace keyboard_utilities
 	{
+		class Keyboard
+		{
+		public:
+			Keyboard();
+			~Keyboard();
+			void wait_for_first_key(KPI key);
+			void operator<<(const int& input);
+			void operator<<(const char& input);
+			void operator<<(const std::string& input);
+			void set_key_operation(KPI key, std::function<void()> func);
+		private:
+			Keyboard_Buffer_Input buffer;
+		};
+		char get_char_from_kpi(KPI key);
 		void setup();
 		void tear_down();
 		void press_button(int key);

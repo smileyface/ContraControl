@@ -1,4 +1,5 @@
 #include "../test_utilities/test_utilities.h"
+#include "../test_utilities/system_testings.h"
 
 #include "../test_utilities/pch.h"
 
@@ -46,7 +47,8 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 	view::initalize();
 	view::start_view();
-	std::cin.putback('0');
+	system_utilities::keyboard_utilities::Keyboard keyboard;
+	keyboard << 0;
 	Message_Relay::get_instance()->push(opm);
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	bool message_in_view = false;
@@ -60,7 +62,7 @@ TEST_F(Command_View_Message_Test, Send_Option)
 		}
 	}
 	EXPECT_EQ(message_in_view, true);
-
+	
 	
 
 	view::stop_view();

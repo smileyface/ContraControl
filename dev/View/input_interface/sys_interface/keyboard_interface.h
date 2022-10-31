@@ -17,6 +17,8 @@
 class Keyboard_Interface
 {
 public:
+
+
 	Keyboard_Interface();
 	virtual ~Keyboard_Interface();
 
@@ -49,7 +51,7 @@ public:
 	/**
 	 * \return Is there a physical or virtual keyboard present.
 	 */
-	bool get_keyboard_present();
+	bool get_keyboard_present(); 
 
 	Action_Stack action_stack;
 protected:

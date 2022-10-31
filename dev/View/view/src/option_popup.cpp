@@ -54,21 +54,12 @@ void Console_Option_Popup::on_query()
 	}
 	while(true)
 	{
-		std::cin >> input;
-
-		if(std::cin.fail())
+		input = keyboard.get_number();
+		if(input > options.size())
 		{
-			std::cerr << "Sorry, I cannot read that. Please try again." << std::endl;
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			continue;
+			//LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
 		}
 
-		if(input < 1 || input > options.size() + 1)
-		{
-			std::cerr << "Sorry, the number is out of range." << std::endl;
-			continue;
-		}
 		choice = input;
 		break;
 	}
