@@ -226,11 +226,18 @@ void system_utilities::keyboard_utilities::press_button(int key)
 	// Press the "A" key
 	ip.ki.wVk = key; 
 	ip.ki.dwFlags = 0;
-//	SendInput(1, &ip, sizeof(INPUT));
-	std::this_thread::sleep_for(std::chrono::milliseconds(40));
+	try
+	{
+		SendInput(1, &ip, sizeof(INPUT));
+		std::this_thread::sleep_for(std::chrono::milliseconds(40));
+	}
+	catch(std::bad_function_call)
+	{
+		printf("Oh God! Everything is borked");
+	}
 
 	ip.ki.dwFlags = KEYEVENTF_KEYUP;
-//	SendInput(1, &ip, sizeof(INPUT));
+	SendInput(1, &ip, sizeof(INPUT));
 }
 #endif
 

@@ -1,4 +1,5 @@
 #include "../sys_interface/key_input_interface.h"
+#include "Messaging/message_relay.h"
 
 #include <vector>
 
@@ -80,6 +81,11 @@ void Key_Press_Interface::operator=(const int new_val)
 {
     if(!pressed && new_val)
     {
+        if(!on_press)
+        {
+            LOG_ERROR("On Press for Key Code " + std::to_string(index_) + " not defined", "On Press");
+            return;
+        }
         on_press();
         pressed = true;
     }

@@ -48,7 +48,8 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	view::initalize();
 	view::start_view();
 	system_utilities::keyboard_utilities::Keyboard keyboard;
-	keyboard << 0;
+	//NEED TO ADD BUFFER INPUT INTERFACE
+	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::NUM_0);
 	Message_Relay::get_instance()->push(opm);
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	bool message_in_view = false;

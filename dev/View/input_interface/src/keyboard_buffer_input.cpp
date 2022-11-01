@@ -14,6 +14,7 @@
 Keyboard_Buffer_Input::Keyboard_Buffer_Input()
 {
 	block = false;
+	loop_it = false;
 #ifdef _WIN32
 	keyboard = new Windows_Keyboard();
 #endif // _WIN32
@@ -26,7 +27,7 @@ Keyboard_Buffer_Input::Keyboard_Buffer_Input()
 
 void Keyboard_Buffer_Input::setup_buffer()
 { 
-	/*buffer.clear();
+	buffer.clear();
 	loop_it = true;
 	if(keyboard->get_keyboard_present())
 	{
@@ -48,7 +49,7 @@ void Keyboard_Buffer_Input::setup_buffer()
 									   buffer.push_back(std::make_pair(i.second, KEY_STATE::RELEASED));
 								   });
 		}
-	}*/
+	}
 }
 
 void Keyboard_Buffer_Input::teardown_buffer()
@@ -61,7 +62,7 @@ void Keyboard_Buffer_Input::teardown_buffer()
 
 void Keyboard_Buffer_Input::get_buffered_input()
 {
-	/*
+	
 	setup_buffer();
 	if(keyboard->get_keyboard_present())
 	{
@@ -72,7 +73,7 @@ void Keyboard_Buffer_Input::get_buffered_input()
 		}
 		keyboard->stop_listening();
 	}
-	teardown_buffer();*/
+	teardown_buffer();
 }
 
 std::string Keyboard_Buffer_Input::get_input()
