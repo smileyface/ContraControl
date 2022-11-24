@@ -14,6 +14,7 @@
 #ifdef _WIN32
 #include <Windows.h>
 #include "../../Network/system_interfaces/windows_network_interface.h"
+#include "../../dev/View/input_interface/sys_interface/windows_keyboard.h"
 #endif // _WIN32
 #ifdef __linux__
 #include <stdio.h>
@@ -24,6 +25,7 @@
 #include <linux/uhid.h>
 #include <sstream>
 #include "../../Network/system_interfaces/linux_network_interface.h"
+#include "../../dev/View/input_interface/sys_interface/linux_keyboard.h"
 
 int fd = 0;
 #endif
@@ -199,6 +201,7 @@ void system_utilities::keyboard_utilities::setup()
 		else
 			LOG_INFO("Direct connect failed cause of : " + std::to_string(why_i_failed), "Connect Keyboard");
 	}
+	
 #endif
 }
 
@@ -216,7 +219,7 @@ void system_utilities::keyboard_utilities::press_button(int key)
 {
 	// This structure will be used to create the keyboard
 // input event.
-	INPUT ip;
+	INPUT ip { };
 	// Set up a generic keyboard event.
 	ip.type = INPUT_KEYBOARD;
 	ip.ki.wScan = 0; // hardware scan code for key
@@ -226,16 +229,9 @@ void system_utilities::keyboard_utilities::press_button(int key)
 	// Press the "A" key
 	ip.ki.wVk = key; 
 	ip.ki.dwFlags = 0;
-	try
-	{
-		SendInput(1, &ip, sizeof(INPUT));
-		std::this_thread::sleep_for(std::chrono::milliseconds(40));
-	}
-	catch(std::bad_function_call)
-	{
-		printf("Oh God! Everything is borked");
-	}
 
+	SendInput(1, &ip, sizeof(INPUT));
+	std::this_thread::sleep_for(std::chrono::milliseconds(40));
 	ip.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &ip, sizeof(INPUT));
 }
@@ -370,14 +366,19 @@ void system_utilities::keyboard_utilities::press_button(int key)
 system_utilities::keyboard_utilities::Keyboard::Keyboard()
 {
 	system_utilities::keyboard_utilities::setup();
-	buffer.keyboard->initalize_codes();
-	buffer.keyboard->connect_to_keyboard();
-	buffer.keyboard->start_listening();
+#ifdef _WIN32
+	buffer = new Windows_Keyboard();
+#endif // _WIN32
+#ifdef __linux__
+	buffer = new Linux_Keyboard();
+#endif
+
+	buffer->start_listening();
 }
 
 system_utilities::keyboard_utilities::Keyboard::~Keyboard()
 { 
-	buffer.keyboard->stop_listening();
+	buffer->stop_listening();
 	system_utilities::keyboard_utilities::tear_down();
 }
 
@@ -610,5 +611,5 @@ void system_utilities::keyboard_utilities::Keyboard::operator<<(const char& inpu
 
 void system_utilities::keyboard_utilities::Keyboard::set_key_operation(KPI key, std::function<void()> func)
 {
-	buffer.keyboard->set_on_press(key, func);
+	//buffer.keyboard->set_on_press(key, func);
 }

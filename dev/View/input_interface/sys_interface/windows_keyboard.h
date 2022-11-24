@@ -22,7 +22,6 @@ public:
 	void initalize_codes();
 
 	void readEv();
-	short getKeyState(short key);
 
 protected:
 private:

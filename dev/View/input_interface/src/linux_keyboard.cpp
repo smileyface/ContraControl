@@ -17,53 +17,57 @@ std::vector<std::string> event_eligible;
 
 void Linux_Keyboard::initalize_codes()
 {
-	code_map[KEY_A] = KEY::A;
-	code_map[KEY_B] = KEY::B;
-	code_map[KEY_C] = KEY::C;
-	code_map[KEY_D] = KEY::D;
-	code_map[KEY_E] = KEY::E;
-	code_map[KEY_F] = KEY::F;
-	code_map[KEY_G] = KEY::G;
-	code_map[KEY_H] = KEY::H;
-	code_map[KEY_I] = KEY::I;
-	code_map[KEY_J] = KEY::J;
-	code_map[KEY_K] = KEY::K;
-	code_map[KEY_L] = KEY::L;
-	code_map[KEY_M] = KEY::M;
-	code_map[KEY_N] = KEY::N;
-	code_map[KEY_O] = KEY::O;
-	code_map[KEY_P] = KEY::P;
-	code_map[KEY_Q] = KEY::Q;
-	code_map[KEY_R] = KEY::R;
-	code_map[KEY_S] = KEY::S;
-	code_map[KEY_T] = KEY::T;
-	code_map[KEY_U] = KEY::U;
-	code_map[KEY_V] = KEY::V;
-	code_map[KEY_W] = KEY::W;
-	code_map[KEY_X] = KEY::X;
-	code_map[KEY_Y] = KEY::Y;
-	code_map[KEY_Z] = KEY::Z;
-	code_map[KEY_K] = KEY::K;
-	code_map[KEY_0] = KEY::NUM_0;
-	code_map[KEY_1] = KEY::NUM_1;
-	code_map[KEY_2] = KEY::NUM_2;
-	code_map[KEY_3] = KEY::NUM_3;
-	code_map[KEY_4] = KEY::NUM_4;
-	code_map[KEY_5] = KEY::NUM_5;
-	code_map[KEY_6] = KEY::NUM_6;
-	code_map[KEY_7] = KEY::NUM_7;
-	code_map[KEY_8] = KEY::NUM_8;
-	code_map[KEY_9] = KEY::NUM_9;
-	code_map[KEY_KP0] = KEY::NUM_PAD::NUM_0;
-	code_map[KEY_KP1] = KEY::NUM_PAD::NUM_1;
-	code_map[KEY_KP2] = KEY::NUM_PAD::NUM_2;
-	code_map[KEY_KP3] = KEY::NUM_PAD::NUM_3;
-	code_map[KEY_KP4] = KEY::NUM_PAD::NUM_4;
-	code_map[KEY_KP5] = KEY::NUM_PAD::NUM_5;
-	code_map[KEY_KP6] = KEY::NUM_PAD::NUM_6;
-	code_map[KEY_KP7] = KEY::NUM_PAD::NUM_7;
-	code_map[KEY_KP8] = KEY::NUM_PAD::NUM_8;
-	code_map[KEY_KP9] = KEY::NUM_PAD::NUM_9;
+	active_layer->add_code(KEY_A, KEY::A);
+	active_layer->add_code(KEY_B, KEY::B);
+	active_layer->add_code(KEY_C, KEY::C);
+	active_layer->add_code(KEY_D, KEY::D);
+	active_layer->add_code(KEY_E, KEY::E);
+	active_layer->add_code(KEY_F, KEY::F);
+	active_layer->add_code(KEY_G, KEY::G);
+	active_layer->add_code(KEY_F, KEY::H);
+	active_layer->add_code(KEY_I, KEY::I);
+	active_layer->add_code(KEY_J, KEY::J);
+	active_layer->add_code(KEY_K, KEY::K);
+	active_layer->add_code(KEY_L, KEY::L);
+	active_layer->add_code(KEY_M, KEY::M);
+	active_layer->add_code(KEY_N, KEY::N);
+	active_layer->add_code(KEY_O, KEY::O);
+	active_layer->add_code(KEY_P, KEY::P);
+	active_layer->add_code(KEY_Q, KEY::Q);
+	active_layer->add_code(KEY_R, KEY::R);
+	active_layer->add_code(KEY_S, KEY::S);
+	active_layer->add_code(KEY_T, KEY::T);
+	active_layer->add_code(KEY_U, KEY::U);
+	active_layer->add_code(KEY_V, KEY::V);
+	active_layer->add_code(KEY_W, KEY::W);
+	active_layer->add_code(KEY_X, KEY::X);
+	active_layer->add_code(KEY_Y, KEY::Y);
+	active_layer->add_code(KEY_Z, KEY::Z);
+	active_layer->add_code(KEY_0, KEY::NUM_0);
+	active_layer->add_code(KEY_1, KEY::NUM_1);
+	active_layer->add_code(KEY_2, KEY::NUM_2);
+	active_layer->add_code(KEY_3, KEY::NUM_3);
+	active_layer->add_code(KEY_4, KEY::NUM_4);
+	active_layer->add_code(KEY_5, KEY::NUM_5);
+	active_layer->add_code(KEY_6, KEY::NUM_6);
+	active_layer->add_code(KEY_7, KEY::NUM_7);
+	active_layer->add_code(KEY_8, KEY::NUM_8);
+	active_layer->add_code(KEY_9, KEY::NUM_9);
+	active_layer->add_code(KEY_KP0, KEY::NUM_PAD::NUM_0);
+	active_layer->add_code(KEY_KP1, KEY::NUM_PAD::NUM_1);
+	active_layer->add_code(KEY_KP2, KEY::NUM_PAD::NUM_2);
+	active_layer->add_code(KEY_KP3, KEY::NUM_PAD::NUM_3);
+	active_layer->add_code(KEY_KP4, KEY::NUM_PAD::NUM_4);
+	active_layer->add_code(KEY_KP5, KEY::NUM_PAD::NUM_5);
+	active_layer->add_code(KEY_KP6, KEY::NUM_PAD::NUM_6);
+	active_layer->add_code(KEY_KP7, KEY::NUM_PAD::NUM_7);
+	active_layer->add_code(KEY_KP8, KEY::NUM_PAD::NUM_8);
+	active_layer->add_code(KEY_KP9, KEY::NUM_PAD::NUM_9);
+	active_layer->add_code(KEY_ENTER, KEY::ENTER);
+	active_layer->add_code(KEY_LEFTSHIFT, KEY::L_SHIFT);
+	active_layer->add_code(KEY_LEFTALT, KEY::L_ALT);
+	active_layer->add_code(KEY_LEFTCTRL, KEY::L_CTRL);
+
 }
 
 Linux_Keyboard::Linux_Keyboard()
@@ -74,6 +78,7 @@ Linux_Keyboard::Linux_Keyboard()
 	keyboard_st = new keyboard_state();
 
 
+	setup_action_layers();
 	connect_to_keyboard();
 }
 
@@ -152,7 +157,7 @@ void Linux_Keyboard::readEv()
 		if(keyboard_ev->type & EV_KEY)
 		{
 			std::lock_guard<std::mutex> lock(keyboard_mutex);
-			code_map[keyboard_ev->code] = keyboard_ev->value;
+			active_layer->handle_event(keyboard_ev->code, keyboard_ev->value);
 		}
 	}
 

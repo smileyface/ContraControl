@@ -3,7 +3,6 @@
 
 #include "../test_utilities/pch.h"
 
-#include "../../dev/View/input_interface/keyboard_buffer_input.h"
 
 
 namespace
@@ -24,6 +23,14 @@ namespace
 			system_utilities::keyboard_utilities::tear_down();
 		}
 	};
+}
+
+TEST_F(Input_System_Test, Action_Layer_Test)
+{
+}
+TEST_F(Input_System_Test, Connection_Test)
+{
+	EXPECT_TRUE(false);
 }
 
 

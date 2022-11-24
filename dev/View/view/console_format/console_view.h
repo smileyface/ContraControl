@@ -9,12 +9,13 @@
 #ifndef VIEW_CONSOLE_VIEW_H
 #define VIEW_CONSOLE_VIEW_H
 #include "../view.h"
-#include "../../input_interface/keyboard_buffer_input.h"
+#include "../../input_interface/sys_interface/keyboard_interface.h"
 
 /** A view to display on the console. */
 class Console_View : public View
 {
 public:
+	Console_View();
 	/** Console is unique, because the window that the out goes is the same that the in comes in. */
 	struct Console_State
 	{
@@ -33,7 +34,7 @@ public:
 
 protected:
 	std::string painted_message;
-	Keyboard_Buffer_Input keyboard;
+	Keyboard_Interface* keyboard = 0;
 private:
 };
 

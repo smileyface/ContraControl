@@ -11,11 +11,12 @@ set(INPUT_INTERFACE_INCLUDES input_interface/sys_interface/key_input_interface.h
                              input_interface/sys_interface/windows_keyboard.h
                              input_interface/sys_interface/keyboard_interface.h)
 
-set(INPUT_INTERFACE_SOURCE input_interface/src/keyboard_buffer_input.cpp
-                           input_interface/src/key_input_interface.cpp 
+set(INPUT_INTERFACE_SOURCE input_interface/src/key_input_interface.cpp 
                            input_interface/src/linux_keyboard.cpp 
                            input_interface/src/windows_keyboard.cpp
-                           input_interface/src/keyboard_interface.cpp)
+                           input_interface/src/keyboard_interface.cpp 
+                           input_interface/src/action_layer.cpp
+                           input_interface/src/predefined_layer.cpp)
 
 set(VIEW_TYPE_INCLUDES view/view_type/option_view_type.h
                        view/view_type/log_view_type.h)
@@ -33,7 +34,8 @@ set(VIEW_INCLUDES view/view.h
                   view/ui_format/ui_led_view.h
                   view/ui_format/ui_main_view.h)
 
-set(VIEW_SOURCE view/src/ui_view.cpp
+set(VIEW_SOURCE view/src/view.cpp
+                view/src/ui_view.cpp
                 view/src/log_view.cpp
                 view/src/option_popup.cpp)
 

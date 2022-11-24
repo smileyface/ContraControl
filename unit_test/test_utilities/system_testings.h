@@ -2,7 +2,7 @@
 #define SYSTEM_TESTING_UTIL_H
 
 #include "../../dev/Interfaces/Messaging/message_relay.h"
-#include "../../dev/View/input_interface/keyboard_buffer_input.h"
+#include "../../dev/View/input_interface/sys_interface/keyboard_interface.h"
 
 namespace system_utilities
 {
@@ -41,7 +41,7 @@ namespace system_utilities
 			void operator<<(const std::string& input);
 			void set_key_operation(KPI key, std::function<void()> func);
 		private:
-			Keyboard_Buffer_Input buffer;
+			Keyboard_Interface* buffer;
 		};
 		char get_char_from_kpi(KPI key);
 		void setup();

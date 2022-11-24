@@ -9,8 +9,6 @@
 
 const int TIMEOUT_TIME = 5;
 
-system_utilities::keyboard_utilities::Keyboard keyboard;
-
 void testing_utilities::get_partial_on(Command* command, Device* device, double timeout)
 {
 	while(timeout > 0)

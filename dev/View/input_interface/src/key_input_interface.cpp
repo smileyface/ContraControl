@@ -64,10 +64,7 @@ std::vector<KPI> parse_input(char)
 Key_Press_Interface::Key_Press_Interface()
 {
     on_press = [] ()
-    {
-        printf("Presses");
-        fflush(stdout);
-    };
+    { };
     on_release = [] ()
     { };
     on_hold = [] ()
@@ -81,13 +78,11 @@ void Key_Press_Interface::operator=(const int new_val)
 {
     if(!pressed && new_val)
     {
-        if(!on_press)
+        if(on_press)
         {
-            LOG_ERROR("On Press for Key Code " + std::to_string(index_) + " not defined", "On Press");
-            return;
+            on_press();
+            pressed = true;
         }
-        on_press();
-        pressed = true;
     }
     else if(pressed && new_val)
     {
@@ -103,7 +98,7 @@ void Key_Press_Interface::operator=(const int new_val)
 Key_Press_Interface::Key_Press_Interface(int index)
 { 
     on_press = [] ()
-    {  };
+    { };
     on_release = [] ()
     { };
     on_hold = [] ()

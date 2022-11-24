@@ -54,10 +54,11 @@ void Console_Option_Popup::on_query()
 	}
 	while(true)
 	{
-		input = keyboard.get_number();
+		//input = keyboard->get_number(); TODO: Make the input be a response message.
+		input = 0;
 		if(input > options.size())
 		{
-			//LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
+			LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
 		}
 
 		choice = input;
