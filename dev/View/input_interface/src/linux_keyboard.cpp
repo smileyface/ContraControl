@@ -68,6 +68,10 @@ void Linux_Keyboard::initalize_codes()
 	master_code_map[KEY_LEFTALT] = KEY::L_ALT;
 	master_code_map[KEY_LEFTCTRL] = KEY::L_CTRL;
 
+	for(Keyboard_Code_Map::iterator i = master_code_map.begin(); i != master_code_map.end(); i++)
+	{
+		i->second.set_code(i->first);
+	}
 }
 
 Linux_Keyboard::Linux_Keyboard()
@@ -77,7 +81,7 @@ Linux_Keyboard::Linux_Keyboard()
 	keyboard_ev = new input_event();
 	keyboard_st = new keyboard_state();
 
-
+	initalize_codes();
 	action_stack.setup_action_layers();
 	connect_to_keyboard();
 }
