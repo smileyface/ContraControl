@@ -185,7 +185,7 @@ TEST_F(Input_System_Test, Multiple_Action_Layers_Event_Handle_Press_Button)
 	keyboard.get_interface()->action_stack.change_action_layers(new_layer_index);
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
-	EXPECT_FALSE(the_good_one) << "The on_press was not preserved";
+	EXPECT_TRUE(the_good_one) << "The on_press was not preserved";
 }
 
 
