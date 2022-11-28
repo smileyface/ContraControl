@@ -40,6 +40,8 @@ public:
 	*/
 	void set_on_release(KPI key, Keyboard_Event function);
 
+	void set_on_hold(KPI key, Keyboard_Event function);
+
 	void add_code(int code, KPI key);
 
 	void handle_event(int code, int event_value);

@@ -36,6 +36,18 @@ void Action_Layer::set_on_release(KPI key, Keyboard_Event func)
 	found_key->second.on_release = func;
 }
 
+void Action_Layer::set_on_hold(KPI key, Keyboard_Event func)
+{ 
+	auto found_key = code_map.find(key.index());
+	if(found_key == code_map.end())
+	{
+		code_map[key.index()] = key;
+		found_key = code_map.find(key.index());
+	}
+
+	found_key->second.on_hold = func;
+}
+
 void Action_Layer::add_code(int code, KPI key)
 { 
 	code_map[code] = key;

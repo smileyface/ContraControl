@@ -618,3 +618,8 @@ bool system_utilities::keyboard_utilities::Keyboard::keyboard_present()
 {
 	return buffer->get_keyboard_present();
 }
+
+Keyboard_Interface* system_utilities::keyboard_utilities::Keyboard::get_interface()
+{
+	return buffer;
+}
