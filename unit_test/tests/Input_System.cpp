@@ -130,6 +130,44 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Overridden_On_Release)
 	EXPECT_TRUE(the_good_one) << "The overridden function was not called";
 }
 
+TEST_F(Input_System_Test, Action_Layer_Event_Handle_Multiple_Buttons)
+{
+	bool the_good_one = false;
+	bool the_bad_one = false;
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
+																		   [&the_bad_one] () mutable
+																		   {
+																				  the_bad_one = true;
+																		   });
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::B,
+																		   [&the_good_one] () mutable
+																		   {
+																				  the_good_one = true;
+																		   });
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::B, 1);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::B, 0);
+
+	EXPECT_FALSE(the_bad_one) << "The function was not overriden";
+	EXPECT_TRUE(the_good_one) << "The overridden function was not called";
+}
+
+TEST_F(Input_System_Test, Action_Layer_Event_Handle_Press_Unhandled_Button)
+{
+	bool the_good_one = false;
+	bool the_bad_one = false;
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
+																		   [&the_good_one] () mutable
+																		   {
+																				  the_good_one = true;
+																		   });
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::C, 1);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::C, 0);
+
+	EXPECT_FALSE(the_good_one) << "The overridden function was not called";
+}
+
+
+
 TEST_F(Input_System_Test, Connection_Test)
 {
 	//Github Actions has input permission issues, so I'm not running that right now.
@@ -150,9 +188,9 @@ TEST_F(Input_System_Test, Capture_Test)
 								   {
 									   is_pressed = true;
 								   });
-		std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
-		std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		EXPECT_TRUE(is_pressed);
 	};
 }
