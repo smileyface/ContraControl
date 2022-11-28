@@ -71,7 +71,8 @@ private:
 /** Shorthand for Key_Press_Interface */
 typedef Key_Press_Interface KPI;
 
-char KPI_to_acsii(std::pair<KPI, KEY_STATE> key_to_convert);
+/** TODO: Implement KPI to ASCII conversion*/
+//char KPI_to_acsii(std::pair<KPI, KEY_STATE> key_to_convert);
 
 /** Common codes for keys */
 namespace KEY
