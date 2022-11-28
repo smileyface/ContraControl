@@ -38,7 +38,7 @@ public:
 
 	void set_on_hold(KPI key, Keyboard_Event function);
 
-	void handle_event(int code, int event_value);
+	void handle_event(KPI key, int event_value);
 
 	void transition_to();
 

@@ -33,10 +33,9 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Press)
 																			{
 																				is_pressed = true;
 																			});
-	int code = master_code_map[system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A)].get_code();
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 1);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	EXPECT_TRUE(is_pressed) << "Pressed was not handled";
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 0);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
 }
 
 TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Hold)
@@ -47,10 +46,9 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Hold)
 																		   {
 																			   is_held = true;
 																		   });
-	int code = master_code_map[system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A)].get_code();
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 1);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	EXPECT_FALSE(is_held) << "Hold was not handled";
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 1);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	EXPECT_TRUE(is_held) << "Hold was not handled";
 }
 
@@ -62,10 +60,9 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Release)
 																		   {
 																				  is_released = true;
 																		   });
-	int code = master_code_map[system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A)].get_code();
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 1);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	EXPECT_FALSE(is_released) << "Release was not handled";
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 0);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
 	EXPECT_TRUE(is_released) << "Release was not handled";
 }
 

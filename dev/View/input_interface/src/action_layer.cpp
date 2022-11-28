@@ -48,12 +48,12 @@ void Action_Layer::set_on_hold(KPI key, Keyboard_Event func)
 	found_key->second.on_hold = func;
 }
 
-void Action_Layer::handle_event(int code, int event_value)
+void Action_Layer::handle_event(KPI key, int event_value)
 { 
 	int index = -1;
 	for(auto i : code_map)
 	{
-		if(i.second.get_code() == code)
+		if(i.second == key)
 		{
 			index = i.first;
 			break;

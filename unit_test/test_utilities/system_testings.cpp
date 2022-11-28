@@ -71,6 +71,7 @@ void system_utilities::teardown_messaging()
 {
 	print_log_messages();
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
+	Message_Relay::get_instance()->clear();
 	message_consumer = 0;
 }
 

@@ -162,6 +162,11 @@ Message_Relay* Message_Relay::get_instance()
 	return instance;
 }
 
+void Message_Relay::clear()
+{ 
+	list_of_message.clear();
+}
+
 
 const Logging_Message* Message_Types::LOGGING = new Logging_Message();
 const View_Subsystem_Message* Message_Types::VIEW_SUBSYSTEM = new View_Subsystem_Message();

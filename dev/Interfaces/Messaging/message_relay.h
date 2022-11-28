@@ -70,6 +70,12 @@ public:
 	 */
 	void deregister_consumer(Message_Consumer* consumer);
 
+	/**
+	* Remove all messages from the relay
+	*/
+	void clear();
+
+
 private:
 	Message_Relay();
 	std::vector<std::pair<Internal_Message*, Consumer_List>> list_of_message;
