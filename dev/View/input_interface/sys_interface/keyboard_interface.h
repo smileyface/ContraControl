@@ -53,10 +53,6 @@ public:
 
 	Action_Stack action_stack;
 protected:
-	/**List of layers of actions that the keyboard can run*/
-	std::vector<Action_Layer> layers;
-	/**List to current action layer*/
-	Action_Layer* active_layer = 0;
 	/** Is the interface active.  */
 	bool active;
 	/** Is there a physical or virtual keyboard present on the system*/

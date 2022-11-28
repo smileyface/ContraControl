@@ -30,7 +30,11 @@ TEST_F(Input_System_Test, Action_Layer_Test)
 }
 TEST_F(Input_System_Test, Connection_Test)
 {
-	EXPECT_TRUE(false);
+	//Github Actions has input permission issues, so I'm not running that right now.
+	if(!system_utilities::CI && !system_utilities::LINUX)
+	{
+		EXPECT_TRUE(keyboard.keyboard_present());
+	}
 }
 
 
@@ -44,9 +48,9 @@ TEST_F(Input_System_Test, Capture_Test)
 								   {
 									   is_pressed = true;
 								   });
-		keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
+		keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
+		std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 		EXPECT_TRUE(is_pressed);
 	};
 }

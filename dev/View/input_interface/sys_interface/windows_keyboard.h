@@ -12,20 +12,20 @@
 
 #include "keyboard_interface.h"
 
+
 /** Keyboard interface for windows */
 class Windows_Keyboard : public Keyboard_Interface
 {
 public:
 	Windows_Keyboard();
 	~Windows_Keyboard();
-	bool connect_to_keyboard();
+	void connect_to_keyboard();
 	void initalize_codes();
 
 	void readEv();
 
 protected:
 private:
-	bool keyboard_present;
 
 };
 

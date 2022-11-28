@@ -2,6 +2,7 @@
 #ifdef _WIN32
 #include "../sys_interface/windows_keyboard.h"
 #include "../sys_interface/key_input_interface.h"
+#include "../action_layer/action_layer.h"
 
 #include <Windows.h>
 #include <vector>
@@ -11,72 +12,81 @@ UINT nDevices;
 
 void Windows_Keyboard::initalize_codes()
 {
-	active_layer->add_code('A', KEY::A);
-	active_layer->add_code('B', KEY::B);
-	active_layer->add_code('C', KEY::C);
-	active_layer->add_code('D', KEY::D);
-	active_layer->add_code('E', KEY::E);
-	active_layer->add_code('F', KEY::F);
-	active_layer->add_code('G', KEY::G);
-	active_layer->add_code('H', KEY::H);
-	active_layer->add_code('I', KEY::I);
-	active_layer->add_code('J', KEY::J);
-	active_layer->add_code('K', KEY::K);
-	active_layer->add_code('L', KEY::L);
-	active_layer->add_code('M', KEY::M);
-	active_layer->add_code('N', KEY::N);
-	active_layer->add_code('O', KEY::O);
-	active_layer->add_code('P', KEY::P);
-	active_layer->add_code('Q', KEY::Q);
-	active_layer->add_code('R', KEY::R);
-	active_layer->add_code('S', KEY::S);
-	active_layer->add_code('T', KEY::T);
-	active_layer->add_code('U', KEY::U);
-	active_layer->add_code('V', KEY::V);
-	active_layer->add_code('W', KEY::W);
-	active_layer->add_code('X', KEY::X);
-	active_layer->add_code('Y', KEY::Y);
-	active_layer->add_code('Z', KEY::Z);
-	active_layer->add_code('0', KEY::NUM_0);
-	active_layer->add_code('1', KEY::NUM_1);
-	active_layer->add_code('2', KEY::NUM_2);
-	active_layer->add_code('3', KEY::NUM_3);
-	active_layer->add_code('4', KEY::NUM_4);
-	active_layer->add_code('5', KEY::NUM_5);
-	active_layer->add_code('6', KEY::NUM_6);
-	active_layer->add_code('7', KEY::NUM_7);
-	active_layer->add_code('8', KEY::NUM_8);
-	active_layer->add_code('9', KEY::NUM_9);
-	active_layer->add_code(VK_NUMPAD0, KEY::NUM_PAD::NUM_0);
-	active_layer->add_code(VK_NUMPAD1, KEY::NUM_PAD::NUM_1);
-	active_layer->add_code(VK_NUMPAD2, KEY::NUM_PAD::NUM_2);
-	active_layer->add_code(VK_NUMPAD3, KEY::NUM_PAD::NUM_3);
-	active_layer->add_code(VK_NUMPAD4, KEY::NUM_PAD::NUM_4);
-	active_layer->add_code(VK_NUMPAD5, KEY::NUM_PAD::NUM_5);
-	active_layer->add_code(VK_NUMPAD6, KEY::NUM_PAD::NUM_6);
-	active_layer->add_code(VK_NUMPAD7, KEY::NUM_PAD::NUM_7);
-	active_layer->add_code(VK_NUMPAD8, KEY::NUM_PAD::NUM_8);
-	active_layer->add_code(VK_NUMPAD9, KEY::NUM_PAD::NUM_9);
-	active_layer->add_code(VK_RETURN, KEY::ENTER);
-	active_layer->add_code(VK_LSHIFT, KEY::L_SHIFT);
-	active_layer->add_code(VK_LMENU, KEY::L_ALT);
-	active_layer->add_code(VK_LCONTROL, KEY::L_CTRL);
+	master_code_map['A'] = KEY::A;
+	master_code_map['B'] = KEY::B;
+	master_code_map['C'] = KEY::C;
+	master_code_map['D'] = KEY::D;
+	master_code_map['E'] = KEY::E;
+	master_code_map['F'] = KEY::F;
+	master_code_map['G'] = KEY::G;
+	master_code_map['H'] = KEY::H;
+	master_code_map['I'] = KEY::I;
+	master_code_map['J'] = KEY::J;
+	master_code_map['K'] = KEY::K;
+	master_code_map['L'] = KEY::L;
+	master_code_map['M'] = KEY::M;
+	master_code_map['N'] = KEY::N;
+	master_code_map['O'] = KEY::O;
+	master_code_map['P'] = KEY::P;
+	master_code_map['Q'] = KEY::Q;
+	master_code_map['R'] = KEY::R;
+	master_code_map['S'] = KEY::S;
+	master_code_map['T'] = KEY::T;
+	master_code_map['U'] = KEY::U;
+	master_code_map['V'] = KEY::V;
+	master_code_map['W'] = KEY::W;
+	master_code_map['X'] = KEY::X;
+	master_code_map['Y'] = KEY::Y;
+	master_code_map['Z'] = KEY::Z;
+	master_code_map['0'] = KEY::NUM_0;
+	master_code_map['1'] = KEY::NUM_1;
+	master_code_map['2'] = KEY::NUM_2;
+	master_code_map['3'] = KEY::NUM_3;
+	master_code_map['4'] = KEY::NUM_4;
+	master_code_map['5'] = KEY::NUM_5;
+	master_code_map['6'] = KEY::NUM_6;
+	master_code_map['7'] = KEY::NUM_7;
+	master_code_map['8'] = KEY::NUM_8;
+	master_code_map['9'] = KEY::NUM_9;
+	master_code_map[VK_NUMPAD0] = KEY::NUM_PAD::NUM_0;
+	master_code_map[VK_NUMPAD1] = KEY::NUM_PAD::NUM_1;
+	master_code_map[VK_NUMPAD2] = KEY::NUM_PAD::NUM_2;
+	master_code_map[VK_NUMPAD3] = KEY::NUM_PAD::NUM_3;
+	master_code_map[VK_NUMPAD4] = KEY::NUM_PAD::NUM_4;
+	master_code_map[VK_NUMPAD5] = KEY::NUM_PAD::NUM_5;
+	master_code_map[VK_NUMPAD6] = KEY::NUM_PAD::NUM_6;
+	master_code_map[VK_NUMPAD7] = KEY::NUM_PAD::NUM_7;
+	master_code_map[VK_NUMPAD8] = KEY::NUM_PAD::NUM_8;
+	master_code_map[VK_NUMPAD9] = KEY::NUM_PAD::NUM_9;
+	master_code_map[VK_RETURN] = KEY::ENTER;
+	master_code_map[VK_LSHIFT] = KEY::L_SHIFT;
+	master_code_map[VK_LMENU] = KEY::L_ALT;
+	master_code_map[VK_LCONTROL] = KEY::L_CTRL;
+
+	for(Keyboard_Code_Map::iterator i = master_code_map.begin(); i != master_code_map.end(); i++)
+	{
+		i->second.set_code(i->first);
+	}
 }
 
 Windows_Keyboard::Windows_Keyboard()
 {
 	initalize_codes();
-	setup_action_layers();
+	action_stack.setup_action_layers();
 	connect_to_keyboard();
 }
 
 Windows_Keyboard::~Windows_Keyboard()
 {
-
 }
 
-bool Windows_Keyboard::connect_to_keyboard()
+void Windows_Keyboard::connect_to_keyboard()
 {
+	//if the keyboard is already connected, get out.
+	if(keyboard_present == true)
+	{
+		return;
+	}
 	if(GetRawInputDeviceList(NULL, &nDevices, sizeof(RAWINPUTDEVICELIST)) != 0)
 	{
 	}
@@ -88,14 +98,14 @@ bool Windows_Keyboard::connect_to_keyboard()
 	{
 		keyboard_present = true;
 	}
-	return keyboard_present;
 }
 
 void Windows_Keyboard::readEv()
 {
 	for(int i = 0; i < 256; i++)
 	{		
-		active_layer->handle_event(i, GetKeyState(i) & 0x8000);
+		if((GetKeyState(i) & 0x8000) > 0)
+			action_stack.get_active_layer()->handle_event(i, 1);
 	}
 }
 

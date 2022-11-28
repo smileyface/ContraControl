@@ -27,7 +27,11 @@ public:
 	 * Constructor for defining common keycode.
 	 * \param code common code.
 	 */
-	Key_Press_Interface(int code);
+	Key_Press_Interface(int index);
+
+	void set_code(char value);
+
+	char get_code();
 
 	/**
 	 * Function to run when key is pressed.
@@ -44,6 +48,8 @@ public:
 	 */
 	std::function<void()> on_hold = [] ()
 	{ };
+
+	int index();
 
 	/**
 	 * set state of button

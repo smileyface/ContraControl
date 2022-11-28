@@ -1,10 +1,10 @@
 #include "../action_layer/action_layer.h"
 
-Keyboard_Code_Map Action_Layer::code_map;
+Keyboard_Code_Map master_code_map;
 
 Action_Layer::Action_Layer()
 {
-
+	code_map = {};
 }
 
 Action_Layer::~Action_Layer()
@@ -14,26 +14,26 @@ Action_Layer::~Action_Layer()
 
 void Action_Layer::set_on_press(KPI key, Keyboard_Event func)
 {
-	for(auto& it : code_map)
+	auto found_key = code_map.find(key.index());
+	if(found_key == code_map.end())
 	{
-		if(it.second == key)
-		{
-			it.second.on_press = func;
-			return;
-		}
+		code_map[key.index()] = key;
+		found_key = code_map.find(key.index());
 	}
+		
+	found_key->second.on_press = func;
 }
 
 void Action_Layer::set_on_release(KPI key, Keyboard_Event func)
 {
-	for(auto& it : code_map)
+	auto found_key = code_map.find(key.index());
+	if(found_key == code_map.end())
 	{
-		if(it.second == key)
-		{
-			it.second.on_release = func;
-			return;
-		}
+		code_map[key.index()] = key;
+		found_key = code_map.find(key.index());
 	}
+
+	found_key->second.on_release = func;
 }
 
 void Action_Layer::add_code(int code, KPI key)
@@ -43,13 +43,32 @@ void Action_Layer::add_code(int code, KPI key)
 
 void Action_Layer::handle_event(int code, int event_value)
 { 
-	if(code_map.find(code) != code_map.end())
+	int index = -1;
+	for(auto i : code_map)
 	{
-		code_map[code] = event_value;
+		if(i.second.get_code() == code)
+		{
+			index = i.first;
+			break;
+		}
+	}
+	if(index >= 0)
+	{
+		code_map[index] = event_value;
 	}
 }
 
 Keyboard_Code_Map Action_Layer::get_codemap()
 {
 	return code_map;
+}
+
+void Action_Layer::transition_from()
+{
+
+}
+
+void Action_Layer::transition_to()
+{
+
 }

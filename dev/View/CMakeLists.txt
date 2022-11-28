@@ -6,17 +6,25 @@ set(FORMAT_SOURCE format/src/format.cpp
                   format/src/console.cpp
                   format/src/ui.cpp)
 
-set(INPUT_INTERFACE_INCLUDES input_interface/sys_interface/key_input_interface.h
+set(INPUT_ACTION_LAYERS_INCLUDES input_interface/action_layer/action_layer.h
+                                 input_interface/action_layer/action_stack.h
+                                 input_interface/action_layer/predefined_layer.h)
+
+set(INPUT_INTERFACE_INCLUDES ${INPUT_ACTION_LAYERS_INCLUDES}
+                             input_interface/sys_interface/key_input_interface.h
                              input_interface/sys_interface/linux_keyboard.h
                              input_interface/sys_interface/windows_keyboard.h
                              input_interface/sys_interface/keyboard_interface.h)
+
+
 
 set(INPUT_INTERFACE_SOURCE input_interface/src/key_input_interface.cpp 
                            input_interface/src/linux_keyboard.cpp 
                            input_interface/src/windows_keyboard.cpp
                            input_interface/src/keyboard_interface.cpp 
                            input_interface/src/action_layer.cpp
-                           input_interface/src/predefined_layer.cpp)
+                           input_interface/src/predefined_layer.cpp 
+                           input_interface/src/action_stack.cpp)
 
 set(VIEW_TYPE_INCLUDES view/view_type/option_view_type.h
                        view/view_type/log_view_type.h)

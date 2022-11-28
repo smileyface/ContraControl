@@ -78,11 +78,8 @@ void Key_Press_Interface::operator=(const int new_val)
 {
     if(!pressed && new_val)
     {
-        if(on_press)
-        {
-            on_press();
-            pressed = true;
-        }
+        on_press();
+        pressed = true;
     }
     else if(pressed && new_val)
     {
@@ -328,4 +325,19 @@ char KPI_to_acsii(std::pair<KPI, KEY_STATE> key)
             
     }
     return val;
+}
+
+int Key_Press_Interface::index()
+{
+    return index_;
+}
+
+void Key_Press_Interface::set_code(char value)
+{
+    code = value;
+}
+
+char Key_Press_Interface::get_code()
+{
+    return code;
 }

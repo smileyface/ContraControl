@@ -611,5 +611,10 @@ void system_utilities::keyboard_utilities::Keyboard::operator<<(const char& inpu
 
 void system_utilities::keyboard_utilities::Keyboard::set_key_operation(KPI key, std::function<void()> func)
 {
-	//buffer.keyboard->set_on_press(key, func);
+	buffer->action_stack.get_active_layer()->set_on_press(key, func);
+}
+
+bool system_utilities::keyboard_utilities::Keyboard::keyboard_present()
+{
+	return buffer->get_keyboard_present();
 }

@@ -54,7 +54,8 @@ void Console_Option_Popup::on_query()
 	}
 	while(true)
 	{
-		//input = keyboard->get_number(); TODO: Make the input be a response message.
+		//TODO Make the input be a response message.
+		//input = keyboard->get_number(); 
 		input = 0;
 		if(input > options.size())
 		{

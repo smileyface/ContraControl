@@ -1,5 +1,5 @@
 /*****************************************************************//**
- * \file   console_view.h
+ * \file   action_layer.h
  * \brief
  *
  * \author kason
@@ -12,6 +12,9 @@
 
 typedef std::map<int, KPI> Keyboard_Code_Map;
 typedef std::function<void()> Keyboard_Event;
+
+/** Map for holding system specific keycodes to a common code */
+extern Keyboard_Code_Map master_code_map;
 
 class Action_Layer
 {
@@ -41,13 +44,14 @@ public:
 
 	void handle_event(int code, int event_value);
 
-	std::function<void()> transition_to;
+	void transition_to();
 
-	std::function<void()> transition_from;
+	void transition_from();
+
 
 private:
-	/** Map for holding system specific keycodes to a common code */
-	static Keyboard_Code_Map code_map;
+	Keyboard_Code_Map code_map;
+
 	
 };
 
