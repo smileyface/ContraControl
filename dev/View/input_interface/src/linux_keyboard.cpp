@@ -126,7 +126,6 @@ void Linux_Keyboard::connect_to_keyboard()
 		{
 			break;
 		}
-		LOG_INFO(location + " not having a useful file descriptor", "Keyboard finder");
 	}
 }
 
