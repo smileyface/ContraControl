@@ -22,6 +22,8 @@ public:
 	*/
 	Action_Layer* get_active_layer();
 
+	int add_action_layer();
+
 	void change_action_layers(int layer);
 
 	void setup_action_layers();

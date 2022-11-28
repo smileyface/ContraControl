@@ -166,6 +166,28 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Press_Unhandled_Button)
 	EXPECT_FALSE(the_good_one) << "The overridden function was not called";
 }
 
+TEST_F(Input_System_Test, Multiple_Action_Layers_Event_Handle_Press_Button)
+{
+	bool the_good_one = false;
+
+	int new_layer_index = keyboard.get_interface()->action_stack.add_action_layer();
+	keyboard.get_interface()->action_stack.change_action_layers(new_layer_index);
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
+																		   [&the_good_one] () mutable
+																		   {
+																				  the_good_one = true;
+																		   });
+	keyboard.get_interface()->action_stack.change_action_layers(0);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
+	EXPECT_FALSE(the_good_one) << "The wrong layer was called";
+	
+	keyboard.get_interface()->action_stack.change_action_layers(new_layer_index);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
+	EXPECT_FALSE(the_good_one) << "The on_press was not preserved";
+}
+
 
 
 TEST_F(Input_System_Test, Connection_Test)

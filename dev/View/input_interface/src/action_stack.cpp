@@ -24,3 +24,9 @@ void Action_Stack::setup_action_layers()
 	layers.emplace_back(Predefined_Action_Layer::buffered_input_layer());
 	change_action_layers(0);
 }
+
+int Action_Stack::add_action_layer()
+{
+	layers.emplace_back(Action_Layer());
+	return layers.size() - 1;
+}
