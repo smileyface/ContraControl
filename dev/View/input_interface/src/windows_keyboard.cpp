@@ -102,10 +102,12 @@ void Windows_Keyboard::connect_to_keyboard()
 
 void Windows_Keyboard::readEv()
 {
-	for(int i = 0; i < 256; i++)
-	{		
-		if((GetKeyState(i) & 0x8000) > 0)
-			action_stack.get_active_layer()->handle_event(i, 1);
+	for(auto key : master_code_map)
+	{
+		if((GetKeyState(key.second.get_code()) & 0x8000) > 0)
+		{
+			action_stack.get_active_layer()->handle_event(key.second, 1);
+		}
 	}
 }
 
