@@ -47,7 +47,7 @@ void Console_Option_Popup::on_refresh()
 
 void Console_Option_Popup::on_query()
 {
-	int input;
+	int option_input;
 	if(!displayed)
 	{
 		return;
@@ -56,18 +56,18 @@ void Console_Option_Popup::on_query()
 	{
 		//TODO Make the input be a response message.
 		//input = keyboard->get_number(); 
-		input = 1;
-		if(input > options.size())
+		option_input = 1;
+		if(option_input > options.size())
 		{
 			LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
 		}
 
-		if(input < 1 || input > options.size() + 1)
+		if(option_input < 1 || option_input > options.size() + 1)
 		{
 			std::cerr << "Sorry, the number is out of range." << std::endl;
 			continue;
 		}
-		choice = input;
+		choice = option_input;
 		break;
 	}
 }
