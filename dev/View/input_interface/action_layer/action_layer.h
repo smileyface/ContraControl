@@ -21,10 +21,6 @@ class Action_Layer
 public:
 	Action_Layer();
 	~Action_Layer();
-	/**
-	* \return Map of system defined code to common defined code
-	*/
-	Keyboard_Code_Map get_codemap();
 
 	/**
 	 * Set on_press to a user-defined callback
@@ -41,8 +37,6 @@ public:
 	void set_on_release(KPI key, Keyboard_Event function);
 
 	void set_on_hold(KPI key, Keyboard_Event function);
-
-	void add_code(int code, KPI key);
 
 	void handle_event(int code, int event_value);
 

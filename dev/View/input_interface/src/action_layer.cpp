@@ -48,11 +48,6 @@ void Action_Layer::set_on_hold(KPI key, Keyboard_Event func)
 	found_key->second.on_hold = func;
 }
 
-void Action_Layer::add_code(int code, KPI key)
-{ 
-	code_map[code] = key;
-}
-
 void Action_Layer::handle_event(int code, int event_value)
 { 
 	int index = -1;
@@ -70,10 +65,6 @@ void Action_Layer::handle_event(int code, int event_value)
 	}
 }
 
-Keyboard_Code_Map Action_Layer::get_codemap()
-{
-	return code_map;
-}
 
 void Action_Layer::transition_from()
 {

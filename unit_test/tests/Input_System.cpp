@@ -25,35 +25,50 @@ namespace
 	};
 }
 
-TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test)
+TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Press)
 {
 	bool is_pressed = false;
-	bool is_released = false;
-	bool is_held = false;
 	keyboard.get_interface()->action_stack.get_active_layer()->set_on_press(KEY::A, 
 																			[&is_pressed] () mutable
 																			{
 																				is_pressed = true;
 																			});
-	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
-																			  [&is_released] () mutable
-																			  {
-																				  is_released = true;
-																			  });
-	keyboard.get_interface()->action_stack.get_active_layer()->set_on_hold(KEY::A,
-																			  [&is_held] () mutable
-																			  {
-																				  is_held = true;
-																			  });
-	
 	int code = master_code_map[system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A)].get_code();
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 1);
 	EXPECT_TRUE(is_pressed) << "Pressed was not handled";
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 0);
+}
+
+TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Hold)
+{
+	bool is_held = false;
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_hold(KEY::A,
+																		   [&is_held] () mutable
+																		   {
+																			   is_held = true;
+																		   });
+	int code = master_code_map[system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A)].get_code();
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 1);
-	EXPECT_TRUE(is_held) << "Held was not handled";
+	EXPECT_FALSE(is_held) << "Hold was not handled";
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 1);
+	EXPECT_TRUE(is_held) << "Hold was not handled";
+}
+
+TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Release)
+{
+	bool is_released = false;
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
+																		   [&is_released] () mutable
+																		   {
+																				  is_released = true;
+																		   });
+	int code = master_code_map[system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A)].get_code();
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 1);
+	EXPECT_FALSE(is_released) << "Release was not handled";
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(code, 0);
 	EXPECT_TRUE(is_released) << "Release was not handled";
 }
+
 TEST_F(Input_System_Test, Connection_Test)
 {
 	//Github Actions has input permission issues, so I'm not running that right now.
