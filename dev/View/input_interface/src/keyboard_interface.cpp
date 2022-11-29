@@ -1,11 +1,16 @@
 #include <thread>
 #include <functional>   // std::mem_fn
+#include <algorithm>    // std::find
 
 #include "../sys_interface/keyboard_interface.h"
 std::thread keyboard_thread;
 
+
 Keyboard_Interface::Keyboard_Interface()
-{ }
+{ 
+	active = false;
+	keyboard_present = false;
+}
 
 Keyboard_Interface::~Keyboard_Interface()
 {
@@ -19,26 +24,26 @@ void Keyboard_Interface::loop()
 
 void Keyboard_Interface::start_listening()
 {
-	keyboard_thread = std::thread([this]()
-								  {
-									  this->loop();
-								  });
+	if(keyboard_present)
+	{
+		active = true;
+		keyboard_thread = std::thread([this] ()
+									  {
+										  this->loop();
+									  });
+	}
 }
 
 void Keyboard_Interface::stop_listening()
 {
-	active = false;
-	keyboard_thread.join();
+	if(keyboard_present)
+	{
+		active = false;
+		keyboard_thread.join();
+	}
 }
 
-void Keyboard_Interface::set_on_press(KPI key, std::function<void()> func)
+bool Keyboard_Interface::get_keyboard_present()
 {
-	for(auto& it : code_map)
-	{
-		if(it.second == key)
-		{
-			it.second.on_press = func;
-			return;
-		}
-	}
+	return keyboard_present;
 }

@@ -9,8 +9,7 @@
 #ifndef INTERFACE_KEYBOARD_INTERFACE
 #define INTERFACE_KEYBOARD_INTERFACE
 
-#include "key_input_interface.h"
-#include <string>
+#include "../action_layer/action_stack.h"
 
 /** Generic interface for reading keypresses from a keyboard. */
 class Keyboard_Interface
@@ -29,7 +28,7 @@ public:
 	 * 
 	 * \return whether connection is successful 
 	 */
-	virtual bool connect_to_keyboard() = 0;
+	virtual void connect_to_keyboard() = 0;
 
 	/**
 	 * Start listening for input from the modeled keyboard 
@@ -48,18 +47,11 @@ public:
 	/**
 	 * \return Is there a physical or virtual keyboard present.
 	 */
-	bool get_keyboard_present();
+	bool get_keyboard_present(); 
 
-	/**
-	 * Set on_press to a user-defined callback
-	 * \param key Key to assign callback function to
-	 * \param function a callback
-	 */
-	void set_on_press(KPI key, std::function<void()> function);
-
+	/** Stack of action layers for keyboard interaction */
+	Action_Stack action_stack;
 protected:
-	/** Map for holding system specific keycodes to a common code */
-	std::map<int, KPI> code_map;
 	/** Is the interface active.  */
 	bool active;
 	/** Is there a physical or virtual keyboard present on the system*/

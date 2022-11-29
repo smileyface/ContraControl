@@ -12,6 +12,15 @@
 #include <functional>
 #include <map>
 
+/**
+ * State of the key
+ */
+enum class KEY_STATE
+{
+	PRESSED, ///<Key is pressed
+	RELEASED ///<Key is released
+};
+
 /** Interface for individual keys */
 class Key_Press_Interface
 {
@@ -19,9 +28,20 @@ public:
 	Key_Press_Interface();
 	/**
 	 * Constructor for defining common keycode.
-	 * \param code common code.
+	 * \param index common code.
 	 */
-	Key_Press_Interface(int code);
+	Key_Press_Interface(int index);
+
+	/**
+	 * Set the system key code.
+	 * \param value System code for the key
+	 */
+	void set_code(char value);
+
+	/**
+	 * \return System code for the key.
+	 */
+	char get_code();
 
 	/**
 	 * Function to run when key is pressed.
@@ -40,6 +60,11 @@ public:
 	{ };
 
 	/**
+	 * \return The index of the key.
+	 */
+	int index();
+
+	/**
 	 * set state of button
 	 * \param new_val State of the button.
 	 */
@@ -53,11 +78,14 @@ public:
 private:
 	bool pressed = false;
 	int val;
+	char code;
 	int index_ = -1;
 };
 /** Shorthand for Key_Press_Interface */
 typedef Key_Press_Interface KPI;
 
+/** TODO: Implement KPI to ASCII conversion*/
+//char KPI_to_acsii(std::pair<KPI, KEY_STATE> key_to_convert);
 
 /** Common codes for keys */
 namespace KEY
@@ -112,6 +140,12 @@ namespace KEY
 	extern KPI NUM_7; ///<7 numrow common code
 	extern KPI NUM_8; ///<8 numrow common code
 	extern KPI NUM_9; ///<9 numrow common code
+
+	extern KPI ENTER; ///<Enter/Return common code
+	extern KPI L_SHIFT; ///<Left Shift common code
+	extern KPI L_CTRL; ///<Left Control common code
+	extern KPI L_ALT; ///<Left Alt common code
+	extern KPI TAB; ///<Tab common code
 }
 
 

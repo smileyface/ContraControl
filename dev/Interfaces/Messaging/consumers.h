@@ -8,7 +8,6 @@
 #ifndef MESSAGE_CONSUMER_H
 #define MESSAGE_CONSUMER_H
 
-#include <vector>
 #include "internal_messages.h"
 
 
@@ -43,7 +42,7 @@ struct Message_Consumer
 	 */
 	bool is_stale();
 private:
-	bool* stale = 0;
+	bool stale = false;
 	const Internal_Message* message_type = 0;
 };
 /**

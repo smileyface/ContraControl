@@ -29,7 +29,7 @@ class Linux_Keyboard : public Keyboard_Interface
 public:
 	Linux_Keyboard();
 	~Linux_Keyboard();
-	bool connect_to_keyboard();
+	void connect_to_keyboard();
 	void readEv();
 	short getKeyState(short key);
 
@@ -43,7 +43,7 @@ private:
 	keyboard_state* keyboard_st;
 	char name[256];
 
-	bool connect_to_keyboard(std::string path_to_keyboard);
+	void connect_to_keyboard(std::string path_to_keyboard);
 };
 
 #endif

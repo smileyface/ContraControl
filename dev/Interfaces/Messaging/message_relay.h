@@ -45,7 +45,7 @@ public:
 	int number_of_messages(Message_Consumer* consumer);
 
 	/**
-	 * Get an instance of the first message in the front of the list.
+	 * Get an instance of the first message in the front of the list. Does not remove the object from the message relay.
 	 *
 	 * \param consumer Pointer to the consumer requesting to get its messages.
 	 * \return instance of the first message
@@ -69,6 +69,12 @@ public:
 	 * \param consumer Consumer to be removed from the list.
 	 */
 	void deregister_consumer(Message_Consumer* consumer);
+
+	/**
+	* Remove all messages from the relay
+	*/
+	void clear();
+
 
 private:
 	Message_Relay();

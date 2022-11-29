@@ -9,7 +9,6 @@
 #ifndef VIEW_FORMAT_INCLUDE_H
 #define VIEW_FORMAT_INCLUDE_H
 
-#include <vector>
 #include <thread>
 
 #include "Interfaces/enums/view_type_enum.h"

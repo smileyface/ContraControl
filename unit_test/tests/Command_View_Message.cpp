@@ -1,9 +1,15 @@
 #include "../test_utilities/test_utilities.h"
+#include "../test_utilities/system_testings.h"
 
 #include "../test_utilities/pch.h"
 
 #include "../../dev/Interfaces/Messaging/message_relay.h"
 #include "../../dev/View/view_main.h"
+
+#include <sstream>
+#include <stdio.h>
+
+
 
 namespace
 {
@@ -28,7 +34,7 @@ namespace
 
 TEST_F(Command_View_Message_Test, Send_Option)
 {
-	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, { "Hello", "It's", "Me" }));
+	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
 	EXPECT_FALSE(found);
 	Option_Popup_Message* opm = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(option_consumer));
 	EXPECT_FALSE(found);
@@ -44,6 +50,9 @@ TEST_F(Command_View_Message_Test, Send_Option)
 
 
 	Message_Relay::get_instance()->push(opm);
+	system_utilities::keyboard_utilities::Keyboard keyboard;
+	//NEED TO ADD BUFFER INPUT INTERFACE
+	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::NUM_0);
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	bool message_in_view = false;
 	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))

@@ -6,8 +6,8 @@
  * \date   August 2022
  *********************************************************************/
 
-#ifndef VIEW_LOG_VIEW_TYPE
-#define VIEW_LOG_VIEW_TYPE
+#ifndef VIEW_OPTION_VIEW_TYPE
+#define VIEW_OPTION_VIEW_TYPE
 
 #include "Messaging/consumers.h"
 
@@ -19,6 +19,7 @@ public:
 	/**The log message captured from the message relay.*/
 	struct MESSAGE
 	{
+		std::string QUERY; ///<Message to display to the user
 		std::vector<std::string> OPTIONS;///<Log message.
 	} message;///<Instance of the captured message.
 	/**Get the log message from the message relay.*/
@@ -29,7 +30,9 @@ protected:
 	* .Message Consumer
 	*/
 	Message_Consumer* option_consumer;
-	/** Stale view*/
-	bool option_stale = true;
+	/**
+	 * Message recieved.
+	 */
+	Option_Popup_Message* specified_message;
 };
-#endif // !VIEW_LOG_VIEW_TYPE
+#endif // !VIEW_OPTION_VIEW_TYPE

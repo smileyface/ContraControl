@@ -7,9 +7,7 @@
 
 Log_View_Type::Log_View_Type()
 {
-
 	log_consumer = new Message_Consumer(new Logging_Message());
-
 	Message_Relay::get_instance()->register_consumer(log_consumer);
 }
 void Log_View_Type::get_message()
@@ -43,5 +41,9 @@ void Console_Log_View::on_paint()
 bool Console_Log_View::is_stale()
 {
 	return log_consumer->is_stale();
+}
 
+bool Console_Log_View::quit()
+{
+	return false;
 }

@@ -62,11 +62,14 @@ set(INTERNAL_MESSAGE_TYPES_HEADER_FILES
                     Messaging/message_types/internal_message_type.h
                     Messaging/message_types/logging_message.h
                     Messaging/message_types/view_messages/view_subsystem_message.h
-                    Messaging/message_types/view_messages/view_request/option_popup_message.h)
+                    Messaging/message_types/view_messages/view_request/option_popup_message.h
+                    Messaging/message_types/response_messages/response_message.h
+                    Messaging/message_types/response_messages/view_request/option_popup_response_message.h)
 set(INTERNAL_MESSAGE_TYPES_SOURCE_FILES
                     Messaging/message_types/src/logging_message.cpp
                     Messaging/message_types/src/view_subsystem_message.cpp
-                    Messaging/message_types/src/option_popup_message.cpp)
+                    Messaging/message_types/src/option_popup_message.cpp
+                    Messaging/message_types/src/option_popup_response_message.cpp)
 set(SYSTEM_MESSAGING_HEADER_FILES
                     ${INTERNAL_MESSAGE_TYPES_HEADER_FILES}
                     Messaging/consumers.h
