@@ -48,6 +48,7 @@ test/googletest*
 googletest-*
 Test
 CoverageReport*
+LastCoverageResults.log
 
 #CMake Extras
 CMakeLists.txt.user
@@ -76,3 +77,4 @@ Debug
 /.github/check-cppcheck-build-dir
 /.github/check.cppcheck
 coverage.xml
+

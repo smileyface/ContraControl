@@ -15,7 +15,6 @@ namespace
 		Message_Consumer* consumer = 0;
 		virtual void SetUp()
 		{
-			system_utilities::keyboard_utilities::setup();
 		}
 		virtual void TearDown()
 		{
