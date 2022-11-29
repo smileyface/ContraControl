@@ -42,6 +42,7 @@ std::string device_type_as_string(DEVICE_IDENTIFIER type)
 	}
 }
 
+
 Device::Device()
 {
 
@@ -108,6 +109,7 @@ bool Device::get_power()
 	return power;
 }
 
+
 bool Device::is_initalized()
 {
 	return initalized;
@@ -147,3 +149,4 @@ Channel Device::get_channel(int channel)
 {
 	return channels[channel];
 }
+

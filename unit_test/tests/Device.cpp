@@ -16,7 +16,6 @@ namespace {
 		virtual void TearDown() {
 			system_utilities::cleanup();
 		}
-
 	};
 	class Device_Gradient_Test : public ::testing::Test {
 	protected:

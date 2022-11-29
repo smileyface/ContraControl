@@ -22,6 +22,7 @@
   */
 namespace model
 {
+
 	/**
 	 * .The string of the namespace name. This is for locating Messages.
 	 */

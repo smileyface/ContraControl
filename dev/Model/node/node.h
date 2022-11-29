@@ -41,6 +41,7 @@ public:
 	 \param type The type of node.
 	 */
 	Node(NODE_TYPE type);
+
 	Node();
 	/**
 	 Get ready to destroy node.
@@ -98,6 +99,7 @@ public:
 	 * \param id The id of the node on the system.
 	 */
 	void add_connection(NODE_TYPE type, Node_Id id);
+
 
 	/**
 	 * Get the id of the local node.

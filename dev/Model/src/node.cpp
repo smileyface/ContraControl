@@ -9,6 +9,7 @@ Node::Node(NODE_TYPE type)
 }
 Node::Node()
 {
+
 	my_type = NODE_TYPE::INVALID;
 	id_pool = 0;
 }
@@ -26,6 +27,12 @@ void Node::clear_node()
 	connections.clear();
 	devices.clear();
 }
+
+/**
+ Add a Device to the node.
+
+ \param device A creator struct that will be used to make the device.
+ */
 
 void Node::register_device(Device_Creator device)
 {
@@ -77,6 +84,7 @@ Node* Node::get_connection(Node_Id id)
 	}
 	return connections[id];
 }
+
 
 void Node::add_connection(NODE_TYPE type, Node_Id id)
 {

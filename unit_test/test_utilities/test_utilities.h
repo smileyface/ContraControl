@@ -1,6 +1,7 @@
 #ifndef TESTING_UTILITIES_H
 #define TESTING_UTILITIES_H
 
+
 #define DEBUG
 
 #include <utility>
@@ -9,6 +10,7 @@
 #include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
 #include "../../dev/View/view_main.h"
+
 
 #include "../../dev/Utilities/Utilities/exceptions.h"
 #include "../../dev/Network/system_interfaces/types/network_status_state.h"

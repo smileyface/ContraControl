@@ -1,4 +1,4 @@
-﻿set(DEVICE_TEST_FILES "tests/Device.cpp"
+set(DEVICE_TEST_FILES "tests/Device.cpp"
                       "tests/Node.cpp"
                       "tests/Network.cpp"
                       "tests/Commands.cpp"
@@ -19,6 +19,7 @@ add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/node_utilities.h"
                            "test_utilities/node_utilities.cpp")
 target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller View_Library System_Interface Network )
+
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -59,7 +60,6 @@ add_test(Devices Static_Test)
 
 IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
   include(CodeCoverage.cmake)
-
   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
 
   SET(CMAKE_CXX_FLAGS "-O1 -g -fno-omit-frame-pointer -fno-optimize-sibling-calls -fprofile-arcs -ftest-coverage -fno-inline -fPIC")
@@ -71,4 +71,5 @@ IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
 							    # otherwise the coverage generation will not complete.
 		    coverage            # Name of output directory.
   )
+
 ENDIF() # NOT CMAKE_COMPILER_IS_GNUCXX

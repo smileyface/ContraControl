@@ -21,7 +21,7 @@ void testing_utilities::get_partial_on(Command* command, Device* device, double 
 void testing_utilities::device_utilities::check_state(Device_Label device, Device* expected_state)
 {
 	Device* received_state = model::get_device(device);
-
+  
 	EXPECT_EQ(received_state->is_valid(), expected_state->is_valid()) << "Device validity is not correct";
 	EXPECT_EQ(received_state->is_initalized(), expected_state->is_initalized()) << "Device is not initalized properly";
 	EXPECT_EQ(received_state->get_power(), expected_state->get_power()) << "Device power is not correct";

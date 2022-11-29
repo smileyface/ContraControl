@@ -5,7 +5,9 @@
 #include <mutex>
 
 #include "Interfaces/types/state.h"
+
 #include "Messaging/message_relay.h"
+
 
 std::thread model_thread;
 std::mutex model_mutex;

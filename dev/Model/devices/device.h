@@ -101,6 +101,7 @@ public:
 	void set_id(Device_Id new_id);
 
 	/**
+
 	 \return If device is valid.
 	 */
 	virtual bool validity_check();
@@ -114,11 +115,13 @@ public:
 	 \return if device is powered
 	 */
 	bool get_power();
+
 	/**
 	 Get if the device is initalized.
 	 \return if the device has been initalized
 	 */
 	bool is_initalized();
+
 	/**
 	 * Get if the device has been validated and not invalidated for any reason.
 	 * \return validation state of the device.
