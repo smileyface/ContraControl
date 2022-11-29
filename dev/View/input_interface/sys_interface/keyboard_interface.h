@@ -10,8 +10,6 @@
 #define INTERFACE_KEYBOARD_INTERFACE
 
 #include "../action_layer/action_stack.h"
-#include <vector>
-#include <string>
 
 /** Generic interface for reading keypresses from a keyboard. */
 class Keyboard_Interface
@@ -51,6 +49,7 @@ public:
 	 */
 	bool get_keyboard_present(); 
 
+	/** Stack of action layers for keyboard interaction */
 	Action_Stack action_stack;
 protected:
 	/** Is the interface active.  */

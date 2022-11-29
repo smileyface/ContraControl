@@ -28,7 +28,12 @@ public:
 	/** \return Selected option */
 	int get_selection();
 
-	/** Checks if we are responding to the correct message */
+	/**
+	 * Checks if we are responding to the correct message.
+	 * \param check_message Message to compare
+	 * \return If the message is this message
+	 * \todo Make this an overloaded ==
+	 */
 	virtual bool this_message(Option_Popup_Message* check_message);
 
 private:

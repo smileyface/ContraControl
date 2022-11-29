@@ -8,7 +8,6 @@
 #ifndef INPUT_INTERFACE_KEYBOARD
 #define INPUT_INTERFACE_KEYBOARD
 
-#include <vector>
 #include <string>
 
 #include "sys_interface/keyboard_interface.h"

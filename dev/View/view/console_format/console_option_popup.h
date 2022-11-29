@@ -26,6 +26,7 @@ public:
 	/**
 	 * Set options for the popup.
 	 * 
+	 * \param query Question to ask the user that corisponds with the list.
 	 * \param list List of options.
 	 */
 	void set_options(std::string query, std::vector<std::string> list);

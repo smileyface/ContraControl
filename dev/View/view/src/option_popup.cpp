@@ -7,6 +7,7 @@
 
 Option_View_Type::Option_View_Type()
 {
+	specified_message = 0;
 	option_consumer = new Message_Consumer(Message_Types::OPTION_POPUP_REQUEST);
 	Message_Relay::get_instance()->register_consumer(option_consumer);
 }

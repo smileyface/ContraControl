@@ -9,8 +9,6 @@
 #ifndef VIEW
 #define VIEW
 
-#include <string>
-
  /**
   * \brief way to view a Device.
   *
@@ -76,7 +74,10 @@ public:
 	*/
 	virtual bool is_stale() = 0;
 
-	/** Has the view been commanded to quit */
+	/**
+	 * Has the view been commanded to quit.
+	 * \return If the view has been commanded to quit
+	 */
 	virtual bool quit() = 0;
 	
 protected:

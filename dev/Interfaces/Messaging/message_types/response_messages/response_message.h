@@ -11,6 +11,9 @@
 
 #include "../internal_message_type.h"
 
+/**
+ * A parent for responding to messages.
+ */
 class Response_Message : public Internal_Message
 {
 	void placeholder()

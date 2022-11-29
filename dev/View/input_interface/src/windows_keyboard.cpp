@@ -102,7 +102,7 @@ void Windows_Keyboard::connect_to_keyboard()
 
 void Windows_Keyboard::readEv()
 {
-	for(auto key : master_code_map)
+	for(std::pair<int, KPI> key : master_code_map)
 	{
 		if((GetKeyState(key.second.get_code()) & 0x8000) > 0)
 		{

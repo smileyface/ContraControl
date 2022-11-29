@@ -25,6 +25,7 @@ public:
 	/**
 	 * Constructor.
 	 * \param from Subsystem sending the message. This is so we know who to send return messages to.
+	 * \param option_query Message to query the user.
 	 * \param list_of_options Options to request from the view.
 	 */
 	Option_Popup_Message(SUBSYSTEM_ID_ENUM from, std::string option_query, Option_List list_of_options);

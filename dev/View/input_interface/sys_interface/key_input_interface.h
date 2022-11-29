@@ -12,10 +12,13 @@
 #include <functional>
 #include <map>
 
+/**
+ * State of the key
+ */
 enum class KEY_STATE
 {
-	PRESSED,
-	RELEASED
+	PRESSED, ///<Key is pressed
+	RELEASED ///<Key is released
 };
 
 /** Interface for individual keys */
@@ -25,12 +28,19 @@ public:
 	Key_Press_Interface();
 	/**
 	 * Constructor for defining common keycode.
-	 * \param code common code.
+	 * \param index common code.
 	 */
 	Key_Press_Interface(int index);
 
+	/**
+	 * Set the system key code.
+	 * \param value System code for the key
+	 */
 	void set_code(char value);
 
+	/**
+	 * \return System code for the key.
+	 */
 	char get_code();
 
 	/**
@@ -49,6 +59,9 @@ public:
 	std::function<void()> on_hold = [] ()
 	{ };
 
+	/**
+	 * \return The index of the key.
+	 */
 	int index();
 
 	/**
@@ -128,11 +141,11 @@ namespace KEY
 	extern KPI NUM_8; ///<8 numrow common code
 	extern KPI NUM_9; ///<9 numrow common code
 
-	extern KPI ENTER;
-	extern KPI L_SHIFT;
-	extern KPI L_CTRL;
-	extern KPI L_ALT;
-	extern KPI TAB;
+	extern KPI ENTER; ///<Enter/Return common code
+	extern KPI L_SHIFT; ///<Left Shift common code
+	extern KPI L_CTRL; ///<Left Control common code
+	extern KPI L_ALT; ///<Left Alt common code
+	extern KPI TAB; ///<Tab common code
 }
 
 

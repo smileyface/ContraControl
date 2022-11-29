@@ -8,7 +8,6 @@
 #ifndef MESSAGE_CONSUMER_H
 #define MESSAGE_CONSUMER_H
 
-#include <vector>
 #include "internal_messages.h"
 
 
