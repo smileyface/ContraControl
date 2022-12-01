@@ -83,7 +83,6 @@ Linux_Keyboard::Linux_Keyboard()
 
 	initalize_codes();
 	action_stack.setup_action_layers();
-	connect_to_keyboard();
 }
 
 Linux_Keyboard::~Linux_Keyboard()

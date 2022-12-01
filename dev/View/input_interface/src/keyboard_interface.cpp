@@ -39,7 +39,8 @@ void Keyboard_Interface::stop_listening()
 	if(keyboard_present)
 	{
 		active = false;
-		keyboard_thread.join();
+		if(keyboard_thread.joinable())
+			keyboard_thread.join();
 	}
 }
 

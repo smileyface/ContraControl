@@ -2,7 +2,7 @@
 #include <chrono>
 #include <iostream>
 
-#include "system_testings.h"
+#include "system_utilities.h"
 
 #include "Utilities/exceptions.h"
 #include "test_utilities.h"
@@ -373,8 +373,6 @@ system_utilities::keyboard_utilities::Keyboard::Keyboard()
 #ifdef __linux__
 	buffer = new Linux_Keyboard();
 #endif
-
-	buffer->start_listening();
 }
 
 system_utilities::keyboard_utilities::Keyboard::~Keyboard()

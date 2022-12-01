@@ -73,7 +73,6 @@ Windows_Keyboard::Windows_Keyboard()
 {
 	initalize_codes();
 	action_stack.setup_action_layers();
-	connect_to_keyboard();
 }
 
 Windows_Keyboard::~Windows_Keyboard()
