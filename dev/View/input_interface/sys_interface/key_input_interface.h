@@ -75,6 +75,20 @@ public:
 	 * \return if the two keys are the same.
 	 */
 	bool operator==(const Key_Press_Interface check_val);
+
+	/**
+	 * Less than or equal to operator.
+	 * \param check_val other key to check against.
+	 * \return if one key has an index less than the other key.
+	 */
+	bool operator<= (const Key_Press_Interface check_val);
+
+	/**
+	 * More than or equal to operator.
+	 * \param check_val other key to check against.
+	 * \return if one key has an index more than the other key.
+	 */
+	bool operator>= (const Key_Press_Interface check_val);
 private:
 	bool pressed = false;
 	int val;

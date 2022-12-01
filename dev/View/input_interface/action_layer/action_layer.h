@@ -8,7 +8,7 @@
 #ifndef KEYBOARD_ACTION_LAYER_H
 #define KEYBOARD_ACTION_LAYER_H
 
-#include "../sys_interface/key_input_interface.h"
+#include "input_buffer.h"
 
 /** A map to house key code to KPI translation data */
 typedef std::map<int, KPI> Keyboard_Code_Map;
@@ -18,6 +18,7 @@ typedef std::function<void()> Keyboard_Event;
 /** Map for holding system specific keycodes to a common code */
 extern Keyboard_Code_Map master_code_map;
 
+extern Keyboard_Input_Buffer input_buffer;
 /**
  * Structure for storing on_press, on_hold, and on_release commands associated with a key stroke.
  */
@@ -65,10 +66,9 @@ public:
 	 */
 	void transition_from();
 
-
 private:
 	Keyboard_Code_Map code_map;
-
+	
 	
 };
 
