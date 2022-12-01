@@ -14,7 +14,9 @@ namespace
 		system_utilities::keyboard_utilities::Keyboard keyboard;
 		Message_Consumer* consumer = 0;
 		virtual void SetUp()
-		{ }
+		{ 
+			input_buffer.clear();
+		}
 		virtual void TearDown()
 		{
 
@@ -23,9 +25,19 @@ namespace
 	};
 }
 
-TEST_F(Keyboard_Buffer_Input, Buffer_Read)
+TEST_F(Keyboard_Buffer_Input, Input_Buffer_Clear)
 {
 
+	keyboard < KEY::A;
+	input_buffer.clear();
+	keyboard < KEY::B;
+
+	std::string read_buffer = input_buffer.get_buffer();
+	EXPECT_EQ(read_buffer, "b");
+}
+
+TEST_F(Keyboard_Buffer_Input, Buffer_Read_Alphabet)
+{
 	keyboard < KEY::A;
 	keyboard < KEY::B;
 	keyboard < KEY::C;
@@ -39,8 +51,27 @@ TEST_F(Keyboard_Buffer_Input, Buffer_Read)
 	keyboard < KEY::C;
 
 	std::string read_buffer = input_buffer.get_buffer();
-
 	EXPECT_EQ(read_buffer, "abcABCabc");
+}
 
+TEST_F(Keyboard_Buffer_Input, Buffer_Read_Number_Line)
+{
+	keyboard < KEY::NUM_0;
+	keyboard < KEY::NUM_1;
+	keyboard < KEY::NUM_2;
+
+	std::string read_buffer = input_buffer.get_buffer();
+	EXPECT_EQ(read_buffer, "012");
+
+}
+
+TEST_F(Keyboard_Buffer_Input, Buffer_Read_Number_Pad)
+{
+	keyboard < KEY::NUM_PAD::NUM_0;
+	keyboard < KEY::NUM_PAD::NUM_1;
+	keyboard < KEY::NUM_PAD::NUM_2;
+
+	std::string read_buffer = input_buffer.get_buffer();
+	EXPECT_EQ(read_buffer, "012");
 
 }

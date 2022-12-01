@@ -40,7 +40,7 @@ char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
         else if(key.second == KEY_STATE::RELEASED)
             shifted = false;
     }
-    if(ascii_chart_conversion > 31)
+    if(ascii_chart_conversion > 0)
     {
         val = key.first.index() + ascii_chart_conversion;
     }
