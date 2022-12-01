@@ -3,7 +3,7 @@
 
 #include "../test_utilities/pch.h"
 
-
+#include "../View/input_interface/action_layer/action_stack.h"
 
 namespace
 {
@@ -21,4 +21,26 @@ namespace
 			system_utilities::keyboard_utilities::tear_down();
 		}
 	};
+}
+
+TEST_F(Keyboard_Buffer_Input, Buffer_Read)
+{
+
+	keyboard < KEY::A;
+	keyboard < KEY::B;
+	keyboard < KEY::C;
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::L_SHIFT, 1);
+	keyboard < KEY::A;
+	keyboard < KEY::B;
+	keyboard < KEY::C;
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::L_SHIFT, 0);
+	keyboard < KEY::A;
+	keyboard < KEY::B;
+	keyboard < KEY::C;
+
+	std::string read_buffer = input_buffer.get_buffer();
+
+	EXPECT_EQ(read_buffer, "abcABCabc");
+
+
 }

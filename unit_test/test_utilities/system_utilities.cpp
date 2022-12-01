@@ -622,3 +622,9 @@ Keyboard_Interface* system_utilities::keyboard_utilities::Keyboard::get_interfac
 {
 	return buffer;
 }
+
+void system_utilities::keyboard_utilities::Keyboard::operator<(KPI key)
+{
+	buffer->action_stack.get_active_layer()->handle_event(key, 1);
+	buffer->action_stack.get_active_layer()->handle_event(key, 0);
+}

@@ -14,21 +14,24 @@ char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
 {
     char ascii_chart_conversion = 0;
     char val = 0;
-    if(key.first >= KEY::A && key.first <= KEY::Z)
+    if(key.first >= KEY::A && key.first <= KEY::NUM_PAD::NUM_9 && key.second == KEY_STATE::PRESSED)
     {
-        ascii_chart_conversion = 64;
-        if(!shifted)
+        if(key.first >= KEY::A && key.first <= KEY::Z)
         {
-            ascii_chart_conversion += 32;
+            ascii_chart_conversion = 64;
+            if(!shifted)
+            {
+                ascii_chart_conversion += 32;
+            }
         }
-    }
-    else if(key.first >= KEY::NUM_0 && key.first <= KEY::NUM_9)
-    {
-        ascii_chart_conversion = 48 - KEY::NUM_0.index();
-    }
-    else if(key.first >= KEY::NUM_PAD::NUM_0 && key.first <= KEY::NUM_PAD::NUM_9)
-    {
-        ascii_chart_conversion = 48 - KEY::NUM_PAD::NUM_0.index();
+        else if(key.first >= KEY::NUM_0 && key.first <= KEY::NUM_9)
+        {
+            ascii_chart_conversion = 48 - KEY::NUM_0.index();
+        }
+        else if(key.first >= KEY::NUM_PAD::NUM_0 && key.first <= KEY::NUM_PAD::NUM_9)
+        {
+            ascii_chart_conversion = 48 - KEY::NUM_PAD::NUM_0.index();
+        }
     }
     else if(key.first == KEY::L_SHIFT)
     {
