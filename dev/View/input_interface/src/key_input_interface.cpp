@@ -3,6 +3,7 @@
 
 #include <vector>
 
+KPI INVALID;
 KPI KEY::A;
 KPI KEY::B;
 KPI KEY::C;
@@ -55,7 +56,7 @@ KPI KEY::L_CTRL;
 KPI KEY::L_ALT;
 KPI KEY::TAB;
 
-int key_index = 1;
+int key_index = 0;
 
 Key_Press_Interface::Key_Press_Interface()
 {

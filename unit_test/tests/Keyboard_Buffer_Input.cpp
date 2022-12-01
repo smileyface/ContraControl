@@ -75,3 +75,11 @@ TEST_F(Keyboard_Buffer_Input, Buffer_Read_Number_Pad)
 	EXPECT_EQ(read_buffer, "012");
 
 }
+
+TEST_F(Keyboard_Buffer_Input, Action_Layer_KPI_ASCII_Conversion_Tests)
+{
+	keyboard < INVALID;
+
+	std::string read_buffer = input_buffer.get_buffer();
+	EXPECT_EQ(read_buffer, "");
+}

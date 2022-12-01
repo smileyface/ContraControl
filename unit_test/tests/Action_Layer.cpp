@@ -204,4 +204,3 @@ TEST_F(Action_Layer_Test, Action_Layer_Dont_Press_The_Button)
 
 	EXPECT_FALSE(the_good_one);
 }
-

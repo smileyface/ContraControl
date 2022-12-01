@@ -36,12 +36,10 @@ TEST_F(Action_Stack_Test, Event_Handle_Multilayer_Press_Button)
 																				  the_good_one = true;
 																			  });
 	keyboard.get_interface()->action_stack.change_action_layers(0);
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
+	keyboard < KEY::A;
 	EXPECT_FALSE(the_good_one) << "The wrong layer was called";
 
 	keyboard.get_interface()->action_stack.change_action_layers(new_layer_index);
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
+	keyboard < KEY::A;
 	EXPECT_TRUE(the_good_one) << "The on_press was not preserved";
 }

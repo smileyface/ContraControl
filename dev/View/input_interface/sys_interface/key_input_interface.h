@@ -93,6 +93,8 @@ private:
 /** Shorthand for Key_Press_Interface */
 typedef Key_Press_Interface KPI;
 
+/** An invalid key for testing */
+extern KPI INVALID;
 /** Common codes for keys */
 namespace KEY
 {
