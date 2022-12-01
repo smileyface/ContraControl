@@ -182,3 +182,26 @@ TEST_F(Action_Layer_Test, Action_Layer_On_Hold_On_New_Layer)
 	EXPECT_TRUE(the_good_one) << "The overridden function was not called";
 }
 
+TEST_F(Action_Layer_Test, Action_Layer_Dont_Press_The_Button)
+{
+	bool the_good_one = false;
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_press(KEY::A,
+																			[&the_good_one] () mutable
+																			{
+																				the_good_one = true;
+																			});
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_hold(KEY::A,
+																		   [&the_good_one] () mutable
+																		   {
+																			   the_good_one = true;
+																		   });
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
+																			  [&the_good_one] () mutable
+																			  {
+																				  the_good_one = true;
+																			  });
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
+
+	EXPECT_FALSE(the_good_one);
+}
+
