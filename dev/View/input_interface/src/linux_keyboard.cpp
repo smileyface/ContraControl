@@ -157,7 +157,13 @@ void Linux_Keyboard::readEv()
 		if(keyboard_ev->type & EV_KEY)
 		{
 			std::lock_guard<std::mutex> lock(keyboard_mutex);
-			action_stack.get_active_layer()->handle_event(keyboard_ev->code, keyboard_ev->value);
+			KPI pressed_key;
+			for(auto i : master_code_map)
+			{
+				if(i.second.get_code() == keyboard_ev->code)
+					pressed_key = i.second;
+			}
+			action_stack.get_active_layer()->handle_event(pressed_key, keyboard_ev->value);
 		}
 	}
 

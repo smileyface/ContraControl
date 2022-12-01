@@ -26,11 +26,6 @@ class Key_Press_Interface
 {
 public:
 	Key_Press_Interface();
-	/**
-	 * Constructor for defining common keycode.
-	 * \param index common code.
-	 */
-	Key_Press_Interface(int index);
 
 	/**
 	 * Set the system key code.
@@ -97,9 +92,6 @@ private:
 };
 /** Shorthand for Key_Press_Interface */
 typedef Key_Press_Interface KPI;
-
-/** TODO: Implement KPI to ASCII conversion*/
-//char KPI_to_acsii(std::pair<KPI, KEY_STATE> key_to_convert);
 
 /** Common codes for keys */
 namespace KEY
