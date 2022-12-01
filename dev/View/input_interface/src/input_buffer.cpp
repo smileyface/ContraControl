@@ -14,7 +14,7 @@ char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
 {
     char ascii_chart_conversion = 0;
     char val = 0;
-    if(key.first >= KEY::A && key.first <= KEY::NUM_PAD::NUM_9 && key.second == KEY_STATE::PRESSED)
+    if((key.first >= KEY::A && key.first <= KEY::NUM_PAD::NUM_9) && key.second == KEY_STATE::PRESSED)
     {
         if(key.first >= KEY::A && key.first <= KEY::Z)
         {

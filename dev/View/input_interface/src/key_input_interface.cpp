@@ -55,12 +55,6 @@ KPI KEY::L_CTRL(49);
 KPI KEY::L_ALT(50);
 KPI KEY::TAB(51);
 
-
-std::vector<KPI> parse_input(char)
-{
-    return std::vector<KPI>();
-}
-
 Key_Press_Interface::Key_Press_Interface()
 {
     on_press = [] ()
