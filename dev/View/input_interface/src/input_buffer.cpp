@@ -10,38 +10,46 @@ Keyboard_Input_Buffer::~Keyboard_Input_Buffer()
 
 bool shifted = false;
 
-char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
+char get_ascii_chart_conversion(KPI key, KEY_STATE state)
 {
     char ascii_chart_conversion = 0;
-    char val = 0;
-    if(key.first >= KEY::A && key.first <= KEY::Z)
+    if(key >= KEY::A && key <= KEY::Z)
     {
-        if(key.second == KEY_STATE::PRESSED)
+        if(state == KEY_STATE::PRESSED)
         {
-            ascii_chart_conversion = 64;
+            ascii_chart_conversion = 65 - KEY::A.index();
             if(!shifted)
             {
                 ascii_chart_conversion += 32;
             }
         }
     }
-    else if(key.first >= KEY::NUM_0 && key.first <= KEY::NUM_9)
+    if(key >= KEY::NUM_0 && key <= KEY::NUM_9)
     {
-        if(key.second == KEY_STATE::PRESSED)
+        if(state == KEY_STATE::PRESSED)
             ascii_chart_conversion = 48 - KEY::NUM_0.index();
     }
-    else if(key.first >= KEY::NUM_PAD::NUM_0 && key.first <= KEY::NUM_PAD::NUM_9)
+    if(key >= KEY::NUM_PAD::NUM_0 && key <= KEY::NUM_PAD::NUM_9)
     {
-        if(key.second == KEY_STATE::PRESSED)
+        if(state == KEY_STATE::PRESSED)
             ascii_chart_conversion = 48 - KEY::NUM_PAD::NUM_0.index();
     }
-    else if(key.first == KEY::L_SHIFT)
+    return ascii_chart_conversion;
+}
+
+char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
+{
+    char ascii_chart_conversion = get_ascii_chart_conversion(key.first, key.second);
+    char val = 0;
+
+    if(key.first == KEY::L_SHIFT)
     {
         if(key.second == KEY_STATE::PRESSED)
             shifted = true;
-        else if(key.second == KEY_STATE::RELEASED)
+        if(key.second == KEY_STATE::RELEASED)
             shifted = false;
     }
+
     if(ascii_chart_conversion > 0)
     {
         val = key.first.index() + ascii_chart_conversion;

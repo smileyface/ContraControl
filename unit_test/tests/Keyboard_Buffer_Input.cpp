@@ -78,7 +78,7 @@ TEST_F(Keyboard_Buffer_Input, Buffer_Read_Number_Pad)
 
 TEST_F(Keyboard_Buffer_Input, Action_Layer_KPI_ASCII_Conversion_Tests)
 {
-	keyboard < INVALID;
+	input_buffer.add(INVALID, KEY_STATE::PRESSED);
 
 	std::string read_buffer = input_buffer.get_buffer();
 	EXPECT_EQ(read_buffer, "");
