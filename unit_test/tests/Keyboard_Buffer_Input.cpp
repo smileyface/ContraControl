@@ -63,6 +63,17 @@ TEST_F(Keyboard_Buffer_Input, Buffer_Read_Number_Line)
 	std::string read_buffer = input_buffer.get_buffer();
 	EXPECT_EQ(read_buffer, "012");
 
+	input_buffer.clear();
+
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::L_SHIFT, 1);
+	keyboard < KEY::NUM_0;
+	keyboard < KEY::NUM_1;
+	keyboard < KEY::NUM_2;
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::L_SHIFT, 0);
+
+	read_buffer = input_buffer.get_buffer();
+	EXPECT_EQ(read_buffer, ")!@");
+
 }
 
 TEST_F(Keyboard_Buffer_Input, Buffer_Read_Number_Pad)

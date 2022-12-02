@@ -10,6 +10,53 @@ Keyboard_Input_Buffer::~Keyboard_Input_Buffer()
 
 bool shifted = false;
 
+char get_special_character_num_line(KPI key)
+{
+    char character = 0;
+    if(key == KEY::NUM_0)
+    {
+        character = 41;
+    }
+    else if(key == KEY::NUM_1)
+    {
+        character = 33;
+    }
+    else if(key == KEY::NUM_2)
+    {
+        character = 64;
+    }
+    else if(key == KEY::NUM_3)
+    {
+        character = 35;
+    }
+    else if(key == KEY::NUM_4)
+    {
+        character = 36;
+    }
+    else if(key == KEY::NUM_5)
+    {
+        character = 37;
+    }
+    else if(key == KEY::NUM_6)
+    {
+        character = 94;
+    }
+    else if(key == KEY::NUM_7)
+    {
+        character = 38;
+    }
+    else if(key == KEY::NUM_8)
+    {
+        character = 42;
+    }
+    else if(key == KEY::NUM_9)
+    {
+        character = 40;
+    }
+    character -= key.index();
+    return character;
+}
+
 char get_ascii_chart_conversion(KPI key, KEY_STATE state)
 {
     char ascii_chart_conversion = 0;
@@ -27,7 +74,12 @@ char get_ascii_chart_conversion(KPI key, KEY_STATE state)
     if(key >= KEY::NUM_0 && key <= KEY::NUM_9)
     {
         if(state == KEY_STATE::PRESSED)
-            ascii_chart_conversion = 48 - KEY::NUM_0.index();
+        {
+            if(shifted)
+                ascii_chart_conversion = get_special_character_num_line(key);
+            else
+                ascii_chart_conversion = 48 - KEY::NUM_0.index();
+        }
     }
     if(key >= KEY::NUM_PAD::NUM_0 && key <= KEY::NUM_PAD::NUM_9)
     {
@@ -36,6 +88,8 @@ char get_ascii_chart_conversion(KPI key, KEY_STATE state)
     }
     return ascii_chart_conversion;
 }
+
+
 
 char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
 {
