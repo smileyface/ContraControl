@@ -18,6 +18,7 @@ typedef std::function<void()> Keyboard_Event;
 /** Map for holding system specific keycodes to a common code */
 extern Keyboard_Code_Map master_code_map;
 
+/** Buffer for the keyboard input. */
 extern Keyboard_Input_Buffer input_buffer;
 /**
  * Structure for storing on_press, on_hold, and on_release commands associated with a key stroke.
