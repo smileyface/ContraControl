@@ -102,4 +102,12 @@ TEST_F(Keyboard_Buffer_Input, Action_Layer_KPI_ASCII_Conversion_Tests)
 
 	std::string read_buffer = input_buffer.get_buffer();
 	EXPECT_EQ(read_buffer, "");
+
+	keyboard < KEY::ENTER;
+	read_buffer = input_buffer.get_buffer();
+#ifdef WIN32
+	EXPECT_EQ(read_buffer, "\r\n");
+#elif __linux__
+	EXPECT_EQ(read_buffer, "\n");
+#endif // WIN32
 }

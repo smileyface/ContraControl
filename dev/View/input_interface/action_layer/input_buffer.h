@@ -37,6 +37,7 @@ public:
 	 * Clear the buffer.
 	 */
 	void clear();
+
 private:
 	/** Buffer containter */
 	std::vector<std::pair<KPI, KEY_STATE>> input_buffer;

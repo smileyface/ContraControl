@@ -71,7 +71,7 @@ char get_ascii_chart_conversion(KPI key, KEY_STATE state)
             }
         }
     }
-    if(key >= KEY::NUM_0 && key <= KEY::NUM_9)
+    else if(key >= KEY::NUM_0 && key <= KEY::NUM_9)
     {
         if(state == KEY_STATE::PRESSED)
         {
@@ -81,7 +81,7 @@ char get_ascii_chart_conversion(KPI key, KEY_STATE state)
                 ascii_chart_conversion = 48 - KEY::NUM_0.index();
         }
     }
-    if(key >= KEY::NUM_PAD::NUM_0 && key <= KEY::NUM_PAD::NUM_9)
+    else if(key >= KEY::NUM_PAD::NUM_0 && key <= KEY::NUM_PAD::NUM_9)
     {
         if(state == KEY_STATE::PRESSED)
             ascii_chart_conversion = 48 - KEY::NUM_PAD::NUM_0.index();
@@ -95,6 +95,10 @@ char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
 {
     char ascii_chart_conversion = get_ascii_chart_conversion(key.first, key.second);
     char val = 0;
+    if(ascii_chart_conversion > 0)
+    {
+        val = key.first.index() + ascii_chart_conversion;
+    }
 
     if(key.first == KEY::L_SHIFT)
     {
@@ -104,10 +108,11 @@ char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
             shifted = false;
     }
 
-    if(ascii_chart_conversion > 0)
+    if(key.first == KEY::ENTER && key.second == KEY_STATE::PRESSED)
     {
-        val = key.first.index() + ascii_chart_conversion;
+        val = 13;
     }
+
     return val;
 }
 
@@ -119,11 +124,23 @@ std::string Keyboard_Input_Buffer::get_buffer()
         char current = KPI_to_ascii(i);
         if(current != 0)
         {
-            return_value += current;
+            if(current == 13)
+            {
+            #ifdef WIN32
+                return_value += "\r\n";
+            #elif __linux__
+                return_value += "\n";
+            #endif
+            }
+            else
+            {
+                return_value += current;
+            }
         }
     }
 	return return_value;
 }
+
 
 void Keyboard_Input_Buffer::add(KPI key, KEY_STATE state)
 { 
