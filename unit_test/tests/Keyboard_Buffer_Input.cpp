@@ -29,10 +29,12 @@ TEST_F(Keyboard_Buffer_Input, Input_Buffer_Clear)
 {
 
 	keyboard < KEY::A;
+	std::string read_buffer = input_buffer.get_buffer();
+	EXPECT_EQ(read_buffer, "a");
 	input_buffer.clear();
 	keyboard < KEY::B;
 
-	std::string read_buffer = input_buffer.get_buffer();
+	read_buffer = input_buffer.get_buffer();
 	EXPECT_EQ(read_buffer, "b");
 }
 
@@ -69,10 +71,17 @@ TEST_F(Keyboard_Buffer_Input, Buffer_Read_Number_Line)
 	keyboard < KEY::NUM_0;
 	keyboard < KEY::NUM_1;
 	keyboard < KEY::NUM_2;
+	keyboard < KEY::NUM_3;
+	keyboard < KEY::NUM_4;
+	keyboard < KEY::NUM_5;
+	keyboard < KEY::NUM_6;
+	keyboard < KEY::NUM_7;
+	keyboard < KEY::NUM_8;
+	keyboard < KEY::NUM_9;
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::L_SHIFT, 0);
 
 	read_buffer = input_buffer.get_buffer();
-	EXPECT_EQ(read_buffer, ")!@");
+	EXPECT_EQ(read_buffer, ")!@#$%^&*(");
 
 }
 
