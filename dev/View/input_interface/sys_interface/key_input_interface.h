@@ -26,11 +26,6 @@ class Key_Press_Interface
 {
 public:
 	Key_Press_Interface();
-	/**
-	 * Constructor for defining common keycode.
-	 * \param index common code.
-	 */
-	Key_Press_Interface(int index);
 
 	/**
 	 * Set the system key code.
@@ -75,6 +70,20 @@ public:
 	 * \return if the two keys are the same.
 	 */
 	bool operator==(const Key_Press_Interface check_val);
+
+	/**
+	 * Less than or equal to operator.
+	 * \param check_val other key to check against.
+	 * \return if one key has an index less than the other key.
+	 */
+	bool operator<= (const Key_Press_Interface check_val);
+
+	/**
+	 * More than or equal to operator.
+	 * \param check_val other key to check against.
+	 * \return if one key has an index more than the other key.
+	 */
+	bool operator>= (const Key_Press_Interface check_val);
 private:
 	bool pressed = false;
 	int val;
@@ -84,9 +93,8 @@ private:
 /** Shorthand for Key_Press_Interface */
 typedef Key_Press_Interface KPI;
 
-/** TODO: Implement KPI to ASCII conversion*/
-//char KPI_to_acsii(std::pair<KPI, KEY_STATE> key_to_convert);
-
+/** An invalid key for testing */
+extern KPI INVALID;
 /** Common codes for keys */
 namespace KEY
 {

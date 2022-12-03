@@ -8,7 +8,8 @@ set(FORMAT_SOURCE format/src/format.cpp
 
 set(INPUT_ACTION_LAYERS_INCLUDES input_interface/action_layer/action_layer.h
                                  input_interface/action_layer/action_stack.h
-                                 input_interface/action_layer/predefined_layer.h)
+                                 input_interface/action_layer/predefined_layer.h
+                                 input_interface/action_layer/input_buffer.h)
 
 set(INPUT_INTERFACE_INCLUDES ${INPUT_ACTION_LAYERS_INCLUDES}
                              input_interface/sys_interface/key_input_interface.h
@@ -24,7 +25,8 @@ set(INPUT_INTERFACE_SOURCE input_interface/src/key_input_interface.cpp
                            input_interface/src/keyboard_interface.cpp 
                            input_interface/src/action_layer.cpp
                            input_interface/src/predefined_layer.cpp 
-                           input_interface/src/action_stack.cpp)
+                           input_interface/src/action_stack.cpp 
+                           input_interface/src/input_buffer.cpp)
 
 set(VIEW_TYPE_INCLUDES view/view_type/option_view_type.h
                        view/view_type/log_view_type.h)

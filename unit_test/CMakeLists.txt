@@ -6,11 +6,15 @@ set(DEVICE_TEST_FILES "tests/Device.cpp"
                       "tests/Network_Messages.cpp" 
                       "tests/Errors.cpp" 
                       "tests/Internal_Messages.cpp"
-                      "tests/Command_View_Message.cpp" "tests/Input_System.cpp")
+                      "tests/Command_View_Message.cpp" 
+                      "tests/Action_Layer.cpp"
+                      "tests/Action_Stack.cpp"
+                      "tests/Keyboard.cpp" 
+                      "tests/Keyboard_Buffer_Input.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h"
-                           "test_utilities/system_testings.h"
-                           "test_utilities/system_testings.cpp"
+                           "test_utilities/system_utilities.h"
+                           "test_utilities/system_utilities.cpp"
                            "test_utilities/module_mains.h"
                            "test_utilities/test_utilities.h"
                            "test_utilities/test_utilities.cpp"

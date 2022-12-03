@@ -2,6 +2,8 @@
 
 Keyboard_Code_Map master_code_map;
 
+Keyboard_Input_Buffer input_buffer;
+
 Action_Layer::Action_Layer()
 {
 	code_map = {};
@@ -50,19 +52,7 @@ void Action_Layer::set_on_hold(KPI key, Keyboard_Event func)
 
 void Action_Layer::handle_event(KPI key, int event_value)
 { 
-	int index = -1;
-	for(auto i : code_map)
-	{
-		if(i.second == key)
-		{
-			index = i.first;
-			break;
-		}
-	}
-	if(index >= 0)
-	{
-		code_map[index] = event_value;
-	}
+	code_map[key.index()] = event_value;
 }
 
 
@@ -73,5 +63,5 @@ void Action_Layer::transition_from()
 
 void Action_Layer::transition_to()
 {
-
+	input_buffer.clear();
 }

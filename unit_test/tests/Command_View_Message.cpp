@@ -1,5 +1,5 @@
 #include "../test_utilities/test_utilities.h"
-#include "../test_utilities/system_testings.h"
+#include "../test_utilities/system_utilities.h"
 
 #include "../test_utilities/pch.h"
 
@@ -52,7 +52,7 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	Message_Relay::get_instance()->push(opm);
 	system_utilities::keyboard_utilities::Keyboard keyboard;
 	//NEED TO ADD BUFFER INPUT INTERFACE
-	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::NUM_0);
+	keyboard <KEY::NUM_0;
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	bool message_in_view = false;
 	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))

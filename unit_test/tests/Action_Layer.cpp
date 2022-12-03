@@ -1,4 +1,4 @@
-#include "../test_utilities/system_testings.h"
+#include "../test_utilities/system_utilities.h"
 #include "../test_utilities/test_utilities.h"
 
 #include "../test_utilities/pch.h"
@@ -7,15 +7,13 @@
 
 namespace
 {
-	class Input_System_Test : public ::testing::Test
+	class Action_Layer_Test : public ::testing::Test
 	{
 	public:
 
 		system_utilities::keyboard_utilities::Keyboard keyboard;
-		Message_Consumer* consumer = 0;
 		virtual void SetUp()
 		{
-			system_utilities::keyboard_utilities::setup();
 		}
 		virtual void TearDown()
 		{
@@ -25,7 +23,7 @@ namespace
 	};
 }
 
-TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Press)
+TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Test_On_Press)
 {
 	bool is_pressed = false;
 	keyboard.get_interface()->action_stack.get_active_layer()->set_on_press(KEY::A, 
@@ -38,7 +36,7 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Press)
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
 }
 
-TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Hold)
+TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Test_On_Hold)
 {
 	bool is_held = false;
 	keyboard.get_interface()->action_stack.get_active_layer()->set_on_hold(KEY::A,
@@ -52,7 +50,7 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Hold)
 	EXPECT_TRUE(is_held) << "Hold was not handled";
 }
 
-TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Release)
+TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Test_On_Release)
 {
 	bool is_released = false;
 	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
@@ -66,7 +64,7 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Test_On_Release)
 	EXPECT_TRUE(is_released) << "Release was not handled";
 }
 
-TEST_F(Input_System_Test, Action_Layer_Event_Handle_Overridden_On_Press)
+TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Overridden_On_Press)
 {
 	bool the_good_one = false;
 	bool the_bad_one = false;
@@ -87,7 +85,7 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Overridden_On_Press)
 	EXPECT_TRUE(the_good_one) << "The overridden function was not called";
 }
 
-TEST_F(Input_System_Test, Action_Layer_Event_Handle_Overridden_On_Hold)
+TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Overridden_On_Hold)
 {
 	bool the_good_one = false;
 	bool the_bad_one = false;
@@ -109,7 +107,7 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Overridden_On_Hold)
 	EXPECT_TRUE(the_good_one) << "The overridden function was not called";
 }
 
-TEST_F(Input_System_Test, Action_Layer_Event_Handle_Overridden_On_Release)
+TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Overridden_On_Release)
 {
 	bool the_good_one = false;
 	bool the_bad_one = false;
@@ -130,7 +128,7 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Overridden_On_Release)
 	EXPECT_TRUE(the_good_one) << "The overridden function was not called";
 }
 
-TEST_F(Input_System_Test, Action_Layer_Event_Handle_Multiple_Buttons)
+TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Multiple_Buttons)
 {
 	bool the_good_one = false;
 	bool the_bad_one = false;
@@ -151,7 +149,7 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Multiple_Buttons)
 	EXPECT_TRUE(the_good_one) << "The overridden function was not called";
 }
 
-TEST_F(Input_System_Test, Action_Layer_Event_Handle_Press_Unhandled_Button)
+TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Press_Unhandled_Button)
 {
 	bool the_good_one = false;
 	bool the_bad_one = false;
@@ -166,53 +164,43 @@ TEST_F(Input_System_Test, Action_Layer_Event_Handle_Press_Unhandled_Button)
 	EXPECT_FALSE(the_good_one) << "The overridden function was not called";
 }
 
-TEST_F(Input_System_Test, Multiple_Action_Layers_Event_Handle_Press_Button)
+TEST_F(Action_Layer_Test, Action_Layer_On_Hold_On_New_Layer)
 {
 	bool the_good_one = false;
-
+	bool the_bad_one = false;
 	int new_layer_index = keyboard.get_interface()->action_stack.add_action_layer();
 	keyboard.get_interface()->action_stack.change_action_layers(new_layer_index);
-	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_hold(KEY::A,
 																		   [&the_good_one] () mutable
 																		   {
 																				  the_good_one = true;
 																		   });
-	keyboard.get_interface()->action_stack.change_action_layers(0);
+
+	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
-	EXPECT_FALSE(the_good_one) << "The wrong layer was called";
-	
-	keyboard.get_interface()->action_stack.change_action_layers(new_layer_index);
-	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
+	EXPECT_TRUE(the_good_one) << "The overridden function was not called";
+}
+
+TEST_F(Action_Layer_Test, Action_Layer_Dont_Press_The_Button)
+{
+	bool the_good_one = false;
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_press(KEY::A,
+																			[&the_good_one] () mutable
+																			{
+																				the_good_one = true;
+																			});
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_hold(KEY::A,
+																		   [&the_good_one] () mutable
+																		   {
+																			   the_good_one = true;
+																		   });
+	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
+																			  [&the_good_one] () mutable
+																			  {
+																				  the_good_one = true;
+																			  });
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
-	EXPECT_TRUE(the_good_one) << "The on_press was not preserved";
-}
 
-
-
-TEST_F(Input_System_Test, Connection_Test)
-{
-	//Github Actions has input permission issues, so I'm not running that right now.
-	if(!system_utilities::CI && !system_utilities::LINUX)
-	{
-		EXPECT_TRUE(keyboard.keyboard_present());
-	}
-}
-
-
-TEST_F(Input_System_Test, Capture_Test)
-{
-	//Github Actions has input permission issues, so I'm not running that right now.
-	if(!system_utilities::CI && !system_utilities::LINUX)
-	{
-		bool is_pressed = false;
-		keyboard.set_key_operation(KEY::A, [&is_pressed] () mutable
-								   {
-									   is_pressed = true;
-								   });
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		EXPECT_TRUE(is_pressed);
-	};
+	EXPECT_FALSE(the_good_one);
 }

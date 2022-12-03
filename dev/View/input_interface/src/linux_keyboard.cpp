@@ -67,6 +67,7 @@ void Linux_Keyboard::initalize_codes()
 	master_code_map[KEY_LEFTSHIFT] = KEY::L_SHIFT;
 	master_code_map[KEY_LEFTALT] = KEY::L_ALT;
 	master_code_map[KEY_LEFTCTRL] = KEY::L_CTRL;
+	master_code_map[KEY_TAB] = KEY::TAB;
 
 	for(Keyboard_Code_Map::iterator i = master_code_map.begin(); i != master_code_map.end(); i++)
 	{
@@ -83,7 +84,6 @@ Linux_Keyboard::Linux_Keyboard()
 
 	initalize_codes();
 	action_stack.setup_action_layers();
-	connect_to_keyboard();
 }
 
 Linux_Keyboard::~Linux_Keyboard()
@@ -158,7 +158,13 @@ void Linux_Keyboard::readEv()
 		if(keyboard_ev->type & EV_KEY)
 		{
 			std::lock_guard<std::mutex> lock(keyboard_mutex);
-			action_stack.get_active_layer()->handle_event(keyboard_ev->code, keyboard_ev->value);
+			KPI pressed_key;
+			for(auto i : master_code_map)
+			{
+				if(i.second.get_code() == keyboard_ev->code)
+					pressed_key = i.second;
+			}
+			action_stack.get_active_layer()->handle_event(pressed_key, keyboard_ev->value);
 		}
 	}
 

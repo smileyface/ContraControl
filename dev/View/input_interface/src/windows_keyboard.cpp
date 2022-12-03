@@ -62,6 +62,7 @@ void Windows_Keyboard::initalize_codes()
 	master_code_map[VK_LSHIFT] = KEY::L_SHIFT;
 	master_code_map[VK_LMENU] = KEY::L_ALT;
 	master_code_map[VK_LCONTROL] = KEY::L_CTRL;
+	master_code_map[VK_TAB] = KEY::TAB;
 
 	for(Keyboard_Code_Map::iterator i = master_code_map.begin(); i != master_code_map.end(); i++)
 	{
@@ -73,7 +74,6 @@ Windows_Keyboard::Windows_Keyboard()
 {
 	initalize_codes();
 	action_stack.setup_action_layers();
-	connect_to_keyboard();
 }
 
 Windows_Keyboard::~Windows_Keyboard()

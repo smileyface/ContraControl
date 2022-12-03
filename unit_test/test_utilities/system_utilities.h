@@ -41,6 +41,7 @@ namespace system_utilities
 			void operator<<(const std::string& input);
 			void set_key_operation(KPI key, std::function<void()> func);
 			bool keyboard_present();
+			void operator<(const KPI key_to_press);
 			Keyboard_Interface* get_interface();
 		private:
 			Keyboard_Interface* buffer;
