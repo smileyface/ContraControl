@@ -110,4 +110,10 @@ TEST_F(Keyboard_Buffer_Input, Action_Layer_KPI_ASCII_Conversion_Tests)
 #elif __linux__
 	EXPECT_EQ(read_buffer, "\n");
 #endif // WIN32
+
+	input_buffer.clear();
+	keyboard < KEY::TAB;
+	read_buffer = input_buffer.get_buffer();
+
+	EXPECT_EQ(read_buffer, "\t");
 }

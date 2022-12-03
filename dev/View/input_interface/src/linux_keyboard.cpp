@@ -67,6 +67,7 @@ void Linux_Keyboard::initalize_codes()
 	master_code_map[KEY_LEFTSHIFT] = KEY::L_SHIFT;
 	master_code_map[KEY_LEFTALT] = KEY::L_ALT;
 	master_code_map[KEY_LEFTCTRL] = KEY::L_CTRL;
+	master_code_map[KEY_TAB] = KEY::TAB;
 
 	for(Keyboard_Code_Map::iterator i = master_code_map.begin(); i != master_code_map.end(); i++)
 	{

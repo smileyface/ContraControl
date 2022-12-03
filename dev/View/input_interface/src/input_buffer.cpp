@@ -112,6 +112,10 @@ char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
     {
         val = 13;
     }
+    else if(key.first == KEY::TAB && key.second == KEY_STATE::PRESSED)
+    {
+        val = 9;
+    }
 
     return val;
 }
@@ -131,6 +135,10 @@ std::string Keyboard_Input_Buffer::get_buffer()
             #elif __linux__
                 return_value += "\n";
             #endif
+            }
+            else if(current == 9)
+            {
+                return_value += "\t";
             }
             else
             {
