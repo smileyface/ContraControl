@@ -18,7 +18,8 @@
 enum class KEY_STATE
 {
 	PRESSED, ///<Key is pressed
-	RELEASED ///<Key is released
+	RELEASED, ///<Key is released
+	HELD ///<Key is held
 };
 
 /** Interface for individual keys */
@@ -59,6 +60,8 @@ public:
 	 */
 	int index();
 
+	KEY_STATE get_state();
+
 	/**
 	 * set state of button
 	 * \param new_val State of the button.
@@ -85,7 +88,7 @@ public:
 	 */
 	bool operator>= (const Key_Press_Interface check_val);
 private:
-	bool pressed = false;
+	KEY_STATE pressed = KEY_STATE::RELEASED;
 	int val;
 	char code;
 	int index_ = -1;

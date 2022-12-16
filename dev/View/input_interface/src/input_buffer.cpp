@@ -116,7 +116,6 @@ char KPI_to_ascii(std::pair<KPI, KEY_STATE> key)
     {
         val = 9;
     }
-
     return val;
 }
 
@@ -146,7 +145,8 @@ std::string Keyboard_Input_Buffer::get_buffer()
             }
         }
     }
-	return return_value;
+    input_buffer.clear();
+    return return_value;
 }
 
 

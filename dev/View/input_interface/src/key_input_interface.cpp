@@ -67,26 +67,27 @@ Key_Press_Interface::Key_Press_Interface()
     on_hold = [] ()
     { };
     val = -1;
-    pressed = false;
+    pressed = KEY_STATE::RELEASED;
     index_ = key_index;
     key_index++;
 }
 
 void Key_Press_Interface::operator=(const int new_val)
 {
-    if(!pressed && new_val)
+    if(pressed == KEY_STATE::RELEASED && new_val)
     {
         on_press();
-        pressed = true;
+        pressed = KEY_STATE::PRESSED;
     }
-    else if(pressed && new_val)
+    else if(pressed == KEY_STATE::PRESSED && new_val)
     {
         on_hold();
+        pressed = KEY_STATE::HELD;
     }
-    else if(pressed && !new_val)
+    else if(!(pressed == KEY_STATE::RELEASED) && !new_val)
     {
         on_release();
-        pressed = false;
+        pressed = KEY_STATE::RELEASED;
     }
 }
 
@@ -123,4 +124,9 @@ void Key_Press_Interface::set_code(char value)
 char Key_Press_Interface::get_code()
 {
     return code;
+}
+
+KEY_STATE Key_Press_Interface::get_state()
+{
+    return pressed;
 }

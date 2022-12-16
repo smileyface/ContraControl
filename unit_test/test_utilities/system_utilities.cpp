@@ -169,6 +169,32 @@ void enable_keys(int fd)
 {
 	ioctl(fd, UI_SET_EVBIT, EV_KEY);
 	ioctl(fd, UI_SET_KEYBIT, KEY_A);
+	ioctl(fd, UI_SET_KEYBIT, KEY_B);
+	ioctl(fd, UI_SET_KEYBIT, KEY_C);
+	ioctl(fd, UI_SET_KEYBIT, KEY_D);
+	ioctl(fd, UI_SET_KEYBIT, KEY_E);
+	ioctl(fd, UI_SET_KEYBIT, KEY_F);
+	ioctl(fd, UI_SET_KEYBIT, KEY_G);
+	ioctl(fd, UI_SET_KEYBIT, KEY_H);
+	ioctl(fd, UI_SET_KEYBIT, KEY_I);
+	ioctl(fd, UI_SET_KEYBIT, KEY_J);
+	ioctl(fd, UI_SET_KEYBIT, KEY_K);
+	ioctl(fd, UI_SET_KEYBIT, KEY_L);
+	ioctl(fd, UI_SET_KEYBIT, KEY_M);
+	ioctl(fd, UI_SET_KEYBIT, KEY_N);
+	ioctl(fd, UI_SET_KEYBIT, KEY_O);
+	ioctl(fd, UI_SET_KEYBIT, KEY_P);
+	ioctl(fd, UI_SET_KEYBIT, KEY_Q);
+	ioctl(fd, UI_SET_KEYBIT, KEY_R);
+	ioctl(fd, UI_SET_KEYBIT, KEY_S);
+	ioctl(fd, UI_SET_KEYBIT, KEY_T);
+	ioctl(fd, UI_SET_KEYBIT, KEY_U);
+	ioctl(fd, UI_SET_KEYBIT, KEY_V);
+	ioctl(fd, UI_SET_KEYBIT, KEY_W);
+	ioctl(fd, UI_SET_KEYBIT, KEY_X);
+	ioctl(fd, UI_SET_KEYBIT, KEY_Y);
+	ioctl(fd, UI_SET_KEYBIT, KEY_Z);
+	ioctl(fd, UI_SET_KEYBIT, KEY_ENTER);
 }
 #endif
 
@@ -235,6 +261,7 @@ void system_utilities::keyboard_utilities::press_button(int key)
 	std::this_thread::sleep_for(std::chrono::milliseconds(40));
 	ip.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &ip, sizeof(INPUT));
+	std::this_thread::sleep_for(std::chrono::milliseconds(40));
 }
 #endif
 
@@ -584,6 +611,8 @@ char system_utilities::keyboard_utilities::get_char_from_kpi(KPI key)
 		return KEY_KP8;
 	else if(key == KEY::NUM_PAD::NUM_9)
 		return KEY_KP9;
+	else if(key == KEY::ENTER)
+		return KEY_ENTER;
 	return 255;
 }
 #endif
@@ -595,6 +624,7 @@ void system_utilities::keyboard_utilities::Keyboard::operator<<(const std::strin
 	{
 		system_utilities::keyboard_utilities::press_button(i);
 	}
+
 	system_utilities::keyboard_utilities::press_button(system_utilities::keyboard_utilities::get_char_from_kpi(KEY::ENTER));
 }
 
