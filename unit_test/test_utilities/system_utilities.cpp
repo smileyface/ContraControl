@@ -144,6 +144,7 @@ void system_utilities::network_utilities::setup()
 		std::string i;
 		if(std::getenv("CI") != NULL)
 		{
+			CI = true;
 			LOG_INFO("On a CI machine", "Test Setup");
 		#ifdef __linux__
 			network::init_network_interfaces("nat");
