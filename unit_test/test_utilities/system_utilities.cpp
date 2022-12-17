@@ -216,7 +216,7 @@ void system_utilities::keyboard_utilities::setup()
 		ioctl(fd, UI_DEV_SETUP, &usetup);
 		ioctl(fd, UI_DEV_CREATE);
 		sleep(1);
-		testing_utilities::input_utilities::connect_keyboard("/dev/input/event0");
+		testing_utilities::input_utilities::connect_keyboard("/dev/uinput");
 		return;
 	}
 	else
