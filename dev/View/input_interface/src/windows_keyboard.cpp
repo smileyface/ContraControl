@@ -3,6 +3,7 @@
 #include "../sys_interface/windows_keyboard.h"
 #include "../sys_interface/key_input_interface.h"
 #include "../action_layer/action_layer.h"
+#include "Messaging/message_relay.h"
 
 #include <Windows.h>
 #include <vector>

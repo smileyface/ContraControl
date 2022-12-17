@@ -71,7 +71,7 @@ TEST_F(Keyboard_Test, Keyboard_Input_Simple)
 	EXPECT_EQ(test1, "test");
 }
 
-TEST_F(Keyboard_Test, Keyboard_Input_Double)
+TEST_F(Keyboard_Test, Keyboard_Input_Double_Identical_Character)
 {
 	std::string test1 = "";
 	std::thread keyboard_test_thread = std::thread([&test1, this] () mutable
@@ -89,4 +89,41 @@ TEST_F(Keyboard_Test, Keyboard_Input_Double)
 	}
 
 	EXPECT_EQ(test1, "aa");
+}
+
+TEST_F(Keyboard_Test, Keyboard_Input_Twice)
+{
+	std::string test1 = "";
+	std::thread keyboard_test_thread = std::thread([&test1, this] () mutable
+												   {
+													   test1 = keyboard.get_interface()->get_simple();
+												   });
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
+	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
+	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::ENTER);
+
+	if(keyboard_test_thread.joinable())
+	{
+		keyboard_test_thread.join();
+	}
+
+	EXPECT_EQ(test1, "aa");
+
+	test1 = "";
+	std::thread keyboard_test_thread2 = std::thread([&test1, this] () mutable
+												   {
+													   test1 = keyboard.get_interface()->get_simple();
+												   });
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::B);
+	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::B);
+	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::ENTER);
+
+	if(keyboard_test_thread2.joinable())
+	{
+		keyboard_test_thread2.join();
+	}
+	EXPECT_EQ(test1, "bb");
 }

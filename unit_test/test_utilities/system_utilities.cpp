@@ -635,6 +635,7 @@ void system_utilities::keyboard_utilities::Keyboard::operator<<(const int& input
 
 void system_utilities::keyboard_utilities::Keyboard::operator<<(const char& input)
 {
+	LOG_DEBUG(std::to_string(input) + " sent");
 	system_utilities::keyboard_utilities::press_button(input);
 }
 

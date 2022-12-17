@@ -67,7 +67,6 @@ protected:
 private:
 	void loop();
 	
-	bool keep_reading();
 
 
 };

@@ -3,6 +3,8 @@
 #include <map>
 #include <iostream>
 
+#include "Messaging/message_relay.h"
+
 bool block;
 bool loop_it;
 
@@ -35,17 +37,20 @@ Action_Layer Predefined_Action_Layer::simple_buffered_input_layer()
 		{
 			new_layer.set_on_press(i.second, [i] () mutable
 								   {
-									   Predefined_Action_Layer::Simple_Input_Layer::terminated = true;
+									  LOG_DEBUG("Enter key pressed");
+									  Predefined_Action_Layer::Simple_Input_Layer::terminated = true;
 								   });
 		}
 		else
 		{
 			new_layer.set_on_press(i.second, [i] () mutable
 								   {
+									   LOG_DEBUG(std::to_string(i.second.get_code()) + " pressed");
 									   input_buffer.add(i.second, KEY_STATE::PRESSED);
 								   });
 			new_layer.set_on_release(i.second, [i, &new_layer] () mutable
 									 {
+										 LOG_DEBUG(std::to_string(i.second.get_code()) + " released");
 										 input_buffer.add(i.second, KEY_STATE::RELEASED);
 									 });
 		}
