@@ -44,7 +44,7 @@ jobs:
     - name: Attempt Permissions fix
       if: runner.os == 'Linux'
       run: |
-        chmod +666 /dev/uinput
+        #sudo +666 /dev/uinput
 
     - name: Build
       shell: bash
