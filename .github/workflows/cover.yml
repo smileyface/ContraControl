@@ -55,7 +55,7 @@ jobs:
     - name: Run
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
-      run: sudo make cov
+      run: make cov
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
