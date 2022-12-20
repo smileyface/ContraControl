@@ -25,15 +25,6 @@ enum class VIEW_TYPE_ENUM
  * \param view_type Enumerator to be coverted to string.
  * \return Enumeration of view type as a c string.
  */
-static char* get_view_type_enum_as_string(VIEW_TYPE_ENUM view_type)
-{
-	switch(view_type)
-	{
-	case VIEW_TYPE_ENUM::LOG:
-		return (char*) "Log";
-	case VIEW_TYPE_ENUM::POPUP_OPTION:
-		return (char*) "Option Popup";
-	}
-	return (char*)"";
-}
+char* get_view_type_enum_as_string(VIEW_TYPE_ENUM view_type);
+
 #endif

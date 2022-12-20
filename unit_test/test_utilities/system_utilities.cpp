@@ -136,6 +136,16 @@ void system_utilities::model_utilities::stop()
 	model::stop_loop();
 }
 
+void system_utilities::controller_utilities::start()
+{
+	controller::start_controller();
+}
+
+void system_utilities::controller_utilities::stop()
+{
+	controller::stop_controller();
+}
+
 void system_utilities::network_utilities::setup()
 {
 	try

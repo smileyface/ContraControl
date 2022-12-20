@@ -216,6 +216,11 @@ void testing_utilities::subsystem_utilities::model_utilities::check_is_running(b
 	EXPECT_EQ(model::model_running, is_running);
 }
 
+void testing_utilities::subsystem_utilities::controller_utilities::check_is_running(bool is_running)
+{
+	EXPECT_EQ(controller::controller_running, is_running);
+}
+
 void testing_utilities::error_utilities::check_override_failure(std::function<void()> function)
 {
 	try

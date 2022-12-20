@@ -55,6 +55,10 @@ namespace testing_utilities
 		{
 			void check_is_running(bool is_running);
 		}
+		namespace controller_utilities
+		{
+			void check_is_running(bool is_running);
+		}
 	}
 	namespace error_utilities
 	{
