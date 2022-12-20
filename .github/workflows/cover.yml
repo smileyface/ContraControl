@@ -45,6 +45,8 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         cat /proc/bus/input/devices
+        cat /etc/default/keyboard
+
         #sudo +666 /dev/uinput
 
     - name: Build
