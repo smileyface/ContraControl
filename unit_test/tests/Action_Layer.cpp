@@ -17,7 +17,6 @@ namespace
 		}
 		virtual void TearDown()
 		{
-
 			system_utilities::keyboard_utilities::tear_down();
 		}
 	};
@@ -33,6 +32,7 @@ TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Test_On_Press)
 																			});
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	EXPECT_TRUE(is_pressed) << "Pressed was not handled";
+	EXPECT_EQ(keyboard.get_interface()->action_stack.get_active_layer()->get_pressed_state(KEY::A), KEY_STATE::PRESSED) << "Key is not in the pressed state";
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
 }
 
@@ -46,8 +46,10 @@ TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Test_On_Hold)
 																		   });
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	EXPECT_FALSE(is_held) << "Hold was not handled";
+	EXPECT_EQ(keyboard.get_interface()->action_stack.get_active_layer()->get_pressed_state(KEY::A), KEY_STATE::PRESSED) << "Key is not in the pressed state";
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	EXPECT_TRUE(is_held) << "Hold was not handled";
+	EXPECT_EQ(keyboard.get_interface()->action_stack.get_active_layer()->get_pressed_state(KEY::A), KEY_STATE::HELD) << "Key is not in the held state";
 }
 
 TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Test_On_Release)
@@ -60,8 +62,10 @@ TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Test_On_Release)
 																		   });
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 1);
 	EXPECT_FALSE(is_released) << "Release was not handled";
+	EXPECT_EQ(keyboard.get_interface()->action_stack.get_active_layer()->get_pressed_state(KEY::A), KEY_STATE::PRESSED) << "Key is not in the pressed state";
 	keyboard.get_interface()->action_stack.get_active_layer()->handle_event(KEY::A, 0);
 	EXPECT_TRUE(is_released) << "Release was not handled";
+	EXPECT_EQ(keyboard.get_interface()->action_stack.get_active_layer()->get_pressed_state(KEY::A), KEY_STATE::RELEASED) << "Key is not in the released state";
 }
 
 TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Overridden_On_Press)

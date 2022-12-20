@@ -39,7 +39,7 @@ public:
 	 */
 	void setup_action_layers();
 
-	KEY_STATE get_pressed_state(KPI key);
+
 private:
 	/**List of layers of actions that the keyboard can run*/
 	std::vector<Action_Layer> layers;

@@ -88,7 +88,7 @@ public:
 	 */
 	bool operator>= (const Key_Press_Interface check_val);
 private:
-	KEY_STATE pressed = KEY_STATE::RELEASED;
+	KEY_STATE pressed;
 	int val;
 	char code;
 	int index_ = -1;

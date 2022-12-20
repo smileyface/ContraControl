@@ -32,8 +32,5 @@ int Action_Stack::add_action_layer()
 	return layers.size() - 1;
 }
 
-KEY_STATE Action_Stack::get_pressed_state(KPI key)
-{
-	return key.get_state();
-}
+
 

@@ -67,6 +67,8 @@ public:
 	 */
 	void transition_from();
 
+	KEY_STATE get_pressed_state(KPI key);
+
 private:
 	Keyboard_Code_Map code_map;
 	

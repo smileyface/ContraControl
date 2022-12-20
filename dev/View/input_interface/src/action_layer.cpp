@@ -69,3 +69,8 @@ void Action_Layer::transition_to()
 	Predefined_Action_Layer::Simple_Input_Layer::returned = false;
 	input_buffer.clear();
 }
+
+KEY_STATE Action_Layer::get_pressed_state(KPI key)
+{
+	return code_map[key.index()].get_state();
+}
