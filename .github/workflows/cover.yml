@@ -46,9 +46,9 @@ jobs:
       run: |
         cat /proc/bus/input/devices
         echo "**************"
-        ls /dev/input
+        ls -l /dev/input
         echo "**************"
-        ls /dev/input/by-path
+        ls -l /dev/input/by-path
 
         #sudo +666 /dev/uinput
 
