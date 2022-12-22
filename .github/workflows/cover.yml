@@ -45,7 +45,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         cat /proc/bus/input/devices
-        cat /etc/default/keyboard
+        ls /dev/input
 
         #sudo +666 /dev/uinput
 
