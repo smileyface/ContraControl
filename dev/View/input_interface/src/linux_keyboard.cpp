@@ -125,7 +125,7 @@ void Linux_Keyboard::connect_to_keyboard()
 	for(int i = 0; i < event_eligible.size(); i++)
 	{
 		std::string location = "/dev/input/" + event_eligible[i];
-		connect_to_keyboard(location);
+		connect_to_keyboard("/dev/input/event1");
 		if(keyboard_present)
 		{
 			break;
