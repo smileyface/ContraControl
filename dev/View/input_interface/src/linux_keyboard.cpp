@@ -124,8 +124,7 @@ void Linux_Keyboard::connect_to_keyboard()
 	bool keyboard_present = false;
 	for(int i = 0; i < event_eligible.size(); i++)
 	{
-		//std::string location = "/dev/input/" + event_eligible[i];
-		std::string location = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+		std::string location = "/dev/input/" + event_eligible[i];
 		connect_to_keyboard(location);
 		if(keyboard_present)
 		{
