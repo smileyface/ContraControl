@@ -18,11 +18,11 @@ namespace
 			keyboard.get_interface()->connect_to_keyboard();
 			keyboard.get_interface()->start_listening();
 
-			/*if(system_utilities::CI && system_utilities::LINUX)
+			if(system_utilities::CI && system_utilities::LINUX)
 			{
 				LOG_INFO("Skipping hardware interface test on Linux CI", "Keyboard test setup");
 				GTEST_SKIP() << "Github Actions has input permission issues on Linux, so I'm not running those tests right now.\nPlease make sure you've run these tests locally before merging the PR.";
-			}*/
+			}
 		}
 		virtual void TearDown()
 		{
