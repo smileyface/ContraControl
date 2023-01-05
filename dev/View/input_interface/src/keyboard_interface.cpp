@@ -67,7 +67,6 @@ std::string Keyboard_Interface::get_simple()
 {
 	std::string val;
 	action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
-	is_simple = true;
 	unsigned int counter=1;
 	unsigned int count_the_counter = 0;
 	while(!Predefined_Action_Layer::Simple_Input_Layer::terminated)
@@ -86,6 +85,6 @@ std::string Keyboard_Interface::get_simple()
 	}
 
     val = input_buffer.get_buffer();
-	Predefined_Action_Layer::Simple_Input_Layer::returned = true;
+	Predefined_Action_Layer::Simple_Input_Layer::returned = Predefined_Action_Layer::Simple_Input_Layer::terminated;
 	return val;
 }

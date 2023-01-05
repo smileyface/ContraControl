@@ -52,3 +52,18 @@ TEST_F(Keyboard_System_Not_Connected_Test, Test_Simple)
 	}
 	EXPECT_TRUE(Predefined_Action_Layer::Simple_Input_Layer::returned);
 }
+
+TEST_F(Keyboard_System_Not_Connected_Test, Test_Timeout)
+{ 
+	std::string test1 = "";
+	std::thread keyboard_test_thread = std::thread([&test1, this] () mutable
+												   {
+													   test1 = keyboard.get_interface()->get_simple();
+												   });
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	if(keyboard_test_thread.joinable())
+	{
+		keyboard_test_thread.join();
+	}
+	EXPECT_FALSE(Predefined_Action_Layer::Simple_Input_Layer::returned);
+}
