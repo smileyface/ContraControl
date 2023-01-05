@@ -7,7 +7,7 @@
 
 namespace
 {
-	class Keyboard_Test : public ::testing::Test
+	class Keyboard_Hardware_Test : public ::testing::Test
 	{
 	public:
 
@@ -32,13 +32,13 @@ namespace
 	};
 }
 
-TEST_F(Keyboard_Test, Connection_Test)
+TEST_F(Keyboard_Hardware_Test, Connection_Test)
 {
 	EXPECT_TRUE(keyboard.keyboard_present());
 }
 
 
-TEST_F(Keyboard_Test, Capture_Test)
+TEST_F(Keyboard_Hardware_Test, Capture_Test)
 {
 	bool is_pressed = false;
 	keyboard.set_key_operation(KEY::A, [&is_pressed] () mutable
@@ -51,7 +51,7 @@ TEST_F(Keyboard_Test, Capture_Test)
 	EXPECT_TRUE(is_pressed);
 }
 
-TEST_F(Keyboard_Test, Keyboard_Input_Simple)
+TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Simple)
 {
 	std::string test1 = "";
 	std::thread keyboard_test_thread = std::thread([&test1, this] () mutable
@@ -72,7 +72,7 @@ TEST_F(Keyboard_Test, Keyboard_Input_Simple)
 	EXPECT_EQ(test1, "test");
 }
 
-TEST_F(Keyboard_Test, Keyboard_Input_Double_Identical_Character)
+TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Double_Identical_Character)
 {
 	std::string test1 = "";
 	std::thread keyboard_test_thread = std::thread([&test1, this] () mutable
@@ -92,7 +92,7 @@ TEST_F(Keyboard_Test, Keyboard_Input_Double_Identical_Character)
 	EXPECT_EQ(test1, "aa");
 }
 
-TEST_F(Keyboard_Test, Keyboard_Input_Twice)
+TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Twice)
 {
 	std::string test1 = "";
 	std::thread keyboard_test_thread = std::thread([&test1, this] () mutable

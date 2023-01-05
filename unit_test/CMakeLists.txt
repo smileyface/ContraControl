@@ -9,8 +9,9 @@ set(DEVICE_TEST_FILES "tests/Device.cpp"
                       "tests/Command_View_Message.cpp" 
                       "tests/Action_Layer.cpp"
                       "tests/Action_Stack.cpp"
-                      "tests/Keyboard.cpp" 
-                      "tests/Keyboard_Buffer_Input.cpp")
+                      "tests/Keyboard_Buffer_Input.cpp" 
+                      "tests/Keyboard_Hardware.cpp" 
+                      "tests/Keyboard_System_Not_Connected.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/system_utilities.h"
@@ -21,7 +22,7 @@ add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/device_utilities.h"
                            "test_utilities/device_utilities.cpp"
                            "test_utilities/node_utilities.h"
-                           "test_utilities/node_utilities.cpp")
+                           "test_utilities/node_utilities.cpp" "test_utilities/keyboard_interface_utilities.h" "test_utilities/keyboard_interface_utilities.cpp")
 target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller View_Library System_Interface Network )
 
 

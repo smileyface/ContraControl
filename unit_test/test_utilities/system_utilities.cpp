@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "system_utilities.h"
+#include "keyboard_interface_utilities.h"
 
 #include "Utilities/exceptions.h"
 #include "test_utilities.h"
@@ -209,6 +210,8 @@ void enable_keys(int fd)
 }
 #endif
 
+bool system_utilities::keyboard_utilities::connect = true;
+
 void system_utilities::keyboard_utilities::setup()
 {
 	system_utilities::setup();
@@ -405,12 +408,23 @@ void system_utilities::keyboard_utilities::press_button(int key)
 system_utilities::keyboard_utilities::Keyboard::Keyboard()
 {
 	system_utilities::keyboard_utilities::setup();
-#ifdef _WIN32
-	buffer = new Windows_Keyboard();
-#endif // _WIN32
-#ifdef __linux__
-	buffer = new Linux_Keyboard();
-#endif
+	buffer = 0;
+	if(system_utilities::keyboard_utilities::connect == false)
+	{
+		buffer = new Test_Keyboard_Interface();
+	}
+	else if(system_utilities::WINDOWS)
+	{
+	#ifdef _WIN32
+		buffer = new Windows_Keyboard();
+	#endif // _WIN32
+	}
+	else if(system_utilities::LINUX)
+	{
+	#ifdef __linux__
+		buffer = new Linux_Keyboard();
+	#endif
+	}
 }
 
 system_utilities::keyboard_utilities::Keyboard::~Keyboard()
