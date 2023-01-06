@@ -69,6 +69,7 @@ std::string Keyboard_Interface::get_simple()
 	action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
 	unsigned int counter=1;
 	unsigned int count_the_counter = 0;
+	//Spin while the buffer collects input
 	while(!Predefined_Action_Layer::Simple_Input_Layer::terminated)
 	{
 		if(counter == 0)
