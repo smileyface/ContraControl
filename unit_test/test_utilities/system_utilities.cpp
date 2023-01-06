@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "system_utilities.h"
+#include "keyboard_interface_utilities.h"
 
 #include "Utilities/exceptions.h"
 #include "test_utilities.h"
@@ -136,6 +137,16 @@ void system_utilities::model_utilities::stop()
 	model::stop_loop();
 }
 
+void system_utilities::controller_utilities::start()
+{
+	controller::start_controller();
+}
+
+void system_utilities::controller_utilities::stop()
+{
+	controller::stop_controller();
+}
+
 void system_utilities::network_utilities::setup()
 {
 	try
@@ -144,6 +155,7 @@ void system_utilities::network_utilities::setup()
 		std::string i;
 		if(std::getenv("CI") != NULL)
 		{
+			CI = true;
 			LOG_INFO("On a CI machine", "Test Setup");
 		#ifdef __linux__
 			network::init_network_interfaces("nat");
@@ -169,8 +181,36 @@ void enable_keys(int fd)
 {
 	ioctl(fd, UI_SET_EVBIT, EV_KEY);
 	ioctl(fd, UI_SET_KEYBIT, KEY_A);
+	ioctl(fd, UI_SET_KEYBIT, KEY_B);
+	ioctl(fd, UI_SET_KEYBIT, KEY_C);
+	ioctl(fd, UI_SET_KEYBIT, KEY_D);
+	ioctl(fd, UI_SET_KEYBIT, KEY_E);
+	ioctl(fd, UI_SET_KEYBIT, KEY_F);
+	ioctl(fd, UI_SET_KEYBIT, KEY_G);
+	ioctl(fd, UI_SET_KEYBIT, KEY_H);
+	ioctl(fd, UI_SET_KEYBIT, KEY_I);
+	ioctl(fd, UI_SET_KEYBIT, KEY_J);
+	ioctl(fd, UI_SET_KEYBIT, KEY_K);
+	ioctl(fd, UI_SET_KEYBIT, KEY_L);
+	ioctl(fd, UI_SET_KEYBIT, KEY_M);
+	ioctl(fd, UI_SET_KEYBIT, KEY_N);
+	ioctl(fd, UI_SET_KEYBIT, KEY_O);
+	ioctl(fd, UI_SET_KEYBIT, KEY_P);
+	ioctl(fd, UI_SET_KEYBIT, KEY_Q);
+	ioctl(fd, UI_SET_KEYBIT, KEY_R);
+	ioctl(fd, UI_SET_KEYBIT, KEY_S);
+	ioctl(fd, UI_SET_KEYBIT, KEY_T);
+	ioctl(fd, UI_SET_KEYBIT, KEY_U);
+	ioctl(fd, UI_SET_KEYBIT, KEY_V);
+	ioctl(fd, UI_SET_KEYBIT, KEY_W);
+	ioctl(fd, UI_SET_KEYBIT, KEY_X);
+	ioctl(fd, UI_SET_KEYBIT, KEY_Y);
+	ioctl(fd, UI_SET_KEYBIT, KEY_Z);
+	ioctl(fd, UI_SET_KEYBIT, KEY_ENTER);
 }
 #endif
+
+bool system_utilities::keyboard_utilities::connect = true;
 
 void system_utilities::keyboard_utilities::setup()
 {
@@ -189,7 +229,7 @@ void system_utilities::keyboard_utilities::setup()
 		ioctl(fd, UI_DEV_SETUP, &usetup);
 		ioctl(fd, UI_DEV_CREATE);
 		sleep(1);
-		testing_utilities::input_utilities::connect_keyboard("/dev/input/event0");
+		testing_utilities::input_utilities::connect_keyboard("/dev/uinput");
 		return;
 	}
 	else
@@ -235,6 +275,7 @@ void system_utilities::keyboard_utilities::press_button(int key)
 	std::this_thread::sleep_for(std::chrono::milliseconds(40));
 	ip.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &ip, sizeof(INPUT));
+	std::this_thread::sleep_for(std::chrono::milliseconds(40));
 }
 #endif
 
@@ -367,12 +408,23 @@ void system_utilities::keyboard_utilities::press_button(int key)
 system_utilities::keyboard_utilities::Keyboard::Keyboard()
 {
 	system_utilities::keyboard_utilities::setup();
-#ifdef _WIN32
-	buffer = new Windows_Keyboard();
-#endif // _WIN32
-#ifdef __linux__
-	buffer = new Linux_Keyboard();
-#endif
+	buffer = 0;
+	if(system_utilities::keyboard_utilities::connect == false)
+	{
+		buffer = new Test_Keyboard_Interface();
+	}
+	else if(system_utilities::WINDOWS)
+	{
+	#ifdef _WIN32
+		buffer = new Windows_Keyboard();
+	#endif // _WIN32
+	}
+	else if(system_utilities::LINUX)
+	{
+	#ifdef __linux__
+		buffer = new Linux_Keyboard();
+	#endif
+	}
 }
 
 system_utilities::keyboard_utilities::Keyboard::~Keyboard()
@@ -584,6 +636,8 @@ char system_utilities::keyboard_utilities::get_char_from_kpi(KPI key)
 		return KEY_KP8;
 	else if(key == KEY::NUM_PAD::NUM_9)
 		return KEY_KP9;
+	else if(key == KEY::ENTER)
+		return KEY_ENTER;
 	return 255;
 }
 #endif
@@ -595,6 +649,7 @@ void system_utilities::keyboard_utilities::Keyboard::operator<<(const std::strin
 	{
 		system_utilities::keyboard_utilities::press_button(i);
 	}
+
 	system_utilities::keyboard_utilities::press_button(system_utilities::keyboard_utilities::get_char_from_kpi(KEY::ENTER));
 }
 
@@ -605,6 +660,7 @@ void system_utilities::keyboard_utilities::Keyboard::operator<<(const int& input
 
 void system_utilities::keyboard_utilities::Keyboard::operator<<(const char& input)
 {
+	LOG_DEBUG(std::to_string(input) + " sent");
 	system_utilities::keyboard_utilities::press_button(input);
 }
 

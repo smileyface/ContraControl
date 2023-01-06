@@ -13,12 +13,9 @@ namespace
 		Message_Consumer* consumer = 0;
 		virtual void SetUp()
 		{
-			keyboard.get_interface()->connect_to_keyboard();
-			keyboard.get_interface()->start_listening();
 		}
 		virtual void TearDown()
 		{
-			keyboard.get_interface()->stop_listening();
 			system_utilities::keyboard_utilities::tear_down();
 		}
 	};

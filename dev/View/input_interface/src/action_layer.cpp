@@ -1,4 +1,6 @@
 #include "../action_layer/action_layer.h"
+#include "../action_layer/predefined_layer.h"
+
 
 Keyboard_Code_Map master_code_map;
 
@@ -63,5 +65,12 @@ void Action_Layer::transition_from()
 
 void Action_Layer::transition_to()
 {
+	Predefined_Action_Layer::Simple_Input_Layer::terminated = false;
+	Predefined_Action_Layer::Simple_Input_Layer::returned = false;
 	input_buffer.clear();
+}
+
+KEY_STATE Action_Layer::get_pressed_state(KPI key)
+{
+	return code_map[key.index()].get_state();
 }

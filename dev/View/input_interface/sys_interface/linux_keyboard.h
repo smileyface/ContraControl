@@ -36,6 +36,8 @@ public:
 	void initalize_codes();
 
 protected:
+
+	void connect_to_keyboard(std::string path_to_keyboard);
 private:
 	pthread_t thread;
 	int keyboard_fd;
@@ -43,7 +45,6 @@ private:
 	keyboard_state* keyboard_st;
 	char name[256];
 
-	void connect_to_keyboard(std::string path_to_keyboard);
 };
 
 #endif

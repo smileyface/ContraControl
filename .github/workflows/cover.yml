@@ -44,8 +44,13 @@ jobs:
     - name: Attempt Permissions fix
       if: runner.os == 'Linux'
       run: |
-        sudo chmod +666 /dev/uinput
-        ls -l /dev/uinput
+        cat /proc/bus/input/devices
+        echo "**************"
+        ls -l /dev/input
+        echo "**************"
+        ls -l /dev/input/by-path
+
+        #sudo +666 /dev/uinput
 
     - name: Build
       shell: bash

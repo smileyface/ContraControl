@@ -49,8 +49,16 @@ public:
 	 */
 	bool get_keyboard_present(); 
 
-	/** Stack of action layers for keyboard interaction */
+	/**
+	* Stack of action layers for keyboard interaction.
+	 */
 	Action_Stack action_stack;
+
+	/**
+	* Get a simple line of text from the keyboard. This is a blocking call.
+	 * \return Simple line of text.
+	 */
+	std::string get_simple();
 protected:
 	/** Is the interface active.  */
 	bool active;
@@ -58,6 +66,7 @@ protected:
 	bool keyboard_present;
 private:
 	void loop();
+	
 
 
 };

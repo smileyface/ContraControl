@@ -3,10 +3,12 @@
 #include "../sys_interface/windows_keyboard.h"
 #include "../sys_interface/key_input_interface.h"
 #include "../action_layer/action_layer.h"
+#include "Messaging/message_relay.h"
 
 #include <Windows.h>
 #include <vector>
 #include <string>
+#include <iostream>
 
 UINT nDevices;
 
@@ -104,10 +106,7 @@ void Windows_Keyboard::readEv()
 {
 	for(std::pair<int, KPI> key : master_code_map)
 	{
-		if((GetKeyState(key.second.get_code()) & 0x8000) > 0)
-		{
-			action_stack.get_active_layer()->handle_event(key.second, 1);
-		}
+		action_stack.get_active_layer()->handle_event(key.second, GetKeyState(key.second.get_code()) & 0x8000);
 	}
 }
 

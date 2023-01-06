@@ -24,6 +24,11 @@ namespace system_utilities
 		void start();
 		void stop();
 	}
+	namespace controller_utilities
+	{
+		void start();
+		void stop();
+	}
 	namespace network_utilities
 	{
 		void setup();
@@ -50,6 +55,7 @@ namespace system_utilities
 		void setup();
 		void tear_down();
 		void press_button(int key);
+		extern bool connect; //default is connect to the hardware
 	}
 }
 

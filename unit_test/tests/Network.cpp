@@ -45,7 +45,7 @@ TEST_F(Local_Network_Test, Server_Start_Up)
 	}
 	catch (NetworkErrorException e)
 	{
-		std::cout << "Server Start Up exception caught";
+		LOG_ERROR("Server Start Up exception caught", "Test");
 		testing_utilities::network_utilities::exception_handle();
 	}
 	catch (const std::exception& exc)

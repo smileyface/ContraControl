@@ -49,6 +49,8 @@ set(VIEW_SOURCE view/src/view.cpp
                 view/src/log_view.cpp
                 view/src/option_popup.cpp)
 
+set(VIEW_FACTORIES_INCLUDE factories/view_factory.h)
+
 set(VIEW_FACTORIES_SOURCE factories/src/view_factory.cpp)
 
 set(VIEW_TOOLKIT_INCLUDES view/toolkit/dimensions.h
@@ -59,7 +61,7 @@ set(VIEW_TOOLKIT_INCLUDES view/toolkit/dimensions.h
 
 set(VIEW_TOOLKIT_SOURCE view/toolkit/src/interfaces.cpp)
 
-add_library(View_Library view_main.cpp view_main.h ${FORMAT_INCLUDES} ${INPUT_INTERFACE_INCLUDES} ${VIEW_INCLUDES} ${VIEW_FACTORIES_INCLUDES}  ${FORMAT_SOURCE} ${INPUT_INTERFACE_SOURCE} ${VIEW_SOURCE} ${VIEW_FACTORIES_SOURCE} )
+add_library(View_Library view_main.cpp view_main.h ${FORMAT_INCLUDES} ${INPUT_INTERFACE_INCLUDES} ${VIEW_INCLUDES} ${VIEW_FACTORIES_INCLUDES}  ${FORMAT_SOURCE} ${INPUT_INTERFACE_SOURCE} ${VIEW_SOURCE} ${VIEW_FACTORIES_INCLUDES} ${VIEW_FACTORIES_SOURCE} )
 
 IF (CMAKE_HOST_WIN32)
     set(WIN32_INTERFACE_INCLUDES view/toolkit/windows/platform/framework.h

@@ -15,11 +15,30 @@
  */
 namespace Predefined_Action_Layer
 {
+	enum
+	{
+		BUFFERED_INPUT_LAYER = 0,
+		SIMPLE_BUFFERED_INPUT_LAYER = 1
+	};
 	/**
 	 * Layer for buffered input. For things like reading strings in.
 	 * \return Newly created layer
 	 */
 	Action_Layer buffered_input_layer();
+
+	/**
+	 * States for a Simple Input Layer
+	 */
+	namespace Simple_Input_Layer
+	{
+		extern bool terminated; ///<Has the Simple Input Layer been terminated.
+		extern bool returned;   ///<Has the Simple Input Layer has successfully returned a string.
+	}
+	/**
+	* Layer for buffered input. For things like reading strings in.
+	* \return Newly created layer
+	*/
+	Action_Layer simple_buffered_input_layer();
 }
 
 #endif // 
