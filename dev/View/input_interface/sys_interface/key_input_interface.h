@@ -60,6 +60,10 @@ public:
 	 */
 	int index();
 
+	/**
+	 * Get state of the key.
+	 * \return State of the key. See KEY_STATE for possible states.
+	 */
 	KEY_STATE get_state();
 
 	/**

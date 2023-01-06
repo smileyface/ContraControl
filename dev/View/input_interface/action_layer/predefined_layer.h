@@ -26,10 +26,13 @@ namespace Predefined_Action_Layer
 	 */
 	Action_Layer buffered_input_layer();
 
+	/**
+	 * States for a Simple Input Layer
+	 */
 	namespace Simple_Input_Layer
 	{
-		extern bool terminated;
-		extern bool returned;
+		extern bool terminated; ///<Has the Simple Input Layer been terminated.
+		extern bool returned;   ///<Has the Simple Input Layer has successfully returned a string.
 	}
 	/**
 	* Layer for buffered input. For things like reading strings in.

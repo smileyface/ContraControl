@@ -67,6 +67,11 @@ public:
 	 */
 	void transition_from();
 
+	/**
+	 * Get state of the key in the layer.
+	 * \param key Key to return state.
+	 * \return State of the key. See enum for possible states.
+	 */
 	KEY_STATE get_pressed_state(KPI key);
 
 private:
