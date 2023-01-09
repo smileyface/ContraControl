@@ -15,8 +15,8 @@ namespace {
 			system_utilities::setup();
 		}
 		virtual void TearDown() {
-			system_utilities::cleanup();
 			network::teardown_network_interfaces();
+			system_utilities::cleanup();
 		}
 	};
 }

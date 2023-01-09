@@ -19,6 +19,7 @@
 namespace {
 	class Local_Network_Test : public ::testing::Test {
 		virtual void SetUp() {
+			system_utilities::setup();
 			system_utilities::network_utilities::setup();
 		}
 		virtual void TearDown() {

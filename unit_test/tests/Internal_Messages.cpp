@@ -1,3 +1,4 @@
+#include "../test_utilities/system_utilities.h"
 #include "../test_utilities/test_utilities.h"
 
 #include "../test_utilities/pch.h"
@@ -9,16 +10,18 @@ namespace
 	class Internal_Message_Test : public ::testing::Test
 	{
 	public:
-		Message_Consumer* consumer;
-		bool found;
+		Message_Consumer* consumer = 0;
+		bool found = false;
 		virtual void SetUp()
 		{
+			system_utilities::setup();
 			consumer = new Message_Consumer(Message_Types::LOGGING);
 			Message_Relay::get_instance()->register_consumer(consumer);
 		}
 		virtual void TearDown()
 		{
 			Message_Relay::get_instance()->deregister_consumer(consumer);
+			system_utilities::cleanup();
 		}
 	};
 }

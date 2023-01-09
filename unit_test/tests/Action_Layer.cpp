@@ -14,9 +14,11 @@ namespace
 		system_utilities::keyboard_utilities::Keyboard keyboard;
 		virtual void SetUp()
 		{
+			system_utilities::setup();
 		}
 		virtual void TearDown()
 		{
+			system_utilities::cleanup();
 			system_utilities::keyboard_utilities::tear_down();
 		}
 	};

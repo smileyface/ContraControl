@@ -15,6 +15,7 @@ namespace
 		Message_Consumer* consumer = 0;
 		virtual void SetUp() override
 		{
+			system_utilities::setup();
 			keyboard.get_interface()->connect_to_keyboard();
 			keyboard.get_interface()->start_listening();
 
@@ -28,6 +29,7 @@ namespace
 		{
 			keyboard.get_interface()->stop_listening();
 			system_utilities::keyboard_utilities::tear_down();
+			system_utilities::cleanup();
 		}
 	};
 }
@@ -45,9 +47,9 @@ TEST_F(Keyboard_Hardware_Test, Capture_Test)
 								{
 									is_pressed = true;
 								});
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	system_utilities::sleep_thread(100);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	system_utilities::sleep_thread(100);
 	EXPECT_TRUE(is_pressed);
 }
 
@@ -58,7 +60,7 @@ TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Simple)
 									{
 									test1 = keyboard.get_interface()->get_simple();
 									});
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	system_utilities::sleep_thread(100);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::T);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::E);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::S);
@@ -79,7 +81,7 @@ TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Double_Identical_Character)
 													{
 														test1 = keyboard.get_interface()->get_simple();
 													});
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	system_utilities::sleep_thread(100);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::ENTER);
@@ -99,7 +101,7 @@ TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Twice)
 												   {
 													   test1 = keyboard.get_interface()->get_simple();
 												   });
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	system_utilities::sleep_thread(100);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::ENTER);
@@ -116,7 +118,7 @@ TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Twice)
 												   {
 													   test1 = keyboard.get_interface()->get_simple();
 												   });
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	system_utilities::sleep_thread(100);
 
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::B);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::B);

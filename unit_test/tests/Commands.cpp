@@ -10,6 +10,7 @@ namespace {
 	protected:
 		Device_Label dl;
 		virtual void SetUp() {
+			system_utilities::setup();
 			device_utilities::start_test_environment();
 			dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 		}
