@@ -167,6 +167,12 @@ void Message_Relay::clear()
 	list_of_message.clear();
 }
 
+bool Message_Relay::has_consumer(Message_Consumer* consumer)
+{
+	auto found = std::find(list_of_registered_consumers.begin(), list_of_registered_consumers.end(), consumer);
+	return found != list_of_registered_consumers.end();
+}
+
 
 const Logging_Message* Message_Types::LOGGING = new Logging_Message();
 const View_Subsystem_Message* Message_Types::VIEW_SUBSYSTEM = new View_Subsystem_Message();

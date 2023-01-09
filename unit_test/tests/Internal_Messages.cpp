@@ -64,3 +64,13 @@ TEST_F(Internal_Message_Test, Freshen)
 	Message_Relay::get_instance()->pop(consumer);
 	EXPECT_FALSE(consumer->is_stale());
 }
+
+TEST_F(Internal_Message_Test, Deregister_Consumer)
+{
+	Message_Consumer* con_two = new Message_Consumer(new Logging_Message());
+	Message_Relay::get_instance()->register_consumer(con_two);
+	LOG_DEBUG("Test Debug");
+	EXPECT_TRUE(Message_Relay::get_instance()->has_consumer(con_two));
+	Message_Relay::get_instance()->deregister_consumer(con_two);
+	EXPECT_FALSE(Message_Relay::get_instance()->has_consumer(con_two));
+}
