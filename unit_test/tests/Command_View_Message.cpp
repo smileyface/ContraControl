@@ -21,6 +21,7 @@ namespace
 		bool found = false;
 		virtual void SetUp()
 		{
+			system_utilities::setup();
 			Message_Relay::get_instance()->register_consumer(logging_messages);
 			Message_Relay::get_instance()->register_consumer(option_consumer);
 		}
@@ -28,6 +29,7 @@ namespace
 		{
 			Message_Relay::get_instance()->deregister_consumer(logging_messages);
 			Message_Relay::get_instance()->deregister_consumer(option_consumer);
+			system_utilities::cleanup();
 		}
 	};
 }

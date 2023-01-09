@@ -17,13 +17,14 @@ namespace
 		system_utilities::keyboard_utilities::Keyboard keyboard;
 		virtual void SetUp() override
 		{
+			system_utilities::setup();
 			system_utilities::keyboard_utilities::connect = false;
 			keyboard = system_utilities::keyboard_utilities::Keyboard();
 			keyboard.get_interface()->connect_to_keyboard();
 		}
 		virtual void TearDown()
 		{
-
+			system_utilities::cleanup();
 		}
 	private:
 	};
@@ -32,7 +33,7 @@ namespace
 TEST_F(Keyboard_System_Not_Connected_Test, Test_Loop)
 {
 	keyboard.get_interface()->start_listening();
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	system_utilities::sleep_thread(100);
 	keyboard.get_interface()->stop_listening();
 	EXPECT_TRUE(((Test_Keyboard_Interface*) keyboard.get_interface())->read_a_character);
 }
@@ -44,7 +45,8 @@ TEST_F(Keyboard_System_Not_Connected_Test, Test_Simple)
 												   {
 													   test1 = keyboard.get_interface()->get_simple();
 												   });
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+	system_utilities::sleep_thread(100);
 	EXPECT_TRUE(keyboard.keyboard_present());
 	Predefined_Action_Layer::Simple_Input_Layer::terminated = true;
 	if(keyboard_test_thread.joinable())
@@ -61,7 +63,7 @@ TEST_F(Keyboard_System_Not_Connected_Test, Test_Simple_Button_Presses)
 												   {
 													   test1 = keyboard.get_interface()->get_simple();
 												   });
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	system_utilities::sleep_thread(100);
 	keyboard < KEY::A;
 	keyboard < KEY::ENTER;
 	if(keyboard_test_thread.joinable())
@@ -78,7 +80,7 @@ TEST_F(Keyboard_System_Not_Connected_Test, Test_Timeout)
 												   {
 													   test1 = keyboard.get_interface()->get_simple();
 												   });
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	system_utilities::sleep_thread(100);
 	if(keyboard_test_thread.joinable())
 	{
 		keyboard_test_thread.join();
