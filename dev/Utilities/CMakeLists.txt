@@ -12,7 +12,7 @@ set(UTILITIES_HEADER_FILES
                     "Utilities/utils.h"
                     "Utilities/exceptions.h"  "Utilities/tools/classes.h")
 set(UTILITIES_SOURCE_FILES
-                    "Utilities/save_reader.cpp")
+                    "Utilities/src/save_reader.cpp" "Utilities/src/timer.cpp")
 
 add_library(Utilities STATIC ${UTILITIES_SOURCE_FILES} ${UTILITIES_HEADER_FILES} )
 target_include_directories(Utilities 
