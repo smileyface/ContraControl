@@ -5,10 +5,5 @@
 
 Console_View::Console_View()
 { 
-#ifdef _WIN32
-	keyboard = new Windows_Keyboard();
-#endif
-#ifdef __linux__
-	keyboard = new Linux_Keyboard();
-#endif
+	keyboard = Keyboard_Buffer_Input();
 }

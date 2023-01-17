@@ -50,6 +50,11 @@ public:
 	bool get_keyboard_present(); 
 
 	/**
+	 * \return Is the keyboard being listened to.
+	 */
+	bool get_active();
+
+	/**
 	* Stack of action layers for keyboard interaction.
 	 */
 	Action_Stack action_stack;

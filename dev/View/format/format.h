@@ -61,7 +61,8 @@ public:
 	void start_display();
 	/** Stop the display loop */
 	void stop_display();
-
+	/** \return Is the format running */
+	bool running();
 protected:
 	/** Loop to update the views */
 	virtual void loop() = 0;
@@ -73,7 +74,10 @@ protected:
 	std::thread* looping_thread = nullptr;
 	/** Consume view messages */
 	Message_Consumer* format_consumer = 0;
+
 private:
+	/** List of views to be destroyed at the end of the display update. */
+	std::vector<std::vector<View*>::iterator> destroy_list;
 };
 
 #endif

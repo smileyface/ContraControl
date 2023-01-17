@@ -61,7 +61,9 @@ public:
 	 * Clean up and exit the View.
 	 */
 	virtual void on_quit()
-	{ };
+	{
+		quit_the_view = true;
+	};
 	/**
 	 * Send a direct command to the View. To be handled in a callback.
 	 * \param command Command to be sent to the View.
@@ -78,13 +80,25 @@ public:
 	 * Has the view been commanded to quit.
 	 * \return If the view has been commanded to quit
 	 */
-	virtual bool quit() = 0;
-	
+	virtual bool quit()
+	{
+		return quit_the_view;
+	};
+
+	void exit()
+	{
+		quit_the_view = true;
+	}
+
 protected:
 	/**
 	 * State of the View's grasp on reality
 	 */
 	bool stale = true;
+	/**
+	 * Line up for destruction at the end of update.
+	 */
+	bool quit_the_view = false;
 };
 
 #endif

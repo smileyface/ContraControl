@@ -49,33 +49,28 @@ void Console_Option_Popup::on_refresh()
 void Console_Option_Popup::on_query()
 {
 	int option_input;
-	if(!displayed)
+	if(!displayed || keyboard.get_timed_out())
 	{
 		return;
 	}
-	while(true)
+	//TODO Make the input be a response message.
+	option_input = keyboard.get_number();
+	if(option_input < 1 || option_input > options.size() + 1)
 	{
-		//TODO Make the input be a response message.
-		//input = keyboard->get_number(); 
-		option_input = 1;
-		if(option_input > options.size())
-		{
-			LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
-		}
-
-		if(option_input < 1 || option_input > options.size() + 1)
-		{
-			std::cerr << "Sorry, the number is out of range." << std::endl;
-			continue;
-		}
-		choice = option_input;
-		break;
+		LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
 	}
+	if(keyboard.get_timed_out())
+	{
+		LOG_ERROR("Selection timed out", "Option Popup Query");
+
+	}
+
+	choice = option_input;
 }
 
 void Console_Option_Popup::on_input()
 {
-	if(choice < 0)
+	if(choice < 0 || keyboard.get_timed_out())
 	{
 		return;
 	}
@@ -90,7 +85,7 @@ bool Console_Option_Popup::is_stale()
 
 bool Console_Option_Popup::quit()
 {
-	return choice > 0;
+	return choice > 0 || keyboard.get_timed_out() || Console_View::quit();
 }
 
 void Console_Option_Popup::set_options(std::string query,std::vector<std::string> list_of_options)

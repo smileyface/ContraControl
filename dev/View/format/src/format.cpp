@@ -1,10 +1,15 @@
 #include <map>
+#include <mutex>
 
 #include "../format.h"
 #include "../View/view/view.h"
 #include "../../factories/view_factory.h"
 #include "../Interfaces/Messaging/message_relay.h"
 #include "../Utilities/Utilities/tools/classes.h"
+
+
+std::mutex format_mutex;
+
 
 View* Format::add_view(VIEW_TYPE_ENUM view)
 {
@@ -13,8 +18,8 @@ View* Format::add_view(VIEW_TYPE_ENUM view)
 
 void Format::update_views()
 {
-	std::vector<std::vector<View*>::iterator> destroy_list;
-	for(auto i = view_list.begin(); i != view_list.end(); i++)
+	auto i = view_list.begin();
+	while( i != view_list.end())
 	{
 		View* r = (*i);
 		if(r->is_stale())
@@ -31,27 +36,30 @@ void Format::update_views()
 		{
 			r->on_quit();
 			r->on_destroy();
-			destroy_list.push_back(i);
+			i = view_list.erase(i);
 		}
-	}
-	for(int i = 0; i < destroy_list.size(); i++)
-	{
-		view_list.erase(destroy_list[i]);
+		else
+		{
+			i++;
+		}
+
 	}
 }
 
 void Format::clean_views()
 {
+	format_mutex.lock();
 	for(auto i = view_list.begin(); i != view_list.end(); i++)
 	{
-		(*i)->on_destroy();
+		(*i)->exit();
 	}
 }
 
 void Format::process_internal_messages()
 {
 	std::vector<View_Subsystem_Message*> list_of_messages;
-	for(View_Subsystem_Message* message = dynamic_cast<View_Subsystem_Message*>(Message_Relay::get_instance()->front(format_consumer)); message != 0; message = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(format_consumer)))
+	View_Subsystem_Message* message = dynamic_cast<View_Subsystem_Message*>(Message_Relay::get_instance()->pop(format_consumer));
+	for(; message != 0; message = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(format_consumer)))
 	{
 		if(instanceof<Option_Popup_Message>(message))
 		{
@@ -73,6 +81,19 @@ void Format::start_display()
 
 void Format::stop_display()
 {
+
+	clean_views();
+	while(view_list.size() > 0)
+	{
+
+	}
+
 	format_running = false;
-	looping_thread->join();
+	if(looping_thread->joinable())
+		looping_thread->join();
+}
+
+bool Format::running()
+{
+	return format_running && looping_thread->joinable();
 }

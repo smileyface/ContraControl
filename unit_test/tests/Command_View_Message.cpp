@@ -4,6 +4,7 @@
 #include "../test_utilities/pch.h"
 
 #include "../../dev/Interfaces/Messaging/message_relay.h"
+#include "../../dev/View/input_interface/keyboard_buffer_input.h"
 #include "../../dev/View/view_main.h"
 
 #include <sstream>
@@ -49,25 +50,45 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 	view::initalize();
 	view::start_view();
-	std::cin.putback('0');
 	Message_Relay::get_instance()->push(opm);
-	system_utilities::keyboard_utilities::Keyboard keyboard;
-	//NEED TO ADD BUFFER INPUT INTERFACE
-	keyboard < KEY::NUM_0;
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+	view::stop_view();
+
 	bool message_in_view = false;
 	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
 	{
 		if(item->get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE &&
-		   item->get_location() == "Option Popup Creation" &&
-		   item->get_message() == "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(SUBSYSTEM_ID_ENUM::TEST)))
+			item->get_location() == "Option Popup Creation" &&
+			item->get_message() == "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(SUBSYSTEM_ID_ENUM::TEST)))
 		{
 			message_in_view = true;
 		}
 	}
 	EXPECT_EQ(message_in_view, true);
 
-	
+
+}
+
+TEST_F(Command_View_Message_Test, Select_Option)
+{
+	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
+	Option_Popup_Message* opm = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(option_consumer));
+
+	view::add_display(DISPLAY_TYPES::CONSOLE);
+	view::initalize();
+	view::start_view();
+	Message_Relay::get_instance()->push(opm);
+
+	system_utilities::keyboard_utilities::Keyboard keyboard;
+	system_utilities::sleep_thread(1000);
+	Timer keyboard_timer;
+	while(keyboard.get_interface()->get_active() && !keyboard_timer.timeout(5000));
+	if(keyboard_timer.get_program_time() > 5.0)
+	{
+		FAIL() << "Keyboard interface never activated. TEST BREAKING ERROR.";
+	}
+	keyboard < KEY::NUM_0;
+	keyboard < KEY::ENTER;
 
 	view::stop_view();
 }

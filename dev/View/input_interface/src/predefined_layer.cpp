@@ -45,6 +45,7 @@ Action_Layer Predefined_Action_Layer::simple_buffered_input_layer()
 		{
 			new_layer.set_on_press(i.second, [i] () mutable
 								   {
+
 									   LOG_DEBUG(std::to_string(i.second.get_code()) + " pressed");
 									   input_buffer.add(i.second, KEY_STATE::PRESSED);
 								   });

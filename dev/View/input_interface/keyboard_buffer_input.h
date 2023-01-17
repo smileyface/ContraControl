@@ -28,14 +28,19 @@ public:
 	 */
 	int get_number();
 	/**
+	 * \return If the attempt for user input timed out.
+	 */
+	bool get_timed_out();
+	/**
 	 * Appropriate keyboard for the system.
 	 * 
 	 * \see Linux_Keyboard
 	 * \see Windows_Keyboard
 	 */
-	Keyboard_Interface* keyboard;
+	static Keyboard_Interface* keyboard;
 private:
 	bool block;
 	std::vector<char> buffer;
+	bool timed_out;
 };
 #endif

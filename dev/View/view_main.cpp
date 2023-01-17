@@ -21,6 +21,7 @@ void view::start_view()
 	{
 		(*iterator)->start_display();
 	}
+	view_running = true;
 }
 
 void view::stop_view()
@@ -29,6 +30,14 @@ void view::stop_view()
 	{
 		(*iterator)->stop_display();
 	}
+	for(auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
+	{
+		while((*iterator)->running())
+		{
+
+		}
+	}
+	view_running = false;
 }
 
 int view::add_display(DISPLAY_TYPES display)

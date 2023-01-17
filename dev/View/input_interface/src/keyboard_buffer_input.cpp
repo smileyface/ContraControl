@@ -2,6 +2,7 @@
 
 #include <string>
 
+Keyboard_Interface* Keyboard_Buffer_Input::keyboard;
 #ifdef _WIN32
 #include <Windows.h>
 #include "../sys_interface/windows_keyboard.h"
@@ -11,30 +12,41 @@
 //#include "system_interfaces/linux_network_interface.h"
 #endif
 
-Keyboard_Buffer_Input::Keyboard_Buffer_Input()
+Keyboard_Buffer_Input::Keyboard_Buffer_Input():
+	block(false),
+	timed_out(false)
 {
-	block = false;
 #ifdef _WIN32
-	keyboard = new Windows_Keyboard();
-#endif // _WIN32
-
-#ifdef __linux__
-	keyboard = new Linux_Keyboard();
+	Keyboard_Buffer_Input::keyboard = new Windows_Keyboard();
 #endif
-
+#ifdef __linux__
+	Keyboard_Buffer_Input::keyboard = new Linux_Keyboard();
+#endif
 }
 
 std::string Keyboard_Buffer_Input::get_input()
 {
-	return std::string();
+	timed_out = false;
+	return keyboard->get_simple();
 }
 
 int Keyboard_Buffer_Input::get_number()
 {
-	return 0;
+	std::string string_to_number = get_input();
+	int val;
+	if(string_to_number == "")
+	{
+		timed_out = true;
+		val = -1;
+	}
+	else
+	{
+		val = stoi(get_input());
+	}
+	return val;
 }
 
-bool Keyboard_Interface::get_keyboard_present()
+bool Keyboard_Buffer_Input::get_timed_out()
 {
-	return keyboard_present;
+	return timed_out;
 }

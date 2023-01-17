@@ -11,7 +11,7 @@
 
 #include <string>
 #include "../view.h"
-#include "../../input_interface/sys_interface/keyboard_interface.h"
+#include "../../input_interface/keyboard_buffer_input.h"
 
 /** A view to display on the console. */
 class Console_View : public View
@@ -38,7 +38,7 @@ protected:
 	/** Message to "paint" (display) into the console. As the console is acsii only, this is a string */
 	std::string painted_message;
 	/** The console interface to an input device. Namely the Keyboard */
-	Keyboard_Interface* keyboard = 0;
+	Keyboard_Buffer_Input keyboard;
 private:
 };
 
