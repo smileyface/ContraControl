@@ -13,7 +13,16 @@
 #endif
 
 /*Externs*/
-Network_Interface* network::network_interface;
+#ifdef _WIN32
+Network_Interface* network::network_interface = new Windows_Network_Interface();
+#endif // IS_WIN32
+#ifdef __linux__
+Network_Interface* network::network_interface = new Linux_Network_Interface();
+#endif //__linux__
+#ifdef _MAC
+//For now, we'll just use the linux interface.
+Network_Interface* network::network_interface = new Linux_Network_Interface();
+#endif // _MAC
 
 bool network_running = false;
 std::thread network_thread;
@@ -21,16 +30,7 @@ std::mutex network_mutex;
 
 void network::init_network_interfaces()
 {
-#ifdef _WIN32
-	network::network_interface = new Windows_Network_Interface();
-#endif // IS_WIN32
-#ifdef __linux__
-	network::network_interface = new Linux_Network_Interface();
-#endif //__linux__
-#ifdef _MAC
-	//For now, we'll just use the linux interface.
-	network::network_interface = new Linux_Network_Interface();
-#endif // _MAC
+
 	network_interface->initalize();
 	generate_crc_table();
 }

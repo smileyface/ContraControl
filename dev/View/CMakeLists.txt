@@ -26,7 +26,8 @@ set(INPUT_INTERFACE_SOURCE input_interface/src/key_input_interface.cpp
                            input_interface/src/action_layer.cpp
                            input_interface/src/predefined_layer.cpp 
                            input_interface/src/action_stack.cpp 
-                           input_interface/src/input_buffer.cpp)
+                           input_interface/src/input_buffer.cpp
+                           input_interface/src/keyboard_buffer_input.cpp)
 
 set(VIEW_TYPE_INCLUDES view/view_type/option_view_type.h
                        view/view_type/log_view_type.h)

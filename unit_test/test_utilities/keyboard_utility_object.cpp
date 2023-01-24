@@ -80,3 +80,8 @@ void system_utilities::keyboard_utilities::Keyboard::operator<(KPI key)
 	buffer->action_stack.get_active_layer()->handle_event(key, 1);
 	buffer->action_stack.get_active_layer()->handle_event(key, 0);
 }
+
+void system_utilities::keyboard_utilities::Keyboard::override_interface(Keyboard_Interface* new_interface)
+{ 
+	buffer = new_interface;
+}

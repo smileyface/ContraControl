@@ -17,9 +17,19 @@ namespace
 	class Command_View_Message_Test : public ::testing::Test
 	{
 	public:
-		Message_Consumer* logging_messages = new Message_Consumer(new Logging_Message());
-		Message_Consumer* option_consumer = new Message_Consumer(new Option_Popup_Message());
+		Message_Consumer* logging_messages;
+		Message_Consumer* option_consumer;
 		bool found = false;
+		Command_View_Message_Test()
+		{
+			logging_messages = new Message_Consumer(new Logging_Message());
+			option_consumer = new Message_Consumer(new Option_Popup_Message());
+		}
+		~Command_View_Message_Test()
+		{
+			delete logging_messages;
+			delete option_consumer;
+		}
 		virtual void SetUp()
 		{
 			system_utilities::setup();
@@ -66,7 +76,6 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	}
 	EXPECT_EQ(message_in_view, true);
 
-
 }
 
 TEST_F(Command_View_Message_Test, Select_Option)
@@ -81,14 +90,14 @@ TEST_F(Command_View_Message_Test, Select_Option)
 
 	system_utilities::keyboard_utilities::Keyboard keyboard;
 	system_utilities::sleep_thread(1000);
+	keyboard < KEY::NUM_0;
+	keyboard < KEY::ENTER;
 	Timer keyboard_timer;
 	while(keyboard.get_interface()->get_active() && !keyboard_timer.timeout(5000));
 	if(keyboard_timer.get_program_time() > 5.0)
 	{
 		FAIL() << "Keyboard interface never activated. TEST BREAKING ERROR.";
 	}
-	keyboard < KEY::NUM_0;
-	keyboard < KEY::ENTER;
 
 	view::stop_view();
 }

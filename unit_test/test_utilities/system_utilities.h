@@ -48,6 +48,7 @@ namespace system_utilities
 			bool keyboard_present();
 			void operator<(const KPI key_to_press);
 			Keyboard_Interface* get_interface();
+			void override_interface(Keyboard_Interface* new_interface);
 		private:
 			Keyboard_Interface* buffer;
 		};

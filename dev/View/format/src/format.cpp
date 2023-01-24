@@ -36,6 +36,7 @@ void Format::update_views()
 		{
 			r->on_quit();
 			r->on_destroy();
+			delete *i;
 			i = view_list.erase(i);
 		}
 		else

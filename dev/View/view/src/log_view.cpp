@@ -10,6 +10,11 @@ Log_View_Type::Log_View_Type()
 	log_consumer = new Message_Consumer(new Logging_Message());
 	Message_Relay::get_instance()->register_consumer(log_consumer);
 }
+
+Log_View_Type::~Log_View_Type()
+{
+	Message_Relay::get_instance()->deregister_consumer(log_consumer);
+}
 void Log_View_Type::get_message()
 {
 	Logging_Message* messages = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(log_consumer));
