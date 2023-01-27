@@ -12,7 +12,7 @@
 /**
  Time kept for the controller.
  */
-extern Timer controller_timer;
+extern Timer::Basic controller_timer;
 
 #endif // !MODEL_SYSTEM_VARIABLES
 

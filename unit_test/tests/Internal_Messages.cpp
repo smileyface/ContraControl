@@ -21,6 +21,7 @@ namespace
 		virtual void TearDown()
 		{
 			Message_Relay::get_instance()->deregister_consumer(consumer);
+			delete consumer;
 			system_utilities::cleanup();
 		}
 	};
@@ -55,7 +56,7 @@ TEST_F(Internal_Message_Test, Multiple_Consumer)
 	EXPECT_EQ(message->get_message(), "Test Debug");
 
 	Message_Relay::get_instance()->deregister_consumer(con_two);
-
+	delete con_two;
 }
 
 TEST_F(Internal_Message_Test, Freshen)
@@ -76,6 +77,7 @@ TEST_F(Internal_Message_Test, Deregister_Consumer)
 	Message_Relay::get_instance()->deregister_consumer(con_two);
 	EXPECT_FALSE(Message_Relay::get_instance()->has_consumer(con_two));
 	Message_Relay::get_instance()->deregister_consumer(con_two);
+	delete con_two;
 }
 
 TEST_F(Internal_Message_Test, Consumer_Messages)
@@ -91,4 +93,5 @@ TEST_F(Internal_Message_Test, Consumer_Messages)
 	EXPECT_EQ(1, Message_Relay::get_instance()->number_of_messages(con_two));
 
 	Message_Relay::get_instance()->deregister_consumer(con_two);
+	delete con_two;
 }

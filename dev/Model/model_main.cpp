@@ -12,7 +12,7 @@
 std::thread model_thread;
 std::mutex model_mutex;
 
-Timer model_timer;
+Timer::Basic model_timer;
 std::atomic<bool> model::model_running;
 Command_List model::step_actions;
 

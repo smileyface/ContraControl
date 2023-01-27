@@ -74,15 +74,15 @@ std::string Keyboard_Interface::get_simple()
 	std::string val;
 	action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
 	//Spin while the buffer collects input
-	Timer keyboard_timeout_timer;
+	Timer::Timeout keyboard_timeout_timer(10000);
 
-	while(!keyboard_timeout_timer.timeout(10000) && !Predefined_Action_Layer::Simple_Input_Layer::terminated)
+	while(!keyboard_timeout_timer.get_alarm() && !Predefined_Action_Layer::Simple_Input_Layer::terminated)
 	{
 
 	}
 
     val = input_buffer.get_buffer();
-	Predefined_Action_Layer::Simple_Input_Layer::returned = Predefined_Action_Layer::Simple_Input_Layer::terminated && 
-		keyboard_timeout_timer.get_program_time() < 10;
+	Predefined_Action_Layer::Simple_Input_Layer::returned = Predefined_Action_Layer::Simple_Input_Layer::terminated &&
+		!keyboard_timeout_timer.get_alarm();
 	return val;
 }

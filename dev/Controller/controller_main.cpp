@@ -9,7 +9,7 @@
 std::thread controller_thread;
 std::mutex controller_mutex;
 
-Timer controller_timer;
+Timer::Basic controller_timer;
 bool controller::controller_running = true;
 Timed_List controller::controller_queue;
 

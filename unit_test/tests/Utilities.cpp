@@ -11,7 +11,6 @@ namespace
 	class Subsystem_Utilities_Test : public ::testing::Test
 	{
 	protected:
-		Timer testing_timer;
 		virtual void SetUp()
 		{
 			system_utilities::setup();
@@ -25,7 +24,9 @@ namespace
 
 TEST_F(Subsystem_Utilities_Test, Timer_Timeout)
 {
-	while(!testing_timer.timeout(5000));
-	ASSERT_GE(testing_timer.get_program_time(), 5) << "Timer alarmed too soon";
-	ASSERT_LE(testing_timer.get_program_time(), 5.01) << "Timer alarmed too late";
+	Timer::Timeout testing(5000);
+	testing.join();
+	ASSERT_TRUE(testing.get_alarm()) << "Alarm did not sound";
+	ASSERT_GE(testing.get_program_time(), 5) << "Timer alarmed too soon";
+	ASSERT_LE(testing.get_program_time(), 5.02) << "Timer alarmed too late";
 }

@@ -92,8 +92,8 @@ TEST_F(Command_View_Message_Test, Select_Option)
 	system_utilities::sleep_thread(1000);
 	keyboard < KEY::NUM_0;
 	keyboard < KEY::ENTER;
-	Timer keyboard_timer;
-	while(keyboard.get_interface()->get_active() && !keyboard_timer.timeout(5000));
+	Timer::Timeout keyboard_timer(5000);
+	while(keyboard.get_interface()->get_active() && !keyboard_timer.get_alarm());
 	if(keyboard_timer.get_program_time() > 5.0)
 	{
 		FAIL() << "Keyboard interface never activated. TEST BREAKING ERROR.";

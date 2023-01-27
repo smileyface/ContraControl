@@ -11,7 +11,7 @@
  /**
   Time kept for the model.
   */
-extern Timer model_timer;
+extern Timer::Basic model_timer;
 
 #endif // !MODEL_SYSTEM_VARIABLES
 
