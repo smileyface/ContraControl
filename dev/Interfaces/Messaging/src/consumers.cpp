@@ -8,6 +8,10 @@ Message_Consumer::Message_Consumer( const Internal_Message* mess)
 	stale = false;
 	message_type = mess;
 }
+Message_Consumer::~Message_Consumer()
+{
+	delete message_type;
+}
 void Message_Consumer::notify()
 {
 	stale = true;

@@ -22,6 +22,7 @@
 class Message_Relay
 {
 public:
+	~Message_Relay();
 	/**
 	 * Push a message to the Message Relay.
 	 *

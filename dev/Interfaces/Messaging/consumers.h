@@ -16,6 +16,7 @@
   */
 struct Message_Consumer
 {
+	~Message_Consumer();
 	/**
 	 * Set consumer up with a flag that determines if it's got a message available
 	 * \param message_type Type of messages to be consumed.

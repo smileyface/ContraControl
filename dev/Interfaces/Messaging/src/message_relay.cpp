@@ -68,6 +68,11 @@ void freshen_messages(Message_Consumer* consumer, std::vector<std::pair<Internal
 Message_Relay::Message_Relay()
 { }
 
+Message_Relay::~Message_Relay()
+{
+	delete instance;
+}
+
 Consumer_List Message_Relay::get_message_consumers(Internal_Message* message)
 {
 	Consumer_List registered_consumers;
