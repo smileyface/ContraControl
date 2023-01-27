@@ -80,4 +80,11 @@ TEST_F(Network_Error_Test, Messaging_Types_Unimplemented)
 TEST_F(Network_Error_Test, Unfound_Address)
 {
 	testing_utilities::network_utilities::expect_exception([]() { network::init_network_interfaces("errors"); }, NETWORK_ERRORS::ADDRESS_ERROR);
+
+#ifdef _WIN32
+	network::set_interface("Loopback Pseudo-Interface 1");
+#endif // _WIN32
+#ifdef __linux__
+	network::set_interface("lo");
+#endif
 }
