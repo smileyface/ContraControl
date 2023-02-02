@@ -10,6 +10,8 @@
 
 #include <vector>
 #include <thread>
+#include <mutex>
+#include <condition_variable>
 
 class Timer_Base
 {
@@ -25,12 +27,12 @@ public:
 	/**
 	 move the current program time.
 	 */
-	void start_clock();
+	virtual void start_clock();
 
 	/**
 	 Stop the clock;
 	 */
-	void stop_clock();
+	virtual void stop_clock();
 	/**
 	 \return time since the last update.
 	 */
@@ -42,9 +44,12 @@ public:
 
 	bool timeout(int timeout_in_millisecond);
 protected:
-	double current_time;
-	double elapsed_time;
-	double program_time;
+	std::chrono::time_point<std::chrono::system_clock> current_time;
+	std::chrono::duration<double> elapsed_time;
+	std::chrono::duration<double> program_time;
+	bool clock_running;
+
+	std::thread timer;
 };
 
 namespace Timer
@@ -64,12 +69,14 @@ namespace Timer
 	{
 	public:
 		Timeout(int timeout_in_millisecond);
-
+		~Timeout();
 		bool get_alarm();
 		void join();
 	private:
 		bool alarm;
-		std::thread timer;
+		double timeout_amount;
+		std::condition_variable timer_conditional;
+		std::mutex timer_mutex;
 	};
 }
 

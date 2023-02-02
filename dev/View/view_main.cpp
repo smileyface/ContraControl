@@ -30,13 +30,6 @@ void view::stop_view()
 	{
 		(*iterator)->stop_display();
 	}
-	for(auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
-	{
-		while((*iterator)->running())
-		{
-
-		}
-	}
 	view_running = false;
 }
 

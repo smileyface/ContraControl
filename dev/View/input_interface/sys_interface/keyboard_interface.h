@@ -10,6 +10,7 @@
 #define INTERFACE_KEYBOARD_INTERFACE
 
 #include "../action_layer/action_stack.h"
+#include "Utilities/timer.h"
 
 /** Generic interface for reading keypresses from a keyboard. */
 class Keyboard_Interface
@@ -69,10 +70,11 @@ protected:
 	bool active;
 	/** Is there a physical or virtual keyboard present on the system*/
 	bool keyboard_present;
+
+
 private:
 	void loop();
-	
-
+	Timer::Timeout keyboard_timeout_timer;
 
 };
 

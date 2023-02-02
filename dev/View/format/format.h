@@ -59,8 +59,10 @@ public:
 
 	/** Start the view in a new threaded loop. */
 	void start_display();
+
 	/** Stop the display loop */
 	void stop_display();
+
 	/** \return Is the format running */
 	bool running();
 protected:

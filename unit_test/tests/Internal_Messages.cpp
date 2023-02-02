@@ -15,13 +15,13 @@ namespace
 		virtual void SetUp()
 		{
 			system_utilities::setup();
-			consumer = new Message_Consumer(Message_Types::LOGGING);
+			if(consumer == 0)
+				consumer = new Message_Consumer(Message_Types::LOGGING);
 			Message_Relay::get_instance()->register_consumer(consumer);
 		}
 		virtual void TearDown()
 		{
 			Message_Relay::get_instance()->deregister_consumer(consumer);
-			delete consumer;
 			system_utilities::cleanup();
 		}
 	};

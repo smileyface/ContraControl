@@ -1,21 +1,20 @@
 #include <thread>
 #include <functional>   // std::mem_fn
 #include <algorithm>    // std::find
-#include <iostream>
 #include <stdint.h>
 
 #include "../sys_interface/keyboard_interface.h"
 #include "../action_layer/predefined_layer.h"
 #include "Messaging/message_relay.h"
-#include "Utilities/timer.h"
 
 std::thread keyboard_thread;
 unsigned int BUFFERED_TIMEOUT = 5;
 
-Keyboard_Interface::Keyboard_Interface()
+Keyboard_Interface::Keyboard_Interface() :
+	keyboard_timeout_timer(1000),
+	active(false),
+	keyboard_present(false)
 { 
-	active = false;
-	keyboard_present = false;
 }
 
 Keyboard_Interface::~Keyboard_Interface()
@@ -34,6 +33,7 @@ void Keyboard_Interface::loop()
 			readEv();
 		}
 	}
+	keyboard_timeout_timer.join();
 	LOG_DEBUG("Reading loop over");
 }
 
@@ -74,11 +74,15 @@ std::string Keyboard_Interface::get_simple()
 	std::string val;
 	action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
 	//Spin while the buffer collects input
-	Timer::Timeout keyboard_timeout_timer(10000);
-
+	keyboard_timeout_timer.start_clock();
 	while(!keyboard_timeout_timer.get_alarm() && !Predefined_Action_Layer::Simple_Input_Layer::terminated)
 	{
+		keyboard_timeout_timer.update_time();
 
+	}
+	if(Predefined_Action_Layer::Simple_Input_Layer::terminated)
+	{
+		keyboard_timeout_timer.stop_clock();
 	}
 
     val = input_buffer.get_buffer();

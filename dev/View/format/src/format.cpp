@@ -43,7 +43,10 @@ void Format::update_views()
 		{
 			i++;
 		}
-
+	}
+	if(view_list.size() == 0)
+	{
+		format_running = false;
 	}
 }
 
@@ -73,6 +76,7 @@ void Format::process_internal_messages()
 
 void Format::start_display()
 {
+
 	format_running = true;
 	looping_thread = new std::thread([this]
 									 {
@@ -82,19 +86,12 @@ void Format::start_display()
 
 void Format::stop_display()
 {
-
 	clean_views();
-	while(view_list.size() > 0)
-	{
-
-	}
-
-	format_running = false;
 	if(looping_thread->joinable())
 		looping_thread->join();
 }
 
 bool Format::running()
 {
-	return format_running && looping_thread->joinable();
+	return looping_thread->joinable();
 }

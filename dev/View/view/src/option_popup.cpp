@@ -19,6 +19,11 @@ void Option_View_Type::get_message()
 	message.QUERY = specified_message->get_option_query();
 }
 
+Console_Option_Popup::~Console_Option_Popup()
+{ 
+
+}
+
 void Console_Option_Popup::on_display()
 {
 	std::cout << painted_message << std::endl;

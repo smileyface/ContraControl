@@ -61,9 +61,9 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	view::initalize();
 	view::start_view();
 	Message_Relay::get_instance()->push(opm);
-
+	system_utilities::sleep_thread(1000);
 	view::stop_view();
-
+	while(view::view_running);
 	bool message_in_view = false;
 	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
 	{

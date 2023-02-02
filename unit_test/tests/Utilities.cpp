@@ -22,11 +22,58 @@ namespace
 	};
 }
 
-TEST_F(Subsystem_Utilities_Test, Timer_Timeout)
+TEST_F(Subsystem_Utilities_Test, Timer_Alignment)
 {
-	Timer::Timeout testing(5000);
+	Timer::Basic testing;
+	double before_clock = std::clock();
+	testing.start_clock();
+	system_utilities::sleep_thread(1000);
+	testing.stop_clock();
+	double after_clock = std::clock();
+	ASSERT_GT((after_clock - before_clock) / (double) CLOCKS_PER_SEC, 1) << "Timer misalignment";
+	ASSERT_LT((after_clock - before_clock) / (double) CLOCKS_PER_SEC, 1.01) << "Timer misalignment";
+}
+
+TEST_F(Subsystem_Utilities_Test, Timer_Stop)
+{
+	Timer::Basic testing;
+	double before_clock = std::clock();
+	testing.start_clock();
+	system_utilities::sleep_thread(1000);
+	testing.stop_clock();
+	double after_clock = std::clock();
+	ASSERT_GT(testing.get_program_time(), 1) << "Timer misalignment";
+	ASSERT_LT(testing.get_program_time(), 1.01) << "Timer misalignment";
+}
+
+TEST_F(Subsystem_Utilities_Test, Timeout_Timer_Alignment)
+{
+	Timer::Timeout testing(1000);
+	testing.start_clock();
+	double before_clock = std::clock();
+	testing.join();
+	double after_clock = std::clock();
+	ASSERT_GE((after_clock - before_clock) / (double) CLOCKS_PER_SEC, 1.0) << "Timer misalignment";
+	ASSERT_LT((after_clock - before_clock) / (double) CLOCKS_PER_SEC, 1.01) << "Timer misalignment";
+}
+TEST_F(Subsystem_Utilities_Test, Timeout_Timer_Timeout)
+{
+	double before_clock = std::clock();
+	Timer::Timeout testing(1000);
+	testing.start_clock();
 	testing.join();
 	ASSERT_TRUE(testing.get_alarm()) << "Alarm did not sound";
-	ASSERT_GE(testing.get_program_time(), 5) << "Timer alarmed too soon";
-	ASSERT_LE(testing.get_program_time(), 5.02) << "Timer alarmed too late";
+	ASSERT_GE(testing.get_program_time(), 1) << "Timer alarmed too soon";
+	ASSERT_LE(testing.get_program_time(), 1.01) << "Timer alarmed too late";
+}
+
+TEST_F(Subsystem_Utilities_Test, Timeout_Timer_Stop)
+{
+	Timer::Timeout testing(5000);
+	testing.start_clock();
+	system_utilities::sleep_thread(1000);
+	testing.stop_clock();
+	ASSERT_FALSE(testing.get_alarm()) << "Alarm sounded";
+	ASSERT_GE(testing.get_program_time(), 1) << "Timer alarmed too soon";
+	ASSERT_LE(testing.get_program_time(), 1.01) << "Timer alarmed too late";
 }

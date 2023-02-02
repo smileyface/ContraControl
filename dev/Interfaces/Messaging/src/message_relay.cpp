@@ -200,3 +200,5 @@ bool Message_Relay::has_consumer(Message_Consumer* consumer)
 const Logging_Message* Message_Types::LOGGING = new Logging_Message();
 const View_Subsystem_Message* Message_Types::VIEW_SUBSYSTEM = new View_Subsystem_Message();
 const Option_Popup_Message* Message_Types::OPTION_POPUP_REQUEST = new Option_Popup_Message();
+const Response_Message* Message_Types::RESPONSE = new Response_Message();
+const Option_Popup_Response_Message* Message_Types::OPTION_POPUP_RESPONSE = new Option_Popup_Response_Message();

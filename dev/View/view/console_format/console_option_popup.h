@@ -18,6 +18,7 @@
 class Console_Option_Popup : public Console_View, public Option_View_Type
 {
 public:
+	~Console_Option_Popup();
 	void on_display();
 	void on_refresh();
 	void on_paint();

@@ -2,74 +2,75 @@
 
 #include <ctime>
 #include <chrono>
+#include <iostream>
 
 
-
+Timer::Timeout::~Timeout()
+{
+	join();
+}
 
 void Timer_Base::update_time()
 {
-	elapsed_time = (std::clock() - current_time) / (double) CLOCKS_PER_SEC;
+	auto captured_time = std::chrono::system_clock::now();
+	elapsed_time = captured_time - current_time;
 	program_time += elapsed_time;
-	current_time = std::clock();
+	current_time = captured_time;
 }
 
 void Timer_Base::reset_clock()
 {
-	elapsed_time = 0.0;
-	current_time = std::clock();
-	program_time = 0.0;
+	elapsed_time = std::chrono::duration<double>(0);
+	current_time = std::chrono::system_clock::now();
+	program_time = std::chrono::duration<double>(0);
 }
 
 void Timer_Base::start_clock()
 {
-	current_time = std::clock();
+	current_time = std::chrono::system_clock::now();
+	clock_running = true;
 }
 
 void Timer_Base::stop_clock()
 {
-	elapsed_time = (std::clock() - current_time) / (double) CLOCKS_PER_SEC;
-	program_time += elapsed_time;
+	update_time();
+	clock_running = false;
 }
 
 double Timer_Base::get_elapsed_time()
 {
-	return elapsed_time;
+	return elapsed_time.count();
 }
 
 double Timer_Base::get_program_time()
 {
-	return program_time;
+	return program_time.count();
 }
 
 Timer::Basic::Basic()
 {
-	current_time = std::clock();
-	elapsed_time = 0.0;
-	program_time = 0.0;
+	reset_clock();
 }
+
 
 Timer::Timeout::Timeout(int timeout_in_millisecond)
 { 
 	alarm = false;
-	program_time = 0.0;
-	start_clock();
-	timer = std::thread([this, timeout_in_millisecond] () mutable
-				{
-					std::this_thread::sleep_for(std::chrono::milliseconds(timeout_in_millisecond));
-					alarm = true;
-					stop_clock();
-				});
+	reset_clock();
+	timeout_amount = timeout_in_millisecond / (double)CLOCKS_PER_SEC;
+
 }
 
 bool Timer::Timeout::get_alarm()
 {
-	return alarm;
+	return program_time.count() > timeout_amount;
 }
+
 
 void Timer::Timeout::join()
 { 
-	if(timer.joinable())
+	while(!get_alarm() && clock_running)
 	{
-		timer.join();
+		update_time();
 	}
 }
