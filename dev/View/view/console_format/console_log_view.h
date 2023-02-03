@@ -18,10 +18,13 @@ class Console_Log_View : public Console_View, public Log_View_Type
 {
 public:
     Console_Log_View();
+    ~Console_Log_View();
 
     void on_display();
     void on_refresh();
     void on_paint();
+    void on_exit();
+    void on_destroy();
 
     bool is_stale();
 private:

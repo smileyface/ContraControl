@@ -29,6 +29,11 @@ namespace system_utilities
 		void start();
 		void stop();
 	}
+	namespace view_utilities
+	{
+		void start();
+		void stop();
+	}
 	namespace network_utilities
 	{
 		void setup();

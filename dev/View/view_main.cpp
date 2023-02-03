@@ -15,6 +15,15 @@ void view::initalize()
 	}
 }
 
+void view::remove_all()
+{ 
+	for(auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
+	{
+		(*iterator)->remove();
+	}
+	list_of_formats.erase(list_of_formats.begin(), list_of_formats.end());
+}
+
 void view::start_view()
 {
 	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)

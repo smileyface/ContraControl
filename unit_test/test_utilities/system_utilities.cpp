@@ -20,6 +20,7 @@
 #endif
 
 Message_Consumer* message_consumer = 0;
+int number_of_test_consumers;
 bool stale;
 
 bool system_utilities::CI = false;
@@ -54,6 +55,7 @@ void system_utilities::setup_messaging()
 		message_consumer = new Message_Consumer(new Logging_Message());
 		Message_Relay::get_instance()->register_consumer(message_consumer);
 	}
+	number_of_test_consumers = Message_Relay::get_instance()->number_of_consumers();
 }
 
 void system_utilities::teardown_messaging()
@@ -96,9 +98,15 @@ void system_utilities::print_log_messages()
 
 void system_utilities::cleanup()
 {
+	int remaining_consumer = Message_Relay::get_instance()->number_of_consumers() - number_of_test_consumers;
+	if(testing_utilities::test_accessor(remaining_consumer <= 0, true) == false)
+	{
+		LOG_ERROR("Not all consumers are deregistered. " + std::to_string(remaining_consumer) + " missing.", "Testing system teardown");
+	}
 	controller::clean_up();
 	model::clean_up();
 	teardown_messaging();
+	
 }
 
 void system_utilities::step(int steps)
@@ -133,6 +141,16 @@ void system_utilities::controller_utilities::start()
 void system_utilities::controller_utilities::stop()
 {
 	controller::stop_controller();
+}
+
+void system_utilities::view_utilities::start()
+{
+	view::start_view();
+}
+
+void system_utilities::view_utilities::stop()
+{
+	view::stop_view();
 }
 
 void system_utilities::network_utilities::setup()

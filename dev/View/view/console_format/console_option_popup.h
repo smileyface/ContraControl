@@ -24,6 +24,8 @@ public:
 	void on_paint();
 	void on_query();
 	void on_input();
+
+	void on_destroy();
 	/**
 	 * Set options for the popup.
 	 * 

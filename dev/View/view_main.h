@@ -28,6 +28,11 @@ namespace view
 	 * Initalize all formats.
 	 */
 	void initalize();
+
+	/**
+	 * Destroy all formats
+	 */
+	void remove_all();
 	/**
 	 * Start all Formats in threads.
 	 */

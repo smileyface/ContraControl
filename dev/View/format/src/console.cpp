@@ -15,6 +15,12 @@ void Console_Format::initalize()
 	add_view(VIEW_TYPE_ENUM::LOG);
 }
 
+void Console_Format::remove()
+{
+	Message_Relay::get_instance()->deregister_consumer(format_consumer);
+	LOG_INFO("Console Removed", "Console Format");
+}
+
 View* Console_Format::add_view(VIEW_TYPE_ENUM view)
 {
 	std::string type(get_view_type_enum_as_string(view));

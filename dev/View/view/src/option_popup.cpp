@@ -62,13 +62,21 @@ void Console_Option_Popup::on_query()
 	option_input = keyboard.get_number();
 	if(option_input < 1 || option_input > options.size() + 1)
 	{
-		LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
+		if(keyboard.get_timed_out())
+		{
+			LOG_ERROR("Selection timed out", "Option Popup Query");
+		}
+		else
+		{
+			LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
+		}
 	}
-	if(keyboard.get_timed_out())
+	else
 	{
-		LOG_ERROR("Selection timed out", "Option Popup Query");
-
+		LOG_DEBUG("Valid option selected: " + option_input);
+		exit();
 	}
+
 
 	choice = option_input;
 }
@@ -81,6 +89,11 @@ void Console_Option_Popup::on_input()
 	}
 	Option_Popup_Response_Message* response = new Option_Popup_Response_Message(choice, specified_message);
 	Message_Relay::get_instance()->push(response);
+}
+
+void Console_Option_Popup::on_destroy()
+{
+	Message_Relay::get_instance()->deregister_consumer(option_consumer);
 }
 
 bool Console_Option_Popup::is_stale()

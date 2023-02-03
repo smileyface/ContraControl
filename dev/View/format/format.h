@@ -30,6 +30,12 @@ public:
 	 * Initalize the Format. Generally includes an alive message and adding system messages.
 	 */
 	virtual void initalize() = 0;
+
+	/**
+	 * Remove the Format. 
+	 */
+	virtual void remove() = 0;
+
 	/**
 	 * Add a new view to the format.
 	 * \param view Type of view to add.

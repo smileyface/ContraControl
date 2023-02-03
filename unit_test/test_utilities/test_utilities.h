@@ -23,6 +23,8 @@ namespace testing_utilities
 
 	extern std::pair<int, int> test_point_succeeded_ratio;
 
+	bool test_accessor(bool test, bool expected);
+
 	namespace device_utilities
 	{
 		void check_state(Device_Label label, Device* expected_state);
@@ -56,6 +58,10 @@ namespace testing_utilities
 			void check_is_running(bool is_running);
 		}
 		namespace controller_utilities
+		{
+			void check_is_running(bool is_running);
+		}
+		namespace view_utilities
 		{
 			void check_is_running(bool is_running);
 		}

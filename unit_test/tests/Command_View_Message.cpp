@@ -5,6 +5,7 @@
 
 #include "../../dev/Interfaces/Messaging/message_relay.h"
 #include "../../dev/View/input_interface/keyboard_buffer_input.h"
+#include "../../dev/View/input_interface/action_layer/predefined_layer.h"
 #include "../../dev/View/view_main.h"
 
 #include <sstream>
@@ -32,6 +33,7 @@ namespace
 		}
 		virtual void SetUp()
 		{
+
 			system_utilities::setup();
 			Message_Relay::get_instance()->register_consumer(logging_messages);
 			Message_Relay::get_instance()->register_consumer(option_consumer);
@@ -63,6 +65,7 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	Message_Relay::get_instance()->push(opm);
 	system_utilities::sleep_thread(1000);
 	view::stop_view();
+	view::remove_all();
 	while(view::view_running);
 	bool message_in_view = false;
 	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
@@ -81,16 +84,16 @@ TEST_F(Command_View_Message_Test, Send_Option)
 TEST_F(Command_View_Message_Test, Select_Option)
 {
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
-	Option_Popup_Message* opm = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(option_consumer));
 
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 	view::initalize();
 	view::start_view();
-	Message_Relay::get_instance()->push(opm);
 
+	system_utilities::keyboard_utilities::connect = false;
 	system_utilities::keyboard_utilities::Keyboard keyboard;
 	system_utilities::sleep_thread(1000);
-	keyboard < KEY::NUM_0;
+	keyboard.get_interface()->action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
+	keyboard < KEY::NUM_1;
 	keyboard < KEY::ENTER;
 	Timer::Timeout keyboard_timer(5000);
 	while(keyboard.get_interface()->get_active() && !keyboard_timer.get_alarm());
@@ -98,6 +101,11 @@ TEST_F(Command_View_Message_Test, Select_Option)
 	{
 		FAIL() << "Keyboard interface never activated. TEST BREAKING ERROR.";
 	}
-
+	std::vector<Logging_Message*> logs;
+	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
+	{
+		logs.push_back(item);
+	}
 	view::stop_view();
+	view::remove_all();
 }

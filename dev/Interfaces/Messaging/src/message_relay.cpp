@@ -196,6 +196,10 @@ bool Message_Relay::has_consumer(Message_Consumer* consumer)
 	return found != list_of_registered_consumers.end();
 }
 
+int Message_Relay::number_of_consumers()
+{
+	return list_of_registered_consumers.size();
+}
 
 const Logging_Message* Message_Types::LOGGING = new Logging_Message();
 const View_Subsystem_Message* Message_Types::VIEW_SUBSYSTEM = new View_Subsystem_Message();

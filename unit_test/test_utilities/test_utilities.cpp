@@ -18,6 +18,12 @@ void testing_utilities::get_partial_on(Command* command, Device* device, double 
 	}
 }
 
+bool testing_utilities::test_accessor(bool test, bool expected)
+{
+	EXPECT_TRUE(test == expected);
+	return test == expected;
+}
+
 void testing_utilities::device_utilities::check_state(Device_Label device, Device* expected_state)
 {
 	Device* received_state = model::get_device(device);
@@ -219,6 +225,11 @@ void testing_utilities::subsystem_utilities::model_utilities::check_is_running(b
 void testing_utilities::subsystem_utilities::controller_utilities::check_is_running(bool is_running)
 {
 	EXPECT_EQ(controller::controller_running, is_running);
+}
+
+void testing_utilities::subsystem_utilities::view_utilities::check_is_running(bool is_running)
+{
+	EXPECT_EQ(view::view_running, is_running);
 }
 
 void testing_utilities::error_utilities::check_override_failure(std::function<void()> function)

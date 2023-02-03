@@ -18,13 +18,22 @@ Log_View_Type::~Log_View_Type()
 void Log_View_Type::get_message()
 {
 	Logging_Message* messages = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(log_consumer));
-	message.MESSAGE = messages->get_message();
-	message.LOC = messages->get_location();
-	message.LEVEL = messages->get_priority_string();
+	if(messages != NULL)
+	{
+		message.MESSAGE = messages->get_message();
+		message.LOC = messages->get_location();
+		message.LEVEL = messages->get_priority_string();
+	}
+
 }
 Console_Log_View::Console_Log_View()
 {
 	system_id = "Log";
+}
+
+Console_Log_View::~Console_Log_View()
+{ 
+	Log_View_Type::~Log_View_Type();
 }
 
 void Console_Log_View::on_refresh()
@@ -41,6 +50,16 @@ void Console_Log_View::on_display()
 void Console_Log_View::on_paint()
 {
 	painted_message = "[" + message_level + "]\t(" + system_id + "):\t" + message_;
+}
+
+void Console_Log_View::on_exit()
+{
+	Message_Relay::get_instance()->deregister_consumer(log_consumer);
+}
+
+void Console_Log_View::on_destroy()
+{ 
+	Log_View_Type::~Log_View_Type();
 }
 
 bool Console_Log_View::is_stale()

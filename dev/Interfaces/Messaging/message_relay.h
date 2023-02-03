@@ -72,15 +72,19 @@ public:
 	void deregister_consumer(Message_Consumer* consumer);
 
 	/**
+	* \return If consumer is on the relay.
+	* \param consumer Consumer to check against.
+	*/
+	bool has_consumer(Message_Consumer* consumer);
+	
+	int number_of_consumers();
+
+	/**
 	* Remove all messages from the relay
 	*/
 	void clear();
 
-	/**
-	 * \return If consumer is on the relay.
-	 * \param consumer Consumer to check against.
-	 */
-	bool has_consumer(Message_Consumer* consumer);
+
 
 
 private:
