@@ -21,7 +21,6 @@ void Option_View_Type::get_message()
 
 Console_Option_Popup::~Console_Option_Popup()
 { 
-
 }
 
 void Console_Option_Popup::on_display()

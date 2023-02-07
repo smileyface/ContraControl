@@ -3,8 +3,10 @@
 #include "keyboard_interface_utilities.h"
 
 #include "../../dev/View/input_interface/sys_interface/windows_keyboard.h"
-
 #include "../../dev/View/input_interface/sys_interface/linux_keyboard.h"
+
+#include "../../dev/View/input_interface/action_layer/predefined_layer.h"
+
 system_utilities::keyboard_utilities::Keyboard::Keyboard()
 {
 	system_utilities::keyboard_utilities::setup();
@@ -68,6 +70,11 @@ void system_utilities::keyboard_utilities::Keyboard::set_key_operation(KPI key, 
 bool system_utilities::keyboard_utilities::Keyboard::keyboard_present()
 {
 	return buffer->get_keyboard_present();
+}
+
+bool system_utilities::keyboard_utilities::Keyboard::still_running()
+{
+	return !Predefined_Action_Layer::Simple_Input_Layer::terminated;
 }
 
 Keyboard_Interface* system_utilities::keyboard_utilities::Keyboard::get_interface()

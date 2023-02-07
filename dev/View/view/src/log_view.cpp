@@ -15,6 +15,7 @@ Log_View_Type::~Log_View_Type()
 {
 	Message_Relay::get_instance()->deregister_consumer(log_consumer);
 }
+
 void Log_View_Type::get_message()
 {
 	Logging_Message* messages = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(log_consumer));
@@ -32,8 +33,7 @@ Console_Log_View::Console_Log_View()
 }
 
 Console_Log_View::~Console_Log_View()
-{ 
-	Log_View_Type::~Log_View_Type();
+{
 }
 
 void Console_Log_View::on_refresh()
@@ -59,7 +59,6 @@ void Console_Log_View::on_exit()
 
 void Console_Log_View::on_destroy()
 { 
-	Log_View_Type::~Log_View_Type();
 }
 
 bool Console_Log_View::is_stale()

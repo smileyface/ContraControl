@@ -20,7 +20,9 @@ void view::remove_all()
 	for(auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
 	{
 		(*iterator)->remove();
+		delete* (iterator);
 	}
+
 	list_of_formats.erase(list_of_formats.begin(), list_of_formats.end());
 }
 

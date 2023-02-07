@@ -27,6 +27,7 @@ void  remove_consumer_from_messages(Message_Consumer* consumer, std::pair<Intern
 	auto it = std::find(messages.second.begin(), messages.second.end(), consumer);
 	if(it != messages.second.end())
 	{
+		std::lock_guard<std::mutex> guard(g_pages_mutex);
 		messages.second.erase(it);
 	}
 }

@@ -17,6 +17,8 @@
 class View
 {
 public:
+	View();
+	virtual ~View();
 	/**
 	 * Set up the data needed for this View.
 	 */

@@ -18,6 +18,7 @@ class Console_View : public View
 {
 public:
 	Console_View();
+	virtual ~Console_View();
 	/** Console is unique, because the window that the out goes is the same that the in comes in. */
 	struct Console_State
 	{

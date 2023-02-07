@@ -92,20 +92,19 @@ TEST_F(Command_View_Message_Test, Select_Option)
 	system_utilities::keyboard_utilities::connect = false;
 	system_utilities::keyboard_utilities::Keyboard keyboard;
 	system_utilities::sleep_thread(1000);
+	Timer::Timeout keyboard_timer(5000);
+	keyboard_timer.start_clock();
+	while(!keyboard.get_interface()->get_active() && !keyboard_timer.get_alarm());
+	if(keyboard_timer.get_program_time() >= 5.0)
+	{
+		ADD_FAILURE() << "Keyboard interface never activated. TEST BREAKING ERROR.";
+	}
 	keyboard.get_interface()->action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
 	keyboard < KEY::NUM_1;
 	keyboard < KEY::ENTER;
-	Timer::Timeout keyboard_timer(5000);
-	while(keyboard.get_interface()->get_active() && !keyboard_timer.get_alarm());
-	if(keyboard_timer.get_program_time() > 5.0)
-	{
-		FAIL() << "Keyboard interface never activated. TEST BREAKING ERROR.";
-	}
-	std::vector<Logging_Message*> logs;
-	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
-	{
-		logs.push_back(item);
-	}
+
+	while(keyboard.still_running());
+	system_utilities::sleep_thread(1000);
 	view::stop_view();
 	view::remove_all();
 }

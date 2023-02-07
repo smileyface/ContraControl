@@ -18,7 +18,7 @@ class Console_Log_View : public Console_View, public Log_View_Type
 {
 public:
     Console_Log_View();
-    ~Console_Log_View();
+    virtual ~Console_Log_View();
 
     void on_display();
     void on_refresh();

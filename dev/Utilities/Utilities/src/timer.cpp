@@ -63,6 +63,7 @@ Timer::Timeout::Timeout(int timeout_in_millisecond)
 
 bool Timer::Timeout::get_alarm()
 {
+	update_time();
 	return program_time.count() > timeout_amount;
 }
 

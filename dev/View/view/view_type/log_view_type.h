@@ -16,7 +16,7 @@ class Log_View_Type
 {
 public:
 	Log_View_Type();
-	~Log_View_Type();
+	virtual ~Log_View_Type();
 	/**The log message captured from the message relay.*/
 	struct MESSAGE
 	{

@@ -52,7 +52,6 @@ void Format::update_views()
 
 void Format::clean_views()
 {
-	format_mutex.lock();
 	for(auto i = view_list.begin(); i != view_list.end(); i++)
 	{
 		(*i)->exit();
