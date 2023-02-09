@@ -1,7 +1,7 @@
-#include "../test_utilities/system_utilities.h"
-#include "../test_utilities/test_utilities.h"
+#include "../../test_utilities/system_utilities.h"
+#include "../../test_utilities/test_utilities.h"
 
-#include "../test_utilities/pch.h"
+#include "../../test_utilities/pch.h"
 
 #include "../../dev/View/input_interface/action_layer/predefined_layer.h"
 #include "../../dev/View/input_interface/keyboard_buffer_input.h"

@@ -3,7 +3,6 @@
 
 
 Keyboard_Code_Map master_code_map;
-
 Keyboard_Input_Buffer input_buffer;
 
 Action_Layer::Action_Layer()

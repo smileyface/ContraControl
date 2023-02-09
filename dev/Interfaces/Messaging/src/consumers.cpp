@@ -29,15 +29,9 @@ bool Message_Consumer::is_stale()
 
 bool Message_Consumer::correct_type(Internal_Message* mess)
 {
-	if(message_type == nullptr)
-	{
-		return false;
-	}
-	if(instanceof<Logging_Message>(message_type) && instanceof<Logging_Message>(mess))
-	{
-		return true;
-	}
-	if(instanceof<View_Subsystem_Message>(message_type) && instanceof<View_Subsystem_Message>(mess))
+	if((instanceof<Logging_Message>(message_type) && instanceof<Logging_Message>(mess)) ||
+	   (instanceof<View_Subsystem_Message>(message_type) && instanceof<View_Subsystem_Message>(mess)) ||
+	   (instanceof<Option_Popup_Message>(message_type) && instanceof <Option_Popup_Message>(mess)))
 	{
 		return true;
 	}

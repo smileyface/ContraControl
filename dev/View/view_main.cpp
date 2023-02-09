@@ -48,11 +48,18 @@ int view::add_display(DISPLAY_TYPES display)
 {
 	int my_display_id = display_id;
 	display_id++;
+	Format* format_ptr = 0;
 	switch (display)
 	{
 	case DISPLAY_TYPES::CONSOLE:
-		list_of_formats.emplace_back(new Console_Format());
+		format_ptr = new Console_Format();
 		break;
 	}
+	if(view_running)
+	{
+		format_ptr->initalize();
+		format_ptr->start_display();
+	}                                 
+	list_of_formats.push_back(format_ptr);
 	return my_display_id;
 }

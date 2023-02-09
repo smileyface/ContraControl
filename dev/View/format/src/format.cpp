@@ -60,16 +60,20 @@ void Format::clean_views()
 
 void Format::process_internal_messages()
 {
-	std::vector<View_Subsystem_Message*> list_of_messages;
-	View_Subsystem_Message* message = dynamic_cast<View_Subsystem_Message*>(Message_Relay::get_instance()->pop(format_consumer));
-	for(; message != 0; message = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(format_consumer)))
+	View_Subsystem_Message* message = dynamic_cast<View_Subsystem_Message*>(Message_Relay::get_instance()->front(format_consumer));
+	for(; message != 0;)
 	{
 		if(instanceof<Option_Popup_Message>(message))
 		{
+			Option_Popup_Message* mess = dynamic_cast<Option_Popup_Message*>(message);
 			Console_Option_Popup* opm = dynamic_cast<Console_Option_Popup*>(add_view(VIEW_TYPE_ENUM::POPUP_OPTION));
 			std::string log_message = "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(message->get_sender()));
 			LOG_INFO(log_message, "Option Popup Creation");
 		}
+		//After handling this format message, remove it
+		Message_Relay::get_instance()->pop(format_consumer);
+		//Move to the next one without removing it.
+		message = dynamic_cast<View_Subsystem_Message*>(Message_Relay::get_instance()->front(format_consumer));
 	}
 }
 

@@ -5,6 +5,8 @@
 #include "../../dev/View/input_interface/sys_interface/windows_keyboard.h"
 #include "../../dev/View/input_interface/sys_interface/linux_keyboard.h"
 
+#include "../../dev/View/input_interface/keyboard_buffer_input.h"
+
 #include "../../dev/View/input_interface/action_layer/predefined_layer.h"
 
 system_utilities::keyboard_utilities::Keyboard::Keyboard()

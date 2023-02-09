@@ -76,8 +76,6 @@ public:
 
 private:
 	Keyboard_Code_Map code_map;
-	
-	
 };
 
 #endif

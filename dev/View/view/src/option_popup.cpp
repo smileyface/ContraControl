@@ -97,7 +97,7 @@ void Console_Option_Popup::on_destroy()
 
 bool Console_Option_Popup::is_stale()
 {
-	return !displayed || option_consumer->is_stale();
+	return stale;
 }
 
 bool Console_Option_Popup::quit()
