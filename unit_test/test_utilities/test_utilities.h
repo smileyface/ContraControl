@@ -24,6 +24,7 @@ namespace testing_utilities
 	extern std::pair<int, int> test_point_succeeded_ratio;
 
 	bool test_accessor(bool test, bool expected);
+	void fail_test(std::string fail_notification);
 
 	namespace device_utilities
 	{

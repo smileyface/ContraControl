@@ -62,6 +62,9 @@ namespace system_utilities
 		void setup();
 		void tear_down();
 		void press_button(int key);
+
+		Keyboard create_test_keyboard();
+
 		extern bool connect; //default is connect to the hardware
 	}
 }

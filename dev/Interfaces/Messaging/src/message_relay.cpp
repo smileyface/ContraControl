@@ -11,10 +11,10 @@ Internal_Message* get_found_message(Message_Consumer* consumer, std::pair<Intern
 {
 	Internal_Message* found_message = 0;
 	std::lock_guard<std::mutex> guard(g_pages_mutex);
-	if(current_message.second.size() != 0)
+	if(current_message.second.size() > 0)
 	{
 		auto it = std::find(current_message.second.begin(), current_message.second.end(), consumer);
-		if(it != std::end(current_message.second))
+		if(it != current_message.second.end())
 		{
 			found_message = current_message.first;
 		}
@@ -133,6 +133,7 @@ int Message_Relay::number_of_messages(Message_Consumer* mc)
 Internal_Message* Message_Relay::front(Message_Consumer* mc)
 {
 	int number_of_messages = 0;
+	Internal_Message* message = 0;
 	for(int i = 0; i < list_of_message.size(); i++)
 	{
 		Internal_Message* message = get_found_message(mc, list_of_message[i]);

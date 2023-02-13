@@ -57,7 +57,7 @@ Timer::Timeout::Timeout(int timeout_in_millisecond)
 { 
 	alarm = false;
 	reset_clock();
-	timeout_amount = timeout_in_millisecond / (double)CLOCKS_PER_SEC;
+	timeout_amount = timeout_in_millisecond / 1000.0f;
 
 }
 
@@ -72,6 +72,16 @@ void Timer::Timeout::join()
 { 
 	while(!get_alarm() && clock_running)
 	{
-		update_time();
 	}
+}
+
+double Timer::timer_to_seconds(double time)
+{
+	return time;
+}
+
+double Timer::get_now()
+{
+	auto time = std::chrono::system_clock::now();
+	return std::chrono::duration<double>(time.time_since_epoch()).count();
 }

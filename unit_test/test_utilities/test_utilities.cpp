@@ -24,6 +24,11 @@ bool testing_utilities::test_accessor(bool test, bool expected)
 	return test == expected;
 }
 
+void testing_utilities::fail_test(std::string fail_message)
+{
+	FAIL() << fail_message;
+}
+
 void testing_utilities::device_utilities::check_state(Device_Label device, Device* expected_state)
 {
 	Device* received_state = model::get_device(device);

@@ -183,3 +183,22 @@ void system_utilities::network_utilities::setup()
 }
 
 bool system_utilities::keyboard_utilities::connect = true;
+
+
+system_utilities::keyboard_utilities::Keyboard system_utilities::keyboard_utilities::create_test_keyboard()
+{
+	system_utilities::keyboard_utilities::connect = false;
+	system_utilities::keyboard_utilities::Keyboard keyboard;
+
+	Timer::Timeout keyboard_timer(5000);
+	//keyboard start listening
+	keyboard.get_interface()->connect_to_keyboard();
+	keyboard.get_interface()->start_listening();
+	keyboard_timer.start_clock();
+	while(!keyboard.get_interface()->get_active() && !keyboard_timer.get_alarm());
+	if(keyboard_timer.get_program_time() >= 5.0)
+	{
+		testing_utilities::fail_test("Test keyboard not activated. TEST BREAKING ERROR.");
+	}
+	return keyboard;
+}

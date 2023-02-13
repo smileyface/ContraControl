@@ -2,7 +2,7 @@
 
 #include <string>
 
-Keyboard_Interface* Keyboard_Buffer_Input::keyboard;
+Keyboard_Interface* Keyboard_Buffer_Input::keyboard = 0;
 #ifdef _WIN32
 #include <Windows.h>
 #include "../sys_interface/windows_keyboard.h"

@@ -78,6 +78,9 @@ namespace Timer
 		std::condition_variable timer_conditional;
 		std::mutex timer_mutex;
 	};
+
+	double timer_to_seconds(double time);
+	double get_now();
 }
 
 

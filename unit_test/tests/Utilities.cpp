@@ -25,23 +25,21 @@ namespace
 TEST_F(Subsystem_Utilities_Test, Timer_Alignment)
 {
 	Timer::Basic testing;
-	double before_clock = std::clock();
+	double before_clock = Timer::get_now();
 	testing.start_clock();
 	system_utilities::sleep_thread(1000);
 	testing.stop_clock();
-	double after_clock = std::clock();
-	ASSERT_GE((after_clock - before_clock) / (double) CLOCKS_PER_SEC, 1) << "Timer misalignment";
-	ASSERT_LT((after_clock - before_clock) / (double) CLOCKS_PER_SEC, 1.025) << "Timer misalignment";
+	double after_clock = Timer::get_now();
+	ASSERT_GE(Timer::timer_to_seconds(after_clock - before_clock), 1) << "Timer misalignment";
+	ASSERT_LT(Timer::timer_to_seconds(after_clock - before_clock), 1.025) << "Timer misalignment";
 }
 
 TEST_F(Subsystem_Utilities_Test, Timer_Stop)
 {
 	Timer::Basic testing;
-	double before_clock = std::clock();
 	testing.start_clock();
 	system_utilities::sleep_thread(1000);
 	testing.stop_clock();
-	double after_clock = std::clock();
 	ASSERT_GE(testing.get_program_time(), 1) << "Timer misalignment";
 	ASSERT_LT(testing.get_program_time(), 1.025) << "Timer misalignment";
 }
@@ -50,11 +48,11 @@ TEST_F(Subsystem_Utilities_Test, Timeout_Timer_Alignment)
 {
 	Timer::Timeout testing(1000);
 	testing.start_clock();
-	double before_clock = std::clock();
+	double before_clock = Timer::get_now();
 	testing.join();
-	double after_clock = std::clock();
-	ASSERT_GE((after_clock - before_clock) / (double) CLOCKS_PER_SEC, 1.0) << "Timer misalignment";
-	ASSERT_LT((after_clock - before_clock) / (double) CLOCKS_PER_SEC, 1.025) << "Timer misalignment";
+	double after_clock = Timer::get_now();
+	ASSERT_GE(Timer::timer_to_seconds(after_clock - before_clock), 1.0) << "Timer misalignment";
+	ASSERT_LT(Timer::timer_to_seconds(after_clock - before_clock), 1.025) << "Timer misalignment";
 }
 TEST_F(Subsystem_Utilities_Test, Timeout_Timer_Timeout)
 {

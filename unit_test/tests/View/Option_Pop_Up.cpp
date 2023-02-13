@@ -69,23 +69,9 @@ TEST_F(Option_Popup_View_Test, Select_Option)
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
-
-	system_utilities::keyboard_utilities::connect = false;
-	system_utilities::keyboard_utilities::Keyboard keyboard;
-	system_utilities::sleep_thread(1000);
-	Timer::Timeout keyboard_timer(5000);
-	//keyboard start listening
-	keyboard.get_interface()->connect_to_keyboard();
-	keyboard.get_interface()->start_listening();
-	keyboard_timer.start_clock();
-	while(!keyboard.get_interface()->get_active() && !keyboard_timer.get_alarm());
-	if(keyboard_timer.get_program_time() >= 5.0)
-	{
-		FAIL() << "Keyboard interface never activated. TEST BREAKING ERROR.";
-	}
+	system_utilities::keyboard_utilities::Keyboard keyboard = system_utilities::keyboard_utilities::create_test_keyboard();
 	keyboard.get_interface()->action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
 	keyboard < KEY::NUM_1;
 	keyboard < KEY::ENTER;
-
-	while(keyboard.still_running());
+	keyboard.get_interface()->stop_listening();
 }
