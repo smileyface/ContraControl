@@ -33,6 +33,10 @@ void Keyboard_Interface::loop()
 			readEv();
 		}
 	}
+	if(!keyboard_present)
+	{
+		active = false;
+	}
 	keyboard_timeout_timer.join();
 	LOG_DEBUG("Reading loop over");
 }
@@ -51,12 +55,9 @@ void Keyboard_Interface::start_listening()
 
 void Keyboard_Interface::stop_listening()
 {
-	if(keyboard_present)
-	{
-		active = false;
-		if(keyboard_thread.joinable())
-			keyboard_thread.join();
-	}
+	active = false;
+	if(keyboard_thread.joinable())
+		keyboard_thread.join();
 }
 
 bool Keyboard_Interface::get_keyboard_present()

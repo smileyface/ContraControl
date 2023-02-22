@@ -32,6 +32,11 @@ public:
 	virtual void connect_to_keyboard() = 0;
 
 	/**
+	 * Disconnect the Keyboard
+	 */
+	virtual void disconnect_keyboard() = 0;
+
+	/**
 	 * Start listening for input from the modeled keyboard 
 	 */
 	void start_listening();

@@ -48,7 +48,7 @@ TEST_F(Keyboard_Hardware_Test, Capture_Test)
 								{
 									is_pressed = true;
 								});
-	system_utilities::sleep_thread(100);
+	system_utilities::sleep_thread(1000);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
 	system_utilities::sleep_thread(1000);
 	EXPECT_TRUE(is_pressed);

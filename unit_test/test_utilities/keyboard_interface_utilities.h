@@ -9,6 +9,7 @@ public:
 	Test_Keyboard_Interface();
 	void initalize_codes();
 	void connect_to_keyboard();
+	void disconnect_keyboard();
 	void readEv();
 
 	bool read_a_character;

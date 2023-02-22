@@ -72,6 +72,11 @@ void Test_Keyboard_Interface::connect_to_keyboard()
 	keyboard_present = true;
 }
 
+void Test_Keyboard_Interface::disconnect_keyboard()
+{
+	keyboard_present = false;
+}
+
 void Test_Keyboard_Interface::readEv()
 {
 	read_a_character = true;

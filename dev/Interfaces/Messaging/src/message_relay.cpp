@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <mutex>
 #include <string>
+#include <iostream>
 
 std::mutex g_pages_mutex;
 Message_Relay* Message_Relay::instance;
@@ -15,9 +16,7 @@ Internal_Message* get_found_message(Message_Consumer* consumer, std::pair<Intern
 	{
 		auto it = std::find(current_message.second.begin(), current_message.second.end(), consumer);
 		if(it != current_message.second.end())
-		{
-			found_message = current_message.first;
-		}
+				found_message = current_message.first;
 	}
 	return found_message;
 }
@@ -189,6 +188,7 @@ Message_Relay* Message_Relay::get_instance()
 
 void Message_Relay::clear()
 { 
+	std::lock_guard<std::mutex> guard(g_pages_mutex);
 	list_of_message.clear();
 }
 

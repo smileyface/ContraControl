@@ -30,6 +30,7 @@ public:
 	Linux_Keyboard();
 	~Linux_Keyboard();
 	void connect_to_keyboard();
+	void disconnect_keyboard();
 	void readEv();
 	short getKeyState(short key);
 

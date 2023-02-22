@@ -170,6 +170,11 @@ void Linux_Keyboard::readEv()
 
 }
 
+void Linux_Keyboard::disconnect_keyboard()
+{ 
+	keyboard_present = false;
+}
+
 short Linux_Keyboard::getKeyState(short key)
 {
 	return keyboard_st->keys[key];

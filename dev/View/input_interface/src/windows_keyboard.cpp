@@ -110,6 +110,10 @@ void Windows_Keyboard::readEv()
 	}
 }
 
+void Windows_Keyboard::disconnect_keyboard()
+{
+	keyboard_present = false;
+}
 
 
 #endif

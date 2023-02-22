@@ -20,6 +20,7 @@ public:
 	Windows_Keyboard();
 	~Windows_Keyboard();
 	void connect_to_keyboard();
+	void disconnect_keyboard();
 	void initalize_codes();
 
 	void readEv();
