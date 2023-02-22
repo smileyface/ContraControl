@@ -41,7 +41,7 @@ public:
 	 * \param view Type of view to add.
 	 * \return Pointer to the newly created view
 	 */
-	virtual View* add_view(VIEW_TYPE_ENUM view);
+	virtual View* add_view(VIEW_TYPE_ENUM view) = 0;
 	/**
 	 * \brief Update all stale views.
 	 *

@@ -10,12 +10,6 @@
 
 std::mutex format_mutex;
 
-
-View* Format::add_view(VIEW_TYPE_ENUM view)
-{
-	return 0;
-}
-
 void Format::update_views()
 {
 	auto i = view_list.begin();
@@ -91,9 +85,4 @@ void Format::stop_display()
 	clean_views();
 	if(looping_thread->joinable())
 		looping_thread->join();
-}
-
-bool Format::running()
-{
-	return looping_thread->joinable();
 }
