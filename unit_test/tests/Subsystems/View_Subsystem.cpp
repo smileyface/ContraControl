@@ -53,6 +53,7 @@ TEST_F(View_Subsystem_Test, View_Test_Display_Add_First)
 {
 	Message_Consumer* logging_messages = new Message_Consumer(new Logging_Message());
 	view::add_display(DISPLAY_TYPES::CONSOLE);
+	view::initalize();
 	view::start_view();
 
 	Option_Popup_Message* opm = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(logging_messages));
