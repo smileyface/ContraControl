@@ -17,6 +17,8 @@ namespace
 		virtual void SetUp() override
 		{
 			system_utilities::setup();
+			system_utilities::keyboard_utilities::connect = true;
+			keyboard.set_interface();
 			keyboard.get_interface()->connect_to_keyboard();
 			keyboard.get_interface()->start_listening();
 
@@ -30,6 +32,7 @@ namespace
 		{
 			keyboard.get_interface()->stop_listening();
 			system_utilities::keyboard_utilities::tear_down();
+			system_utilities::keyboard_utilities::connect = false;
 			system_utilities::cleanup();
 		}
 	};

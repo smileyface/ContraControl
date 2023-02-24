@@ -13,6 +13,22 @@ system_utilities::keyboard_utilities::Keyboard::Keyboard()
 {
 	system_utilities::keyboard_utilities::setup();
 	buffer = 0;
+	set_interface();
+}
+
+system_utilities::keyboard_utilities::Keyboard::~Keyboard()
+{
+	buffer->stop_listening();
+	system_utilities::keyboard_utilities::tear_down();
+}
+
+void system_utilities::keyboard_utilities::Keyboard::wait_for_first_key(KPI key)
+{
+
+}
+
+void system_utilities::keyboard_utilities::Keyboard::set_interface()
+{
 	if(system_utilities::keyboard_utilities::connect == false)
 	{
 		buffer = new Test_Keyboard_Interface();
@@ -29,17 +45,6 @@ system_utilities::keyboard_utilities::Keyboard::Keyboard()
 		buffer = new Linux_Keyboard();
 	#endif
 	}
-}
-
-system_utilities::keyboard_utilities::Keyboard::~Keyboard()
-{
-	buffer->stop_listening();
-	system_utilities::keyboard_utilities::tear_down();
-}
-
-void system_utilities::keyboard_utilities::Keyboard::wait_for_first_key(KPI key)
-{
-
 }
 
 

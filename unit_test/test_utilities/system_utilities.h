@@ -55,6 +55,7 @@ namespace system_utilities
 			Keyboard_Interface* get_interface();
 			void override_interface(Keyboard_Interface* new_interface);
 			bool still_running();
+			void set_interface();
 		private:
 			Keyboard_Interface* buffer;
 		};
