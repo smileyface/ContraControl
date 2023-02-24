@@ -13,20 +13,25 @@
 #endif
 
 /*Externs*/
-#ifdef _WIN32
-Network_Interface* network::network_interface = new Windows_Network_Interface();
-#endif // IS_WIN32
-#ifdef __linux__
-Network_Interface* network::network_interface = new Linux_Network_Interface();
-#endif //__linux__
-#ifdef _MAC
-//For now, we'll just use the linux interface.
-Network_Interface* network::network_interface = new Linux_Network_Interface();
-#endif // _MAC
+Network_Interface* network::network_interface = 0;
 
 bool network_running = false;
 std::thread network_thread;
 std::mutex network_mutex;
+
+void network::make_os_network_interface()
+{
+#ifdef _WIN32
+	network::network_interface = new Windows_Network_Interface();
+#endif // IS_WIN32
+#ifdef __linux__
+	network::network_interface = new Linux_Network_Interface();
+#endif //__linux__
+#ifdef _MAC
+	//For now, we'll just use the linux interface.
+	network::network_interface = new Linux_Network_Interface();
+#endif // _MAC
+}
 
 void network::init_network_interfaces()
 {
@@ -72,6 +77,11 @@ void network::teardown_network_interfaces()
 		network::network_interface->clean_up();
 	}
 	LOG_INFO("Network Interface torndown", "Network");
+}
+
+void network::destroy_interface()
+{
+	delete network::network_interface;
 }
 
 Network_Message network::listen_for_message(Connection_Id src, MESSAGES listen_for)

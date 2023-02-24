@@ -19,6 +19,11 @@ namespace network
     static const char* subsystem_name = "Network";
 
     /**
+     * Create interface based on which OS we're running on.
+     */
+    void make_os_network_interface();
+
+    /**
      * \brief Setup network interface as a system specific interface.
      */
     extern void init_network_interfaces();
@@ -32,6 +37,10 @@ namespace network
      * \brief Teardown and clean up system specific network interface.
      */
     extern void teardown_network_interfaces();
+    /**
+     * \brief Delete the network interface
+     */
+    extern void destroy_interface();
     /**
      * \brief Send a message on the network interface.
      *

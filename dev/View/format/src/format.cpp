@@ -74,10 +74,11 @@ void Format::process_internal_messages()
 void Format::start_display()
 {
 	format_running = true;
-	looping_thread = new std::thread([this]
-									 {
-										 loop();
-									 });
+	if(looping_thread == nullptr)
+		looping_thread = new std::thread([this]
+										 {
+											 loop();
+										 });
 }
 
 void Format::stop_display()

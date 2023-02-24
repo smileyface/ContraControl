@@ -14,6 +14,7 @@
 namespace {
 	class Network_Error_Test : public ::testing::Test {
 		virtual void SetUp() {
+			network::make_os_network_interface();
 			system_utilities::setup_messaging();
 		}
 		virtual void TearDown() {
@@ -48,6 +49,7 @@ TEST_F(Network_Error_Test, Error_States_Initalized)
 
 TEST_F(Network_Error_Test, Error_States_Broadcast_Setup)
 {
+
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::SOCKET_INVALID);
 #endif // !_WIN32

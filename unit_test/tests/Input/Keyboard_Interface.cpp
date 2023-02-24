@@ -50,6 +50,7 @@ TEST_F(Keyboard_Interface_Test, Test_Keyboard_Plug_Pull)
 	keyboard.get_interface()->start_listening();
 	system_utilities::sleep_thread(100);
 	keyboard.get_interface()->disconnect_keyboard();
+	system_utilities::sleep_thread(100);
 	EXPECT_FALSE(keyboard.get_interface()->get_active());
 }
 

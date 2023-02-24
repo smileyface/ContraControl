@@ -16,6 +16,21 @@ Keyboard_Buffer_Input::Keyboard_Buffer_Input():
 	block(false),
 	timed_out(false)
 {
+	set_interface();
+}
+
+Keyboard_Buffer_Input::~Keyboard_Buffer_Input()
+{
+	if(keyboard != 0)
+	{
+		delete keyboard;
+		keyboard = 0;
+	}
+
+}
+
+void Keyboard_Buffer_Input::set_interface()
+{
 #ifdef _WIN32
 	Keyboard_Buffer_Input::keyboard = new Windows_Keyboard();
 #endif

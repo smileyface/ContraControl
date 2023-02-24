@@ -18,9 +18,9 @@ void testing_utilities::get_partial_on(Command* command, Device* device, double 
 	}
 }
 
-bool testing_utilities::test_accessor(bool test, bool expected)
+bool testing_utilities::test_accessor(bool test, bool expected, std::string messaging)
 {
-	EXPECT_TRUE(test == expected);
+	EXPECT_TRUE(test == expected) << messaging;
 	return test == expected;
 }
 

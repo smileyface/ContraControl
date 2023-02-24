@@ -39,6 +39,7 @@ void system_utilities::setup()
 	{
 		model::initalize();
 		controller::initalize();
+		network::make_os_network_interface();
 	}
 	catch(NetworkErrorException)
 	{
@@ -55,6 +56,7 @@ void system_utilities::setup_messaging()
 		message_consumer = new Message_Consumer(new Logging_Message());
 		Message_Relay::get_instance()->register_consumer(message_consumer);
 	}
+
 	number_of_test_consumers = Message_Relay::get_instance()->number_of_consumers();
 }
 
@@ -63,6 +65,7 @@ void system_utilities::teardown_messaging()
 	print_log_messages();
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
 	Message_Relay::get_instance()->clear();
+	Message_Relay::destroy();
 	message_consumer = 0;
 }
 
@@ -99,14 +102,14 @@ void system_utilities::print_log_messages()
 void system_utilities::cleanup()
 {
 	int remaining_consumer = Message_Relay::get_instance()->number_of_consumers() - number_of_test_consumers;
-	if(testing_utilities::test_accessor(remaining_consumer <= 0, true) == false)
+	if(testing_utilities::test_accessor(remaining_consumer <= 0, true, "Consumers not closed out") == false)
 	{
 		LOG_ERROR("Not all consumers are deregistered. " + std::to_string(remaining_consumer) + " missing.", "Testing system teardown");
 	}
 	controller::clean_up();
 	model::clean_up();
+	network::destroy_interface();
 	teardown_messaging();
-	
 }
 
 void system_utilities::step(int steps)

@@ -7,6 +7,7 @@
 
 std::mutex g_pages_mutex;
 Message_Relay* Message_Relay::instance;
+std::vector<Internal_Message*> list_of_pointers;
 
 Internal_Message* get_found_message(Message_Consumer* consumer, std::pair<Internal_Message*, Consumer_List>& current_message)
 {
@@ -50,11 +51,18 @@ bool more_messages(Message_Consumer* consumer, std::vector<std::pair<Internal_Me
 
 void remove_unwanted_messages(std::vector<std::pair<Internal_Message*, Consumer_List>>& list_of_message)
 {
-	auto it = std::remove_if(list_of_message.begin(), list_of_message.end(), remove_func);
-	if(it != list_of_message.end())
+	auto it = list_of_message.begin();
+	while( it != list_of_message.end() )
 	{
-		const std::lock_guard<std::mutex> lock(g_pages_mutex);
-		list_of_message.erase(it);
+		if(it->second.size() == 0)
+		{
+			const std::lock_guard<std::mutex> lock(g_pages_mutex);
+			it = list_of_message.erase(it);
+		}
+		else
+		{
+			++it;
+		}
 	}
 }
 
@@ -69,9 +77,7 @@ Message_Relay::Message_Relay()
 { }
 
 Message_Relay::~Message_Relay()
-{
-	delete instance;
-}
+{ }
 
 Consumer_List Message_Relay::get_message_consumers(Internal_Message* message)
 {
@@ -92,6 +98,7 @@ void Message_Relay::push(Internal_Message* message)
 	Consumer_List registered_consumers = get_message_consumers(message);
 
 	list_of_message.emplace_back(std::make_pair(message, registered_consumers));
+	list_of_pointers.push_back(message);
 	for(int i = 0; i < registered_consumers.size(); i++)
 	{
 		registered_consumers[i]->notify();
@@ -184,6 +191,17 @@ Message_Relay* Message_Relay::get_instance()
 		instance = new Message_Relay();
 	}
 	return instance;
+}
+
+void Message_Relay::destroy()
+{
+	for(auto i = list_of_pointers.begin(); i != list_of_pointers.end(); i++)
+	{
+		delete* i;
+	}
+	list_of_pointers.clear();
+	delete instance;
+	instance = NULL;
 }
 
 void Message_Relay::clear()

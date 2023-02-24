@@ -16,7 +16,6 @@ View::~View()
 
 Console_View::Console_View()
 { 
-	keyboard = Keyboard_Buffer_Input();
 }
 
 Console_View::~Console_View()

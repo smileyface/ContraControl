@@ -58,6 +58,11 @@ public:
 	 * \return Instance of the message relay.
 	 */
 	static Message_Relay* get_instance();
+
+	/**
+	 * Clean up the messsage relay
+	 */
+	static void destroy();
 	/**
 	 * Register consumer for message consumption.
 	 * \param consumer Add a Message_Consumer to the list of known consumers. You must do this before you are able to recieve messages.

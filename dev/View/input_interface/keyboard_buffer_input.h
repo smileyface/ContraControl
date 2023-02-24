@@ -17,6 +17,7 @@ class Keyboard_Buffer_Input
 {
 public:
 	Keyboard_Buffer_Input();
+	~Keyboard_Buffer_Input();
 	/**
 	* Get string of characters recived from the keyboard. Terminated with an ENTER key press.
 	* \return entered string. 
@@ -31,6 +32,10 @@ public:
 	 * \return If the attempt for user input timed out.
 	 */
 	bool get_timed_out();
+	/**
+	 * Set the interface based on operating system
+	 */
+	void set_interface();
 	/**
 	 * Appropriate keyboard for the system.
 	 * 
