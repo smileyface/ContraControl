@@ -113,6 +113,9 @@ Linux_Network_Interface::Linux_Network_Interface()
 	local_connections::setup(connections);
 }
 
+Linux_Network_Interface::~Linux_Network_Interface()
+{ }
+
 void Linux_Network_Interface::initalize()
 {
 	char hostname_temp[50];

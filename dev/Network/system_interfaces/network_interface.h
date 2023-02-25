@@ -35,6 +35,8 @@ class Network_Interface
 {
 public:
 
+	virtual ~Network_Interface();
+
 	/**
 	 * \brief Initalize the interface.
 	 *

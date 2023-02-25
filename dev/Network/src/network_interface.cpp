@@ -38,6 +38,9 @@ void Network_Interface::set_server()
 	is_server = true;
 }
 
+Network_Interface::~Network_Interface()
+{ }
+
 Network_Status_State Network_Interface::get_status()
 {
 	return status_state;

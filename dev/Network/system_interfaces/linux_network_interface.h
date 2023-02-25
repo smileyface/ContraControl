@@ -28,6 +28,7 @@ class Linux_Network_Interface : public Network_Interface
 {
 public:
 	Linux_Network_Interface();
+	~Linux_Network_Interface();
 	void initalized();
 	void initalize();
 	void clean_up();

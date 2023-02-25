@@ -81,7 +81,11 @@ void network::teardown_network_interfaces()
 
 void network::destroy_interface()
 {
-	delete network::network_interface;
+	if(network::network_interface != 0)
+	{
+		delete network::network_interface;
+		network::network_interface = 0;
+	}
 }
 
 Network_Message network::listen_for_message(Connection_Id src, MESSAGES listen_for)
