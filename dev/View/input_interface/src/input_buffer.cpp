@@ -1,5 +1,7 @@
 #include "../action_layer/input_buffer.h"
 
+#include "Messaging/message_relay.h"
+
 Keyboard_Input_Buffer::Keyboard_Input_Buffer()
 { 
     input_buffer = std::vector<std::pair<KPI, KEY_STATE>>();
@@ -151,7 +153,8 @@ std::string Keyboard_Input_Buffer::get_buffer()
 
 
 void Keyboard_Input_Buffer::add(KPI key, KEY_STATE state)
-{ 
+{
+    LOG_DEBUG(std::to_string(key.get_code()) + " sent");
     input_buffer.push_back(std::make_pair(key, state));
 }
 

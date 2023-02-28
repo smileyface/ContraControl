@@ -12,7 +12,6 @@ std::vector<Internal_Message*> list_of_pointers;
 Internal_Message* get_found_message(Message_Consumer* consumer, std::pair<Internal_Message*, Consumer_List>& current_message)
 {
 	Internal_Message* found_message = 0;
-	std::lock_guard<std::mutex> guard(g_pages_mutex);
 	if(current_message.second.size() > 0)
 	{
 		auto it = std::find(current_message.second.begin(), current_message.second.end(), consumer);
