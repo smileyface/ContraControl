@@ -13,15 +13,7 @@ Internal_Message* Message_Relay::get_found_message(Message_Consumer* consumer, M
 	Internal_Message* found_message = 0;
 	if(current_message.second.size() > 0)
 	{
-		auto it = current_message.second.begin();
-		while(it != current_message.second.end())
-		{
-			if(*it == consumer)
-			{
-				break;
-			}
-			it++;
-		}
+		auto it = std::find(current_message.second.begin(), current_message.second.end(), consumer);
 		if(it != current_message.second.end())
 				found_message = current_message.first;
 	}
@@ -52,8 +44,9 @@ void Message_Relay::remove_unwanted_messages()
 	{
 		if(it->second.size() == 0)
 		{
-			const std::lock_guard<std::mutex> lock(g_pages_mutex);
+			g_pages_mutex.lock();
 			it = list_of_message.erase(it);
+			g_pages_mutex.unlock();
 		}
 		else
 		{
