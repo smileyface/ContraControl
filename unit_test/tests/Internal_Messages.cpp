@@ -16,8 +16,7 @@ namespace
 		{
 			system_utilities::setup();
 			if(consumer == 0)
-				consumer = new Message_Consumer(Message_Types::LOGGING);
-			Message_Relay::get_instance()->register_consumer(consumer);
+				consumer = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
 		}
 		virtual void TearDown()
 		{
@@ -48,15 +47,13 @@ TEST_F(Internal_Message_Test, Logging_Levels_Test)
 
 TEST_F(Internal_Message_Test, Multiple_Consumer)
 {
-	Message_Consumer* con_two = new Message_Consumer(new Logging_Message());
 	LOG_DEBUG("Test Debug");
-	Message_Relay::get_instance()->register_consumer(con_two);
+	Message_Consumer* con_two = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
 	Logging_Message* message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(con_two));
 	message->placeholder();
 	EXPECT_EQ(message->get_message(), "Test Debug");
 
 	Message_Relay::get_instance()->deregister_consumer(con_two);
-	delete con_two;
 }
 
 TEST_F(Internal_Message_Test, Freshen)
@@ -68,30 +65,33 @@ TEST_F(Internal_Message_Test, Freshen)
 	EXPECT_FALSE(consumer->is_stale());
 }
 
+TEST_F(Internal_Message_Test, Register_Consumer)
+{
+	LOG_DEBUG("Test Debug");
+	Message_Consumer* con_two = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
+	EXPECT_TRUE(Message_Relay::get_instance()->has_consumer(con_two));
+	Message_Relay::get_instance()->deregister_consumer(con_two);
+}
+
 TEST_F(Internal_Message_Test, Deregister_Consumer)
 {
-	Message_Consumer* con_two = new Message_Consumer(new Logging_Message());
 	LOG_DEBUG("Test Debug");
-	Message_Relay::get_instance()->register_consumer(con_two);
+	Message_Consumer* con_two = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
 	EXPECT_TRUE(Message_Relay::get_instance()->has_consumer(con_two));
 	Message_Relay::get_instance()->deregister_consumer(con_two);
 	EXPECT_FALSE(Message_Relay::get_instance()->has_consumer(con_two));
 	Message_Relay::get_instance()->deregister_consumer(con_two);
-	delete con_two;
 }
 
 TEST_F(Internal_Message_Test, Consumer_Messages)
 {
-	Message_Consumer* con_two = new Message_Consumer(new Logging_Message());
-
-	Message_Relay::get_instance()->register_consumer(con_two);
+	Message_Consumer* con_two = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
 	EXPECT_EQ(0, Message_Relay::get_instance()->number_of_messages(con_two));
 	LOG_DEBUG("Test Debug");
 	EXPECT_EQ(1, Message_Relay::get_instance()->number_of_messages(con_two));
 	Message_Relay::get_instance()->deregister_consumer(con_two);
-	Message_Relay::get_instance()->register_consumer(con_two);
+	con_two = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
 	EXPECT_EQ(1, Message_Relay::get_instance()->number_of_messages(con_two));
 
 	Message_Relay::get_instance()->deregister_consumer(con_two);
-	delete con_two;
 }

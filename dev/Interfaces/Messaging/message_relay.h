@@ -9,10 +9,15 @@
 #define SYSTEM_MESSAGE_INTERFACE_H
 
 #include <string>
+#include <map>
+#include <set>
 
+//Helper objects
 #include "Messaging/consumers.h"
  //Messaging types
 #include "internal_messages.h"
+
+typedef std::pair<Internal_Message* const, Consumer_List> Message_Map_Node;
 
 /**
  * Message relay system as a singleton.
@@ -67,7 +72,7 @@ public:
 	 * Register consumer for message consumption.
 	 * \param consumer Add a Message_Consumer to the list of known consumers. You must do this before you are able to recieve messages.
 	 */
-	void register_consumer(Message_Consumer* consumer);
+	Message_Consumer* register_consumer(const Internal_Message* mess);
 
 	/**
 	 * Remove consumer from the consumer list. The system that owns this consumer will not be able to recieve messages while deregistered.
@@ -89,16 +94,20 @@ public:
 	*/
 	void clear();
 
-
-
-
 private:
 	Message_Relay();
-	std::vector<std::pair<Internal_Message*, Consumer_List>> list_of_message;
-	std::vector<Message_Consumer*> list_of_registered_consumers;
+	std::map<Internal_Message*, Consumer_List> list_of_message;
+	std::map<Message_Consumer*, std::vector<Internal_Message*>> list_of_consumers;
+	std::set<Message_Consumer*> list_of_registered_consumers;
 	static Message_Relay* instance;
 
 	Consumer_List get_message_consumers(Internal_Message* message);
+	void freshen_messages(Message_Consumer* consumer);
+	bool more_messages(Message_Consumer* consumer);
+	void remove_unwanted_messages();
+	void remove_consumer_from_messages(Message_Consumer* consumer, Consumer_List& messages);
+	Internal_Message* get_found_message(Message_Consumer* consumer, Message_Map_Node& current_message);
+
 };
 
 //MACROS.

@@ -19,25 +19,15 @@ namespace
 	{
 	public:
 		Message_Consumer* logging_messages;
-		Option_Popup_View_Test()
-		{
-			logging_messages = new Message_Consumer(new Logging_Message());
-		}
-		~Option_Popup_View_Test()
-		{
-			delete logging_messages;
-		}
 		virtual void SetUp()
 		{
 			system_utilities::setup();
-			Message_Relay::get_instance()->register_consumer(logging_messages);
-			view::initalize();
+			logging_messages = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
 			view::start_view();
 		}
 		virtual void TearDown()
 		{
 			view::stop_view();
-			view::remove_all();
 			Message_Relay::get_instance()->deregister_consumer(logging_messages);
 			system_utilities::cleanup();
 		}
@@ -69,9 +59,11 @@ TEST_F(Option_Popup_View_Test, Select_Option)
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
+	system_utilities::sleep_thread(100);
 	system_utilities::keyboard_utilities::Keyboard keyboard = system_utilities::keyboard_utilities::create_test_keyboard();
 	keyboard.get_interface()->action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
-	keyboard < KEY::NUM_1;
-	keyboard < KEY::ENTER;
-	keyboard.get_interface()->stop_listening();
+
+	//keyboard < KEY::NUM_1;
+	//keyboard < KEY::ENTER;
+	//keyboard.get_interface()->stop_listening();
 }

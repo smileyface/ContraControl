@@ -7,48 +7,45 @@
 
 std::mutex g_pages_mutex;
 Message_Relay* Message_Relay::instance;
-std::vector<Internal_Message*> list_of_pointers;
 
-Internal_Message* get_found_message(Message_Consumer* consumer, std::pair<Internal_Message*, Consumer_List>& current_message)
+Internal_Message* Message_Relay::get_found_message(Message_Consumer* consumer, Message_Map_Node& current_message)
 {
 	Internal_Message* found_message = 0;
 	if(current_message.second.size() > 0)
 	{
-		auto it = std::find(current_message.second.begin(), current_message.second.end(), consumer);
+		auto it = current_message.second.begin();
+		while(it != current_message.second.end())
+		{
+			if(*it == consumer)
+			{
+				break;
+			}
+			it++;
+		}
 		if(it != current_message.second.end())
 				found_message = current_message.first;
 	}
 	return found_message;
 }
 
-void  remove_consumer_from_messages(Message_Consumer* consumer, std::pair<Internal_Message*, Consumer_List>& messages)
+void Message_Relay::remove_consumer_from_messages(Message_Consumer* consumer, Consumer_List& messages)
 {
-	auto it = std::find(messages.second.begin(), messages.second.end(), consumer);
-	if(it != messages.second.end())
+	auto it = std::find(messages.begin(), messages.end(), consumer);
+	if(it != messages.end())
 	{
-		std::lock_guard<std::mutex> guard(g_pages_mutex);
-		messages.second.erase(it);
+		g_pages_mutex.lock();
+		messages.erase(it);
+		g_pages_mutex.unlock();
 	}
 }
 
-bool remove_func(std::pair<Internal_Message*, Consumer_List> Message_Data)
+bool Message_Relay::more_messages(Message_Consumer* consumer)
 {
-	return Message_Data.second.size() == 0;
+	bool messages_found = number_of_messages(consumer) > 0;
+	return messages_found;
 }
 
-bool more_messages(Message_Consumer* consumer, std::vector<std::pair<Internal_Message*, Consumer_List>> messages)
-{
-	for(int i = 0; i < messages.size(); i++)
-	{
-		if(std::find(messages[i].second.begin(), messages[i].second.end(), consumer) != messages[i].second.end())
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-void remove_unwanted_messages(std::vector<std::pair<Internal_Message*, Consumer_List>>& list_of_message)
+void Message_Relay::remove_unwanted_messages()
 {
 	auto it = list_of_message.begin();
 	while( it != list_of_message.end() )
@@ -65,10 +62,10 @@ void remove_unwanted_messages(std::vector<std::pair<Internal_Message*, Consumer_
 	}
 }
 
-void freshen_messages(Message_Consumer* consumer, std::vector<std::pair<Internal_Message*, Consumer_List>>& list_of_message)
+void Message_Relay::freshen_messages(Message_Consumer* consumer)
 {
 	//if the consumer doesn't have another message on the relay
-	if(!more_messages(consumer, list_of_message))
+	if(!more_messages(consumer))
 		consumer->freshen();
 }
 
@@ -93,11 +90,10 @@ Consumer_List Message_Relay::get_message_consumers(Internal_Message* message)
 
 void Message_Relay::push(Internal_Message* message)
 {
-	std::lock_guard<std::mutex> guard(g_pages_mutex);
 	Consumer_List registered_consumers = get_message_consumers(message);
-
-	list_of_message.emplace_back(std::make_pair(message, registered_consumers));
-	list_of_pointers.push_back(message);
+	g_pages_mutex.lock();
+	list_of_message[message] = registered_consumers;
+	g_pages_mutex.unlock();
 	for(int i = 0; i < registered_consumers.size(); i++)
 	{
 		registered_consumers[i]->notify();
@@ -107,26 +103,26 @@ void Message_Relay::push(Internal_Message* message)
 Internal_Message* Message_Relay::pop(Message_Consumer* consumer)
 {
 	Internal_Message* message = 0;
-	for(int i = 0; i < list_of_message.size(); i++)
+	for(auto current_message = list_of_message.begin(); current_message != list_of_message.end(); current_message++)
 	{
-		message = get_found_message(consumer, list_of_message[i]);
+		message = front(consumer);
 		if(message != 0)
 		{
-			remove_consumer_from_messages(consumer, list_of_message[i]);
-			freshen_messages(consumer, list_of_message);
+			remove_consumer_from_messages(consumer, list_of_message[message]);
+			freshen_messages(consumer);
 			break;
 		}
 	}
-	remove_unwanted_messages(list_of_message);
+	remove_unwanted_messages();
 	return message;
 }
 
 int Message_Relay::number_of_messages(Message_Consumer* mc)
 {
 	int number_of_messages = 0;
-	for(int i = 0; i < list_of_message.size(); i++)
+	for(auto current_message = list_of_message.begin(); current_message != list_of_message.end(); current_message++)
 	{
-		Internal_Message* message = get_found_message(mc, list_of_message[i]);
+		Internal_Message* message = get_found_message(mc, *current_message);
 		if(message != 0)
 		{
 			number_of_messages++;
@@ -137,32 +133,34 @@ int Message_Relay::number_of_messages(Message_Consumer* mc)
 
 Internal_Message* Message_Relay::front(Message_Consumer* mc)
 {
-	int number_of_messages = 0;
 	Internal_Message* message = 0;
-	for(int i = 0; i < list_of_message.size(); i++)
+	for(auto i = list_of_message.begin(); i != list_of_message.end(); i++)
 	{
-		Internal_Message* message = get_found_message(mc, list_of_message[i]);
-		if(message != 0)
+		if(get_found_message(mc, (*i)) != 0)
 		{
-			return message;
+			message = i->first;
+			break;
+	
 		}
 	}
-	return 0;
+	return message;
 }
 
-void Message_Relay::register_consumer(Message_Consumer* mc)
+Message_Consumer* Message_Relay::register_consumer(const Internal_Message* mess)
 {
-	if(std::find(list_of_registered_consumers.begin(), list_of_registered_consumers.end(), mc) == list_of_registered_consumers.end())
+	Message_Consumer* new_consumer = new Message_Consumer(mess);
+	auto return_status = list_of_registered_consumers.insert(new_consumer);
+	if(return_status.second)
 	{
-		list_of_registered_consumers.push_back(mc);
-		for(int i = 0; i < list_of_message.size(); i++)
+		for(auto current_message = list_of_message.begin(); current_message != list_of_message.end(); current_message++)
 		{
-			if(mc->correct_type(list_of_message[i].first))
+			if(new_consumer->correct_type(current_message->first))
 			{
-				list_of_message[i].second.push_back(mc);
+				current_message->second.push_back(new_consumer);
 			}
 		}
 	}
+	return new_consumer;
 }
 
 void Message_Relay::deregister_consumer(Message_Consumer* mc)
@@ -170,16 +168,17 @@ void Message_Relay::deregister_consumer(Message_Consumer* mc)
 	auto consumer = std::find(list_of_registered_consumers.begin(), list_of_registered_consumers.end(), mc);
 	if(consumer != std::end(list_of_registered_consumers))
 	{
-		list_of_registered_consumers.erase(consumer);
-		for(int i = 0; i < list_of_message.size(); i++)
+		for(auto current_message = list_of_message.begin(); current_message != list_of_message.end(); current_message++)
 		{
-			Internal_Message* message = get_found_message(mc, list_of_message[i]);
+			Internal_Message* message = get_found_message(mc, (*current_message));
 			if(message != 0)
 			{
-				remove_consumer_from_messages(mc, list_of_message[i]);
+				remove_consumer_from_messages(mc, list_of_message[message]);
 			}
 		}
-		remove_unwanted_messages(list_of_message);
+		delete* consumer;
+		list_of_registered_consumers.erase(consumer);
+		remove_unwanted_messages();
 	}
 }
 
@@ -194,11 +193,6 @@ Message_Relay* Message_Relay::get_instance()
 
 void Message_Relay::destroy()
 {
-	for(auto i = list_of_pointers.begin(); i != list_of_pointers.end(); i++)
-	{
-		delete* i;
-	}
-	list_of_pointers.clear();
 	delete instance;
 	instance = NULL;
 }
@@ -207,6 +201,7 @@ void Message_Relay::clear()
 { 
 	std::lock_guard<std::mutex> guard(g_pages_mutex);
 	list_of_message.clear();
+	list_of_registered_consumers.clear();
 }
 
 bool Message_Relay::has_consumer(Message_Consumer* consumer)

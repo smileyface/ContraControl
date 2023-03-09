@@ -9,12 +9,14 @@
 #ifndef INTERNAL_MESSAGES_LIST
 #define INTERNAL_MESSAGES_LIST
 
+
  //#include "internal_message_type.h"
 #include "message_types/logging_message.h"
 //#include "message_types/view_messages/view_subsystem_message.h"
 //#include "message_types/view_messages/view_request/option_popup_message.h"
 //#include "message_types/response_messages/response_message.h"
 #include "message_types/response_messages/view_request/option_popup_response_message.h"
+
 
 /**
  * Types of Internal_Messages for consumers to use
@@ -33,6 +35,4 @@ struct Message_Types
 	static const Option_Popup_Response_Message* OPTION_POPUP_RESPONSE;
 
 };
-
-
 #endif

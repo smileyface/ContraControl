@@ -51,12 +51,12 @@ TEST_F(View_Subsystem_Test, View_Test_Keyboard_Input)
 
 TEST_F(View_Subsystem_Test, View_Test_Display_Add_First)
 {
-	Message_Consumer* logging_messages = new Message_Consumer(new Logging_Message());
+	Message_Consumer* logging_messages = new Message_Consumer(Message_Types::LOGGING);
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 	view::initalize();
 	view::start_view();
 
-	Option_Popup_Message* opm = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(logging_messages));
+	auto opm = Message_Relay::get_instance()->pop(logging_messages);
 
 	view::stop_view();
 	view::remove_all();

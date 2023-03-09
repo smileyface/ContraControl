@@ -10,7 +10,6 @@ Message_Consumer::Message_Consumer( const Internal_Message* mess)
 }
 Message_Consumer::~Message_Consumer()
 {
-	delete message_type;
 }
 void Message_Consumer::notify()
 {

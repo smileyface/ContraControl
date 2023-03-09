@@ -21,30 +21,18 @@ namespace
 		Message_Consumer* logging_messages;
 		Message_Consumer* option_consumer;
 		bool found = false;
-		Command_View_Message_Test()
-		{
-			logging_messages = new Message_Consumer(new Logging_Message());
-			option_consumer = new Message_Consumer(new Option_Popup_Message());
-		}
-		~Command_View_Message_Test()
-		{
-			delete logging_messages;
-			delete option_consumer;
-		}
 		virtual void SetUp()
 		{
 
 			system_utilities::setup();
-			Message_Relay::get_instance()->register_consumer(logging_messages);
-			Message_Relay::get_instance()->register_consumer(option_consumer);
+			logging_messages = Message_Relay::get_instance()->register_consumer(new Logging_Message());
+			option_consumer = Message_Relay::get_instance()->register_consumer(new Option_Popup_Message());
 
-			view::initalize();
 			view::start_view();
 		}
 		virtual void TearDown()
 		{
 			view::stop_view();
-			view::remove_all();
 			Message_Relay::get_instance()->deregister_consumer(logging_messages);
 			Message_Relay::get_instance()->deregister_consumer(option_consumer);
 			system_utilities::cleanup();

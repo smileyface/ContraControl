@@ -53,8 +53,7 @@ void system_utilities::setup_messaging()
 {
 	if(message_consumer == 0)
 	{
-		message_consumer = new Message_Consumer(new Logging_Message());
-		Message_Relay::get_instance()->register_consumer(message_consumer);
+		message_consumer = Message_Relay::get_instance()->register_consumer(new Logging_Message());
 	}
 
 	number_of_test_consumers = Message_Relay::get_instance()->number_of_consumers();
@@ -64,38 +63,44 @@ void system_utilities::teardown_messaging()
 {
 	print_log_messages();
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
-	Message_Relay::get_instance()->clear();
 	Message_Relay::destroy();
 	message_consumer = 0;
 }
+void display_log_messages(Logging_Message* mess)
+{
+	int level = (int) MESSAGE_PRIORITY::INFO_MESSAGE;
+#ifdef DEBUG
+	level = (int) MESSAGE_PRIORITY::DEBUG_MESSAGE;
+#endif // DEBUG
 
+	if((int) mess->get_priority() < level)
+	{
+		return;
+	}
+	std::string priority_string;
+	if(mess->get_priority() == MESSAGE_PRIORITY::ERROR_MESSAGE)
+	{
+		std::cout << "[  \u001b[33m" + mess->get_priority_string() + "\u001b[0m   ]";
+	}
+	else if(mess->get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE)
+	{
+		std::cout << "[  " + mess->get_priority_string() + "    ]";
+	}
+	else
+	{
+		std::cout << "[  " << mess->get_priority_string() << "   ]";
+	}
+	std::cout << " (" << mess->get_location() << ")  " << mess->get_message() << std::endl << std::flush;
+}
 void system_utilities::print_log_messages()
 {
-	for(Logging_Message* mess = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(message_consumer)); mess != 0; mess = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(message_consumer)))
+	auto mess = Message_Relay::get_instance()->pop(message_consumer);
+	while(mess != 0)
 	{
-		int level = (int) MESSAGE_PRIORITY::INFO_MESSAGE;
-	#ifdef DEBUG
-		level = (int) MESSAGE_PRIORITY::DEBUG_MESSAGE;
-	#endif // DEBUG
-
-		if((int) mess->get_priority() < level)
-		{
-			continue;
-		}
-		std::string priority_string;
-		if(mess->get_priority() == MESSAGE_PRIORITY::ERROR_MESSAGE)
-		{
-			std::cout << "[  \u001b[33m" + mess->get_priority_string() + "\u001b[0m   ]";
-		}
-		else if(mess->get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE)
-		{
-			std::cout << "[  " + mess->get_priority_string() + "    ]";
-		}
-		else
-		{
-			std::cout << "[  " << mess->get_priority_string() << "   ]";
-		}
-		std::cout << " (" << mess->get_location() << ")  " << mess->get_message() << std::endl << std::flush;
+		Logging_Message* log_mess = dynamic_cast<Logging_Message*>(mess);
+		display_log_messages(log_mess);
+		delete mess;
+		mess = Message_Relay::get_instance()->pop(message_consumer);
 	}
 }
 

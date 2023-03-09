@@ -7,8 +7,7 @@
 
 Log_View_Type::Log_View_Type()
 {
-	log_consumer = new Message_Consumer(new Logging_Message());
-	Message_Relay::get_instance()->register_consumer(log_consumer);
+	log_consumer = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
 }
 
 Log_View_Type::~Log_View_Type()
@@ -54,7 +53,6 @@ void Console_Log_View::on_paint()
 
 void Console_Log_View::on_exit()
 {
-	Message_Relay::get_instance()->deregister_consumer(log_consumer);
 }
 
 void Console_Log_View::on_destroy()

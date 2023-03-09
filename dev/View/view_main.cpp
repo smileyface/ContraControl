@@ -28,6 +28,7 @@ void view::remove_all()
 
 void view::start_view()
 {
+	view::initalize();
 	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
 	{
 		(*iterator)->start_display();
@@ -42,7 +43,9 @@ void view::stop_view()
 		(*iterator)->stop_display();
 	}
 	view_running = false;
+	view::remove_all();
 }
+
 
 int view::add_display(DISPLAY_TYPES display)
 {
