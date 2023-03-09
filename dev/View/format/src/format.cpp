@@ -55,10 +55,9 @@ void Format::clean_views()
 
 void Format::process_internal_messages()
 {
-	Internal_Message* message = Message_Relay::get_instance()->front(format_consumer);
+	View_Subsystem_Message* message = dynamic_cast<View_Subsystem_Message*>(Message_Relay::get_instance()->pop(format_consumer));
 	for(; message != 0;)
 	{
-		auto message = dynamic_cast<View_Subsystem_Message*>(Message_Relay::get_instance()->front(format_consumer));
 		if(instanceof<Option_Popup_Message>(message))
 		{
 			Console_Option_Popup* opm = dynamic_cast<Console_Option_Popup*>(add_view(VIEW_TYPE_ENUM::POPUP_OPTION));
@@ -66,7 +65,7 @@ void Format::process_internal_messages()
 			LOG_INFO(log_message, "Option Popup Creation");
 		}
 		//After handling this format message, remove it
-		Message_Relay::get_instance()->pop(format_consumer);
+		message = dynamic_cast<View_Subsystem_Message*>(Message_Relay::get_instance()->pop(format_consumer));
 	}
 }
 

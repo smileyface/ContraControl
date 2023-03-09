@@ -14,8 +14,11 @@ Option_View_Type::Option_View_Type()
 void Option_View_Type::get_message()
 {
 	specified_message = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(option_consumer));
-	message.OPTIONS = specified_message->get_options();
-	message.QUERY = specified_message->get_option_query();
+	if(specified_message != 0)
+	{
+		message.OPTIONS = specified_message->get_options();
+		message.QUERY = specified_message->get_option_query();
+	}
 }
 
 Console_Option_Popup::~Console_Option_Popup()

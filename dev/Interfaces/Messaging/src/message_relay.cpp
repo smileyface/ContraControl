@@ -102,16 +102,11 @@ void Message_Relay::push(Internal_Message* message)
 
 Internal_Message* Message_Relay::pop(Message_Consumer* consumer)
 {
-	Internal_Message* message = 0;
-	for(auto current_message = list_of_message.begin(); current_message != list_of_message.end(); current_message++)
+	Internal_Message* message = front(consumer);
+	if(message != 0)
 	{
-		message = front(consumer);
-		if(message != 0)
-		{
-			remove_consumer_from_messages(consumer, list_of_message[message]);
-			freshen_messages(consumer);
-			break;
-		}
+		remove_consumer_from_messages(consumer, list_of_message[message]);
+		freshen_messages(consumer);
 	}
 	remove_unwanted_messages();
 	return message;
