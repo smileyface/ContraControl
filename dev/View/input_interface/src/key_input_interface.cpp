@@ -76,7 +76,7 @@ void Key_Press_Interface::operator=(const int new_val)
 {
     if(pressed == KEY_STATE::RELEASED && new_val)
     {
-        on_press();
+       on_press();
         pressed = KEY_STATE::PRESSED;
     }
     else if(pressed == KEY_STATE::PRESSED && new_val)

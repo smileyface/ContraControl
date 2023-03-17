@@ -18,15 +18,15 @@ namespace
 	class Command_View_Message_Test : public ::testing::Test
 	{
 	public:
-		Message_Consumer* logging_messages;
-		Message_Consumer* option_consumer;
+		Message_Consumer* logging_messages = 0;
+		Message_Consumer* option_consumer = 0;
 		bool found = false;
 		virtual void SetUp()
 		{
 
 			system_utilities::setup();
-			logging_messages = Message_Relay::get_instance()->register_consumer(new Logging_Message());
-			option_consumer = Message_Relay::get_instance()->register_consumer(new Option_Popup_Message());
+			logging_messages = Message_Relay::get_instance()->register_consumer<Logging_Message>();
+			option_consumer = Message_Relay::get_instance()->register_consumer<Option_Popup_Message>();
 
 			view::start_view();
 		}
@@ -44,10 +44,10 @@ TEST_F(Command_View_Message_Test, Send_Option)
 {
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
 	EXPECT_FALSE(found);
-	Option_Popup_Message* opm = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(option_consumer));
+	Option_Popup_Message opm = Message_Relay::get_instance()->pop<Option_Popup_Message>(option_consumer);
 	EXPECT_FALSE(found);
-	EXPECT_EQ(opm->get_sender(), SUBSYSTEM_ID_ENUM::TEST);
-	Option_List list=opm->get_options();
+	EXPECT_EQ(opm.get_sender(), SUBSYSTEM_ID_ENUM::TEST);
+	Option_List list=opm.get_options();
 	EXPECT_EQ(list[0], "Hello");
 	EXPECT_EQ(list[1], "It's");
 	EXPECT_EQ(list[2], "Me");

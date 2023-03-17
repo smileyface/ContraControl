@@ -60,6 +60,7 @@ target_include_directories(System_Interface
 target_link_libraries(System_Interface PUBLIC Controller Model)
 
 set(INTERNAL_MESSAGE_TYPES_HEADER_FILES
+                    Messaging/message_types/message_ptr.h
                     Messaging/internal_messages.h
                     Messaging/message_types/internal_message_type.h
                     Messaging/message_types/logging_message.h
@@ -71,7 +72,8 @@ set(INTERNAL_MESSAGE_TYPES_SOURCE_FILES
                     Messaging/message_types/src/logging_message.cpp
                     Messaging/message_types/src/view_subsystem_message.cpp
                     Messaging/message_types/src/option_popup_message.cpp
-                    Messaging/message_types/src/option_popup_response_message.cpp)
+                    Messaging/message_types/src/option_popup_response_message.cpp
+                    Messaging/message_types/src/message_ptr.cpp)
 set(SYSTEM_MESSAGING_HEADER_FILES
                     ${INTERNAL_MESSAGE_TYPES_HEADER_FILES}
                     Messaging/consumers.h

@@ -22,7 +22,7 @@ namespace
 		virtual void SetUp()
 		{
 			system_utilities::setup();
-			logging_messages = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
+			logging_messages = Message_Relay::get_instance()->register_consumer<Logging_Message>();
 			view::start_view();
 		}
 		virtual void TearDown()
@@ -40,13 +40,12 @@ TEST_F(Option_Popup_View_Test, Create_Option)
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
 	
 
-	system_utilities::sleep_thread(100);
 	bool message_in_view = false;
-	for(auto item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)); item != 0; item = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(logging_messages)))
+	for(auto item = Message_Relay::get_instance()->pop<Logging_Message>(logging_messages); !item.is_valid(); item = Message_Relay::get_instance()->pop<Logging_Message>(logging_messages))
 	{
-		if(item->get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE &&
-		   item->get_location() == "Option Popup Creation" &&
-		   item->get_message() == "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(SUBSYSTEM_ID_ENUM::TEST)))
+		if(item.get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE &&
+		   item.get_location() == "Option Popup Creation" &&
+		   item.get_message() == "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(SUBSYSTEM_ID_ENUM::TEST)))
 		{
 			message_in_view = true;
 		}

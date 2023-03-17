@@ -23,7 +23,7 @@ public:
 	 * \param selection Index of the option that the user selected.
 	 * \param responding_message Pointer to the message we're responding to.
 	 */
-	Option_Popup_Response_Message(int selection, Option_Popup_Message* responding_message);
+	Option_Popup_Response_Message(int selection, Option_Popup_Message responding_message);
 	
 	/** \return Selected option */
 	int get_selection();
@@ -34,11 +34,11 @@ public:
 	 * \return If the message is this message
 	 * \todo Make this an overloaded ==
 	 */
-	virtual bool this_message(Option_Popup_Message* check_message);
+	virtual bool this_message(Option_Popup_Message check_message);
 
 private:
 	int selection_;
-	Option_Popup_Message* responding_message_;
+	Option_Popup_Message responding_message_;
 };
 
 #endif

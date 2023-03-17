@@ -15,10 +15,28 @@
 class Internal_Message
 {
 public:
+	Internal_Message() :
+		valid(false)
+	{ }
 	virtual ~Internal_Message()
 	{ };
 	/** This will be replaced when I come up with more messaging design */
-	virtual void placeholder() = 0;
+	virtual bool operator!=(Internal_Message* ptr_value)
+	{
+		return this != ptr_value;
+	}
+
+	bool is_valid()
+	{
+		return valid;
+	}
+
+	virtual void validate()
+	{
+		valid = true;
+	}
+protected:
+	bool valid;
 };
 
 #endif

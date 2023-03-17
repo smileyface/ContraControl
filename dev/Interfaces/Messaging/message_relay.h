@@ -17,7 +17,15 @@
  //Messaging types
 #include "internal_messages.h"
 
-typedef std::pair<Internal_Message* const, Consumer_List> Message_Map_Node;
+typedef std::pair<Message_Ptr<Internal_Message> const, Consumer_List> Message_Map_Node;
+
+struct Compare_Message
+{
+	bool operator()(const Message_Ptr<Internal_Message> lhs, const Message_Ptr<Internal_Message> rhs) const
+	{
+		return (lhs.get()) < (rhs.get());
+	}
+};
 
 /**
  * Message relay system as a singleton.
@@ -40,7 +48,13 @@ public:
 	 * \param consumer Pointer to the consumer requesting to get its messages.
 	 * \return first message on the relay for the requesting Consumer.
 	 */
-	Internal_Message* pop(Message_Consumer* consumer);
+	Message_Ptr<Internal_Message> pop(Message_Consumer* consumer);
+
+	template<typename Message_Type>
+	Message_Type pop(Message_Consumer* consumer)
+	{
+		return pop(consumer).convert_type<Message_Type>();
+	}
 
 	/**
 	 * Get if there are messages for the consumer in the relay.
@@ -56,7 +70,7 @@ public:
 	 * \param consumer Pointer to the consumer requesting to get its messages.
 	 * \return instance of the first message
 	 */
-	Internal_Message* front(Message_Consumer* consumer);
+	Message_Ptr<Internal_Message> front(Message_Consumer* consumer);
 
 	/**
 	 * Get instance of the singleton.
@@ -72,7 +86,23 @@ public:
 	 * Register consumer for message consumption.
 	 * \param consumer Add a Message_Consumer to the list of known consumers. You must do this before you are able to recieve messages.
 	 */
-	Message_Consumer* register_consumer(const Internal_Message* mess);
+	template<typename Message_Type>
+	Message_Consumer* register_consumer()
+	{
+		Message_Consumer* new_consumer = new Message_Consumer(new Message_Type());
+		auto return_status = list_of_registered_consumers.insert(new_consumer);
+		if(return_status.second)
+		{
+			for(auto current_message = list_of_message.begin(); current_message != list_of_message.end(); current_message++)
+			{
+				if(new_consumer->correct_type(current_message->first.get()))
+				{
+					current_message->second.push_back(new_consumer);
+				}
+			}
+		}
+		return new_consumer;
+	}
 
 	/**
 	 * Remove consumer from the consumer list. The system that owns this consumer will not be able to recieve messages while deregistered.
@@ -96,8 +126,7 @@ public:
 
 private:
 	Message_Relay();
-	std::map<Internal_Message*, Consumer_List> list_of_message;
-	std::map<Message_Consumer*, std::vector<Internal_Message*>> list_of_consumers;
+	std::map<Message_Ptr<Internal_Message>, Consumer_List, Compare_Message> list_of_message;
 	std::set<Message_Consumer*> list_of_registered_consumers;
 	static Message_Relay* instance;
 
@@ -106,7 +135,7 @@ private:
 	bool more_messages(Message_Consumer* consumer);
 	void remove_unwanted_messages();
 	void remove_consumer_from_messages(Message_Consumer* consumer, Consumer_List& messages);
-	Internal_Message* get_found_message(Message_Consumer* consumer, Message_Map_Node& current_message);
+	Message_Ptr<Internal_Message> get_found_message(Message_Consumer* consumer, Message_Map_Node& current_message);
 
 };
 

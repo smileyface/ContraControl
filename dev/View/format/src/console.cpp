@@ -12,7 +12,7 @@ void Console_Format::initalize()
 	if(format_consumer == 0)
 	{
 		format_consumer =
-			Message_Relay::get_instance()->register_consumer(Message_Types::VIEW_SUBSYSTEM);
+			Message_Relay::get_instance()->register_consumer<View_Subsystem_Message>();
 		LOG_INFO("Console On Line", "Console Format");
 		add_view(VIEW_TYPE_ENUM::LOG);
 	}

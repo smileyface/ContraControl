@@ -7,18 +7,15 @@
 
 Option_View_Type::Option_View_Type()
 {
-	specified_message = 0;
-	option_consumer = Message_Relay::get_instance()->register_consumer(Message_Types::OPTION_POPUP_REQUEST);
+	specified_message;
+	option_consumer = Message_Relay::get_instance()->register_consumer<Option_Popup_Message>();
 }
 
 void Option_View_Type::get_message()
 {
-	specified_message = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(option_consumer));
-	if(specified_message != 0)
-	{
-		message.OPTIONS = specified_message->get_options();
-		message.QUERY = specified_message->get_option_query();
-	}
+	specified_message = Message_Relay::get_instance()->pop<Option_Popup_Message>(option_consumer);
+	message.OPTIONS = specified_message.get_options();
+	message.QUERY = specified_message.get_option_query();
 }
 
 Console_Option_Popup::~Console_Option_Popup()
@@ -84,12 +81,10 @@ void Console_Option_Popup::on_query()
 
 void Console_Option_Popup::on_input()
 {
-	if(choice < 0 || keyboard.get_timed_out())
+	if(choice > -1 || !keyboard.get_timed_out())
 	{
-		return;
+		Message_Relay::get_instance()->push(new Option_Popup_Response_Message(choice, specified_message));
 	}
-	Option_Popup_Response_Message* response = new Option_Popup_Response_Message(choice, specified_message);
-	Message_Relay::get_instance()->push(response);
 }
 
 void Console_Option_Popup::on_destroy()

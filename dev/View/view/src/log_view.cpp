@@ -7,7 +7,7 @@
 
 Log_View_Type::Log_View_Type()
 {
-	log_consumer = Message_Relay::get_instance()->register_consumer(Message_Types::LOGGING);
+	log_consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
 }
 
 Log_View_Type::~Log_View_Type()
@@ -17,14 +17,10 @@ Log_View_Type::~Log_View_Type()
 
 void Log_View_Type::get_message()
 {
-	Logging_Message* messages = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(log_consumer));
-	if(messages != NULL)
-	{
-		message.MESSAGE = messages->get_message();
-		message.LOC = messages->get_location();
-		message.LEVEL = messages->get_priority_string();
-	}
-
+	Logging_Message messages = Message_Relay::get_instance()->pop<Logging_Message>(log_consumer);
+	message.MESSAGE = messages.get_message();
+	message.LOC = messages.get_location();
+	message.LEVEL = messages.get_priority_string();
 }
 Console_Log_View::Console_Log_View()
 {

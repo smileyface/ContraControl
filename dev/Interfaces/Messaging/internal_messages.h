@@ -9,6 +9,7 @@
 #ifndef INTERNAL_MESSAGES_LIST
 #define INTERNAL_MESSAGES_LIST
 
+#include "message_types/message_ptr.h"
 
  //#include "internal_message_type.h"
 #include "message_types/logging_message.h"
