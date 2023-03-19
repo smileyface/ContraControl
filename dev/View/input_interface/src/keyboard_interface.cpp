@@ -55,9 +55,12 @@ void Keyboard_Interface::start_listening()
 
 void Keyboard_Interface::stop_listening()
 {
-	active = false;
-	if(keyboard_thread.joinable())
-		keyboard_thread.join();
+	if(this != nullptr)
+	{
+		active = false;
+		if(keyboard_thread.joinable())
+			keyboard_thread.join();
+	}
 }
 
 bool Keyboard_Interface::get_keyboard_present()
@@ -73,21 +76,24 @@ bool Keyboard_Interface::get_active()
 std::string Keyboard_Interface::get_simple()
 {
 	std::string val;
-	action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
-	//Spin while the buffer collects input
-	keyboard_timeout_timer.start_clock();
-	while(!keyboard_timeout_timer.get_alarm() && !Predefined_Action_Layer::Simple_Input_Layer::terminated)
+	if(this != nullptr)
 	{
-		keyboard_timeout_timer.update_time();
+		action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
+		//Spin while the buffer collects input
+		keyboard_timeout_timer.start_clock();
+		while(!keyboard_timeout_timer.get_alarm() && !Predefined_Action_Layer::Simple_Input_Layer::terminated)
+		{
+			keyboard_timeout_timer.update_time();
 
-	}
-	if(Predefined_Action_Layer::Simple_Input_Layer::terminated)
-	{
-		keyboard_timeout_timer.stop_clock();
-	}
+		}
+		if(Predefined_Action_Layer::Simple_Input_Layer::terminated)
+		{
+			keyboard_timeout_timer.stop_clock();
+		}
 
-    val = input_buffer.get_buffer();
-	Predefined_Action_Layer::Simple_Input_Layer::returned = Predefined_Action_Layer::Simple_Input_Layer::terminated &&
-		!keyboard_timeout_timer.get_alarm();
+		val = input_buffer.get_buffer();
+		Predefined_Action_Layer::Simple_Input_Layer::returned = Predefined_Action_Layer::Simple_Input_Layer::terminated &&
+			!keyboard_timeout_timer.get_alarm();
+	}
 	return val;
 }

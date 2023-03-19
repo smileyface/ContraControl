@@ -1,9 +1,14 @@
 #include "../action_layer/action_stack.h"
 #include "../action_layer/predefined_layer.h"
 
-Action_Stack::Action_Stack()
+Action_Stack::Action_Stack() :
+	active_layer(0)
 {
+}
 
+Action_Stack::~Action_Stack()
+{
+	active_layer = 0;
 }
 
 Action_Layer* Action_Stack::get_active_layer()

@@ -89,6 +89,7 @@ void Console_Option_Popup::on_input()
 
 void Console_Option_Popup::on_destroy()
 {
+	keyboard.cancel();
 	Message_Relay::get_instance()->deregister_consumer(option_consumer);
 }
 

@@ -17,6 +17,7 @@ class Action_Stack
 {
 public:
 	Action_Stack();
+	~Action_Stack();
 	/**
 	* \return Current active layer
 	*/
@@ -44,7 +45,7 @@ private:
 	/**List of layers of actions that the keyboard can run*/
 	std::vector<Action_Layer> layers;
 	/**List to current action layer*/
-	Action_Layer* active_layer = 0;
+	Action_Layer* active_layer;
 };
 
 #endif

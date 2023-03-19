@@ -37,6 +37,10 @@ public:
 	 */
 	void set_interface();
 	/**
+	 * Cancel use of keyboard.
+	 */
+	void cancel();
+	/**
 	 * Appropriate keyboard for the system.
 	 * 
 	 * \see Linux_Keyboard

@@ -65,3 +65,8 @@ bool Keyboard_Buffer_Input::get_timed_out()
 {
 	return timed_out;
 }
+
+void Keyboard_Buffer_Input::cancel()
+{
+	keyboard->stop_listening();
+}
