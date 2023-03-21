@@ -77,5 +77,9 @@ namespace testing_utilities
 		void wait_for_keypress(KPI key);
 		void connect_keyboard(std::string path_to_keyboard);
 	}
+	namespace message_utilities
+	{
+		void get_message_timeout(Logging_Message message, int timeout);
+	}
 }
 #endif

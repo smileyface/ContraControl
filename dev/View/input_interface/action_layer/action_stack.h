@@ -43,9 +43,11 @@ public:
 
 private:
 	/**List of layers of actions that the keyboard can run*/
-	std::vector<Action_Layer> layers;
+	std::map<int, Action_Layer> layers;
 	/**List to current action layer*/
 	Action_Layer* active_layer;
+
+	int last_id;
 };
 
 #endif

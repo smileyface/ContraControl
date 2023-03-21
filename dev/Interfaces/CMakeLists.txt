@@ -61,6 +61,7 @@ target_link_libraries(System_Interface PUBLIC Controller Model)
 
 set(INTERNAL_MESSAGE_TYPES_HEADER_FILES
                     Messaging/message_types/message_ptr.h
+                    Messaging/message_types/id_pool.h
                     Messaging/internal_messages.h
                     Messaging/message_types/internal_message_type.h
                     Messaging/message_types/logging_message.h
@@ -69,6 +70,7 @@ set(INTERNAL_MESSAGE_TYPES_HEADER_FILES
                     Messaging/message_types/response_messages/response_message.h
                     Messaging/message_types/response_messages/view_request/option_popup_response_message.h)
 set(INTERNAL_MESSAGE_TYPES_SOURCE_FILES
+                    Messaging/message_types/src/internal_message.cpp
                     Messaging/message_types/src/logging_message.cpp
                     Messaging/message_types/src/view_subsystem_message.cpp
                     Messaging/message_types/src/option_popup_message.cpp
@@ -81,7 +83,7 @@ set(SYSTEM_MESSAGING_HEADER_FILES
 set(SYSTEM_MESSAGING_SOURCE_FILES
                     ${INTERNAL_MESSAGE_TYPES_SOURCE_FILES}
                     Messaging/src/consumers.cpp
-                    Messaging/src/message_relay.cpp)
+                    Messaging/src/message_relay.cpp "Messaging/message_types/src/id_pool.cpp")
 
 add_library(System_Messaging ${SYSTEM_MESSAGING_SOURCE_FILES} ${SYSTEM_MESSAGING_HEADER_FILES})
 target_include_directories(System_Messaging

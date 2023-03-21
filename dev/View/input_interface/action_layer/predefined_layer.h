@@ -18,7 +18,8 @@ namespace Predefined_Action_Layer
 	enum
 	{
 		BUFFERED_INPUT_LAYER = 0,
-		SIMPLE_BUFFERED_INPUT_LAYER = 1
+		SIMPLE_BUFFERED_INPUT_LAYER = 1,
+		END_OF_PREDEFINED = 2
 	};
 	/**
 	 * Layer for buffered input. For things like reading strings in.

@@ -116,7 +116,11 @@ public:
 	* \param consumer Consumer to check against.
 	*/
 	bool has_consumer(Message_Consumer* consumer);
-	
+
+
+	/**
+	 * \return The number of consumers.
+	 */
 	int number_of_consumers();
 
 	/**

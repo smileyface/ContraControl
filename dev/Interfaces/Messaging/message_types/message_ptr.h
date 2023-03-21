@@ -2,6 +2,8 @@
  * \file   message_ptr.h
  * \brief  
  * 
+ * \todo move this to a Block subsystem
+ * 
  * \author kason
  * \date   March 2023
  *********************************************************************/

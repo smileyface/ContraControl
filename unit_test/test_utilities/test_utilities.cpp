@@ -284,3 +284,24 @@ void testing_utilities::input_utilities::connect_keyboard(std::string path_to_ke
 {
 	//buffer.keyboard->connect_to_keyboard();
 }
+
+void testing_utilities::message_utilities::get_message_timeout(Logging_Message message, int timeout)
+{
+	Message_Consumer* check_consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
+	bool message_in_view = false;
+	Timer::Timeout to(timeout);
+	while(!to.get_alarm() && !message_in_view)
+	{
+		for(auto item = Message_Relay::get_instance()->pop<Logging_Message>(check_consumer); item.is_valid(); item = Message_Relay::get_instance()->pop<Logging_Message>(check_consumer))
+		{
+			if(item.get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE &&
+			   item.get_location() == "Option Popup Creation" &&
+			   item.get_message() == "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(SUBSYSTEM_ID_ENUM::TEST)))
+			{
+				message_in_view = true;
+			}
+		}
+	}
+	Message_Relay::get_instance()->deregister_consumer(check_consumer);
+	EXPECT_EQ(message_in_view, true);
+}
