@@ -12,6 +12,7 @@
 /** Enumerator of all the subsystems. */
 enum class SUBSYSTEM_ID_ENUM
 {
+	INVALID,
 	/** Enumerator for the controller */
 	CONTROLLER,
 	/** Enumerator for the model */

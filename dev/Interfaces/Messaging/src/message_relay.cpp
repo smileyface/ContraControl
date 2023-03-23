@@ -11,10 +11,11 @@ Message_Relay* Message_Relay::instance;
 Message_Ptr<Internal_Message> Message_Relay::get_found_message(Message_Consumer* consumer, Message_Map_Node& current_message)
 {
 	Message_Ptr<Internal_Message> found_message;
-	if(current_message.second.size() > 0)
+	Consumer_List list_of_consumers = current_message.second;
+	if(list_of_consumers.size() > 0)
 	{
-		auto it = std::find(current_message.second.begin(), current_message.second.end(), consumer);
-		if(it != current_message.second.end())
+		auto it = std::find(list_of_consumers.begin(), list_of_consumers.end(), consumer);
+		if(it != list_of_consumers.end())
 				found_message = current_message.first;
 	}
 	return found_message;
@@ -112,7 +113,7 @@ int Message_Relay::number_of_messages(Message_Consumer* mc)
 	for(auto current_message = list_of_message.begin(); current_message != list_of_message.end(); current_message++)
 	{
 		Message_Ptr<Internal_Message> message = get_found_message(mc, *current_message);
-		if(message != 0)
+		if(message.get() != nullptr)
 		{
 			number_of_messages++;
 		}
@@ -125,7 +126,7 @@ Message_Ptr<Internal_Message> Message_Relay::front(Message_Consumer* mc)
 	Message_Ptr<Internal_Message> message = 0;
 	for(auto i = list_of_message.begin(); i != list_of_message.end(); i++)
 	{
-		if(get_found_message(mc, (*i)) != 0)
+		if(get_found_message(mc, (*i)).get() != nullptr)
 		{
 			message = i->first;
 			break;
@@ -144,7 +145,7 @@ void Message_Relay::deregister_consumer(Message_Consumer* mc)
 		for(auto current_message = list_of_message.begin(); current_message != list_of_message.end(); current_message++)
 		{
 			Message_Ptr<Internal_Message> message = get_found_message(mc, (*current_message));
-			if(message != 0)
+			if(message.get() != nullptr)
 			{
 				remove_consumer_from_messages(mc, (*current_message).second);
 			}

@@ -55,7 +55,7 @@ void Format::clean_views()
 
 void Format::process_internal_messages()
 {	
-	for(Message_Ptr<Internal_Message> message = Message_Relay::get_instance()->pop(format_consumer); message != 0; message = Message_Relay::get_instance()->pop(format_consumer))
+	for(Message_Ptr<Internal_Message> message = Message_Relay::get_instance()->pop(format_consumer); message.get() != 0; message = Message_Relay::get_instance()->pop(format_consumer))
 	{
 		if(message.instance_of<Option_Popup_Message>())
 		{

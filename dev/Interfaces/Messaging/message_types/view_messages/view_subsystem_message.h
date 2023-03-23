@@ -26,7 +26,7 @@ public:
 	 */
 	SUBSYSTEM_ID_ENUM get_sender();
 private:
-	SUBSYSTEM_ID_ENUM request_from;
+	SUBSYSTEM_ID_ENUM request_from = SUBSYSTEM_ID_ENUM::INVALID;
 };
 
 #endif // !VIEW_FORMAT_MESSAGE

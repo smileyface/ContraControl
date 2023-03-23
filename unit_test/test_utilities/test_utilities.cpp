@@ -294,9 +294,9 @@ void testing_utilities::message_utilities::get_message_timeout(Logging_Message m
 	{
 		for(auto item = Message_Relay::get_instance()->pop<Logging_Message>(check_consumer); item.is_valid(); item = Message_Relay::get_instance()->pop<Logging_Message>(check_consumer))
 		{
-			if(item.get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE &&
-			   item.get_location() == "Option Popup Creation" &&
-			   item.get_message() == "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(SUBSYSTEM_ID_ENUM::TEST)))
+			if(item.get_priority() == message.get_priority() &&
+			   item.get_location() == message.get_location() &&
+			   item.get_message() == message.get_message())
 			{
 				message_in_view = true;
 			}

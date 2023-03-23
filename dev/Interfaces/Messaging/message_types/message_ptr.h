@@ -53,10 +53,6 @@ public:
 			(*this->uses)++;
 		}
 	}
-	bool operator!=(T* obj)
-	{
-		return this->message != obj;
-	}
 	T* get() const
 	{
 		return this->message;
