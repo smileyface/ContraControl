@@ -59,6 +59,7 @@ target_include_directories(System_Interface
     PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 target_link_libraries(System_Interface PUBLIC Controller Model)
 
+#################INTERNAL MESSAGE##################
 set(INTERNAL_MESSAGE_TYPES_HEADER_FILES
                     Messaging/internal_messages.h
                     Messaging/message_types/internal_message_type.h
@@ -93,6 +94,26 @@ target_include_directories(System_Messaging
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Messaging"
     PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
+set(SYSTEM_MESSAGING_HEADER_FILES
+                    Threading/threading.h 
+                    Threading/subsystem_job.h)
+set(SYSTEM_MESSAGING_SOURCE_FILES
+                    Threading/src/threading.cpp 
+                    Threading/src/subsystem_job.cpp)
+
+add_library(System_Threading ${SYSTEM_MESSAGING_SOURCE_FILES} ${SYSTEM_MESSAGING_HEADER_FILES})
+target_include_directories(System_Threading
+                            PUBLIC
+                                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+                                "$<INSTALL_INTERFACE:${CMAKE_BINARY_DIR}/inc/System_Threading>")
+# Set the output directory for build artifacts
+  set_target_properties(System_Threading
+    PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Threading"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Threading"
+    PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
 install(FILES ${INTERFACE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface)
 install(FILES ${INTERFACE_TYPE_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/System_Interface/type)
 install(FILES ${SYSTEM_MESSAGING_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/Messaging)
+install(FILES ${SYSTEM_MESSAGING_HEADER_FILES} DESTINATION ${CMAKE_BINARY_DIR}/inc/Threading)
