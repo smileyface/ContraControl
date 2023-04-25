@@ -94,14 +94,19 @@ target_include_directories(System_Messaging
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/Messaging"
     PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
-set(SYSTEM_MESSAGING_HEADER_FILES
-                    Threading/threading.h 
-                    Threading/subsystem_job.h)
-set(SYSTEM_MESSAGING_SOURCE_FILES
-                    Threading/src/threading.cpp 
-                    Threading/src/subsystem_job.cpp)
+#################THREAD POOL##################
+set(THREAD_POOL_HEADER_FILES
+                    Threading/thread_pool.h 
+                    Threading/scheduler/scheduler.h
+                    Threading/jobs/threaded_job.h
+                    Threading/jobs/job_run_interval.h)
+set(THREAD_POOL_SOURCE_FILES
+                    Threading/src/thread_pool.cpp 
+                    Threading/src/threaded_job.cpp 
+                    Threading/src/job_run_interval.cpp 
+                    Threading/src/scheduler.cpp)
 
-add_library(System_Threading ${SYSTEM_MESSAGING_SOURCE_FILES} ${SYSTEM_MESSAGING_HEADER_FILES})
+add_library(System_Threading ${THREAD_POOL_SOURCE_FILES} ${THREAD_POOL_HEADER_FILES})
 target_include_directories(System_Threading
                             PUBLIC
                                 "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"

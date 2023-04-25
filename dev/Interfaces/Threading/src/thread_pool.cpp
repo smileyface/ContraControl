@@ -1,4 +1,4 @@
-#include "../threading.h"
+#include "../thread_pool.h"
 
 #include <mutex>
 
@@ -55,21 +55,21 @@ void Thread_Pool::threading_loop(int thread_number)
 {
 	while(pool_running[thread_number])
 	{
-		std::function<void()> job;
+		Threaded_Job job;
 		{
 			std::unique_lock<std::mutex> lock(queue_mutex);
 			mutex_condition.wait(lock, [this, thread_number]
 								 {
-									 return !job_queue.empty() || pool_running[thread_number];
+									 return !job_queue.empty() || !pool_running[thread_number];
 								 });
-			if(pool_running[thread_number])
+			if(!pool_running[thread_number])
 			{
 				return;
 			}
 			job = job_queue.front();
 			job_queue.pop();
 		}
-		job();
+		job.run();
 	}
 }
 

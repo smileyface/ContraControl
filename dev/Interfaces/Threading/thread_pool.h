@@ -12,9 +12,9 @@
 #include <thread>
 #include <queue>
 #include <mutex>
-#include <mutex>
+#include <condition_variable>
 
-#include "subsystem_job.h"
+#include "jobs/threaded_job.h"
 
 
 class Thread_Pool

@@ -2,7 +2,7 @@
 #include "../test_utilities/test_utilities.h"
 
 #include "../test_utilities/pch.h"
-#include "../../dev/Interfaces/Threading/threading.h"
+#include "../../dev/Interfaces/Threading/thread_pool.h"
 
 namespace
 {
@@ -62,5 +62,7 @@ TEST_F(Threading_Test, Add_Job_To_Queue)
 										 {
 											 function_run = true;
 										 });
-
+	system_utilities::sleep_thread(1);
+	EXPECT_TRUE(function_run);
+	Thread_Pool::get_instance()->update_thread_count(0);
 }
