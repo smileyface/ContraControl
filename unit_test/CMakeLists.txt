@@ -20,6 +20,7 @@ add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/system_utilities.cpp"
                            "test_utilities/keyboard_interface_utilities.h" 
                            "test_utilities/keyboard_interface_utilities.cpp"
+                           "test_utilities/keyboard_utility_object.cpp"
                            "test_utilities/linux_keyboard_utilities.cpp"
                            "test_utilities/win_keyboard_utilities.cpp"
                            "test_utilities/module_mains.h"
@@ -28,9 +29,7 @@ add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/device_utilities.h"
                            "test_utilities/device_utilities.cpp"
                            "test_utilities/node_utilities.h"
-                           "test_utilities/node_utilities.cpp" 
-                           "test_utilities/keyboard_interface_utilities.h" 
-                           "test_utilities/keyboard_interface_utilities.cpp")
+                           "test_utilities/node_utilities.cpp" )
 target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller View_Library System_Interface Network System_Threading)
 
 
