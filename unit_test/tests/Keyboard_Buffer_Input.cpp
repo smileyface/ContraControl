@@ -14,13 +14,14 @@ namespace
 		system_utilities::keyboard_utilities::Keyboard keyboard;
 		Message_Consumer* consumer = 0;
 		virtual void SetUp()
-		{ 
+		{
+			system_utilities::setup();
 			input_buffer.clear();
 		}
 		virtual void TearDown()
 		{
-
 			system_utilities::keyboard_utilities::tear_down();
+			system_utilities::cleanup();
 		}
 	};
 }

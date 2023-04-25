@@ -25,7 +25,6 @@ Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 
 void device_utilities::start_test_environment()
 {
-	system_utilities::setup();
 	model::initalize_my_node(device_utilities::node_handle);
 }
 
