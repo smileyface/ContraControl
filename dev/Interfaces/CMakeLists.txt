@@ -96,14 +96,11 @@ target_include_directories(System_Messaging
 
 #################THREAD POOL##################
 set(THREAD_POOL_HEADER_FILES
-                    Threading/thread_pool.h 
                     Threading/scheduler/scheduler.h
-                    Threading/jobs/threaded_job.h
-                    Threading/jobs/job_run_interval.h)
+                    Threading/scheduler/task.h
+                    Threading/threading.h)
 set(THREAD_POOL_SOURCE_FILES
-                    Threading/src/thread_pool.cpp 
-                    Threading/src/threaded_job.cpp 
-                    Threading/src/job_run_interval.cpp 
+                    Threading/src/task.cpp
                     Threading/src/scheduler.cpp)
 
 add_library(System_Threading ${THREAD_POOL_SOURCE_FILES} ${THREAD_POOL_HEADER_FILES})

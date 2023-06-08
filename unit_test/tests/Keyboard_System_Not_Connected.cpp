@@ -80,7 +80,7 @@ TEST_F(Keyboard_System_Not_Connected_Test, Test_Timeout)
 												   {
 													   test1 = keyboard.get_interface()->get_simple();
 												   });
-	system_utilities::sleep_thread(100);
+	system_utilities::sleep_thread(1);
 	if(keyboard_test_thread.joinable())
 	{
 		keyboard_test_thread.join();

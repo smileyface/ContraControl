@@ -5,32 +5,67 @@
  * \author kason
  * \date   April 2023
  *********************************************************************/
+#ifndef SCHEDULER_H
+#define SCHEDULER_H
 
-#include <map>
+#include "task.h"
+#include <queue>
 
-#include "../jobs/threaded_job.h"
-
-enum class FRAME_SOURCE
-{
-	MAIN,
-	NETWORK,
-	MODEL,
-	VIEW_SUBSYSTEM,
-	CONTROL,
-	MESSAGE_RELAY
-};
-
-class Scheduler
-{
+/**
+ * @brief The Scheduler class manages the scheduling and execution of tasks.
+ */
+class Scheduler {
 public:
-	static Scheduler* get_instance();
+    /**
+     * @brief Gets the singleton instance of the Scheduler.
+     * @return The Scheduler instance.
+     */
+    static Scheduler* get_instance();
 
-	void add_job_to_frame(FRAME_SOURCE source, Threaded_Job job);
-	void add_job_to_frame(FRAME_SOURCE source, Threaded_Job job, Interval interval);
+    /**
+     * @brief Destroys the instance of the Scheduler
+     */
+    static void destroy_instance();
+
+    /**
+     * @brief Adds a task to the scheduler.
+     * @param task The task to be added.
+     */
+    void add_task(Task task);
+
+    /**
+     * @brief Gets number of tasks on the scheduler.
+     * @return The number of tasks.
+     */
+    int get_number_of_tasks();
+
+    /**
+     * @brief Gets the total number of subtasks in each task on the scheduler.
+     * @return The number of subtasks.
+     */
+    int get_number_of_subtasks();
+
+    /**
+     * @brief Starts the execution of the tasks with the given frame duration.
+     * @param frameDuration The duration of a frame.
+     */
+    void start(int frame_rate);
+
+    /**
+     * @brief Stops the execution of all tasks.
+     */
+    void stop();
+
 private:
-	Scheduler();
-	static Scheduler* instance;
+    Scheduler();
+    ~Scheduler();
+    Scheduler(const Scheduler&) = delete;
+    Scheduler& operator=(const Scheduler&) = delete;
 
-	std::map<FRAME_SOURCE, Frame> frame;
-	float refresh_rate;
+    std::priority_queue<Task> tasks;
+    int frame_rate;
+
+    static Scheduler* instance;
 };
+
+#endif // SCHEDULER_H
