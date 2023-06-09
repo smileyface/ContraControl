@@ -47,7 +47,7 @@ public:
 
     /**
      * @brief Starts the execution of the tasks with the given frame duration.
-     * @param frameDuration The duration of a frame.
+     * @param frame_rate The duration of a frame.
      */
     void start(int frame_rate);
 
