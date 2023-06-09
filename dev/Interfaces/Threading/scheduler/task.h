@@ -48,6 +48,12 @@ public:
     int number_of_subtask();
 
     /**
+     * @brief Get number of overruns, defined as a task taking more than 1.5 times over execution time.
+     * @returns number of overruns.
+     */
+    int get_overruns();
+
+    /**
      * @brief Runs the task for the given frame duration.
      * @param frameDuration The duration of a frame.
      */
@@ -81,6 +87,7 @@ public:
 private:
     std::string name;
     int priority;
+    int overruns;
     double percentage;
     std::vector<std::function<void()>> subtasks;
     bool is_running;

@@ -2,12 +2,21 @@
 
 #include <iostream>
 
-Task::Task(const std::string& name, int priority, double percentage)
-    : name(name), priority(priority), percentage(percentage), is_running(false)
+Task::Task(const std::string& name, int priority, double percentage) : 
+    name(name), 
+    priority(priority), 
+    percentage(percentage), 
+    is_running(false), 
+    overruns(0)
 { }
 
-Task::Task(const Task& other)
-    : name(other.name), priority(other.priority), percentage(other.percentage), is_running(false), subtasks(other.subtasks)
+Task::Task(const Task& other) : 
+    name(other.name), 
+    priority(other.priority), 
+    percentage(other.percentage), 
+    is_running(false), 
+    subtasks(other.subtasks),
+    overruns(other.overruns)
 { 
 }
 
@@ -22,6 +31,11 @@ int Task::number_of_subtask()
     return subtasks.size();
 }
 
+int Task::get_overruns()
+{
+    return overruns;
+}
+
 void Task::run(std::chrono::milliseconds frameDuration)
 {
     auto taskExecutionTime = static_cast<int>(frameDuration.count() * percentage);
@@ -34,6 +48,10 @@ void Task::run(std::chrono::milliseconds frameDuration)
     {
         if(elapsedSeconds >= std::chrono::milliseconds(taskExecutionTime))
         {
+            if(elapsedSeconds >= std::chrono::milliseconds(static_cast<int>(taskExecutionTime * 1.5)) )
+            {
+                overruns++;
+            }
             break;
         }
         subtask();
