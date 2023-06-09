@@ -41,7 +41,8 @@ TEST_F(Task_Test, AddSubtask)
 // Test case for the Task class
 TEST_F(Task_Test, Subtask_Overrun)
 {
-	Task task("TestTask", 1, 0.5);
+	Task task("OverrunTask", 1, 0.5);
+	Task task_2("Non Overrunning Task", 1, 0.5);
 	int counter = 0;
 
 	// Define subtask function
@@ -51,7 +52,7 @@ TEST_F(Task_Test, Subtask_Overrun)
 	};
 	auto subtask2 = [&counter] ()
 	{
-		system_utilities::sleep_thread(1000);
+		system_utilities::sleep_thread(600);
 	};
 
 	task.add_subtask(subtask);
@@ -63,4 +64,12 @@ TEST_F(Task_Test, Subtask_Overrun)
 
 	// Verify that the subtask was added
 	EXPECT_EQ(task.get_overruns(), 1);
+
+	task_2.add_subtask(subtask2);
+	task_2.add_subtask(subtask);
+	task_2.start(std::chrono::milliseconds(1000));
+
+	task_2.stop();
+
+	EXPECT_EQ(task_2.get_overruns(), 0);
 }
