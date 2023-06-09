@@ -30,7 +30,8 @@ TEST_F(Exceptions_Test, Description_Test)
 	EXPECT_STREQ(dnfe.what(), "Device is not on node");
 	EXPECT_STREQ(nnfe.what(), "Node is unknown");
 	EXPECT_STREQ(iste.what(), "Incorrect state attempting to be mangled");
-	EXPECT_STREQ(dnfe.what(), "Invalid command given");
-	EXPECT_STREQ(dnfe.what(), "Device is of an invalid type");
-	EXPECT_STREQ(dnfe.what(), "Function not implemented");
+	EXPECT_STREQ(ice.what(), "Invalid command given");
+	EXPECT_STREQ(ide.what(), "Device is of an invalid type");
+	EXPECT_STREQ(ufe.what(), "Function not implemented");
+	EXPECT_STREQ(nee.what(), "Network Error");
 }

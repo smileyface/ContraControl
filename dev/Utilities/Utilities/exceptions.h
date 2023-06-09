@@ -15,6 +15,11 @@
 class DeviceNotFoundException : public std::exception
 {
 public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Device is not on node";
@@ -28,6 +33,11 @@ public:
 class NodeNotFoundException : public std::exception
 {
 public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Node is unknown";
@@ -40,6 +50,11 @@ public:
 class IncorrectStateTypeException : public std::exception
 {
 public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Incorrect state attempting to be mangled";
@@ -52,6 +67,11 @@ public:
 class InvalidCommandException : public std::exception
 {
 public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Invalid command given";
@@ -64,6 +84,11 @@ public:
 class InvalidDeviceException : public std::exception
 {
 public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Device is of an invalid type";
@@ -76,6 +101,11 @@ public:
 class UnimplementedFunctionException : public std::exception
 {
 public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Function not implemented";
