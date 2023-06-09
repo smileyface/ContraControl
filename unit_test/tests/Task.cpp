@@ -73,3 +73,51 @@ TEST_F(Task_Test, Subtask_Overrun)
 
 	EXPECT_EQ(task_2.get_overruns(), 0);
 }
+
+// Test case for the Task class
+TEST_F(Task_Test, Double_Start_Subtask)
+{
+	Task task("TestTask", 1, 0.5);
+	int counter = 0;
+
+	// Define subtask function
+	auto subtask = [&counter] ()
+	{
+		counter++;
+	};
+
+	task.add_subtask(subtask);
+
+	task.start(std::chrono::milliseconds(500));
+	EXPECT_NO_THROW(task.start(std::chrono::milliseconds(500)));
+
+	task.stop();
+}
+
+// Test case for the Task class
+TEST_F(Task_Test, Double_Stop_Subtask)
+{
+	Task task("TestTask", 1, 0.5);
+	int counter = 0;
+
+	// Define subtask function
+	auto subtask = [&counter] ()
+	{
+		counter++;
+	};
+
+	task.add_subtask(subtask);
+
+	task.start(std::chrono::milliseconds(500));
+
+	task.stop();
+	EXPECT_NO_THROW(task.stop());
+}
+
+TEST_F(Task_Test, Assignment)
+{
+	Task task("Task", 1, 0.5);
+	Task* task_2 = &task;
+	task = task;
+	EXPECT_EQ(&task, task_2);
+}
