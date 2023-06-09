@@ -38,6 +38,23 @@ TEST_F(Network_Messaging_Test, Message_Type)
 	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
 }
 
+TEST_F(Network_Messaging_Test, Message_Type_Test_2)
+{
+	IPV4_Addr address;
+	std::string node_name = "Test_Node";
+	Network_Message message = node_messages::network_message_factory(MESSAGES::UNDEFINED);
+	message[0] = node_name;
+	message[1] = address;
+	message[2] = false;
+	message[3] = Byte(100);
+	message[4] = 12.01f;
+	message[5] = -100;
+	Packed_Message p_message(message);
+	testing_utilities::network_utilities::network_message_utilities::check_header(255, p_message.get_packet().size(), p_message.get_packet());
+	Packed_Message b_message(p_message.get_packet());
+	testing_utilities::network_utilities::network_message_utilities::compare_messages(p_message, b_message);
+}
+
 TEST_F(Network_Messaging_Test, Message_NODE_HELLO)
 {
 	IPV4_Addr address("127.0.0.1");
