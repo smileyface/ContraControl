@@ -26,6 +26,13 @@ namespace
 	};
 }
 
+
+TEST_F(Internal_Message_Test, Add_Message)
+{
+	EXPECT_EQ(Message_Relay::get_instance()->number_of_messages(consumer), 0);
+	LOG_INFO("This is a new message", "Add message test");
+	EXPECT_EQ(Message_Relay::get_instance()->number_of_messages(consumer), 1);
+}
 TEST_F(Internal_Message_Test, Logging_Levels_Test)
 {
 	LOG_DEBUG("Test Debug");

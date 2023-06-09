@@ -153,6 +153,12 @@ TEST_F(Scheduler_Test, Scheduler_Singleton_Instantiations)
     EXPECT_EQ(scheduler, Scheduler::get_instance());
 }
 
+TEST_F(Scheduler_Test, Scheduler_Destroy)
+{
+    Scheduler::destroy_instance();
+    EXPECT_NO_THROW(Scheduler::destroy_instance());
+}
+
 TEST_F(Scheduler_Test, Cancel_The_Scheduler)
 {
     std::vector<int> called_order;
