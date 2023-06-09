@@ -49,15 +49,16 @@ int Scheduler::get_number_of_subtasks()
 
 void Scheduler::start(int frame_rate)
 {
-    std::chrono::milliseconds frameDurationMs(static_cast<int>(1000.0 / frame_rate));
+    std::chrono::milliseconds frameDurationMs(static_cast<int>(1000.0/ frame_rate));
 
-    std::priority_queue<Task> task_cpy(tasks);
-    while(!task_cpy.empty())
+    
+    while(!tasks.empty())
     {
-        auto task = task_cpy.top();
-        task_cpy.pop();
+        auto task = tasks.top();
+        tasks.pop();
         task.start(frameDurationMs);
         std::this_thread::sleep_for(frameDurationMs);
+        task.stop();
     }
 }
 

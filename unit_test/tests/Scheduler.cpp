@@ -25,7 +25,6 @@ namespace
 // Test case for the Scheduler class
 TEST_F(Scheduler_Test, Add_Task)
 {
-    Scheduler* scheduler = Scheduler::get_instance();
     Task task("TestTask", 1, 0.5);
 
     scheduler->add_task(task);
@@ -36,7 +35,6 @@ TEST_F(Scheduler_Test, Add_Task)
 
 TEST_F(Scheduler_Test, Start_The_Scheduler)
 {
-    Scheduler* scheduler = Scheduler::get_instance();
     Task task1("TestTask", 1, 0.5);
 
     task1.add_subtask([] ()
@@ -56,7 +54,6 @@ TEST_F(Scheduler_Test, Run_Tasks)
     int subtask2_run_count = 0;
     int subtask3_run_count = 0;
 
-    Scheduler* scheduler = Scheduler::get_instance();
     Task task1("Task1", 1, 0.5);
     Task task2("Task2", 2, 0.3);
     Task task3("Task3", 3, 0.2);
@@ -101,4 +98,53 @@ TEST_F(Scheduler_Test, Run_Tasks)
     EXPECT_EQ(subtask2_run_count, 2);
     EXPECT_EQ(subtask3_run_count, 1);
     scheduler->stop();
+}
+
+TEST_F(Scheduler_Test, Run_Tasks_In_Order)
+{ 
+    std::vector<int> called_order;
+
+    Task task1("Task1", 1, 0.5);
+    Task task2("Task2", 3, 0.3);
+    Task task3("Task3", 2, 0.2);
+
+    // Define subtask functions
+    auto subtask1 = [&called_order] () mutable
+    {
+        called_order.push_back(1);
+    };
+
+    auto subtask2 = [&called_order] () mutable
+    {
+       called_order.push_back(2);
+    };
+
+    auto subtask3 = [&called_order] () mutable
+    {
+        called_order.push_back(3);
+    };
+
+    // Add subtasks to tasks
+    task1.add_subtask(subtask1);
+    task2.add_subtask(subtask2);
+    task3.add_subtask(subtask3);
+
+    // Add tasks to the scheduler
+    scheduler->add_task(task1);
+    scheduler->add_task(task2);
+    scheduler->add_task(task3);
+
+    // Start the scheduler
+    scheduler->start(100); // Frame duration of 100 milliseconds
+
+    // Verify that the tasks were executed
+    // ... Add your own assertions here
+
+    system_utilities::sleep_thread(100);
+    scheduler->stop();
+
+    EXPECT_EQ(called_order[0], 1);
+    EXPECT_EQ(called_order[1], 3);
+    EXPECT_EQ(called_order[2], 2);
+
 }

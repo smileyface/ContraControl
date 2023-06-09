@@ -7,9 +7,8 @@ Task::Task(const std::string& name, int priority, double percentage)
 { }
 
 Task::Task(const Task& other)
-    : name(other.name), priority(other.priority), percentage(other.percentage), is_running(false)
+    : name(other.name), priority(other.priority), percentage(other.percentage), is_running(false), subtasks(other.subtasks)
 { 
-    subtasks = other.subtasks;
 }
 
 
@@ -64,7 +63,7 @@ void Task::stop()
 
 bool Task::operator<(const Task& other) const
 {
-    return priority < other.priority;
+    return priority > other.priority;
 }
 
 Task& Task::operator=(const Task& other)
@@ -75,6 +74,7 @@ Task& Task::operator=(const Task& other)
         priority = other.priority;
         percentage = other.percentage;
         is_running = false;
+        subtasks = other.subtasks;
     }
     return *this;
 }
