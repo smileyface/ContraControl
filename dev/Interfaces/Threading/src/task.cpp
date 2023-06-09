@@ -57,7 +57,10 @@ void Task::stop()
     if(is_running)
     {
         is_running = false;
-        thread.join();
+        if(thread.joinable())
+        {
+            thread.join();
+        }
     }
 }
 

@@ -146,5 +146,51 @@ TEST_F(Scheduler_Test, Run_Tasks_In_Order)
     EXPECT_EQ(called_order[0], 1);
     EXPECT_EQ(called_order[1], 3);
     EXPECT_EQ(called_order[2], 2);
+}
 
+TEST_F(Scheduler_Test, Scheduler_Singleton_Instantiations)
+{
+    EXPECT_EQ(scheduler, Scheduler::get_instance());
+}
+
+TEST_F(Scheduler_Test, Cancel_The_Scheduler)
+{
+    std::vector<int> called_order;
+
+    Task task1("Task1", 1, 0.5);
+    Task task2("Task2", 3, 0.3);
+    Task task3("Task3", 2, 0.2);
+
+    // Define subtask functions
+    auto subtask1 = [&called_order] () mutable
+    {
+        called_order.push_back(1);
+    };
+
+    auto subtask2 = [&called_order] () mutable
+    {
+        called_order.push_back(2);
+    };
+
+    auto subtask3 = [&called_order] () mutable
+    {
+        called_order.push_back(3);
+    };
+
+    // Add subtasks to tasks
+    task1.add_subtask(subtask1);
+    task2.add_subtask(subtask2);
+    task3.add_subtask(subtask3);
+
+    // Add tasks to the scheduler
+    scheduler->add_task(task1);
+    scheduler->add_task(task2);
+    scheduler->add_task(task3);
+
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 3);
+
+    scheduler->stop();
+
+    EXPECT_EQ(called_order.size(), 0);
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 0);
 }
