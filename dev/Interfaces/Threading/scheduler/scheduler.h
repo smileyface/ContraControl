@@ -10,6 +10,7 @@
 
 #include "task.h"
 #include <queue>
+#include <mutex>
 
 /**
  * @brief The Scheduler class manages the scheduling and execution of tasks.
@@ -62,7 +63,7 @@ private:
     Scheduler(const Scheduler&) = delete;
     Scheduler& operator=(const Scheduler&) = delete;
 
-    std::priority_queue<Task> tasks;
+    std::vector<std::vector<Task>> tasks;
     int frame_rate;
 
     static Scheduler* instance;

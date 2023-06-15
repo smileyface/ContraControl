@@ -25,7 +25,16 @@ public:
      * @param name The name of the task.
      * @param priority The priority of the task.
      * @param percentage The percentage of frame duration allocated to this task.
+     * @param persistence Is the task persistent.
      */
+    Task(const std::string& name, int priority, double percentage, bool persistence);
+
+    /**
+ * @brief Constructs a Task object.
+ * @param name The name of the task.
+ * @param priority The priority of the task.
+ * @param percentage The percentage of frame duration allocated to this task.
+ */
     Task(const std::string& name, int priority, double percentage);
 
     /**
@@ -52,6 +61,18 @@ public:
      * @returns number of overruns.
      */
     int get_overruns();
+
+    /**
+     * @brief Get priority of the task.
+     * @returns Priority.
+     */
+    int get_priority();
+
+    /**
+     * @brief Get persistance of task.
+     * @returns Persistance
+     */
+    bool get_persistence();
 
     /**
      * @brief Runs the task for the given frame duration.
@@ -88,6 +109,7 @@ private:
     std::string name;
     int priority;
     int overruns;
+    bool persistence;
     double percentage;
     std::vector<std::function<void()>> subtasks;
     bool is_running;

@@ -2,6 +2,7 @@
 #include <thread>
 
 #include "Threading/scheduler/scheduler.h"
+#include "Messaging/message_relay.h"
 
 
 Scheduler* Scheduler::instance = nullptr;
@@ -26,23 +27,34 @@ void Scheduler::destroy_instance()
 
 void Scheduler::add_task(Task task)
 {
-    tasks.push(task);
+    if(task.get_priority() < 0 || task.get_priority() > 10)
+    {
+        LOG_ERROR("Task priority outside of range", "Adding task");
+        return;
+    }
+    tasks[task.get_priority() - 1].push_back(task);
 }
 
 int Scheduler::get_number_of_tasks()
 {
-    return tasks.size();
+    int total = 0;
+    for(auto task_list : tasks)
+    {
+            total += task_list.size();
+    }
+    return total;
 }
 
 int Scheduler::get_number_of_subtasks()
 {
     int total = 0;
-    std::priority_queue<Task> task_cpy(tasks);
-    while(!task_cpy.empty())
+
+    for(auto task_list : tasks)
     {
-        auto task = task_cpy.top();
-        task_cpy.pop();
-        total += task.number_of_subtask();
+        for(auto task : task_list)
+        {
+            total += task.number_of_subtask();
+        }
     }
     return total;
 }
@@ -51,30 +63,39 @@ void Scheduler::start(int frame_rate)
 {
     std::chrono::milliseconds frameDurationMs(static_cast<int>(1000.0/ frame_rate));
 
-    
-    while(!tasks.empty())
+    for(auto task_list : tasks)
     {
-        auto task = tasks.top();
-        tasks.pop();
-        task.start(frameDurationMs);
-        std::this_thread::sleep_for(frameDurationMs);
-        task.stop();
+        for(int i = 0; i < task_list.size(); i++)
+        {
+            Task* task = &task_list[i];
+            task->start(frameDurationMs);
+            std::this_thread::sleep_for(frameDurationMs);
+            task->stop();
+            if(task->get_persistence() == false)
+            {
+                task_list.erase(task_list.begin() + i);
+            }
+        }
     }
 }
 
 void Scheduler::stop()
 {
-    while(!tasks.empty())
+    for(int i = 0; i < tasks.size(); i++)
     {
-        auto task = tasks.top();
-        tasks.pop();
-        task.stop();
+        for(int j = 0; j < tasks[i].size(); j++)
+        {
+            tasks[i][j].stop();
+        }
+        tasks[i].clear();
     }
 }
 
 Scheduler::Scheduler() :
     frame_rate(30)
-{ }
+{
+    tasks.resize(10);
+}
 
 Scheduler::~Scheduler()
 { }
