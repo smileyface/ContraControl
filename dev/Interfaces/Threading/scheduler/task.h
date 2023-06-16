@@ -92,13 +92,6 @@ public:
     void stop();
 
     /**
-     * @brief Overloaded less-than operator to compare tasks based on priority.
-     * @param other The other Task object to compare with.
-     * @return True if this task has lower priority than the other task, false otherwise.
-     */
-    bool operator<(const Task& other) const;
-
-    /**
      * @brief Assignment operator override.
      * @param other The Task object to be assigned.
      * @return Reference to the assigned Task object.

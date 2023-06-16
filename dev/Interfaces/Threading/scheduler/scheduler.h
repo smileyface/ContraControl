@@ -57,6 +57,11 @@ public:
      */
     void stop();
 
+    /**
+     * @brief Remove all tasks from the scheduler.
+     */
+    void clear();
+
 private:
     Scheduler();
     ~Scheduler();

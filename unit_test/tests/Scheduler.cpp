@@ -196,7 +196,35 @@ TEST_F(Scheduler_Test, Cancel_The_Scheduler)
     EXPECT_EQ(scheduler->get_number_of_tasks(), 3);
 
     scheduler->stop();
+    scheduler->clear();
 
     EXPECT_EQ(called_order.size(), 0);
     EXPECT_EQ(scheduler->get_number_of_tasks(), 0);
+}
+
+TEST_F(Scheduler_Test, Test_Persistence)
+{
+    Task test_task("Test", 2, .3, false);
+    test_task.add_subtask([] ()
+                          {
+
+                          });
+    scheduler->add_task(test_task);
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
+    scheduler->start(100);
+    system_utilities::sleep_thread(200);
+    scheduler->stop();
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 0);
+
+    Task test_task_2("Test2", 2, .3, true);
+    test_task.add_subtask([] ()
+                          {
+
+                          });
+    scheduler->add_task(test_task_2);
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
+    scheduler->start(100);
+    system_utilities::sleep_thread(200);
+    scheduler->stop();
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
 }

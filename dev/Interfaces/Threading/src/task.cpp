@@ -99,11 +99,6 @@ void Task::stop()
     }
 }
 
-bool Task::operator<(const Task& other) const
-{
-    return priority > other.priority;
-}
-
 Task& Task::operator=(const Task& other)
 {
     if(this != &other)

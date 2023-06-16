@@ -63,17 +63,21 @@ void Scheduler::start(int frame_rate)
 {
     std::chrono::milliseconds frameDurationMs(static_cast<int>(1000.0/ frame_rate));
 
-    for(auto task_list : tasks)
+    for(std::vector<Task>& task_list : tasks)
     {
-        for(int i = 0; i < task_list.size(); i++)
+        
+        for(auto task = task_list.begin(); task != task_list.end(); )
         {
-            Task* task = &task_list[i];
             task->start(frameDurationMs);
             std::this_thread::sleep_for(frameDurationMs);
             task->stop();
             if(task->get_persistence() == false)
             {
-                task_list.erase(task_list.begin() + i);
+                task = task_list.erase(task);
+            }
+            else
+            {
+                ++task;
             }
         }
     }
@@ -87,6 +91,13 @@ void Scheduler::stop()
         {
             tasks[i][j].stop();
         }
+    }
+}
+
+void Scheduler::clear()
+{
+    for(int i = 0; i < tasks.size(); i++)
+    {
         tasks[i].clear();
     }
 }
@@ -98,4 +109,6 @@ Scheduler::Scheduler() :
 }
 
 Scheduler::~Scheduler()
-{ }
+{ 
+    clear();
+}
