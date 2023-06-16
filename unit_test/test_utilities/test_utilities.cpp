@@ -128,8 +128,9 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 	{
 		function();
 	}
-	catch(NetworkErrorException)
+	catch(NetworkErrorException e)
 	{
+		EXPECT_STREQ(e.what(), "Network Error");
 		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 		return;
 	}
@@ -227,8 +228,9 @@ void testing_utilities::error_utilities::check_override_failure(std::function<vo
 	{
 		function();
 	}
-	catch(UnimplementedFunctionException)
+	catch(UnimplementedFunctionException e)
 	{
+		EXPECT_STREQ(e.what(), "Function not implemented");
 		SUCCEED();
 		return;
 	}
