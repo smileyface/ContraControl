@@ -120,4 +120,9 @@ TEST_F(Task_Test, Assignment)
 	Task* task_2 = &task;
 	task = task;
 	EXPECT_EQ(&task, task_2);
+
+	Task task_3("Task3", 2, 0.5);
+	task = task_3;
+	EXPECT_EQ(task.get_name(), task_3.get_name());
+	EXPECT_NE(&task, &task_3);
 }

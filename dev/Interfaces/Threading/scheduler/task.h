@@ -75,6 +75,12 @@ public:
     bool get_persistence();
 
     /**
+     * @brief Get name of the task.
+     * @returns Name
+     */
+    std::string get_name();
+
+    /**
      * @brief Runs the task for the given frame duration.
      * @param frameDuration The duration of a frame.
      */

@@ -27,7 +27,7 @@ void Scheduler::destroy_instance()
 
 void Scheduler::add_task(Task task)
 {
-    if(task.get_priority() < 0 || task.get_priority() > 10)
+    if(task.get_priority() < 1 || task.get_priority() > 10)
     {
         LOG_ERROR("Task priority outside of range", "Adding task");
         return;

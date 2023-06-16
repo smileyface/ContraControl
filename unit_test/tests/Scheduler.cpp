@@ -148,6 +148,23 @@ TEST_F(Scheduler_Test, Run_Tasks_In_Order)
     EXPECT_EQ(called_order[2], 2);
 }
 
+TEST_F(Scheduler_Test, Priority_Out_Of_Bounds)
+{
+    Task task1("Task1", 11, 0.5);
+    Task task2("Task1", 0, 0.5);
+    Task task_valid_1("Valid Task", 1, 0.5);
+    Task task_valid_2("Valid Task", 10, 0.5);
+    scheduler->add_task(task1);
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 0);
+    scheduler->add_task(task2);
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 0);
+    scheduler->add_task(task_valid_1);
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
+    scheduler->add_task(task_valid_2);
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 2);
+
+}
+
 TEST_F(Scheduler_Test, Scheduler_Singleton_Instantiations)
 {
     EXPECT_EQ(scheduler, Scheduler::get_instance());

@@ -56,6 +56,11 @@ bool Task::get_persistence()
     return persistence;
 }
 
+std::string Task::get_name()
+{
+    return name;
+}
+
 void Task::run(std::chrono::milliseconds frameDuration)
 {
     auto taskExecutionTime = static_cast<int>(frameDuration.count() * percentage);
