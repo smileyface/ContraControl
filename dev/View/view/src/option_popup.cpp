@@ -7,16 +7,14 @@
 
 Option_View_Type::Option_View_Type()
 {
-	specified_message = 0;
 	option_consumer = new Message_Consumer(Message_Types::OPTION_POPUP_REQUEST);
-	Message_Relay::get_instance()->register_consumer(option_consumer);
 }
 
 void Option_View_Type::get_message()
 {
-	specified_message = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(option_consumer));
-	message.OPTIONS = specified_message->get_options();
-	message.QUERY = specified_message->get_option_query();
+	specified_message = Message_Relay::get_instance()->pop<Option_Popup_Message>(option_consumer);
+	message.OPTIONS = specified_message.get_options();
+	message.QUERY = specified_message.get_option_query();
 }
 
 void Console_Option_Popup::on_display()
@@ -79,7 +77,7 @@ void Console_Option_Popup::on_input()
 	{
 		return;
 	}
-	Option_Popup_Response_Message* response = new Option_Popup_Response_Message(choice, specified_message);
+	Option_Popup_Response_Message* response = new Option_Popup_Response_Message(choice, &specified_message);
 	Message_Relay::get_instance()->push(response);
 }
 

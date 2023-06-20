@@ -33,6 +33,6 @@ protected:
 	/**
 	 * Message recieved.
 	 */
-	Option_Popup_Message* specified_message;
+	Option_Popup_Message specified_message;
 };
 #endif // !VIEW_OPTION_VIEW_TYPE

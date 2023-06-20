@@ -37,8 +37,6 @@ public:
 	 * \return Query message to display to the user,
 	 */
 	std::string get_option_query();
-
-	void placeholder();
 private:
 	Option_List options_;
 	std::string option_query_;

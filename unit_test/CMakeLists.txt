@@ -14,7 +14,8 @@ set(DEVICE_TEST_FILES "tests/Device.cpp"
                       "tests/Keyboard_Hardware.cpp" 
                       "tests/Keyboard_System_Not_Connected.cpp" 
                       "tests/Task.cpp"
-                      "tests/Scheduler.cpp" )
+                      "tests/Scheduler.cpp"  
+                      "tests/Internal_Messages_Ptr.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/system_utilities.h"
