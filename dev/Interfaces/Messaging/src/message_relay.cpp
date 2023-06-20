@@ -38,39 +38,6 @@ void Message_Relay::push(Internal_Message* message)
 	}
 }
 
-Internal_Message* get_found_message(Message_Consumer* consumer, std::pair<Internal_Message*, Consumer_List>& current_message)
-{
-	Internal_Message* found_message = 0;
-	std::lock_guard<std::mutex> guard(g_pages_mutex);
-	if(current_message.second.size() != 0)
-	{
-		auto it = std::find(current_message.second.begin(), current_message.second.end(), consumer);
-		if(it != std::end(current_message.second))
-		{
-			found_message = current_message.first;
-			current_message.second.erase(it);
-		}
-	}
-	return found_message;
-}
-
-bool remove_func(std::pair<Internal_Message*, Consumer_List> Message_Data)
-{
-	return Message_Data.second.size() == 0;
-}
-
-bool more_messages(Message_Consumer* consumer, std::vector<std::pair<Internal_Message*, Consumer_List>> messages)
-{
-	for(int i = 0; i < messages.size(); i++)
-	{
-		auto it = std::find(messages[i].second.begin(), messages[i].second.end(), consumer);
-		if(it != messages[i].second.end())
-		{
-			return true;
-		}
-	}
-	return false;
-}
 
 Message_Ptr<Internal_Message> Message_Relay::pop(Message_Consumer* consumer)
 {
