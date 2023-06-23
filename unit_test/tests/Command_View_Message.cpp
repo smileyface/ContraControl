@@ -34,25 +34,29 @@ namespace
 	};
 }
 
-TEST_F(Command_View_Message_Test, Send_Option)
+TEST_F(Command_View_Message_Test, Request_Message_On_Relay)
 {
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
 	EXPECT_FALSE(found);
 	Option_Popup_Message opm = Message_Relay::get_instance()->pop<Option_Popup_Message>(option_consumer);
 	EXPECT_FALSE(found);
 	EXPECT_EQ(opm.get_sender(), SUBSYSTEM_ID_ENUM::TEST);
-	Option_List list=opm.get_options();
+	Option_List list = opm.get_options();
 	EXPECT_EQ(list[0], "Hello");
 	EXPECT_EQ(list[1], "It's");
 	EXPECT_EQ(list[2], "Me");
+}
+
+TEST_F(Command_View_Message_Test, Send_Option)
+{
+
 
 	view::add_display(DISPLAY_TYPES::CONSOLE);
 	view::initalize();
 	view::start_view();
 
 
-	/* TODO: Make this test for when relay handles different messages
-	Message_Relay::get_instance()->push(&opm);
+	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
 	system_utilities::keyboard_utilities::Keyboard keyboard;
 	//NEED TO ADD BUFFER INPUT INTERFACE
 	keyboard < KEY::NUM_0;
@@ -69,7 +73,6 @@ TEST_F(Command_View_Message_Test, Send_Option)
 		}
 	}
 	EXPECT_EQ(message_in_view, true);
-	*/
 
 
 	view::stop_view();
