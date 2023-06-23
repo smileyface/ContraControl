@@ -51,12 +51,13 @@ void Format::clean_views()
 void Format::process_internal_messages()
 {
 	std::vector<View_Subsystem_Message*> list_of_messages;
-	for(View_Subsystem_Message* message = dynamic_cast<View_Subsystem_Message*>(Message_Relay::get_instance()->front(format_consumer)); message != 0; message = dynamic_cast<Option_Popup_Message*>(Message_Relay::get_instance()->pop(format_consumer)))
+	for(Message_Ptr<Internal_Message> message = Message_Relay::get_instance()->pop(format_consumer); message != 0; message = Message_Relay::get_instance()->pop(format_consumer))
 	{
-		if(instanceof<Option_Popup_Message>(message))
+		if(message.instance_of<Option_Popup_Message>())
 		{
+			Option_Popup_Message message_actualized = message.convert_type<Option_Popup_Message>();
 			Console_Option_Popup* opm = dynamic_cast<Console_Option_Popup*>(add_view(VIEW_TYPE_ENUM::POPUP_OPTION));
-			std::string log_message = "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(message->get_sender()));
+			std::string log_message = "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(message_actualized.get_sender()));
 			LOG_INFO(log_message, "Option Popup Creation");
 		}
 	}

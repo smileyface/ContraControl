@@ -72,9 +72,6 @@ public:
 	 * \param valid_message Desired validity to set message to.
 	 */
 	Logging_Message();
-
-	void placeholder()
-	{ };
 private:
 	/**
 	 * How dire this message is.

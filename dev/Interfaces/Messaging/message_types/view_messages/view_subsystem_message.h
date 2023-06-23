@@ -16,7 +16,6 @@
 class View_Subsystem_Message : public Internal_Message
 {
 public:
-	void placeholder();
 	/**
 	 * \param sender Subsystem sending the message. This is so we know who to send return messages to.
 	 */

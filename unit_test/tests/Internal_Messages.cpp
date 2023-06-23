@@ -15,8 +15,7 @@ namespace
 		virtual void SetUp()
 		{
 			system_utilities::setup();
-			consumer = new Message_Consumer(Message_Types::LOGGING);
-			Message_Relay::get_instance()->register_consumer(consumer);
+			consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
 		}
 		virtual void TearDown()
 		{
@@ -36,30 +35,29 @@ TEST_F(Internal_Message_Test, Add_Message)
 TEST_F(Internal_Message_Test, Logging_Levels_Test)
 {
 	LOG_DEBUG("Test Debug");
-	Logging_Message* message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(consumer));
-	EXPECT_EQ(message->get_priority_string(), "DEBUG");
+	Logging_Message message = Message_Relay::get_instance()->pop<Logging_Message>(consumer);
+	EXPECT_EQ(message.get_priority_string(), "DEBUG");
 	LOG_ERROR("Test Error", "Test script");
-	message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(consumer));
-	EXPECT_EQ(message->get_priority_string(), "ERROR");
+	message = Message_Relay::get_instance()->pop<Logging_Message>(consumer);
+	EXPECT_EQ(message.get_priority_string(), "ERROR");
 	LOG_INFO("Test Info", "Test Script");
-	message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(consumer));
-	EXPECT_EQ(message->get_priority_string(), "INFO");
+	message = Message_Relay::get_instance()->pop<Logging_Message>(consumer);
+	EXPECT_EQ(message.get_priority_string(), "INFO");
 	Message_Relay::get_instance()->push(new Logging_Message(MESSAGE_PRIORITY::SEVERE_MESSAGE, "Test Kaboom", "Test Script"));
-	message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(consumer));
-	EXPECT_EQ(message->get_priority_string(), "SEVERE");
+	message = Message_Relay::get_instance()->pop<Logging_Message>(consumer);
+	EXPECT_EQ(message.get_priority_string(), "SEVERE");
 	Message_Relay::get_instance()->push(new Logging_Message(MESSAGE_PRIORITY(255), "Test Kaboom", "Test Script"));
-	message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(consumer));
-	EXPECT_EQ(message->get_priority_string(), "UNHANDLED PRIORITY");
+	message = Message_Relay::get_instance()->pop<Logging_Message>(consumer);
+	EXPECT_EQ(message.get_priority_string(), "UNHANDLED PRIORITY");
 }
 
 TEST_F(Internal_Message_Test, Multiple_Consumer)
 {
-	Message_Consumer* con_two = new Message_Consumer(new Logging_Message());
+	Message_Consumer* con_two =
+		Message_Relay::get_instance()->register_consumer<Logging_Message>();
 	LOG_DEBUG("Test Debug");
-	Message_Relay::get_instance()->register_consumer(con_two);
-	Logging_Message* message = dynamic_cast<Logging_Message*>(Message_Relay::get_instance()->pop(con_two));
-	message->placeholder();
-	EXPECT_EQ(message->get_message(), "Test Debug");
+	Logging_Message message = Message_Relay::get_instance()->pop<Logging_Message>(con_two);
+	EXPECT_EQ(message.get_message(), "Test Debug");
 
 }
 

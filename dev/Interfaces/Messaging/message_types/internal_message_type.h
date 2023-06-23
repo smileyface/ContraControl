@@ -15,10 +15,29 @@
 class Internal_Message
 {
 public:
-	virtual ~Internal_Message()
-	{ };
-	/** This will be replaced when I come up with more messaging design */
-	virtual void placeholder() = 0;
+	/**
+	 * Default Constructor
+	 */
+	Internal_Message();
+	/**
+	 * Default Deconstructor
+	 */
+	virtual ~Internal_Message();
+
+	/**
+	* Is the message valid.
+	* @return Validity of the message.
+	*/
+	bool is_valid();
+	/**
+	 * Validate the message. Sets the valid flag.
+	 */
+	virtual void validate();
+protected:
+	/**
+	 * Message validation flag.
+	 */
+	bool valid;
 };
 
 #endif
