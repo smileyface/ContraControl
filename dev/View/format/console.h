@@ -11,18 +11,22 @@
 
 #include "format.h"
 
-/**
- * Interface for Console UI.
- */
+ /**
+  * Interface for Console UI.
+  */
 class Console_Format : public Format
 {
 public:
 	void initalize();
-	void add_view(VIEW_TYPE_ENUM view);
+	/**
+	 * Add a new view to the format.
+	 * \param view Type of view to add.
+	 * \return Pointer to the newly created view
+	 */
+	View* add_view(VIEW_TYPE_ENUM view);
 
 protected:
 	void loop();
-
 
 private:
 	void console_display_thread();

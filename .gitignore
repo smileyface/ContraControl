@@ -37,6 +37,7 @@ packages/*
 /dev/.vs
 bin/*
 build/*
+unit_test/Static_Test
 
 #CMake
 out/*
@@ -46,6 +47,8 @@ out/*
 test/googletest*
 googletest-*
 Test
+CoverageReport*
+LastCoverageResults.log
 
 #CMake Extras
 CMakeLists.txt.user
@@ -73,3 +76,5 @@ Debug
 */out/documents/*
 /.github/check-cppcheck-build-dir
 /.github/check.cppcheck
+coverage.xml
+

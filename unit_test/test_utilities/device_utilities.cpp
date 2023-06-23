@@ -1,59 +1,65 @@
 #include "device_utilities.h"
-#include "system_testings.h"
+#include "system_utilities.h"
 #include "module_mains.h"
 
 int device_utilities::device_in_use = 0;
-Device* device_utilities::get_nominal_state(DEVICE_IDENTIFIER device, Command* command)
+Node_Id device_utilities::node_handle = "Test_Node_1";
+std::map<Device_Id, Device*> device_utilities::model_list;
+
+Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 {
-	Device* ds = create_device_instance(Device_Creator((Device_Id)device, "Nominal"));
-	switch (command->get_id())
+	if (command->get_id() == COMMAND_ENUM::INITALIZE)
 	{
-	case COMMAND_ENUM::ON:
-		ds->power = true;
-	case COMMAND_ENUM::OFF:
-	case COMMAND_ENUM::INITALIZE:
-		ds->initalized = true;
-		ds->valid = true;
-	case COMMAND_ENUM::INVALID:
-		break;
+		model_list[label]->initalize("nominal");
 	}
-	return ds;
+	if (command->get_id() == COMMAND_ENUM::ON)
+	{
+		model_list[label]->turn_on();
+	}
+	if (command->get_id() == COMMAND_ENUM::OFF)
+	{
+		model_list[label]->turn_off();
+	}
+	return model_list[label];
 }
 
-void device_utilities::setup_node(Node_Id id)
+void device_utilities::start_test_environment()
 {
-	model::initalize_my_node(id);
+	model::initalize_my_node(device_utilities::node_handle);
 }
 
-void device_utilities::create_node(Node_Id id)
+Device_Label device_utilities::add_device(Device_Creator creator)
 {
-	model::create_node(Node_Type::TEST, id);
+	model::get_node(device_utilities::node_handle)->register_device(creator);
+	model_list[model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()] = create_device_instance(creator);
+	return(Device_Label(device_utilities::node_handle, model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()));
 }
 
-Device_Label device_utilities::add_device(Node_Id id, Device_Creator creator)
+void device_utilities::remove_device(Device_Label label)
 {
-	model::get_node(id)->register_device(creator);
-	return(Device_Label(id, model::get_node(id)->get_device(creator.second)->get_id()));
+	model::get_node(label.get_node_id())->remove_device(label.get_device_id());
 }
 
 Device* device_utilities::command_device(Device_Label label, Command* command)
 {
 	controller::add_command(Timed_Command(command, label, 0));
-	system_util::step(1);
-	return get_nominal_state(model::get_device(label)->get_device_type(), command);
+	system_utilities::step(1);
+	Device* ds = get_nominal_state(label.get_device_id(), command);
+	return ds;
+}
+
+void device_utilities::add_command(Device_Label label, Command* command)
+{
+	controller::add_command(Timed_Command(command, label, 0));
+	controller::step();
 }
 
 Device* device_utilities::finish_command(Device_Label label, Command* command)
 {
 	while (!command->completed())
 	{
-		system_util::step(1);
+		system_utilities::step(1);
 	}
-	system_util::step(1);
-	return get_nominal_state(model::get_device(label)->get_device_type(), command);
-}
-
-void device_utilities::initalize_device(Device_Label label)
-{
-	command_device(label, new Initalize());
+	system_utilities::step(1);
+	return get_nominal_state(label.get_device_id(), command);
 }

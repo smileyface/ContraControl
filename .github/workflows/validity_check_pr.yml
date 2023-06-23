@@ -1,0 +1,135 @@
+name: Validity Checks (Pull Request)
+
+on:
+    pull_request:
+        branches: [master, version/**]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Debug
+  RUN_COVER: true
+  GCOV_PREFIX: cover/
+
+
+jobs:
+  Build:
+    name: '${{ matrix.os }}: build'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Create Build Environment
+      run: cmake -E make_directory ${{runner.workspace}}/build
+
+    - name: Configure CMake
+      # Use a bash shell so we can use the same syntax for environment variable
+      # access regardless of the host operating system
+      shell: bash
+      working-directory: ${{runner.workspace}}/build
+      # Note the current convention is to use the -S and -B options here to specify source 
+      # and build directories, but this is only available with CMake 3.13 and higher.  
+      # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+
+    - name: Build Check
+      working-directory: ${{runner.workspace}}/build
+      # Execute the build.  You can specify a specific target with "--target <NAME>"
+      run: |
+        cmake --build .
+
+    - name: "Tar action"
+      uses: a7ul/tar-action@v1.1.0
+      id: compress
+      with:
+        command: c
+        cwd: ${{runner.workspace}}
+        files: build
+        outPath: build.tar.gz
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact-test-${{runner.os}}
+        path: build.tar.gz
+    
+  Test:
+    timeout-minutes: 30
+    name: '${{ matrix.os }}: test'
+    needs: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/download-artifact@v2
+      with:
+       name: my-artifact-test-${{runner.os}}
+       path: .
+
+
+    - name: Extract files
+      uses: a7ul/tar-action@v1.1.0
+      id: extract
+      with:
+        command: x
+        cwd: ${{runner.workspace}}
+        files: build.tar.gz
+
+    - name: Setup testing Network (Linux)
+      # Create a testing network called wlan0
+      if: runner.os == 'Linux'
+      run: |
+        docker network create --opt com.docker.network.bridge.name=nat test-net --subnet "192.168.0.0/24"
+        ifconfig
+        python -m pip install --upgrade pip
+        pip install gcovr
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Setup testing Network (Windows)
+      # Create a testing network called wlan0
+      if: runner.os == 'Windows'
+      run: |
+        docker network create -d "nat" --subnet "192.168.0.0/24" my_nat
+        ipconfig /all
+        
+    - name: Attempt Permissions fix
+      if: runner.os == 'Linux'
+      run: |
+        sudo chmod +666 /dev/uinput
+        sudo apt install gdb
+        
+#    - name: Debug
+#      uses: lhotari/action-upterm@v1
+#      with:
+#        ## limits ssh access and adds the ssh public key for the user which triggered the workflow
+#        limit-access-to-actor: true
+#        ## limits ssh access and adds the ssh public keys of the listed GitHub users
+#        limit-access-to-users: smileyface
+
+    - name: Unit Testing
+      working-directory: ${{runner.workspace}}/build/unit_test
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: |
+        ctest --verbose
+        
+  
+  Document:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: "mkdir out"
+    - name: Doxygen Action
+      # You may pin to the exact commit or the version.
+      # uses: mattnotmitt/doxygen-action@9964e41e7f2e2a56e42fe789421f3fe33e938d63
+      uses: mattnotmitt/doxygen-action@v1.3.1
+      with:
+        doxyfile-path: .github/github_doxy #Errors on warnings
+    - name: Check for successful doc
+      run: "test -f out/documents/html/index.html && echo 'we good' || exit 1"

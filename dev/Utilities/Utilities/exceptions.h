@@ -8,12 +8,18 @@
 #ifndef PROJECT_EXCEPTIONS_H
 #define PROJECT_EXCEPTIONS_H
 
-#include <exception>
+#include <stdexcept>
 /**
  \brief Exception node throws when attempting to access a device that does not exist.
  */
 class DeviceNotFoundException : public std::exception
 {
+public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Device is not on node";
@@ -26,6 +32,12 @@ class DeviceNotFoundException : public std::exception
 
 class NodeNotFoundException : public std::exception
 {
+public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Node is unknown";
@@ -37,6 +49,12 @@ class NodeNotFoundException : public std::exception
  */
 class IncorrectStateTypeException : public std::exception
 {
+public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Incorrect state attempting to be mangled";
@@ -48,9 +66,32 @@ class IncorrectStateTypeException : public std::exception
  */
 class InvalidCommandException : public std::exception
 {
+public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Invalid command given";
+    }
+};
+
+/**
+ \brief When attempting to change the state of an invalid device type
+ */
+class InvalidDeviceException : public std::exception
+{
+public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
+    virtual const char* what() const throw()
+    {
+        return "Device is of an invalid type";
     }
 };
 
@@ -59,6 +100,12 @@ class InvalidCommandException : public std::exception
  */
 class UnimplementedFunctionException : public std::exception
 {
+public:
+    /**
+ * Austin 3:16 says:
+ *
+ * \return String of message
+ */
     virtual const char* what() const throw()
     {
         return "Function not implemented";
@@ -70,6 +117,12 @@ class UnimplementedFunctionException : public std::exception
  */
 class NetworkErrorException : public std::exception
 {
+public:
+    /**
+     * Austin 3:16 says:
+     * 
+     * \return String of message
+     */
     virtual const char* what() const throw()
     {
         return "Network Error";

@@ -11,7 +11,7 @@
 		{
 			"label": "Install gcov",
 			"type":"shell",
-			"command": "pip install gcovr"
+			"command": "sudo apt-get update; sudo apt-get install python3.6; pip install gcovr"
 		}
 	]
 }

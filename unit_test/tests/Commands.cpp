@@ -1,62 +1,89 @@
 #include "../test_utilities/device_utilities.h"
-#include "../test_utilities/system_testings.h"
+#include "../test_utilities/system_utilities.h"
 #include "../test_utilities/test_utilities.h"
 
 #include "../test_utilities/pch.h"
 
 
 namespace {
-	class Device_Commands_Test : public ::testing::Test {
+	class Commands_Test : public ::testing::Test {
 	protected:
 		Device_Label dl;
 		virtual void SetUp() {
-			system_util::setup();
-			device_utilities::setup_node("Test_Node_Local");
-			dl = device_utilities::add_device("Test_Node_Local", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
-			device_utilities::initalize_device(dl);
+			system_utilities::setup();
+			device_utilities::start_test_environment();
+			dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 		}
 		virtual void TearDown() {
-			system_util::cleanup();
+			system_utilities::cleanup();
 		}
-
-	};
-
-	class Device_Commands_Test_No_Init : public ::testing::Test {
-	protected:
-		Device_Label dl;
-		virtual void SetUp() {
-			system_util::setup();
-			device_utilities::setup_node("Test_Node_Local");
-			dl = device_utilities::add_device("Test_Node_Local", Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
+		void switch_to_device(DEVICE_IDENTIFIER device_type) {
+			device_utilities::remove_device(dl);
+			dl = device_utilities::add_device(Device_Creator((int)device_type, "Test1"));
 		}
-		virtual void TearDown() {
-			system_util::cleanup();
-		}
-
 	};
 }
 
-TEST_F(Device_Commands_Test, Device_Initalize) {
+TEST_F(Commands_Test, Device_Initalize) {
+
 	Device* ds = create_device_instance(Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Results"));
-	ds->initalized = true;
-	ds->valid = true;
-
-	testing_util::device_utilities::check_state(dl, ds);
+	testing_utilities::device_utilities::check_state(dl, ds);
+	ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize("Test1")));
+	testing_utilities::device_utilities::check_state(dl, ds);
+}
+TEST_F(Commands_Test, Device_On) {
+	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
+	testing_utilities::device_utilities::check_state(dl, ds);
+	ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize("Test1")));
+	ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
+	testing_utilities::device_utilities::check_state(dl, ds);
 }
 
-TEST_F(Device_Commands_Test, Device_On) {
-	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
-	testing_util::device_utilities::check_state(dl, ds);
-	system_util::cleanup();
-}
-
-TEST_F(Device_Commands_Test, Device_Off) {
-	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
-	testing_util::device_utilities::check_state(dl, ds);
+TEST_F(Commands_Test, Device_Off) {
+	Device * ds = static_cast<Device*>(device_utilities::command_device(dl, new Off()));
+	testing_utilities::device_utilities::check_state(dl, ds);
+	ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize("Test1")));
+	ds = static_cast<Device*>(device_utilities::command_device(dl, new On()));
+	testing_utilities::device_utilities::check_state(dl, ds);
 
 	ds = static_cast<Device*>(device_utilities::command_device(dl, new Off()));
-	testing_util::device_utilities::check_state(dl, ds);
+	testing_utilities::device_utilities::check_state(dl, ds);
+}
 
-	system_util::cleanup();
+TEST_F(Commands_Test, Device_Assign_Channel) {
+	dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::GRADIENT, "Test1"));
+	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new Assign(50)));
+	testing_utilities::device_utilities::check_channel(dl, 50);
 
+	dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::RGB, "RGB_Tester"));
+	ds = static_cast<Device*>(device_utilities::command_device(dl, new Assign(2, 50)));
+	testing_utilities::device_utilities::check_channel(dl, 2, 50);
+	testing_utilities::device_utilities::check_channel(dl, 1, 0);
+	testing_utilities::device_utilities::check_channel(dl, 0, 0);
+}
+
+TEST_F(Commands_Test, Device_Invalid_Command) {
+	EXPECT_THROW(device_utilities::command_device(dl, new Command()), InvalidCommandException);
+}
+
+TEST_F(Commands_Test, Device_Duplicate_Command) {
+	device_utilities::command_device(dl, new Initalize("Test1"));
+	On* on = new On();
+	device_utilities::add_command(dl, on);
+	device_utilities::add_command(dl, new Off());
+	device_utilities::add_command(dl, on);
+	system_utilities::step(1);
+
+	Device* ds = new Device();
+	ds->initalize("tester");
+	ds->turn_off();
+	testing_utilities::device_utilities::check_state(dl, ds);
+
+	device_utilities::add_command(dl, new On());
+	device_utilities::add_command(dl, new Off());
+	device_utilities::add_command(dl, new On());
+	system_utilities::step(1);
+
+	ds->turn_on();
+	testing_utilities::device_utilities::check_state(dl, ds);
 }

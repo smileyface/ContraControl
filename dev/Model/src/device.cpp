@@ -1,6 +1,47 @@
 #include <typeinfo> //typeid
 
 #include "../devices/device.h"
+#include "Utilities/exceptions.h"
+
+
+Device* create_device_instance(Device_Creator creator)
+{
+	Device* the_device;
+	switch ((DEVICE_IDENTIFIER)creator.first)
+	{
+	case DEVICE_IDENTIFIER::SWITCH:
+		the_device = new Device(DEVICE_IDENTIFIER::SWITCH, 0);
+		break;
+	case DEVICE_IDENTIFIER::GRADIENT:
+		the_device = new Device(DEVICE_IDENTIFIER::GRADIENT, 1);
+		break;
+	case DEVICE_IDENTIFIER::RGB:
+		the_device = new Device(DEVICE_IDENTIFIER::RGB, 3);
+		break;
+	case DEVICE_IDENTIFIER::INVALID:
+	default:
+		the_device = new Device();
+	}
+	the_device->set_name(creator.second);
+	return the_device;
+}
+
+std::string device_type_as_string(DEVICE_IDENTIFIER type)
+{
+	switch (type)
+	{
+	case DEVICE_IDENTIFIER::SWITCH:
+		return "Switch";
+	case DEVICE_IDENTIFIER::GRADIENT:
+		return "Gradient";
+	case DEVICE_IDENTIFIER::RGB:
+		return "RGB";
+	case DEVICE_IDENTIFIER::INVALID:
+	default:
+		return "Invalid";
+	}
+}
+
 
 Device::Device()
 {
@@ -33,8 +74,7 @@ Device_Name Device::get_name()
 
 Device_Name Device::get_full_name()
 {
-	Device_Name device_name = typeid(*this).name();
-	return device_name.erase(0, 6) + "::" + get_name();
+	return device_type_as_string(type) + "::" + get_name() + "#" + std::to_string(get_id());
 }
 
 DEVICE_IDENTIFIER Device::get_device_type() 
@@ -69,9 +109,20 @@ bool Device::get_power()
 	return power;
 }
 
+
+bool Device::is_initalized()
+{
+	return initalized;
+}
+
+bool Device::is_valid()
+{
+	return valid;
+}
+
 void Device::turn_on()
 {
-	if (initalized == false)
+	if (is_initalized() == false)
 	{
 		valid = false;
 		return;
@@ -81,7 +132,7 @@ void Device::turn_on()
 
 void Device::turn_off()
 {
-	if (initalized == false)
+	if (is_initalized() == false)
 	{
 		valid = false;
 		return;
@@ -94,9 +145,8 @@ void Device::set_channel(int channel, Channel value)
 	channels[channel] = value;
 }
 
-bool Device::operator==(const Device& ld)
+Channel Device::get_channel(int channel)
 {
-	bool type_check = typeid(*this).name() == typeid(ld).name();
-	bool device_name = this->device_name == ld.device_name;
-	return type_check && device_name;
+	return channels[channel];
 }
+

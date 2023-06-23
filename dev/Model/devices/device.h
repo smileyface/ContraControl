@@ -30,14 +30,26 @@ enum class DEVICE_IDENTIFIER : Device_Id
 	*/
 	GRADIENT,
 	/**
-	Device with multiple channels
-	*/
-	CHANNEL,
+	 A 3 channel color device
+	 */
+	 RGB,
 	/**
 	Device that controls audio
 	*/
-	AUDIO
+	AUDIO,
+	/**
+	 An invalid device
+	 */
+	 INVALID
 };
+
+/**
+ * Represent DEVICE_IDENTIFIER enum as a string.
+ * \param type Device Identifier type.
+ * \return String representation.
+ */
+std::string device_type_as_string(DEVICE_IDENTIFIER type);
+
 /*!
  * \cond
  */
@@ -89,12 +101,7 @@ public:
 	void set_id(Device_Id new_id);
 
 	/**
-	 * Check if type and name is the same
-	 * \param ld Device on the left side of the operator.
-	 * \return If they're the same.
-	 */
-	bool operator==(const Device& ld);
-	/**
+
 	 \return If device is valid.
 	 */
 	virtual bool validity_check();
@@ -108,6 +115,18 @@ public:
 	 \return if device is powered
 	 */
 	bool get_power();
+
+	/**
+	 Get if the device is initalized.
+	 \return if the device has been initalized
+	 */
+	bool is_initalized();
+
+	/**
+	 * Get if the device has been validated and not invalidated for any reason.
+	 * \return validation state of the device.
+	 */
+	bool is_valid();
 	/**
 	 Turn on the device.
 	 */
@@ -122,6 +141,25 @@ public:
 	 * \param value Value to set Channel to.
 	 */
 	void set_channel(int channel, Channel value);
+	/**
+	 Get value of specific channel
+	 \param channel Designation of channel that will be returning the value.
+	 \return value of channel
+	 */
+	Channel get_channel(int channel);
+
+protected:
+	/**
+	 ID of the device. This is a system assigned unique id.
+	 */
+	Device_Id id = INVALID_DEVICE;
+	/**
+	 Name of device. Mainly for human readability.
+	 */
+	Device_Name device_name = "INVALID";
+
+	/** Type of device. This is so the UI knows how to handle this device. */
+	DEVICE_IDENTIFIER type = DEVICE_IDENTIFIER::DEVICE;
 	/**
 	 Has the device been initalized.
 	 */
@@ -138,18 +176,6 @@ public:
 	 Position of each channel. 1-255 range. 0 is reserved for unused channels
 	*/
 	std::vector<Channel> channels;
-protected:
-	/**
-	 ID of the device. This is a system assigned unique id.
-	 */
-	Device_Id id = INVALID_DEVICE;
-	/**
-	 Name of device. Mainly for human readability.
-	 */
-	Device_Name device_name = "INVALID";
-
-	/** Type of device. This is so the UI knows how to handle this device. */
-	DEVICE_IDENTIFIER type = DEVICE_IDENTIFIER::DEVICE;
 };
 
 #endif

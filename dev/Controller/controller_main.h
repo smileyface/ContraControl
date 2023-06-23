@@ -1,23 +1,22 @@
 /*****************************************************************//**
  * \file   controller_main.h
  * \brief  Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead.
- * 
+ *
  * \author kason
  * \date   April 2021
  *********************************************************************/
-
 
 #ifndef MAIN_EXECUTOR_H
 #define MAIN_EXECUTOR_H
 
 #include "Interfaces/types/timed_command.h"
 #include "system/timer.h"
-#include "Messaging/system_messaging.h"
+#include "Messaging/message_relay.h"
 
-/**
- * Main brain of the controller. It keeps track of commands to send to the model, and when to send them
- * \todo Change the timer interface from decrement timer to activate_state timer. This will mainly solve the issues with editing a timeline.
- */
+ /**
+  * Main brain of the controller. It keeps track of commands to send to the model, and when to send them
+  * \todo Change the timer interface from decrement timer to activate_state timer. This will mainly solve the issues with editing a timeline.
+  */
 namespace controller
 {
 	/**
@@ -35,7 +34,7 @@ namespace controller
 
 	/**
 	 * Start up.
-	 * 
+	 *
 	 * Resets the Controller clock.
 	 */
 	void initalize();
@@ -47,14 +46,14 @@ namespace controller
 
 	/**
 	 * Add a Timed_Command to the sorted queue of commands. Thread safe.
-	 * 
+	 *
 	 * \param tc Command to add
 	 */
 	void add_command(Timed_Command tc);
 
 	/**
 	 * Iterate the loop.
-	 * 
+	 *
 	 */
 	void step();
 
@@ -66,13 +65,6 @@ namespace controller
 	 * Clear queues
 	 */
 	void clean_up();
-
-	/**
-	 * Message system
-	 */
-	extern System_Messages* controller_message_interface;
 }
-
-
 
 #endif

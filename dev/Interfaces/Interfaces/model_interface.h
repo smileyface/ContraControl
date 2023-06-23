@@ -17,6 +17,7 @@ class Model_Interfaces {
 public:
 	class Controller_Interface;
 	class Main_Interface;
+	class Network_Interface;
 };
 
 /**
@@ -55,6 +56,14 @@ public:
 	 * Stops the Model execution loop.
 	 */
 	static void stop_model();
+};
+
+/**
+ Model interface to the Network.
+ */
+class Model_Interfaces::Network_Interface
+{
+
 };
 
 #endif // !MODEL_COMMAND_INTERFACE

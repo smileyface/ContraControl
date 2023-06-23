@@ -1,17 +1,40 @@
-﻿set(DEVICE_TEST_FILES "tests/Device.cpp" 
-                      "tests/Node.cpp" 
+set(DEVICE_TEST_FILES "tests/Device.cpp"
+                      "tests/Node.cpp"
                       "tests/Network.cpp"
-                      "tests/Commands.cpp")
+                      "tests/Commands.cpp"
+                      "tests/Subsystem.cpp"
+                      "tests/Network_Messages.cpp" 
+                      "tests/Errors.cpp" 
+                      "tests/Exceptions.cpp"
+                      "tests/Internal_Messages.cpp"
+                      "tests/Command_View_Message.cpp" 
+                      "tests/Action_Layer.cpp"
+                      "tests/Action_Stack.cpp"
+                      "tests/Keyboard_Buffer_Input.cpp" 
+                      "tests/Keyboard_Hardware.cpp" 
+                      "tests/Keyboard_System_Not_Connected.cpp" 
+                      "tests/Task.cpp"
+                      "tests/Scheduler.cpp"  
+                      "tests/Internal_Messages_Ptr.cpp")
 
-add_library(Test_Utilities "test_utilities/pch.h" 
-                           "test_utilities/system_testings.h" 
-                           "test_utilities/system_testings.cpp"  
-                           "test_utilities/module_mains.h" 
-                           "test_utilities/test_utilities.h" 
-                           "test_utilities/test_utilities.cpp" 
-                           "test_utilities/device_utilities.h" 
-                           "test_utilities/device_utilities.cpp"  )
-target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller System_Interface Network)
+add_library(Test_Utilities "test_utilities/pch.h"
+                           "test_utilities/system_utilities.h"
+                           "test_utilities/system_utilities.cpp"
+                           "test_utilities/keyboard_interface_utilities.h" 
+                           "test_utilities/keyboard_interface_utilities.cpp"
+                           "test_utilities/keyboard_utility_object.cpp"
+                           "test_utilities/linux_keyboard_utilities.cpp"
+                           "test_utilities/win_keyboard_utilities.cpp"
+                           "test_utilities/module_mains.h"
+                           "test_utilities/test_utilities.h"
+                           "test_utilities/test_utilities.cpp"
+                           "test_utilities/device_utilities.h"
+                           "test_utilities/device_utilities.cpp"
+                           "test_utilities/node_utilities.h"
+                           "test_utilities/node_utilities.cpp" )
+target_link_libraries(Test_Utilities "gtest_main" Utilities Model Controller View_Library System_Interface Network System_Threading)
+
+
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -50,14 +73,11 @@ target_link_libraries(Static_Test gtest_main Test_Utilities)
 #add_test(NAME Controller_Tests COMMAND Controller_Tests)
 add_test(Devices Static_Test)
 
-
-
 IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
   include(CodeCoverage.cmake)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
 
-  #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/.cmake_modules")
-
-  
+  SET(CMAKE_CXX_FLAGS "-O1 -g -fno-omit-frame-pointer -fno-optimize-sibling-calls -fprofile-arcs -ftest-coverage -fno-inline -fPIC")
 
   SETUP_TARGET_FOR_COVERAGE_COBERTURA(
         cov  # Name for custom target.
@@ -66,4 +86,5 @@ IF(CMAKE_COMPILER_IS_GNUCXX AND RUN_COVER)
 							    # otherwise the coverage generation will not complete.
 		    coverage            # Name of output directory.
   )
+
 ENDIF() # NOT CMAKE_COMPILER_IS_GNUCXX

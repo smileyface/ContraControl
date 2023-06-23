@@ -33,6 +33,10 @@ namespace state_interfaces
 	 */
 	void mangle_state(Command* command, Device* state)
 	{
+		if (state->get_device_type() > DEVICE_IDENTIFIER::INVALID)
+		{
+			throw InvalidDeviceException();
+		}
 		switch (command->get_id())
 		{
 		case COMMAND_ENUM::INVALID:
@@ -46,6 +50,8 @@ namespace state_interfaces
 		case COMMAND_ENUM::OFF:
 			state->turn_off();
 			break;
+		case COMMAND_ENUM::ASSIGN:
+			state->set_channel(static_cast<Assign*>(command)->channel, static_cast<Assign*>(command)->value);
 		}
 	}
 }

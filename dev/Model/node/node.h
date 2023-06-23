@@ -13,7 +13,7 @@
 /**
  Type of node, such as UI, GENERIC_HARDWARE or R-PI
  */
-enum class Node_Type : uint8_t
+enum class NODE_TYPE : uint8_t
 {
 	/**
 	 A Tester node.
@@ -40,7 +40,8 @@ public:
 
 	 \param type The type of node.
 	 */
-	Node(Node_Type type);
+	Node(NODE_TYPE type);
+
 	Node();
 	/**
 	 Get ready to destroy node.
@@ -53,6 +54,11 @@ public:
 	 */
 	void register_device(Device_Creator device);
 
+	/**
+	 * Remove a device from the node.
+	 * \param label A label to the device that needs removal.
+	 */
+	void remove_device(Device_Id label);
 	/**
 	 Return a pointer to a device requested by Device_Id
 
@@ -92,7 +98,8 @@ public:
 	 * \param type Type of the node.
 	 * \param id The id of the node on the system.
 	 */
-	void add_connection(Node_Type type, Node_Id id);
+	void add_connection(NODE_TYPE type, Node_Id id);
+
 
 	/**
 	 * Get the id of the local node.
@@ -103,7 +110,7 @@ private:
 	std::map<Node_Id, Node*> connections;
 	Device_Id_Map devices;
 	std::map<Device_Name, Device_Id> name_to_id_map;
-	Node_Type my_type;
+	NODE_TYPE my_type;
 	Device_Id id_pool;
 	Node_Id my_id;
 };
