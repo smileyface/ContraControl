@@ -68,7 +68,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">view_type_enum.h File Reference</div>  </div>
 </div><!--header-->
@@ -91,9 +92,15 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a1fb66550c6a5e0cfd06147ef17b366ba"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a> { <a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366baafa177138f94a7ea01f549b1aa7893d03">SYSTEM</a>
+<tr class="memitem:a1fb66550c6a5e0cfd06147ef17b366ba"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a> { <a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366baa4b5ffcdaf38ce4d463171f5c977c5ab3">LOG</a>
+, <a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366baab41c8853f9f29da000c8347afeb5ebf8">POPUP_OPTION</a>
  }</td></tr>
 <tr class="separator:a1fb66550c6a5e0cfd06147ef17b366ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:afeab0bc668332c00bce53cf432267fab"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="view__type__enum_8h.html#afeab0bc668332c00bce53cf432267fab">get_view_type_enum_as_string</a> (<a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a> view_type)</td></tr>
+<tr class="separator:afeab0bc668332c00bce53cf432267fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>kason </dd></dl>
@@ -120,9 +127,37 @@ Enumerations</h2></td></tr>
 </div><div class="memdoc">
 <p>Identifier for <a class="el" href="class_view.html" title="way to view a Device.">View</a> Type </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1fb66550c6a5e0cfd06147ef17b366baafa177138f94a7ea01f549b1aa7893d03"></a>SYSTEM&#160;</td><td class="fielddoc"><p>A System <a class="el" href="class_view.html" title="way to view a Device.">View</a> Type. Mainly for <a class="el" href="class_system___messages.html">System_Messages</a> </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1fb66550c6a5e0cfd06147ef17b366baa4b5ffcdaf38ce4d463171f5c977c5ab3"></a>LOG&#160;</td><td class="fielddoc"><p>A System <a class="el" href="class_view.html" title="way to view a Device.">View</a> Type. Mainly for System_Messages </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1fb66550c6a5e0cfd06147ef17b366baab41c8853f9f29da000c8347afeb5ebf8"></a>POPUP_OPTION&#160;</td><td class="fielddoc"><p>An optional popup. </p>
 </td></tr>
 </table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="afeab0bc668332c00bce53cf432267fab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeab0bc668332c00bce53cf432267fab">&#9670;&nbsp;</a></span>get_view_type_enum_as_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* get_view_type_enum_as_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a>&#160;</td>
+          <td class="paramname"><em>view_type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Return view type as string. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">view_type</td><td>Enumerator to be coverted to string. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Enumeration of view type as a c string. </dd></dl>
 
 </div>
 </div>

@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['network_5fstatus_5fstate_516',['Network_Status_State',['../struct_network___status___state.html#ac4e95a79a7dee16abc08989e1f41c72b',1,'Network_Status_State']]],
-  ['node_517',['Node',['../class_node.html#aef3ec8a4ecacac56808af328ccd44720',1,'Node']]],
-  ['node_5fack_518',['NODE_ACK',['../struct_node___messages_1_1_n_o_d_e___a_c_k.html#a9a2f53a9174f603caef10b1b13429c29',1,'Node_Messages::NODE_ACK']]],
-  ['node_5fhello_519',['NODE_HELLO',['../struct_node___messages_1_1_n_o_d_e___h_e_l_l_o.html#a4c56747cf40da390dc4baba053a00ba9',1,'Node_Messages::NODE_HELLO']]],
-  ['notify_520',['notify',['../struct_message___consumer.html#ad4971d98f19e8839d7144d5ee96c8155',1,'Message_Consumer']]]
+  ['listen_843',['listen',['../class_network___interface.html#aed240f6f41548b29b590391ddb46e69f',1,'Network_Interface']]],
+  ['listen_5ffor_5fmessage_844',['listen_for_message',['../namespacenetwork.html#a3c2ee6bbc82c5e9e569b6b7a29a1c206',1,'network']]],
+  ['logging_5fmessage_845',['Logging_Message',['../class_logging___message.html#a79aee642f30eb144c2d0dd6c302b736f',1,'Logging_Message::Logging_Message(MESSAGE_PRIORITY pri, std::string msg, std::string loc)'],['../class_logging___message.html#ae2bcd73b4613d8b1612e88a3305a1beb',1,'Logging_Message::Logging_Message()']]],
+  ['loop_846',['loop',['../class_console___format.html#a382ca15d586ad7041a3273f11d2bd73a',1,'Console_Format::loop()'],['../class_format.html#a3bd0546dd70423ed53a2b523fedaeb27',1,'Format::loop()']]]
 ];

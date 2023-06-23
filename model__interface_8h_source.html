@@ -81,31 +81,38 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">class </span><a class="code" href="class_model___interfaces_1_1_controller___interface.html">Controller_Interface</a>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">class </span><a class="code" href="class_model___interfaces_1_1_main___interface.html">Main_Interface</a>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_model___interfaces_1_1_controller___interface.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_model___interfaces_1_1_controller___interface.html">Model_Interfaces::Controller_Interface</a> {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_model___interfaces_1_1_controller___interface.html#a95f79a76b14024f8359e07ca9d73e79e">add_to_step</a>(<a class="code" href="class_model___command.html">Model_Command</a> theCommand);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_model___interfaces_1_1_controller___interface.html#a9e27d4f1868bc49c604eb2418bf3caff">request_command</a>(<a class="code" href="class_model___command.html">Model_Command</a> theCommand, <span class="keywordtype">double</span> seconds_to_execute);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_model___interfaces_1_1_main___interface.html">   47</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_model___interfaces_1_1_main___interface.html">Model_Interfaces::Main_Interface</a></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_model___interfaces_1_1_main___interface.html#ae3b3c277d11eb78c650893de1a3c2cd4">start_model</a>();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_model___interfaces_1_1_main___interface.html#a50f49a211cb08e9e7551489c1ada421b">stop_model</a>();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !MODEL_COMMAND_INTERFACE</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">class </span><a class="code" href="model__interface_8h.html#class_model___interfaces_1_1_network___interface">Network_Interface</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_model___interfaces_1_1_controller___interface.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_model___interfaces_1_1_controller___interface.html">Model_Interfaces::Controller_Interface</a> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_model___interfaces_1_1_controller___interface.html#a95f79a76b14024f8359e07ca9d73e79e">add_to_step</a>(<a class="code" href="class_model___command.html">Model_Command</a> theCommand);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_model___interfaces_1_1_controller___interface.html#a9e27d4f1868bc49c604eb2418bf3caff">request_command</a>(<a class="code" href="class_model___command.html">Model_Command</a> theCommand, <span class="keywordtype">double</span> seconds_to_execute);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_model___interfaces_1_1_main___interface.html">   48</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_model___interfaces_1_1_main___interface.html">Model_Interfaces::Main_Interface</a></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_model___interfaces_1_1_main___interface.html#ae3b3c277d11eb78c650893de1a3c2cd4">start_model</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_model___interfaces_1_1_main___interface.html#a50f49a211cb08e9e7551489c1ada421b">stop_model</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="model__interface_8h.html">   64</a></span>&#160;<span class="keyword">class </span><a class="code" href="model__interface_8h.html#class_model___interfaces_1_1_network___interface">Model_Interfaces::Network_Interface</a></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !MODEL_COMMAND_INTERFACE</span></div>
 <div class="ttc" id="aclass_model___command_html"><div class="ttname"><a href="class_model___command.html">Model_Command</a></div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:19</div></div>
-<div class="ttc" id="aclass_model___interfaces_1_1_controller___interface_html"><div class="ttname"><a href="class_model___interfaces_1_1_controller___interface.html">Model_Interfaces::Controller_Interface</a></div><div class="ttdef"><b>Definition:</b> model_interface.h:25</div></div>
+<div class="ttc" id="aclass_model___interfaces_1_1_controller___interface_html"><div class="ttname"><a href="class_model___interfaces_1_1_controller___interface.html">Model_Interfaces::Controller_Interface</a></div><div class="ttdef"><b>Definition:</b> model_interface.h:26</div></div>
 <div class="ttc" id="aclass_model___interfaces_1_1_controller___interface_html_a95f79a76b14024f8359e07ca9d73e79e"><div class="ttname"><a href="class_model___interfaces_1_1_controller___interface.html#a95f79a76b14024f8359e07ca9d73e79e">Model_Interfaces::Controller_Interface::add_to_step</a></div><div class="ttdeci">static void add_to_step(Model_Command theCommand)</div><div class="ttdef"><b>Definition:</b> model_interface.cpp:13</div></div>
 <div class="ttc" id="aclass_model___interfaces_1_1_controller___interface_html_a9e27d4f1868bc49c604eb2418bf3caff"><div class="ttname"><a href="class_model___interfaces_1_1_controller___interface.html#a9e27d4f1868bc49c604eb2418bf3caff">Model_Interfaces::Controller_Interface::request_command</a></div><div class="ttdeci">static void request_command(Model_Command theCommand, double seconds_to_execute)</div><div class="ttdef"><b>Definition:</b> model_interface.cpp:18</div></div>
-<div class="ttc" id="aclass_model___interfaces_1_1_main___interface_html"><div class="ttname"><a href="class_model___interfaces_1_1_main___interface.html">Model_Interfaces::Main_Interface</a></div><div class="ttdef"><b>Definition:</b> model_interface.h:48</div></div>
+<div class="ttc" id="aclass_model___interfaces_1_1_main___interface_html"><div class="ttname"><a href="class_model___interfaces_1_1_main___interface.html">Model_Interfaces::Main_Interface</a></div><div class="ttdef"><b>Definition:</b> model_interface.h:49</div></div>
 <div class="ttc" id="aclass_model___interfaces_1_1_main___interface_html_a50f49a211cb08e9e7551489c1ada421b"><div class="ttname"><a href="class_model___interfaces_1_1_main___interface.html#a50f49a211cb08e9e7551489c1ada421b">Model_Interfaces::Main_Interface::stop_model</a></div><div class="ttdeci">static void stop_model()</div><div class="ttdef"><b>Definition:</b> model_interface.cpp:30</div></div>
 <div class="ttc" id="aclass_model___interfaces_1_1_main___interface_html_ae3b3c277d11eb78c650893de1a3c2cd4"><div class="ttname"><a href="class_model___interfaces_1_1_main___interface.html#ae3b3c277d11eb78c650893de1a3c2cd4">Model_Interfaces::Main_Interface::start_model</a></div><div class="ttdeci">static void start_model()</div><div class="ttdef"><b>Definition:</b> model_interface.cpp:24</div></div>
 <div class="ttc" id="amodel__interface_8h_html_class_model___interfaces"><div class="ttname"><a href="model__interface_8h.html#class_model___interfaces">Model_Interfaces</a></div><div class="ttdef"><b>Definition:</b> model_interface.h:16</div></div>
+<div class="ttc" id="amodel__interface_8h_html_class_model___interfaces_1_1_network___interface"><div class="ttname"><a href="model__interface_8h.html#class_model___interfaces_1_1_network___interface">Model_Interfaces::Network_Interface</a></div><div class="ttdef"><b>Definition:</b> model_interface.h:65</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

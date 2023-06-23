@@ -1,0 +1,13 @@
+<map id="input_buffer.h" name="input_buffer.h">
+<area shape="rect" id="node1" title=" " alt="" coords="183,5,282,32"/>
+<area shape="rect" id="node2" href="$action__layer_8h.html" title=" " alt="" coords="182,80,283,107"/>
+<area shape="rect" id="node3" href="$action__stack_8h.html" title=" " alt="" coords="110,155,217,181"/>
+<area shape="rect" id="node11" href="$predefined__layer_8h.html" title=" " alt="" coords="241,155,366,181"/>
+<area shape="rect" id="node4" href="$keyboard__interface_8h.html" title=" " alt="" coords="93,229,234,256"/>
+<area shape="rect" id="node5" href="$keyboard__buffer__input_8h.html" title=" " alt="" coords="5,304,164,331"/>
+<area shape="rect" id="node6" href="$console__view_8h.html" title=" " alt="" coords="188,304,299,331"/>
+<area shape="rect" id="node7" href="$console__log__view_8h.html" title=" " alt="" coords="89,379,224,405"/>
+<area shape="rect" id="node10" href="$console__option__popup_8h.html" title=" " alt="" coords="248,379,409,405"/>
+<area shape="rect" id="node8" href="$views_8h.html" title=" " alt="" coords="209,453,275,480"/>
+<area shape="rect" id="node9" href="$view__factory_8h.html" title=" " alt="" coords="189,528,295,555"/>
+</map>

@@ -1,6 +1,7 @@
 <map id="console_view.h" name="console_view.h">
-<area shape="rect" id="node1" title=" " alt="" coords="30,5,141,32"/>
-<area shape="rect" id="node2" href="$console__system__view_8h.html" title=" " alt="" coords="5,80,165,107"/>
-<area shape="rect" id="node3" href="$views_8h.html" title=" " alt="" coords="52,155,119,181"/>
-<area shape="rect" id="node4" href="$view__factory_8h.html" title=" " alt="" coords="33,229,138,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="103,5,213,32"/>
+<area shape="rect" id="node2" href="$console__log__view_8h.html" title=" " alt="" coords="5,80,140,107"/>
+<area shape="rect" id="node5" href="$console__option__popup_8h.html" title=" " alt="" coords="164,80,325,107"/>
+<area shape="rect" id="node3" href="$views_8h.html" title=" " alt="" coords="125,155,191,181"/>
+<area shape="rect" id="node4" href="$view__factory_8h.html" title=" " alt="" coords="105,229,211,256"/>
 </map>

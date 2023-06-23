@@ -1,5 +1,6 @@
 <map id="Console_View" name="Console_View">
-<area shape="rect" id="node1" title=" " alt="" coords="31,80,136,107"/>
-<area shape="rect" id="node3" href="$class_console___system___view.html" title=" " alt="" coords="5,155,161,181"/>
-<area shape="rect" id="node2" href="$class_view.html" title="way to view a Device." alt="" coords="58,5,109,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="105,80,211,107"/>
+<area shape="rect" id="node3" href="$class_console___log___view.html" title=" " alt="" coords="5,155,140,181"/>
+<area shape="rect" id="node4" href="$class_console___option___popup.html" title=" " alt="" coords="164,155,323,181"/>
+<area shape="rect" id="node2" href="$class_view.html" title="way to view a Device." alt="" coords="133,5,183,32"/>
 </map>

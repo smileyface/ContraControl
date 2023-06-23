@@ -75,18 +75,22 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3faf4c00f42396604e7d46e29ea1258b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_message___consumer.html#a3faf4c00f42396604e7d46e29ea1258b">Message_Consumer</a> (bool &amp;stale)</td></tr>
-<tr class="separator:a3faf4c00f42396604e7d46e29ea1258b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fc0579d7b5b01c4535c1e8072228f57"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_message___consumer.html#a7fc0579d7b5b01c4535c1e8072228f57">Message_Consumer</a> (const <a class="el" href="class_internal___message.html">Internal_Message</a> *message_type)</td></tr>
+<tr class="separator:a7fc0579d7b5b01c4535c1e8072228f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4971d98f19e8839d7144d5ee96c8155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_message___consumer.html#ad4971d98f19e8839d7144d5ee96c8155">notify</a> ()</td></tr>
 <tr class="separator:ad4971d98f19e8839d7144d5ee96c8155"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8de775dfdaa35b2d726003351a790c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_message___consumer.html#ac8de775dfdaa35b2d726003351a790c2">freshen</a> ()</td></tr>
 <tr class="separator:ac8de775dfdaa35b2d726003351a790c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c776c27521f33f699632aabf0e0f746"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_message___consumer.html#a3c776c27521f33f699632aabf0e0f746">correct_type</a> (<a class="el" href="class_internal___message.html">Internal_Message</a> *message)</td></tr>
+<tr class="separator:a3c776c27521f33f699632aabf0e0f746"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadb113466818097e6d10b58c94acb9ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_message___consumer.html#aadb113466818097e6d10b58c94acb9ee">is_stale</a> ()</td></tr>
+<tr class="separator:aadb113466818097e6d10b58c94acb9ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An object for declaring that the containing object wants to be notified of a change, or recieve a message sent. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3faf4c00f42396604e7d46e29ea1258b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3faf4c00f42396604e7d46e29ea1258b">&#9670;&nbsp;</a></span>Message_Consumer()</h2>
+<a id="a7fc0579d7b5b01c4535c1e8072228f57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fc0579d7b5b01c4535c1e8072228f57">&#9670;&nbsp;</a></span>Message_Consumer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -94,15 +98,15 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Message_Consumer::Message_Consumer </td>
           <td>(</td>
-          <td class="paramtype">bool &amp;&#160;</td>
-          <td class="paramname"><em>stale</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="class_internal___message.html">Internal_Message</a> *&#160;</td>
+          <td class="paramname"><em>message_type</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Set consumer up with a flag that determines if it's got a message available </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stale</td><td>Reference to the message indicator flag. </td></tr>
+    <tr><td class="paramname">message_type</td><td>Type of messages to be consumed. </td></tr>
   </table>
   </dd>
 </dl>
@@ -110,6 +114,31 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3c776c27521f33f699632aabf0e0f746"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c776c27521f33f699632aabf0e0f746">&#9670;&nbsp;</a></span>correct_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Message_Consumer::correct_type </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_internal___message.html">Internal_Message</a> *&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Is the message argument the correct type for this consumer </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td><a class="el" href="class_internal___message.html">Internal_Message</a> to check against. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Is this message the correct type. </dd></dl>
+
+</div>
+</div>
 <a id="ac8de775dfdaa35b2d726003351a790c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac8de775dfdaa35b2d726003351a790c2">&#9670;&nbsp;</a></span>freshen()</h2>
 
@@ -125,6 +154,24 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Remove notification. To be done after containing object has handled the message. </p>
+
+</div>
+</div>
+<a id="aadb113466818097e6d10b58c94acb9ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadb113466818097e6d10b58c94acb9ee">&#9670;&nbsp;</a></span>is_stale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Message_Consumer::is_stale </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Is the consumer stale (has it been notified) </p><dl class="section return"><dt>Returns</dt><dd>Is the consumer notified </dd></dl>
 
 </div>
 </div>

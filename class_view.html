@@ -68,7 +68,7 @@ $(function() {
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_view-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">View Class Reference</div>  </div>
+<div class="title">View Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -81,9 +81,10 @@ Inheritance diagram for View:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_view__inherit__graph.png" border="0" usemap="#a_view_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_view_inherit__map" id="a_view_inherit__map">
-<area shape="rect" title="way to view a Device." alt="" coords="58,5,109,32"/>
-<area shape="rect" href="class_console___view.html" title=" " alt="" coords="31,80,136,107"/>
-<area shape="rect" href="class_console___system___view.html" title=" " alt="" coords="5,155,161,181"/>
+<area shape="rect" title="way to view a Device." alt="" coords="133,5,183,32"/>
+<area shape="rect" href="class_console___view.html" title=" " alt="" coords="105,80,211,107"/>
+<area shape="rect" href="class_console___log___view.html" title=" " alt="" coords="5,155,140,181"/>
+<area shape="rect" href="class_console___option___popup.html" title=" " alt="" coords="164,155,323,181"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -99,14 +100,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac3ec0d788fb3e7cc7d62ab0d1c0936bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c212bb4e7f22c03a44841a741b33aef"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a3c212bb4e7f22c03a44841a741b33aef">on_paint</a> ()</td></tr>
 <tr class="separator:a3c212bb4e7f22c03a44841a741b33aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bf168851f88276f875ca2aaab090038"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a6bf168851f88276f875ca2aaab090038">on_input</a> ()</td></tr>
+<tr class="separator:a6bf168851f88276f875ca2aaab090038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4868e672501ea2f8921276460587a1b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#af4868e672501ea2f8921276460587a1b">on_query</a> ()</td></tr>
+<tr class="separator:af4868e672501ea2f8921276460587a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51efc1b48afdc4e4e0a874725b2a89e4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a51efc1b48afdc4e4e0a874725b2a89e4">on_create</a> ()</td></tr>
 <tr class="separator:a51efc1b48afdc4e4e0a874725b2a89e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb4162504fec5abacf7e0644c0b2ef00"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#acb4162504fec5abacf7e0644c0b2ef00">on_quit</a> ()</td></tr>
 <tr class="separator:acb4162504fec5abacf7e0644c0b2ef00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48142d4291d58b20208de53a6f2d76c1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a48142d4291d58b20208de53a6f2d76c1">on_command</a> (unsigned int command)</td></tr>
 <tr class="separator:a48142d4291d58b20208de53a6f2d76c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc56c44a904cd0086f90fc745ecfee4a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#abc56c44a904cd0086f90fc745ecfee4a">is_stale</a> ()</td></tr>
-<tr class="separator:abc56c44a904cd0086f90fc745ecfee4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a871eaa63af897c7345e77941b165fc81"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a871eaa63af897c7345e77941b165fc81">is_stale</a> ()=0</td></tr>
+<tr class="separator:a871eaa63af897c7345e77941b165fc81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11e58842e741d2a1c10ca85c910327a2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a11e58842e741d2a1c10ca85c910327a2">quit</a> ()=0</td></tr>
+<tr class="separator:a11e58842e741d2a1c10ca85c910327a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -142,8 +149,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="abc56c44a904cd0086f90fc745ecfee4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc56c44a904cd0086f90fc745ecfee4a">&#9670;&nbsp;</a></span>is_stale()</h2>
+<a id="a871eaa63af897c7345e77941b165fc81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a871eaa63af897c7345e77941b165fc81">&#9670;&nbsp;</a></span>is_stale()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,7 +159,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool View::is_stale </td>
+          <td class="memname">virtual bool View::is_stale </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -160,11 +167,13 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Is the <a class="el" href="class_view.html" title="way to view a Device.">View</a> out of touch with the model? </p><dl class="section return"><dt>Returns</dt><dd>If the <a class="el" href="class_view.html" title="way to view a Device.">View</a> is out of touch. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_console___option___popup.html#aa3a7e099f7d5f408400fcba1c9853f67">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a11e46554c81ca01084b1bc93619d3e04">Console_Log_View</a>.</p>
 
 </div>
 </div>
@@ -276,7 +285,35 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Display the painted frame on the screen. </p>
 
-<p>Reimplemented in <a class="el" href="class_console___system___view.html#a399e4829ae2448a65ca11cf82d3d5ed9">Console_System_View</a>.</p>
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#ac6b754d566435366b18adb7a4dcaff7d">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a6e2cb93720eb720f8d448ddb41a72409">Console_Log_View</a>.</p>
+
+</div>
+</div>
+<a id="a6bf168851f88276f875ca2aaab090038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bf168851f88276f875ca2aaab090038">&#9670;&nbsp;</a></span>on_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void View::on_input </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Called when input recieved. Generally for handling the results of <a class="el" href="class_view.html#af4868e672501ea2f8921276460587a1b">on_query()</a>. </p>
+
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#a1aeec044fd07023d412bd40e6f6f6e93">Console_Option_Popup</a>.</p>
 
 </div>
 </div>
@@ -304,7 +341,35 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Called to create a frame to paint with on_display. </p>
 
-<p>Reimplemented in <a class="el" href="class_console___system___view.html#a28bf66eb269b5b5d8479f09f9d7e9d09">Console_System_View</a>.</p>
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#adf03e46e68c381495a617ac892109331">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a27c26095588fbf799645ae187608d268">Console_Log_View</a>.</p>
+
+</div>
+</div>
+<a id="af4868e672501ea2f8921276460587a1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4868e672501ea2f8921276460587a1b">&#9670;&nbsp;</a></span>on_query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void View::on_query </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Called when waiting on input from the user. Is a blocking call. </p>
+
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#a8f5c721872d59d2be5e5129ed5536992">Console_Option_Popup</a>.</p>
 
 </div>
 </div>
@@ -358,7 +423,35 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Update the data for the view and set stale to false. </p>
 
-<p>Reimplemented in <a class="el" href="class_console___system___view.html#a59a4967bee7929324a4279d1de46f0c5">Console_System_View</a>.</p>
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#ade861036764118a4ba426c5330257f05">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a8b12b624e5f03bb75719bdd8a585ba40">Console_Log_View</a>.</p>
+
+</div>
+</div>
+<a id="a11e58842e741d2a1c10ca85c910327a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11e58842e741d2a1c10ca85c910327a2">&#9670;&nbsp;</a></span>quit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool View::quit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Has the view been commanded to quit. </p><dl class="section return"><dt>Returns</dt><dd>If the view has been commanded to quit </dd></dl>
+
+<p>Implemented in <a class="el" href="class_console___option___popup.html#a322660109625a9df4d68005f6ff7a5cb">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a71e6d015df9ec333db70172b04068a32">Console_Log_View</a>.</p>
 
 </div>
 </div>

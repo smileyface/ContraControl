@@ -66,11 +66,14 @@ $(function() {
 &#160;
 
 <h3><a id="index_a"></a>- a -</h3><ul>
-<li>addr
-: <a class="el" href="struct_node___messages_1_1_n_o_d_e___h_e_l_l_o.html#a93c909a3f70b2f2c5ff54d20f3db60ef">Node_Messages::NODE_HELLO</a>
+<li>action_stack
+: <a class="el" href="class_keyboard___interface.html#aace09139708a93d0e654568f3d48fb6c">Keyboard_Interface</a>
+</li>
+<li>active
+: <a class="el" href="class_keyboard___interface.html#af295405e37914ae65e48bdb8270fece3">Keyboard_Interface</a>
 </li>
 <li>address
-: <a class="el" href="connections_8h.html#a734a5fbf764261abf6adf444ae09f4f4">Connection</a>
+: <a class="el" href="connections_8h.html#a16be0529a04d20a2eb07865abf5ce3ca">Connection</a>
 </li>
 </ul>
 
@@ -83,10 +86,10 @@ $(function() {
 : <a class="el" href="class_device.html#a31b8059054a388bef4bf7072d5f4bcc1">Device</a>
 </li>
 <li>chk1
-: <a class="el" href="messaging_8h.html#a44df4904345d2431a20bb04b3bc5a832">MESSAGE_FOOTER</a>
+: <a class="el" href="struct_message___footer.html#a8d6bbed8ce6870106dd391afbbe2434d">Message_Footer</a>
 </li>
 <li>chk2
-: <a class="el" href="messaging_8h.html#a202431486de76421eec7b35a942256ed">MESSAGE_FOOTER</a>
+: <a class="el" href="struct_message___footer.html#a15674bbb3718e00761eeef150395d843">Message_Footer</a>
 </li>
 <li>command
 : <a class="el" href="class_model___command.html#a88a34260c489270ccac5bf5c43f94556">Model_Command</a>
@@ -95,13 +98,13 @@ $(function() {
 <li>connections
 : <a class="el" href="class_network___interface.html#a449d67289f450c8c30dd0f2771640263">Network_Interface</a>
 </li>
+<li>current_state
+: <a class="el" href="struct_console___view_1_1_console___state.html#ad424b67757e8bc086ca125ebfbadcff9">Console_View::Console_State</a>
+</li>
 </ul>
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
-<li>device
-: <a class="el" href="class_log___entry.html#aa1b3479418265eaf8a0b907f6cfbc060">Log_Entry</a>
-</li>
 <li>device_label
 : <a class="el" href="class_timed___command.html#ad6ee22835f4ee1cd1fcd772aa3eec818">Timed_Command</a>
 </li>
@@ -119,8 +122,8 @@ $(function() {
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
-<li>footer
-: <a class="el" href="struct_p_a_c_k_e_d___m_e_s_s_a_g_e.html#a471b226df91811c3c8e8162fae22ef3b">PACKED_MESSAGE</a>
+<li>format_consumer
+: <a class="el" href="class_format.html#ab2eb3f5744cd148d1180fe371aa869c9">Format</a>
 </li>
 <li>format_running
 : <a class="el" href="class_format.html#ad468204108a72a8a08e4e709823cb826">Format</a>
@@ -129,9 +132,6 @@ $(function() {
 
 
 <h3><a id="index_h"></a>- h -</h3><ul>
-<li>header
-: <a class="el" href="struct_p_a_c_k_e_d___m_e_s_s_a_g_e.html#a08ee69f06fbceb66bd28a8d25904d722">PACKED_MESSAGE</a>
-</li>
 <li>hostname
 : <a class="el" href="class_network___interface.html#a01fe93179cda08a10eadada7683100e2">Network_Interface</a>
 </li>
@@ -141,8 +141,6 @@ $(function() {
 <h3><a id="index_i"></a>- i -</h3><ul>
 <li>id
 : <a class="el" href="class_device.html#a643ec360dcfd5010385247c6cfdb0790">Device</a>
-, <a class="el" href="struct_node___messages_1_1_n_o_d_e___a_c_k.html#ae376d5fa4e71fdf3b64cfdab4d2ed749">Node_Messages::NODE_ACK</a>
-, <a class="el" href="struct_node___messages_1_1_n_o_d_e___h_e_l_l_o.html#af1ac17910484977f937e4c0ae33300b1">Node_Messages::NODE_HELLO</a>
 </li>
 <li>initalized
 : <a class="el" href="class_device.html#a26c293c1449d70515414f94089000674">Device</a>
@@ -155,7 +153,17 @@ $(function() {
 </li>
 <li>is_server
 : <a class="el" href="class_network___interface.html#a9e02e7d4ff228640a68c420bd07081ce">Network_Interface</a>
-, <a class="el" href="struct_node___messages_1_1_n_o_d_e___a_c_k.html#aa33f8aba73a5fe69ba99b6a686091328">Node_Messages::NODE_ACK</a>
+</li>
+</ul>
+
+
+<h3><a id="index_k"></a>- k -</h3><ul>
+<li>keyboard
+: <a class="el" href="class_console___view.html#ae295a865929b64162f3ae83f8adbfbbf">Console_View</a>
+, <a class="el" href="class_keyboard___buffer___input.html#a3ceaa4bb816452585bfe6ea772e3aecb">Keyboard_Buffer_Input</a>
+</li>
+<li>keyboard_present
+: <a class="el" href="class_keyboard___interface.html#a3f9d400c6e73059bafa55ab80084c8eb">Keyboard_Interface</a>
 </li>
 </ul>
 
@@ -165,14 +173,22 @@ $(function() {
 : <a class="el" href="class_model___command.html#a26d6981e84591b92b49c0e67eeaa1cdf">Model_Command</a>
 </li>
 <li>length
-: <a class="el" href="messaging_8h.html#add82d11a05de66d2c471219ce0d98567">MESSAGE_HEADER</a>
-, <a class="el" href="struct_message___string.html#a19bd2808b4de983ccbb11c59a54f434c">Message_String</a>
+: <a class="el" href="struct_message___header.html#ab2739e8e956d9c1632a7779680edde3d">Message_Header</a>
+</li>
+<li>LEVEL
+: <a class="el" href="class_log___view___type.html#a7e5c63956ba7661d509f91eea90cabd9">Log_View_Type::MESSAGE</a>
+</li>
+<li>LOC
+: <a class="el" href="class_log___view___type.html#a31a905ad0f2da134972643f4077f0e61">Log_View_Type::MESSAGE</a>
 </li>
 <li>localhost
-: <a class="el" href="class_network___interface.html#ac77be9578061d97fde3dcef6b0603d52">Network_Interface</a>
+: <a class="el" href="class_network___interface.html#a6a5a5c8d5845c77130451fe4b4b886d4">Network_Interface</a>
 </li>
-<li>location
-: <a class="el" href="struct_system___message.html#a6bf5b88c69376097e04cfd2d9817129c">System_Message</a>
+<li>log_consumer
+: <a class="el" href="class_log___view___type.html#a5daf609774a4832e1d98e4fce3efa948">Log_View_Type</a>
+</li>
+<li>LOGGING
+: <a class="el" href="struct_message___types.html#a90e2fdaa6706253e73cd60c29fd6abd9">Message_Types</a>
 </li>
 <li>looping_thread
 : <a class="el" href="class_format.html#a32ec8c810d3dc7000ca34faadead2675">Format</a>
@@ -182,15 +198,19 @@ $(function() {
 
 <h3><a id="index_m"></a>- m -</h3><ul>
 <li>message
-: <a class="el" href="class_log___entry.html#a8db0d40ef2e598aefb756d7fb950a06d">Log_Entry</a>
-, <a class="el" href="struct_p_a_c_k_e_d___m_e_s_s_a_g_e.html#a4bae511e67eff612de1c3a54bc2e38be">PACKED_MESSAGE</a>
-, <a class="el" href="struct_system___message.html#a6959569c72d8895f7cbedfc7c1f5297a">System_Message</a>
+: <a class="el" href="class_log___view___type.html#a5ce4637d5f4fd9c3d862ee53aac1d0b6">Log_View_Type</a>
+</li>
+<li>MESSAGE
+: <a class="el" href="class_log___view___type.html#ae65cb6fb11aa9dd34639cc6d6795a4ae">Log_View_Type::MESSAGE</a>
+</li>
+<li>message
+: <a class="el" href="class_option___view___type.html#a821397e00ec20c1634ae4db30d52d883">Option_View_Type</a>
 </li>
 <li>message_id
-: <a class="el" href="messaging_8h.html#a571e20715a0af7e5fa57e08e2d43e939">MESSAGE_HEADER</a>
+: <a class="el" href="struct_message___header.html#a9fd8382d7d9e4630537512fbfd8fb9f6">Message_Header</a>
 </li>
 <li>message_start
-: <a class="el" href="messaging_8h.html#ab5dc56ad505fcd73815e007c44f96863">MESSAGE_HEADER</a>
+: <a class="el" href="struct_message___header.html#a28f3823f3c68217e05f716ef931c18c6">Message_Header</a>
 </li>
 </ul>
 
@@ -202,18 +222,52 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_o"></a>- o -</h3><ul>
+<li>on_hold
+: <a class="el" href="class_key___press___interface.html#af3ad4d8b712df0d99600c80f202d5dd5">Key_Press_Interface</a>
+</li>
+<li>on_press
+: <a class="el" href="class_key___press___interface.html#acd35a78e153f43f1cf009f9cbf4c7395">Key_Press_Interface</a>
+</li>
+<li>on_release
+: <a class="el" href="class_key___press___interface.html#af1b9989a8ef3158750777bd430d4dd33">Key_Press_Interface</a>
+</li>
+<li>option_consumer
+: <a class="el" href="class_option___view___type.html#a2fb853d2025e90bb5ed54787462e5fd8">Option_View_Type</a>
+</li>
+<li>OPTION_POPUP_REQUEST
+: <a class="el" href="struct_message___types.html#a36a718b2199c9172431fc67226741ff4">Message_Types</a>
+</li>
+<li>OPTION_POPUP_RESPONSE
+: <a class="el" href="struct_message___types.html#af247a4cae5aa612ea86f8f112a0a0526">Message_Types</a>
+</li>
+<li>OPTIONS
+: <a class="el" href="class_option___view___type.html#a36a2694cec7be1e303520ea85e6f9907">Option_View_Type::MESSAGE</a>
+</li>
+</ul>
+
+
 <h3><a id="index_p"></a>- p -</h3><ul>
+<li>painted_message
+: <a class="el" href="class_console___view.html#ad1d0826732c1fca326501f648c2d1c32">Console_View</a>
+</li>
 <li>power
 : <a class="el" href="class_device.html#ac1cad75d2b05b66659c00026a82a1ebe">Device</a>
 </li>
-<li>priority
-: <a class="el" href="class_log___entry.html#a8e5b21c7a9f8988e22f0a08d7657be7c">Log_Entry</a>
-, <a class="el" href="struct_system___message.html#aa1d76b841a0726947a7816c68f8beed7">System_Message</a>
+</ul>
+
+
+<h3><a id="index_q"></a>- q -</h3><ul>
+<li>QUERY
+: <a class="el" href="class_option___view___type.html#a29f989a08300b8a32190963110c6ab7d">Option_View_Type::MESSAGE</a>
 </li>
 </ul>
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>RESPONSE
+: <a class="el" href="struct_message___types.html#ac81e58a3d3d9e5a15ce6954bdaf45d21">Message_Types</a>
+</li>
 <li>run
 : <a class="el" href="class_timed___command.html#a5ac012c10e11d75431ee3c99a4df3042">Timed_Command</a>
 </li>
@@ -222,7 +276,7 @@ $(function() {
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>S_un
-: <a class="el" href="structipv4__addr.html#a60e51a013a59222fe689501954b41173">ipv4_addr</a>
+: <a class="el" href="struct_i_p_v4___addr.html#abf0b7cb6e2a7358645e45014799175d6">IPV4_Addr</a>
 </li>
 <li>sock
 : <a class="el" href="connections_8h.html#a50ca7c17a64836ca25a1fe9953cc6cf6">Connection</a>
@@ -233,17 +287,20 @@ $(function() {
 <li>sock_type
 : <a class="el" href="_network_2system__interfaces_2network__interface_8h.html#a6ba4aefb0568202dd096381ef334d520">Socket_Maker</a>
 </li>
+<li>specified_message
+: <a class="el" href="class_option___view___type.html#a5d522eabf19b81ffde72170fbf27943a">Option_View_Type</a>
+</li>
 <li>stale
 : <a class="el" href="class_view.html#aeca43db88abd65b7eb01cb302af18a79">View</a>
+</li>
+<li>state
+: <a class="el" href="class_console___view.html#afdb5fc6a672461afd33d2468a202cc4e">Console_View</a>
 </li>
 <li>status
 : <a class="el" href="struct_network___status___state.html#ae72863b55bde116163128eae49a1e371">Network_Status_State</a>
 </li>
 <li>status_state
 : <a class="el" href="class_network___interface.html#a822e9bffe5e9e1060f0c848351c0bc86">Network_Interface</a>
-</li>
-<li>str
-: <a class="el" href="struct_message___string.html#a45a0b2e7ca8088f5d8cab8af2ca8bd7a">Message_String</a>
 </li>
 </ul>
 
@@ -264,15 +321,16 @@ $(function() {
 <h3><a id="index_v"></a>- v -</h3><ul>
 <li>valid
 : <a class="el" href="class_device.html#a8e814d33989d99714e38cb11957c7777">Device</a>
-</li>
-<li>valid_message
-: <a class="el" href="struct_system___message.html#a698ec28d5f590f576cd4dd83109e39d8">System_Message</a>
+, <a class="el" href="class_internal___message.html#ad3f28db926ccf38a0720409a7671b917">Internal_Message</a>
 </li>
 <li>value
 : <a class="el" href="class_assign.html#a6d393fcf868fa57e0023c90daca8f85d">Assign</a>
 </li>
 <li>view_list
 : <a class="el" href="class_format.html#a5f3f85dbe1419cfaf430344dc6b53b11">Format</a>
+</li>
+<li>VIEW_SUBSYSTEM
+: <a class="el" href="struct_message___types.html#ae132b1fe5f8dcab87684d9ff01c1a6b0">Message_Types</a>
 </li>
 </ul>
 </div><!-- contents -->

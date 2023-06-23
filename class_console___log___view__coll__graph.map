@@ -1,0 +1,11 @@
+<map id="Console_Log_View" name="Console_Log_View">
+<area shape="rect" id="node1" title=" " alt="" coords="713,143,848,169"/>
+<area shape="rect" id="node2" href="$class_console___view.html" title=" " alt="" coords="554,89,659,116"/>
+<area shape="rect" id="node3" href="$class_view.html" title="way to view a Device." alt="" coords="298,5,349,32"/>
+<area shape="rect" id="node4" href="$struct_console___view_1_1_console___state.html" title=" " alt="" coords="244,57,403,98"/>
+<area shape="rect" id="node5" href="$class_keyboard___interface.html" title=" " alt="" coords="256,123,391,149"/>
+<area shape="rect" id="node6" href="$class_action___stack.html" title=" " alt="" coords="5,123,105,149"/>
+<area shape="rect" id="node7" href="$class_log___view___type.html" title=" " alt="" coords="549,173,664,200"/>
+<area shape="rect" id="node8" href="$struct_message___consumer.html" title=" " alt="" coords="253,173,394,200"/>
+<area shape="rect" id="node9" href="$class_log___view___type.html#struct_log___view___type_1_1_m_e_s_s_a_g_e" title=" " alt="" coords="231,224,416,251"/>
+</map>

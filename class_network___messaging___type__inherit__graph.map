@@ -1,0 +1,9 @@
+<map id="Network_Messaging_Type" name="Network_Messaging_Type">
+<area shape="rect" id="node1" title=" " alt="" coords="317,5,493,32"/>
+<area shape="rect" id="node2" href="$class_network___address.html" title=" " alt="" coords="5,80,132,107"/>
+<area shape="rect" id="node3" href="$class_network___bool.html" title=" " alt="" coords="157,80,261,107"/>
+<area shape="rect" id="node4" href="$class_network___byte.html" title=" " alt="" coords="285,80,389,107"/>
+<area shape="rect" id="node5" href="$class_network___percent.html" title=" " alt="" coords="413,80,535,107"/>
+<area shape="rect" id="node6" href="$class_network___string.html" title=" " alt="" coords="559,80,671,107"/>
+<area shape="rect" id="node7" href="$class_network___word.html" title=" " alt="" coords="696,80,804,107"/>
+</map>

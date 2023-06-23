@@ -68,7 +68,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">node_communication.h File Reference</div>  </div>
 </div><!--header-->
@@ -78,14 +79,24 @@ $(function() {
   
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="messaging_8h_source.html">messaging.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="network__message__types_8h_source.html">types/network_message_types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for node_communication.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="node__communication_8h__incl.png" border="0" usemap="#anode__communication_8h" alt=""/></div>
 <map name="anode__communication_8h" id="anode__communication_8h">
-<area shape="rect" title=" " alt="" coords="5,5,160,32"/>
-<area shape="rect" href="messaging_8h.html" title=" " alt="" coords="35,80,130,107"/>
-<area shape="rect" title=" " alt="" coords="52,155,113,181"/>
+<area shape="rect" title=" " alt="" coords="268,5,423,32"/>
+<area shape="rect" href="messaging_8h.html" title=" " alt="" coords="256,80,350,107"/>
+<area shape="rect" href="network__message__types_8h.html" title=" " alt="" coords="391,155,554,196"/>
+<area shape="rect" title=" " alt="" coords="204,162,266,189"/>
+<area shape="rect" title=" " alt="" coords="7,415,66,442"/>
+<area shape="rect" href="messages_2types_2messages_8h.html" title=" " alt="" coords="53,162,180,189"/>
+<area shape="rect" href="network__message__header_8h.html" title=" " alt="" coords="103,244,266,285"/>
+<area shape="rect" href="network__message__footer_8h.html" title=" " alt="" coords="290,244,452,285"/>
+<area shape="rect" href="network__type_8h.html" title=" " alt="" coords="130,333,239,360"/>
+<area shape="rect" href="ipv4__addr_8h.html" title=" " alt="" coords="110,408,258,449"/>
+<area shape="rect" title=" " alt="" coords="157,497,212,524"/>
+<area shape="rect" href="basic__types_8h.html" title=" " alt="" coords="476,251,578,278"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -102,12 +113,19 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="node__communication_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_node___messages_1_1_n_o_d_e___h_e_l_l_o.html">Node_Messages::NODE_HELLO</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacenode__messages"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenode__messages.html">node_messages</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_node___messages_1_1_n_o_d_e___a_c_k.html">Node_Messages::NODE_ACK</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a3ee00bbcda96ef5259abaa44e6c7f921"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_network___message.html">Network_Message</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenode__messages.html#a3ee00bbcda96ef5259abaa44e6c7f921">node_messages::network_message_factory</a> (<a class="el" href="messages_2types_2messages_8h.html#a8bd0a320f1808fff52ce56f8751b640f">MESSAGES</a> message)</td></tr>
+<tr class="separator:a3ee00bbcda96ef5259abaa44e6c7f921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbb70e4a7e0297c0e6bce9047ff1d4d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenode__messages.html#adbb70e4a7e0297c0e6bce9047ff1d4d9">node_messages::network_message_populate</a> (<a class="el" href="class_network___message.html">Network_Message</a> &amp;message)</td></tr>
+<tr class="separator:adbb70e4a7e0297c0e6bce9047ff1d4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5679c64641f799385aa505a7216a2c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenode__messages.html#ab5679c64641f799385aa505a7216a2c1">node_messages::network_client_state_machine</a> ()</td></tr>
+<tr class="separator:ab5679c64641f799385aa505a7216a2c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>kason </dd></dl>

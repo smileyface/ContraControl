@@ -1,5 +1,5 @@
 <map id="Network_Interface" name="Network_Interface">
-<area shape="rect" id="node1" title="Interface for handling network communication between Nodes." alt="" coords="89,95,218,121"/>
+<area shape="rect" id="node1" title="Interface for handling network communication between Nodes." alt="" coords="90,95,219,121"/>
 <area shape="rect" id="node2" href="$struct_network___status___state.html" title="A container for displaying the state of the network." alt="" coords="5,5,160,32"/>
-<area shape="rect" id="node3" href="$structipv4__addr.html" title=" " alt="" coords="185,5,263,32"/>
+<area shape="rect" id="node3" href="$struct_i_p_v4___addr.html" title=" " alt="" coords="184,5,269,32"/>
 </map>

@@ -64,21 +64,26 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_console___view-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Console_View Class Reference</div>  </div>
+<div class="title">Console_View Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="console__view_8h_source.html">console_view.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Console_View:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_console___view__inherit__graph.png" border="0" usemap="#a_console___view_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_console___view_inherit__map" id="a_console___view_inherit__map">
-<area shape="rect" title=" " alt="" coords="31,80,136,107"/>
-<area shape="rect" href="class_console___system___view.html" title=" " alt="" coords="5,155,161,181"/>
-<area shape="rect" href="class_view.html" title="way to view a Device." alt="" coords="58,5,109,32"/>
+<area shape="rect" title=" " alt="" coords="105,80,211,107"/>
+<area shape="rect" href="class_console___log___view.html" title=" " alt="" coords="5,155,140,181"/>
+<area shape="rect" href="class_console___option___popup.html" title=" " alt="" coords="164,155,323,181"/>
+<area shape="rect" href="class_view.html" title="way to view a Device." alt="" coords="133,5,183,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -86,11 +91,19 @@ Collaboration diagram for Console_View:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_console___view__coll__graph.png" border="0" usemap="#a_console___view_coll__map" alt="Collaboration graph"/></div>
 <map name="a_console___view_coll__map" id="a_console___view_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,111,107"/>
-<area shape="rect" href="class_view.html" title="way to view a Device." alt="" coords="33,5,83,32"/>
+<area shape="rect" title=" " alt="" coords="107,199,213,225"/>
+<area shape="rect" href="class_view.html" title="way to view a Device." alt="" coords="5,102,56,129"/>
+<area shape="rect" href="struct_console___view_1_1_console___state.html" title=" " alt="" coords="81,95,239,136"/>
+<area shape="rect" href="class_keyboard___interface.html" title=" " alt="" coords="263,102,398,129"/>
+<area shape="rect" href="class_action___stack.html" title=" " alt="" coords="281,5,381,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_console___view_1_1_console___state.html">Console_State</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a493ad9090b9a9ca05f54584289d95430"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a493ad9090b9a9ca05f54584289d95430">initalize</a> ()</td></tr>
@@ -103,21 +116,38 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac3ec0d788fb3e7cc7d62ab0d1c0936bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c212bb4e7f22c03a44841a741b33aef"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a3c212bb4e7f22c03a44841a741b33aef">on_paint</a> ()</td></tr>
 <tr class="separator:a3c212bb4e7f22c03a44841a741b33aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bf168851f88276f875ca2aaab090038"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a6bf168851f88276f875ca2aaab090038">on_input</a> ()</td></tr>
+<tr class="separator:a6bf168851f88276f875ca2aaab090038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4868e672501ea2f8921276460587a1b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#af4868e672501ea2f8921276460587a1b">on_query</a> ()</td></tr>
+<tr class="separator:af4868e672501ea2f8921276460587a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51efc1b48afdc4e4e0a874725b2a89e4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a51efc1b48afdc4e4e0a874725b2a89e4">on_create</a> ()</td></tr>
 <tr class="separator:a51efc1b48afdc4e4e0a874725b2a89e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb4162504fec5abacf7e0644c0b2ef00"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#acb4162504fec5abacf7e0644c0b2ef00">on_quit</a> ()</td></tr>
 <tr class="separator:acb4162504fec5abacf7e0644c0b2ef00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48142d4291d58b20208de53a6f2d76c1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a48142d4291d58b20208de53a6f2d76c1">on_command</a> (unsigned int command)</td></tr>
 <tr class="separator:a48142d4291d58b20208de53a6f2d76c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc56c44a904cd0086f90fc745ecfee4a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#abc56c44a904cd0086f90fc745ecfee4a">is_stale</a> ()</td></tr>
-<tr class="separator:abc56c44a904cd0086f90fc745ecfee4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a871eaa63af897c7345e77941b165fc81"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a871eaa63af897c7345e77941b165fc81">is_stale</a> ()=0</td></tr>
+<tr class="separator:a871eaa63af897c7345e77941b165fc81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11e58842e741d2a1c10ca85c910327a2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a11e58842e741d2a1c10ca85c910327a2">quit</a> ()=0</td></tr>
+<tr class="separator:a11e58842e741d2a1c10ca85c910327a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:afdb5fc6a672461afd33d2468a202cc4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_console___view_1_1_console___state.html">Console_State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_console___view.html#afdb5fc6a672461afd33d2468a202cc4e">state</a></td></tr>
+<tr class="separator:afdb5fc6a672461afd33d2468a202cc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:ad1d0826732c1fca326501f648c2d1c32"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_console___view.html#ad1d0826732c1fca326501f648c2d1c32">painted_message</a></td></tr>
+<tr class="separator:ad1d0826732c1fca326501f648c2d1c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae295a865929b64162f3ae83f8adbfbbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_keyboard___interface.html">Keyboard_Interface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_console___view.html#ae295a865929b64162f3ae83f8adbfbbf">keyboard</a> = 0</td></tr>
+<tr class="separator:ae295a865929b64162f3ae83f8adbfbbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeca43db88abd65b7eb01cb302af18a79"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#aeca43db88abd65b7eb01cb302af18a79">stale</a> = true</td></tr>
 <tr class="separator:aeca43db88abd65b7eb01cb302af18a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A view to display on the console. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a493ad9090b9a9ca05f54584289d95430"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a493ad9090b9a9ca05f54584289d95430">&#9670;&nbsp;</a></span>initalize()</h2>
 
@@ -144,8 +174,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="abc56c44a904cd0086f90fc745ecfee4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc56c44a904cd0086f90fc745ecfee4a">&#9670;&nbsp;</a></span>is_stale()</h2>
+<a id="a871eaa63af897c7345e77941b165fc81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a871eaa63af897c7345e77941b165fc81">&#9670;&nbsp;</a></span>is_stale()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,7 +184,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool View::is_stale </td>
+          <td class="memname">virtual bool View::is_stale </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -162,11 +192,13 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Is the <a class="el" href="class_view.html" title="way to view a Device.">View</a> out of touch with the model? </p><dl class="section return"><dt>Returns</dt><dd>If the <a class="el" href="class_view.html" title="way to view a Device.">View</a> is out of touch. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_console___option___popup.html#aa3a7e099f7d5f408400fcba1c9853f67">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a11e46554c81ca01084b1bc93619d3e04">Console_Log_View</a>.</p>
 
 </div>
 </div>
@@ -278,7 +310,35 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Display the painted frame on the screen. </p>
 
-<p>Reimplemented in <a class="el" href="class_console___system___view.html#a399e4829ae2448a65ca11cf82d3d5ed9">Console_System_View</a>.</p>
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#ac6b754d566435366b18adb7a4dcaff7d">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a6e2cb93720eb720f8d448ddb41a72409">Console_Log_View</a>.</p>
+
+</div>
+</div>
+<a id="a6bf168851f88276f875ca2aaab090038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bf168851f88276f875ca2aaab090038">&#9670;&nbsp;</a></span>on_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void View::on_input </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Called when input recieved. Generally for handling the results of <a class="el" href="class_view.html#af4868e672501ea2f8921276460587a1b">on_query()</a>. </p>
+
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#a1aeec044fd07023d412bd40e6f6f6e93">Console_Option_Popup</a>.</p>
 
 </div>
 </div>
@@ -306,7 +366,35 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Called to create a frame to paint with on_display. </p>
 
-<p>Reimplemented in <a class="el" href="class_console___system___view.html#a28bf66eb269b5b5d8479f09f9d7e9d09">Console_System_View</a>.</p>
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#adf03e46e68c381495a617ac892109331">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a27c26095588fbf799645ae187608d268">Console_Log_View</a>.</p>
+
+</div>
+</div>
+<a id="af4868e672501ea2f8921276460587a1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4868e672501ea2f8921276460587a1b">&#9670;&nbsp;</a></span>on_query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void View::on_query </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Called when waiting on input from the user. Is a blocking call. </p>
+
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#a8f5c721872d59d2be5e5129ed5536992">Console_Option_Popup</a>.</p>
 
 </div>
 </div>
@@ -360,11 +448,85 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Update the data for the view and set stale to false. </p>
 
-<p>Reimplemented in <a class="el" href="class_console___system___view.html#a59a4967bee7929324a4279d1de46f0c5">Console_System_View</a>.</p>
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#ade861036764118a4ba426c5330257f05">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a8b12b624e5f03bb75719bdd8a585ba40">Console_Log_View</a>.</p>
+
+</div>
+</div>
+<a id="a11e58842e741d2a1c10ca85c910327a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11e58842e741d2a1c10ca85c910327a2">&#9670;&nbsp;</a></span>quit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool View::quit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Has the view been commanded to quit. </p><dl class="section return"><dt>Returns</dt><dd>If the view has been commanded to quit </dd></dl>
+
+<p>Implemented in <a class="el" href="class_console___option___popup.html#a322660109625a9df4d68005f6ff7a5cb">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a71e6d015df9ec333db70172b04068a32">Console_Log_View</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae295a865929b64162f3ae83f8adbfbbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae295a865929b64162f3ae83f8adbfbbf">&#9670;&nbsp;</a></span>keyboard</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_keyboard___interface.html">Keyboard_Interface</a>* Console_View::keyboard = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The console interface to an input device. Namely the Keyboard </p>
+
+</div>
+</div>
+<a id="ad1d0826732c1fca326501f648c2d1c32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1d0826732c1fca326501f648c2d1c32">&#9670;&nbsp;</a></span>painted_message</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Console_View::painted_message</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Message to "paint" (display) into the console. As the console is acsii only, this is a string </p>
+
+</div>
+</div>
 <a id="aeca43db88abd65b7eb01cb302af18a79"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeca43db88abd65b7eb01cb302af18a79">&#9670;&nbsp;</a></span>stale</h2>
 
@@ -388,8 +550,24 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="afdb5fc6a672461afd33d2468a202cc4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdb5fc6a672461afd33d2468a202cc4e">&#9670;&nbsp;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_console___view_1_1_console___state.html">Console_State</a> Console_View::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Access to the input/output state of the console </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="console__view_8h_source.html">console_view.h</a></li>
+<li>view.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

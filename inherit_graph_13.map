@@ -1,3 +1,8 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_log___entry.html" title=" " alt="" coords="5,5,85,32"/>
+<area shape="rect" id="node1" href="$class_internal___message.html" title=" " alt="" coords="5,56,131,83"/>
+<area shape="rect" id="node2" href="$class_logging___message.html" title=" " alt="" coords="206,5,334,32"/>
+<area shape="rect" id="node3" href="$class_response___message.html" title=" " alt="" coords="200,56,340,83"/>
+<area shape="rect" id="node5" href="$class_view___subsystem___message.html" title=" " alt="" coords="179,108,361,135"/>
+<area shape="rect" id="node4" href="$class_option___popup___response___message.html" title=" " alt="" coords="409,46,579,87"/>
+<area shape="rect" id="node6" href="$class_option___popup___message.html" title=" " alt="" coords="412,112,576,139"/>
 </map>

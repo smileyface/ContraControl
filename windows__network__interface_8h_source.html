@@ -104,12 +104,12 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">bool</span> ipv4_compare(sockaddr_in* win_address, <a class="code" href="structipv4__addr.html">ipv4_addr</a> gen_address);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="structipv4__addr.html">ipv4_addr</a> convert_win_address(sockaddr_in* win_address);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> setup_broadcast_socket(<a class="code" href="connections_8h.html#struct_connection">Connection</a>&amp; connect, <a class="code" href="structipv4__addr.html">ipv4_addr</a> host_ip);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="structipv4__addr.html">ipv4_addr</a> get_subnet_mask(SOCKET sock, <a class="code" href="structipv4__addr.html">ipv4_addr</a> host_ip);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="structipv4__addr.html">ipv4_addr</a> get_interface_address(std::string hostname, std::string interfaces);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="structipv4__addr.html">ipv4_addr</a> get_broadcast(<a class="code" href="structipv4__addr.html">ipv4_addr</a> host_ip, <a class="code" href="structipv4__addr.html">ipv4_addr</a> net_mask);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">bool</span> ipv4_compare(sockaddr_in* win_address, <a class="code" href="struct_i_p_v4___addr.html">IPV4_Addr</a> gen_address);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="struct_i_p_v4___addr.html">IPV4_Addr</a> convert_win_address(sockaddr_in* win_address);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> setup_broadcast_socket(<a class="code" href="connections_8h.html#struct_connection">Connection</a>&amp; connect, <a class="code" href="struct_i_p_v4___addr.html">IPV4_Addr</a> host_ip);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="struct_i_p_v4___addr.html">IPV4_Addr</a> get_subnet_mask(SOCKET sock, <a class="code" href="struct_i_p_v4___addr.html">IPV4_Addr</a> host_ip);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="struct_i_p_v4___addr.html">IPV4_Addr</a> get_interface_address(std::string hostname, std::string interfaces);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="struct_i_p_v4___addr.html">IPV4_Addr</a> get_broadcast(<a class="code" href="struct_i_p_v4___addr.html">IPV4_Addr</a> host_ip, <a class="code" href="struct_i_p_v4___addr.html">IPV4_Addr</a> net_mask);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416">NETWORK_ERRORS</a> set_error_state(<span class="keywordtype">int</span> err_code = -1);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
@@ -127,8 +127,8 @@ $(function() {
 <div class="ttc" id="aconnections_8h_html"><div class="ttname"><a href="connections_8h.html">connections.h</a></div></div>
 <div class="ttc" id="aconnections_8h_html_a3d28a58fbf672c8a67dda4c4e251312d"><div class="ttname"><a href="connections_8h.html#a3d28a58fbf672c8a67dda4c4e251312d">Connection_Id</a></div><div class="ttdeci">std::string Connection_Id</div><div class="ttdef"><b>Definition:</b> connections.h:36</div></div>
 <div class="ttc" id="aconnections_8h_html_struct_connection"><div class="ttname"><a href="connections_8h.html#struct_connection">Connection</a></div><div class="ttdef"><b>Definition:</b> connections.h:28</div></div>
-<div class="ttc" id="anetwork__status__state_8h_html_adc61e8f2859c67298cd289633daf6416"><div class="ttname"><a href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416">NETWORK_ERRORS</a></div><div class="ttdeci">NETWORK_ERRORS</div><div class="ttdef"><b>Definition:</b> network_status_state.h:30</div></div>
-<div class="ttc" id="astructipv4__addr_html"><div class="ttname"><a href="structipv4__addr.html">ipv4_addr</a></div><div class="ttdef"><b>Definition:</b> ipv4_addr.h:13</div></div>
+<div class="ttc" id="anetwork__status__state_8h_html_adc61e8f2859c67298cd289633daf6416"><div class="ttname"><a href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416">NETWORK_ERRORS</a></div><div class="ttdeci">NETWORK_ERRORS</div><div class="ttdef"><b>Definition:</b> network_status_state.h:34</div></div>
+<div class="ttc" id="astruct_i_p_v4___addr_html"><div class="ttname"><a href="struct_i_p_v4___addr.html">IPV4_Addr</a></div><div class="ttdef"><b>Definition:</b> ipv4_addr.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

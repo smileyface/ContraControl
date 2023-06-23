@@ -1,5 +1,14 @@
 <map id="node_communication.h" name="node_communication.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,160,32"/>
-<area shape="rect" id="node2" href="$messaging_8h.html" title=" " alt="" coords="35,80,130,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="52,155,113,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="268,5,423,32"/>
+<area shape="rect" id="node2" href="$messaging_8h.html" title=" " alt="" coords="256,80,350,107"/>
+<area shape="rect" id="node9" href="$network__message__types_8h.html" title=" " alt="" coords="391,155,554,196"/>
+<area shape="rect" id="node3" title=" " alt="" coords="204,162,266,189"/>
+<area shape="rect" id="node4" title=" " alt="" coords="7,415,66,442"/>
+<area shape="rect" id="node5" href="$messages_2types_2messages_8h.html" title=" " alt="" coords="53,162,180,189"/>
+<area shape="rect" id="node11" href="$network__message__header_8h.html" title=" " alt="" coords="103,244,266,285"/>
+<area shape="rect" id="node12" href="$network__message__footer_8h.html" title=" " alt="" coords="290,244,452,285"/>
+<area shape="rect" id="node6" href="$network__type_8h.html" title=" " alt="" coords="130,333,239,360"/>
+<area shape="rect" id="node7" href="$ipv4__addr_8h.html" title=" " alt="" coords="110,408,258,449"/>
+<area shape="rect" id="node8" title=" " alt="" coords="157,497,212,524"/>
+<area shape="rect" id="node10" href="$basic__types_8h.html" title=" " alt="" coords="476,251,578,278"/>
 </map>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name_621',['name',['../class_initalize.html#a4ac0c8d0720af216f4e38630a99e7216',1,'Initalize']]],
-  ['network_5finterface_622',['network_interface',['../namespacenetwork.html#a9b9b73adcbac7cea468436241e663c40',1,'network']]],
-  ['network_5fmessage_5finterface_623',['network_message_interface',['../namespacenetwork.html#a61539f3cda38ca13cab4419a718fc236',1,'network']]]
+  ['k_998',['K',['../namespace_k_e_y.html#abf73dd98baf1785cf2de5b36a22f9e2d',1,'KEY']]],
+  ['keyboard_999',['keyboard',['../class_keyboard___buffer___input.html#a3ceaa4bb816452585bfe6ea772e3aecb',1,'Keyboard_Buffer_Input::keyboard()'],['../class_console___view.html#ae295a865929b64162f3ae83f8adbfbbf',1,'Console_View::keyboard()']]],
+  ['keyboard_5fpresent_1000',['keyboard_present',['../class_keyboard___interface.html#a3f9d400c6e73059bafa55ab80084c8eb',1,'Keyboard_Interface']]]
 ];

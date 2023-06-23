@@ -4,14 +4,24 @@
 <area shape="rect" id="node3" href="$_model_2system_2timer_8h.html" title=" " alt="" coords="91,87,197,114"/>
 <area shape="rect" id="node5" title=" " alt="" coords="221,80,376,121"/>
 <area shape="rect" id="node6" href="$node_8h.html" title=" " alt="" coords="401,87,493,114"/>
-<area shape="rect" id="node12" href="$system__messaging_8h.html" title=" " alt="" coords="517,87,728,114"/>
+<area shape="rect" id="node12" href="$message__relay_8h.html" title=" " alt="" coords="565,87,752,114"/>
 <area shape="rect" id="node4" title=" " alt="" coords="82,169,206,211"/>
-<area shape="rect" id="node7" href="$device_8h.html" title=" " alt="" coords="407,177,487,203"/>
-<area shape="rect" id="node8" title=" " alt="" coords="370,259,417,285"/>
-<area shape="rect" id="node9" href="$devices_2device_8h.html" title=" " alt="" coords="441,259,559,285"/>
-<area shape="rect" id="node10" title=" " alt="" coords="327,333,484,375"/>
-<area shape="rect" id="node11" href="$channel_8h.html" title=" " alt="" coords="509,341,683,367"/>
-<area shape="rect" id="node13" title=" " alt="" coords="553,177,607,203"/>
-<area shape="rect" id="node14" href="$consumers_8h.html" title=" " alt="" coords="632,177,795,203"/>
-<area shape="rect" id="node15" title=" " alt="" coords="684,259,743,285"/>
+<area shape="rect" id="node7" href="$device_8h.html" title=" " alt="" coords="383,177,463,203"/>
+<area shape="rect" id="node8" title=" " alt="" coords="523,259,570,285"/>
+<area shape="rect" id="node9" href="$devices_2device_8h.html" title=" " alt="" coords="363,259,482,285"/>
+<area shape="rect" id="node10" title=" " alt="" coords="156,348,313,389"/>
+<area shape="rect" id="node11" href="$channel_8h.html" title=" " alt="" coords="338,355,513,382"/>
+<area shape="rect" id="node13" title=" " alt="" coords="887,556,942,583"/>
+<area shape="rect" id="node14" title=" " alt="" coords="487,177,527,203"/>
+<area shape="rect" id="node15" href="$consumers_8h.html" title=" " alt="" coords="601,177,764,203"/>
+<area shape="rect" id="node16" href="$internal__messages_8h.html" title="List of Internal Messages." alt="" coords="612,259,753,285"/>
+<area shape="rect" id="node17" href="$message__ptr_8h.html" title=" " alt="" coords="347,459,517,501"/>
+<area shape="rect" id="node19" href="$logging__message_8h.html" title=" " alt="" coords="777,459,935,501"/>
+<area shape="rect" id="node20" href="$option__popup__response__message_8h.html" title=" " alt="" coords="596,333,767,404"/>
+<area shape="rect" id="node18" href="$internal__message__type_8h.html" title=" " alt="" coords="441,638,607,665"/>
+<area shape="rect" id="node21" href="$response__message_8h.html" title=" " alt="" coords="404,556,559,583"/>
+<area shape="rect" id="node22" href="$option__popup__message_8h.html" title=" " alt="" coords="610,452,753,508"/>
+<area shape="rect" id="node23" title=" " alt="" coords="583,556,641,583"/>
+<area shape="rect" id="node24" href="$view__subsystem__message_8h.html" title=" " alt="" coords="665,556,863,583"/>
+<area shape="rect" id="node25" title=" " alt="" coords="673,631,855,672"/>
 </map>

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['ui_707',['UI',['../node_8h.html#a03fdb968a8a7e5e73652fc3453b4f761a71ff71526d15db86eb50fcac245d183b',1,'node.h']]],
-  ['undefined_708',['UNDEFINED',['../messaging_8h.html#a53bcaebc649cb805c811c24c06702f6fa0db45d2a4141101bdfe48e3314cfbca3',1,'messaging.h']]],
-  ['uninitalized_5finterface_709',['UNINITALIZED_INTERFACE',['../network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416a852b6f0af828598132fb386d465ceb64',1,'network_status_state.h']]],
-  ['unknown_5ferror_710',['UNKNOWN_ERROR',['../network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416a9a10f345b0f755d461a8673a5e9ef6b4',1,'network_status_state.h']]]
+  ['released_1156',['RELEASED',['../key__input__interface_8h.html#a1cc30adc1a93db98bc0e2537978a3ed7a109d54efbb64d71f9a6ab18d0fb8add8',1,'key_input_interface.h']]],
+  ['rgb_1157',['RGB',['../devices_2device_8h.html#a90ca22d79dd3ad45ef7e225babdb2e70a889574aebacda6bfd3e534e2b49b8028',1,'device.h']]]
 ];

@@ -1,0 +1,12 @@
+<map id="keyboard_buffer_input.h" name="keyboard_buffer_input.h">
+<area shape="rect" id="node1" title=" " alt="" coords="12,5,171,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,415,60,442"/>
+<area shape="rect" id="node3" href="$keyboard__interface_8h.html" title=" " alt="" coords="73,80,227,121"/>
+<area shape="rect" id="node4" href="$action__stack_8h.html" title=" " alt="" coords="81,169,221,211"/>
+<area shape="rect" id="node5" title=" " alt="" coords="242,415,301,442"/>
+<area shape="rect" id="node6" href="$action__layer_8h.html" title=" " alt="" coords="101,259,202,285"/>
+<area shape="rect" id="node7" href="$input__buffer_8h.html" title=" " alt="" coords="102,333,201,360"/>
+<area shape="rect" id="node8" href="$key__input__interface_8h.html" title=" " alt="" coords="85,408,218,449"/>
+<area shape="rect" id="node9" title=" " alt="" coords="68,497,147,524"/>
+<area shape="rect" id="node10" title=" " alt="" coords="171,497,217,524"/>
+</map>

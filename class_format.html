@@ -86,16 +86,29 @@ Inheritance diagram for Format:</div>
 <area shape="rect" href="class_console___format.html" title=" " alt="" coords="5,80,123,107"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for Format:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_format__coll__graph.png" border="0" usemap="#a_format_coll__map" alt="Collaboration graph"/></div>
+<map name="a_format_coll__map" id="a_format_coll__map">
+<area shape="rect" title="Format that the data will take." alt="" coords="45,95,107,121"/>
+<area shape="rect" href="struct_message___consumer.html" title=" " alt="" coords="5,5,147,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae9e2667bee40a4afeee7ac7126e03c15"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#ae9e2667bee40a4afeee7ac7126e03c15">initalize</a> ()=0</td></tr>
 <tr class="separator:ae9e2667bee40a4afeee7ac7126e03c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cf3e0abb38a558f323d6de46586d642"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a9cf3e0abb38a558f323d6de46586d642">add_view</a> (<a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a> view)</td></tr>
-<tr class="separator:a9cf3e0abb38a558f323d6de46586d642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b45881f2a862b276af502da9281d080"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_view.html">View</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a6b45881f2a862b276af502da9281d080">add_view</a> (<a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a> view)</td></tr>
+<tr class="separator:a6b45881f2a862b276af502da9281d080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f669c63d185b6de463c56f4c3ebb945"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a7f669c63d185b6de463c56f4c3ebb945">update_views</a> ()</td></tr>
 <tr class="memdesc:a7f669c63d185b6de463c56f4c3ebb945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update all stale views.  <a href="class_format.html#a7f669c63d185b6de463c56f4c3ebb945">More...</a><br /></td></tr>
 <tr class="separator:a7f669c63d185b6de463c56f4c3ebb945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a21894e4d84cdd67818a2e1f5bd40ce"><td class="memItemLeft" align="right" valign="top"><a id="a3a21894e4d84cdd67818a2e1f5bd40ce"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a3a21894e4d84cdd67818a2e1f5bd40ce">process_internal_messages</a> ()</td></tr>
+<tr class="memdesc:a3a21894e4d84cdd67818a2e1f5bd40ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get messages from the Int. <br /></td></tr>
+<tr class="separator:a3a21894e4d84cdd67818a2e1f5bd40ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3232673acaff2007192c1cb98c250602"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a3232673acaff2007192c1cb98c250602">clean_views</a> ()</td></tr>
 <tr class="memdesc:a3232673acaff2007192c1cb98c250602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy all views.  <a href="class_format.html#a3232673acaff2007192c1cb98c250602">More...</a><br /></td></tr>
 <tr class="separator:a3232673acaff2007192c1cb98c250602"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,12 +130,14 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad468204108a72a8a08e4e709823cb826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32ec8c810d3dc7000ca34faadead2675"><td class="memItemLeft" align="right" valign="top">std::thread *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a32ec8c810d3dc7000ca34faadead2675">looping_thread</a> = nullptr</td></tr>
 <tr class="separator:a32ec8c810d3dc7000ca34faadead2675"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2eb3f5744cd148d1180fe371aa869c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_message___consumer.html">Message_Consumer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#ab2eb3f5744cd148d1180fe371aa869c9">format_consumer</a> = 0</td></tr>
+<tr class="separator:ab2eb3f5744cd148d1180fe371aa869c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Examples include: A console. A UI. WS2811 protocol. DMX protocol. Data pin. It contains a list of Views that feed it the data to "display." A <a class="el" href="class_format.html" title="Format that the data will take.">Format</a> mainly calls the handles for all it's known Views in every loop </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9cf3e0abb38a558f323d6de46586d642"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9cf3e0abb38a558f323d6de46586d642">&#9670;&nbsp;</a></span>add_view()</h2>
+<a id="a6b45881f2a862b276af502da9281d080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b45881f2a862b276af502da9281d080">&#9670;&nbsp;</a></span>add_view()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +146,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Format::add_view </td>
+          <td class="memname"><a class="el" href="class_view.html">View</a> * Format::add_view </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a>&#160;</td>
           <td class="paramname"><em>view</em></td><td>)</td>
@@ -150,8 +165,9 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the newly created view </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_console___format.html#a686ad661315231dad1e62d5eac2df47a">Console_Format</a>.</p>
+<p>Reimplemented in <a class="el" href="class_console___format.html#a512afe17207cb5e9353183455fede86c">Console_Format</a>.</p>
 
 </div>
 </div>
@@ -279,11 +295,34 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>If a view is defined as stale, call on_refresh, on_paint, and on_display for the stale <a class="el" href="class_view.html" title="way to view a Device.">View</a>. Stale is defined as different things for different devices. For System_View, it's that there's a new message on the <a class="el" href="struct_system___message.html">System_Message</a> stack. For a device, it's that the state has changed in some meaningful way. </p>
+<p>If a view is defined as stale, call on_refresh, on_paint, and on_display for the stale <a class="el" href="class_view.html" title="way to view a Device.">View</a>. Stale is defined as different things for different devices. For System_View, it's that there's a new message on the System_Message stack. For a device, it's that the state has changed in some meaningful way. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab2eb3f5744cd148d1180fe371aa869c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2eb3f5744cd148d1180fe371aa869c9">&#9670;&nbsp;</a></span>format_consumer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_message___consumer.html">Message_Consumer</a>* Format::format_consumer = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Consume view messages </p>
+
+</div>
+</div>
 <a id="ad468204108a72a8a08e4e709823cb826"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad468204108a72a8a08e4e709823cb826">&#9670;&nbsp;</a></span>format_running</h2>
 

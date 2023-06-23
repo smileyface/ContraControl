@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['off_694',['OFF',['../command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4',1,'command.h']]],
-  ['on_695',['ON',['../command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a90651ebea9a35ec4e018c8157492e17c',1,'command.h']]]
+  ['model_1141',['MODEL',['../subsystem__enum_8h.html#a8ef96cebf7241fa63d323213da06fb68a7a03bac2692f8d17e2cda1b0721ffd0e',1,'subsystem_enum.h']]]
 ];

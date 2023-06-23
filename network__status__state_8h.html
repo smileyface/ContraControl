@@ -99,10 +99,15 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:abc25c1e707f426740448c2bd9364c8d2"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2">NETWORK_STATUS</a> : unsigned char { <a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2a547ba52b62f9302ee1b6950111c36f9f">NETWORK_ERROR</a>
+<tr class="memitem:abc25c1e707f426740448c2bd9364c8d2"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2">NETWORK_STATUS</a> : unsigned char { <br />
+&#160;&#160;<a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2a547ba52b62f9302ee1b6950111c36f9f">NETWORK_ERROR</a>
 , <a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2adfc4f40460d2d9abecd0fdd8b742f1cd">NETWORK_INITALIZED</a>
-, <a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2ab553d3d5041d76da39ab245bf3763662">CLIENT_CONNECT</a>
+, <a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2a16dd13283c3fee369e8972bd50e59aec">CLIENT_AWAKE</a>
+, <a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2a7a210c42977a0307b24b71658966c9af">CLIENT_WAIT</a>
+, <br />
+&#160;&#160;<a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2ab553d3d5041d76da39ab245bf3763662">CLIENT_CONNECT</a>
 , <a class="el" href="network__status__state_8h.html#abc25c1e707f426740448c2bd9364c8d2a1b43be1868e36f2fabd65a3f7d2c3012">SERVER_LISTENING</a>
+<br />
  }</td></tr>
 <tr class="separator:abc25c1e707f426740448c2bd9364c8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc61e8f2859c67298cd289633daf6416"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416">NETWORK_ERRORS</a> : unsigned char { <br />
@@ -121,7 +126,8 @@ Enumerations</h2></td></tr>
 , <a class="el" href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416a957402573854ce9b948851a97b99cfbd">NETWORK_CODE_ERROR</a>
 , <a class="el" href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416a43033fb1925790e1fef83a5d940c951b">NETWORK_OPTION_ERROR</a>
 , <br />
-&#160;&#160;<a class="el" href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416a9a10f345b0f755d461a8673a5e9ef6b4">UNKNOWN_ERROR</a>
+&#160;&#160;<a class="el" href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416a51c268bfcfdf890967ba328244f45f77">ADDRESS_ERROR</a>
+, <a class="el" href="network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416a9a10f345b0f755d461a8673a5e9ef6b4">UNKNOWN_ERROR</a>
 <br />
  }</td></tr>
 <tr class="separator:adc61e8f2859c67298cd289633daf6416"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +181,8 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="adc61e8f2859c67298cd289633daf6416a43033fb1925790e1fef83a5d940c951b"></a>NETWORK_OPTION_ERROR&#160;</td><td class="fielddoc"><p>When an option is incorrect. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="adc61e8f2859c67298cd289633daf6416a51c268bfcfdf890967ba328244f45f77"></a>ADDRESS_ERROR&#160;</td><td class="fielddoc"><p>When the IP address returns an invalid addres </p>
+</td></tr>
 <tr><td class="fieldname"><a id="adc61e8f2859c67298cd289633daf6416a9a10f345b0f755d461a8673a5e9ef6b4"></a>UNKNOWN_ERROR&#160;</td><td class="fielddoc"><p>Some unknown error has occured. </p>
 </td></tr>
 </table>
@@ -205,6 +213,10 @@ Enumerations</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abc25c1e707f426740448c2bd9364c8d2a547ba52b62f9302ee1b6950111c36f9f"></a>NETWORK_ERROR&#160;</td><td class="fielddoc"><p>Network is in the error state. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="abc25c1e707f426740448c2bd9364c8d2adfc4f40460d2d9abecd0fdd8b742f1cd"></a>NETWORK_INITALIZED&#160;</td><td class="fielddoc"><p>Network is initalized </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abc25c1e707f426740448c2bd9364c8d2a16dd13283c3fee369e8972bd50e59aec"></a>CLIENT_AWAKE&#160;</td><td class="fielddoc"><p>Client has started, but has not connected to server yet. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abc25c1e707f426740448c2bd9364c8d2a7a210c42977a0307b24b71658966c9af"></a>CLIENT_WAIT&#160;</td><td class="fielddoc"><p>Client is waiting for server to send a response </p>
 </td></tr>
 <tr><td class="fieldname"><a id="abc25c1e707f426740448c2bd9364c8d2ab553d3d5041d76da39ab245bf3763662"></a>CLIENT_CONNECT&#160;</td><td class="fielddoc"><p>Client is connected </p>
 </td></tr>

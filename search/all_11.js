@@ -1,14 +1,21 @@
 var searchData=
 [
-  ['timer_2eh_316',['timer.h',['../_utilities_2_utilities_2timer_8h.html',1,'']]],
-  ['ui_317',['UI',['../node_8h.html#a03fdb968a8a7e5e73652fc3453b4f761a71ff71526d15db86eb50fcac245d183b',1,'node.h']]],
-  ['ui_2eh_318',['ui.h',['../ui_8h.html',1,'']]],
-  ['undefined_319',['UNDEFINED',['../messaging_8h.html#a53bcaebc649cb805c811c24c06702f6fa0db45d2a4141101bdfe48e3314cfbca3',1,'messaging.h']]],
-  ['unimplementedfunctionexception_320',['UnimplementedFunctionException',['../class_unimplemented_function_exception.html',1,'']]],
-  ['uninitalized_5finterface_321',['UNINITALIZED_INTERFACE',['../network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416a852b6f0af828598132fb386d465ceb64',1,'network_status_state.h']]],
-  ['unknown_5ferror_322',['UNKNOWN_ERROR',['../network__status__state_8h.html#adc61e8f2859c67298cd289633daf6416a9a10f345b0f755d461a8673a5e9ef6b4',1,'network_status_state.h']]],
-  ['unused_323',['UNUSED',['../channel_8h.html#a222c51e666fc5f300a50b6938a81fe56',1,'channel.h']]],
-  ['update_5ftime_324',['update_time',['../class_timer.html#a94bcfe8762424a6b5c0e0e07d1ff167d',1,'Timer']]],
-  ['update_5fviews_325',['update_views',['../class_format.html#a7f669c63d185b6de463c56f4c3ebb945',1,'Format']]],
-  ['utils_2eh_326',['utils.h',['../utils_8h.html',1,'']]]
+  ['r_422',['R',['../namespace_k_e_y.html#ae51bc01346c2e5cf6d39fdb038a07ce0',1,'KEY']]],
+  ['read_5fcommands_423',['read_commands',['../save__reader_8h.html#a9dc05b19ce3eb3cc38566d7173f7ac1e',1,'file_reader']]],
+  ['read_5fdevices_424',['read_devices',['../save__reader_8h.html#ab375e69e961750ebabe3095e9be20b81',1,'file_reader']]],
+  ['read_5ffile_425',['read_file',['../save__reader_8h.html#a0dd99727a899c27c2ac4470062e90230',1,'file_reader']]],
+  ['readev_426',['readEv',['../class_keyboard___interface.html#a5544e52f496cd020eff897a7786482fa',1,'Keyboard_Interface']]],
+  ['register_5fconsumer_427',['register_consumer',['../class_message___relay.html#a303a08f2816015dedd451c424dfecba7',1,'Message_Relay']]],
+  ['register_5fdevice_428',['register_device',['../class_node.html#a8da160d5437ff7a47300769e4376c9c7',1,'Node']]],
+  ['released_429',['RELEASED',['../key__input__interface_8h.html#a1cc30adc1a93db98bc0e2537978a3ed7a109d54efbb64d71f9a6ab18d0fb8add8',1,'key_input_interface.h']]],
+  ['remove_5fdevice_430',['remove_device',['../class_node.html#abc7b27d3e72595fa4ead04d985388408',1,'Node']]],
+  ['request_5fcommand_431',['request_command',['../class_model___interfaces_1_1_controller___interface.html#a9e27d4f1868bc49c604eb2418bf3caff',1,'Model_Interfaces::Controller_Interface']]],
+  ['request_5fcommand_5fadd_432',['request_command_add',['../class_controller___interfaces_1_1_model___interface.html#a6865ccccfa34938245bbe07d9c4228c7',1,'Controller_Interfaces::Model_Interface']]],
+  ['reset_5fclock_433',['reset_clock',['../class_timer.html#ae7d6bc0211176beef639ba645d11636b',1,'Timer']]],
+  ['response_434',['RESPONSE',['../struct_message___types.html#ac81e58a3d3d9e5a15ce6954bdaf45d21',1,'Message_Types']]],
+  ['response_5fmessage_435',['Response_Message',['../class_response___message.html',1,'']]],
+  ['response_5fmessage_2eh_436',['response_message.h',['../response__message_8h.html',1,'']]],
+  ['returned_437',['returned',['../namespace_predefined___action___layer_1_1_simple___input___layer.html#a0b855a7c933f4c8c71daf5c5b18a82fc',1,'Predefined_Action_Layer::Simple_Input_Layer']]],
+  ['rgb_438',['RGB',['../devices_2device_8h.html#a90ca22d79dd3ad45ef7e225babdb2e70a889574aebacda6bfd3e534e2b49b8028',1,'device.h']]],
+  ['run_439',['run',['../class_task.html#a2aa160ab3d755f139109b4abedbd9d7a',1,'Task::run()'],['../class_timed___command.html#a5ac012c10e11d75431ee3c99a4df3042',1,'Timed_Command::run()']]]
 ];
