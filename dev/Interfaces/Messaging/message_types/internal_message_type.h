@@ -23,18 +23,7 @@ public:
 	 * Default Deconstructor
 	 */
 	virtual ~Internal_Message();
-	/**
-	 * Not equal comparator.
-	 * @param ptr_value Right address.
-	 * @return If left address is not equal to right address.
-	 */
-	virtual bool operator!=(Internal_Message* ptr_value);
-	/**
-	 * Equal comparator.
-	 * @param ptr_value Right address.
-	 * @return If left address is equal to the right address.
-	 */
-	virtual bool operator==(Internal_Message* ptr_value);
+
 	/**
 	* Is the message valid.
 	* @return Validity of the message.
@@ -49,10 +38,6 @@ protected:
 	 * Message validation flag.
 	 */
 	bool valid;
-	/**
-	 * A unique id for the message for comparisons.
-	 */
-	unsigned long unique_message_id;
 };
 
 #endif
