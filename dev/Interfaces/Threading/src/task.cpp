@@ -30,6 +30,10 @@ Task::Task(const Task& other) :
     overruns(other.overruns)
 { }
 
+Task::~Task()
+{
+    stop();
+}
 
 void Task::add_subtask(const std::function<void()>& subtask)
 {
@@ -84,6 +88,7 @@ void Task::run(std::chrono::milliseconds frameDuration)
         currentTime = std::chrono::steady_clock::now();
         elapsedSeconds = currentTime - startTime;
     }
+    is_running = false;
 }
 
 void Task::start(std::chrono::milliseconds frameDuration)
@@ -97,9 +102,8 @@ void Task::start(std::chrono::milliseconds frameDuration)
 
 void Task::stop()
 {
-    if(is_running)
+    if(thread.joinable())
     {
-        is_running = false;
         thread.join();
     }
 }

@@ -105,8 +105,8 @@ TEST_F(Scheduler_Test, Run_Tasks_In_Order)
     std::vector<int> called_order;
 
     Task task1("Task1", 1, 0.5);
-    Task task2("Task2", 3, 0.3);
-    Task task3("Task3", 2, 0.2);
+    Task task2("Task2", 2, 0.3);
+    Task task3("Task3", 3, 0.2);
 
     // Define subtask functions
     auto subtask1 = [&called_order] () mutable
@@ -144,8 +144,8 @@ TEST_F(Scheduler_Test, Run_Tasks_In_Order)
     scheduler->stop();
 
     EXPECT_EQ(called_order[0], 1);
-    EXPECT_EQ(called_order[1], 3);
-    EXPECT_EQ(called_order[2], 2);
+    EXPECT_EQ(called_order[1], 2);
+    EXPECT_EQ(called_order[2], 3);
 }
 
 TEST_F(Scheduler_Test, Priority_Out_Of_Bounds)
@@ -233,10 +233,11 @@ TEST_F(Scheduler_Test, Test_Persistence)
     scheduler->stop();
     EXPECT_EQ(scheduler->get_number_of_tasks(), 0);
 
+    int run_count = 0;
     Task test_task_2("Test2", 2, .3, true);
-    test_task.add_subtask([] ()
+    test_task_2.add_subtask([&run_count] ()
                           {
-
+                              run_count++;
                           });
     scheduler->add_task(test_task_2);
     EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
@@ -244,4 +245,24 @@ TEST_F(Scheduler_Test, Test_Persistence)
     system_utilities::sleep_thread(200);
     scheduler->stop();
     EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
+    scheduler->start(100);
+    system_utilities::sleep_thread(200);
+    scheduler->stop();
+    EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
+    EXPECT_EQ(run_count,2);
+}
+
+TEST_F(Scheduler_Test, Test_Scheduler_Looping)
+{
+    int run_count = 0;
+    Task test_task("Test", 2, 0.3);
+    test_task.add_subtask([&run_count] () mutable
+                          {
+                              run_count++;
+                          });
+    scheduler->add_task(test_task);
+    scheduler->start(100);
+    system_utilities::sleep_thread(500);
+    scheduler->stop();
+    EXPECT_EQ(run_count, 5);
 }

@@ -25,6 +25,25 @@ void Scheduler::destroy_instance()
     }
 }
 
+void Scheduler::clean_persistence()
+{
+    for(std::vector<Task>& task_list : tasks)
+    {
+        //clean persistence
+        for(auto task = task_list.begin(); task != task_list.end(); )
+        {
+            if(task->get_persistence() == false)
+            {
+                task = task_list.erase(task);
+            }
+            else
+            {
+                ++task;
+            }
+        }
+    }
+}
+
 void Scheduler::add_task(Task task)
 {
     if(task.get_priority() < 1 || task.get_priority() > 10)
@@ -59,32 +78,33 @@ int Scheduler::get_number_of_subtasks()
     return total;
 }
 
-void Scheduler::start(int frame_rate)
+void Scheduler::frame_run()
 {
-    std::chrono::milliseconds frameDurationMs(static_cast<int>(1000.0/ frame_rate));
-
-    for(std::vector<Task>& task_list : tasks)
+    std::chrono::milliseconds frameDurationMs(static_cast<int>(1000.0 / frame_rate));
+    while(scheduler_running)
     {
-        
-        for(auto task = task_list.begin(); task != task_list.end(); )
+        for(int i = 0; i < tasks.size(); i++)
         {
-            task->start(frameDurationMs);
-            std::this_thread::sleep_for(frameDurationMs);
-            task->stop();
-            if(task->get_persistence() == false)
+            for(int j = 0; j < tasks[i].size() && scheduler_running; j++)
             {
-                task = task_list.erase(task);
-            }
-            else
-            {
-                ++task;
+
+                tasks[i][j].start(frameDurationMs);
             }
         }
+        std::this_thread::sleep_for(frameDurationMs);
+        clean_persistence();
     }
+}
+
+void Scheduler::start(int frame_rate)
+{
+        scheduler_running = true;
+        std::thread(&Scheduler::frame_run, this).detach();
 }
 
 void Scheduler::stop()
 {
+    scheduler_running = false;
     for(int i = 0; i < tasks.size(); i++)
     {
         for(int j = 0; j < tasks[i].size(); j++)
@@ -96,14 +116,16 @@ void Scheduler::stop()
 
 void Scheduler::clear()
 {
-    for(int i = 0; i < tasks.size(); i++)
+    for(std::vector<Task>& task_list : tasks)
     {
-        tasks[i].clear();
+        while(task_list.size() > 0)
+            task_list.clear();
     }
 }
 
 Scheduler::Scheduler() :
-    frame_rate(30)
+    frame_rate(30),
+    scheduler_running(false)
 {
     tasks.resize(10);
 }

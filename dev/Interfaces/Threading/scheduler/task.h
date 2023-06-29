@@ -30,11 +30,11 @@ public:
     Task(const std::string& name, int priority, double percentage, bool persistence);
 
     /**
- * @brief Constructs a Task object.
- * @param name The name of the task.
- * @param priority The priority of the task.
- * @param percentage The percentage of frame duration allocated to this task.
- */
+     * @brief Constructs a Task object.
+     * @param name The name of the task.
+     * @param priority The priority of the task.
+     * @param percentage The percentage of frame duration allocated to this task.
+     */
     Task(const std::string& name, int priority, double percentage);
 
     /**
@@ -43,6 +43,7 @@ public:
      */
     Task(const Task& other);
 
+    ~Task();
 
     /**
      * @brief Adds a subtask to the task.

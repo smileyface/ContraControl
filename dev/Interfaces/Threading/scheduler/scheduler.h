@@ -67,9 +67,14 @@ private:
     ~Scheduler();
     Scheduler(const Scheduler&) = delete;
     Scheduler& operator=(const Scheduler&) = delete;
+    void clean_persistence();
+    void frame_run();
+
+    bool scheduler_running;
 
     std::vector<std::vector<Task>> tasks;
     int frame_rate;
+    std::thread scheduler_thread;
 
     static Scheduler* instance;
 };
