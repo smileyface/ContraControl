@@ -47,6 +47,12 @@ public:
     int get_number_of_subtasks();
 
     /**
+     * @brief Gets the number of overruns.
+     * @return The number of overrun frames.
+     */
+    int get_overruns();
+
+    /**
      * @brief Starts the execution of the tasks with the given frame duration.
      * @param frame_rate The duration of a frame.
      */
@@ -75,6 +81,7 @@ private:
     std::vector<std::vector<Task>> tasks;
     int frame_rate;
     std::thread scheduler_thread;
+    int overruns;
 
     static Scheduler* instance;
 };

@@ -78,6 +78,11 @@ int Scheduler::get_number_of_subtasks()
     return total;
 }
 
+int Scheduler::get_overruns()
+{
+    return overruns;
+}
+
 
 void Scheduler::start(int frameDuration) {
     scheduler_running = true;
@@ -113,9 +118,13 @@ void Scheduler::start(int frameDuration) {
                         
                         if(elapsedSeconds > frameDurationMs)
                         {
+                            overruns++;
                             LOG_ERROR("OVERRUN", "Scheduler");
                         }
-                        std::this_thread::sleep_for(frameDurationMs - (elapsedSeconds));
+                        else
+                        {
+                            std::this_thread::sleep_for(frameDurationMs - (elapsedSeconds));
+                        }
                         frames_run++;
                     }
                     LOG_INFO("Scheduler Dead", "Scheduler");
@@ -148,6 +157,7 @@ void Scheduler::clear()
 }
 
 Scheduler::Scheduler() :
+    overruns(0),
     frame_rate(30),
     scheduler_running(false)
 {
