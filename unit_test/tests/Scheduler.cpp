@@ -265,7 +265,7 @@ TEST_F(Scheduler_Test, Test_Scheduler_Looping)
                               run_count++;
                           });
     scheduler->add_task(test_task);
-    scheduler->start(30);
+    scheduler->start(27);
     system_utilities::sleep_thread(100);
     scheduler->stop();
     EXPECT_EQ(run_count, 3);
