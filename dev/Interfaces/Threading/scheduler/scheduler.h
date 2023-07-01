@@ -68,9 +68,9 @@ private:
     Scheduler(const Scheduler&) = delete;
     Scheduler& operator=(const Scheduler&) = delete;
     void clean_persistence();
-    void frame_run();
 
     bool scheduler_running;
+    std::mutex mutex;
 
     std::vector<std::vector<Task>> tasks;
     int frame_rate;

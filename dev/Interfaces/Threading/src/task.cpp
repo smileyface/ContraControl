@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+int alive_threads = 0;
+
 Task::Task(const std::string& name, int priority, double percentage, bool persistence = false) :
     name(name),
     priority(priority),
@@ -67,28 +69,14 @@ std::string Task::get_name()
 
 void Task::run(std::chrono::milliseconds frameDuration)
 {
-    auto taskExecutionTime = static_cast<int>(frameDuration.count() * percentage);
-
-    auto startTime = std::chrono::steady_clock::now();
-    auto currentTime = startTime;
-    std::chrono::duration<double> elapsedSeconds = currentTime - startTime;
+    alive_threads++;
 
     for(const auto& subtask : subtasks)
     {
-        if(elapsedSeconds >= std::chrono::milliseconds(taskExecutionTime))
-        {
-            if(elapsedSeconds >= std::chrono::milliseconds(static_cast<int>(taskExecutionTime * 1.5)) )
-            {
-                overruns++;
-            }
-            break;
-        }
         subtask();
-
-        currentTime = std::chrono::steady_clock::now();
-        elapsedSeconds = currentTime - startTime;
     }
     is_running = false;
+    alive_threads--;
 }
 
 void Task::start(std::chrono::milliseconds frameDuration)

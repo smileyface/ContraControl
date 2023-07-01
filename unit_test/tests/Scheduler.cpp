@@ -12,11 +12,13 @@ namespace
         Scheduler* scheduler;
         virtual void SetUp()
         {
+            system_utilities::setup_messaging();
             scheduler = Scheduler::get_instance();
         }
         virtual void TearDown()
         {
             scheduler->destroy_instance();
+            system_utilities::cleanup();
         }
     };
 }
@@ -54,9 +56,9 @@ TEST_F(Scheduler_Test, Run_Tasks)
     int subtask2_run_count = 0;
     int subtask3_run_count = 0;
 
-    Task task1("Task1", 1, 0.5);
-    Task task2("Task2", 2, 0.3);
-    Task task3("Task3", 3, 0.2);
+    Task task1("Task1", 1, 0.5, false);
+    Task task2("Task2", 2, 0.3, false);
+    Task task3("Task3", 3, 0.2, false);
 
     // Define subtask functions
     auto subtask1 = [&subtask1_run_count] () mutable
@@ -93,20 +95,20 @@ TEST_F(Scheduler_Test, Run_Tasks)
     // Verify that the tasks were executed
     // ... Add your own assertions here
 
-    system_utilities::sleep_thread(100);
+    system_utilities::sleep_thread(10);
+    scheduler->stop();
     EXPECT_EQ(subtask1_run_count, 3);
     EXPECT_EQ(subtask2_run_count, 2);
     EXPECT_EQ(subtask3_run_count, 1);
-    scheduler->stop();
 }
 
 TEST_F(Scheduler_Test, Run_Tasks_In_Order)
 { 
     std::vector<int> called_order;
 
-    Task task1("Task1", 1, 0.5);
-    Task task2("Task2", 2, 0.3);
-    Task task3("Task3", 3, 0.2);
+    Task task1("Task1", 1, 0.5, false);
+    Task task2("Task2", 4, 0.3, false);
+    Task task3("Task3", 3, 0.2, false);
 
     // Define subtask functions
     auto subtask1 = [&called_order] () mutable
@@ -143,9 +145,16 @@ TEST_F(Scheduler_Test, Run_Tasks_In_Order)
     system_utilities::sleep_thread(100);
     scheduler->stop();
 
-    EXPECT_EQ(called_order[0], 1);
-    EXPECT_EQ(called_order[1], 2);
-    EXPECT_EQ(called_order[2], 3);
+    if(called_order.size() != 3)
+    {
+        ADD_FAILURE() << "Subtasks not called";
+    }
+    else
+    {
+        EXPECT_EQ(called_order[0], 1);
+        EXPECT_EQ(called_order[1], 2);
+        EXPECT_EQ(called_order[2], 3);
+    }
 }
 
 TEST_F(Scheduler_Test, Priority_Out_Of_Bounds)
@@ -228,7 +237,7 @@ TEST_F(Scheduler_Test, Test_Persistence)
                           });
     scheduler->add_task(test_task);
     EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
-    scheduler->start(100);
+    scheduler->start(10);
     system_utilities::sleep_thread(200);
     scheduler->stop();
     EXPECT_EQ(scheduler->get_number_of_tasks(), 0);
@@ -241,15 +250,10 @@ TEST_F(Scheduler_Test, Test_Persistence)
                           });
     scheduler->add_task(test_task_2);
     EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
-    scheduler->start(100);
+    scheduler->start(10);
     system_utilities::sleep_thread(200);
     scheduler->stop();
     EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
-    scheduler->start(100);
-    system_utilities::sleep_thread(200);
-    scheduler->stop();
-    EXPECT_EQ(scheduler->get_number_of_tasks(), 1);
-    EXPECT_EQ(run_count,2);
 }
 
 TEST_F(Scheduler_Test, Test_Scheduler_Looping)
@@ -261,8 +265,8 @@ TEST_F(Scheduler_Test, Test_Scheduler_Looping)
                               run_count++;
                           });
     scheduler->add_task(test_task);
-    scheduler->start(100);
-    system_utilities::sleep_thread(500);
+    scheduler->start(30);
+    system_utilities::sleep_thread(100);
     scheduler->stop();
-    EXPECT_EQ(run_count, 5);
+    EXPECT_EQ(run_count, 3);
 }

@@ -78,28 +78,48 @@ int Scheduler::get_number_of_subtasks()
     return total;
 }
 
-void Scheduler::frame_run()
-{
-    std::chrono::milliseconds frameDurationMs(static_cast<int>(1000.0 / frame_rate));
-    while(scheduler_running)
-    {
-        for(int i = 0; i < tasks.size(); i++)
-        {
-            for(int j = 0; j < tasks[i].size() && scheduler_running; j++)
-            {
 
-                tasks[i][j].start(frameDurationMs);
-            }
-        }
-        std::this_thread::sleep_for(frameDurationMs);
-        clean_persistence();
-    }
-}
+void Scheduler::start(int frameDuration) {
+    scheduler_running = true;
+    frame_rate = frameDuration;
+    scheduler_thread = std::thread([this] ()
+                {
+                                       int frames_run = 0;
+                    LOG_INFO("Scheduler Start", "Scheduler");
+                    std::chrono::milliseconds frameDurationMs(static_cast<int>((1000.0/frame_rate)));
 
-void Scheduler::start(int frame_rate)
-{
-        scheduler_running = true;
-        std::thread(&Scheduler::frame_run, this).detach();
+                    auto start_time = std::chrono::steady_clock::now();
+                    auto cur_time = start_time;
+                    while(scheduler_running)
+                    {
+                       start_time = std::chrono::steady_clock::now();
+                       for(int i = 0; i < tasks.size(); i++)
+                       {
+                            for(int j = 0; j < tasks[i].size() && scheduler_running; j++)
+                            {
+                                tasks[i][j].start(frameDurationMs);
+                            }
+                        }
+                        clean_persistence();
+                        for(int i = 0; i < tasks.size(); i++)
+                        {
+                            for(int j = 0; j < tasks[i].size() && scheduler_running; j++)
+                            {
+                                tasks[i][j].stop();
+                            }
+                        }
+                        cur_time = std::chrono::steady_clock::now();
+                        auto elapsedSeconds = std::chrono::duration_cast<std::chrono::milliseconds>(cur_time - start_time);
+                        
+                        if(elapsedSeconds > frameDurationMs)
+                        {
+                            LOG_ERROR("OVERRUN", "Scheduler");
+                        }
+                        std::this_thread::sleep_for(frameDurationMs - (elapsedSeconds));
+                        frames_run++;
+                    }
+                    LOG_INFO("Scheduler Dead", "Scheduler");
+                });
 }
 
 void Scheduler::stop()
@@ -111,6 +131,10 @@ void Scheduler::stop()
         {
             tasks[i][j].stop();
         }
+    }
+    if(scheduler_thread.joinable())
+    {
+        scheduler_thread.join();
     }
 }
 

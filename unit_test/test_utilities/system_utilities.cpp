@@ -116,7 +116,14 @@ void system_utilities::step(int steps)
 
 void system_utilities::sleep_thread(int time_to_sleep)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(time_to_sleep));
+	try
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(time_to_sleep));
+	}
+	catch(std::exception s)
+	{
+		LOG_ERROR("EXCEPTION", "ASDF");
+	}
 }
 
 void system_utilities::model_utilities::start()
