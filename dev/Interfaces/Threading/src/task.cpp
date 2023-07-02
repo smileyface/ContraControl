@@ -47,11 +47,6 @@ int Task::number_of_subtask()
     return subtasks.size();
 }
 
-int Task::get_overruns()
-{
-    return overruns;
-}
-
 int Task::get_priority()
 {
     return priority;

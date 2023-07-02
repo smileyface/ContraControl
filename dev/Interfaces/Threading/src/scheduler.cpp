@@ -100,7 +100,7 @@ void Scheduler::start(int frameDuration) {
                        start_time = std::chrono::steady_clock::now();
                        for(int i = 0; i < tasks.size(); i++)
                        {
-                            for(int j = 0; j < tasks[i].size() && scheduler_running; j++)
+                            for(int j = 0; j < tasks[i].size(); j++)
                             {
                                 tasks[i][j].start(frameDurationMs);
                             }
@@ -108,7 +108,7 @@ void Scheduler::start(int frameDuration) {
                         clean_persistence();
                         for(int i = 0; i < tasks.size(); i++)
                         {
-                            for(int j = 0; j < tasks[i].size() && scheduler_running; j++)
+                            for(int j = 0; j < tasks[i].size(); j++)
                             {
                                 tasks[i][j].stop();
                             }
