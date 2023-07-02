@@ -41,6 +41,10 @@ namespace model
 	 */
 	extern Command_List step_actions;
 
+	/**
+	 * Task to add model to the scheduler.
+	 */
+	extern Task model_task;
 
 	/**
 	 * \brief Get node from list of known nodes by ID

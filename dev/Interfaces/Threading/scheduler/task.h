@@ -43,6 +43,11 @@ public:
      */
     Task(const Task& other);
 
+    /**
+     * @brief Default constructor.
+     */
+    Task();
+
     ~Task();
 
     /**

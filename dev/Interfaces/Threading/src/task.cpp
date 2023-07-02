@@ -32,6 +32,16 @@ Task::Task(const Task& other) :
     overruns(other.overruns)
 { }
 
+Task::Task() :
+    name(""),
+    priority(0),
+    percentage(0.0),
+    is_running(false),
+    persistence(false),
+    subtasks({}),
+    overruns(0)
+{ }
+
 Task::~Task()
 {
     stop();

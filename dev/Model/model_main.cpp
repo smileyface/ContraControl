@@ -5,6 +5,7 @@
 #include <mutex>
 
 #include "Interfaces/types/state.h"
+#include "Threading/threading.h"
 
 
 std::thread model_thread;
@@ -13,6 +14,7 @@ std::mutex model_mutex;
 Timer model_timer;
 std::atomic<bool> model::model_running;
 Command_List model::step_actions;
+Task model::model_task;
 
 Node model::my_node;
 
@@ -20,6 +22,7 @@ void model::initalize()
 {
 	model_timer.reset_clock();
 	initalize_my_node("LOCAL");
+	model_task = Task("Model", 2, .2);
 }
 
 Node* model::get_node(Node_Id id)
@@ -67,27 +70,19 @@ void model::step()
 	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
 }
 
-void model_loop()
-{
-	LOG_DEBUG("Loop thread has started");
-	while(model::model_running)
-	{
-		model::step();
-	}
-}
-
 void model::start_loop()
 {
 	model_running = true;
-	LOG_INFO("Model Started", subsystem_name);
-	model_thread = std::thread(model_loop);
+	LOG_INFO("Model added to scheduler", subsystem_name);
+	model_task.add_subtask(model::step);
+	Scheduler::get_instance()->add_task(model_task);
 }
 
 void model::stop_loop()
 {
 	LOG_INFO("Model Stopped", subsystem_name);
 	model_running = false;
-	model_thread.join();
+
 }
 
 void model::clean_up()
