@@ -82,7 +82,7 @@ void model::stop_loop()
 {
 	LOG_INFO("Model Stopped", subsystem_name);
 	model_running = false;
-
+	model_task.set_persistence(false);
 }
 
 void model::clean_up()

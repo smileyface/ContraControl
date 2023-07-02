@@ -72,6 +72,11 @@ std::string Task::get_name()
     return name;
 }
 
+void Task::set_persistence(bool persist)
+{
+    persistence = persist;
+}
+
 void Task::run(std::chrono::milliseconds frameDuration)
 {
     alive_threads++;

@@ -14,6 +14,7 @@ namespace
         {
             system_utilities::setup_messaging();
             scheduler = Scheduler::get_instance();
+            scheduler->clear();
         }
         virtual void TearDown()
         {

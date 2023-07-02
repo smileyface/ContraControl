@@ -87,6 +87,12 @@ public:
     std::string get_name();
 
     /**
+     * @brief Set persistence
+     * @param persist Should the task persist
+     */
+    void set_persistence(bool persist);
+
+    /**
      * @brief Runs the task for the given frame duration.
      * @param frameDuration The duration of a frame.
      */
