@@ -83,13 +83,33 @@ int Scheduler::get_overruns()
     return overruns;
 }
 
+void Scheduler::frame(std::chrono::milliseconds frameDurationMs)
+{
+    for(int i = 0; i < tasks.size(); i++)
+    {
+        for(int j = 0; j < tasks[i].size(); j++)
+        {
+            tasks[i][j].start(frameDurationMs);
+        }
+    }
+    clean_persistence();
+    for(int i = 0; i < tasks.size(); i++)
+    {
+        for(int j = 0; j < tasks[i].size(); j++)
+        {
+            tasks[i][j].stop();
+        }
+    }
+
+}
+
 
 void Scheduler::start(int frameDuration) {
     scheduler_running = true;
     frame_rate = frameDuration;
     scheduler_thread = std::thread([this] ()
                 {
-                                       int frames_run = 0;
+                    int frames_run = 0;
                     LOG_INFO("Scheduler Start", "Scheduler");
                     std::chrono::milliseconds frameDurationMs(static_cast<int>((1000.0/frame_rate)));
 
@@ -97,25 +117,11 @@ void Scheduler::start(int frameDuration) {
                     auto cur_time = start_time;
                     while(scheduler_running)
                     {
-                       start_time = std::chrono::steady_clock::now();
-                       for(int i = 0; i < tasks.size(); i++)
-                       {
-                            for(int j = 0; j < tasks[i].size(); j++)
-                            {
-                                tasks[i][j].start(frameDurationMs);
-                            }
-                        }
-                        clean_persistence();
-                        for(int i = 0; i < tasks.size(); i++)
-                        {
-                            for(int j = 0; j < tasks[i].size(); j++)
-                            {
-                                tasks[i][j].stop();
-                            }
-                        }
+                        start_time = std::chrono::steady_clock::now();
+                        frame(frameDurationMs);
                         cur_time = std::chrono::steady_clock::now();
                         auto elapsedSeconds = std::chrono::duration_cast<std::chrono::milliseconds>(cur_time - start_time);
-                        
+
                         if(elapsedSeconds > frameDurationMs)
                         {
                             overruns++;

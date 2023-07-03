@@ -80,7 +80,6 @@ void Task::set_persistence(bool persist)
 void Task::run(std::chrono::milliseconds frameDuration)
 {
     alive_threads++;
-
     for(const auto& subtask : subtasks)
     {
         subtask();

@@ -64,6 +64,12 @@ public:
     void stop();
 
     /**
+     * @brief Run a single frame.
+     * @param frameDurationMs Duration of the frame.
+     */
+    void frame(std::chrono::milliseconds frameDurationMs);
+
+    /**
      * @brief Remove all tasks from the scheduler.
      */
     void clear();

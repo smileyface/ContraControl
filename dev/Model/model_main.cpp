@@ -52,19 +52,27 @@ void mangle_model(T* command, Device* device)
 
 void model::step()
 {
+	int model_step_thread = 0;
 	for(Command_List::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
 	{
-		try
-		{
-			mangle_model(it->command, model::get_device(it->label));
-			it->command->time_to_complete -= model_timer.get_elapsed_time();
-		}
-		catch(std::exception&)
-		{
-			model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
-			std::rethrow_exception(std::current_exception());
-		}
+		model_step_thread++;
+		model_task.add_subtask([it, &model_step_thread] () mutable
+							   {
+								   try
+								   {
+									   mangle_model(it->command, model::get_device(it->label));
+									   it->command->time_to_complete -= model_timer.get_elapsed_time();
+								   }
+								   catch(std::exception&)
+								   {
+									   model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
+									   std::rethrow_exception(std::current_exception());
+								   }
+								   model_step_thread--;
+							   });
 	}
+	while(model_step_thread > 0)
+	{}
 
 	model_timer.update_time();
 	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());

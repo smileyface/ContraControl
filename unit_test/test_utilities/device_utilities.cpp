@@ -25,6 +25,8 @@ Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 
 void device_utilities::start_test_environment()
 {
+	model::model_task = Task("Model", 2, .2);
+	Scheduler::get_instance()->add_task(model::model_task);
 	model::initalize_my_node(device_utilities::node_handle);
 }
 

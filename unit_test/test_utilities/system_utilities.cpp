@@ -110,20 +110,16 @@ void system_utilities::step(int steps)
 	for(int i = 0; i < steps; i++)
 	{
 		controller::step();
-		model::step();
+		model::model_task.add_subtask(model::step);
+		std::chrono::milliseconds frameDurationMs(100);
+		Scheduler::get_instance()->frame(frameDurationMs);
+		sleep_thread(100);
 	}
 }
 
 void system_utilities::sleep_thread(int time_to_sleep)
 {
-	try
-	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(time_to_sleep));
-	}
-	catch(std::exception s)
-	{
-		LOG_ERROR("EXCEPTION", "ASDF");
-	}
 }
 
 void system_utilities::model_utilities::start()
