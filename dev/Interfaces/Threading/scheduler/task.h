@@ -14,6 +14,11 @@
 #include <chrono>
 #include <thread>
 
+/**
+ * @brief A subtask to be run during the runtime of the Task.
+ */
+typedef std::function<void()> Subtask;
+
  /**
   * @brief The Task class represents a task with subtasks.
   */
@@ -54,7 +59,7 @@ public:
      * @brief Adds a subtask to the task.
      * @param subtask The subtask to be added.
      */
-    void add_subtask(const std::function<void()>& subtask);
+    void add_subtask(const Subtask& subtask);
 
     /**
      * @brief Get number of subtasks to be run.
@@ -122,7 +127,7 @@ private:
     int overruns;
     bool persistence;
     double percentage;
-    std::vector<std::function<void()>> subtasks;
+    std::vector<Subtask> subtasks;
     bool is_running;
     std::thread thread;
 public:

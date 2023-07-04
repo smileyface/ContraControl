@@ -23,6 +23,12 @@ void model::initalize()
 	model_timer.reset_clock();
 	initalize_my_node("LOCAL");
 	model_task = Task("Model", 2, .2);
+	Scheduler::get_instance()->add_system_task(model::step);
+	Scheduler::get_instance()->add_cleanup_task([] ()
+												{
+													model_timer.update_time();
+													model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
+												});
 }
 
 Node* model::get_node(Node_Id id)
@@ -71,19 +77,13 @@ void model::step()
 								   model_step_thread--;
 							   });
 	}
-	while(model_step_thread > 0)
-	{}
-
-	model_timer.update_time();
-	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
 }
 
 void model::start_loop()
 {
 	model_running = true;
 	LOG_INFO("Model added to scheduler", subsystem_name);
-	model_task.add_subtask(model::step);
-	Scheduler::get_instance()->add_task(model_task);
+	Scheduler::get_instance()->add_task(&model::model_task);
 }
 
 void model::stop_loop()

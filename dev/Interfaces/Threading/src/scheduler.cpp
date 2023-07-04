@@ -27,12 +27,12 @@ void Scheduler::destroy_instance()
 
 void Scheduler::clean_persistence()
 {
-    for(std::vector<Task>& task_list : tasks)
+    for(std::vector<Task*>& task_list : tasks)
     {
         //clean persistence
         for(auto task = task_list.begin(); task != task_list.end(); )
         {
-            if(task->get_persistence() == false)
+            if((*task)->get_persistence() == false)
             {
                 task = task_list.erase(task);
             }
@@ -44,14 +44,14 @@ void Scheduler::clean_persistence()
     }
 }
 
-void Scheduler::add_task(Task task)
+void Scheduler::add_task(Task* task)
 {
-    if(task.get_priority() < 1 || task.get_priority() > 10)
+    if(task->get_priority() < 1 || task->get_priority() > 10)
     {
         LOG_ERROR("Task priority outside of range", "Adding task");
         return;
     }
-    tasks[task.get_priority() - 1].push_back(task);
+    tasks[task->get_priority() - 1].push_back(task);
 }
 
 int Scheduler::get_number_of_tasks()
@@ -72,7 +72,7 @@ int Scheduler::get_number_of_subtasks()
     {
         for(auto task : task_list)
         {
-            total += task.number_of_subtask();
+            total += task->number_of_subtask();
         }
     }
     return total;
@@ -89,20 +89,26 @@ void Scheduler::frame(std::chrono::milliseconds frameDurationMs)
     {
         for(int j = 0; j < tasks[i].size(); j++)
         {
-            tasks[i][j].start(frameDurationMs);
+            tasks[i][j]->start(frameDurationMs);
         }
-    }
-    clean_persistence();
-    for(int i = 0; i < tasks.size(); i++)
-    {
         for(int j = 0; j < tasks[i].size(); j++)
         {
-            tasks[i][j].stop();
+            tasks[i][j]->stop();
         }
     }
 
+    clean_persistence();
 }
 
+void Scheduler::add_system_task(Subtask task)
+{
+    system_task.add_subtask(task);
+}
+
+void Scheduler::add_cleanup_task(Subtask task)
+{
+    cleanup_task.add_subtask(task);
+}
 
 void Scheduler::start(int frameDuration) {
     scheduler_running = true;
@@ -144,7 +150,7 @@ void Scheduler::stop()
     {
         for(int j = 0; j < tasks[i].size(); j++)
         {
-            tasks[i][j].stop();
+            tasks[i][j]->stop();
         }
     }
     if(scheduler_thread.joinable())
@@ -155,7 +161,7 @@ void Scheduler::stop()
 
 void Scheduler::clear()
 {
-    for(std::vector<Task>& task_list : tasks)
+    for(std::vector<Task*>& task_list : tasks)
     {
         while(task_list.size() > 0)
             task_list.clear();
@@ -168,6 +174,11 @@ Scheduler::Scheduler() :
     scheduler_running(false)
 {
     tasks.resize(10);
+
+    system_task = Task("System", 1, .05);
+    add_task(&system_task);
+    cleanup_task = Task("System Cleanup", 5, .05);
+    add_task(&cleanup_task);
 }
 
 Scheduler::~Scheduler()
