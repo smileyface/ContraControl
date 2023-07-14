@@ -4,6 +4,8 @@
 #include "../test_utilities/pch.h"
 #include "../../dev/Interfaces/Threading/scheduler/scheduler.h"
 
+#include <algorithm>
+
 namespace
 {
     class Scheduler_Test : public ::testing::Test
@@ -34,6 +36,8 @@ TEST_F(Scheduler_Test, Add_Task)
     // Verify that the task was added to the scheduler
     EXPECT_EQ(scheduler->get_number_of_tasks(), 3);
 }
+
+
 
 TEST_F(Scheduler_Test, Start_The_Scheduler)
 {
@@ -274,10 +278,10 @@ TEST_F(Scheduler_Test, Test_Scheduler_Looping)
 TEST_F(Scheduler_Test, Test_Scheduler_Overrun)
 {
     Task test_task("Test", 1, 0.3, false);
-    test_task.add_subtask([] () mutable
+    test_task.add_subtask(Cleaned_Task([] () mutable
                           {
                               system_utilities::sleep_thread(100);
-                          });
+                          }));
     scheduler->add_task(&test_task);
     scheduler->start(30);
     system_utilities::sleep_thread(1000);
@@ -325,4 +329,32 @@ TEST_F(Scheduler_Test, Cleanup_Task)
     system_utilities::sleep_thread(1000);
     scheduler->stop();
     EXPECT_EQ(run_id, 42);
+}
+
+TEST_F(Scheduler_Test, Dryrun_The_System_and_Cleanups)
+{
+    std::vector<int> runs;
+
+    Task test_task("Test", 2, 0.3, false);
+    scheduler->add_task(&test_task);
+    scheduler->add_system_task([&runs, test_task] () mutable
+                               {
+                                   runs.push_back(0);
+                                   test_task.add_subtask([&runs] () mutable
+                                                         {
+                                                             runs.push_back(1);
+                                                         });
+                               });
+    scheduler->add_cleanup_task([&runs] () mutable
+                                {
+                                    runs.push_back(2);
+                                });
+
+    scheduler->start(30);
+    system_utilities::sleep_thread(100);
+    scheduler->stop();
+    auto begin_run = std::find(runs.begin(), runs.end(), 0);
+    auto cleanup_run = std::find(runs.begin(), runs.end(), 2);
+    EXPECT_NE(begin_run, runs.end());
+    EXPECT_NE(cleanup_run, runs.end());
 }

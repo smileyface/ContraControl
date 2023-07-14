@@ -91,3 +91,8 @@ TEST_F(Task_Test, Assignment)
 	EXPECT_EQ(task.get_name(), task_3.get_name());
 	EXPECT_NE(&task, &task_3);
 }
+
+TEST_F(Task_Test, Cleaned_Subtask)
+{
+
+}

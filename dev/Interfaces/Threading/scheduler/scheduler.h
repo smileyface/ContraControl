@@ -40,7 +40,7 @@ public:
      * 
      * @param task The system task to add to the scheduler.
      */
-    void add_system_task(Subtask task);
+    void add_system_task(std::function<void()> task);
 
     /**
      * @brief Adds a cleanup task to the scheduler.
@@ -48,7 +48,7 @@ public:
      *
      * @param task The cleanup task to add to the scheduler.
      */
-    void add_cleanup_task(Subtask task);
+    void add_cleanup_task(std::function<void()> task);
 
     /**
      * @brief Gets number of tasks on the scheduler.

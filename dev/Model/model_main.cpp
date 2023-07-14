@@ -27,8 +27,8 @@ void model::initalize()
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{
 													model_timer.update_time();
-													model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
-												});
+													model::step_actions.clear();
+												} );
 }
 
 Node* model::get_node(Node_Id id)
@@ -59,23 +59,22 @@ void mangle_model(T* command, Device* device)
 void model::step()
 {
 	int model_step_thread = 0;
-	for(Command_List::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
+	for(auto i = 0; i < model::step_actions.size(); ++i)
 	{
 		model_step_thread++;
-		model_task.add_subtask([it, &model_step_thread] () mutable
+		model_task.add_subtask(Cleaned_Task([i, &model_step_thread] () mutable
 							   {
 								   try
 								   {
-									   mangle_model(it->command, model::get_device(it->label));
-									   it->command->time_to_complete -= model_timer.get_elapsed_time();
+									   mangle_model(model::step_actions[i].command, model::get_device(model::step_actions[i].label));
+									   model::step_actions[i].command->time_to_complete -= model_timer.get_elapsed_time();
 								   }
 								   catch(std::exception&)
 								   {
-									   model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
-									   std::rethrow_exception(std::current_exception());
+									   model_task.exception(std::current_exception());
 								   }
 								   model_step_thread--;
-							   });
+							   } ));
 	}
 }
 

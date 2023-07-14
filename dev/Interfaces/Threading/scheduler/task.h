@@ -11,13 +11,11 @@
 #include <string>
 #include <functional>
 #include <vector>
+#include <queue>
 #include <chrono>
 #include <thread>
 
-/**
- * @brief A subtask to be run during the runtime of the Task.
- */
-typedef std::function<void()> Subtask;
+#include "subtask.h"
 
  /**
   * @brief The Task class represents a task with subtasks.
@@ -25,6 +23,16 @@ typedef std::function<void()> Subtask;
 class Task
 {
 public:
+    /**
+     * @brief Constructs a Task object.
+     * @param name The name of the task.
+     * @param priority The priority of the task.
+     * @param percentage The percentage of frame duration allocated to this task.
+     * @param persistence Is the task persistent.
+     * @param clear_subtasks Remove all subtasks after the frame.
+     */
+    Task(const std::string& name, int priority, double percentage, bool persistence, bool clear_subtasks);
+
     /**
      * @brief Constructs a Task object.
      * @param name The name of the task.
@@ -53,6 +61,9 @@ public:
      */
     Task();
 
+    /**
+     * @brief Default deconstructor
+     */
     ~Task();
 
     /**
@@ -60,6 +71,12 @@ public:
      * @param subtask The subtask to be added.
      */
     void add_subtask(const Subtask& subtask);
+
+    /**
+     * @brief Adds a function to the task as a Sticky_Task.
+     * @param subtask The function to be added as a Sticky_Task.
+     */
+    void add_subtask(const std::function<void()>& subtask);
 
     /**
      * @brief Get number of subtasks to be run.
@@ -115,6 +132,12 @@ public:
     void stop();
 
     /**
+     * @brief Add an exception thrown in the task.
+     * @param ex Exception pointer to exception thrown.
+     */
+    void exception(std::exception_ptr ex);
+
+    /**
      * @brief Assignment operator override.
      * @param other The Task object to be assigned.
      * @return Reference to the assigned Task object.
@@ -126,10 +149,12 @@ private:
     int priority;
     int overruns;
     bool persistence;
+    bool clear_subtasks;
     double percentage;
     std::vector<Subtask> subtasks;
     bool is_running;
-    std::thread thread;
+    std::vector<std::thread> thread;
+    std::queue<std::exception_ptr> thrown_exceptions;
 public:
 };
 

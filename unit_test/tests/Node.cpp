@@ -17,17 +17,21 @@ namespace {
 
 	};
 }
-TEST_F(Node_Test, Node_Exclusion)
+
+TEST_F(Node_Test, Device_Exclusion)
 {
 	node_utilities::create_node("Test_Node_2");
-	Device_Label dl = node_utilities::add_device(node_utilities::local_node_handle, Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
+	Device_Label dl = node_utilities::add_device(node_utilities::local_node_handle, Device_Creator((int) DEVICE_IDENTIFIER::SWITCH, "Test1"));
 
 	Device_Label dl_e("Test_Node_2", 0);
-	
-	ASSERT_THROW(device_utilities::command_device(dl_e, new On()), DeviceNotFoundException);
 
+	EXPECT_THROW(device_utilities::command_device(dl_e, new On()), DeviceNotFoundException);
+}
+
+TEST_F(Node_Test, Node_Exclusion)
+{
 	Device_Label dl_e2("Test_Fail", 0);
-	ASSERT_THROW(device_utilities::command_device(dl_e2, new Off()), NodeNotFoundException);
+	EXPECT_THROW(device_utilities::command_device(dl_e2, new Off()), NodeNotFoundException);
 }
 
 TEST_F(Node_Test, Add_Devices)

@@ -100,20 +100,21 @@ void Scheduler::frame(std::chrono::milliseconds frameDurationMs)
     clean_persistence();
 }
 
-void Scheduler::add_system_task(Subtask task)
+void Scheduler::add_system_task(std::function<void()> task)
 {
-    system_task.add_subtask(task);
+    system_task.add_subtask(Sticky_Task(task));
 }
 
-void Scheduler::add_cleanup_task(Subtask task)
+void Scheduler::add_cleanup_task(std::function<void()> task)
 {
-    cleanup_task.add_subtask(task);
+    cleanup_task.add_subtask(Sticky_Task(task));
 }
 
 void Scheduler::start(int frameDuration) {
     scheduler_running = true;
     frame_rate = frameDuration;
-    scheduler_thread = std::thread([this] ()
+    int frames_run;
+    scheduler_thread = std::thread([ &frames_run, this] ()
                 {
                     int frames_run = 0;
                     LOG_INFO("Scheduler Start", "Scheduler");
@@ -175,9 +176,9 @@ Scheduler::Scheduler() :
 {
     tasks.resize(10);
 
-    system_task = Task("System", 1, .05);
+    system_task = Task("System", 1, .05, true, false);
     add_task(&system_task);
-    cleanup_task = Task("System Cleanup", 5, .05);
+    cleanup_task = Task("System Cleanup", 5, .05, true, false);
     add_task(&cleanup_task);
 }
 
