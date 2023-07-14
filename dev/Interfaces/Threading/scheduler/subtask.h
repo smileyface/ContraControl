@@ -20,10 +20,12 @@ struct Subtask
 
 /**
  * @brief A subtask that is removed from the run list after it is run. A run-once task.
+ * @param subtask A subtask to run as a one off
  */
 Subtask Cleaned_Task(std::function<void()> subtask);
 
 /**
  * @brief A subtask that sticks around the run list after it is run.
+ * @param subtask A subtask to run everytime the task is run.
  */
 Subtask Sticky_Task(std::function<void()> subtask);
