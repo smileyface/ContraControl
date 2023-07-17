@@ -101,10 +101,12 @@ target_include_directories(System_Messaging
 set(THREAD_POOL_HEADER_FILES
                     Threading/scheduler/scheduler.h
                     Threading/scheduler/task.h
-                    Threading/threading.h)
+                    Threading/threading.h 
+                    Threading/scheduler/subtask.h)
 set(THREAD_POOL_SOURCE_FILES
                     Threading/src/task.cpp
-                    Threading/src/scheduler.cpp)
+                    Threading/src/scheduler.cpp
+                    Threading/src/subtask.cpp)
 
 add_library(System_Threading ${THREAD_POOL_SOURCE_FILES} ${THREAD_POOL_HEADER_FILES})
 target_include_directories(System_Threading

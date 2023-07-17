@@ -32,7 +32,23 @@ public:
      * @brief Adds a task to the scheduler.
      * @param task The task to be added.
      */
-    void add_task(Task task);
+    void add_task(Task* task);
+
+    /**
+     * @brief Adds a system task to the scheduler.
+     * The system task is for adding more task to the current frame. It is run as part of PRI_1.
+     * 
+     * @param task The system task to add to the scheduler.
+     */
+    void add_system_task(std::function<void()> task);
+
+    /**
+     * @brief Adds a cleanup task to the scheduler.
+     * The cleanup task is for adding more task to the cleanup frame. It is run as part of PRI_5.
+     *
+     * @param task The cleanup task to add to the scheduler.
+     */
+    void add_cleanup_task(std::function<void()> task);
 
     /**
      * @brief Gets number of tasks on the scheduler.
@@ -47,6 +63,12 @@ public:
     int get_number_of_subtasks();
 
     /**
+     * @brief Gets the number of overruns.
+     * @return The number of overrun frames.
+     */
+    int get_overruns();
+
+    /**
      * @brief Starts the execution of the tasks with the given frame duration.
      * @param frame_rate The duration of a frame.
      */
@@ -58,6 +80,12 @@ public:
     void stop();
 
     /**
+     * @brief Run a single frame.
+     * @param frameDurationMs Duration of the frame.
+     */
+    void frame(std::chrono::milliseconds frameDurationMs);
+
+    /**
      * @brief Remove all tasks from the scheduler.
      */
     void clear();
@@ -67,9 +95,18 @@ private:
     ~Scheduler();
     Scheduler(const Scheduler&) = delete;
     Scheduler& operator=(const Scheduler&) = delete;
+    void clean_persistence();
 
-    std::vector<std::vector<Task>> tasks;
+    bool scheduler_running;
+    std::mutex mutex;
+
+    Task system_task;
+    Task cleanup_task;
+
+    std::vector<std::vector<Task*>> tasks;
     int frame_rate;
+    std::thread scheduler_thread;
+    int overruns;
 
     static Scheduler* instance;
 };

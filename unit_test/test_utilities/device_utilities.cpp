@@ -8,15 +8,19 @@ std::map<Device_Id, Device*> device_utilities::model_list;
 
 Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 {
-	if (command->get_id() == COMMAND_ENUM::INITALIZE)
+	if(model_list[label] == nullptr)
+	{
+		LOG_ERROR("Device not in testing model", "Testing Device Utilities");
+	}
+	else if (command->get_id() == COMMAND_ENUM::INITALIZE)
 	{
 		model_list[label]->initalize("nominal");
 	}
-	if (command->get_id() == COMMAND_ENUM::ON)
+	else if (command->get_id() == COMMAND_ENUM::ON)
 	{
 		model_list[label]->turn_on();
 	}
-	if (command->get_id() == COMMAND_ENUM::OFF)
+	else if (command->get_id() == COMMAND_ENUM::OFF)
 	{
 		model_list[label]->turn_off();
 	}
@@ -25,6 +29,7 @@ Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 
 void device_utilities::start_test_environment()
 {
+	model::initalize();
 	model::initalize_my_node(device_utilities::node_handle);
 }
 

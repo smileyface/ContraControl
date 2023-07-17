@@ -103,20 +103,27 @@ void system_utilities::cleanup()
 	controller::clean_up();
 	model::clean_up();
 	teardown_messaging();
+	Scheduler::get_instance()->stop();
+	Scheduler::get_instance()->clear();
+	Scheduler::destroy_instance();
 }
 
 void system_utilities::step(int steps)
 {
+	model::start_loop();
 	for(int i = 0; i < steps; i++)
 	{
 		controller::step();
-		model::step();
+		std::chrono::milliseconds frameDurationMs(100);
+		Scheduler::get_instance()->frame(frameDurationMs);
+		sleep_thread(100);
 	}
+	model::stop_loop();
 }
 
 void system_utilities::sleep_thread(int time_to_sleep)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(time_to_sleep));
+		std::this_thread::sleep_for(std::chrono::milliseconds(time_to_sleep));
 }
 
 void system_utilities::model_utilities::start()

@@ -2,13 +2,26 @@
 
 #include <iostream>
 
+int alive_threads = 0;
+
+Task::Task(const std::string& name, int priority, double percentage, bool persistence, bool clear_subtasks) :  
+    name(name),
+    priority(priority),
+    percentage(percentage),
+    is_running(false),
+    persistence(persistence),
+    overruns(0),
+    clear_subtasks(clear_subtasks)
+{ }
+
 Task::Task(const std::string& name, int priority, double percentage, bool persistence = false) :
     name(name),
     priority(priority),
     percentage(percentage),
     is_running(false),
     persistence(persistence),
-    overruns(0)
+    overruns(0),
+    clear_subtasks(true)
 { }
 
 Task::Task(const std::string& name, int priority, double percentage) :
@@ -17,7 +30,8 @@ Task::Task(const std::string& name, int priority, double percentage) :
     percentage(percentage),
     is_running(false),
     persistence(true),
-    overruns(0)
+    overruns(0),
+    clear_subtasks(true)
 { }
 
 Task::Task(const Task& other) :
@@ -27,23 +41,39 @@ Task::Task(const Task& other) :
     is_running(false), 
     persistence(other.persistence),
     subtasks(other.subtasks),
-    overruns(other.overruns)
+    overruns(other.overruns),
+    clear_subtasks(other.clear_subtasks)
 { }
 
+Task::Task() :
+    name(""),
+    priority(0),
+    percentage(0.0),
+    is_running(false),
+    persistence(false),
+    subtasks({}),
+    overruns(0),
+    clear_subtasks(true)
+{ }
+
+Task::~Task()
+{
+    stop();
+}
+
+void Task::add_subtask(const Subtask& subtask)
+{
+    subtasks.push_back(subtask);
+}
 
 void Task::add_subtask(const std::function<void()>& subtask)
 {
-    subtasks.push_back(subtask);
+    subtasks.push_back(Sticky_Task(subtask));
 }
 
 int Task::number_of_subtask()
 {
     return subtasks.size();
-}
-
-int Task::get_overruns()
-{
-    return overruns;
 }
 
 int Task::get_priority()
@@ -61,28 +91,32 @@ std::string Task::get_name()
     return name;
 }
 
+void Task::set_persistence(bool persist)
+{
+    persistence = persist;
+}
+
 void Task::run(std::chrono::milliseconds frameDuration)
 {
-    auto taskExecutionTime = static_cast<int>(frameDuration.count() * percentage);
-
-    auto startTime = std::chrono::steady_clock::now();
-    auto currentTime = startTime;
-    std::chrono::duration<double> elapsedSeconds = currentTime - startTime;
-
+    alive_threads++;
     for(const auto& subtask : subtasks)
     {
-        if(elapsedSeconds >= std::chrono::milliseconds(taskExecutionTime))
+        if(is_running)
+            subtask.task();
+    }
+    is_running = false;
+    alive_threads--;
+    auto tasks = subtasks.begin();
+    while(tasks != subtasks.end())
+    {
+        if(tasks->clean_after)
         {
-            if(elapsedSeconds >= std::chrono::milliseconds(static_cast<int>(taskExecutionTime * 1.5)) )
-            {
-                overruns++;
-            }
-            break;
+            tasks = subtasks.erase(tasks);
         }
-        subtask();
-
-        currentTime = std::chrono::steady_clock::now();
-        elapsedSeconds = currentTime - startTime;
+        else
+        {
+            tasks++;
+        }
     }
 }
 
@@ -91,17 +125,34 @@ void Task::start(std::chrono::milliseconds frameDuration)
     if(!is_running)
     {
         is_running = true;
-        thread = std::thread(&Task::run, this, frameDuration);
+        thread.push_back(std::thread(&Task::run, this, frameDuration));
     }
 }
 
 void Task::stop()
 {
-    if(is_running)
+    for(auto i = thread.begin(); i != thread.end(); i++)
     {
-        is_running = false;
-        thread.join();
+        if((*i).joinable())
+        {
+            (*i).join();
+        }
+        
     }
+    thread.clear();
+
+    
+    while(thrown_exceptions.size() > 0)
+    {
+        std::exception_ptr ex = thrown_exceptions.front();
+        thrown_exceptions.pop();
+        std::rethrow_exception(ex);
+    }
+}
+
+void Task::exception(std::exception_ptr ex)
+{
+    thrown_exceptions.push(ex);
 }
 
 Task& Task::operator=(const Task& other)
