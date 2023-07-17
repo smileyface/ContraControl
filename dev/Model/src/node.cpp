@@ -9,9 +9,22 @@ Node::Node(NODE_TYPE type)
 }
 Node::Node()
 {
-
 	my_type = NODE_TYPE::INVALID;
 	id_pool = 0;
+}
+Node::~Node()
+{
+	for(auto device = devices.begin(); device != devices.end();device++)
+	{
+		delete device->second;
+	}
+	devices.clear();
+	for(auto conn = connections.begin(); conn != connections.end(); conn++)
+	{
+		delete conn->second;
+	}
+	connections.clear();
+
 }
 
 void Node::clear_node()
@@ -44,6 +57,7 @@ void Node::register_device(Device_Creator device)
 
 void Node::remove_device(Device_Id label)
 {
+	delete devices[label];
 	devices.erase(label);
 }
 
@@ -89,6 +103,11 @@ Node* Node::get_connection(Node_Id id)
 void Node::add_connection(NODE_TYPE type, Node_Id id)
 {
 	connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
+}
+
+void Node::remove_connection(Node_Id id)
+{
+	delete connections[id];
 }
 
 Node_Id Node::get_id()

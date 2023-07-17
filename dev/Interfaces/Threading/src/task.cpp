@@ -101,7 +101,8 @@ void Task::run(std::chrono::milliseconds frameDuration)
     alive_threads++;
     for(const auto& subtask : subtasks)
     {
-        subtask.task();
+        if(is_running)
+            subtask.task();
     }
     is_running = false;
     alive_threads--;

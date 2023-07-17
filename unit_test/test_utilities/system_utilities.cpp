@@ -103,6 +103,7 @@ void system_utilities::cleanup()
 	controller::clean_up();
 	model::clean_up();
 	teardown_messaging();
+	Scheduler::get_instance()->stop();
 	Scheduler::get_instance()->clear();
 	Scheduler::destroy_instance();
 }
@@ -117,6 +118,7 @@ void system_utilities::step(int steps)
 		Scheduler::get_instance()->frame(frameDurationMs);
 		sleep_thread(100);
 	}
+	model::stop_loop();
 }
 
 void system_utilities::sleep_thread(int time_to_sleep)

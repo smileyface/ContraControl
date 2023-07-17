@@ -59,22 +59,28 @@ void mangle_model(T* command, Device* device)
 void model::step()
 {
 	int model_step_thread = 0;
+	std::vector<Model_Command> model_actions(model::step_actions);
 	for(auto i = 0; i < model::step_actions.size(); ++i)
 	{
 		model_step_thread++;
-		model_task.add_subtask(Cleaned_Task([i, &model_step_thread] () mutable
-							   {
-								   try
+		if(model::step_actions[i].run == false)
+		{
+			model_task.add_subtask(Cleaned_Task([i, &model_step_thread] () mutable
 								   {
-									   mangle_model(model::step_actions[i].command, model::get_device(model::step_actions[i].label));
-									   model::step_actions[i].command->time_to_complete -= model_timer.get_elapsed_time();
-								   }
-								   catch(std::exception&)
-								   {
-									   model_task.exception(std::current_exception());
-								   }
-								   model_step_thread--;
-							   } ));
+									   try
+									   {
+										   mangle_model(model::step_actions[i].command, model::get_device(model::step_actions[i].label));
+										   model::step_actions[i].command->time_to_complete -= model_timer.get_elapsed_time();
+									   }
+									   catch(std::exception&)
+									   {
+										   model_task.exception(std::current_exception());
+									   }
+									   model_step_thread--;
+								   }));
+			model::step_actions[i].run = true;
+		}
+
 	}
 }
 
@@ -95,6 +101,7 @@ void model::stop_loop()
 void model::clean_up()
 {
 	my_node.clear_node();
+	step_actions.clear();
 }
 
 void model::initalize_my_node(Node_Id id)
