@@ -40,7 +40,6 @@ namespace model
 	 Actions to be completed on this step of the loop.
 	 */
 	extern Command_List step_actions;
-
 	/**
 	 * Task to add model to the scheduler.
 	 */

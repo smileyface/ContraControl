@@ -45,6 +45,7 @@ void system_utilities::setup()
 		testing_utilities::network_utilities::exception_handle();
 	}
 	setup_messaging();
+
 }
 
 void system_utilities::setup_messaging()
@@ -61,6 +62,18 @@ void system_utilities::teardown_messaging()
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
 	Message_Relay::get_instance()->clear();
 	message_consumer = 0;
+}
+
+void system_utilities::start_system()
+{
+	model::start_loop();
+	controller::start_controller();
+}
+
+void system_utilities::stop_system()
+{
+	model::stop_loop();
+	controller::stop_controller();
 }
 
 void display_log_messages(Logging_Message mess)
@@ -110,15 +123,12 @@ void system_utilities::cleanup()
 
 void system_utilities::step(int steps)
 {
-	model::start_loop();
 	for(int i = 0; i < steps; i++)
 	{
-		controller::step();
 		std::chrono::milliseconds frameDurationMs(100);
 		Scheduler::get_instance()->frame(frameDurationMs);
 		sleep_thread(100);
 	}
-	model::stop_loop();
 }
 
 void system_utilities::sleep_thread(int time_to_sleep)

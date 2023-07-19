@@ -10,10 +10,13 @@ namespace {
 	protected:
 		Device_Label dl;
 		virtual void SetUp() {
+			system_utilities::setup();
+			system_utilities::start_system();
 			device_utilities::start_test_environment();
 			dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 		}
 		virtual void TearDown() {
+			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}
 	};
@@ -21,10 +24,13 @@ namespace {
 	protected:
 		Device_Label dl;
 		virtual void SetUp() {
+			system_utilities::setup();
+			system_utilities::start_system();
 			device_utilities::start_test_environment();
 			dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::GRADIENT, "Test1"));
 		}
 		virtual void TearDown() {
+			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}
 	};
@@ -32,10 +38,13 @@ namespace {
 	protected:
 		Device_Label dl;
 		virtual void SetUp() {
+			system_utilities::setup();
+			system_utilities::start_system();
 			device_utilities::start_test_environment();
 			dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::RGB, "Test1"));
 		}
 		virtual void TearDown() {
+			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}
 	};
@@ -44,9 +53,11 @@ namespace {
 		Device_Label dl;
 		virtual void SetUp() {
 			device_utilities::start_test_environment();
+			system_utilities::start_system();
 			dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::INVALID, "Test1"));
 		}
 		virtual void TearDown() {
+			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}
 	};
