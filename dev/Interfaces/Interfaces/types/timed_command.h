@@ -42,6 +42,7 @@ public:
 		command = cmd;
 		device_label = label;
 		time = t;
+		run = false;
 	};
 
 	/**
