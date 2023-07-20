@@ -5,7 +5,8 @@
 #include <mutex>
 
 #include "Interfaces/types/state.h"
-#include "Threading/threading.h"
+
+#include "Messaging/message_relay.h"
 
 
 std::thread model_thread;
@@ -14,7 +15,6 @@ std::mutex model_mutex;
 Timer model_timer;
 std::atomic<bool> model::model_running;
 Command_List model::step_actions;
-Task model::model_task;
 
 Node model::my_node;
 
@@ -22,23 +22,6 @@ void model::initalize()
 {
 	model_timer.reset_clock();
 	initalize_my_node("LOCAL");
-	model_task = Task("Model", 2, .2);
-	Scheduler::get_instance()->add_system_task(model::step);
-	Scheduler::get_instance()->add_cleanup_task([] ()
-												{
-													model_timer.update_time();
-													for(auto i = model::step_actions.begin(); i != model::step_actions.end(); )
-													{
-														if(i->run)
-														{
-															i = model::step_actions.erase(i);
-														}
-														else
-														{
-															i++;
-														}
-													}
-												} );
 }
 
 Node* model::get_node(Node_Id id)
@@ -68,53 +51,50 @@ void mangle_model(T* command, Device* device)
 
 void model::step()
 {
-	int model_step_thread = 0;
-	std::vector<Model_Command> model_actions(model::step_actions);
-	for(auto i = 0; i < model::step_actions.size(); ++i)
+	for(Command_List::iterator it = model::step_actions.begin(); it != model::step_actions.end(); ++it)
 	{
-		model_step_thread++;
-		if(model::step_actions[i].run == false)
+		try
 		{
-			auto command = model::step_actions[i].command;
-			auto label = model::step_actions[i].label;
-			model_task.add_subtask(Cleaned_Task([i, command, label, &model_step_thread] () mutable
-								   {
-									   try
-									   {
-										   mangle_model(command, model::get_device(label));
-										   command->complete_command();
-										   command->time_to_complete -= model_timer.get_elapsed_time();
-									   }
-									   catch(std::exception&)
-									   {
-										   model_task.exception(std::current_exception());
-									   }
-									   model_step_thread--;
-								   }));
-			model::step_actions[i].run = true;
+			mangle_model(it->command, model::get_device(it->label));
+			it->command->time_to_complete -= model_timer.get_elapsed_time();
 		}
+		catch(std::exception&)
+		{
+			model::step_actions.erase(model::step_actions.begin(), model::step_actions.begin() + 1);
+			std::rethrow_exception(std::current_exception());
+		}
+	}
 
+	model_timer.update_time();
+	model::step_actions.erase(model::step_actions.begin(), model::step_actions.end());
+}
+
+void model_loop()
+{
+	LOG_DEBUG("Loop thread has started");
+	while(model::model_running)
+	{
+		model::step();
 	}
 }
 
 void model::start_loop()
 {
 	model_running = true;
-	LOG_INFO("Model added to scheduler", subsystem_name);
-	Scheduler::get_instance()->add_task(&model::model_task);
+	LOG_INFO("Model Started", subsystem_name);
+	model_thread = std::thread(model_loop);
 }
 
 void model::stop_loop()
 {
 	LOG_INFO("Model Stopped", subsystem_name);
 	model_running = false;
-	model_task.set_persistence(false);
+	model_thread.join();
 }
 
 void model::clean_up()
 {
 	my_node.clear_node();
-	step_actions.clear();
 }
 
 void model::initalize_my_node(Node_Id id)

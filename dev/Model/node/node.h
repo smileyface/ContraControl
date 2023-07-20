@@ -43,7 +43,6 @@ public:
 	Node(NODE_TYPE type);
 
 	Node();
-	~Node();
 	/**
 	 Get ready to destroy node.
 	 */
@@ -101,11 +100,6 @@ public:
 	 */
 	void add_connection(NODE_TYPE type, Node_Id id);
 
-	/**
-	 * Remove a connection to a node.
-	 * \param id The ID to the node that needs removing
-	 */
-	void remove_connection(Node_Id id);
 
 	/**
 	 * Get the id of the local node.

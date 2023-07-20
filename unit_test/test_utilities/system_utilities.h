@@ -9,8 +9,6 @@ namespace system_utilities
 	void setup();
 	void setup_messaging();
 	void teardown_messaging();
-	void start_system();
-	void stop_system();
 
 	void cleanup();
 	void print_log_messages();

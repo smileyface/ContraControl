@@ -12,46 +12,32 @@ std::mutex controller_mutex;
 Timer controller_timer;
 bool controller::controller_running = true;
 Timed_List controller::controller_queue;
-Task controller::controller_task;
-
-//FILE GLOBALS
-std::vector<int> remove_indexes;
 
 void controller::initalize()
 {
 	controller_timer.reset_clock();
-	controller_task = Task("Controller", 2, .15);
-	Scheduler::get_instance()->add_system_task(controller::step);
-	Scheduler::get_instance()->add_cleanup_task([] ()
-												{
-													for(auto command = controller::controller_queue.begin(); command != controller::controller_queue.end();)
-													{
+}
 
-														controller_mutex.lock();
-														if(command->command->completed())
-														{
-															command = controller::controller_queue.erase(command);
-														}
-														else
-														{
-															command++;
-														}
-														controller_mutex.unlock();
-													}
-												});
+void controller_loop()
+{
+	LOG_DEBUG("Loop thread has started");
+	while(controller::controller_running)
+	{
+		controller::step();
+	}
 }
 void controller::start_controller()
 {
-	controller_running = true;
-	LOG_INFO("Controller Added to the Scheduler", subsystem_name);
-	Scheduler::get_instance()->add_task(&controller::controller_task);
+	LOG_INFO("Controller Started", subsystem_name);
+	controller_thread = std::thread(controller_loop);
 }
 
 void controller::stop_controller()
 {
 	LOG_INFO("Controller Stopped", subsystem_name);
-	controller_task.set_persistence(false);
 	controller_running = false;
+	if(controller_thread.joinable())
+		controller_thread.join();
 }
 
 void controller::add_command(Timed_Command tc)
@@ -67,37 +53,28 @@ void controller::add_command(Timed_Command tc)
 
 void controller::step()
 {
+	std::vector<int> remove_indexes;
 	for(int i = 0; i < controller_queue.size(); i++)
 	{
-		if(controller_queue[i].run == false)
+		if(controller_queue[i].time <= 0)
 		{
-			controller_task.add_subtask(Cleaned_Task([i] ()
-										{
-											try
-											{
-												if(controller::controller_queue[i].time <= 0)
-												{
-													Controller_Interfaces::Model_Interface::send_command(controller::controller_queue[i]);
-												}
-												else
-												{
-													controller::controller_queue[i].time -= controller_timer.get_elapsed_time();
-												}
-											}
-											catch(std::exception&)
-											{
-												controller::controller_task.exception(std::current_exception());
-											}
-
-										}));
-			controller::controller_queue[i].run = true;
+			Controller_Interfaces::Model_Interface::send_command(controller_queue[i]);
+			if(controller_queue[i].command->completed())
+				remove_indexes.push_back(i);
+		}
+		else
+		{
+			controller_queue[i].time -= controller_timer.get_elapsed_time();
 		}
 	}
-
-
+	for(size_t i = 0; i < remove_indexes.size(); i++)
+	{
+		controller_queue.erase(controller_queue.begin() + remove_indexes[i]);
+	}
+	controller_timer.update_time();
 }
 
 void controller::clean_up()
 {
-	controller_queue.clear();
+	controller_queue.erase(controller_queue.begin(), controller_queue.end());
 }

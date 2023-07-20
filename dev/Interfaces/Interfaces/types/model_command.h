@@ -26,7 +26,6 @@ public:
 	{
 		label = device_label;
 		command = cmd;
-		run = false;
 	};
 	/**
 	 Label that maps to the device to run.
@@ -36,11 +35,6 @@ public:
 	 Command to run.
 	 */
 	Command* command;
-
-	/**
-	 * Command has been run.
-	 */
-	bool run;
 };
 
 /**

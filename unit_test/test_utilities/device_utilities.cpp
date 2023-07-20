@@ -8,19 +8,15 @@ std::map<Device_Id, Device*> device_utilities::model_list;
 
 Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 {
-	if(model_list[label] == nullptr)
-	{
-		LOG_ERROR("Device not in testing model", "Testing Device Utilities");
-	}
-	else if (command->get_id() == COMMAND_ENUM::INITALIZE)
+	if (command->get_id() == COMMAND_ENUM::INITALIZE)
 	{
 		model_list[label]->initalize("nominal");
 	}
-	else if (command->get_id() == COMMAND_ENUM::ON)
+	if (command->get_id() == COMMAND_ENUM::ON)
 	{
 		model_list[label]->turn_on();
 	}
-	else if (command->get_id() == COMMAND_ENUM::OFF)
+	if (command->get_id() == COMMAND_ENUM::OFF)
 	{
 		model_list[label]->turn_off();
 	}
@@ -47,7 +43,7 @@ void device_utilities::remove_device(Device_Label label)
 Device* device_utilities::command_device(Device_Label label, Command* command)
 {
 	controller::add_command(Timed_Command(command, label, 0));
-	system_utilities::step(2);
+	system_utilities::step(1);
 	Device* ds = get_nominal_state(label.get_device_id(), command);
 	return ds;
 }
@@ -55,6 +51,7 @@ Device* device_utilities::command_device(Device_Label label, Command* command)
 void device_utilities::add_command(Device_Label label, Command* command)
 {
 	controller::add_command(Timed_Command(command, label, 0));
+	controller::step();
 }
 
 Device* device_utilities::finish_command(Device_Label label, Command* command)

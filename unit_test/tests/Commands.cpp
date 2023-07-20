@@ -11,12 +11,10 @@ namespace {
 		Device_Label dl;
 		virtual void SetUp() {
 			system_utilities::setup();
-			system_utilities::start_system();
 			device_utilities::start_test_environment();
 			dl = device_utilities::add_device(Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Test1"));
 		}
 		virtual void TearDown() {
-			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}
 		void switch_to_device(DEVICE_IDENTIFIER device_type) {
@@ -74,7 +72,7 @@ TEST_F(Commands_Test, Device_Duplicate_Command) {
 	device_utilities::add_command(dl, on);
 	device_utilities::add_command(dl, new Off());
 	device_utilities::add_command(dl, on);
-	system_utilities::step(2);
+	system_utilities::step(1);
 
 	Device* ds = new Device();
 	ds->initalize("tester");
@@ -84,7 +82,7 @@ TEST_F(Commands_Test, Device_Duplicate_Command) {
 	device_utilities::add_command(dl, new On());
 	device_utilities::add_command(dl, new Off());
 	device_utilities::add_command(dl, new On());
-	system_utilities::step(2);
+	system_utilities::step(1);
 
 	ds->turn_on();
 	testing_utilities::device_utilities::check_state(dl, ds);
