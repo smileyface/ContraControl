@@ -17,14 +17,6 @@ Task controller::controller_task;
 //FILE GLOBALS
 std::vector<int> remove_indexes;
 
-void controller_loop()
-{
-	LOG_DEBUG("Loop thread has started");
-	while(controller::controller_running)
-	{
-		controller::step();
-	}
-}
 void controller::initalize()
 {
 	controller_timer.reset_clock();
