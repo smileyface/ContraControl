@@ -1,7 +1,7 @@
-name: Validity Checks (Pull Request)
+name: Validity Checks (Push)
 
 on:
-    pull_request:
+    push:
         branches: [master]
 
 env:
