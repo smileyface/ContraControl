@@ -9,9 +9,11 @@ namespace {
 	class Node_Test : public ::testing::Test {
 		virtual void SetUp() {
 			system_utilities::setup();
+			system_utilities::start_system();
 			node_utilities::start_test_environment();
 		}
 		virtual void TearDown() {
+			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}
 

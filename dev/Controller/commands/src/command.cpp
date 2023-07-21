@@ -1,5 +1,20 @@
 #include "../command.h"
 
-COMMAND_ENUM Command::get_id() { return COMMAND_ENUM::INVALID; }
+Command::Command() : 
+	complete(false)
+{ }
 
-bool Command::completed() { return time_to_complete <= 0.0; }
+COMMAND_ENUM Command::get_id() 
+{ 
+	return COMMAND_ENUM::INVALID; 
+}
+
+bool Command::completed() 
+{ 
+	return complete;
+}
+
+void Command::complete_command()
+{
+	complete = true;
+}

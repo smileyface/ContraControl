@@ -27,7 +27,17 @@ void model::initalize()
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{
 													model_timer.update_time();
-													model::step_actions.clear();
+													for(auto i = model::step_actions.begin(); i != model::step_actions.end(); )
+													{
+														if(i->run)
+														{
+															i = model::step_actions.erase(i);
+														}
+														else
+														{
+															i++;
+														}
+													}
 												} );
 }
 
@@ -65,12 +75,15 @@ void model::step()
 		model_step_thread++;
 		if(model::step_actions[i].run == false)
 		{
-			model_task.add_subtask(Cleaned_Task([i, &model_step_thread] () mutable
+			auto command = model::step_actions[i].command;
+			auto label = model::step_actions[i].label;
+			model_task.add_subtask(Cleaned_Task([i, command, label, &model_step_thread] () mutable
 								   {
 									   try
 									   {
-										   mangle_model(model::step_actions[i].command, model::get_device(model::step_actions[i].label));
-										   model::step_actions[i].command->time_to_complete -= model_timer.get_elapsed_time();
+										   mangle_model(command, model::get_device(label));
+										   command->complete_command();
+										   command->time_to_complete -= model_timer.get_elapsed_time();
 									   }
 									   catch(std::exception&)
 									   {

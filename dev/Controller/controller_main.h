@@ -12,6 +12,7 @@
 #include "Interfaces/types/timed_command.h"
 #include "system/timer.h"
 #include "Messaging/message_relay.h"
+#include "Threading/threading.h"
 
  /**
   * Main brain of the controller. It keeps track of commands to send to the model, and when to send them
@@ -31,6 +32,10 @@ namespace controller
 	 Sorted queue of commands to send to the model.
 	 */
 	extern Timed_List controller_queue;
+	/**
+	 * Task to add the controller to the scheduler.
+	 */
+	extern Task controller_task;
 
 	/**
 	 * Start up.
