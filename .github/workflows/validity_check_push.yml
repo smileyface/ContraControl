@@ -2,7 +2,7 @@ name: Validity Checks (Push)
 
 on:
     push:
-        branches: [patch/**,  feature/**]
+        branches: [main]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -27,6 +27,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Create Build Environment
+      run: cmake -E make_directory ${{runner.workspace}}/build
+      
+    - name: Configure CMake
       # Use a bash shell so we can use the same syntax for environment variable
       # access regardless of the host operating system
       shell: bash
