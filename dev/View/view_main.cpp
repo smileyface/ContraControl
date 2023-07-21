@@ -7,8 +7,15 @@ std::vector<Format*> view::list_of_formats = {};
 bool view::view_running = false;
 int display_id = 0;
 
+Task view::view_task;
+
 void view::initalize()
 {
+	view_task = Task("View", 2, .4);
+	Scheduler::get_instance()->add_system_task([] ()
+											   { });
+	Scheduler::get_instance()->add_cleanup_task([] ()
+												{ });
 	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
 	{
 		(*iterator)->initalize();

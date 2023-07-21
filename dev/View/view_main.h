@@ -9,6 +9,7 @@
 #ifndef VIEW_EXECUTOR_H
 #define VIEW_EXECUTOR_H
 #include "format/format.h"
+#include "Threading/threading.h"
 
 /**
  * An interface for every display.
@@ -23,6 +24,10 @@ namespace view
 	 * Boolean for the state of all views.
 	 */
 	extern bool view_running;
+	/**
+	 * Task to add view to the scheduler.
+	 */
+	extern Task view_task;
 
 	/**
 	 * Initalize all formats.
