@@ -58,7 +58,7 @@ TEST_F(Internal_Message_Test, Multiple_Consumer)
 	LOG_DEBUG("Test Debug");
 	Logging_Message message = Message_Relay::get_instance()->pop<Logging_Message>(con_two);
 	EXPECT_EQ(message.get_message(), "Test Debug");
-
+	Message_Relay::get_instance()->deregister_consumer(con_two);
 }
 
 TEST_F(Internal_Message_Test, Freshen)
