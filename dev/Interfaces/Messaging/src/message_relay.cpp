@@ -65,6 +65,11 @@ int Message_Relay::number_of_messages(Message_Consumer* mc)
 	return number_of_messages;
 }
 
+int Message_Relay::number_of_consumers()
+{
+	return list_of_registered_consumers.size();
+}
+
 Message_Ptr<Internal_Message> Message_Relay::front(Message_Consumer* mc)
 {
 	Message_Ptr<Internal_Message> message = 0;

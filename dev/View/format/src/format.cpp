@@ -29,8 +29,8 @@ void Format::update_views()
 
 		if(r->quit())
 		{
-			r->on_quit();
 			r->on_destroy();
+			r->on_quit();
 			destroy_list.push_back(i);
 		}
 	}
@@ -44,8 +44,9 @@ void Format::clean_views()
 {
 	for(auto i = view_list.begin(); i != view_list.end(); i++)
 	{
-		(*i)->on_destroy();
+		(*i)->quit_view();
 	}
+	Message_Relay::get_instance()->deregister_consumer(format_consumer);
 }
 
 void Format::process_internal_messages()
@@ -61,19 +62,4 @@ void Format::process_internal_messages()
 			LOG_INFO(log_message, "Option Popup Creation");
 		}
 	}
-}
-
-void Format::start_display()
-{
-	format_running = true;
-	looping_thread = new std::thread([this]
-									 {
-										 this->loop();
-									 });
-}
-
-void Format::stop_display()
-{
-	format_running = false;
-	looping_thread->join();
 }

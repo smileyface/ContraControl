@@ -22,6 +22,8 @@ namespace
 		virtual void SetUp()
 		{
 			system_utilities::setup();
+			system_utilities::start_system();
+			view::add_display(DISPLAY_TYPES::CONSOLE);
 			logging_messages = Message_Relay::get_instance()->register_consumer<Logging_Message>();
 			option_consumer = Message_Relay::get_instance()->register_consumer<Option_Popup_Message>();
 		}
@@ -29,6 +31,7 @@ namespace
 		{
 			Message_Relay::get_instance()->deregister_consumer(logging_messages);
 			Message_Relay::get_instance()->deregister_consumer(option_consumer);
+			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}
 	};
@@ -50,12 +53,6 @@ TEST_F(Command_View_Message_Test, Request_Message_On_Relay)
 TEST_F(Command_View_Message_Test, Send_Option)
 {
 
-
-	view::add_display(DISPLAY_TYPES::CONSOLE);
-	view::initalize();
-	view::start_view();
-
-
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
 	system_utilities::keyboard_utilities::Keyboard keyboard;
 	//NEED TO ADD BUFFER INPUT INTERFACE
@@ -75,5 +72,5 @@ TEST_F(Command_View_Message_Test, Send_Option)
 	EXPECT_EQ(message_in_view, true);
 
 
-	view::stop_view();
+
 }

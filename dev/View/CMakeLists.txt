@@ -77,4 +77,4 @@ IF (CMAKE_HOST_WIN32)
 ENDIF()
 
 
-target_link_libraries(View_Library PUBLIC  System_Interface System_Messaging Utilities)
+target_link_libraries(View_Library PUBLIC  System_Interface System_Messaging System_Threading Utilities)

@@ -38,6 +38,7 @@ void system_utilities::setup()
 	{
 		model::initalize();
 		controller::initalize();
+		view::initalize();
 	}
 	catch(NetworkErrorException)
 	{
@@ -60,6 +61,7 @@ void system_utilities::teardown_messaging()
 {
 	print_log_messages();
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
+	testing_utilities::message_utilities::system_is_clean();
 	Message_Relay::get_instance()->clear();
 	message_consumer = 0;
 }
@@ -68,12 +70,14 @@ void system_utilities::start_system()
 {
 	model::start_loop();
 	controller::start_controller();
+	view::start_view();
 }
 
 void system_utilities::stop_system()
 {
 	model::stop_loop();
 	controller::stop_controller();
+	view::stop_view();
 }
 
 void display_log_messages(Logging_Message mess)
@@ -115,6 +119,7 @@ void system_utilities::cleanup()
 {
 	controller::clean_up();
 	model::clean_up();
+	view::clean_up();
 	teardown_messaging();
 	Scheduler::get_instance()->stop();
 	Scheduler::get_instance()->clear();

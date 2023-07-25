@@ -25,11 +25,9 @@ public:
 	 */
 	View* add_view(VIEW_TYPE_ENUM view);
 
-protected:
-	void loop();
 
-private:
-	void console_display_thread();
+protected:
+	void step();
 };
 
 #endif

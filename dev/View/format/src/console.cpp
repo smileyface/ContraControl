@@ -24,12 +24,9 @@ View* Console_Format::add_view(VIEW_TYPE_ENUM view)
 	return new_view;
 }
 
-void Console_Format::loop()
+void Console_Format::step()
 {
-	while(format_running)
-	{
 		process_internal_messages();
 		update_views();
 		//send off internal messages();
-	}
 }

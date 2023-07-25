@@ -12,8 +12,7 @@ Task view::view_task;
 void view::initalize()
 {
 	view_task = Task("View", 2, .4);
-	Scheduler::get_instance()->add_system_task([] ()
-											   { });
+	Scheduler::get_instance()->add_system_task(view::step);
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{ });
 	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
@@ -24,17 +23,33 @@ void view::initalize()
 
 void view::start_view()
 {
-	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
-	{
-		(*iterator)->start_display();
-	}
+	LOG_INFO("View System added to the Scheduler", subsystem_name);
+	Scheduler::get_instance()->add_task(&view::view_task);
 }
 
 void view::stop_view()
 {
-	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
+	LOG_INFO("View Stopped", subsystem_name);
+	view_task.set_persistence(false);
+	view_running = false;
+}
+
+void view::clean_up()
+{
+	for(int i = 0; i < list_of_formats.size(); i++)
 	{
-		(*iterator)->stop_display();
+		list_of_formats[i]->clean_views();
+	}
+}
+
+void  view::step()
+{
+	for(int i = 0; i < list_of_formats.size(); i++)
+	{
+		view::view_task.add_subtask(Cleaned_Task([i] ()
+									{
+										list_of_formats[i]->step();
+									}));
 	}
 }
 

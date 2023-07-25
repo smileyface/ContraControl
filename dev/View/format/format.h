@@ -57,14 +57,10 @@ public:
 	 */
 	void clean_views();
 
-	/** Start the view in a new threaded loop. */
-	void start_display();
-	/** Stop the display loop */
-	void stop_display();
-
+	/** An update step for the views */
+	virtual void step() = 0;
 protected:
-	/** Loop to update the views */
-	virtual void loop() = 0;
+
 	/** List of views that the format controls */
 	std::vector<View*> view_list;
 	/** Is the display loop running */

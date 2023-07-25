@@ -81,6 +81,13 @@ public:
 	int number_of_messages(Message_Consumer* consumer);
 
 	/**
+	 * Get the number of consumers on the relay
+	 * 
+	 * \return number of consumers on the relay.
+	 */
+	int number_of_consumers();
+
+	/**
 	 * Get an instance of the first message in the front of the list. Does not remove the object from the message relay.
 	 *
 	 * \param consumer Pointer to the consumer requesting to get its messages.

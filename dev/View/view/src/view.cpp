@@ -12,3 +12,15 @@ Console_View::Console_View()
 	keyboard = new Linux_Keyboard();
 #endif
 }
+
+View::View() :
+	quiter(false)
+{ }
+
+View::~View()
+{ }
+
+void View::quit_view()
+{ 
+	quiter = true;
+}

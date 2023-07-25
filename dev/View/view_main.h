@@ -10,12 +10,17 @@
 #define VIEW_EXECUTOR_H
 #include "format/format.h"
 #include "Threading/threading.h"
+#include "Messaging/message_relay.h"
 
 /**
  * An interface for every display.
  */
 namespace view
 {
+	/**
+	 * .The string of the namespace name. This is for locating Messages.
+	 */
+	static const char* subsystem_name = "View";
 	/**
 	 * Contained list of formats. Not for public consumption.
 	 */
@@ -41,6 +46,14 @@ namespace view
 	 * Stop all Formats threads.
 	 */
 	void stop_view();
+	/**
+	 * Clean all the view.
+	 */
+	void clean_up();
+	/**
+	 * A single step of the view.
+	 */
+	void step();
 	/**
 	 * Add a new Format.
 	 * \param display Type for Format to display.

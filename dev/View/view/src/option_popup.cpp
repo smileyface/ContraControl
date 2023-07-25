@@ -88,7 +88,7 @@ bool Console_Option_Popup::is_stale()
 
 bool Console_Option_Popup::quit()
 {
-	return choice > 0;
+	return choice > 0 || quiter;
 }
 
 void Console_Option_Popup::set_options(std::string query,std::vector<std::string> list_of_options)

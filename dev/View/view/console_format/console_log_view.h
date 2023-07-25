@@ -22,6 +22,7 @@ public:
     void on_display();
     void on_refresh();
     void on_paint();
+    void on_destroy();
 
     bool is_stale();
     bool quit();
@@ -29,6 +30,7 @@ private:
 	std::string system_id;
     std::string message_;
     std::string message_level;
+    bool message_valid;
 
     std::string painted_message;
 };
