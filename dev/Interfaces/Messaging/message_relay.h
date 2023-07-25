@@ -102,6 +102,11 @@ public:
 	static Message_Relay* get_instance();
 
 	/**
+	Destroy the instance of the singleton
+	*/
+	static void destroy_instance();
+
+	/**
 	 * Register consumer for message consumption.
 	 * \param consumer Add a Message_Consumer to the list of known consumers. You must do this before you are able to recieve messages.
 	 * \return A pointer to the consumer on the relay

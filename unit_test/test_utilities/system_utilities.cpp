@@ -68,6 +68,7 @@ void system_utilities::teardown_messaging()
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
 	testing_utilities::message_utilities::system_is_clean();
 	Message_Relay::get_instance()->clear();
+	Message_Relay::destroy_instance();
 	message_consumer = 0;
 }
 
@@ -129,6 +130,7 @@ void system_utilities::cleanup()
 	Scheduler::get_instance()->stop();
 	Scheduler::get_instance()->clear();
 	Scheduler::destroy_instance();
+	system_setup = false;
 }
 
 void system_utilities::step(int steps)

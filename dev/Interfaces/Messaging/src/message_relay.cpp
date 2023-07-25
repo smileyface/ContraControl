@@ -113,6 +113,16 @@ Message_Relay* Message_Relay::get_instance()
 	return instance;
 }
 
+void Message_Relay::destroy_instance()
+{ 
+	if(instance != NULL)
+	{
+		delete instance;
+		instance = NULL;
+	}
+
+}
+
 void Message_Relay::clear()
 { 
 	std::lock_guard<std::mutex> guard(g_pages_mutex);
