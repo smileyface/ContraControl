@@ -60,7 +60,6 @@ void enable_keys(int fd)
 
 void system_utilities::keyboard_utilities::setup()
 {
-	system_utilities::setup();
 	struct uinput_setup usetup;
 	if((fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK)) > 0)
 	{
@@ -91,7 +90,6 @@ void system_utilities::keyboard_utilities::setup()
 
 void system_utilities::keyboard_utilities::tear_down()
 {
-	system_utilities::cleanup();
 	ioctl(fd, UI_DEV_DESTROY);
 	close(fd);
 }

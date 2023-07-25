@@ -7,7 +7,6 @@
 
 Log_View_Type::Log_View_Type()
 {
-	log_consumer =	Message_Relay::get_instance()->register_consumer<Logging_Message>();
 }
 void Log_View_Type::get_message()
 {
@@ -16,6 +15,10 @@ void Log_View_Type::get_message()
 	message.LOC = messages.get_location();
 	message.LEVEL = messages.get_priority_string();
 	message.vaild = message.MESSAGE == "" ? false: true;
+}
+void Log_View_Type::create()
+{
+	log_consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
 }
 void Log_View_Type::destroy()
 { 
@@ -36,15 +39,13 @@ void Console_Log_View::on_refresh()
 }
 void Console_Log_View::on_create()
 { 
-
+	Log_View_Type::create();
+	Console_View::on_create();
 }
 
 void Console_Log_View::on_display()
 {
-	if(message_valid)
-	{
-		std::cout << painted_message << std::endl << std::flush;
-	}
+	std::cout << painted_message << std::endl << std::flush;
 }
 void Console_Log_View::on_paint()
 {

@@ -7,7 +7,6 @@
 
 Option_View_Type::Option_View_Type()
 {
-	option_consumer = new Message_Consumer(Message_Types::OPTION_POPUP_REQUEST);
 }
 
 void Option_View_Type::get_message()
@@ -15,6 +14,16 @@ void Option_View_Type::get_message()
 	specified_message = Message_Relay::get_instance()->pop<Option_Popup_Message>(option_consumer);
 	message.OPTIONS = specified_message.get_options();
 	message.QUERY = specified_message.get_option_query();
+}
+
+void Option_View_Type::create()
+{ 
+	option_consumer = Message_Relay::get_instance()->register_consumer<Option_Popup_Message>();
+}
+
+void Option_View_Type::destroy()
+{
+	Message_Relay::get_instance()->deregister_consumer(option_consumer);
 }
 
 void Console_Option_Popup::on_display()
@@ -69,6 +78,18 @@ void Console_Option_Popup::on_query()
 		choice = option_input;
 		break;
 	}
+}
+
+void Console_Option_Popup::on_create()
+{
+	Option_View_Type::create();
+	Console_View::on_create();
+}
+
+void Console_Option_Popup::on_destroy()
+{ 
+	Option_View_Type::destroy();
+	Console_View::on_destroy();
 }
 
 void Console_Option_Popup::on_input()

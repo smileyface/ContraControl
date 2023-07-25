@@ -26,7 +26,9 @@ public:
 	} message;///<Instance of the captured message.
 	/**Get the log message from the message relay.*/
 	void get_message();
-
+	/** Create the Log View */
+	void create();
+	/** Destroy the Log View */
 	void destroy();
 
 protected:    

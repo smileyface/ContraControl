@@ -20,6 +20,7 @@
 #endif
 
 Message_Consumer* message_consumer = 0;
+bool system_setup = false;
 bool stale;
 
 bool system_utilities::CI = false;
@@ -34,18 +35,22 @@ bool system_utilities::WINDOWS = false;
 
 void system_utilities::setup()
 {
-	try
+	if(system_setup == false)
 	{
-		model::initalize();
-		controller::initalize();
-		view::initalize();
+		try
+		{
+			model::initalize();
+			controller::initalize();
+			view::initalize();
+		}
+		catch(NetworkErrorException)
+		{
+			printf("Caught network exception");
+			testing_utilities::network_utilities::exception_handle();
+		}
+		setup_messaging();
+		system_setup = true;
 	}
-	catch(NetworkErrorException)
-	{
-		printf("Caught network exception");
-		testing_utilities::network_utilities::exception_handle();
-	}
-	setup_messaging();
 
 }
 

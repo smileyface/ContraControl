@@ -43,6 +43,7 @@ TEST_F(Command_View_Message_Test, Request_Message_On_Relay)
 {
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
 	EXPECT_FALSE(found);
+	system_utilities::step(1);
 	Option_Popup_Message opm = Message_Relay::get_instance()->pop<Option_Popup_Message>(option_consumer);
 	EXPECT_FALSE(found);
 	EXPECT_EQ(opm.get_sender(), SUBSYSTEM_ID_ENUM::TEST);
@@ -55,6 +56,7 @@ TEST_F(Command_View_Message_Test, Request_Message_On_Relay)
 TEST_F(Command_View_Message_Test, Send_Option)
 {
 	Message_Relay::get_instance()->push(new Option_Popup_Message(SUBSYSTEM_ID_ENUM::TEST, "Tester", { "Hello", "It's", "Me" }));
+	system_utilities::step(1);
 	system_utilities::keyboard_utilities::Keyboard keyboard;
 	//NEED TO ADD BUFFER INPUT INTERFACE
 	keyboard < KEY::NUM_0;

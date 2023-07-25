@@ -19,7 +19,7 @@ View* Format::add_view(VIEW_TYPE_ENUM view)
 void Format::update_views()
 {
 	std::vector<std::vector<View*>::iterator> destroy_list;
-	for(auto i = view_list.begin(); i != view_list.end(); i++)
+	for(auto i = view_list.begin(); i != view_list.end();)
 	{
 		View* r = (*i);
 		if(r->is_stale())
@@ -36,12 +36,13 @@ void Format::update_views()
 		{
 			r->on_destroy();
 			r->on_quit();
-			destroy_list.push_back(i);
+			delete (*i);
+			i = view_list.erase(i);
 		}
-	}
-	for(int i = 0; i < destroy_list.size(); i++)
-	{
-		view_list.erase(destroy_list[i]);
+		else
+		{
+			i++;
+		}
 	}
 }
 
@@ -51,6 +52,7 @@ void Format::clean_views()
 	{
 		(*i)->quit_view();
 	}
+	update_views();
 	Message_Relay::get_instance()->deregister_consumer(format_consumer);
 }
 
