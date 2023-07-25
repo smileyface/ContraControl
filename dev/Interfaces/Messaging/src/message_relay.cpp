@@ -65,6 +65,11 @@ int Message_Relay::number_of_messages(Message_Consumer* mc)
 	return number_of_messages;
 }
 
+int Message_Relay::number_of_consumers()
+{
+	return list_of_registered_consumers.size();
+}
+
 Message_Ptr<Internal_Message> Message_Relay::front(Message_Consumer* mc)
 {
 	Message_Ptr<Internal_Message> message = 0;
@@ -106,6 +111,16 @@ Message_Relay* Message_Relay::get_instance()
 		instance = new Message_Relay();
 	}
 	return instance;
+}
+
+void Message_Relay::destroy_instance()
+{ 
+	if(instance != NULL)
+	{
+		delete instance;
+		instance = NULL;
+	}
+
 }
 
 void Message_Relay::clear()

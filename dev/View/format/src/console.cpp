@@ -17,19 +17,13 @@ void Console_Format::initalize()
 
 View* Console_Format::add_view(VIEW_TYPE_ENUM view)
 {
-	std::string type(get_view_type_enum_as_string(view));
-	LOG_INFO("Adding View: " + type, "Console Format");
-	View* new_view = view_factory(view, DISPLAY_TYPES::CONSOLE);
-	view_list.push_back(new_view);
+	View* new_view = Format::add_view(view);
 	return new_view;
 }
 
-void Console_Format::loop()
+void Console_Format::step()
 {
-	while(format_running)
-	{
-		process_internal_messages();
-		update_views();
-		//send off internal messages();
-	}
+	process_internal_messages();
+	update_views();
+	//send off internal messages();
 }

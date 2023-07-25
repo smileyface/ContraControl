@@ -18,10 +18,12 @@
 class Console_Option_Popup : public Console_View, public Option_View_Type
 {
 public:
+	void on_create();
 	void on_display();
 	void on_refresh();
 	void on_paint();
 	void on_query();
+	void on_destroy();
 	void on_input();
 	/**
 	 * Set options for the popup.

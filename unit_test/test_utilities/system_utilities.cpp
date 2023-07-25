@@ -20,6 +20,7 @@
 #endif
 
 Message_Consumer* message_consumer = 0;
+bool system_setup = false;
 bool stale;
 
 bool system_utilities::CI = false;
@@ -34,17 +35,22 @@ bool system_utilities::WINDOWS = false;
 
 void system_utilities::setup()
 {
-	try
+	if(system_setup == false)
 	{
-		model::initalize();
-		controller::initalize();
+		try
+		{
+			model::initalize();
+			controller::initalize();
+			view::initalize();
+		}
+		catch(NetworkErrorException)
+		{
+			printf("Caught network exception");
+			testing_utilities::network_utilities::exception_handle();
+		}
+		setup_messaging();
+		system_setup = true;
 	}
-	catch(NetworkErrorException)
-	{
-		printf("Caught network exception");
-		testing_utilities::network_utilities::exception_handle();
-	}
-	setup_messaging();
 
 }
 
@@ -60,7 +66,9 @@ void system_utilities::teardown_messaging()
 {
 	print_log_messages();
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
+	testing_utilities::message_utilities::system_is_clean();
 	Message_Relay::get_instance()->clear();
+	Message_Relay::destroy_instance();
 	message_consumer = 0;
 }
 
@@ -68,12 +76,14 @@ void system_utilities::start_system()
 {
 	model::start_loop();
 	controller::start_controller();
+	view::start_view();
 }
 
 void system_utilities::stop_system()
 {
 	model::stop_loop();
 	controller::stop_controller();
+	view::stop_view();
 }
 
 void display_log_messages(Logging_Message mess)
@@ -115,10 +125,12 @@ void system_utilities::cleanup()
 {
 	controller::clean_up();
 	model::clean_up();
+	view::clean_up();
 	teardown_messaging();
 	Scheduler::get_instance()->stop();
 	Scheduler::get_instance()->clear();
 	Scheduler::destroy_instance();
+	system_setup = false;
 }
 
 void system_utilities::step(int steps)
