@@ -8,7 +8,12 @@
 
 View* Format::add_view(VIEW_TYPE_ENUM view)
 {
-	return 0;
+	std::string type(get_view_type_enum_as_string(view));
+	LOG_INFO("Adding View: " + type, "Console Format");
+	View* new_view = view_factory(view, DISPLAY_TYPES::CONSOLE);
+	new_view->on_create();
+	view_list.push_back(new_view);
+	return new_view;
 }
 
 void Format::update_views()

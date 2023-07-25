@@ -34,6 +34,11 @@ void Console_Log_View::on_refresh()
 	message_level = message.LEVEL;
 	message_valid = message.vaild;
 }
+void Console_Log_View::on_create()
+{ 
+
+}
+
 void Console_Log_View::on_display()
 {
 	if(message_valid)

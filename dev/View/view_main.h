@@ -13,6 +13,11 @@
 #include "Messaging/message_relay.h"
 
 /**
+ * A unique identifier the handle a View
+ */
+typedef unsigned short View_Handle;
+
+/**
  * An interface for every display.
  */
 namespace view
@@ -24,7 +29,7 @@ namespace view
 	/**
 	 * Contained list of formats. Not for public consumption.
 	 */
-	extern std::vector<Format*> list_of_formats;
+	extern std::map<View_Handle, Format*> list_of_formats;
 	/**
 	 * Boolean for the state of all views.
 	 */
@@ -59,7 +64,13 @@ namespace view
 	 * \param display Type for Format to display.
 	 * \return handle for Display
 	 */
-	int add_display(DISPLAY_TYPES display);
+	View_Handle add_display(DISPLAY_TYPES display);
+
+	/**
+	 * Remove a Format
+	 * \param handle Handle to specifiy the display to remove
+	 */
+	void remove_display(View_Handle handle);
 }
 
 
