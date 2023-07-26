@@ -8,7 +8,8 @@
       "buildRoot": "${projectDir}\\out\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "/D_CRT_NONSTDC_NO_WARNINGS",
-      "ctestCommandArgs": ""
+      "ctestCommandArgs": "",
+      "enableClangTidyCodeAnalysis": true
     },
     {
       "name": "RaspberryPi-Debug",

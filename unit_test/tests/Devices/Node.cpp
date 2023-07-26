@@ -1,9 +1,9 @@
-#include "../test_utilities/node_utilities.h"
-#include "../test_utilities/device_utilities.h"
-#include "../test_utilities/system_utilities.h"
-#include "../test_utilities/test_utilities.h"
+#include "../../test_utilities/node_utilities.h"
+#include "../../test_utilities/device_utilities.h"
+#include "../../test_utilities/system_utilities.h"
+#include "../../test_utilities/test_utilities.h"
 
-#include "../test_utilities/pch.h"
+#include "../../test_utilities/pch.h"
 
 namespace {
 	class Node_Test : public ::testing::Test {
