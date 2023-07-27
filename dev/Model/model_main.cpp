@@ -7,8 +7,6 @@
 #include "Interfaces/types/state.h"
 #include "Threading/threading.h"
 
-
-std::thread model_thread;
 std::mutex model_mutex;
 
 Timer model_timer;
