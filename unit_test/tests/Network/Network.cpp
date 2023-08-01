@@ -43,6 +43,7 @@ TEST_F(Local_Network_Test, Server_Start_Up)
 	{
 		testing_utilities::network_utilities::check_initalized();
 		network::start_server();
+		EXPECT_TRUE(network::network_interface->server());
 	}
 	catch (NetworkErrorException e)
 	{
@@ -62,7 +63,7 @@ TEST_F(Local_Network_Test, Client_Start_Up)
 	{
 		testing_utilities::network_utilities::check_initalized();
 		network::start_client();
-		std::this_thread::sleep_for(std::chrono::seconds(1));
+		EXPECT_TRUE(network::network_interface->client());
 		//TODO Add a localhost listener
 	}
 	catch (NetworkErrorException e)

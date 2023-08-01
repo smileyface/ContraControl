@@ -60,24 +60,6 @@ void network::init_network_interfaces(std::string interfaces)
 	network_interface->initalize();
 }
 
-void client_loop()
-{
-	//call_and_response(NODE_HELLO, NODE_ACK, 2);
-	while(network_running)
-	{
-		node_messages::network_client_state_machine();
-	}
-}
-
-void server_loop()
-{
-	while(network_running)
-	{
-		//listen on Broadcast for NODE_HELLO
-		//Once found, Send NODE_ACK
-	}
-}
-
 void network::teardown_network_interfaces()
 {
 	network_running = false;

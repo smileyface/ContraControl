@@ -104,20 +104,7 @@ void Task::run(std::chrono::milliseconds frameDuration)
         if(is_running)
             subtask.task();
     }
-    is_running = false;
     alive_threads--;
-    auto tasks = subtasks.begin();
-    while(tasks != subtasks.end())
-    {
-        if(tasks->clean_after)
-        {
-            tasks = subtasks.erase(tasks);
-        }
-        else
-        {
-            tasks++;
-        }
-    }
 }
 
 void Task::start(std::chrono::milliseconds frameDuration)
@@ -137,10 +124,23 @@ void Task::stop()
         {
             (*i).join();
         }
-        
     }
     thread.clear();
+    is_running = false;
 
+
+    auto tasks = subtasks.begin();
+    while(tasks != subtasks.end())
+    {
+        if(tasks->clean_after)
+        {
+            tasks = subtasks.erase(tasks);
+        }
+        else
+        {
+            tasks++;
+        }
+    }
     
     while(thrown_exceptions.size() > 0)
     {
