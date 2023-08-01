@@ -143,7 +143,7 @@ protected:
 	/**
 	 * \brief Is the local node a server.
 	 */
-	bool is_server = false;
+	bool is_server = true;
 	/**
 	 * \brief the interface name of the local node.
 	 */

@@ -14,13 +14,13 @@ namespace
 		bool found = false;
 		virtual void SetUp()
 		{
-			system_utilities::setup();
+			system_utilities::setup_messaging();
 			consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
 		}
 		virtual void TearDown()
 		{
 			Message_Relay::get_instance()->deregister_consumer(consumer);
-			system_utilities::cleanup();
+			system_utilities::teardown_messaging();
 		}
 	};
 }

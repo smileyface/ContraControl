@@ -19,7 +19,7 @@ Task network::network_task;
 bool network_running = false;
 std::mutex network_mutex;
 
-void network::init_network_interfaces()
+void network::initalize()
 {
 	instantiate_interface();
 	network_interface->initalize();
@@ -52,15 +52,15 @@ void network::instantiate_interface()
 #endif // _MAC
 }
 
-void network::init_network_interfaces(std::string interfaces)
+void network::initalize(std::string interfaces)
 {
-	init_network_interfaces();
+	initalize();
 	network_interface->clean_up();
 	network_interface->set_interface(interfaces);
 	network_interface->initalize();
 }
 
-void network::teardown_network_interfaces()
+void network::clean_up()
 {
 	network_running = false;
 	network_task.set_persistence(false);

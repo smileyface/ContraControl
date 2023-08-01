@@ -23,17 +23,16 @@ namespace {
 			system_utilities::network_utilities::setup();
 		}
 		virtual void TearDown() {
-			network::teardown_network_interfaces();
+			network::clean_up();
 			system_utilities::cleanup();
 		}
 	};
 }
-
-
 TEST_F(Local_Network_Test, Network_SetUp)
 {
 	/** Start in server mode */
 	testing_utilities::network_utilities::check_initalized();
+	EXPECT_TRUE(network::network_interface->server());
 }
 
 TEST_F(Local_Network_Test, Server_Start_Up)
