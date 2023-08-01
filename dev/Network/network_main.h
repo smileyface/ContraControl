@@ -6,6 +6,7 @@
  * \date   March 2022
  *********************************************************************/
 #include "system_interfaces/network_interface.h"
+#include "Threading/threading.h"
 /**
  * \brief Main network interface. Use this instead of creating a new Network_Interface object.
  *
@@ -16,12 +17,21 @@ namespace network
      /**
      * .The string of the namespace name. This is for locating Messages.
      */
-    static const char* subsystem_name = "Network";
+    static const char* subsystem_name = "Network";	
+    /**
+     * Task to add model to the scheduler.
+     */
+    extern Task network_task;
 
     /**
      * \brief Setup network interface as a system specific interface.
      */
     extern void init_network_interfaces();
+
+    /**
+     * \brief Intantiate a system specific interface.
+     */
+    extern void instantiate_interface();
 
     /**
      * \brief Setup network interface as a given interface.

@@ -14,12 +14,31 @@
 
 /*Externs*/
 Network_Interface* network::network_interface;
+Task network::network_task;
 
 bool network_running = false;
-std::thread network_thread;
 std::mutex network_mutex;
 
 void network::init_network_interfaces()
+{
+	instantiate_interface();
+	network_interface->initalize();
+	generate_crc_table();
+
+	Scheduler::get_instance()->add_system_task([] ()
+											   {
+													if(network::network_interface->server())
+													{
+														   
+													}
+													else if(network::network_interface->client())
+													{
+														network::network_task.add_subtask(Cleaned_Task(node_messages::network_client_state_machine));
+													}
+											   });
+}
+
+void network::instantiate_interface()
 {
 #ifdef _WIN32
 	network::network_interface = new Windows_Network_Interface();
@@ -31,8 +50,6 @@ void network::init_network_interfaces()
 	//For now, we'll just use the linux interface.
 	network::network_interface = new Linux_Network_Interface();
 #endif // _MAC
-	network_interface->initalize();
-	generate_crc_table();
 }
 
 void network::init_network_interfaces(std::string interfaces)
@@ -45,7 +62,6 @@ void network::init_network_interfaces(std::string interfaces)
 
 void client_loop()
 {
-	LOG_INFO("Starting Client Loop", "Client Loop");
 	//call_and_response(NODE_HELLO, NODE_ACK, 2);
 	while(network_running)
 	{
@@ -65,11 +81,11 @@ void server_loop()
 void network::teardown_network_interfaces()
 {
 	network_running = false;
-	if(network_thread.joinable())
-		network_thread.join();
+	network_task.set_persistence(false);
 	if(network::network_interface != nullptr)
 	{
 		network::network_interface->clean_up();
+		network::network_interface = nullptr;
 	}
 	LOG_INFO("Network Interface torndown", "Network");
 }
@@ -81,16 +97,18 @@ Network_Message network::listen_for_message(Connection_Id src, MESSAGES listen_f
 
 void network::start_server()
 {
+	LOG_INFO("Starting Server Loop", "Server Loop");
 	network::network_interface->set_server();
+	Scheduler::get_instance()->add_task(&network::network_task);
 	network_running = true;
-	network_thread = std::thread(server_loop);
 }
 
 void network::start_client()
 {
+	LOG_INFO("Starting Client Loop", "Client Loop");
 	network::network_interface->set_client();
+	Scheduler::get_instance()->add_task(&network::network_task);
 	network_running = true;
-	network_thread = std::thread(client_loop);
 }
 
 void network::set_interface(std::string i)

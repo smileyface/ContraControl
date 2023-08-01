@@ -27,6 +27,7 @@ namespace {
 #ifdef _WIN32
 TEST_F(Network_Error_Test, Error_States_Initialize_System_Interface_Error)
 {
+	network::instantiate_interface();
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);
 	wVersionRequested = MAKEWORD(0, 0);
 	testing_utilities::network_utilities::expect_exception([]() {network::init_network_interfaces(); }, NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR);
