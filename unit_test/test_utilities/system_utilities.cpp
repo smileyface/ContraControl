@@ -42,6 +42,7 @@ void system_utilities::setup()
 			model::initalize();
 			controller::initalize();
 			view::initalize();
+			system_utilities::network_utilities::setup();
 		}
 		catch(NetworkErrorException)
 		{
@@ -126,6 +127,7 @@ void system_utilities::cleanup()
 	controller::clean_up();
 	model::clean_up();
 	view::clean_up();
+	network::clean_up();
 	teardown_messaging();
 	Scheduler::get_instance()->stop();
 	Scheduler::get_instance()->clear();
@@ -172,23 +174,22 @@ void system_utilities::network_utilities::setup()
 {
 	try
 	{
-		system_utilities::setup();
 		std::string i;
 		if(std::getenv("CI") != NULL)
 		{
 			CI = true;
 			LOG_INFO("On a CI machine", "Test Setup");
 		#ifdef __linux__
-			network::init_network_interfaces("nat");
+			network::initalize("nat");
 		#endif // __linux
 		#ifdef _WIN32
-			network::init_network_interfaces("vEthernet (nat)");
+			network::initalize("vEthernet (nat)");
 		#endif
 		}
 		else
 		{
 			LOG_INFO("Not on a CI machine", "Test Setup");
-			network::init_network_interfaces();
+			network::initalize();
 		}
 	}
 	catch(NetworkErrorException e)

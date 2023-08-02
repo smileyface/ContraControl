@@ -60,6 +60,18 @@ public:
 	 * \return Network_Status_State
 	 */
 	Network_Status_State get_status();
+	/**
+	 * \brief Is the network a server.
+	 * 
+	 * \return The Interface is in the server state
+	 */
+	bool server();
+	/**
+	 * \brief Is the network a client.
+	 * 
+	 * \return The Interface is in the client state
+	 */
+	bool client();
 
 	//setters
 	/**
@@ -131,7 +143,7 @@ protected:
 	/**
 	 * \brief Is the local node a server.
 	 */
-	bool is_server = false;
+	bool is_server = true;
 	/**
 	 * \brief the interface name of the local node.
 	 */

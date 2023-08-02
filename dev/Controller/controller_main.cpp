@@ -6,7 +6,6 @@
 #include <thread>
 #include <mutex>
 
-std::thread controller_thread;
 std::mutex controller_mutex;
 
 Timer controller_timer;

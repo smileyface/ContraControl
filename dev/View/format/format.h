@@ -65,8 +65,6 @@ protected:
 	std::vector<View*> view_list;
 	/** Is the display loop running */
 	bool format_running = false;
-	/** Thread that is handling the loop */
-	std::thread* looping_thread = nullptr;
 	/** Consume view messages */
 	Message_Consumer* format_consumer = 0;
 private:
