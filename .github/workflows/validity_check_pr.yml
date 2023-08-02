@@ -143,9 +143,13 @@ jobs:
 
     - uses: ZedThree/clang-tidy-review@v0.13.2
       id: review
+      with:
+        cmake_command: |
+                pip install cmake && \
+                cmake . build -DCMAKE_EXPORT_COMPILE_COMMANDS=On
 
     # Uploads an artefact containing clang_fixes.json
-    - uses: ZedThree/clang-tidy-review/upload@v0.12.0
+    - uses: ZedThree/clang-tidy-review/upload@v0.13.2
       id: upload-review
 
     # If there are any comments, fail the check
