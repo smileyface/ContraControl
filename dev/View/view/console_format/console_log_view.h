@@ -11,7 +11,6 @@
 
 #include "console_view.h"
 #include "../view_type/log_view_type.h"
-#include "Messaging/consumers.h"
 
 /** View for System_Messages on the Console */
 class Console_Log_View : public Console_View, public Log_View_Type

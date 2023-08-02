@@ -9,7 +9,6 @@
 #define SCHEDULER_H
 
 #include "task.h"
-#include <queue>
 #include <mutex>
 
 /**

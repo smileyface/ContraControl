@@ -9,8 +9,6 @@
 #ifndef CONSOLE_OPTION_POPUP_VIEW
 #define CONSOLE_OPTION_POPUP_VIEW
 
-#include <vector>
-
 #include "console_view.h"
 #include "../view_type/option_view_type.h"
 

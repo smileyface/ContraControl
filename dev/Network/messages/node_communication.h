@@ -9,8 +9,6 @@
 #define NETWORK_NODE_MESSAGES
 #include "messaging.h"
 
-#include "types/network_message_types.h"
-
 /** Node Messages utilities */
 namespace node_messages
 {

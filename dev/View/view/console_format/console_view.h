@@ -9,7 +9,6 @@
 #ifndef VIEW_CONSOLE_VIEW_H
 #define VIEW_CONSOLE_VIEW_H
 
-#include <string>
 #include "../view.h"
 #include "../../input_interface/sys_interface/keyboard_interface.h"
 
