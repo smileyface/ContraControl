@@ -55,19 +55,4 @@ TEST_F(Local_Network_Test, Server_Start_Up)
 	}
 }
 
-TEST_F(Local_Network_Test, Client_Start_Up)
-{
-	/** Start in server mode */	
-	try
-	{
-		testing_utilities::network_utilities::check_initalized();
-		network::start_client();
-		EXPECT_TRUE(network::network_interface->client());
-		//TODO Add a localhost listener
-	}
-	catch (NetworkErrorException e)
-	{
-		testing_utilities::network_utilities::exception_handle();
-	}
-}
 

@@ -19,9 +19,13 @@ namespace network
      */
     static const char* subsystem_name = "Network";	
     /**
-     * Task to add model to the scheduler.
+     * Task to add the network to the scheduler.
      */
     extern Task network_task;
+    /**
+     * Is the network running
+     */
+    extern bool network_running;
 
     /**
      * \brief Setup network interface as a system specific interface.

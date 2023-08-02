@@ -16,7 +16,7 @@
 Network_Interface* network::network_interface;
 Task network::network_task;
 
-bool network_running = false;
+bool network::network_running = false;
 std::mutex network_mutex;
 
 void network::initalize()
@@ -24,6 +24,7 @@ void network::initalize()
 	instantiate_interface();
 	network_interface->initalize();
 	generate_crc_table();
+	network_task = Task("Network", 2, .1);
 
 	Scheduler::get_instance()->add_system_task([] ()
 											   {
@@ -67,6 +68,7 @@ void network::clean_up()
 	if(network::network_interface != nullptr)
 	{
 		network::network_interface->clean_up();
+		delete network::network_interface;
 		network::network_interface = nullptr;
 	}
 	LOG_INFO("Network Interface torndown", "Network");

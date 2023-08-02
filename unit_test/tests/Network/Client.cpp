@@ -23,11 +23,9 @@ namespace
 		virtual void SetUp()
 		{
 			system_utilities::setup();
-			system_utilities::network_utilities::setup();
 		}
 		virtual void TearDown()
 		{
-			network::clean_up();
 			system_utilities::cleanup();
 		}
 	};
@@ -37,4 +35,23 @@ TEST_F(Client_Network_Test, Network_SetUp)
 {
 	/** Start in server mode */
 	testing_utilities::network_utilities::check_initalized();
+	network::start_client();
+	EXPECT_TRUE(network::network_interface->client());
+	EXPECT_TRUE(network::network_running);
+
+}
+
+TEST_F(Client_Network_Test, Client_Initial_State)
+{
+	/** Start in server mode */
+	testing_utilities::network_utilities::check_initalized();
+	network::start_client();
+
+	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::NETWORK_INITALIZED);
+
+	system_utilities::step(1);
+
+	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::CLIENT_WAIT);
+
+
 }

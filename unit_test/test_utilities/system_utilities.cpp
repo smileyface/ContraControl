@@ -42,7 +42,7 @@ void system_utilities::setup()
 			model::initalize();
 			controller::initalize();
 			view::initalize();
-			network::initalize();
+			system_utilities::network_utilities::setup();
 		}
 		catch(NetworkErrorException)
 		{
