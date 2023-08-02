@@ -8,8 +8,6 @@
 #ifndef KEYBOARD_ACTION_STACK_H
 #define KEYBOARD_ACTION_STACK_H
 
-#include <vector>
-
 #include "action_layer.h"
 
 /** List of action layers. */

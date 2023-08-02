@@ -8,13 +8,11 @@
 #ifndef SYSTEM_MESSAGE_INTERFACE_H
 #define SYSTEM_MESSAGE_INTERFACE_H
 
-#include <string>
 #include <map>
 #include <set>
 
 #include "Messaging/consumers.h"
  //Messaging types
-#include "internal_messages.h"
 
 /**
  * @brief A basic structure for comparisons.

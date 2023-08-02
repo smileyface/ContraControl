@@ -9,7 +9,6 @@
 #define TASK_H
 
 #include <string>
-#include <functional>
 #include <vector>
 #include <queue>
 #include <chrono>
