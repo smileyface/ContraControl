@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -85,6 +85,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4eaebe64fc193ee3841019e420f85ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09f43f391275d94a9394fd20755a73ae"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message___relay.html#a09f43f391275d94a9394fd20755a73ae">number_of_messages</a> (<a class="el" href="struct_message___consumer.html">Message_Consumer</a> *consumer)</td></tr>
 <tr class="separator:a09f43f391275d94a9394fd20755a73ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c3b3dd4b7f65cb8eda18995490c0972"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message___relay.html#a6c3b3dd4b7f65cb8eda18995490c0972">number_of_consumers</a> ()</td></tr>
+<tr class="separator:a6c3b3dd4b7f65cb8eda18995490c0972"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69bc16ad5ccf80b9af985a221d3320c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_message___ptr.html">Message_Ptr</a>&lt; <a class="el" href="class_internal___message.html">Internal_Message</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message___relay.html#a69bc16ad5ccf80b9af985a221d3320c0">front</a> (<a class="el" href="struct_message___consumer.html">Message_Consumer</a> *consumer)</td></tr>
 <tr class="separator:a69bc16ad5ccf80b9af985a221d3320c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a303a08f2816015dedd451c424dfecba7"><td class="memTemplParams" colspan="2">template&lt;typename Message_Type &gt; </td></tr>
@@ -99,6 +101,8 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a07a1aa357c1c5d95c1ba405f6536d191"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_message___relay.html">Message_Relay</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message___relay.html#a07a1aa357c1c5d95c1ba405f6536d191">get_instance</a> ()</td></tr>
 <tr class="separator:a07a1aa357c1c5d95c1ba405f6536d191"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab333ccaeea43c7fd50fffcace35743c1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message___relay.html#ab333ccaeea43c7fd50fffcace35743c1">destroy_instance</a> ()</td></tr>
+<tr class="separator:ab333ccaeea43c7fd50fffcace35743c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Message relay system as a singleton.</p>
@@ -143,6 +147,32 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ab333ccaeea43c7fd50fffcace35743c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab333ccaeea43c7fd50fffcace35743c1">&#9670;&nbsp;</a></span>destroy_instance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Message_Relay::destroy_instance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Destroy the instance of the singleton </p>
 
 </div>
 </div>
@@ -195,6 +225,25 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Get instance of the singleton. </p><dl class="section return"><dt>Returns</dt><dd>Instance of the message relay. </dd></dl>
+
+</div>
+</div>
+<a id="a6c3b3dd4b7f65cb8eda18995490c0972"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c3b3dd4b7f65cb8eda18995490c0972">&#9670;&nbsp;</a></span>number_of_consumers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Message_Relay::number_of_consumers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the number of consumers on the relay</p>
+<dl class="section return"><dt>Returns</dt><dd>number of consumers on the relay. </dd></dl>
 
 </div>
 </div>

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -76,66 +76,86 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define TASK_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;chrono&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_task.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_task.html">Task</a></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_task.html#a9fbcf3a41c2ebb12ff2acb16dd583925">Task</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">int</span> priority, <span class="keywordtype">double</span> percentage, <span class="keywordtype">bool</span> persistence);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_task.html#a9fbcf3a41c2ebb12ff2acb16dd583925">Task</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">int</span> priority, <span class="keywordtype">double</span> percentage);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_task.html#a9fbcf3a41c2ebb12ff2acb16dd583925">Task</a>(<span class="keyword">const</span> <a class="code" href="class_task.html">Task</a>&amp; other);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a346b298745d8473337b814036b4cea91">add_subtask</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>()&gt;&amp; subtask);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_task.html#a11b4338c3f4bd70248f54761679e3479">number_of_subtask</a>();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_task.html#a5d1244a988fe9bfd7d092fd9b0dd6a19">get_overruns</a>();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_task.html#af2a7929ba758a50e826b5ce3850b3868">get_priority</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_task.html#aae7c5fe4dbb7389294c95b8553d4c94d">get_persistence</a>();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::string <a class="code" href="class_task.html#a595154da67ecf37fcf13be37496bc802">get_name</a>();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a2aa160ab3d755f139109b4abedbd9d7a">run</a>(std::chrono::milliseconds frameDuration);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a802a9c63e280ff96cc13d498924bc748">start</a>(std::chrono::milliseconds frame_duration);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#aba5eb3d6c2a034aa0e319383fbec68c4">stop</a>();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="class_task.html">Task</a>&amp; <a class="code" href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_task.html">Task</a>&amp; other);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::string name;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">int</span> priority;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">int</span> overruns;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">bool</span> persistence;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">double</span> percentage;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    std::vector&lt;std::function&lt;void()&gt;&gt; subtasks;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">bool</span> is_running;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    std::thread thread;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// TASK_H</span></div>
-<div class="ttc" id="aclass_task_html"><div class="ttname"><a href="class_task.html">Task</a></div><div class="ttdoc">The Task class represents a task with subtasks.</div><div class="ttdef"><b>Definition:</b> task.h:21</div></div>
-<div class="ttc" id="aclass_task_html_a11b4338c3f4bd70248f54761679e3479"><div class="ttname"><a href="class_task.html#a11b4338c3f4bd70248f54761679e3479">Task::number_of_subtask</a></div><div class="ttdeci">int number_of_subtask()</div><div class="ttdoc">Get number of subtasks to be run.</div><div class="ttdef"><b>Definition:</b> task.cpp:39</div></div>
-<div class="ttc" id="aclass_task_html_a2aa160ab3d755f139109b4abedbd9d7a"><div class="ttname"><a href="class_task.html#a2aa160ab3d755f139109b4abedbd9d7a">Task::run</a></div><div class="ttdeci">void run(std::chrono::milliseconds frameDuration)</div><div class="ttdoc">Runs the task for the given frame duration.</div><div class="ttdef"><b>Definition:</b> task.cpp:64</div></div>
-<div class="ttc" id="aclass_task_html_a346b298745d8473337b814036b4cea91"><div class="ttname"><a href="class_task.html#a346b298745d8473337b814036b4cea91">Task::add_subtask</a></div><div class="ttdeci">void add_subtask(const std::function&lt; void()&gt; &amp;subtask)</div><div class="ttdoc">Adds a subtask to the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:34</div></div>
-<div class="ttc" id="aclass_task_html_a595154da67ecf37fcf13be37496bc802"><div class="ttname"><a href="class_task.html#a595154da67ecf37fcf13be37496bc802">Task::get_name</a></div><div class="ttdeci">std::string get_name()</div><div class="ttdoc">Get name of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:59</div></div>
-<div class="ttc" id="aclass_task_html_a5d1244a988fe9bfd7d092fd9b0dd6a19"><div class="ttname"><a href="class_task.html#a5d1244a988fe9bfd7d092fd9b0dd6a19">Task::get_overruns</a></div><div class="ttdeci">int get_overruns()</div><div class="ttdoc">Get number of overruns, defined as a task taking more than 1.5 times over execution time.</div><div class="ttdef"><b>Definition:</b> task.cpp:44</div></div>
-<div class="ttc" id="aclass_task_html_a802a9c63e280ff96cc13d498924bc748"><div class="ttname"><a href="class_task.html#a802a9c63e280ff96cc13d498924bc748">Task::start</a></div><div class="ttdeci">void start(std::chrono::milliseconds frame_duration)</div><div class="ttdoc">Starts the execution of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:89</div></div>
-<div class="ttc" id="aclass_task_html_a96fcef3b463a6c11a78ea3cc7cd8f83c"><div class="ttname"><a href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">Task::operator=</a></div><div class="ttdeci">Task &amp; operator=(const Task &amp;other)</div><div class="ttdoc">Assignment operator override.</div><div class="ttdef"><b>Definition:</b> task.cpp:107</div></div>
-<div class="ttc" id="aclass_task_html_a9fbcf3a41c2ebb12ff2acb16dd583925"><div class="ttname"><a href="class_task.html#a9fbcf3a41c2ebb12ff2acb16dd583925">Task::Task</a></div><div class="ttdeci">Task(const std::string &amp;name, int priority, double percentage, bool persistence)</div><div class="ttdoc">Constructs a Task object.</div><div class="ttdef"><b>Definition:</b> task.cpp:5</div></div>
-<div class="ttc" id="aclass_task_html_aae7c5fe4dbb7389294c95b8553d4c94d"><div class="ttname"><a href="class_task.html#aae7c5fe4dbb7389294c95b8553d4c94d">Task::get_persistence</a></div><div class="ttdeci">bool get_persistence()</div><div class="ttdoc">Get persistance of task.</div><div class="ttdef"><b>Definition:</b> task.cpp:54</div></div>
-<div class="ttc" id="aclass_task_html_aba5eb3d6c2a034aa0e319383fbec68c4"><div class="ttname"><a href="class_task.html#aba5eb3d6c2a034aa0e319383fbec68c4">Task::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stops the execution of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:98</div></div>
-<div class="ttc" id="aclass_task_html_af2a7929ba758a50e826b5ce3850b3868"><div class="ttname"><a href="class_task.html#af2a7929ba758a50e826b5ce3850b3868">Task::get_priority</a></div><div class="ttdeci">int get_priority()</div><div class="ttdoc">Get priority of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:49</div></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="subtask_8h.html">subtask.h</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_task.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_task.html">Task</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_task.html#a0ca53354bdc006762a0fda68c64f7608">Task</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">int</span> priority, <span class="keywordtype">double</span> percentage, <span class="keywordtype">bool</span> persistence, <span class="keywordtype">bool</span> clear_subtasks);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_task.html#a0ca53354bdc006762a0fda68c64f7608">Task</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">int</span> priority, <span class="keywordtype">double</span> percentage, <span class="keywordtype">bool</span> persistence);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_task.html#a0ca53354bdc006762a0fda68c64f7608">Task</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">int</span> priority, <span class="keywordtype">double</span> percentage);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_task.html#a0ca53354bdc006762a0fda68c64f7608">Task</a>(<span class="keyword">const</span> <a class="code" href="class_task.html">Task</a>&amp; other);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_task.html#a0ca53354bdc006762a0fda68c64f7608">Task</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="class_task.html#a3ecf499ea35fb4a96853969a1e1cbbce">~Task</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a83b2f04acfa75e20db6fdf1c29d8e800">add_subtask</a>(<span class="keyword">const</span> <a class="code" href="subtask_8h.html#struct_subtask">Subtask</a>&amp; subtask);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a83b2f04acfa75e20db6fdf1c29d8e800">add_subtask</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>()&gt;&amp; subtask);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_task.html#a11b4338c3f4bd70248f54761679e3479">number_of_subtask</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="class_task.html#a5d1244a988fe9bfd7d092fd9b0dd6a19">   90</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_task.html#a5d1244a988fe9bfd7d092fd9b0dd6a19">get_overruns</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_task.html#af2a7929ba758a50e826b5ce3850b3868">get_priority</a>();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_task.html#aae7c5fe4dbb7389294c95b8553d4c94d">get_persistence</a>();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::string <a class="code" href="class_task.html#a595154da67ecf37fcf13be37496bc802">get_name</a>();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#afb86f0e8f1eb117dd179e3afbbb5f8b5">set_persistence</a>(<span class="keywordtype">bool</span> persist);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a2aa160ab3d755f139109b4abedbd9d7a">run</a>(std::chrono::milliseconds frameDuration);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a802a9c63e280ff96cc13d498924bc748">start</a>(std::chrono::milliseconds frame_duration);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#aba5eb3d6c2a034aa0e319383fbec68c4">stop</a>();</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a0b9538d24091379690719b77724cf684">exception</a>(std::exception_ptr ex);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <a class="code" href="class_task.html">Task</a>&amp; <a class="code" href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_task.html">Task</a>&amp; other);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    std::string name;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordtype">int</span> priority;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordtype">int</span> overruns;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordtype">bool</span> persistence;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordtype">bool</span> clear_subtasks;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">double</span> percentage;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    std::vector&lt;Subtask&gt; subtasks;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordtype">bool</span> is_running;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    std::vector&lt;std::thread&gt; thread;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    std::queue&lt;std::exception_ptr&gt; thrown_exceptions;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;};</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// TASK_H</span></div>
+<div class="ttc" id="aclass_task_html"><div class="ttname"><a href="class_task.html">Task</a></div><div class="ttdoc">The Task class represents a task with subtasks.</div><div class="ttdef"><b>Definition:</b> task.h:23</div></div>
+<div class="ttc" id="aclass_task_html_a0b9538d24091379690719b77724cf684"><div class="ttname"><a href="class_task.html#a0b9538d24091379690719b77724cf684">Task::exception</a></div><div class="ttdeci">void exception(std::exception_ptr ex)</div><div class="ttdoc">Add an exception thrown in the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:153</div></div>
+<div class="ttc" id="aclass_task_html_a0ca53354bdc006762a0fda68c64f7608"><div class="ttname"><a href="class_task.html#a0ca53354bdc006762a0fda68c64f7608">Task::Task</a></div><div class="ttdeci">Task()</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> task.cpp:48</div></div>
+<div class="ttc" id="aclass_task_html_a11b4338c3f4bd70248f54761679e3479"><div class="ttname"><a href="class_task.html#a11b4338c3f4bd70248f54761679e3479">Task::number_of_subtask</a></div><div class="ttdeci">int number_of_subtask()</div><div class="ttdoc">Get number of subtasks to be run.</div><div class="ttdef"><b>Definition:</b> task.cpp:74</div></div>
+<div class="ttc" id="aclass_task_html_a2aa160ab3d755f139109b4abedbd9d7a"><div class="ttname"><a href="class_task.html#a2aa160ab3d755f139109b4abedbd9d7a">Task::run</a></div><div class="ttdeci">void run(std::chrono::milliseconds frameDuration)</div><div class="ttdoc">Runs the task for the given frame duration.</div><div class="ttdef"><b>Definition:</b> task.cpp:99</div></div>
+<div class="ttc" id="aclass_task_html_a3ecf499ea35fb4a96853969a1e1cbbce"><div class="ttname"><a href="class_task.html#a3ecf499ea35fb4a96853969a1e1cbbce">Task::~Task</a></div><div class="ttdeci">~Task()</div><div class="ttdoc">Default deconstructor.</div><div class="ttdef"><b>Definition:</b> task.cpp:59</div></div>
+<div class="ttc" id="aclass_task_html_a595154da67ecf37fcf13be37496bc802"><div class="ttname"><a href="class_task.html#a595154da67ecf37fcf13be37496bc802">Task::get_name</a></div><div class="ttdeci">std::string get_name()</div><div class="ttdoc">Get name of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:89</div></div>
+<div class="ttc" id="aclass_task_html_a5d1244a988fe9bfd7d092fd9b0dd6a19"><div class="ttname"><a href="class_task.html#a5d1244a988fe9bfd7d092fd9b0dd6a19">Task::get_overruns</a></div><div class="ttdeci">int get_overruns()</div><div class="ttdoc">Get number of overruns, defined as a task taking more than 1.5 times over execution time.</div></div>
+<div class="ttc" id="aclass_task_html_a802a9c63e280ff96cc13d498924bc748"><div class="ttname"><a href="class_task.html#a802a9c63e280ff96cc13d498924bc748">Task::start</a></div><div class="ttdeci">void start(std::chrono::milliseconds frame_duration)</div><div class="ttdoc">Starts the execution of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:110</div></div>
+<div class="ttc" id="aclass_task_html_a83b2f04acfa75e20db6fdf1c29d8e800"><div class="ttname"><a href="class_task.html#a83b2f04acfa75e20db6fdf1c29d8e800">Task::add_subtask</a></div><div class="ttdeci">void add_subtask(const Subtask &amp;subtask)</div><div class="ttdoc">Adds a subtask to the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:64</div></div>
+<div class="ttc" id="aclass_task_html_a96fcef3b463a6c11a78ea3cc7cd8f83c"><div class="ttname"><a href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">Task::operator=</a></div><div class="ttdeci">Task &amp; operator=(const Task &amp;other)</div><div class="ttdoc">Assignment operator override.</div><div class="ttdef"><b>Definition:</b> task.cpp:158</div></div>
+<div class="ttc" id="aclass_task_html_aae7c5fe4dbb7389294c95b8553d4c94d"><div class="ttname"><a href="class_task.html#aae7c5fe4dbb7389294c95b8553d4c94d">Task::get_persistence</a></div><div class="ttdeci">bool get_persistence()</div><div class="ttdoc">Get persistance of task.</div><div class="ttdef"><b>Definition:</b> task.cpp:84</div></div>
+<div class="ttc" id="aclass_task_html_aba5eb3d6c2a034aa0e319383fbec68c4"><div class="ttname"><a href="class_task.html#aba5eb3d6c2a034aa0e319383fbec68c4">Task::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stops the execution of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:119</div></div>
+<div class="ttc" id="aclass_task_html_af2a7929ba758a50e826b5ce3850b3868"><div class="ttname"><a href="class_task.html#af2a7929ba758a50e826b5ce3850b3868">Task::get_priority</a></div><div class="ttdeci">int get_priority()</div><div class="ttdoc">Get priority of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:79</div></div>
+<div class="ttc" id="aclass_task_html_afb86f0e8f1eb117dd179e3afbbb5f8b5"><div class="ttname"><a href="class_task.html#afb86f0e8f1eb117dd179e3afbbb5f8b5">Task::set_persistence</a></div><div class="ttdeci">void set_persistence(bool persist)</div><div class="ttdoc">Set persistence.</div><div class="ttdef"><b>Definition:</b> task.cpp:94</div></div>
+<div class="ttc" id="asubtask_8h_html"><div class="ttname"><a href="subtask_8h.html">subtask.h</a></div></div>
+<div class="ttc" id="asubtask_8h_html_struct_subtask"><div class="ttname"><a href="subtask_8h.html#struct_subtask">Subtask</a></div><div class="ttdoc">A subtask to be run during the runtime of the Task.</div><div class="ttdef"><b>Definition:</b> subtask.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

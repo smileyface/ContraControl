@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -79,12 +79,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa968a29fe574c5a6ecf4f25d65d69f4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84864ca31dbc6c07ee1f20771a9fc3b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___message.html#a84864ca31dbc6c07ee1f20771a9fc3b0">Network_Message</a> (<a class="el" href="messages_2types_2messages_8h.html#a8bd0a320f1808fff52ce56f8751b640f">MESSAGES</a> message_type, std::vector&lt; <a class="el" href="class_network___messaging___type.html">Network_Messaging_Type</a> * &gt; types)</td></tr>
 <tr class="separator:a84864ca31dbc6c07ee1f20771a9fc3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21ec5dbaead836edfce14251e069daf4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="network__type_8h.html#ae3a497195d617519e5353ea7b417940f">Byte</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___message.html#a21ec5dbaead836edfce14251e069daf4">pack</a> ()</td></tr>
+<tr class="memitem:a21ec5dbaead836edfce14251e069daf4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="network__type_8h.html#a6441c50bc51689439349ec5d5ead6c0b">Byte_Array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___message.html#a21ec5dbaead836edfce14251e069daf4">pack</a> ()</td></tr>
 <tr class="separator:a21ec5dbaead836edfce14251e069daf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b4534e0c963e88ff3a733e1ce121e63"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___message.html#a5b4534e0c963e88ff3a733e1ce121e63">size</a> ()</td></tr>
 <tr class="separator:a5b4534e0c963e88ff3a733e1ce121e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8df2fbf783c6d3cdbf3752d3977fa31a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___message.html#a8df2fbf783c6d3cdbf3752d3977fa31a">unpack</a> (std::vector&lt; <a class="el" href="network__type_8h.html#ae3a497195d617519e5353ea7b417940f">Byte</a> &gt; message, int header_size)</td></tr>
-<tr class="separator:a8df2fbf783c6d3cdbf3752d3977fa31a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa696681c945b13eeaa3451b9fab718ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___message.html#aa696681c945b13eeaa3451b9fab718ff">unpack</a> (<a class="el" href="network__type_8h.html#a6441c50bc51689439349ec5d5ead6c0b">Byte_Array</a> message, int header_size)</td></tr>
+<tr class="separator:aa696681c945b13eeaa3451b9fab718ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2cfbe36e5ddd56e03afbebae6b6c669"><td class="memItemLeft" align="right" valign="top"><a class="el" href="messages_2types_2messages_8h.html#a8bd0a320f1808fff52ce56f8751b640f">MESSAGES</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___message.html#ac2cfbe36e5ddd56e03afbebae6b6c669">get_type</a> ()</td></tr>
 <tr class="separator:ac2cfbe36e5ddd56e03afbebae6b6c669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bd643fa9902ced893a482353d2e8cb2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_network___messaging___type.html">Network_Messaging_Type</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_network___message.html#a4bd643fa9902ced893a482353d2e8cb2">get_message</a> ()</td></tr>
@@ -249,8 +249,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8df2fbf783c6d3cdbf3752d3977fa31a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8df2fbf783c6d3cdbf3752d3977fa31a">&#9670;&nbsp;</a></span>unpack()</h2>
+<a id="aa696681c945b13eeaa3451b9fab718ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa696681c945b13eeaa3451b9fab718ff">&#9670;&nbsp;</a></span>unpack()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +258,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void Network_Message::unpack </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="network__type_8h.html#ae3a497195d617519e5353ea7b417940f">Byte</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="network__type_8h.html#a6441c50bc51689439349ec5d5ead6c0b">Byte_Array</a>&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>

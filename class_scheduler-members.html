@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -70,12 +70,16 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="class_scheduler.html">Scheduler</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_scheduler.html#a13130c5f8804c842b135de34836eac56">add_task</a>(Task task)</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_scheduler.html#ad7f73412c6a672297feacb109baf89ba">add_cleanup_task</a>(std::function&lt; void()&gt; task)</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_scheduler.html#afca7e1c183dc928dde049fe5e0efce06">add_system_task</a>(std::function&lt; void()&gt; task)</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_scheduler.html#a6220b56ae5ef4ef67a03e01e2d5d2d71">add_task</a>(Task *task)</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_scheduler.html#a53a061075e64681ba5b6b4f9e540898b">clear</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_scheduler.html#a9c4653c6323d4bac0dcc1e349e8effe0">destroy_instance</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_scheduler.html#af1549eccfc413c5a1cfb2d4f4f824734">get_instance</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_scheduler.html#aaf2bb6de35334ff9ee74447eae4e68a0">get_number_of_subtasks</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_scheduler.html#afa4a8c26b1d4a1edb20b44e65fd8a0bd">get_number_of_tasks</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_scheduler.html#a10491d05740640f2ede57c44d5dfad02">frame</a>(std::chrono::milliseconds frameDurationMs)</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_scheduler.html#af1549eccfc413c5a1cfb2d4f4f824734">get_instance</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_scheduler.html#aaf2bb6de35334ff9ee74447eae4e68a0">get_number_of_subtasks</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_scheduler.html#afa4a8c26b1d4a1edb20b44e65fd8a0bd">get_number_of_tasks</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_scheduler.html#a3a81a2e2b5485431ef542732f94443ca">get_overruns</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_scheduler.html#a86d4189517e71b5c52dbbe07d48eeab2">start</a>(int frame_rate)</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_scheduler.html#a7ac470a1b0421f2db78e5b478a6b28b1">stop</a>()</td><td class="entry"><a class="el" href="class_scheduler.html">Scheduler</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->

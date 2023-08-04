@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -106,6 +106,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ad403181d90309b60eda7781feee5259d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#ad403181d90309b60eda7781feee5259d">quit_view</a> ()</td></tr>
+<tr class="separator:ad403181d90309b60eda7781feee5259d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a493ad9090b9a9ca05f54584289d95430"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a493ad9090b9a9ca05f54584289d95430">initalize</a> ()</td></tr>
 <tr class="separator:a493ad9090b9a9ca05f54584289d95430"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a8d48cd1b5f13720d94efaf4b9fcb65"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a6a8d48cd1b5f13720d94efaf4b9fcb65">on_refresh</a> ()</td></tr>
@@ -144,6 +146,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae295a865929b64162f3ae83f8adbfbbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeca43db88abd65b7eb01cb302af18a79"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#aeca43db88abd65b7eb01cb302af18a79">stale</a> = true</td></tr>
 <tr class="separator:aeca43db88abd65b7eb01cb302af18a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7369129ba9410569e88ef08fb51c007a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_view.html#a7369129ba9410569e88ef08fb51c007a">quiter</a></td></tr>
+<tr class="separator:a7369129ba9410569e88ef08fb51c007a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A view to display on the console. </p>
@@ -258,6 +262,8 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Create the <a class="el" href="class_view.html" title="way to view a Device.">View</a> and any containers required. Called after initalized. </p>
 
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#a0d92f9a3226afbd6ea20c8765daf9bfa">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a6ff6ed0eea1f71fe20f3fd550f25ec6b">Console_Log_View</a>.</p>
+
 </div>
 </div>
 <a id="ac3ec0d788fb3e7cc7d62ab0d1c0936bf"></a>
@@ -283,6 +289,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Called right before on_quit. Used to flatten any containers that is created with on_create. </p>
+
+<p>Reimplemented in <a class="el" href="class_console___option___popup.html#afaa06174c684027bb1985b030023c632">Console_Option_Popup</a>, and <a class="el" href="class_console___log___view.html#a254b3cb176b2bb3cdafaa766131a0bab">Console_Log_View</a>.</p>
 
 </div>
 </div>
@@ -480,6 +488,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ad403181d90309b60eda7781feee5259d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad403181d90309b60eda7781feee5259d">&#9670;&nbsp;</a></span>quit_view()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void View::quit_view </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set quiter to true. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ae295a865929b64162f3ae83f8adbfbbf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae295a865929b64162f3ae83f8adbfbbf">&#9670;&nbsp;</a></span>keyboard</h2>
@@ -524,6 +558,29 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Message to "paint" (display) into the console. As the console is acsii only, this is a string </p>
+
+</div>
+</div>
+<a id="a7369129ba9410569e88ef08fb51c007a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7369129ba9410569e88ef08fb51c007a">&#9670;&nbsp;</a></span>quiter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool View::quiter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="class_command.html">Command</a> the view to quit. </p>
 
 </div>
 </div>

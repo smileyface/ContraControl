@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -69,6 +69,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -79,29 +80,42 @@ $(function() {
 <p>Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="format_8h_source.html">format/format.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="threading_8h_source.html">Threading/threading.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="message__relay_8h_source.html">Messaging/message_relay.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for view_main.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="view__main_8h__incl.png" border="0" usemap="#aview__main_8h" alt=""/></div>
 <map name="aview__main_8h" id="aview__main_8h">
-<area shape="rect" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="303,5,398,32"/>
-<area shape="rect" href="format_8h.html" title=" " alt="" coords="295,80,406,107"/>
-<area shape="rect" title=" " alt="" coords="5,162,64,189"/>
-<area shape="rect" href="view__type__enum_8h.html" title=" " alt="" coords="88,155,243,196"/>
-<area shape="rect" href="display__type__enum_8h.html" title=" " alt="" coords="267,155,434,196"/>
-<area shape="rect" href="consumers_8h.html" title=" " alt="" coords="459,162,621,189"/>
-<area shape="rect" href="view_8h.html" title=" " alt="" coords="646,162,746,189"/>
-<area shape="rect" href="internal__messages_8h.html" title="List of Internal Messages." alt="" coords="469,244,611,271"/>
-<area shape="rect" href="message__ptr_8h.html" title=" " alt="" coords="332,333,503,375"/>
-<area shape="rect" href="logging__message_8h.html" title=" " alt="" coords="455,445,614,486"/>
-<area shape="rect" href="option__popup__response__message_8h.html" title=" " alt="" coords="631,319,801,389"/>
-<area shape="rect" href="internal__message__type_8h.html" title=" " alt="" coords="477,623,643,650"/>
-<area shape="rect" title=" " alt="" coords="623,541,678,568"/>
-<area shape="rect" href="response__message_8h.html" title=" " alt="" coords="639,452,793,479"/>
-<area shape="rect" href="option__popup__message_8h.html" title=" " alt="" coords="818,437,961,493"/>
-<area shape="rect" title=" " alt="" coords="924,541,983,568"/>
-<area shape="rect" href="view__subsystem__message_8h.html" title=" " alt="" coords="702,541,901,568"/>
-<area shape="rect" title=" " alt="" coords="711,616,892,657"/>
+<area shape="rect" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="279,5,374,32"/>
+<area shape="rect" href="format_8h.html" title=" " alt="" coords="571,80,682,107"/>
+<area shape="rect" href="threading_8h.html" title=" " alt="" coords="62,80,209,107"/>
+<area shape="rect" href="message__relay_8h.html" title=" " alt="" coords="233,80,420,107"/>
+<area shape="rect" title=" " alt="" coords="364,341,422,367"/>
+<area shape="rect" href="view__type__enum_8h.html" title=" " alt="" coords="606,155,761,196"/>
+<area shape="rect" href="display__type__enum_8h.html" title=" " alt="" coords="786,155,952,196"/>
+<area shape="rect" href="consumers_8h.html" title=" " alt="" coords="369,162,532,189"/>
+<area shape="rect" href="view_8h.html" title=" " alt="" coords="976,162,1076,189"/>
+<area shape="rect" href="internal__messages_8h.html" title="List of Internal Messages." alt="" coords="606,244,748,271"/>
+<area shape="rect" href="message__ptr_8h.html" title=" " alt="" coords="638,541,809,583"/>
+<area shape="rect" href="logging__message_8h.html" title=" " alt="" coords="543,445,702,486"/>
+<area shape="rect" href="option__popup__response__message_8h.html" title=" " alt="" coords="446,319,617,389"/>
+<area shape="rect" href="internal__message__type_8h.html" title=" " alt="" coords="430,638,596,665"/>
+<area shape="rect" title=" " alt="" coords="340,549,395,575"/>
+<area shape="rect" href="response__message_8h.html" title=" " alt="" coords="364,452,518,479"/>
+<area shape="rect" href="option__popup__message_8h.html" title=" " alt="" coords="146,437,288,493"/>
+<area shape="rect" title=" " alt="" coords="6,549,65,575"/>
+<area shape="rect" href="view__subsystem__message_8h.html" title=" " alt="" coords="118,549,316,575"/>
+<area shape="rect" title=" " alt="" coords="126,631,308,672"/>
+<area shape="rect" href="scheduler_8h.html" title=" " alt="" coords="62,162,210,189"/>
+<area shape="rect" href="task_8h.html" title=" " alt="" coords="138,244,195,271"/>
+<area shape="rect" title=" " alt="" coords="219,244,276,271"/>
+<area shape="rect" title=" " alt="" coords="146,341,203,367"/>
+<area shape="rect" title=" " alt="" coords="228,341,289,367"/>
+<area shape="rect" href="subtask_8h.html" title=" " alt="" coords="43,341,122,367"/>
+<area shape="rect" title=" " alt="" coords="43,452,122,479"/>
+<area shape="rect" title=" " alt="" coords="298,162,344,189"/>
+<area shape="rect" title=" " alt="" coords="233,162,273,189"/>
 </map>
 </div>
 </div>
@@ -112,6 +126,11 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceview"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html">view</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ad93dd05d73374d9822f4637aefb09522"><td class="memItemLeft" align="right" valign="top">typedef unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a></td></tr>
+<tr class="separator:ad93dd05d73374d9822f4637aefb09522"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a6273c41711c44b28bc3a7a41c0930d8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a6273c41711c44b28bc3a7a41c0930d8d">view::initalize</a> ()</td></tr>
@@ -120,20 +139,44 @@ Functions</h2></td></tr>
 <tr class="separator:a586caa734da95bbace5b15297af51fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8335061396cdc1aab6d2bfc9368e58b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a8335061396cdc1aab6d2bfc9368e58b9">view::stop_view</a> ()</td></tr>
 <tr class="separator:a8335061396cdc1aab6d2bfc9368e58b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65814e5d87612d631a477a1777dbdb9f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a65814e5d87612d631a477a1777dbdb9f">view::add_display</a> (<a class="el" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a> display)</td></tr>
-<tr class="separator:a65814e5d87612d631a477a1777dbdb9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88dd632ff818059b822c261af6bb2295"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a88dd632ff818059b822c261af6bb2295">view::clean_up</a> ()</td></tr>
+<tr class="separator:a88dd632ff818059b822c261af6bb2295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aec4aaf1810cd12dd2ae2e5c623c054"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a2aec4aaf1810cd12dd2ae2e5c623c054">view::step</a> ()</td></tr>
+<tr class="separator:a2aec4aaf1810cd12dd2ae2e5c623c054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4db6e2a8e7849b39de13fe36cbc8f999"><td class="memItemLeft" align="right" valign="top"><a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a4db6e2a8e7849b39de13fe36cbc8f999">view::add_display</a> (<a class="el" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a> display)</td></tr>
+<tr class="separator:a4db6e2a8e7849b39de13fe36cbc8f999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88712f4fe6c7daf8ca99635d14a00831"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a88712f4fe6c7daf8ca99635d14a00831">view::remove_display</a> (<a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a> handle)</td></tr>
+<tr class="separator:a88712f4fe6c7daf8ca99635d14a00831"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac31a7e161ade26082a2107d6c4f81c8e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_format.html">Format</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#ac31a7e161ade26082a2107d6c4f81c8e">view::list_of_formats</a> = {}</td></tr>
-<tr class="separator:ac31a7e161ade26082a2107d6c4f81c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922118d3c797f0bb0e43d34a53b54a9a"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a>, <a class="el" href="class_format.html">Format</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a922118d3c797f0bb0e43d34a53b54a9a">view::list_of_formats</a> = {}</td></tr>
+<tr class="separator:a922118d3c797f0bb0e43d34a53b54a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9e30d175e7eb5f83387a5b091213012"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#ab9e30d175e7eb5f83387a5b091213012">view::view_running</a> = false</td></tr>
 <tr class="separator:ab9e30d175e7eb5f83387a5b091213012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7889bbeb9c1ef10a37454186559ba18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_task.html">Task</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#ad7889bbeb9c1ef10a37454186559ba18">view::view_task</a></td></tr>
+<tr class="separator:ad7889bbeb9c1ef10a37454186559ba18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>kason </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>February 2022 </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="ad93dd05d73374d9822f4637aefb09522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad93dd05d73374d9822f4637aefb09522">&#9670;&nbsp;</a></span>View_Handle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef unsigned short <a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A unique identifier the handle a <a class="el" href="class_view.html" title="way to view a Device.">View</a> </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -86,23 +86,27 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="class_model___command.html#a26d6981e84591b92b49c0e67eeaa1cdf">label</a> = device_label;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="class_model___command.html#a88a34260c489270ccac5bf5c43f94556">command</a> = cmd;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    };</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_model___command.html#a26d6981e84591b92b49c0e67eeaa1cdf">   33</a></span>&#160;    <a class="code" href="class_device___label.html">Device_Label</a> <a class="code" href="class_model___command.html#a26d6981e84591b92b49c0e67eeaa1cdf">label</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_model___command.html#a88a34260c489270ccac5bf5c43f94556">   37</a></span>&#160;    <a class="code" href="class_command.html">Command</a>* <a class="code" href="class_model___command.html#a88a34260c489270ccac5bf5c43f94556">command</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="class_model___command.html#a3b1110bfec4aa8c44ccadd108000d14d">run</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_model___command.html#a26d6981e84591b92b49c0e67eeaa1cdf">   34</a></span>&#160;    <a class="code" href="class_device___label.html">Device_Label</a> <a class="code" href="class_model___command.html#a26d6981e84591b92b49c0e67eeaa1cdf">label</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_model___command.html#a88a34260c489270ccac5bf5c43f94556">   38</a></span>&#160;    <a class="code" href="class_command.html">Command</a>* <a class="code" href="class_model___command.html#a88a34260c489270ccac5bf5c43f94556">command</a>;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="_interfaces_2types_2model__command_8h.html#a01a0bac86f68be310bbd4467441793b0">   43</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;Model_Command&gt; <a class="code" href="_interfaces_2types_2model__command_8h.html#a01a0bac86f68be310bbd4467441793b0">Command_List</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !INTERFACE_MODEL_COMMAND_TYPE</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="ttc" id="a_interfaces_2types_2model__command_8h_html_a01a0bac86f68be310bbd4467441793b0"><div class="ttname"><a href="_interfaces_2types_2model__command_8h.html#a01a0bac86f68be310bbd4467441793b0">Command_List</a></div><div class="ttdeci">std::vector&lt; Model_Command &gt; Command_List</div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:43</div></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_model___command.html#a3b1110bfec4aa8c44ccadd108000d14d">   43</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_model___command.html#a3b1110bfec4aa8c44ccadd108000d14d">run</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="_interfaces_2types_2model__command_8h.html#a01a0bac86f68be310bbd4467441793b0">   49</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;Model_Command&gt; <a class="code" href="_interfaces_2types_2model__command_8h.html#a01a0bac86f68be310bbd4467441793b0">Command_List</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !INTERFACE_MODEL_COMMAND_TYPE</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="ttc" id="a_interfaces_2types_2model__command_8h_html_a01a0bac86f68be310bbd4467441793b0"><div class="ttname"><a href="_interfaces_2types_2model__command_8h.html#a01a0bac86f68be310bbd4467441793b0">Command_List</a></div><div class="ttdeci">std::vector&lt; Model_Command &gt; Command_List</div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:49</div></div>
 <div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:54</div></div>
 <div class="ttc" id="aclass_device___label_html"><div class="ttname"><a href="class_device___label.html">Device_Label</a></div><div class="ttdef"><b>Definition:</b> Interfaces/types/device_label.h:48</div></div>
 <div class="ttc" id="aclass_model___command_html"><div class="ttname"><a href="class_model___command.html">Model_Command</a></div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:19</div></div>
-<div class="ttc" id="aclass_model___command_html_a26d6981e84591b92b49c0e67eeaa1cdf"><div class="ttname"><a href="class_model___command.html#a26d6981e84591b92b49c0e67eeaa1cdf">Model_Command::label</a></div><div class="ttdeci">Device_Label label</div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:29</div></div>
+<div class="ttc" id="aclass_model___command_html_a26d6981e84591b92b49c0e67eeaa1cdf"><div class="ttname"><a href="class_model___command.html#a26d6981e84591b92b49c0e67eeaa1cdf">Model_Command::label</a></div><div class="ttdeci">Device_Label label</div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:30</div></div>
 <div class="ttc" id="aclass_model___command_html_a30c44a4dcc5aed95c5190b1422bd9afa"><div class="ttname"><a href="class_model___command.html#a30c44a4dcc5aed95c5190b1422bd9afa">Model_Command::Model_Command</a></div><div class="ttdeci">Model_Command(Device_Label device_label, Command *cmd)</div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:25</div></div>
-<div class="ttc" id="aclass_model___command_html_a88a34260c489270ccac5bf5c43f94556"><div class="ttname"><a href="class_model___command.html#a88a34260c489270ccac5bf5c43f94556">Model_Command::command</a></div><div class="ttdeci">Command * command</div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:37</div></div>
+<div class="ttc" id="aclass_model___command_html_a3b1110bfec4aa8c44ccadd108000d14d"><div class="ttname"><a href="class_model___command.html#a3b1110bfec4aa8c44ccadd108000d14d">Model_Command::run</a></div><div class="ttdeci">bool run</div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:43</div></div>
+<div class="ttc" id="aclass_model___command_html_a88a34260c489270ccac5bf5c43f94556"><div class="ttname"><a href="class_model___command.html#a88a34260c489270ccac5bf5c43f94556">Model_Command::command</a></div><div class="ttdeci">Command * command</div><div class="ttdef"><b>Definition:</b> Interfaces/types/model_command.h:38</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

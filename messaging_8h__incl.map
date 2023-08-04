@@ -1,13 +1,13 @@
 <map id="messaging.h" name="messaging.h">
-<area shape="rect" id="node1" title=" " alt="" coords="242,5,337,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="175,5,270,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,87,67,114"/>
-<area shape="rect" id="node3" title=" " alt="" coords="107,341,165,367"/>
-<area shape="rect" id="node4" href="$messages_2types_2messages_8h.html" title=" " alt="" coords="142,87,269,114"/>
-<area shape="rect" id="node8" href="$network__message__types_8h.html" title=" " alt="" coords="293,80,456,121"/>
-<area shape="rect" id="node10" href="$network__message__header_8h.html" title=" " alt="" coords="368,169,531,211"/>
-<area shape="rect" id="node11" href="$network__message__footer_8h.html" title=" " alt="" coords="555,169,717,211"/>
-<area shape="rect" id="node5" href="$network__type_8h.html" title=" " alt="" coords="239,259,348,285"/>
-<area shape="rect" id="node6" href="$ipv4__addr_8h.html" title=" " alt="" coords="219,333,367,375"/>
-<area shape="rect" id="node7" title=" " alt="" coords="266,423,321,449"/>
-<area shape="rect" id="node9" href="$basic__types_8h.html" title=" " alt="" coords="243,177,344,203"/>
+<area shape="rect" id="node3" href="$messages_2types_2messages_8h.html" title=" " alt="" coords="11,177,138,203"/>
+<area shape="rect" id="node8" href="$network__message__types_8h.html" title=" " alt="" coords="141,80,304,121"/>
+<area shape="rect" id="node10" href="$network__message__header_8h.html" title=" " alt="" coords="288,169,451,211"/>
+<area shape="rect" id="node11" href="$network__message__footer_8h.html" title=" " alt="" coords="407,80,569,121"/>
+<area shape="rect" id="node4" href="$network__type_8h.html" title=" " alt="" coords="236,259,345,285"/>
+<area shape="rect" id="node5" title=" " alt="" coords="199,341,257,367"/>
+<area shape="rect" id="node6" href="$ipv4__addr_8h.html" title=" " alt="" coords="281,333,429,375"/>
+<area shape="rect" id="node7" title=" " alt="" coords="327,423,382,449"/>
+<area shape="rect" id="node9" href="$basic__types_8h.html" title=" " alt="" coords="163,177,264,203"/>
 </map>

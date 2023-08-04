@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -110,15 +110,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a3232673acaff2007192c1cb98c250602"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a3232673acaff2007192c1cb98c250602">clean_views</a> ()</td></tr>
 <tr class="memdesc:a3232673acaff2007192c1cb98c250602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy all views.  <a href="class_format.html#a3232673acaff2007192c1cb98c250602">More...</a><br /></td></tr>
 <tr class="separator:a3232673acaff2007192c1cb98c250602"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9707627e6b5e79844e7f5742cbadf9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#ab9707627e6b5e79844e7f5742cbadf9a">start_display</a> ()</td></tr>
-<tr class="separator:ab9707627e6b5e79844e7f5742cbadf9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3a44d60c2256a143056c636dda51d19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#ad3a44d60c2256a143056c636dda51d19">stop_display</a> ()</td></tr>
-<tr class="separator:ad3a44d60c2256a143056c636dda51d19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a382ca15d586ad7041a3273f11d2bd73a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_console___format.html#a382ca15d586ad7041a3273f11d2bd73a">loop</a> ()</td></tr>
-<tr class="separator:a382ca15d586ad7041a3273f11d2bd73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a695198ef677e096c91d9e768f60a4edd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_console___format.html#a695198ef677e096c91d9e768f60a4edd">step</a> ()</td></tr>
+<tr class="separator:a695198ef677e096c91d9e768f60a4edd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -126,8 +122,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5f3f85dbe1419cfaf430344dc6b53b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad468204108a72a8a08e4e709823cb826"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#ad468204108a72a8a08e4e709823cb826">format_running</a> = false</td></tr>
 <tr class="separator:ad468204108a72a8a08e4e709823cb826"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32ec8c810d3dc7000ca34faadead2675"><td class="memItemLeft" align="right" valign="top">std::thread *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a32ec8c810d3dc7000ca34faadead2675">looping_thread</a> = nullptr</td></tr>
-<tr class="separator:a32ec8c810d3dc7000ca34faadead2675"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2eb3f5744cd148d1180fe371aa869c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_message___consumer.html">Message_Consumer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#ab2eb3f5744cd148d1180fe371aa869c9">format_consumer</a> = 0</td></tr>
 <tr class="separator:ab2eb3f5744cd148d1180fe371aa869c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -223,8 +217,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a382ca15d586ad7041a3273f11d2bd73a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a382ca15d586ad7041a3273f11d2bd73a">&#9670;&nbsp;</a></span>loop()</h2>
+<a id="a695198ef677e096c91d9e768f60a4edd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a695198ef677e096c91d9e768f60a4edd">&#9670;&nbsp;</a></span>step()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,7 +227,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Console_Format::loop </td>
+          <td class="memname">void Console_Format::step </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -245,61 +239,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Loop to update the views </p>
+<p>An update step for the views </p>
 
-<p>Implements <a class="el" href="class_format.html#a3bd0546dd70423ed53a2b523fedaeb27">Format</a>.</p>
-
-</div>
-</div>
-<a id="ab9707627e6b5e79844e7f5742cbadf9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9707627e6b5e79844e7f5742cbadf9a">&#9670;&nbsp;</a></span>start_display()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Format::start_display </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Start the view in a new threaded loop. </p>
-
-</div>
-</div>
-<a id="ad3a44d60c2256a143056c636dda51d19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3a44d60c2256a143056c636dda51d19">&#9670;&nbsp;</a></span>stop_display()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Format::stop_display </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Stop the display loop </p>
+<p>Implements <a class="el" href="class_format.html#a938c33ab05837b0c72da0cf3299ece1c">Format</a>.</p>
 
 </div>
 </div>
@@ -373,29 +315,6 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Is the display loop running </p>
-
-</div>
-</div>
-<a id="a32ec8c810d3dc7000ca34faadead2675"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32ec8c810d3dc7000ca34faadead2675">&#9670;&nbsp;</a></span>looping_thread</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::thread* Format::looping_thread = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Thread that is handling the loop </p>
 
 </div>
 </div>

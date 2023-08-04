@@ -1,20 +1,31 @@
 <map id="view_main.h" name="view_main.h">
-<area shape="rect" id="node1" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="303,5,398,32"/>
-<area shape="rect" id="node2" href="$format_8h.html" title=" " alt="" coords="295,80,406,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,162,64,189"/>
-<area shape="rect" id="node4" href="$view__type__enum_8h.html" title=" " alt="" coords="88,155,243,196"/>
-<area shape="rect" id="node5" href="$display__type__enum_8h.html" title=" " alt="" coords="267,155,434,196"/>
-<area shape="rect" id="node6" href="$consumers_8h.html" title=" " alt="" coords="459,162,621,189"/>
-<area shape="rect" id="node18" href="$view_8h.html" title=" " alt="" coords="646,162,746,189"/>
-<area shape="rect" id="node7" href="$internal__messages_8h.html" title="List of Internal Messages." alt="" coords="469,244,611,271"/>
-<area shape="rect" id="node8" href="$message__ptr_8h.html" title=" " alt="" coords="332,333,503,375"/>
-<area shape="rect" id="node10" href="$logging__message_8h.html" title=" " alt="" coords="455,445,614,486"/>
-<area shape="rect" id="node12" href="$option__popup__response__message_8h.html" title=" " alt="" coords="631,319,801,389"/>
-<area shape="rect" id="node9" href="$internal__message__type_8h.html" title=" " alt="" coords="477,623,643,650"/>
-<area shape="rect" id="node11" title=" " alt="" coords="623,541,678,568"/>
-<area shape="rect" id="node13" href="$response__message_8h.html" title=" " alt="" coords="639,452,793,479"/>
-<area shape="rect" id="node14" href="$option__popup__message_8h.html" title=" " alt="" coords="818,437,961,493"/>
-<area shape="rect" id="node15" title=" " alt="" coords="924,541,983,568"/>
-<area shape="rect" id="node16" href="$view__subsystem__message_8h.html" title=" " alt="" coords="702,541,901,568"/>
-<area shape="rect" id="node17" title=" " alt="" coords="711,616,892,657"/>
+<area shape="rect" id="node1" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="279,5,374,32"/>
+<area shape="rect" id="node2" href="$format_8h.html" title=" " alt="" coords="571,80,682,107"/>
+<area shape="rect" id="node19" href="$threading_8h.html" title=" " alt="" coords="62,80,209,107"/>
+<area shape="rect" id="node27" href="$message__relay_8h.html" title=" " alt="" coords="233,80,420,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="364,341,422,367"/>
+<area shape="rect" id="node4" href="$view__type__enum_8h.html" title=" " alt="" coords="606,155,761,196"/>
+<area shape="rect" id="node5" href="$display__type__enum_8h.html" title=" " alt="" coords="786,155,952,196"/>
+<area shape="rect" id="node6" href="$consumers_8h.html" title=" " alt="" coords="369,162,532,189"/>
+<area shape="rect" id="node18" href="$view_8h.html" title=" " alt="" coords="976,162,1076,189"/>
+<area shape="rect" id="node7" href="$internal__messages_8h.html" title="List of Internal Messages." alt="" coords="606,244,748,271"/>
+<area shape="rect" id="node8" href="$message__ptr_8h.html" title=" " alt="" coords="638,541,809,583"/>
+<area shape="rect" id="node10" href="$logging__message_8h.html" title=" " alt="" coords="543,445,702,486"/>
+<area shape="rect" id="node12" href="$option__popup__response__message_8h.html" title=" " alt="" coords="446,319,617,389"/>
+<area shape="rect" id="node9" href="$internal__message__type_8h.html" title=" " alt="" coords="430,638,596,665"/>
+<area shape="rect" id="node11" title=" " alt="" coords="340,549,395,575"/>
+<area shape="rect" id="node13" href="$response__message_8h.html" title=" " alt="" coords="364,452,518,479"/>
+<area shape="rect" id="node14" href="$option__popup__message_8h.html" title=" " alt="" coords="146,437,288,493"/>
+<area shape="rect" id="node15" title=" " alt="" coords="6,549,65,575"/>
+<area shape="rect" id="node16" href="$view__subsystem__message_8h.html" title=" " alt="" coords="118,549,316,575"/>
+<area shape="rect" id="node17" title=" " alt="" coords="126,631,308,672"/>
+<area shape="rect" id="node20" href="$scheduler_8h.html" title=" " alt="" coords="62,162,210,189"/>
+<area shape="rect" id="node21" href="$task_8h.html" title=" " alt="" coords="138,244,195,271"/>
+<area shape="rect" id="node26" title=" " alt="" coords="219,244,276,271"/>
+<area shape="rect" id="node22" title=" " alt="" coords="146,341,203,367"/>
+<area shape="rect" id="node23" title=" " alt="" coords="228,341,289,367"/>
+<area shape="rect" id="node24" href="$subtask_8h.html" title=" " alt="" coords="43,341,122,367"/>
+<area shape="rect" id="node25" title=" " alt="" coords="43,452,122,479"/>
+<area shape="rect" id="node28" title=" " alt="" coords="298,162,344,189"/>
+<area shape="rect" id="node29" title=" " alt="" coords="233,162,273,189"/>
 </map>

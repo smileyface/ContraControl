@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -76,23 +76,20 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define NETWORK_NODE_MESSAGES</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="messaging_8h.html">messaging.h</a>&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="network__message__types_8h.html">types/network_message_types.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespacenode__messages.html">   15</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacenode__messages.html">node_messages</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_network___message.html">Network_Message</a> <a class="code" href="namespacenode__messages.html#a3ee00bbcda96ef5259abaa44e6c7f921">network_message_factory</a>(<a class="code" href="messages_2types_2messages_8h.html#a8bd0a320f1808fff52ce56f8751b640f">MESSAGES</a> message);</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="namespacenode__messages.html#adbb70e4a7e0297c0e6bce9047ff1d4d9">   29</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacenode__messages.html#adbb70e4a7e0297c0e6bce9047ff1d4d9">network_message_populate</a>(<a class="code" href="class_network___message.html">Network_Message</a>&amp; message);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacenode__messages.html#ab5679c64641f799385aa505a7216a2c1">network_client_state_machine</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_network___message_html"><div class="ttname"><a href="class_network___message.html">Network_Message</a></div><div class="ttdef"><b>Definition:</b> messaging.h:25</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespacenode__messages.html">   13</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacenode__messages.html">node_messages</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_network___message.html">Network_Message</a> <a class="code" href="namespacenode__messages.html#a3ee00bbcda96ef5259abaa44e6c7f921">network_message_factory</a>(<a class="code" href="messages_2types_2messages_8h.html#a8bd0a320f1808fff52ce56f8751b640f">MESSAGES</a> message);</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="namespacenode__messages.html#adbb70e4a7e0297c0e6bce9047ff1d4d9">   27</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacenode__messages.html#adbb70e4a7e0297c0e6bce9047ff1d4d9">network_message_populate</a>(<a class="code" href="class_network___message.html">Network_Message</a>&amp; message);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacenode__messages.html#ab5679c64641f799385aa505a7216a2c1">network_client_state_machine</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_network___message_html"><div class="ttname"><a href="class_network___message.html">Network_Message</a></div><div class="ttdef"><b>Definition:</b> messaging.h:24</div></div>
 <div class="ttc" id="amessages_2types_2messages_8h_html_a8bd0a320f1808fff52ce56f8751b640f"><div class="ttname"><a href="messages_2types_2messages_8h.html#a8bd0a320f1808fff52ce56f8751b640f">MESSAGES</a></div><div class="ttdeci">MESSAGES</div><div class="ttdef"><b>Definition:</b> messages/types/messages.h:17</div></div>
 <div class="ttc" id="amessaging_8h_html"><div class="ttname"><a href="messaging_8h.html">messaging.h</a></div></div>
-<div class="ttc" id="anamespacenode__messages_html"><div class="ttname"><a href="namespacenode__messages.html">node_messages</a></div><div class="ttdef"><b>Definition:</b> node_communication.h:16</div></div>
+<div class="ttc" id="anamespacenode__messages_html"><div class="ttname"><a href="namespacenode__messages.html">node_messages</a></div><div class="ttdef"><b>Definition:</b> node_communication.h:14</div></div>
 <div class="ttc" id="anamespacenode__messages_html_a3ee00bbcda96ef5259abaa44e6c7f921"><div class="ttname"><a href="namespacenode__messages.html#a3ee00bbcda96ef5259abaa44e6c7f921">node_messages::network_message_factory</a></div><div class="ttdeci">Network_Message network_message_factory(MESSAGES message)</div><div class="ttdef"><b>Definition:</b> node_messages.cpp:4</div></div>
 <div class="ttc" id="anamespacenode__messages_html_ab5679c64641f799385aa505a7216a2c1"><div class="ttname"><a href="namespacenode__messages.html#ab5679c64641f799385aa505a7216a2c1">node_messages::network_client_state_machine</a></div><div class="ttdeci">void network_client_state_machine()</div><div class="ttdef"><b>Definition:</b> node_messages.cpp:17</div></div>
 <div class="ttc" id="anamespacenode__messages_html_adbb70e4a7e0297c0e6bce9047ff1d4d9"><div class="ttname"><a href="namespacenode__messages.html#adbb70e4a7e0297c0e6bce9047ff1d4d9">node_messages::network_message_populate</a></div><div class="ttdeci">void network_message_populate(Network_Message &amp;message)</div></div>
-<div class="ttc" id="anetwork__message__types_8h_html"><div class="ttname"><a href="network__message__types_8h.html">network_message_types.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

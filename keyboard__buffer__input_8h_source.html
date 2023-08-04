@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -75,24 +75,22 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef INPUT_INTERFACE_KEYBOARD</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define INPUT_INTERFACE_KEYBOARD</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="keyboard__interface_8h.html">sys_interface/keyboard_interface.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="keyboard__interface_8h.html">sys_interface/keyboard_interface.h</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_keyboard___buffer___input.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_keyboard___buffer___input.html">Keyboard_Buffer_Input</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_keyboard___buffer___input.html">Keyboard_Buffer_Input</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    std::string <a class="code" href="class_keyboard___buffer___input.html#a7504b3f9f3251b5769664c6cd150cb68">get_input</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_keyboard___buffer___input.html#a90bebde0f9ff8311e31ac219d6f97031">get_number</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_keyboard___buffer___input.html#a3ceaa4bb816452585bfe6ea772e3aecb">   36</a></span>&#160;    <a class="code" href="class_keyboard___interface.html">Keyboard_Interface</a>* <a class="code" href="class_keyboard___buffer___input.html#a3ceaa4bb816452585bfe6ea772e3aecb">keyboard</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">bool</span> block;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    std::vector&lt;char&gt; buffer;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_keyboard___buffer___input_html"><div class="ttname"><a href="class_keyboard___buffer___input.html">Keyboard_Buffer_Input</a></div><div class="ttdef"><b>Definition:</b> keyboard_buffer_input.h:17</div></div>
-<div class="ttc" id="aclass_keyboard___buffer___input_html_a3ceaa4bb816452585bfe6ea772e3aecb"><div class="ttname"><a href="class_keyboard___buffer___input.html#a3ceaa4bb816452585bfe6ea772e3aecb">Keyboard_Buffer_Input::keyboard</a></div><div class="ttdeci">Keyboard_Interface * keyboard</div><div class="ttdef"><b>Definition:</b> keyboard_buffer_input.h:36</div></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_keyboard___buffer___input.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_keyboard___buffer___input.html">Keyboard_Buffer_Input</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_keyboard___buffer___input.html">Keyboard_Buffer_Input</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::string <a class="code" href="class_keyboard___buffer___input.html#a7504b3f9f3251b5769664c6cd150cb68">get_input</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_keyboard___buffer___input.html#a90bebde0f9ff8311e31ac219d6f97031">get_number</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_keyboard___buffer___input.html#a3ceaa4bb816452585bfe6ea772e3aecb">   34</a></span>&#160;    <a class="code" href="class_keyboard___interface.html">Keyboard_Interface</a>* <a class="code" href="class_keyboard___buffer___input.html#a3ceaa4bb816452585bfe6ea772e3aecb">keyboard</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span> block;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::vector&lt;char&gt; buffer;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_keyboard___buffer___input_html"><div class="ttname"><a href="class_keyboard___buffer___input.html">Keyboard_Buffer_Input</a></div><div class="ttdef"><b>Definition:</b> keyboard_buffer_input.h:15</div></div>
+<div class="ttc" id="aclass_keyboard___buffer___input_html_a3ceaa4bb816452585bfe6ea772e3aecb"><div class="ttname"><a href="class_keyboard___buffer___input.html#a3ceaa4bb816452585bfe6ea772e3aecb">Keyboard_Buffer_Input::keyboard</a></div><div class="ttdeci">Keyboard_Interface * keyboard</div><div class="ttdef"><b>Definition:</b> keyboard_buffer_input.h:34</div></div>
 <div class="ttc" id="aclass_keyboard___buffer___input_html_a7504b3f9f3251b5769664c6cd150cb68"><div class="ttname"><a href="class_keyboard___buffer___input.html#a7504b3f9f3251b5769664c6cd150cb68">Keyboard_Buffer_Input::get_input</a></div><div class="ttdeci">std::string get_input()</div><div class="ttdef"><b>Definition:</b> keyboard_buffer_input.cpp:27</div></div>
 <div class="ttc" id="aclass_keyboard___buffer___input_html_a90bebde0f9ff8311e31ac219d6f97031"><div class="ttname"><a href="class_keyboard___buffer___input.html#a90bebde0f9ff8311e31ac219d6f97031">Keyboard_Buffer_Input::get_number</a></div><div class="ttdeci">int get_number()</div><div class="ttdef"><b>Definition:</b> keyboard_buffer_input.cpp:32</div></div>
 <div class="ttc" id="aclass_keyboard___interface_html"><div class="ttname"><a href="class_keyboard___interface.html">Keyboard_Interface</a></div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:16</div></div>

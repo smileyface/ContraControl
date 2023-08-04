@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -78,6 +78,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aed296659d2f8b10aeadc8ae89f0d01c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#aed296659d2f8b10aeadc8ae89f0d01c1">Task</a> (const std::string &amp;name, int priority, double percentage, bool persistence, bool clear_subtasks)</td></tr>
+<tr class="memdesc:aed296659d2f8b10aeadc8ae89f0d01c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="class_task.html" title="The Task class represents a task with subtasks.">Task</a> object.  <a href="class_task.html#aed296659d2f8b10aeadc8ae89f0d01c1">More...</a><br /></td></tr>
+<tr class="separator:aed296659d2f8b10aeadc8ae89f0d01c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fbcf3a41c2ebb12ff2acb16dd583925"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a9fbcf3a41c2ebb12ff2acb16dd583925">Task</a> (const std::string &amp;name, int priority, double percentage, bool persistence)</td></tr>
 <tr class="memdesc:a9fbcf3a41c2ebb12ff2acb16dd583925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="class_task.html" title="The Task class represents a task with subtasks.">Task</a> object.  <a href="class_task.html#a9fbcf3a41c2ebb12ff2acb16dd583925">More...</a><br /></td></tr>
 <tr class="separator:a9fbcf3a41c2ebb12ff2acb16dd583925"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -87,8 +90,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4eeccb28177492d5f58a9ff18f64fc15"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a4eeccb28177492d5f58a9ff18f64fc15">Task</a> (const <a class="el" href="class_task.html">Task</a> &amp;other)</td></tr>
 <tr class="memdesc:a4eeccb28177492d5f58a9ff18f64fc15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="class_task.html#a4eeccb28177492d5f58a9ff18f64fc15">More...</a><br /></td></tr>
 <tr class="separator:a4eeccb28177492d5f58a9ff18f64fc15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca53354bdc006762a0fda68c64f7608"><td class="memItemLeft" align="right" valign="top"><a id="a0ca53354bdc006762a0fda68c64f7608"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a0ca53354bdc006762a0fda68c64f7608">Task</a> ()</td></tr>
+<tr class="memdesc:a0ca53354bdc006762a0fda68c64f7608"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="separator:a0ca53354bdc006762a0fda68c64f7608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ecf499ea35fb4a96853969a1e1cbbce"><td class="memItemLeft" align="right" valign="top"><a id="a3ecf499ea35fb4a96853969a1e1cbbce"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a3ecf499ea35fb4a96853969a1e1cbbce">~Task</a> ()</td></tr>
+<tr class="memdesc:a3ecf499ea35fb4a96853969a1e1cbbce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default deconstructor. <br /></td></tr>
+<tr class="separator:a3ecf499ea35fb4a96853969a1e1cbbce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83b2f04acfa75e20db6fdf1c29d8e800"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a83b2f04acfa75e20db6fdf1c29d8e800">add_subtask</a> (const <a class="el" href="subtask_8h.html#struct_subtask">Subtask</a> &amp;subtask)</td></tr>
+<tr class="memdesc:a83b2f04acfa75e20db6fdf1c29d8e800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a subtask to the task.  <a href="class_task.html#a83b2f04acfa75e20db6fdf1c29d8e800">More...</a><br /></td></tr>
+<tr class="separator:a83b2f04acfa75e20db6fdf1c29d8e800"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a346b298745d8473337b814036b4cea91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a346b298745d8473337b814036b4cea91">add_subtask</a> (const std::function&lt; void()&gt; &amp;subtask)</td></tr>
-<tr class="memdesc:a346b298745d8473337b814036b4cea91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a subtask to the task.  <a href="class_task.html#a346b298745d8473337b814036b4cea91">More...</a><br /></td></tr>
+<tr class="memdesc:a346b298745d8473337b814036b4cea91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a function to the task as a Sticky_Task.  <a href="class_task.html#a346b298745d8473337b814036b4cea91">More...</a><br /></td></tr>
 <tr class="separator:a346b298745d8473337b814036b4cea91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11b4338c3f4bd70248f54761679e3479"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a11b4338c3f4bd70248f54761679e3479">number_of_subtask</a> ()</td></tr>
 <tr class="memdesc:a11b4338c3f4bd70248f54761679e3479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of subtasks to be run.  <a href="class_task.html#a11b4338c3f4bd70248f54761679e3479">More...</a><br /></td></tr>
@@ -105,6 +119,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a595154da67ecf37fcf13be37496bc802"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a595154da67ecf37fcf13be37496bc802">get_name</a> ()</td></tr>
 <tr class="memdesc:a595154da67ecf37fcf13be37496bc802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get name of the task.  <a href="class_task.html#a595154da67ecf37fcf13be37496bc802">More...</a><br /></td></tr>
 <tr class="separator:a595154da67ecf37fcf13be37496bc802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb86f0e8f1eb117dd179e3afbbb5f8b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#afb86f0e8f1eb117dd179e3afbbb5f8b5">set_persistence</a> (bool persist)</td></tr>
+<tr class="memdesc:afb86f0e8f1eb117dd179e3afbbb5f8b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set persistence.  <a href="class_task.html#afb86f0e8f1eb117dd179e3afbbb5f8b5">More...</a><br /></td></tr>
+<tr class="separator:afb86f0e8f1eb117dd179e3afbbb5f8b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2aa160ab3d755f139109b4abedbd9d7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a2aa160ab3d755f139109b4abedbd9d7a">run</a> (std::chrono::milliseconds frameDuration)</td></tr>
 <tr class="memdesc:a2aa160ab3d755f139109b4abedbd9d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the task for the given frame duration.  <a href="class_task.html#a2aa160ab3d755f139109b4abedbd9d7a">More...</a><br /></td></tr>
 <tr class="separator:a2aa160ab3d755f139109b4abedbd9d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,13 +132,72 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#aba5eb3d6c2a034aa0e319383fbec68c4">stop</a> ()</td></tr>
 <tr class="memdesc:aba5eb3d6c2a034aa0e319383fbec68c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the execution of the task. <br /></td></tr>
 <tr class="separator:aba5eb3d6c2a034aa0e319383fbec68c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b9538d24091379690719b77724cf684"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a0b9538d24091379690719b77724cf684">exception</a> (std::exception_ptr ex)</td></tr>
+<tr class="memdesc:a0b9538d24091379690719b77724cf684"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an exception thrown in the task.  <a href="class_task.html#a0b9538d24091379690719b77724cf684">More...</a><br /></td></tr>
+<tr class="separator:a0b9538d24091379690719b77724cf684"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96fcef3b463a6c11a78ea3cc7cd8f83c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_task.html">Task</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">operator=</a> (const <a class="el" href="class_task.html">Task</a> &amp;other)</td></tr>
 <tr class="memdesc:a96fcef3b463a6c11a78ea3cc7cd8f83c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator override.  <a href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">More...</a><br /></td></tr>
 <tr class="separator:a96fcef3b463a6c11a78ea3cc7cd8f83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aed296659d2f8b10aeadc8ae89f0d01c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed296659d2f8b10aeadc8ae89f0d01c1">&#9670;&nbsp;</a></span>Task() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Task::Task </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>percentage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>persistence</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>clear_subtasks</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the task. </td></tr>
+    <tr><td class="paramname">priority</td><td>The priority of the task. </td></tr>
+    <tr><td class="paramname">percentage</td><td>The percentage of frame duration allocated to this task. </td></tr>
+    <tr><td class="paramname">persistence</td><td>Is the task persistent. </td></tr>
+    <tr><td class="paramname">clear_subtasks</td><td>Remove all subtasks after the frame. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a9fbcf3a41c2ebb12ff2acb16dd583925"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9fbcf3a41c2ebb12ff2acb16dd583925">&#9670;&nbsp;</a></span>Task() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fbcf3a41c2ebb12ff2acb16dd583925">&#9670;&nbsp;</a></span>Task() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +246,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <a id="a74872b40371d39605bef092c307c8fef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74872b40371d39605bef092c307c8fef">&#9670;&nbsp;</a></span>Task() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a74872b40371d39605bef092c307c8fef">&#9670;&nbsp;</a></span>Task() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,7 +288,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <a id="a4eeccb28177492d5f58a9ff18f64fc15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4eeccb28177492d5f58a9ff18f64fc15">&#9670;&nbsp;</a></span>Task() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eeccb28177492d5f58a9ff18f64fc15">&#9670;&nbsp;</a></span>Task() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,7 +313,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a346b298745d8473337b814036b4cea91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a346b298745d8473337b814036b4cea91">&#9670;&nbsp;</a></span>add_subtask()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a346b298745d8473337b814036b4cea91">&#9670;&nbsp;</a></span>add_subtask() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,7 +329,55 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">subtask</td><td>The function to be added as a Sticky_Task. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a83b2f04acfa75e20db6fdf1c29d8e800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83b2f04acfa75e20db6fdf1c29d8e800">&#9670;&nbsp;</a></span>add_subtask() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Task::add_subtask </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="subtask_8h.html#struct_subtask">Subtask</a> &amp;&#160;</td>
+          <td class="paramname"><em>subtask</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
     <tr><td class="paramname">subtask</td><td>The subtask to be added. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0b9538d24091379690719b77724cf684"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b9538d24091379690719b77724cf684">&#9670;&nbsp;</a></span>exception()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Task::exception </td>
+          <td>(</td>
+          <td class="paramtype">std::exception_ptr&#160;</td>
+          <td class="paramname"><em>ex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ex</td><td>Exception pointer to exception thrown. </td></tr>
   </table>
   </dd>
 </dl>
@@ -393,6 +517,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frameDuration</td><td>The duration of a frame. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afb86f0e8f1eb117dd179e3afbbb5f8b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb86f0e8f1eb117dd179e3afbbb5f8b5">&#9670;&nbsp;</a></span>set_persistence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Task::set_persistence </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>persist</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">persist</td><td>Should the task persist </td></tr>
   </table>
   </dd>
 </dl>

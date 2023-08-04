@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -89,18 +89,19 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="class_timed___command.html#aea33f74358cc1c8911ff20759ac315db">command</a> = cmd;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="class_timed___command.html#ad6ee22835f4ee1cd1fcd772aa3eec818">device_label</a> = label;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="class_timed___command.html#ab73411327945b0f2d23efc75512ca808">time</a> = t;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    };</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_timed___command.html#ae8d566ea93513b62e435f2876021fa60">   51</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_timed___command.html#ae8d566ea93513b62e435f2876021fa60">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_timed___command.html">Timed_Command</a>&amp; tc)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_timed___command.html#ab73411327945b0f2d23efc75512ca808">time</a> &lt; tc.<a class="code" href="class_timed___command.html#ab73411327945b0f2d23efc75512ca808">time</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">   61</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;Timed_Command&gt; <a class="code" href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="class_timed___command.html#a5ac012c10e11d75431ee3c99a4df3042">run</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    };</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_timed___command.html#ae8d566ea93513b62e435f2876021fa60">   52</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_timed___command.html#ae8d566ea93513b62e435f2876021fa60">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_timed___command.html">Timed_Command</a>&amp; tc)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_timed___command.html#ab73411327945b0f2d23efc75512ca808">time</a> &lt; tc.<a class="code" href="class_timed___command.html#ab73411327945b0f2d23efc75512ca808">time</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">   62</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;Timed_Command&gt; <a class="code" href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:54</div></div>
 <div class="ttc" id="aclass_device___label_html"><div class="ttname"><a href="class_device___label.html">Device_Label</a></div><div class="ttdef"><b>Definition:</b> Interfaces/types/device_label.h:48</div></div>
 <div class="ttc" id="aclass_timed___command_html"><div class="ttname"><a href="class_timed___command.html">Timed_Command</a></div><div class="ttdef"><b>Definition:</b> timed_command.h:17</div></div>
@@ -108,9 +109,9 @@ $(function() {
 <div class="ttc" id="aclass_timed___command_html_a5ac012c10e11d75431ee3c99a4df3042"><div class="ttname"><a href="class_timed___command.html#a5ac012c10e11d75431ee3c99a4df3042">Timed_Command::run</a></div><div class="ttdeci">bool run</div><div class="ttdef"><b>Definition:</b> timed_command.h:34</div></div>
 <div class="ttc" id="aclass_timed___command_html_ab73411327945b0f2d23efc75512ca808"><div class="ttname"><a href="class_timed___command.html#ab73411327945b0f2d23efc75512ca808">Timed_Command::time</a></div><div class="ttdeci">double time</div><div class="ttdef"><b>Definition:</b> timed_command.h:30</div></div>
 <div class="ttc" id="aclass_timed___command_html_ad6ee22835f4ee1cd1fcd772aa3eec818"><div class="ttname"><a href="class_timed___command.html#ad6ee22835f4ee1cd1fcd772aa3eec818">Timed_Command::device_label</a></div><div class="ttdeci">Device_Label device_label</div><div class="ttdef"><b>Definition:</b> timed_command.h:26</div></div>
-<div class="ttc" id="aclass_timed___command_html_ae8d566ea93513b62e435f2876021fa60"><div class="ttname"><a href="class_timed___command.html#ae8d566ea93513b62e435f2876021fa60">Timed_Command::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(const Timed_Command &amp;tc)</div><div class="ttdef"><b>Definition:</b> timed_command.h:51</div></div>
+<div class="ttc" id="aclass_timed___command_html_ae8d566ea93513b62e435f2876021fa60"><div class="ttname"><a href="class_timed___command.html#ae8d566ea93513b62e435f2876021fa60">Timed_Command::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(const Timed_Command &amp;tc)</div><div class="ttdef"><b>Definition:</b> timed_command.h:52</div></div>
 <div class="ttc" id="aclass_timed___command_html_aea33f74358cc1c8911ff20759ac315db"><div class="ttname"><a href="class_timed___command.html#aea33f74358cc1c8911ff20759ac315db">Timed_Command::command</a></div><div class="ttdeci">Command * command</div><div class="ttdef"><b>Definition:</b> timed_command.h:22</div></div>
-<div class="ttc" id="atimed__command_8h_html_ad11384ace0e6819718d3dcb5c3236a1d"><div class="ttname"><a href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a></div><div class="ttdeci">std::vector&lt; Timed_Command &gt; Timed_List</div><div class="ttdef"><b>Definition:</b> timed_command.h:61</div></div>
+<div class="ttc" id="atimed__command_8h_html_ad11384ace0e6819718d3dcb5c3236a1d"><div class="ttname"><a href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a></div><div class="ttdeci">std::vector&lt; Timed_Command &gt; Timed_List</div><div class="ttdef"><b>Definition:</b> timed_command.h:62</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -70,7 +70,9 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="class_task.html">Task</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_task.html#a346b298745d8473337b814036b4cea91">add_subtask</a>(const std::function&lt; void()&gt; &amp;subtask)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_task.html#a83b2f04acfa75e20db6fdf1c29d8e800">add_subtask</a>(const Subtask &amp;subtask)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_task.html#a346b298745d8473337b814036b4cea91">add_subtask</a>(const std::function&lt; void()&gt; &amp;subtask)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_task.html#a0b9538d24091379690719b77724cf684">exception</a>(std::exception_ptr ex)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_task.html#a595154da67ecf37fcf13be37496bc802">get_name</a>()</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_task.html#a5d1244a988fe9bfd7d092fd9b0dd6a19">get_overruns</a>()</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_task.html#aae7c5fe4dbb7389294c95b8553d4c94d">get_persistence</a>()</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
@@ -78,11 +80,15 @@ $(function() {
   <tr><td class="entry"><a class="el" href="class_task.html#a11b4338c3f4bd70248f54761679e3479">number_of_subtask</a>()</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">operator=</a>(const Task &amp;other)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_task.html#a2aa160ab3d755f139109b4abedbd9d7a">run</a>(std::chrono::milliseconds frameDuration)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_task.html#a802a9c63e280ff96cc13d498924bc748">start</a>(std::chrono::milliseconds frame_duration)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_task.html#aba5eb3d6c2a034aa0e319383fbec68c4">stop</a>()</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_task.html#afb86f0e8f1eb117dd179e3afbbb5f8b5">set_persistence</a>(bool persist)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_task.html#a802a9c63e280ff96cc13d498924bc748">start</a>(std::chrono::milliseconds frame_duration)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_task.html#aba5eb3d6c2a034aa0e319383fbec68c4">stop</a>()</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_task.html#aed296659d2f8b10aeadc8ae89f0d01c1">Task</a>(const std::string &amp;name, int priority, double percentage, bool persistence, bool clear_subtasks)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_task.html#a9fbcf3a41c2ebb12ff2acb16dd583925">Task</a>(const std::string &amp;name, int priority, double percentage, bool persistence)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_task.html#a74872b40371d39605bef092c307c8fef">Task</a>(const std::string &amp;name, int priority, double percentage)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_task.html#a4eeccb28177492d5f58a9ff18f64fc15">Task</a>(const Task &amp;other)</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_task.html#a0ca53354bdc006762a0fda68c64f7608">Task</a>()</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_task.html#a3ecf499ea35fb4a96853969a1e1cbbce">~Task</a>()</td><td class="entry"><a class="el" href="class_task.html">Task</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

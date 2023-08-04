@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['network_5fclient_5fstate_5fmachine_852',['network_client_state_machine',['../namespacenode__messages.html#ab5679c64641f799385aa505a7216a2c1',1,'node_messages']]],
-  ['network_5fmessage_853',['Network_Message',['../class_network___message.html#aa968a29fe574c5a6ecf4f25d65d69f4e',1,'Network_Message::Network_Message()'],['../class_network___message.html#a84864ca31dbc6c07ee1f20771a9fc3b0',1,'Network_Message::Network_Message(MESSAGES message_type, std::vector&lt; Network_Messaging_Type * &gt; types)']]],
-  ['network_5fmessage_5ffactory_854',['network_message_factory',['../namespacenode__messages.html#a3ee00bbcda96ef5259abaa44e6c7f921',1,'node_messages']]],
-  ['network_5fmessage_5fpopulate_855',['network_message_populate',['../namespacenode__messages.html#adbb70e4a7e0297c0e6bce9047ff1d4d9',1,'node_messages']]],
-  ['network_5fstatus_5fstate_856',['Network_Status_State',['../struct_network___status___state.html#ac4e95a79a7dee16abc08989e1f41c72b',1,'Network_Status_State']]],
-  ['node_857',['Node',['../class_node.html#ad27ade37db0d02ba3285ffecf5bfac56',1,'Node']]],
-  ['notify_858',['notify',['../struct_message___consumer.html#ad4971d98f19e8839d7144d5ee96c8155',1,'Message_Consumer']]],
-  ['number_5fof_5fmessages_859',['number_of_messages',['../class_message___relay.html#a09f43f391275d94a9394fd20755a73ae',1,'Message_Relay']]],
-  ['number_5fof_5fsubtask_860',['number_of_subtask',['../class_task.html#a11b4338c3f4bd70248f54761679e3479',1,'Task']]]
+  ['mangle_5fstate_882',['mangle_state',['../namespacestate__interfaces.html#a026b532e9e402506f0183d3f8b9356da',1,'state_interfaces']]],
+  ['message_5fconsumer_883',['Message_Consumer',['../struct_message___consumer.html#a7fc0579d7b5b01c4535c1e8072228f57',1,'Message_Consumer']]],
+  ['message_5ffooter_884',['Message_Footer',['../struct_message___footer.html#a519d2780a85f764a9510a60bda6c86b2',1,'Message_Footer']]],
+  ['message_5fptr_885',['Message_Ptr',['../class_message___ptr.html#a9fb3b78a52d19fdae999e0a5a6d1cb94',1,'Message_Ptr::Message_Ptr()'],['../class_message___ptr.html#a738de6450a3455247dd86cd054cf01aa',1,'Message_Ptr::Message_Ptr(T *mess)'],['../class_message___ptr.html#a379fa63659a7cf959362ef2d0942e0d1',1,'Message_Ptr::Message_Ptr(const Message_Ptr &amp;obj)']]],
+  ['model_5fcommand_886',['Model_Command',['../class_model___command.html#a30c44a4dcc5aed95c5190b1422bd9afa',1,'Model_Command::Model_Command(Device_Label device_label, Command *cmd)'],['../class_model___command.html#a30c44a4dcc5aed95c5190b1422bd9afa',1,'Model_Command::Model_Command(Device_Label device_label, Command *cmd)']]]
 ];

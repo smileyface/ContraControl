@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -95,6 +95,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af4f19568e78941d05e0e8f87b90dee6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ec479bef3712c3010d828b034ce1221"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#a2ec479bef3712c3010d828b034ce1221">add_connection</a> (<a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a> type, <a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> id)</td></tr>
 <tr class="separator:a2ec479bef3712c3010d828b034ce1221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab183af7b45a08f92479e044c8d461baf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#ab183af7b45a08f92479e044c8d461baf">remove_connection</a> (<a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> id)</td></tr>
+<tr class="separator:ab183af7b45a08f92479e044c8d461baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b67fa27b2bcb94d7fb1e87e8d3baf36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#a6b67fa27b2bcb94d7fb1e87e8d3baf36">get_id</a> ()</td></tr>
 <tr class="separator:a6b67fa27b2bcb94d7fb1e87e8d3baf36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -353,6 +355,30 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">device</td><td>A creator struct that will be used to make the device. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab183af7b45a08f92479e044c8d461baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab183af7b45a08f92479e044c8d461baf">&#9670;&nbsp;</a></span>remove_connection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Node::remove_connection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a>&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Remove a connection to a node. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID to the node that needs removing </td></tr>
   </table>
   </dd>
 </dl>

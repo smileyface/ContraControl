@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['mangle_5fstate_847',['mangle_state',['../namespacestate__interfaces.html#a026b532e9e402506f0183d3f8b9356da',1,'state_interfaces']]],
-  ['message_5fconsumer_848',['Message_Consumer',['../struct_message___consumer.html#a7fc0579d7b5b01c4535c1e8072228f57',1,'Message_Consumer']]],
-  ['message_5ffooter_849',['Message_Footer',['../struct_message___footer.html#a519d2780a85f764a9510a60bda6c86b2',1,'Message_Footer']]],
-  ['message_5fptr_850',['Message_Ptr',['../class_message___ptr.html#a9fb3b78a52d19fdae999e0a5a6d1cb94',1,'Message_Ptr::Message_Ptr()'],['../class_message___ptr.html#a738de6450a3455247dd86cd054cf01aa',1,'Message_Ptr::Message_Ptr(T *mess)'],['../class_message___ptr.html#a379fa63659a7cf959362ef2d0942e0d1',1,'Message_Ptr::Message_Ptr(const Message_Ptr &amp;obj)']]],
-  ['model_5fcommand_851',['Model_Command',['../class_model___command.html#a30c44a4dcc5aed95c5190b1422bd9afa',1,'Model_Command::Model_Command(Device_Label device_label, Command *cmd)'],['../class_model___command.html#a30c44a4dcc5aed95c5190b1422bd9afa',1,'Model_Command::Model_Command(Device_Label device_label, Command *cmd)']]]
+  ['listen_879',['listen',['../class_network___interface.html#aed240f6f41548b29b590391ddb46e69f',1,'Network_Interface']]],
+  ['listen_5ffor_5fmessage_880',['listen_for_message',['../namespacenetwork.html#a3c2ee6bbc82c5e9e569b6b7a29a1c206',1,'network']]],
+  ['logging_5fmessage_881',['Logging_Message',['../class_logging___message.html#a79aee642f30eb144c2d0dd6c302b736f',1,'Logging_Message::Logging_Message(MESSAGE_PRIORITY pri, std::string msg, std::string loc)'],['../class_logging___message.html#ae2bcd73b4613d8b1612e88a3305a1beb',1,'Logging_Message::Logging_Message()']]]
 ];

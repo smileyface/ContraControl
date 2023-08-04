@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['unpack_946',['unpack',['../class_network___message.html#a8df2fbf783c6d3cdbf3752d3977fa31a',1,'Network_Message::unpack()'],['../class_network___byte.html#ad6dc944d60d1be7e6256fdd8438d791f',1,'Network_Byte::unpack()'],['../class_network___word.html#afaabfbc9a337c6ead7b57e2b3a53c5b2',1,'Network_Word::unpack()'],['../class_network___percent.html#a85835381665fe9724315e7fbee61b047',1,'Network_Percent::unpack()'],['../class_network___string.html#abde6b839a4b88d45d30e0b236e9d7702',1,'Network_String::unpack()'],['../class_network___bool.html#a22d70e725d2b720fe04baa26ca5efa7e',1,'Network_Bool::unpack()'],['../class_network___address.html#a5b47b44e0f07d2c8240a062ec20a5cdb',1,'Network_Address::unpack()'],['../struct_message___footer.html#ad55c45947f25db2555c2745f0017e4ef',1,'Message_Footer::unpack()'],['../struct_message___header.html#a3e9fb996a7e39dece16227153538cc64',1,'Message_Header::unpack()'],['../class_network___messaging___type.html#aa38531de0ecf1c7e42dab844837c0592',1,'Network_Messaging_Type::unpack()']]],
-  ['update_5ftime_947',['update_time',['../class_timer.html#a94bcfe8762424a6b5c0e0e07d1ff167d',1,'Timer']]],
-  ['update_5fviews_948',['update_views',['../class_format.html#a7f669c63d185b6de463c56f4c3ebb945',1,'Format']]]
+  ['task_978',['Task',['../class_task.html#aed296659d2f8b10aeadc8ae89f0d01c1',1,'Task::Task(const std::string &amp;name, int priority, double percentage, bool persistence, bool clear_subtasks)'],['../class_task.html#a9fbcf3a41c2ebb12ff2acb16dd583925',1,'Task::Task(const std::string &amp;name, int priority, double percentage, bool persistence)'],['../class_task.html#a74872b40371d39605bef092c307c8fef',1,'Task::Task(const std::string &amp;name, int priority, double percentage)'],['../class_task.html#a4eeccb28177492d5f58a9ff18f64fc15',1,'Task::Task(const Task &amp;other)'],['../class_task.html#a0ca53354bdc006762a0fda68c64f7608',1,'Task::Task()']]],
+  ['this_5fmessage_979',['this_message',['../class_option___popup___response___message.html#aaf05beb922b458db320f2353cb1c4e23',1,'Option_Popup_Response_Message']]],
+  ['timed_5fcommand_980',['Timed_Command',['../class_timed___command.html#a4a62aa82d7ecdfbc370913222831107d',1,'Timed_Command']]],
+  ['transition_5ffrom_981',['transition_from',['../class_action___layer.html#af997223779048abede00f52dae63223f',1,'Action_Layer']]],
+  ['transition_5fto_982',['transition_to',['../class_action___layer.html#a1752c2a01b7f50c4c443c6e39d05bc44',1,'Action_Layer']]],
+  ['turn_5foff_983',['turn_off',['../class_device.html#a59ce797adbab404b97bbed08f32663a8',1,'Device']]],
+  ['turn_5fon_984',['turn_on',['../class_device.html#afe97521c294bb1ee3d1caa0a4a4def76',1,'Device']]]
 ];

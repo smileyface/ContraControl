@@ -1,13 +1,13 @@
 <map id="console_view.h" name="console_view.h">
-<area shape="rect" id="node1" title=" " alt="" coords="49,5,160,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,430,60,457"/>
-<area shape="rect" id="node3" href="$view_8h.html" title=" " alt="" coords="70,95,139,121"/>
-<area shape="rect" id="node4" href="$keyboard__interface_8h.html" title=" " alt="" coords="164,80,323,136"/>
-<area shape="rect" id="node5" href="$action__stack_8h.html" title=" " alt="" coords="173,184,313,225"/>
-<area shape="rect" id="node6" title=" " alt="" coords="242,430,301,457"/>
-<area shape="rect" id="node7" href="$action__layer_8h.html" title=" " alt="" coords="113,273,214,300"/>
-<area shape="rect" id="node8" href="$input__buffer_8h.html" title=" " alt="" coords="106,348,205,375"/>
-<area shape="rect" id="node9" href="$key__input__interface_8h.html" title=" " alt="" coords="85,423,218,464"/>
-<area shape="rect" id="node10" title=" " alt="" coords="68,512,147,539"/>
-<area shape="rect" id="node11" title=" " alt="" coords="171,512,217,539"/>
+<area shape="rect" id="node1" title=" " alt="" coords="54,5,165,32"/>
+<area shape="rect" id="node2" href="$view_8h.html" title=" " alt="" coords="5,95,75,121"/>
+<area shape="rect" id="node3" href="$keyboard__interface_8h.html" title=" " alt="" coords="99,80,258,136"/>
+<area shape="rect" id="node4" href="$action__stack_8h.html" title=" " alt="" coords="109,184,249,225"/>
+<area shape="rect" id="node5" href="$action__layer_8h.html" title=" " alt="" coords="128,273,229,300"/>
+<area shape="rect" id="node6" href="$input__buffer_8h.html" title=" " alt="" coords="129,348,228,375"/>
+<area shape="rect" id="node7" title=" " alt="" coords="68,430,127,457"/>
+<area shape="rect" id="node8" title=" " alt="" coords="151,430,206,457"/>
+<area shape="rect" id="node9" href="$key__input__interface_8h.html" title=" " alt="" coords="231,423,364,464"/>
+<area shape="rect" id="node10" title=" " alt="" coords="214,512,293,539"/>
+<area shape="rect" id="node11" title=" " alt="" coords="317,512,363,539"/>
 </map>

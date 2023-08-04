@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -75,29 +75,47 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef VIEW_EXECUTOR_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define VIEW_EXECUTOR_H</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="format_8h.html">format/format.h</a>&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="namespaceview.html">   16</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceview.html">view</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">extern</span> std::vector&lt;Format*&gt; <a class="code" href="namespaceview.html#ac31a7e161ade26082a2107d6c4f81c8e">list_of_formats</a>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceview.html#ab9e30d175e7eb5f83387a5b091213012">view_running</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a6273c41711c44b28bc3a7a41c0930d8d">initalize</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a586caa734da95bbace5b15297af51fa6">start_view</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a8335061396cdc1aab6d2bfc9368e58b9">stop_view</a>();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="namespaceview.html#a65814e5d87612d631a477a1777dbdb9f">add_display</a>(<a class="code" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a> display);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="threading_8h.html">Threading/threading.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="message__relay_8h.html">Messaging/message_relay.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">   18</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="namespaceview.html">   23</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceview.html">view</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* subsystem_name = <span class="stringliteral">&quot;View&quot;</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">extern</span> std::map&lt;View_Handle, Format*&gt; <a class="code" href="namespaceview.html#a922118d3c797f0bb0e43d34a53b54a9a">list_of_formats</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceview.html#ab9e30d175e7eb5f83387a5b091213012">view_running</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">extern</span> <a class="code" href="class_task.html">Task</a> <a class="code" href="namespaceview.html#ad7889bbeb9c1ef10a37454186559ba18">view_task</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a6273c41711c44b28bc3a7a41c0930d8d">initalize</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a586caa734da95bbace5b15297af51fa6">start_view</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a8335061396cdc1aab6d2bfc9368e58b9">stop_view</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a88dd632ff818059b822c261af6bb2295">clean_up</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a2aec4aaf1810cd12dd2ae2e5c623c054">step</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a> <a class="code" href="namespaceview.html#a4db6e2a8e7849b39de13fe36cbc8f999">add_display</a>(<a class="code" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a> display);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceview.html#a88712f4fe6c7daf8ca99635d14a00831">remove_display</a>(<a class="code" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a> handle);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_task_html"><div class="ttname"><a href="class_task.html">Task</a></div><div class="ttdoc">The Task class represents a task with subtasks.</div><div class="ttdef"><b>Definition:</b> task.h:23</div></div>
 <div class="ttc" id="adisplay__type__enum_8h_html_a276e342efd244f8591592e86219914ba"><div class="ttname"><a href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a></div><div class="ttdeci">DISPLAY_TYPES</div><div class="ttdef"><b>Definition:</b> display_type_enum.h:16</div></div>
 <div class="ttc" id="aformat_8h_html"><div class="ttname"><a href="format_8h.html">format.h</a></div></div>
-<div class="ttc" id="anamespaceview_html"><div class="ttname"><a href="namespaceview.html">view</a></div><div class="ttdef"><b>Definition:</b> view_main.h:17</div></div>
-<div class="ttc" id="anamespaceview_html_a586caa734da95bbace5b15297af51fa6"><div class="ttname"><a href="namespaceview.html#a586caa734da95bbace5b15297af51fa6">view::start_view</a></div><div class="ttdeci">void start_view()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:18</div></div>
-<div class="ttc" id="anamespaceview_html_a6273c41711c44b28bc3a7a41c0930d8d"><div class="ttname"><a href="namespaceview.html#a6273c41711c44b28bc3a7a41c0930d8d">view::initalize</a></div><div class="ttdeci">void initalize()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:10</div></div>
-<div class="ttc" id="anamespaceview_html_a65814e5d87612d631a477a1777dbdb9f"><div class="ttname"><a href="namespaceview.html#a65814e5d87612d631a477a1777dbdb9f">view::add_display</a></div><div class="ttdeci">int add_display(DISPLAY_TYPES display)</div><div class="ttdef"><b>Definition:</b> view_main.cpp:34</div></div>
-<div class="ttc" id="anamespaceview_html_a8335061396cdc1aab6d2bfc9368e58b9"><div class="ttname"><a href="namespaceview.html#a8335061396cdc1aab6d2bfc9368e58b9">view::stop_view</a></div><div class="ttdeci">void stop_view()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:26</div></div>
+<div class="ttc" id="amessage__relay_8h_html"><div class="ttname"><a href="message__relay_8h.html">message_relay.h</a></div></div>
+<div class="ttc" id="anamespaceview_html"><div class="ttname"><a href="namespaceview.html">view</a></div><div class="ttdef"><b>Definition:</b> view_main.h:24</div></div>
+<div class="ttc" id="anamespaceview_html_a2aec4aaf1810cd12dd2ae2e5c623c054"><div class="ttname"><a href="namespaceview.html#a2aec4aaf1810cd12dd2ae2e5c623c054">view::step</a></div><div class="ttdeci">void step()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:47</div></div>
+<div class="ttc" id="anamespaceview_html_a4db6e2a8e7849b39de13fe36cbc8f999"><div class="ttname"><a href="namespaceview.html#a4db6e2a8e7849b39de13fe36cbc8f999">view::add_display</a></div><div class="ttdeci">View_Handle add_display(DISPLAY_TYPES display)</div><div class="ttdef"><b>Definition:</b> view_main.cpp:58</div></div>
+<div class="ttc" id="anamespaceview_html_a586caa734da95bbace5b15297af51fa6"><div class="ttname"><a href="namespaceview.html#a586caa734da95bbace5b15297af51fa6">view::start_view</a></div><div class="ttdeci">void start_view()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:25</div></div>
+<div class="ttc" id="anamespaceview_html_a6273c41711c44b28bc3a7a41c0930d8d"><div class="ttname"><a href="namespaceview.html#a6273c41711c44b28bc3a7a41c0930d8d">view::initalize</a></div><div class="ttdeci">void initalize()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:12</div></div>
+<div class="ttc" id="anamespaceview_html_a8335061396cdc1aab6d2bfc9368e58b9"><div class="ttname"><a href="namespaceview.html#a8335061396cdc1aab6d2bfc9368e58b9">view::stop_view</a></div><div class="ttdeci">void stop_view()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:32</div></div>
+<div class="ttc" id="anamespaceview_html_a88712f4fe6c7daf8ca99635d14a00831"><div class="ttname"><a href="namespaceview.html#a88712f4fe6c7daf8ca99635d14a00831">view::remove_display</a></div><div class="ttdeci">void remove_display(View_Handle handle)</div><div class="ttdef"><b>Definition:</b> view_main.cpp:75</div></div>
+<div class="ttc" id="anamespaceview_html_a88dd632ff818059b822c261af6bb2295"><div class="ttname"><a href="namespaceview.html#a88dd632ff818059b822c261af6bb2295">view::clean_up</a></div><div class="ttdeci">void clean_up()</div><div class="ttdef"><b>Definition:</b> view_main.cpp:39</div></div>
+<div class="ttc" id="anamespaceview_html_a922118d3c797f0bb0e43d34a53b54a9a"><div class="ttname"><a href="namespaceview.html#a922118d3c797f0bb0e43d34a53b54a9a">view::list_of_formats</a></div><div class="ttdeci">std::map&lt; View_Handle, Format * &gt; list_of_formats</div><div class="ttdef"><b>Definition:</b> view_main.cpp:6</div></div>
 <div class="ttc" id="anamespaceview_html_ab9e30d175e7eb5f83387a5b091213012"><div class="ttname"><a href="namespaceview.html#ab9e30d175e7eb5f83387a5b091213012">view::view_running</a></div><div class="ttdeci">bool view_running</div><div class="ttdef"><b>Definition:</b> view_main.cpp:7</div></div>
-<div class="ttc" id="anamespaceview_html_ac31a7e161ade26082a2107d6c4f81c8e"><div class="ttname"><a href="namespaceview.html#ac31a7e161ade26082a2107d6c4f81c8e">view::list_of_formats</a></div><div class="ttdeci">std::vector&lt; Format * &gt; list_of_formats</div><div class="ttdef"><b>Definition:</b> view_main.cpp:6</div></div>
+<div class="ttc" id="anamespaceview_html_ad7889bbeb9c1ef10a37454186559ba18"><div class="ttname"><a href="namespaceview.html#ad7889bbeb9c1ef10a37454186559ba18">view::view_task</a></div><div class="ttdeci">Task view_task</div><div class="ttdef"><b>Definition:</b> view_main.cpp:10</div></div>
+<div class="ttc" id="athreading_8h_html"><div class="ttname"><a href="threading_8h.html">threading.h</a></div></div>
+<div class="ttc" id="aview__main_8h_html_ad93dd05d73374d9822f4637aefb09522"><div class="ttname"><a href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a></div><div class="ttdeci">unsigned short View_Handle</div><div class="ttdef"><b>Definition:</b> view_main.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

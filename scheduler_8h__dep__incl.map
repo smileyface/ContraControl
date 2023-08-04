@@ -1,4 +1,8 @@
 <map id="scheduler.h" name="scheduler.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,93,32"/>
-<area shape="rect" id="node2" href="$threading_8h_source.html" title=" " alt="" coords="7,80,92,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="223,5,311,32"/>
+<area shape="rect" id="node2" href="$threading_8h.html" title=" " alt="" coords="224,80,309,107"/>
+<area shape="rect" id="node3" href="$controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="5,155,125,181"/>
+<area shape="rect" id="node4" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="150,155,253,181"/>
+<area shape="rect" id="node5" href="$network__main_8h.html" title=" " alt="" coords="277,155,390,181"/>
+<area shape="rect" id="node6" href="$view__main_8h.html" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="414,155,509,181"/>
 </map>

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -79,15 +79,24 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a13130c5f8804c842b135de34836eac56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#a13130c5f8804c842b135de34836eac56">add_task</a> (<a class="el" href="class_task.html">Task</a> task)</td></tr>
-<tr class="memdesc:a13130c5f8804c842b135de34836eac56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a task to the scheduler.  <a href="class_scheduler.html#a13130c5f8804c842b135de34836eac56">More...</a><br /></td></tr>
-<tr class="separator:a13130c5f8804c842b135de34836eac56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6220b56ae5ef4ef67a03e01e2d5d2d71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#a6220b56ae5ef4ef67a03e01e2d5d2d71">add_task</a> (<a class="el" href="class_task.html">Task</a> *task)</td></tr>
+<tr class="memdesc:a6220b56ae5ef4ef67a03e01e2d5d2d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a task to the scheduler.  <a href="class_scheduler.html#a6220b56ae5ef4ef67a03e01e2d5d2d71">More...</a><br /></td></tr>
+<tr class="separator:a6220b56ae5ef4ef67a03e01e2d5d2d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afca7e1c183dc928dde049fe5e0efce06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#afca7e1c183dc928dde049fe5e0efce06">add_system_task</a> (std::function&lt; void()&gt; task)</td></tr>
+<tr class="memdesc:afca7e1c183dc928dde049fe5e0efce06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a system task to the scheduler. The system task is for adding more task to the current frame. It is run as part of PRI_1.  <a href="class_scheduler.html#afca7e1c183dc928dde049fe5e0efce06">More...</a><br /></td></tr>
+<tr class="separator:afca7e1c183dc928dde049fe5e0efce06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7f73412c6a672297feacb109baf89ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#ad7f73412c6a672297feacb109baf89ba">add_cleanup_task</a> (std::function&lt; void()&gt; task)</td></tr>
+<tr class="memdesc:ad7f73412c6a672297feacb109baf89ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a cleanup task to the scheduler. The cleanup task is for adding more task to the cleanup frame. It is run as part of PRI_5.  <a href="class_scheduler.html#ad7f73412c6a672297feacb109baf89ba">More...</a><br /></td></tr>
+<tr class="separator:ad7f73412c6a672297feacb109baf89ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa4a8c26b1d4a1edb20b44e65fd8a0bd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#afa4a8c26b1d4a1edb20b44e65fd8a0bd">get_number_of_tasks</a> ()</td></tr>
 <tr class="memdesc:afa4a8c26b1d4a1edb20b44e65fd8a0bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets number of tasks on the scheduler.  <a href="class_scheduler.html#afa4a8c26b1d4a1edb20b44e65fd8a0bd">More...</a><br /></td></tr>
 <tr class="separator:afa4a8c26b1d4a1edb20b44e65fd8a0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf2bb6de35334ff9ee74447eae4e68a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#aaf2bb6de35334ff9ee74447eae4e68a0">get_number_of_subtasks</a> ()</td></tr>
 <tr class="memdesc:aaf2bb6de35334ff9ee74447eae4e68a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of subtasks in each task on the scheduler.  <a href="class_scheduler.html#aaf2bb6de35334ff9ee74447eae4e68a0">More...</a><br /></td></tr>
 <tr class="separator:aaf2bb6de35334ff9ee74447eae4e68a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a81a2e2b5485431ef542732f94443ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#a3a81a2e2b5485431ef542732f94443ca">get_overruns</a> ()</td></tr>
+<tr class="memdesc:a3a81a2e2b5485431ef542732f94443ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of overruns.  <a href="class_scheduler.html#a3a81a2e2b5485431ef542732f94443ca">More...</a><br /></td></tr>
+<tr class="separator:a3a81a2e2b5485431ef542732f94443ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86d4189517e71b5c52dbbe07d48eeab2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#a86d4189517e71b5c52dbbe07d48eeab2">start</a> (int frame_rate)</td></tr>
 <tr class="memdesc:a86d4189517e71b5c52dbbe07d48eeab2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the execution of the tasks with the given frame duration.  <a href="class_scheduler.html#a86d4189517e71b5c52dbbe07d48eeab2">More...</a><br /></td></tr>
 <tr class="separator:a86d4189517e71b5c52dbbe07d48eeab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -95,6 +104,9 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#a7ac470a1b0421f2db78e5b478a6b28b1">stop</a> ()</td></tr>
 <tr class="memdesc:a7ac470a1b0421f2db78e5b478a6b28b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the execution of all tasks. <br /></td></tr>
 <tr class="separator:a7ac470a1b0421f2db78e5b478a6b28b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10491d05740640f2ede57c44d5dfad02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#a10491d05740640f2ede57c44d5dfad02">frame</a> (std::chrono::milliseconds frameDurationMs)</td></tr>
+<tr class="memdesc:a10491d05740640f2ede57c44d5dfad02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a single frame.  <a href="class_scheduler.html#a10491d05740640f2ede57c44d5dfad02">More...</a><br /></td></tr>
+<tr class="separator:a10491d05740640f2ede57c44d5dfad02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53a061075e64681ba5b6b4f9e540898b"><td class="memItemLeft" align="right" valign="top"><a id="a53a061075e64681ba5b6b4f9e540898b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scheduler.html#a53a061075e64681ba5b6b4f9e540898b">clear</a> ()</td></tr>
 <tr class="memdesc:a53a061075e64681ba5b6b4f9e540898b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all tasks from the scheduler. <br /></td></tr>
@@ -111,8 +123,56 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <tr class="separator:a9c4653c6323d4bac0dcc1e349e8effe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a13130c5f8804c842b135de34836eac56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13130c5f8804c842b135de34836eac56">&#9670;&nbsp;</a></span>add_task()</h2>
+<a id="ad7f73412c6a672297feacb109baf89ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7f73412c6a672297feacb109baf89ba">&#9670;&nbsp;</a></span>add_cleanup_task()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scheduler::add_cleanup_task </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>task</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">task</td><td>The cleanup task to add to the scheduler. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afca7e1c183dc928dde049fe5e0efce06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afca7e1c183dc928dde049fe5e0efce06">&#9670;&nbsp;</a></span>add_system_task()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scheduler::add_system_task </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>task</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">task</td><td>The system task to add to the scheduler. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6220b56ae5ef4ef67a03e01e2d5d2d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6220b56ae5ef4ef67a03e01e2d5d2d71">&#9670;&nbsp;</a></span>add_task()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -120,7 +180,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
         <tr>
           <td class="memname">void Scheduler::add_task </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_task.html">Task</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_task.html">Task</a> *&#160;</td>
           <td class="paramname"><em>task</em></td><td>)</td>
           <td></td>
         </tr>
@@ -129,6 +189,30 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">task</td><td>The task to be added. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a10491d05740640f2ede57c44d5dfad02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10491d05740640f2ede57c44d5dfad02">&#9670;&nbsp;</a></span>frame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scheduler::frame </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::milliseconds&#160;</td>
+          <td class="paramname"><em>frameDurationMs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frameDurationMs</td><td>Duration of the frame. </td></tr>
   </table>
   </dd>
 </dl>
@@ -194,6 +278,24 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The number of tasks. </dd></dl>
+
+</div>
+</div>
+<a id="a3a81a2e2b5485431ef542732f94443ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a81a2e2b5485431ef542732f94443ca">&#9670;&nbsp;</a></span>get_overruns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Scheduler::get_overruns </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The number of overrun frames. </dd></dl>
 
 </div>
 </div>

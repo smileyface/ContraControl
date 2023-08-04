@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.5</span>
+   &#160;<span id="projectnumber">0.0.7</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -79,27 +79,35 @@ Functions</h2></td></tr>
 <tr class="separator:a586caa734da95bbace5b15297af51fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8335061396cdc1aab6d2bfc9368e58b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a8335061396cdc1aab6d2bfc9368e58b9">stop_view</a> ()</td></tr>
 <tr class="separator:a8335061396cdc1aab6d2bfc9368e58b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65814e5d87612d631a477a1777dbdb9f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a65814e5d87612d631a477a1777dbdb9f">add_display</a> (<a class="el" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a> display)</td></tr>
-<tr class="separator:a65814e5d87612d631a477a1777dbdb9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88dd632ff818059b822c261af6bb2295"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a88dd632ff818059b822c261af6bb2295">clean_up</a> ()</td></tr>
+<tr class="separator:a88dd632ff818059b822c261af6bb2295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aec4aaf1810cd12dd2ae2e5c623c054"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a2aec4aaf1810cd12dd2ae2e5c623c054">step</a> ()</td></tr>
+<tr class="separator:a2aec4aaf1810cd12dd2ae2e5c623c054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4db6e2a8e7849b39de13fe36cbc8f999"><td class="memItemLeft" align="right" valign="top"><a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a4db6e2a8e7849b39de13fe36cbc8f999">add_display</a> (<a class="el" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a> display)</td></tr>
+<tr class="separator:a4db6e2a8e7849b39de13fe36cbc8f999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88712f4fe6c7daf8ca99635d14a00831"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a88712f4fe6c7daf8ca99635d14a00831">remove_display</a> (<a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a> handle)</td></tr>
+<tr class="separator:a88712f4fe6c7daf8ca99635d14a00831"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac31a7e161ade26082a2107d6c4f81c8e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_format.html">Format</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#ac31a7e161ade26082a2107d6c4f81c8e">list_of_formats</a> = {}</td></tr>
-<tr class="separator:ac31a7e161ade26082a2107d6c4f81c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922118d3c797f0bb0e43d34a53b54a9a"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a>, <a class="el" href="class_format.html">Format</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#a922118d3c797f0bb0e43d34a53b54a9a">list_of_formats</a> = {}</td></tr>
+<tr class="separator:a922118d3c797f0bb0e43d34a53b54a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9e30d175e7eb5f83387a5b091213012"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#ab9e30d175e7eb5f83387a5b091213012">view_running</a> = false</td></tr>
 <tr class="separator:ab9e30d175e7eb5f83387a5b091213012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7889bbeb9c1ef10a37454186559ba18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_task.html">Task</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceview.html#ad7889bbeb9c1ef10a37454186559ba18">view_task</a></td></tr>
+<tr class="separator:ad7889bbeb9c1ef10a37454186559ba18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An interface for every display. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a65814e5d87612d631a477a1777dbdb9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65814e5d87612d631a477a1777dbdb9f">&#9670;&nbsp;</a></span>add_display()</h2>
+<a id="a4db6e2a8e7849b39de13fe36cbc8f999"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4db6e2a8e7849b39de13fe36cbc8f999">&#9670;&nbsp;</a></span>add_display()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int view::add_display </td>
+          <td class="memname"><a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a> view::add_display </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a>&#160;</td>
           <td class="paramname"><em>display</em></td><td>)</td>
@@ -114,6 +122,24 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>handle for Display </dd></dl>
+
+</div>
+</div>
+<a id="a88dd632ff818059b822c261af6bb2295"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88dd632ff818059b822c261af6bb2295">&#9670;&nbsp;</a></span>clean_up()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void view::clean_up </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Clean all the view. </p>
 
 </div>
 </div>
@@ -135,6 +161,30 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a88712f4fe6c7daf8ca99635d14a00831"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88712f4fe6c7daf8ca99635d14a00831">&#9670;&nbsp;</a></span>remove_display()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void view::remove_display </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a>&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Remove a <a class="el" href="class_format.html" title="Format that the data will take.">Format</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>Handle to specifiy the display to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a586caa734da95bbace5b15297af51fa6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a586caa734da95bbace5b15297af51fa6">&#9670;&nbsp;</a></span>start_view()</h2>
 
@@ -150,6 +200,24 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Start all Formats in threads. </p>
+
+</div>
+</div>
+<a id="a2aec4aaf1810cd12dd2ae2e5c623c054"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aec4aaf1810cd12dd2ae2e5c623c054">&#9670;&nbsp;</a></span>step()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void view::step </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A single step of the view. </p>
 
 </div>
 </div>
@@ -172,8 +240,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="ac31a7e161ade26082a2107d6c4f81c8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac31a7e161ade26082a2107d6c4f81c8e">&#9670;&nbsp;</a></span>list_of_formats</h2>
+<a id="a922118d3c797f0bb0e43d34a53b54a9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a922118d3c797f0bb0e43d34a53b54a9a">&#9670;&nbsp;</a></span>list_of_formats</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +250,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="class_format.html">Format</a> * &gt; view::list_of_formats = {}</td>
+          <td class="memname">std::map&lt; <a class="el" href="view__main_8h.html#ad93dd05d73374d9822f4637aefb09522">View_Handle</a>, <a class="el" href="class_format.html">Format</a> * &gt; view::list_of_formats = {}</td>
         </tr>
       </table>
   </td>
@@ -215,6 +283,29 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Boolean for the state of all views. </p>
+
+</div>
+</div>
+<a id="ad7889bbeb9c1ef10a37454186559ba18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7889bbeb9c1ef10a37454186559ba18">&#9670;&nbsp;</a></span>view_task</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_task.html">Task</a> view::view_task</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="class_task.html" title="The Task class represents a task with subtasks.">Task</a> to add view to the scheduler. </p>
 
 </div>
 </div>
