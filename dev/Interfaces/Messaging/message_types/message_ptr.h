@@ -44,7 +44,7 @@ public:
 	Message_Ptr(const Message_Ptr& obj)
 	{
 		message = obj.message;
-		uses = obj.uses;
+		uses = { obj.uses };
 		if(message != nullptr)
 		{
 			(*uses)++;
