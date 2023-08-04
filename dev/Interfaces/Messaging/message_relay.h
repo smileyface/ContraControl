@@ -8,13 +8,11 @@
 #ifndef SYSTEM_MESSAGE_INTERFACE_H
 #define SYSTEM_MESSAGE_INTERFACE_H
 
-#include <string>
 #include <map>
 #include <set>
 
 #include "Messaging/consumers.h"
  //Messaging types
-#include "internal_messages.h"
 
 /**
  * @brief A basic structure for comparisons.
@@ -81,6 +79,13 @@ public:
 	int number_of_messages(Message_Consumer* consumer);
 
 	/**
+	 * Get the number of consumers on the relay
+	 * 
+	 * \return number of consumers on the relay.
+	 */
+	int number_of_consumers();
+
+	/**
 	 * Get an instance of the first message in the front of the list. Does not remove the object from the message relay.
 	 *
 	 * \param consumer Pointer to the consumer requesting to get its messages.
@@ -93,6 +98,11 @@ public:
 	 * \return Instance of the message relay.
 	 */
 	static Message_Relay* get_instance();
+
+	/**
+	Destroy the instance of the singleton
+	*/
+	static void destroy_instance();
 
 	/**
 	 * Register consumer for message consumption.

@@ -22,9 +22,14 @@ public:
 		std::string MESSAGE;///<Log message.
 		std::string LOC;///<Location message was sent from.
 		std::string LEVEL;///<Level of log.
+		bool vaild; ///<Is the message valid.
 	} message;///<Instance of the captured message.
 	/**Get the log message from the message relay.*/
 	void get_message();
+	/** Create the Log View */
+	void create();
+	/** Destroy the Log View */
+	void destroy();
 
 protected:    
 	/**

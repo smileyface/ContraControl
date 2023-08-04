@@ -1,7 +1,7 @@
-#include "../test_utilities/system_utilities.h"
-#include "../test_utilities/test_utilities.h"
+#include "../../test_utilities/system_utilities.h"
+#include "../../test_utilities/test_utilities.h"
 
-#include "../test_utilities/pch.h"
+#include "../../test_utilities/pch.h"
 
 #include "../../dev/Interfaces/Messaging/message_relay.h"
 
@@ -14,13 +14,13 @@ namespace
 		bool found = false;
 		virtual void SetUp()
 		{
-			system_utilities::setup();
+			system_utilities::setup_messaging();
 			consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
 		}
 		virtual void TearDown()
 		{
 			Message_Relay::get_instance()->deregister_consumer(consumer);
-			system_utilities::cleanup();
+			system_utilities::teardown_messaging();
 		}
 	};
 }
@@ -58,7 +58,7 @@ TEST_F(Internal_Message_Test, Multiple_Consumer)
 	LOG_DEBUG("Test Debug");
 	Logging_Message message = Message_Relay::get_instance()->pop<Logging_Message>(con_two);
 	EXPECT_EQ(message.get_message(), "Test Debug");
-
+	Message_Relay::get_instance()->deregister_consumer(con_two);
 }
 
 TEST_F(Internal_Message_Test, Freshen)

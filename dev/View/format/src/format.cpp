@@ -8,13 +8,18 @@
 
 View* Format::add_view(VIEW_TYPE_ENUM view)
 {
-	return 0;
+	std::string type(get_view_type_enum_as_string(view));
+	LOG_INFO("Adding View: " + type, "Console Format");
+	View* new_view = view_factory(view, DISPLAY_TYPES::CONSOLE);
+	new_view->on_create();
+	view_list.push_back(new_view);
+	return new_view;
 }
 
 void Format::update_views()
 {
 	std::vector<std::vector<View*>::iterator> destroy_list;
-	for(auto i = view_list.begin(); i != view_list.end(); i++)
+	for(auto i = view_list.begin(); i != view_list.end();)
 	{
 		View* r = (*i);
 		if(r->is_stale())
@@ -29,14 +34,15 @@ void Format::update_views()
 
 		if(r->quit())
 		{
-			r->on_quit();
 			r->on_destroy();
-			destroy_list.push_back(i);
+			r->on_quit();
+			delete (*i);
+			i = view_list.erase(i);
 		}
-	}
-	for(int i = 0; i < destroy_list.size(); i++)
-	{
-		view_list.erase(destroy_list[i]);
+		else
+		{
+			i++;
+		}
 	}
 }
 
@@ -44,8 +50,10 @@ void Format::clean_views()
 {
 	for(auto i = view_list.begin(); i != view_list.end(); i++)
 	{
-		(*i)->on_destroy();
+		(*i)->quit_view();
 	}
+	update_views();
+	Message_Relay::get_instance()->deregister_consumer(format_consumer);
 }
 
 void Format::process_internal_messages()
@@ -61,19 +69,4 @@ void Format::process_internal_messages()
 			LOG_INFO(log_message, "Option Popup Creation");
 		}
 	}
-}
-
-void Format::start_display()
-{
-	format_running = true;
-	looping_thread = new std::thread([this]
-									 {
-										 this->loop();
-									 });
-}
-
-void Format::stop_display()
-{
-	format_running = false;
-	looping_thread->join();
 }

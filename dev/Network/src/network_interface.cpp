@@ -32,6 +32,15 @@ std::string Network_Interface::get_hostname()
 {
 	return hostname;
 }
+bool Network_Interface::server()
+{
+	return is_server == true;
+}
+
+bool Network_Interface::client()
+{
+	return is_server == false;
+}
 
 void Network_Interface::set_server()
 {

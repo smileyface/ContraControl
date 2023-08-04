@@ -270,3 +270,8 @@ void testing_utilities::input_utilities::connect_keyboard(std::string path_to_ke
 {
 	//buffer.keyboard->connect_to_keyboard();
 }
+
+void testing_utilities::message_utilities::system_is_clean()
+{
+	EXPECT_EQ(Message_Relay::get_instance()->number_of_consumers(), 0) << "There are still consumers on the Message Relay";
+}

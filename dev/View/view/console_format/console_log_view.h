@@ -11,7 +11,6 @@
 
 #include "console_view.h"
 #include "../view_type/log_view_type.h"
-#include "Messaging/consumers.h"
 
 /** View for System_Messages on the Console */
 class Console_Log_View : public Console_View, public Log_View_Type
@@ -19,9 +18,11 @@ class Console_Log_View : public Console_View, public Log_View_Type
 public:
     Console_Log_View();
 
+    void on_create();
     void on_display();
     void on_refresh();
     void on_paint();
+    void on_destroy();
 
     bool is_stale();
     bool quit();
@@ -29,8 +30,7 @@ private:
 	std::string system_id;
     std::string message_;
     std::string message_level;
-
-    std::string painted_message;
+    bool message_valid;
 };
 
 #endif

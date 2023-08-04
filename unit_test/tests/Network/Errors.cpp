@@ -1,7 +1,7 @@
-#include "../test_utilities/system_utilities.h"
-#include "../test_utilities/test_utilities.h"
+#include "../../test_utilities/system_utilities.h"
+#include "../../test_utilities/test_utilities.h"
 
-#include "../test_utilities/pch.h"
+#include "../../test_utilities/pch.h"
 
 #include "../../Network/network_main.h"
 #ifdef _WIN32
@@ -27,9 +27,10 @@ namespace {
 #ifdef _WIN32
 TEST_F(Network_Error_Test, Error_States_Initialize_System_Interface_Error)
 {
+	network::instantiate_interface();
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);
 	wVersionRequested = MAKEWORD(0, 0);
-	testing_utilities::network_utilities::expect_exception([]() {network::init_network_interfaces(); }, NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR);
+	testing_utilities::network_utilities::expect_exception([]() {network::initalize(); }, NETWORK_ERRORS::SYSTEM_INTERFACE_ERROR);
 	wVersionRequested = MAKEWORD(2, 2);
 }
 #endif
@@ -48,6 +49,7 @@ TEST_F(Network_Error_Test, Error_States_Initalized)
 
 TEST_F(Network_Error_Test, Error_States_Broadcast_Setup)
 {
+	system_utilities::network_utilities::setup();
 #ifdef _WIN32
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->setup_connection(local_connections::broadcast, { IPPROTO_MAX, SOCK_STREAM, AF_INET }); }, NETWORK_ERRORS::SOCKET_INVALID);
 #endif // !_WIN32
@@ -79,5 +81,5 @@ TEST_F(Network_Error_Test, Messaging_Types_Unimplemented)
 
 TEST_F(Network_Error_Test, Unfound_Address)
 {
-	testing_utilities::network_utilities::expect_exception([]() { network::init_network_interfaces("errors"); }, NETWORK_ERRORS::ADDRESS_ERROR);
+	testing_utilities::network_utilities::expect_exception([]() { network::initalize("errors"); }, NETWORK_ERRORS::ADDRESS_ERROR);
 }

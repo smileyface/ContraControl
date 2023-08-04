@@ -1,7 +1,7 @@
-#include "../test_utilities/system_utilities.h"
-#include "../test_utilities/test_utilities.h"
+#include "../../test_utilities/system_utilities.h"
+#include "../../test_utilities/test_utilities.h"
 
-#include "../test_utilities/pch.h"
+#include "../../test_utilities/pch.h"
 
 #include <cstdlib>
 #include <iostream>
@@ -15,7 +15,7 @@ namespace {
 			system_utilities::setup();
 		}
 		virtual void TearDown() {
-			network::teardown_network_interfaces();
+			network::clean_up();
 			system_utilities::cleanup();
 		}
 	};

@@ -20,6 +20,7 @@
 #endif
 
 Message_Consumer* message_consumer = 0;
+bool system_setup = false;
 bool stale;
 
 bool system_utilities::CI = false;
@@ -34,17 +35,24 @@ bool system_utilities::WINDOWS = false;
 
 void system_utilities::setup()
 {
-	try
+	if(system_setup == false)
 	{
-		model::initalize();
-		controller::initalize();
+		try
+		{
+			model::initalize();
+			controller::initalize();
+			view::initalize();
+			system_utilities::network_utilities::setup();
+		}
+		catch(NetworkErrorException)
+		{
+			printf("Caught network exception");
+			testing_utilities::network_utilities::exception_handle();
+		}
+		setup_messaging();
+		system_setup = true;
 	}
-	catch(NetworkErrorException)
-	{
-		printf("Caught network exception");
-		testing_utilities::network_utilities::exception_handle();
-	}
-	setup_messaging();
+
 }
 
 void system_utilities::setup_messaging()
@@ -59,8 +67,24 @@ void system_utilities::teardown_messaging()
 {
 	print_log_messages();
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
+	testing_utilities::message_utilities::system_is_clean();
 	Message_Relay::get_instance()->clear();
+	Message_Relay::destroy_instance();
 	message_consumer = 0;
+}
+
+void system_utilities::start_system()
+{
+	model::start_loop();
+	controller::start_controller();
+	view::start_view();
+}
+
+void system_utilities::stop_system()
+{
+	model::stop_loop();
+	controller::stop_controller();
+	view::stop_view();
 }
 
 void display_log_messages(Logging_Message mess)
@@ -102,21 +126,28 @@ void system_utilities::cleanup()
 {
 	controller::clean_up();
 	model::clean_up();
+	view::clean_up();
+	network::clean_up();
 	teardown_messaging();
+	Scheduler::get_instance()->stop();
+	Scheduler::get_instance()->clear();
+	Scheduler::destroy_instance();
+	system_setup = false;
 }
 
 void system_utilities::step(int steps)
 {
 	for(int i = 0; i < steps; i++)
 	{
-		controller::step();
-		model::step();
+		std::chrono::milliseconds frameDurationMs(100);
+		Scheduler::get_instance()->frame(frameDurationMs);
+		sleep_thread(100);
 	}
 }
 
 void system_utilities::sleep_thread(int time_to_sleep)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(time_to_sleep));
+		std::this_thread::sleep_for(std::chrono::milliseconds(time_to_sleep));
 }
 
 void system_utilities::model_utilities::start()
@@ -143,23 +174,22 @@ void system_utilities::network_utilities::setup()
 {
 	try
 	{
-		system_utilities::setup();
 		std::string i;
 		if(std::getenv("CI") != NULL)
 		{
 			CI = true;
 			LOG_INFO("On a CI machine", "Test Setup");
 		#ifdef __linux__
-			network::init_network_interfaces("nat");
+			network::initalize("nat");
 		#endif // __linux
 		#ifdef _WIN32
-			network::init_network_interfaces("vEthernet (nat)");
+			network::initalize("vEthernet (nat)");
 		#endif
 		}
 		else
 		{
 			LOG_INFO("Not on a CI machine", "Test Setup");
-			network::init_network_interfaces();
+			network::initalize();
 		}
 	}
 	catch(NetworkErrorException e)

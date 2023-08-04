@@ -17,6 +17,12 @@
 class View
 {
 public:
+	View();
+	~View();
+	/**
+	 * Set quiter to true.
+	 */
+	void quit_view();
 	/**
 	 * Set up the data needed for this View.
 	 */
@@ -85,6 +91,11 @@ protected:
 	 * State of the View's grasp on reality
 	 */
 	bool stale = true;
+
+	/**
+	 * Command the view to quit.
+	 */
+	bool quiter;
 };
 
 #endif

@@ -3,43 +3,78 @@
 #include "format/console.h"
 #include "view/views.h"
 
-std::vector<Format*> view::list_of_formats = {};
+std::map<View_Handle, Format*> view::list_of_formats = {};
 bool view::view_running = false;
 int display_id = 0;
 
+Task view::view_task;
+
 void view::initalize()
 {
+	view_task = Task("View", 2, .4);
+	Scheduler::get_instance()->add_system_task(view::step);
+	Scheduler::get_instance()->add_cleanup_task([] ()
+												{ });
+	//initalize any format already added the system
 	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
 	{
-		(*iterator)->initalize();
+		(*iterator).second->initalize();
 	}
 }
 
 void view::start_view()
 {
-	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
-	{
-		(*iterator)->start_display();
-	}
+	LOG_INFO("View System added to the Scheduler", subsystem_name);
+	Scheduler::get_instance()->add_task(&view::view_task);
+	view_running = true;
 }
 
 void view::stop_view()
 {
-	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
+	LOG_INFO("View Stopped", subsystem_name);
+	view_task.set_persistence(false);
+	view_running = false;
+}
+
+void view::clean_up()
+{
+	for(auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
 	{
-		(*iterator)->stop_display();
+		(*iterator).second->clean_views();
 	}
 }
 
-int view::add_display(DISPLAY_TYPES display)
+void  view::step()
+{
+	for(auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
+	{
+		view::view_task.add_subtask(Cleaned_Task([iterator] ()
+									{
+										(*iterator).second->step();
+									}));
+	}
+}
+
+View_Handle view::add_display(DISPLAY_TYPES display)
 {
 	int my_display_id = display_id;
 	display_id++;
 	switch (display)
 	{
 	case DISPLAY_TYPES::CONSOLE:
-		list_of_formats.emplace_back(new Console_Format());
+		list_of_formats[my_display_id] = new Console_Format();
 		break;
 	}
+	if(view_running)
+	{
+		list_of_formats[my_display_id]->initalize();
+	}
 	return my_display_id;
+}
+
+void view::remove_display(View_Handle handle)
+{
+	list_of_formats[handle]->clean_views();
+	delete list_of_formats[handle];
+	list_of_formats.erase(handle);
 }

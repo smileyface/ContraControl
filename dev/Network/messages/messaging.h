@@ -10,7 +10,6 @@
 #define NETWORK_MESSAGES
 
 #include <cstring>
-#include <vector>
 
 #include "types/messages.h"
 #include "types/network_message_types.h"
@@ -39,7 +38,7 @@ public:
 	 * 
 	 * \return Byte array of the message.
 	 */
-	std::vector<Byte> pack();
+	Byte_Array pack();
 	/**
 	 * Size of the array of bytes produced by Network_Message::pack()
 	 * 
@@ -53,7 +52,7 @@ public:
 	 * \param message Array of bytes to convert.
 	 * \param header_size Size of the message header so that the header can be removed.
 	 */
-	void unpack(std::vector<Byte> message, int header_size);
+	void unpack(Byte_Array message, int header_size);
 
 	/**
 	 * \return type of the message.

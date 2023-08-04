@@ -70,5 +70,9 @@ namespace testing_utilities
 		void wait_for_keypress(KPI key);
 		void connect_keyboard(std::string path_to_keyboard);
 	}
+	namespace message_utilities
+	{
+		void system_is_clean();
+	}
 }
 #endif

@@ -9,10 +9,12 @@
 #define TASK_H
 
 #include <string>
-#include <functional>
 #include <vector>
+#include <queue>
 #include <chrono>
 #include <thread>
+
+#include "subtask.h"
 
  /**
   * @brief The Task class represents a task with subtasks.
@@ -26,15 +28,25 @@ public:
      * @param priority The priority of the task.
      * @param percentage The percentage of frame duration allocated to this task.
      * @param persistence Is the task persistent.
+     * @param clear_subtasks Remove all subtasks after the frame.
+     */
+    Task(const std::string& name, int priority, double percentage, bool persistence, bool clear_subtasks);
+
+    /**
+     * @brief Constructs a Task object.
+     * @param name The name of the task.
+     * @param priority The priority of the task.
+     * @param percentage The percentage of frame duration allocated to this task.
+     * @param persistence Is the task persistent.
      */
     Task(const std::string& name, int priority, double percentage, bool persistence);
 
     /**
- * @brief Constructs a Task object.
- * @param name The name of the task.
- * @param priority The priority of the task.
- * @param percentage The percentage of frame duration allocated to this task.
- */
+     * @brief Constructs a Task object.
+     * @param name The name of the task.
+     * @param priority The priority of the task.
+     * @param percentage The percentage of frame duration allocated to this task.
+     */
     Task(const std::string& name, int priority, double percentage);
 
     /**
@@ -43,10 +55,25 @@ public:
      */
     Task(const Task& other);
 
+    /**
+     * @brief Default constructor.
+     */
+    Task();
+
+    /**
+     * @brief Default deconstructor
+     */
+    ~Task();
 
     /**
      * @brief Adds a subtask to the task.
      * @param subtask The subtask to be added.
+     */
+    void add_subtask(const Subtask& subtask);
+
+    /**
+     * @brief Adds a function to the task as a Sticky_Task.
+     * @param subtask The function to be added as a Sticky_Task.
      */
     void add_subtask(const std::function<void()>& subtask);
 
@@ -81,6 +108,12 @@ public:
     std::string get_name();
 
     /**
+     * @brief Set persistence
+     * @param persist Should the task persist
+     */
+    void set_persistence(bool persist);
+
+    /**
      * @brief Runs the task for the given frame duration.
      * @param frameDuration The duration of a frame.
      */
@@ -98,6 +131,12 @@ public:
     void stop();
 
     /**
+     * @brief Add an exception thrown in the task.
+     * @param ex Exception pointer to exception thrown.
+     */
+    void exception(std::exception_ptr ex);
+
+    /**
      * @brief Assignment operator override.
      * @param other The Task object to be assigned.
      * @return Reference to the assigned Task object.
@@ -109,10 +148,12 @@ private:
     int priority;
     int overruns;
     bool persistence;
+    bool clear_subtasks;
     double percentage;
-    std::vector<std::function<void()>> subtasks;
+    std::vector<Subtask> subtasks;
     bool is_running;
-    std::thread thread;
+    std::vector<std::thread> thread;
+    std::queue<std::exception_ptr> thrown_exceptions;
 public:
 };
 

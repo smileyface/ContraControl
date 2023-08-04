@@ -143,11 +143,9 @@ char system_utilities::keyboard_utilities::get_char_from_kpi(KPI key)
 
 void system_utilities::keyboard_utilities::tear_down()
 {
-	system_utilities::cleanup();
 }
 
 void system_utilities::keyboard_utilities::setup()
 {
-	system_utilities::setup();
 }
 #endif // _WIN32

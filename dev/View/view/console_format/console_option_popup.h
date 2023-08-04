@@ -9,8 +9,6 @@
 #ifndef CONSOLE_OPTION_POPUP_VIEW
 #define CONSOLE_OPTION_POPUP_VIEW
 
-#include <vector>
-
 #include "console_view.h"
 #include "../view_type/option_view_type.h"
 
@@ -18,10 +16,12 @@
 class Console_Option_Popup : public Console_View, public Option_View_Type
 {
 public:
+	void on_create();
 	void on_display();
 	void on_refresh();
 	void on_paint();
 	void on_query();
+	void on_destroy();
 	void on_input();
 	/**
 	 * Set options for the popup.
