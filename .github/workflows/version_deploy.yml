@@ -1,0 +1,92 @@
+name: Version Deploy
+
+on:
+  pull_request:
+      branches: [master]
+      types:
+        - closed
+    # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+
+jobs:
+  Document:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: "mkdir out"
+    - name: Doxygen Action
+      # You may pin to the exact commit or the version.
+      # uses: mattnotmitt/doxygen-action@9964e41e7f2e2a56e42fe789421f3fe33e938d63
+      uses: mattnotmitt/doxygen-action@v1.3.1
+      with:
+        doxyfile-path: .github/github_doxy #Errors on warnings
+    - name: Check for successful doc
+      run: "test -f out/documents/html/index.html && echo 'we good' || exit 1"
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: './out/documents/html'
+        
+  Code_Coverage:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install gcovr
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Setup testing Network (Linux)
+      # Create a testing network called wlan0
+      if: runner.os == 'Linux'
+      run: |
+        docker network create --opt com.docker.network.bridge.name=nat test-net --subnet "192.168.0.0/24"
+        ifconfig
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
+    - name: Attempt Permissions fix
+      if: runner.os == 'Linux'
+      run: |
+        cat /proc/bus/input/devices
+        echo "**************"
+        ls -l /dev/input
+        echo "**************"
+        ls -l /dev/input/by-path
+
+        #sudo +666 /dev/uinput
+
+    - name: Build
+      shell: bash
+      # Execute the build.  You can specify a specific target with "--target <NAME>"
+      run: cmake . -DRUN_COVER=true
+
+      
+    - name: Run
+      shell: bash
+      # Execute the build.  You can specify a specific target with "--target <NAME>"
+      run: make cov
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ./coverage/reports/
+        fail_ci_if_error: true
+        files: ./coverage.xml
+        path_to_write_report: ./codecov_report.txt
+        verbose: true
