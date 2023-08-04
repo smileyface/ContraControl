@@ -165,6 +165,7 @@ Task& Task::operator=(const Task& other)
         persistence = other.persistence;
         is_running = false;
         subtasks = other.subtasks;
+        overruns = other.overruns;
     }
     return *this;
 }

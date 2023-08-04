@@ -78,3 +78,4 @@ Debug
 /.github/check.cppcheck
 coverage.xml
 
+/check-cppcheck-build-dir

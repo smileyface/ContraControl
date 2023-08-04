@@ -31,8 +31,6 @@ private:
     std::string message_;
     std::string message_level;
     bool message_valid;
-
-    std::string painted_message;
 };
 
 #endif

@@ -32,7 +32,7 @@ jobs:
       # Note the current convention is to use the -S and -B options here to specify source 
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_EXPORT_COMPILE_COMMANDS=On
 
     - name: Build Check
       working-directory: ${{runner.workspace}}/build
@@ -133,3 +133,25 @@ jobs:
         doxyfile-path: .github/github_doxy #Errors on warnings
     - name: Check for successful doc
       run: "test -f out/documents/html/index.html && echo 'we good' || exit 1"
+      
+  ClangTidyReview:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    # Optionally generate compile_commands.json
+
+    - uses: ZedThree/clang-tidy-review@v0.13.2
+      id: review
+      with:
+        cmake_command: |
+                pip install cmake && \
+                cmake . build -DCMAKE_EXPORT_COMPILE_COMMANDS=On
+
+    # Uploads an artefact containing clang_fixes.json
+    - uses: ZedThree/clang-tidy-review/upload@v0.13.2
+      id: upload-review
+
+    # If there are any comments, fail the check
+    - if: steps.review.outputs.total_comments > 0
+      run: exit 1
