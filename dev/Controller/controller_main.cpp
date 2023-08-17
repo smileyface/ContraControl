@@ -10,7 +10,7 @@ std::mutex controller_mutex;
 
 Timer controller_timer;
 bool controller::controller_running = true;
-Timed_List controller::controller_queue;
+Command_List controller::controller_queue;
 Task controller::controller_task;
 
 //FILE GLOBALS
@@ -53,15 +53,9 @@ void controller::stop_controller()
 	controller_running = false;
 }
 
-void controller::add_command(Timed_Command tc)
+void controller::add_command(Packed_Command tc)
 {
-	controller_mutex.lock();
-	controller::controller_queue.push_back(tc);
-	controller_mutex.unlock();
-	std::sort(controller::controller_queue.begin(), controller::controller_queue.end(), [] (Timed_Command a, Timed_Command b)
-			  {
-				  return a < b;
-			  });
+	Message_Relay::get_instance()->push(new Controller_Model_Command(tc));
 }
 
 void controller::step()
@@ -76,7 +70,7 @@ void controller::step()
 											{
 												if(controller::controller_queue[i].time <= 0)
 												{
-													Controller_Interfaces::Model_Interface::send_command(controller::controller_queue[i]);
+													add_command(controller::controller_queue[i]);
 												}
 												else
 												{

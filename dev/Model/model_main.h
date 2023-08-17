@@ -12,7 +12,7 @@
 
 #include "system/timer.h"
 
-#include "Interfaces/types/model_command.h"
+#include "Interfaces/types/packed_command.h"
 #include "node/node.h"
 #include "Messaging/message_relay.h"
 #include "Threading/threading.h"
@@ -44,6 +44,10 @@ namespace model
 	 * Task to add model to the scheduler.
 	 */
 	extern Task model_task;
+	/**
+	 * Consumer for Controller messages
+	 */
+	extern Message_Consumer* model_controller_consumer;
 
 	/**
 	 * \brief Get node from list of known nodes by ID
@@ -118,6 +122,6 @@ namespace model
 	 * .Add a command to the Model from the an interface.
 	 * \param command The command to run.
 	 */
-	void command_model(Model_Command command);
+	void command_model(Packed_Command command);
 }
 #endif 

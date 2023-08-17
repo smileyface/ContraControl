@@ -67,7 +67,6 @@ TEST_F(Commands_Test, Device_Assign_Channel) {
 TEST_F(Commands_Test, Device_Invalid_Command) {
 	EXPECT_THROW(device_utilities::command_device(dl, new Command()), InvalidCommandException);
 }
-
 TEST_F(Commands_Test, Device_Duplicate_Command) {
 	device_utilities::command_device(dl, new Initalize("Test1"));
 	On* on = new On();

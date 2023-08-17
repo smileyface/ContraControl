@@ -17,6 +17,7 @@
 //#include "message_types/view_messages/view_request/option_popup_message.h"
 //#include "message_types/response_messages/response_message.h"
 #include "message_types/response_messages/view_request/option_popup_response_message.h"
+#include "message_types/command_messages/controller_model_command_message.h"
 
 /**
  * Types of Internal_Messages for consumers to use

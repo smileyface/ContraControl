@@ -10,14 +10,14 @@
 
 
 
-void Model_Interfaces::Controller_Interface::add_to_step(Model_Command theCommand)
+void Model_Interfaces::Controller_Interface::add_to_step(Packed_Command theCommand)
 {
 	model::command_model(theCommand);
 }
 
-void Model_Interfaces::Controller_Interface::request_command(Model_Command theCommand, double seconds_to_execute)
+void Model_Interfaces::Controller_Interface::request_command(Packed_Command theCommand, double seconds_to_execute)
 {
-	Timed_Command command(theCommand.command, theCommand.label, seconds_to_execute);
+	Packed_Command command(theCommand.command, theCommand.device_label, seconds_to_execute);
 	Controller_Interfaces::Model_Interface::request_command_add(command);
 }
 

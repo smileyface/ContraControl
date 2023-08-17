@@ -8,7 +8,7 @@
 #ifndef COMMAND_MODEL_INTERFACE
 #define COMMAND_MODEL_INTERFACE
 
-#include "types/model_command.h"
+#include "types/packed_command.h"
 
 /**
  Interfaces for the Model.
@@ -30,7 +30,7 @@ public:
 	* \param theCommand The command to run with label to device.
 	* \return This should not return anything, but Doxygen thinks it does. 
 	 */
-	static void add_to_step(Model_Command theCommand);
+	static void add_to_step(Packed_Command theCommand);
 	/**
 	* Request to add a command to the Controller.
 	* \param theCommand Command to add to send to the Controller.
@@ -38,7 +38,7 @@ public:
 	* \todo Make seconds_to_execute append to current time.
 	* \return This should not return anything, but Doxygen thinks it does.
 	 */
-	static void request_command(Model_Command theCommand, double seconds_to_execute);
+	static void request_command(Packed_Command theCommand, double seconds_to_execute);
 
 };
 
