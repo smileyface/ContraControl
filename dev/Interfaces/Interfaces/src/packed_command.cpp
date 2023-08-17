@@ -7,10 +7,10 @@ Packed_Command::Packed_Command() :
 	run(false)
 { }
 
-Packed_Command::Packed_Command(Command* cmd, Device_Label label, double t) :
+Packed_Command::Packed_Command(Command* cmd, Device_Label label, double time) :
 	command(cmd),
 	device_label(label),
-	time(t),
+	time(time),
 	run(false)
 { }
 
@@ -26,15 +26,15 @@ Packed_Command::~Packed_Command()
 
 
 
-bool Packed_Command::operator<(const Packed_Command& tc)
+bool Packed_Command::operator<(const Packed_Command& cmd)
 {
-	return time < tc.time;
+	return time < cmd.time;
 }
 
-void Packed_Command::operator=(const Packed_Command& tc)
+void Packed_Command::operator=(const Packed_Command& cmd)
 {
-	command = tc.command;
-	device_label = tc.device_label;
-	time = tc.time;
-	run = tc.run;
+	command = cmd.command;
+	device_label = cmd.device_label;
+	time = cmd.time;
+	run = cmd.run;
 }

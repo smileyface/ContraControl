@@ -22,9 +22,9 @@ public:
 	/**
 	 @param cmd Command to run.
 	 @param label Label that maps to the device to command.
-	 @param t Time from start to run the command.
+	 @param time Time from start to run the command.
 	 */
-	Packed_Command(Command* cmd, Device_Label label, double t);
+	Packed_Command(Command* cmd, Device_Label label, double time);
 	/**.
 	* @brief Instantaneous command. Will run on the next frame
 	@param cmd Command to run.
@@ -36,13 +36,13 @@ public:
 	 @param tc Timed_Command to compare to.
 	 @return If tc happens after this command.
 	 */
-	bool operator<(const Packed_Command& tc);
+	bool operator<(const Packed_Command& cmd);
 
 	/**
 	* Assignment operator.
 	 * @param tc Timed_Command to copy to.
 	 */
-	void operator=(const Packed_Command& tc);
+	void operator=(const Packed_Command& cmd);
 	/**
 	 Command to run
 	 */
