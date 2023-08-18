@@ -60,7 +60,7 @@ Packed_Command& Packed_Command::operator=(const Packed_Command& cmd) noexcept
 	return *this;
 }
 
-Packed_Command& Packed_Command::operator=(Packed_Command&& cmd)
+Packed_Command& Packed_Command::operator=(Packed_Command&& cmd) noexcept
 {
 	if(this != &cmd)
 	{

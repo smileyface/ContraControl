@@ -45,7 +45,7 @@ public:
 	* Move Assignment operator.
 	 * @param tc Timed_Command to copy to.
 	 */
-	Packed_Command& operator=(Packed_Command&& cmd);
+	Packed_Command& operator=(Packed_Command&& cmd) noexcept;
 
 	/**
 	 Command to run
