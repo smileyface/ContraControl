@@ -19,33 +19,12 @@ class Packed_Command
 public:
 	Packed_Command();
 	~Packed_Command();
-
-	/**
-	 * Copy Constructor.
-	 * @param cmd Packed command to copy.
-	 */
-	Packed_Command(const Packed_Command& cmd) noexcept;
-	/**
-	 * Move Constructor.
-	 * @param cmd Packed command to copy.
-	 */
-	Packed_Command(Packed_Command&& cmd);
 	/**
 	 @param cmd Command to run.
 	 @param label Label that maps to the device to command.
 	 @param time Time from start to run the command.
 	 */
 	Packed_Command(Command* cmd, Device_Label label, double time);
-	/**
-	* Assignment operator.
-	 * @param tc Timed_Command to copy to.
-	 */
-	Packed_Command& operator=(const Packed_Command& cmd) noexcept;
-	/**
-	* Move Assignment operator.
-	 * @param tc Timed_Command to copy to.
-	 */
-	Packed_Command& operator=(Packed_Command&& cmd) noexcept;
 
 	/**
 	 Command to run

@@ -150,6 +150,6 @@ void model::command_model(const Packed_Command& command)
 	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(command));
 	if(found == model::step_actions.end() || model::step_actions.size() == 0)
 	{
-		model::step_actions.emplace_back(command);
+		model::step_actions.push_back(std::move(command));
 	}
 }
