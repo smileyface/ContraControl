@@ -40,12 +40,12 @@ public:
 	* Assignment operator.
 	 * @param tc Timed_Command to copy to.
 	 */
-	Packed_Command& operator=(const Packed_Command& cmd);
+	Packed_Command& operator=(const Packed_Command& cmd) noexcept;
 	/**
 	* Move Assignment operator.
 	 * @param tc Timed_Command to copy to.
 	 */
-	Packed_Command& operator=(Packed_Command&& cmd) noexcept;
+	Packed_Command& operator=(Packed_Command&& cmd);
 
 	/**
 	 Command to run
