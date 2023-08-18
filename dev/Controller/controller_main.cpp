@@ -55,14 +55,14 @@ void controller::stop_controller()
 
 void controller::add_command(Packed_Command tc)
 {
-	Message_Relay::get_instance()->push(new Controller_Model_Command(tc));
+	controller_queue.push_back(tc);
 }
 
 void controller::step()
 {
 	for(int i = 0; i < controller_queue.size(); i++)
 	{
-		if(controller_queue[i].run == false)
+		if(controller_queue[i].sent == false)
 		{
 			controller_task.add_subtask(Cleaned_Task([i] ()
 										{
@@ -70,7 +70,7 @@ void controller::step()
 											{
 												if(controller::controller_queue[i].time <= 0)
 												{
-													add_command(controller::controller_queue[i]);
+													Message_Relay::get_instance()->push(new Controller_Model_Command(controller::controller_queue[i]));
 												}
 												else
 												{
@@ -81,9 +81,8 @@ void controller::step()
 											{
 												controller::controller_task.exception(std::current_exception());
 											}
-
 										}));
-			controller::controller_queue[i].run = true;
+			controller_queue[i].sent = true;
 		}
 	}
 

@@ -112,17 +112,18 @@ void Task::start(std::chrono::milliseconds frameDuration)
     if(!is_running)
     {
         is_running = true;
-        thread.push_back(std::thread(&Task::run, this, frameDuration));
+        std::thread th(&Task::run, this, frameDuration);
+        thread.push_back(std::move(th));
     }
 }
 
 void Task::stop()
 {
-    for(auto i = thread.begin(); i != thread.end(); i++)
+    for(int i = 0; i < thread.size(); i++)
     {
-        if((*i).joinable())
+        if(thread[i].joinable())
         {
-            (*i).join();
+            thread[i].join();
         }
     }
     thread.clear();

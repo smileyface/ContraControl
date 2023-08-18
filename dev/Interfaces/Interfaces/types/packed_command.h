@@ -59,6 +59,10 @@ public:
 	 Has it been run?
 	 */
 	bool run;
+	/**
+	 * Has the command been sent to the model.
+	 */
+	bool sent;
 };
 
 /**

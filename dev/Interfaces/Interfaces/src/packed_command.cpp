@@ -4,21 +4,24 @@ Packed_Command::Packed_Command() :
 	command(0),
 	device_label(),
 	time(0.0),
-	run(false)
+	run(false),
+	sent(false)
 { }
 
 Packed_Command::Packed_Command(Command* cmd, Device_Label label, double time) :
 	command(cmd),
 	device_label(label),
 	time(time),
-	run(false)
+	run(false),
+	sent(false)
 { }
 
 Packed_Command::Packed_Command(Command* cmd, Device_Label label) :
 	command(cmd),
 	device_label(label),
 	time(0.0),
-	run(false)
+	run(false),
+	sent(false)
 { }
 
 Packed_Command::~Packed_Command()
