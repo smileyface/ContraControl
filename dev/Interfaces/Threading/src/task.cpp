@@ -1,6 +1,10 @@
 #include "../scheduler/task.h"
 
 #include <iostream>
+#include <map>
+#include <mutex>
+
+std::mutex g_pages_mutex;
 
 int alive_threads = 0;
 
@@ -119,6 +123,7 @@ void Task::start(std::chrono::milliseconds frameDuration)
 
 void Task::stop()
 {
+    g_pages_mutex.lock();
     for(int i = 0; i < thread.size(); i++)
     {
         if(thread[i].joinable())
@@ -127,6 +132,7 @@ void Task::stop()
         }
     }
     thread.clear();
+    g_pages_mutex.unlock();
     is_running = false;
 
 
