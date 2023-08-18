@@ -52,7 +52,7 @@ namespace controller
 	/**
 	 * Add a Packed_Command to the sorted queue of commands. Thread safe.
 	 *
-	 * \param tc Command to add
+	 * \param cmd Command to add
 	 */
 	void add_command(const Packed_Command& cmd);
 
