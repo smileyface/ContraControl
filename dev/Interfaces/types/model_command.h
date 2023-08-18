@@ -37,11 +37,6 @@ public:
 	Command* command;
 };
 
-/**
- List of commands
- */
-typedef std::vector<Model_Command> Command_List;
-
 #endif // !INTERFACE_MODEL_COMMAND_TYPE
 
 

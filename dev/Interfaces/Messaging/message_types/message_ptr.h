@@ -125,7 +125,6 @@ public:
 		if(this->message != nullptr)
 		{
 			new_message = *dynamic_cast<Message_Type*>(this->message);
-
 		}
 
 		return new_message;

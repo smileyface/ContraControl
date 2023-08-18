@@ -58,6 +58,8 @@ public:
      */
 	double time_to_complete = 0.0;
 	Command();
+    virtual ~Command()
+    { };
 
     /**
      * \return If time to complete is 0, Command has completed, therefore return true.

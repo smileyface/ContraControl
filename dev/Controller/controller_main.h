@@ -9,7 +9,7 @@
 #ifndef MAIN_EXECUTOR_H
 #define MAIN_EXECUTOR_H
 
-#include "Interfaces/types/timed_command.h"
+#include "Interfaces/types/packed_command.h"
 #include "system/timer.h"
 #include "Messaging/message_relay.h"
 #include "Threading/threading.h"
@@ -31,7 +31,7 @@ namespace controller
 	/**
 	 Sorted queue of commands to send to the model.
 	 */
-	extern Timed_List controller_queue;
+	extern Command_List controller_queue;
 	/**
 	 * Task to add the controller to the scheduler.
 	 */
@@ -50,11 +50,11 @@ namespace controller
 	void start_controller();
 
 	/**
-	 * Add a Timed_Command to the sorted queue of commands. Thread safe.
+	 * Add a Packed_Command to the sorted queue of commands. Thread safe.
 	 *
-	 * \param tc Command to add
+	 * \param cmd Command to add
 	 */
-	void add_command(Timed_Command tc);
+	void add_command(const Packed_Command& cmd);
 
 	/**
 	 * Iterate the loop.

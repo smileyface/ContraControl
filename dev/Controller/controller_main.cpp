@@ -1,7 +1,6 @@
 #include <algorithm>    // std::sort
 
 #include "controller_main.h"
-#include "Interfaces/controller_interface.h"
 
 #include <thread>
 #include <mutex>
@@ -10,7 +9,7 @@ std::mutex controller_mutex;
 
 Timer controller_timer;
 bool controller::controller_running = true;
-Timed_List controller::controller_queue;
+Command_List controller::controller_queue;
 Task controller::controller_task;
 
 //FILE GLOBALS
@@ -53,22 +52,16 @@ void controller::stop_controller()
 	controller_running = false;
 }
 
-void controller::add_command(Timed_Command tc)
+void controller::add_command(const Packed_Command& cmd)
 {
-	controller_mutex.lock();
-	controller::controller_queue.push_back(tc);
-	controller_mutex.unlock();
-	std::sort(controller::controller_queue.begin(), controller::controller_queue.end(), [] (Timed_Command a, Timed_Command b)
-			  {
-				  return a < b;
-			  });
+	controller_queue.push_back(cmd);
 }
 
 void controller::step()
 {
 	for(int i = 0; i < controller_queue.size(); i++)
 	{
-		if(controller_queue[i].run == false)
+		if(!controller_queue[i].sent)
 		{
 			controller_task.add_subtask(Cleaned_Task([i] ()
 										{
@@ -76,7 +69,7 @@ void controller::step()
 											{
 												if(controller::controller_queue[i].time <= 0)
 												{
-													Controller_Interfaces::Model_Interface::send_command(controller::controller_queue[i]);
+													Message_Relay::get_instance()->push(new Controller_Model_Command(controller::controller_queue[i]));
 												}
 												else
 												{
@@ -87,9 +80,8 @@ void controller::step()
 											{
 												controller::controller_task.exception(std::current_exception());
 											}
-
 										}));
-			controller::controller_queue[i].run = true;
+			controller_queue[i].sent = true;
 		}
 	}
 
