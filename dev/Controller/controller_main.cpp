@@ -52,16 +52,16 @@ void controller::stop_controller()
 	controller_running = false;
 }
 
-void controller::add_command(Packed_Command tc)
+void controller::add_command(const Packed_Command& cmd)
 {
-	controller_queue.push_back(tc);
+	controller_queue.push_back(cmd);
 }
 
 void controller::step()
 {
 	for(int i = 0; i < controller_queue.size(); i++)
 	{
-		if(controller_queue[i].sent == false)
+		if(!controller_queue[i].sent)
 		{
 			controller_task.add_subtask(Cleaned_Task([i] ()
 										{

@@ -122,6 +122,6 @@ namespace model
 	 * .Add a command to the Model from the an interface.
 	 * \param command The command to run.
 	 */
-	void command_model(Packed_Command command);
+	void command_model(const Packed_Command& command);
 }
 #endif 

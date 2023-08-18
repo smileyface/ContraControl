@@ -19,6 +19,12 @@ class Packed_Command
 public:
 	Packed_Command();
 	~Packed_Command();
+
+	/**
+	 * Copy Constructor.
+	 * @param cmd Packed command to copy.
+	 */
+	Packed_Command(const Packed_Command& cmd);
 	/**
 	 @param cmd Command to run.
 	 @param label Label that maps to the device to command.
@@ -36,13 +42,14 @@ public:
 	 @param tc Timed_Command to compare to.
 	 @return If tc happens after this command.
 	 */
-	bool operator<(const Packed_Command& cmd);
+	bool operator<(const Packed_Command& cmd) const;
 
 	/**
 	* Assignment operator.
 	 * @param tc Timed_Command to copy to.
 	 */
-	void operator=(const Packed_Command& cmd);
+	Packed_Command& operator=(const Packed_Command& cmd);
+
 	/**
 	 Command to run
 	 */

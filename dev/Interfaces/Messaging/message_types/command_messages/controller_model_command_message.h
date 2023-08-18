@@ -13,7 +13,7 @@ class Controller_Model_Command : public Internal_Message
 {
 public:
 	Controller_Model_Command();
-	Controller_Model_Command(Packed_Command tc);
+	Controller_Model_Command(const Packed_Command& cmd);
 
 	Packed_Command get_command();
 

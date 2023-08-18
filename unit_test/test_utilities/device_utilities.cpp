@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "device_utilities.h"
 #include "system_utilities.h"
 #include "module_mains.h"
@@ -54,7 +56,7 @@ Device* device_utilities::command_device(Device_Label label, Command* command)
 
 void device_utilities::add_command(Device_Label label, Command* command)
 {
-	controller::add_command(Packed_Command(command, label, 0));
+	controller::add_command(Packed_Command(command, std::move(label), 0));
 }
 
 Device* device_utilities::finish_command(Device_Label label, Command* command)

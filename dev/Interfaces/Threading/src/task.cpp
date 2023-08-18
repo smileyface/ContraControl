@@ -112,8 +112,8 @@ void Task::start(std::chrono::milliseconds frameDuration)
     if(!is_running)
     {
         is_running = true;
-        std::thread th(&Task::run, this, frameDuration);
-        thread.push_back(std::move(th));
+        std::thread thrd(&Task::run, this, frameDuration);
+        thread.push_back(std::move(thrd));
     }
 }
 
