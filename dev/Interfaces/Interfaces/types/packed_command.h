@@ -24,12 +24,12 @@ public:
 	 * Copy Constructor.
 	 * @param cmd Packed command to copy.
 	 */
-	Packed_Command(const Packed_Command& cmd);
+	Packed_Command(const Packed_Command& cmd) noexcept;
 	/**
 	 * Move Constructor.
 	 * @param cmd Packed command to copy.
 	 */
-	Packed_Command(const Packed_Command&& cmd);
+	Packed_Command(Packed_Command&& cmd);
 	/**
 	 @param cmd Command to run.
 	 @param label Label that maps to the device to command.
@@ -45,7 +45,7 @@ public:
 	* Move Assignment operator.
 	 * @param tc Timed_Command to copy to.
 	 */
-	Packed_Command& operator=(const Packed_Command&& cmd);
+	Packed_Command& operator=(Packed_Command&& cmd) noexcept;
 
 	/**
 	 Command to run
