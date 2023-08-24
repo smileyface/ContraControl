@@ -29,7 +29,7 @@ set(INTERFACE_SOURCE_FILES
                     Interfaces/src/main_interface.cpp
                     Interfaces/src/view_interface.cpp 
                     Interfaces/src/view_type_enum.cpp
-                    Interfaces/src/packed_command.cpp)
+                    Interfaces/src/packed_command.cpp "Interfaces/src/state.cpp")
 
 set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/device_label.h
@@ -40,7 +40,8 @@ set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/packed_command.h
                     Interfaces/enums/display_type_enum.h
                     Interfaces/enums/subsystem_enum.h
-                    Interfaces/enums/view_type_enum.h)
+                    Interfaces/enums/view_type_enum.h
+                    Interfaces/enums/device_type.h)
 
 add_library(System_Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
 target_include_directories(System_Interface

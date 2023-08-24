@@ -51,10 +51,8 @@ Device::Device()
 Device::Device(DEVICE_IDENTIFIER type_of_device, int number_of_channels)
 {
 	type = type_of_device;
-	for (int i = 0; i < number_of_channels; i++)
-	{
-		channels.push_back(UNUSED);
-	}
+	channels.resize(number_of_channels);
+	std::fill(channels.begin(), channels.end(), UNUSED);
 }
 
 Device::~Device()

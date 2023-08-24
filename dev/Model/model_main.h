@@ -123,5 +123,7 @@ namespace model
 	 * \param command The command to run.
 	 */
 	void command_model(const Packed_Command& command);
+
+
 }
 #endif 

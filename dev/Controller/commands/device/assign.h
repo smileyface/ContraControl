@@ -17,11 +17,7 @@
 class Assign : public Command {
 public:
 
-	Assign() 
-	{
-		channel = 0;
-		value = 0;
-	};
+	Assign();
 	/**
 	 Set channel 0 to a specific value.
 	 \param new_value Value to assign to channel 0

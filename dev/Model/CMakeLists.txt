@@ -3,7 +3,8 @@ set(MODEL_DEVICES_HEADER_FILES
                     device.h )
 
 set(MODEL_DEVICE_SOURCE_FILES
-                    src/device.cpp "src/node.cpp")
+                    src/device.cpp 
+                    src/node.cpp)
 
 set(MODEL_SYSTEM_HEADER_FILES
                     system/timer.h)

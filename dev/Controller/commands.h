@@ -11,6 +11,7 @@
 
 //commands.h included by inheritance
 #include "commands/common/initalize.h"
+#include "commands/common/device_create.h"
 #include "commands/device/on.h"
 #include "commands/device/off.h"
 #include "commands/device/assign.h"
