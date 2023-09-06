@@ -12,6 +12,7 @@
 #include <string>			//std::string
 
 #include "../command.h"
+#include "Interfaces/types/device_label.h"
 
 /**
  * Run device initalization. Name device and check for validity.
@@ -30,6 +31,8 @@ public:
 	 */
 	std::string name;
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::INITALIZE; }
+	/** Device to command */
+	Device_Label label;
 
 };
 #endif // !INITALIZE_COMMAND_H

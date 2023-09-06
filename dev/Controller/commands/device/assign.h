@@ -8,13 +8,13 @@
 #ifndef ASSIGN_COMMAND
 #define ASSIGN_COMMAND
 
-#include "../command.h"
+#include "device_command.h"
 #include "Interfaces/types/channel.h"
 
  /**
   * A command to assign a channel a certain value.
   */
-class Assign : public Command {
+class Assign : public Device_Command {
 public:
 
 	Assign();

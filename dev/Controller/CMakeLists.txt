@@ -1,13 +1,13 @@
 set(CONTROLLER_HEADER_FILES 
                     commands/common/initalize.h
-                    commands/common/device_create.h
+                    commands/device/device_create.h
                     commands/device/off.h
                     commands/device/on.h
                     commands/device/assign.h
                     commands/command.h
                     commands.h
                     controller_main.h
-                    system/timer.h)
+                    system/timer.h "commands/device/device_command.h")
 
 set(CONTROLLER_SOURCE_FILES
                     commands/src/initalize.cpp
