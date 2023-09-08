@@ -61,9 +61,9 @@ Device* model::get_device(Device_Label label)
 }
 
 template <typename T>
-void mangle_model(T* command, Device* device)
+void mangle_model(T* command)
 {
-	state_interfaces::mangle_state(command, device);
+	state_interfaces::mangle_state(command);
 }
 
 void model::step()
@@ -79,12 +79,11 @@ void model::step()
 		if(model::step_actions[i].run == false)
 		{
 			auto command = model::step_actions[i].command;
-			auto label = model::step_actions[i].device_label;
-			model_task.add_subtask(Cleaned_Task([command, label, &model_step_thread] () mutable
+			model_task.add_subtask(Cleaned_Task([command, &model_step_thread] () mutable
 								   {
 									   try
 									   {
-										   mangle_model(command, model::get_device(label));
+										   mangle_model(command);
 										   command->complete_command();
 										   command->time_to_complete -= model_timer.get_elapsed_time();
 									   }
@@ -131,15 +130,13 @@ void model::initalize_my_node(Node_Id id)
  */
 struct compare
 {
-	Packed_Command key;                                         //NOLINT
-	compare(Packed_Command const& i) : key(i)                   //NOLINT
-	{ }                                                         //NOLINT
-	bool operator()(Packed_Command const& i)                    //NOLINT
-	{                                                           //NOLINT
-		bool same_command = key.command == i.command;           //NOLINT
-		bool same_device = key.device_label == i.device_label;  //NOLINT
-		return same_command && same_device;                     //NOLINT
-	}                                                           //NOLINT
+	Packed_Command key;
+	compare(Packed_Command const& i) : key(i)
+	{ }
+	bool operator()(Packed_Command const& i)
+	{
+		return key.command == i.command;
+	}
 };
 /**
  * \endcond

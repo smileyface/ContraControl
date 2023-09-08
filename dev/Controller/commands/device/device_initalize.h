@@ -1,30 +1,31 @@
 /*****************************************************************//**
- * \file   initalize.h
+ * \file   device_initalize.h
  * \brief  
  * 
  * \author kason
- * \date   April 2021
+ * \date   September 2023
  *********************************************************************/
-
-#ifndef INITALIZE_GENERAL_H
-#define INITALIZE_GENERAL_H
+#ifndef INITALIZE_COMMAND_H
+#define INITALIZE_COMMAND_H
 
 #include <string>			//std::string
 
-#include "../command.h"
+#include "device_command.h"
+#include "Interfaces/types/device_label.h"
 
-/**
- * Run device initalization. Name device and check for validity.
- */
-class Initalize : public Command
+ /**
+  * Run device initalization. Name device and check for validity.
+  */
+class Initalize_Device : public Device_Command
 {
 public:
-	~Initalize() {};
+	Initalize_Device() = delete;
+	~Initalize_Device();
 	/**
 	 * Construct command for a device.
 	 * \param device_common_name Common name of device.
 	 */
-	Initalize(std::string device_common_name);
+	Initalize_Device(Device_Label label, std::string device_common_name);
 
 	virtual COMMAND_ENUM get_id()
 	{

@@ -17,6 +17,10 @@ public:
 	{ }
 	virtual ~Device_Command()
 	{ }
+
+	virtual void set_label(Device_Label label);
+	virtual Device_Label get_label();
+protected:
 	/** Device to command */
 	Device_Label label;
 };

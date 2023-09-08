@@ -1,7 +1,10 @@
 #include "../response_messages/view_request/option_popup_response_message.h"
 
-Option_Popup_Response_Message::Option_Popup_Response_Message()
+Option_Popup_Response_Message::Option_Popup_Response_Message() :
+	selection_(-1),
+	responding_message_(0)
 { 
+	Response_Message();
 	selection_ = -1;
 	responding_message_ = 0;
 }

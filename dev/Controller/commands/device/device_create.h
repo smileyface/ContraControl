@@ -17,6 +17,8 @@ public:
 	Device_Create();
 	~Device_Create();
 
+	Device_Create(Node_Id send_to_node, Device_Id id, Device_Name name);
+
 	Node_Id node;
 	Device_Creator device;
 

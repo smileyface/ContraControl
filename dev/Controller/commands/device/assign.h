@@ -17,18 +17,18 @@
 class Assign : public Device_Command {
 public:
 
-	Assign();
+	Assign() = delete;
 	/**
 	 Set channel 0 to a specific value.
 	 \param new_value Value to assign to channel 0
 	 */
-	Assign(Channel new_value);
+	Assign(Device_Label label, Channel new_value);
 	/**
 	 Set a channel to a specific value.
 	 \param channel_number Designation of channel to assign value to.
 	 \param new_value Value to assign to channel
 	 */
-	Assign(int channel_number, Channel new_value);
+	Assign(Device_Label label, int channel_number, Channel new_value);
 	~Assign() {};
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::ASSIGN; }
 

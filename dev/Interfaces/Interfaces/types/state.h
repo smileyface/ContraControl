@@ -9,7 +9,6 @@
 #define STATE_INTERFACES_H
 
 #include "../Utilities/Utilities/exceptions.h"
-#include "../Model/device.h"
 #include "../Controller/commands.h"
 
 /**
@@ -22,6 +21,6 @@ namespace state_interfaces
 	 \param command The Command that will mangle state.
 	 \param state The state held in the Device.
 	 */
-	void mangle_state(Command* command, Device* state);
+	void mangle_state(Command* command);
 }
 #endif

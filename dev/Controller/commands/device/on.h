@@ -18,8 +18,9 @@
  */
 class On : public Device_Command {
 public:
-	On() {};
-	~On() {};
+	On() = delete;
+	On(Device_Label label);
+	~On();
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::ON; }
 };
 #endif // !ON_COMMAND_H

@@ -36,7 +36,9 @@ void device_utilities::start_test_environment()
 
 Device_Label device_utilities::add_device(Device_Creator creator)
 {
-	model::get_node(device_utilities::node_handle)->register_device(creator);
+	Device_Label label(device_utilities::node_handle, -1);
+	controller::add_command(Packed_Command(new Device_Create(device_utilities::node_handle, creator.first, creator.second), 0));
+	system_utilities::step(2);
 	model_list[model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()] = create_device_instance(creator);
 	return(Device_Label(device_utilities::node_handle, model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()));
 }
@@ -48,15 +50,16 @@ void device_utilities::remove_device(Device_Label label)
 
 Device* device_utilities::command_device(Device_Label label, Command* command)
 {
-	controller::add_command(Packed_Command(command, label, 0));
+	Device_Command* d_command = static_cast<Device_Command*>(command);
+	controller::add_command(Packed_Command(command, 0));
 	system_utilities::step(2);
 	Device* ds = get_nominal_state(label.get_device_id(), command);
 	return ds;
 }
 
-void device_utilities::add_command(Device_Label label, Command* command)
+void device_utilities::add_command(Command* command)
 {
-	controller::add_command(Packed_Command(command, std::move(label), 0));
+	controller::add_command(Packed_Command(command, 0));
 }
 
 Device* device_utilities::finish_command(Device_Label label, Command* command)

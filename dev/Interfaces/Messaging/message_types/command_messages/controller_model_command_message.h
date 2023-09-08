@@ -33,4 +33,5 @@ public:
 
 private:
 	Packed_Command command;
+
 };

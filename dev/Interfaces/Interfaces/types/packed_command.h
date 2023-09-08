@@ -24,16 +24,12 @@ public:
 	 @param label Label that maps to the device to command.
 	 @param time Time from start to run the command.
 	 */
-	Packed_Command(Command* cmd, Device_Label label, double time);
+	Packed_Command(Command* cmd, double time);
 
 	/**
 	 Command to run
 	 */
 	Command* command;
-	/**
-	 Label that maps to the device to command
-	 */
-	Device_Label device_label;
 	/**
 	 Time to run.
 	 */

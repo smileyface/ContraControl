@@ -9,9 +9,8 @@ Packed_Command::Packed_Command() :
 	sent(false)
 { }
 
-Packed_Command::Packed_Command(Command* cmd, Device_Label label, double time) :
+Packed_Command::Packed_Command(Command* cmd, double time) :
 	command(cmd),
-	device_label(std::move(label)),
 	time(time),
 	run(false),
 	sent(false)

@@ -13,8 +13,9 @@ namespace
 		Device_Label dl;
 		virtual void SetUp()
 		{
-			device_utilities::start_test_environment();
+			system_utilities::setup();
 			system_utilities::start_system();
+			device_utilities::start_test_environment();
 			dl = device_utilities::add_device(Device_Creator((int) DEVICE_IDENTIFIER::INVALID, "Test1"));
 		}
 		virtual void TearDown()
@@ -32,6 +33,6 @@ TEST_F(Device_Invalid_Test, Device_Invalid)
 
 TEST_F(Device_Invalid_Test, Device_Naming)
 {
-	device_utilities::command_device(dl, new Initalize("Test1"));
+	device_utilities::command_device(dl, new Initalize_Device(dl, "Test1"));
 	testing_utilities::device_utilities::check_name(dl, DEVICE_IDENTIFIER::INVALID, "Test1");
 }
