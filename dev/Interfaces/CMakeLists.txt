@@ -30,7 +30,7 @@ set(INTERFACE_SOURCE_FILES
                     Interfaces/src/view_interface.cpp 
                     Interfaces/src/view_type_enum.cpp
                     Interfaces/src/packed_command.cpp 
-                    Interfaces/src/state.cpp )
+                    Interfaces/src/state.cpp)
 
 set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/device_label.h
