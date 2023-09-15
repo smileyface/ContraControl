@@ -20,9 +20,8 @@ void state_interfaces::mangle_state(Command* command)
 	case COMMAND_ENUM::ASSIGN:
 		model::get_device(static_cast<Assign*>(command)->get_label())->set_channel(static_cast<Assign*>(command)->channel, static_cast<Assign*>(command)->value);
 		break;
-	case COMMAND_ENUM::DEVICE_DESTRUCTION:
-		break;
 	case COMMAND_ENUM::INVALID:
+	default:
 		throw InvalidCommandException();
 	}
 }
