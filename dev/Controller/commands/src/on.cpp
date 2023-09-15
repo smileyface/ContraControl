@@ -7,5 +7,4 @@ On::On(Device_Label label)
 
 On::~On()
 {
-	Device_Command::~Device_Command();
 }

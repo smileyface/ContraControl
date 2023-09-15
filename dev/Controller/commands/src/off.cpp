@@ -7,5 +7,4 @@ Off::Off(Device_Label label)
 
 Off::~Off()
 {
-	Device_Command::~Device_Command();
 }
