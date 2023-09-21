@@ -19,6 +19,9 @@
 class On : public Device_Command {
 public:
 	On() = delete;
+	/**
+	 * \param label Label of the device to command.
+	 */
 	On(Device_Label label);
 	~On();
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::ON; }

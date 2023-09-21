@@ -21,7 +21,6 @@ public:
 	~Packed_Command();
 	/**
 	 @param cmd Command to run.
-	 @param label Label that maps to the device to command.
 	 @param time Time from start to run the command.
 	 */
 	Packed_Command(Command* cmd, double time);

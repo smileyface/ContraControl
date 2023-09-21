@@ -11,6 +11,9 @@
 
 #include "../internal_message_type.h"
 
+/**
+ * A handle to get the responding message back.
+ */
 typedef int* Message_Receipt;
 
 /**
@@ -27,9 +30,13 @@ public:
 	 * \todo Make this an overloaded ==
 	 */
 	virtual bool this_message(Message_Receipt check_message);
+
+	/**
+	 * \return The pointer to the recipt
+	 */
 	Message_Receipt get_receipt();
 protected:
-	Message_Receipt receipt;
+	Message_Receipt receipt; ///<An object to know which message we are responding to.
 };
 
 #endif

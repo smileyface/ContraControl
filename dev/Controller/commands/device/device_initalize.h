@@ -23,6 +23,7 @@ public:
 	~Initalize_Device();
 	/**
 	 * Construct command for a device.
+	 * \param label Label of the device to command.
 	 * \param device_common_name Common name of device.
 	 */
 	Initalize_Device(Device_Label label, std::string device_common_name);

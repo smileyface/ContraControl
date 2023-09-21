@@ -18,6 +18,9 @@ class Off : public Device_Command {
 public:
  
 	Off() = delete;
+	/**
+	 * \param label Label of the device to command.
+	 */
 	Off(Device_Label label);
 	~Off();
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::OFF; }

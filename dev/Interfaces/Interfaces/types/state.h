@@ -19,7 +19,6 @@ namespace state_interfaces
 	/**
 	 Change state of device based on command.
 	 \param command The Command that will mangle state.
-	 \param state The state held in the Device.
 	 */
 	void mangle_state(Command* command);
 }

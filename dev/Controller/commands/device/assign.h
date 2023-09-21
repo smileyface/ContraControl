@@ -20,11 +20,13 @@ public:
 	Assign() = delete;
 	/**
 	 Set channel 0 to a specific value.
+	 \param label Label of the device to command.
 	 \param new_value Value to assign to channel 0
 	 */
 	Assign(Device_Label label, Channel new_value);
 	/**
 	 Set a channel to a specific value.
+	 \param label Label of the device to command.
 	 \param channel_number Designation of channel to assign value to.
 	 \param new_value Value to assign to channel
 	 */

@@ -10,6 +10,9 @@
 #include "../command.h"
 #include "Interfaces/enums/device_type.h"
 
+/**
+ * Base class for commanding devices.
+ */
 class Device_Command : public Command
 {
 public:
@@ -17,8 +20,15 @@ public:
 	{ }
 	virtual ~Device_Command()
 	{ }
-
+	/**
+	 * Identifier of device to command
+	 * 
+	 * \param label Label for the device.
+	 */
 	virtual void set_label(Device_Label label);
+	/**
+	 * \return label of the device to command.
+	 */
 	virtual Device_Label get_label();
 protected:
 	/** Device to command */
