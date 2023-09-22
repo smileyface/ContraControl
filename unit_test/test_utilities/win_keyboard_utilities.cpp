@@ -138,7 +138,7 @@ char system_utilities::keyboard_utilities::get_char_from_kpi(KPI key)
 		return VK_LSHIFT;
 	else if(key == KEY::ENTER)
 		return VK_RETURN;
-	return 255;
+	return 0xFF;
 }
 
 void system_utilities::keyboard_utilities::tear_down()

@@ -9,17 +9,7 @@
 #define STATE_INTERFACES_H
 
 #include "../Utilities/Utilities/exceptions.h"
-#include "../Model/device.h"
 #include "../Controller/commands.h"
-
-/**
- * Device specific check for validity.
- * \return If device is a valid device.
- */
-bool validity_check()
-{
-	return true;
-}
 
 /**
  Interfaces to handle device state
@@ -29,30 +19,7 @@ namespace state_interfaces
 	/**
 	 Change state of device based on command.
 	 \param command The Command that will mangle state.
-	 \param state The state held in the Device.
 	 */
-	void mangle_state(Command* command, Device* state)
-	{
-		if (state->get_device_type() > DEVICE_IDENTIFIER::INVALID)
-		{
-			throw InvalidDeviceException();
-		}
-		switch (command->get_id())
-		{
-		case COMMAND_ENUM::INVALID:
-			throw InvalidCommandException();
-		case COMMAND_ENUM::INITALIZE:
-			state->initalize(static_cast<Initalize*>(command)->name);
-			break;
-		case COMMAND_ENUM::ON:
-			state->turn_on();
-			break;
-		case COMMAND_ENUM::OFF:
-			state->turn_off();
-			break;
-		case COMMAND_ENUM::ASSIGN:
-			state->set_channel(static_cast<Assign*>(command)->channel, static_cast<Assign*>(command)->value);
-		}
-	}
+	void mangle_state(Command* command);
 }
 #endif

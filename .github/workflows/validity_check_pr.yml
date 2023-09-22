@@ -98,12 +98,12 @@ jobs:
         docker network create -d "nat" --subnet "192.168.0.0/24" my_nat
         ipconfig /all
         
-    - name: Attempt Permissions fix
-      if: runner.os == 'Linux'
-      run: |
-        sudo chmod +666 /dev/uinput
-        sudo apt install gdb
-        
+#    - name: Attempt Permissions fix
+#      if: runner.os == 'Linux'
+#      run: |
+#        sudo chmod +666 /dev/uinput
+#        sudo apt install gdb
+#        
 #    - name: Debug
 #      uses: lhotari/action-upterm@v1
 #      with:

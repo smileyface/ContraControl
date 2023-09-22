@@ -19,6 +19,10 @@ typedef unsigned short command_id;
 enum class COMMAND_ENUM :command_id
 {
     /**
+     Create a new device
+     */
+    DEVICE_CREATION,
+    /**
      Do device start up routine
      */
 	INITALIZE,
@@ -35,13 +39,9 @@ enum class COMMAND_ENUM :command_id
      */
      ASSIGN,
     /**
-     Generic transition
+     * Destroy device.
      */
-	TRANSITION,
-    /**
-     Transition at in a linear manner
-     */
-	LINEAR_TRANSITION,
+    DEVICE_DESTRUCTION,
     /**
      Unmapped Command
      */

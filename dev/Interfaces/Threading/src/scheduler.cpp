@@ -113,10 +113,10 @@ void Scheduler::add_cleanup_task(std::function<void()> task)
 void Scheduler::start(int frameDuration) {
     scheduler_running = true;
     frame_rate = frameDuration;
-    int frames_run;
+    int frames_run = 0;
     scheduler_thread = std::thread([ &frames_run, this] ()
                 {
-                    int frames_run = 0;
+                    frames_run = 0;
                     LOG_INFO("Scheduler Start", "Scheduler");
                     std::chrono::milliseconds frameDurationMs(static_cast<int>((1000.0/frame_rate)));
 

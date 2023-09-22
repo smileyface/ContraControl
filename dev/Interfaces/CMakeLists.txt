@@ -29,7 +29,8 @@ set(INTERFACE_SOURCE_FILES
                     Interfaces/src/main_interface.cpp
                     Interfaces/src/view_interface.cpp 
                     Interfaces/src/view_type_enum.cpp
-                    Interfaces/src/packed_command.cpp)
+                    Interfaces/src/packed_command.cpp 
+                    Interfaces/src/state.cpp)
 
 set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/device_label.h
@@ -40,7 +41,8 @@ set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/types/packed_command.h
                     Interfaces/enums/display_type_enum.h
                     Interfaces/enums/subsystem_enum.h
-                    Interfaces/enums/view_type_enum.h)
+                    Interfaces/enums/view_type_enum.h
+                    Interfaces/enums/device_type.h)
 
 add_library(System_Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})
 target_include_directories(System_Interface
@@ -65,12 +67,14 @@ set(INTERNAL_MESSAGE_TYPES_HEADER_FILES
                     Messaging/message_types/view_messages/view_request/option_popup_message.h
                     Messaging/message_types/response_messages/response_message.h
                     Messaging/message_types/response_messages/view_request/option_popup_response_message.h
+                    Messaging/message_types/response_messages/command_request/create_device_response_message.h
                     Messaging/message_types/command_messages/controller_model_command_message.h)
 set(INTERNAL_MESSAGE_TYPES_SOURCE_FILES
                     Messaging/message_types/src/logging_message.cpp
                     Messaging/message_types/src/view_subsystem_message.cpp
                     Messaging/message_types/src/message_ptr.cpp
                     Messaging/message_types/src/option_popup_message.cpp
+                    Messaging/message_types/src/response_message.cpp
                     Messaging/message_types/src/option_popup_response_message.cpp
                     Messaging/message_types/src/internal_message.cpp
                     Messaging/message_types/src/controller_model_command_message.cpp)

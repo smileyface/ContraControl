@@ -26,7 +26,7 @@ namespace device_utilities
 	/*
 	Add a device to the given node in the model. Returns device name.
 	*/
-	Device_Label add_device(Device_Creator);
+	Device_Label add_device( Device_Creator);
 	/*
 	Remove device from a node;
 	*/
@@ -36,7 +36,7 @@ namespace device_utilities
 	*/
 	Device* command_device(Device_Label label, Command* command);
 
-	void add_command(Device_Label label, Command* command);
+	void add_command(Command* command);
 
 	Device* finish_command(Device_Label label, Command* command);
 }
