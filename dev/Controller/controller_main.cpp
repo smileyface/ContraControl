@@ -90,5 +90,6 @@ void controller::step()
 
 void controller::clean_up()
 {
+	Commander::destroy_instance();
 	controller_queue.clear();
 }

@@ -2,6 +2,15 @@
 
 Commander* Commander::instance = nullptr;
 
+Commander::~Commander()
+{
+	while(!command_list.empty())
+	{
+		delete command_list.front();
+		command_list.erase(command_list.begin());
+	}
+}
+
 Commander* Commander::get_instance()
 {
 	if(instance == nullptr)
@@ -9,6 +18,15 @@ Commander* Commander::get_instance()
 		instance = new Commander();
 	}
 	return instance;
+}
+
+void Commander::destroy_instance()
+{ 
+	if(instance != nullptr)
+	{
+		delete instance;
+		instance = nullptr;
+	}
 }
 
 void Commander::clean_list()

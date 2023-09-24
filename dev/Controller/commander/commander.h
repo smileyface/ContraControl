@@ -22,6 +22,11 @@ public:
 	 * \return Singleton instance
 	 */
 	static Commander* get_instance();
+
+	/**
+	 * Singleton destroy instance
+	 */
+	static void destroy_instance();
 	/**
 	 * Create a new command and put it on the command_list
 	 * \tparam T Type of Command to create
@@ -37,6 +42,7 @@ public:
 private:
 	std::vector<Command*> command_list;
 	Commander() = default;
+	~Commander();
 	static Commander* instance;
 };
 
