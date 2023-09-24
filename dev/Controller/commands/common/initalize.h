@@ -28,7 +28,7 @@ public:
 
 	virtual COMMAND_ENUM get_id()
 	{
-		return COMMAND_ENUM::INITALIZE;
+		return COMMAND_ENUM::INITALIZE_DEVICE;
 	}
 	/**
  Name for the device to be initalized

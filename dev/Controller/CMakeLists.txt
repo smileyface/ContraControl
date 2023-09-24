@@ -7,6 +7,7 @@ set(CONTROLLER_HEADER_FILES
                     commands/device/assign.h
                     commands/command.h
                     commands.h
+                    commander/commander.h
                     controller_main.h
                     system/timer.h "commands/device/device_initalize.h")
 
@@ -16,7 +17,7 @@ set(CONTROLLER_SOURCE_FILES
                     commands/src/command.cpp 
                     commands/src/device_create.cpp
                     commands/src/on.cpp
-                    commands/src/off.cpp "commands/src/device_command.cpp" "commands/src/device_initalize.cpp")
+                    commands/src/off.cpp "commands/src/device_command.cpp" "commands/src/device_initalize.cpp" "commander/src/commander.cpp")
 
 add_library(Controller controller_main.cpp ${CONTROLLER_HEADER_FILES} ${CONTROLLER_SOURCE_FILES})
 

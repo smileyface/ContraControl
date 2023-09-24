@@ -24,7 +24,6 @@ void controller::initalize()
 												{
 													for(auto command = controller::controller_queue.begin(); command != controller::controller_queue.end();)
 													{
-
 														controller_mutex.lock();
 														if(command->command->completed())
 														{
@@ -36,6 +35,7 @@ void controller::initalize()
 														}
 														controller_mutex.unlock();
 													}
+													Commander::get_instance()->clean_list();
 												});
 }
 void controller::start_controller()

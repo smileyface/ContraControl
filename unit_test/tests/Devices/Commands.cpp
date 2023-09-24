@@ -30,14 +30,14 @@ TEST_F(Commands_Test, Device_Initalize)
 {
 	Device* ds = create_device_instance(Device_Creator((int)DEVICE_IDENTIFIER::SWITCH, "Results"));
 	testing_utilities::device_utilities::check_state(dl, ds);
-	ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize_Device(dl, "Test1")));
+	ds = static_cast<Device*>(device_utilities::command_device(dl, Commander::get_instance()->make_command<Initalize_Device>(dl, "Test1")));
 	testing_utilities::device_utilities::check_state(dl, ds);
 }
 TEST_F(Commands_Test, Device_On)
 {
 	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, new On(dl)));
 	testing_utilities::device_utilities::check_state(dl, ds);
-	ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize_Device(dl, "Test1")));
+	ds = static_cast<Device*>(device_utilities::command_device(dl, Commander::get_instance()->make_command<Initalize_Device>(dl, "Test1")));
 	ds = static_cast<Device*>(device_utilities::command_device(dl, new On(dl)));
 	testing_utilities::device_utilities::check_state(dl, ds);
 }
@@ -46,7 +46,7 @@ TEST_F(Commands_Test, Device_Off)
 {
 	Device * ds = static_cast<Device*>(device_utilities::command_device(dl, new Off(dl)));
 	testing_utilities::device_utilities::check_state(dl, ds);
-	ds = static_cast<Device*>(device_utilities::command_device(dl, new Initalize_Device(dl, "Test1")));
+	ds = static_cast<Device*>(device_utilities::command_device(dl, Commander::get_instance()->make_command<Initalize_Device>(dl, "Test1")));
 	ds = static_cast<Device*>(device_utilities::command_device(dl, new On(dl)));
 	testing_utilities::device_utilities::check_state(dl, ds);
 

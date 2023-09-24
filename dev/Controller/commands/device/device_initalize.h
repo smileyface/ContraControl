@@ -26,11 +26,11 @@ public:
 	 * \param label Label of the device to command.
 	 * \param device_common_name Common name of device.
 	 */
-	Initalize_Device(Device_Label label, std::string device_common_name);
+	Initalize_Device(Device_Label label, Device_Name device_common_name);
 
 	virtual COMMAND_ENUM get_id()
 	{
-		return COMMAND_ENUM::INITALIZE;
+		return COMMAND_ENUM::INITALIZE_DEVICE;
 	}
 	/**
  Name for the device to be initalized
