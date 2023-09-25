@@ -11,7 +11,6 @@ Timer controller_timer;
 bool controller::controller_running = true;
 Command_List controller::controller_queue;
 Task controller::controller_task;
-Commander* controller::commander = Commander::get_instance();
 
 //FILE GLOBALS
 std::vector<int> remove_indexes;
@@ -26,7 +25,7 @@ void controller::initalize()
 													for(auto command = controller::controller_queue.begin(); command != controller::controller_queue.end();)
 													{
 														controller_mutex.lock();
-														if(command->command->completed())
+														if(command->sent)
 														{
 															command = controller::controller_queue.erase(command);
 														}

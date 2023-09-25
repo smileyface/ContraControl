@@ -40,7 +40,7 @@ void device_utilities::start_test_environment()
 Device_Label device_utilities::add_device(Device_Creator creator)
 {
 	Device_Label label(device_utilities::node_handle, -1);
-	controller::add_command(Packed_Command(controller::commander->make_command<Device_Create>(device_utilities::node_handle, creator.first, creator.second), 0));
+	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Device_Create>(device_utilities::node_handle, creator.first, creator.second), 0));
 	system_utilities::step(2);
 	model_list[model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()] = create_device_instance(creator);
 	return(Device_Label(device_utilities::node_handle, model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()));
