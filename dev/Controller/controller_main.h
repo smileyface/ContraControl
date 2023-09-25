@@ -40,6 +40,11 @@ namespace controller
 	extern Task controller_task;
 
 	/**
+	 * A handle to the Commander
+	 */
+	extern Commander* commander;
+
+	/**
 	 * Start up.
 	 *
 	 * Resets the Controller clock.

@@ -44,3 +44,8 @@ void Commander::clean_list()
 		}
 	}
 }
+
+int Commander::get_number_of_commands()
+{
+	return command_list.size();
+}

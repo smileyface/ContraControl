@@ -11,6 +11,7 @@ Timer controller_timer;
 bool controller::controller_running = true;
 Command_List controller::controller_queue;
 Task controller::controller_task;
+Commander* controller::commander = Commander::get_instance();
 
 //FILE GLOBALS
 std::vector<int> remove_indexes;

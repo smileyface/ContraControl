@@ -39,6 +39,12 @@ public:
 	 * Destruct and remove all Commands on the command_list that are marked as completed.
 	 */
 	void clean_list();
+
+	/**
+	 * \return Number of commands not executed yet.
+	 */
+	int get_number_of_commands();
+
 private:
 	std::vector<Command*> command_list;
 	Commander() = default;

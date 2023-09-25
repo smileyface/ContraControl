@@ -33,6 +33,6 @@ TEST_F(Device_Invalid_Test, Device_Invalid)
 
 TEST_F(Device_Invalid_Test, Device_Naming)
 {
-	device_utilities::command_device(dl, Commander::get_instance()->make_command<Initalize_Device>(dl, "Test1"));
+	device_utilities::command_device(dl, controller::commander->make_command<Initalize_Device>(dl, "Test1"));
 	testing_utilities::device_utilities::check_name(dl, DEVICE_IDENTIFIER::INVALID, "Test1");
 }
