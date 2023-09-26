@@ -25,7 +25,7 @@ void controller::initalize()
 													for(auto command = controller::controller_queue.begin(); command != controller::controller_queue.end();)
 													{
 														controller_mutex.lock();
-														if(command->sent)
+														if(command->command_sent())
 														{
 															command = controller::controller_queue.erase(command);
 														}
@@ -75,7 +75,7 @@ void controller::step()
 												controller::controller_task.exception(std::current_exception());
 											}
 										}));
-			controller_queue[i].sent = true;
+			controller_queue[i].send_command();
 		}
 		else
 		{
