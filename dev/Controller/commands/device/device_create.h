@@ -17,7 +17,7 @@
 class Device_Create : public Command
 {
 public:
-	Device_Create();
+	Device_Create() = delete;
 	~Device_Create();
 
 	/**

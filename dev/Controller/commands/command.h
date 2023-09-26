@@ -25,7 +25,7 @@ enum class COMMAND_ENUM :command_id
     /**
      Do device start up routine
      */
-	INITALIZE,
+	INITALIZE_DEVICE,
     /**
      Turn device on
      */

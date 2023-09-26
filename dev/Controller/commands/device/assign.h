@@ -31,7 +31,7 @@ public:
 	 \param new_value Value to assign to channel
 	 */
 	Assign(Device_Label label, int channel_number, Channel new_value);
-	~Assign() {};
+	virtual ~Assign() {};
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::ASSIGN; }
 
 	/** Value to assign to designated channel */

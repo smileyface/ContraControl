@@ -7,7 +7,8 @@ Packed_Command::Packed_Command() :
 	time(0.0),
 	run(false),
 	sent(false)
-{ }
+{
+}
 
 Packed_Command::Packed_Command(Command* cmd, double time) :
 	command(cmd),
@@ -16,8 +17,8 @@ Packed_Command::Packed_Command(Command* cmd, double time) :
 	sent(false)
 { }
 
+
 Packed_Command::~Packed_Command()
 {
-//	delete command;
-}
 
+}

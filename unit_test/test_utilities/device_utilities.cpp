@@ -7,6 +7,7 @@
 int device_utilities::device_in_use = 0;
 Node_Id device_utilities::node_handle = "Test_Node_1";
 std::map<Device_Id, Device*> device_utilities::model_list;
+std::vector<Packed_Command> command_list;
 
 Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 {
@@ -14,7 +15,7 @@ Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 	{
 		LOG_ERROR("Device not in testing model", "Testing Device Utilities");
 	}
-	else if (command->get_id() == COMMAND_ENUM::INITALIZE)
+	else if (command->get_id() == COMMAND_ENUM::INITALIZE_DEVICE)
 	{
 		model_list[label]->initalize("nominal");
 	}
@@ -34,10 +35,12 @@ void device_utilities::start_test_environment()
 	model::initalize_my_node(device_utilities::node_handle);
 }
 
+
+
 Device_Label device_utilities::add_device(Device_Creator creator)
 {
 	Device_Label label(device_utilities::node_handle, -1);
-	controller::add_command(Packed_Command(new Device_Create(device_utilities::node_handle, creator.first, creator.second), 0));
+	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Device_Create>(device_utilities::node_handle, creator.first, creator.second), 0));
 	system_utilities::step(2);
 	model_list[model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()] = create_device_instance(creator);
 	return(Device_Label(device_utilities::node_handle, model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()));
@@ -52,8 +55,8 @@ Device* device_utilities::command_device(Device_Label label, Command* command)
 {
 	Device_Command* d_command = static_cast<Device_Command*>(command);
 	controller::add_command(Packed_Command(command, 0));
+	Device* ds = get_nominal_state(label.get_device_id(), d_command);
 	system_utilities::step(2);
-	Device* ds = get_nominal_state(label.get_device_id(), command);
 	return ds;
 }
 

@@ -9,6 +9,8 @@
 #ifndef MAIN_EXECUTOR_H
 #define MAIN_EXECUTOR_H
 
+#include "commander/commander.h"
+
 #include "Interfaces/types/packed_command.h"
 #include "system/timer.h"
 #include "Messaging/message_relay.h"

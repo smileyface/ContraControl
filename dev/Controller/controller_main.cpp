@@ -24,9 +24,8 @@ void controller::initalize()
 												{
 													for(auto command = controller::controller_queue.begin(); command != controller::controller_queue.end();)
 													{
-
 														controller_mutex.lock();
-														if(command->command->completed())
+														if(command->sent)
 														{
 															command = controller::controller_queue.erase(command);
 														}
@@ -36,6 +35,7 @@ void controller::initalize()
 														}
 														controller_mutex.unlock();
 													}
+													Commander::get_instance()->clean_list();
 												});
 }
 void controller::start_controller()
@@ -90,5 +90,6 @@ void controller::step()
 
 void controller::clean_up()
 {
+	Commander::destroy_instance();
 	controller_queue.clear();
 }
