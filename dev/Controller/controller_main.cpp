@@ -25,7 +25,7 @@ void controller::initalize()
 													for(auto command = controller::controller_queue.begin(); command != controller::controller_queue.end();)
 													{
 														controller_mutex.lock();
-														if(command->sent)
+														if(command->command_sent())
 														{
 															command = controller::controller_queue.erase(command);
 														}
@@ -61,19 +61,19 @@ void controller::step()
 {
 	for(int i = 0; i < controller_queue.size(); i++)
 	{
-		if(!controller_queue[i].sent)
+		if(!controller_queue[i].command_sent())
 		{
 			controller_task.add_subtask(Cleaned_Task([i] ()
 										{
 											try
 											{
-												if(controller::controller_queue[i].time <= 0)
+												if(controller::controller_queue[i].get_time() <= 0)
 												{
 													Message_Relay::get_instance()->push(new Controller_Model_Command(controller::controller_queue[i]));
 												}
 												else
 												{
-													controller::controller_queue[i].time -= controller_timer.get_elapsed_time();
+													controller::controller_queue[i].move_time(controller_timer.get_elapsed_time());
 												}
 											}
 											catch(std::exception&)
@@ -81,7 +81,7 @@ void controller::step()
 												controller::controller_task.exception(std::current_exception());
 											}
 										}));
-			controller_queue[i].sent = true;
+			controller_queue[i].send_command();
 		}
 	}
 

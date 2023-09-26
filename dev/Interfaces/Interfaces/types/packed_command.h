@@ -26,6 +26,41 @@ public:
 	Packed_Command(Command* cmd, double time);
 
 	/**
+	 * Move time forward
+	 * \param elapse_time Amount to decrement the time delay by.
+	 */
+	void move_time(double elapse_time);
+
+	/**
+	 * \return Time offset.
+	 */
+	double get_time();
+	/**
+	 * \return Pointer to the command.
+	 */
+	Command* get_command();
+
+	/**
+	 * \return If the message has been sent from the Controller to the Model.
+	 */
+	bool command_sent();
+	/**
+	 * \return If the command has been run from the Model.
+	 */
+	bool command_run();
+
+	/**
+	 * Set the send flag
+	 */
+	void send_command();
+	/**
+	 * Set the run flag
+	 */
+	void run_command();
+
+
+private:
+	/**
 	 Command to run
 	 */
 	Command* command;
