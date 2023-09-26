@@ -29,7 +29,7 @@ void model::initalize()
 													model_timer.update_time();
 													for(auto i = model::step_actions.begin(); i != model::step_actions.end(); )
 													{
-														if(i->run)
+														if(i->command_run())
 														{
 															i = model::step_actions.erase(i);
 														}
@@ -76,9 +76,9 @@ void model::step()
 	for(auto i = 0; i < model::step_actions.size(); ++i)
 	{
 		model_step_thread++;
-		if(model::step_actions[i].run == false)
+		if(model::step_actions[i].command_run() == false)
 		{
-			auto command = model::step_actions[i].command;
+			auto command = model::step_actions[i].get_command();
 			model_task.add_subtask(Cleaned_Task([command, &model_step_thread] () mutable
 								   {
 									   try
@@ -93,7 +93,7 @@ void model::step()
 									   }
 									   model_step_thread--;
 								   }));
-			model::step_actions[i].run = true;
+			model::step_actions[i].run_command();
 		}
 
 	}
@@ -135,21 +135,19 @@ struct compare
 	{ }
 	bool operator()(Packed_Command const& i)
 	{
-		return key.command == i.command;
+		Packed_Command comp = i;
+		return key.get_command() == comp.get_command();
 	}
 };
-
-
-
 /**
  * \endcond
  */
 
 
-
 void model::command_model(const Packed_Command& command)
 {
 	//OPTIMIZE
+
 	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(command));
 	if(found == model::step_actions.end() || model::step_actions.size() == 0)
 	{
