@@ -35,6 +35,7 @@ namespace device_utilities
 	Command a device. Returns the nominal state associated with that command.
 	*/
 	Device* command_device(Device_Label label, Command* command);
+	Device* command_device(Device_Label label, Command* command, double delay);
 
 	void add_command(Command* command);
 

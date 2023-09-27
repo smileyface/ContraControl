@@ -60,6 +60,14 @@ Device* device_utilities::command_device(Device_Label label, Command* command)
 	return ds;
 }
 
+Device* device_utilities::command_device(Device_Label label, Command* command, double delay)
+{
+	Device_Command* d_command = static_cast<Device_Command*>(command);
+	controller::add_command(Packed_Command(command, delay));
+	system_utilities::step(2);
+	return model_list[label.get_device_id()];
+}
+
 void device_utilities::add_command(Command* command)
 {
 	controller::add_command(Packed_Command(command, 0));

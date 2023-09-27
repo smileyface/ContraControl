@@ -41,6 +41,7 @@ void controller::initalize()
 void controller::start_controller()
 {
 	controller_running = true;
+	controller_timer.start_clock();
 	LOG_INFO("Controller Added to the Scheduler", subsystem_name);
 	Scheduler::get_instance()->add_task(&controller::controller_task);
 }
@@ -61,20 +62,13 @@ void controller::step()
 {
 	for(int i = 0; i < controller_queue.size(); i++)
 	{
-		if(!controller_queue[i].sent)
+		if(!controller_queue[i].command_sent() && controller_queue[i].get_time() <= 0)
 		{
 			controller_task.add_subtask(Cleaned_Task([i] ()
 										{
 											try
 											{
-												if(controller::controller_queue[i].time <= 0)
-												{
-													Message_Relay::get_instance()->push(new Controller_Model_Command(controller::controller_queue[i]));
-												}
-												else
-												{
-													controller::controller_queue[i].time -= controller_timer.get_elapsed_time();
-												}
+												Message_Relay::get_instance()->push(new Controller_Model_Command(controller::controller_queue[i]));
 											}
 											catch(std::exception&)
 											{
@@ -83,7 +77,12 @@ void controller::step()
 										}));
 			controller_queue[i].sent = true;
 		}
+		else
+		{
+			controller::controller_queue[i].move_time(controller_timer.get_elapsed_time());
+		}
 	}
+	controller_timer.update_time();
 
 
 }
