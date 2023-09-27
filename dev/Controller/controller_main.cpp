@@ -61,7 +61,7 @@ void controller::add_command(const Packed_Command& cmd)
 void controller::step()
 {
 	for(int i = 0; i < controller_queue.size(); i++)
-	{
+  {
 		if(!controller_queue[i].command_sent() && controller_queue[i].get_time() <= 0)
 		{
 			controller_task.add_subtask(Cleaned_Task([i] ()
