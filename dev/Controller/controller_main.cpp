@@ -66,14 +66,7 @@ void controller::step()
 		{
 			controller_task.add_subtask(Cleaned_Task([i] ()
 										{
-											try
-											{
-												Message_Relay::get_instance()->push(new Controller_Model_Command(controller::controller_queue[i]));
-											}
-											catch(std::exception&)
-											{
-												controller::controller_task.exception(std::current_exception());
-											}
+											Message_Relay::get_instance()->push(new Controller_Model_Command(controller::controller_queue[i]));
 										}));
 			controller_queue[i].send_command();
 		}
