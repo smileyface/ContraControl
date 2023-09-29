@@ -12,14 +12,24 @@
 #include "../command.h"
 #include "Interfaces/types/device_label.h"
 
+ /**
+  * A command for the Model to remove a device from a designated Node.
+  */
 class Device_Destruction : public Command
 {
 public:
 	Device_Destruction() = delete;
 	~Device_Destruction();
 
+	/**
+	 * Constructor
+	 * \param label The label for the Device to remove of from the node.
+	 */
 	Device_Destruction(Device_Label label);
 
+	/**
+	 * \return Label for the device to remove.
+	 */
 	Device_Label get_device();
 
 	virtual COMMAND_ENUM get_id()

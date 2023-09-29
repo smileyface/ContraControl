@@ -13,7 +13,7 @@
 
 
 /**
- * A command for the Model to add a device
+ * A command for the Model to add a device to a designated Node.
  */
 class Device_Create : public Command
 {
