@@ -8,32 +8,30 @@
 #ifndef ASSIGN_COMMAND
 #define ASSIGN_COMMAND
 
-#include "../command.h"
+#include "device_command.h"
 #include "Interfaces/types/channel.h"
 
  /**
   * A command to assign a channel a certain value.
   */
-class Assign : public Command {
+class Assign : public Device_Command {
 public:
 
-	Assign() 
-	{
-		channel = 0;
-		value = 0;
-	};
+	Assign() = delete;
 	/**
 	 Set channel 0 to a specific value.
+	 \param label Label of the device to command.
 	 \param new_value Value to assign to channel 0
 	 */
-	Assign(Channel new_value);
+	Assign(Device_Label label, Channel new_value);
 	/**
 	 Set a channel to a specific value.
+	 \param label Label of the device to command.
 	 \param channel_number Designation of channel to assign value to.
 	 \param new_value Value to assign to channel
 	 */
-	Assign(int channel_number, Channel new_value);
-	~Assign() {};
+	Assign(Device_Label label, int channel_number, Channel new_value);
+	virtual ~Assign() {};
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::ASSIGN; }
 
 	/** Value to assign to designated channel */

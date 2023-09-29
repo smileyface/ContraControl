@@ -10,7 +10,10 @@
 #define COMMANDS_INCLUSION_H
 
 //commands.h included by inheritance
-#include "commands/common/initalize.h"
+#include "commands/device/device_initalize.h"
+#include "commands/device/device_command.h"
+#include "commands/device/device_create.h"
+#include "commands/device/device_destruction.h"
 #include "commands/device/on.h"
 #include "commands/device/off.h"
 #include "commands/device/assign.h"

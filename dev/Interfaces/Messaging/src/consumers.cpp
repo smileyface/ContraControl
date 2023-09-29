@@ -37,5 +37,9 @@ bool Message_Consumer::correct_type(Internal_Message* mess)
 	{
 		return true;
 	}
+	if(instanceof<Controller_Model_Command>(message_type) && instanceof<Controller_Model_Command>(mess))
+	{
+		return true;
+	}
 	return false;
 }

@@ -4,7 +4,7 @@
 #include <mutex>
 #include <string>
 
-std::mutex g_pages_mutex;
+std::mutex message_relay_mutex;
 Message_Relay* Message_Relay::instance;
 
 
@@ -28,10 +28,10 @@ Consumer_List Message_Relay::get_message_consumers(Internal_Message* message)
 void Message_Relay::push(Internal_Message* message)
 {
 	Consumer_List registered_consumers = get_message_consumers(message);
-	g_pages_mutex.lock();
+	message_relay_mutex.lock();
 	message->validate();
 	list_of_message[Message_Ptr<Internal_Message>(message)] = registered_consumers;
-	g_pages_mutex.unlock();
+	message_relay_mutex.unlock();
 	for(int i = 0; i < registered_consumers.size(); i++)
 	{
 		registered_consumers[i]->notify();
@@ -125,7 +125,7 @@ void Message_Relay::destroy_instance()
 
 void Message_Relay::clear()
 { 
-	std::lock_guard<std::mutex> guard(g_pages_mutex);
+	std::lock_guard<std::mutex> guard(message_relay_mutex);
 	for(auto i = list_of_registered_consumers.begin(); i != list_of_registered_consumers.end(); i = list_of_registered_consumers.begin())
 	{
 		deregister_consumer(*i);

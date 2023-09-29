@@ -4,6 +4,7 @@ Command::Command() :
 	complete(false)
 { }
 
+
 COMMAND_ENUM Command::get_id() 
 { 
 	return COMMAND_ENUM::INVALID; 

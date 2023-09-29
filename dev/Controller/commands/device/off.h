@@ -8,17 +8,23 @@
 #ifndef OFF_COMMAND
 #define OFF_COMMAND
 
-#include "../command.h"
+#include "device_command.h"
+#include "Interfaces/types/device_label.h"
 
  /**
   * A command to turn devices off.
   */
-class Off : public Command {
+class Off : public Device_Command {
 public:
  
-	Off() {};
-	~Off() {};
+	Off() = delete;
+	/**
+	 * \param label Label of the device to command.
+	 */
+	Off(Device_Label label);
+	~Off();
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::OFF; }
+
 
 };
 

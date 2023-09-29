@@ -33,7 +33,7 @@ TEST_F(Device_RGB_Test, Device_Created)
 TEST_F(Device_RGB_Test, Device_Invalid)
 {
 	testing_utilities::device_utilities::check_validity(dl, false);
-	device_utilities::command_device(dl, new Initalize("Test1"));
+	device_utilities::command_device(dl, Commander::get_instance()->make_command<Initalize_Device>(dl, "Test1"));
 	testing_utilities::device_utilities::check_validity(dl, true);
 }
 TEST_F(Device_RGB_Test, Device_Removed)
@@ -44,6 +44,6 @@ TEST_F(Device_RGB_Test, Device_Removed)
 }
 TEST_F(Device_RGB_Test, Device_Naming)
 {
-	device_utilities::command_device(dl, new Initalize("Test1"));
+	device_utilities::command_device(dl, Commander::get_instance()->make_command<Initalize_Device>(dl, "Test1"));
 	testing_utilities::device_utilities::check_name(dl, DEVICE_IDENTIFIER::RGB, "Test1");
 }

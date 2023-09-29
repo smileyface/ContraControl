@@ -41,12 +41,6 @@ void Node::clear_node()
 	devices.clear();
 }
 
-/**
- Add a Device to the node.
-
- \param device A creator struct that will be used to make the device.
- */
-
 void Node::register_device(Device_Creator device)
 {
 	devices[id_pool] = create_device_instance(device);

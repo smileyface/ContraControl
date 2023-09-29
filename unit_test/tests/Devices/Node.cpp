@@ -27,13 +27,13 @@ TEST_F(Node_Test, Device_Exclusion)
 
 	Device_Label dl_e("Test_Node_2", 0);
 
-	EXPECT_THROW(device_utilities::command_device(dl_e, new On()), DeviceNotFoundException);
+	EXPECT_THROW(device_utilities::command_device(dl_e, new On(dl_e)), DeviceNotFoundException);
 }
 
 TEST_F(Node_Test, Node_Exclusion)
 {
 	Device_Label dl_e2("Test_Fail", 0);
-	EXPECT_THROW(device_utilities::command_device(dl_e2, new Off()), NodeNotFoundException);
+	EXPECT_THROW(device_utilities::command_device(dl_e2, new Off(dl_e2)), NodeNotFoundException);
 }
 
 TEST_F(Node_Test, Add_Devices)

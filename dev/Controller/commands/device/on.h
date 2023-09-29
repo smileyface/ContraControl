@@ -10,16 +10,20 @@
 #define ON_COMMAND_H
 
 
-#include "../command.h"
+#include "device_command.h"
+#include "Interfaces/types/device_label.h"
 
 /**
  * A command to turn devices on.
  */
-class On : public Command {
+class On : public Device_Command {
 public:
-	On() {};
-	~On() {};
+	On() = delete;
+	/**
+	 * \param label Label of the device to command.
+	 */
+	On(Device_Label label);
+	~On();
 	virtual COMMAND_ENUM get_id() { return COMMAND_ENUM::ON; }
-
 };
 #endif // !ON_COMMAND_H

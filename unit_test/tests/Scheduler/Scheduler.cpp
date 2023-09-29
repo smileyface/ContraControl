@@ -98,8 +98,8 @@ TEST_F(Scheduler_Test, Run_Tasks)
 
     // Verify that the tasks were executed
     // ... Add your own assertions here
-
-    system_utilities::sleep_thread(100);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    //system_utilities::sleep_thread(100);
     scheduler->stop();
     EXPECT_EQ(subtask1_run_count, 3);
     EXPECT_EQ(subtask2_run_count, 2);
@@ -146,7 +146,7 @@ TEST_F(Scheduler_Test, Run_Tasks_In_Order)
     // Verify that the tasks were executed
     // ... Add your own assertions here
 
-    system_utilities::sleep_thread(100);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     scheduler->stop();
 
     if(called_order.size() != 3)
@@ -242,7 +242,7 @@ TEST_F(Scheduler_Test, Test_Persistence)
     scheduler->add_task(&test_task);
     EXPECT_EQ(scheduler->get_number_of_tasks(), 3);
     scheduler->start(10);
-    system_utilities::sleep_thread(200);
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
     scheduler->stop();
     EXPECT_EQ(scheduler->get_number_of_tasks(), 2);
 
@@ -255,7 +255,7 @@ TEST_F(Scheduler_Test, Test_Persistence)
     scheduler->add_task(&test_task_2);
     EXPECT_EQ(scheduler->get_number_of_tasks(), 3);
     scheduler->start(10);
-    system_utilities::sleep_thread(200);
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
     scheduler->stop();
     EXPECT_EQ(scheduler->get_number_of_tasks(), 3);
 }
@@ -270,7 +270,7 @@ TEST_F(Scheduler_Test, Test_Scheduler_Looping)
                           });
     scheduler->add_task(&test_task);
     scheduler->start(27);
-    system_utilities::sleep_thread(100);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     scheduler->stop();
     EXPECT_EQ(run_count, 3);
 }
@@ -280,11 +280,11 @@ TEST_F(Scheduler_Test, Test_Scheduler_Overrun)
     Task test_task("Test", 1, 0.3, false);
     test_task.add_subtask(Cleaned_Task([] () mutable
                           {
-                              system_utilities::sleep_thread(100);
+                              std::this_thread::sleep_for(std::chrono::milliseconds(200));
                           }));
     scheduler->add_task(&test_task);
     scheduler->start(30);
-    system_utilities::sleep_thread(1000);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     scheduler->stop();
     EXPECT_EQ(scheduler->get_overruns(), 1);
 }
@@ -300,7 +300,7 @@ TEST_F(Scheduler_Test, Add_Task_With_Scheduler_Running)
                           {
                               run = true;
                           });
-    system_utilities::sleep_thread(1000);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     scheduler->stop();
     EXPECT_TRUE(run);
 }
@@ -313,7 +313,7 @@ TEST_F(Scheduler_Test, System_Task)
                                    run_id = 42;
                                });
     scheduler->start(30);
-    system_utilities::sleep_thread(1000);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     scheduler->stop();
     EXPECT_EQ(run_id, 42);
 }
@@ -326,7 +326,7 @@ TEST_F(Scheduler_Test, Cleanup_Task)
                                {
                                    run_id = 42;
                                });
-    system_utilities::sleep_thread(1000);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     scheduler->stop();
     EXPECT_EQ(run_id, 42);
 }
@@ -351,7 +351,7 @@ TEST_F(Scheduler_Test, Dryrun_The_System_and_Cleanups)
                                 });
 
     scheduler->start(30);
-    system_utilities::sleep_thread(100);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     scheduler->stop();
     auto begin_run = std::find(runs.begin(), runs.end(), 0);
     auto cleanup_run = std::find(runs.begin(), runs.end(), 2);

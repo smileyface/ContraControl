@@ -1,7 +1,6 @@
 #include <algorithm>    // std::sort
 
 #include "controller_main.h"
-#include "Interfaces/controller_interface.h"
 
 #include <thread>
 #include <mutex>
@@ -10,7 +9,7 @@ std::mutex controller_mutex;
 
 Timer controller_timer;
 bool controller::controller_running = true;
-Timed_List controller::controller_queue;
+Command_List controller::controller_queue;
 Task controller::controller_task;
 
 //FILE GLOBALS
@@ -25,9 +24,8 @@ void controller::initalize()
 												{
 													for(auto command = controller::controller_queue.begin(); command != controller::controller_queue.end();)
 													{
-
 														controller_mutex.lock();
-														if(command->command->completed())
+														if(command->command_sent())
 														{
 															command = controller::controller_queue.erase(command);
 														}
@@ -37,11 +35,13 @@ void controller::initalize()
 														}
 														controller_mutex.unlock();
 													}
+													Commander::get_instance()->clean_list();
 												});
 }
 void controller::start_controller()
 {
 	controller_running = true;
+	controller_timer.start_clock();
 	LOG_INFO("Controller Added to the Scheduler", subsystem_name);
 	Scheduler::get_instance()->add_task(&controller::controller_task);
 }
@@ -53,50 +53,35 @@ void controller::stop_controller()
 	controller_running = false;
 }
 
-void controller::add_command(Timed_Command tc)
+void controller::add_command(const Packed_Command& cmd)
 {
-	controller_mutex.lock();
-	controller::controller_queue.push_back(tc);
-	controller_mutex.unlock();
-	std::sort(controller::controller_queue.begin(), controller::controller_queue.end(), [] (Timed_Command a, Timed_Command b)
-			  {
-				  return a < b;
-			  });
+	controller_queue.push_back(cmd);
 }
 
 void controller::step()
 {
 	for(int i = 0; i < controller_queue.size(); i++)
-	{
-		if(controller_queue[i].run == false)
+  {
+		if(!controller_queue[i].command_sent() && controller_queue[i].get_time() <= 0)
 		{
 			controller_task.add_subtask(Cleaned_Task([i] ()
 										{
-											try
-											{
-												if(controller::controller_queue[i].time <= 0)
-												{
-													Controller_Interfaces::Model_Interface::send_command(controller::controller_queue[i]);
-												}
-												else
-												{
-													controller::controller_queue[i].time -= controller_timer.get_elapsed_time();
-												}
-											}
-											catch(std::exception&)
-											{
-												controller::controller_task.exception(std::current_exception());
-											}
-
+											Message_Relay::get_instance()->push(new Controller_Model_Command(controller::controller_queue[i]));
 										}));
-			controller::controller_queue[i].run = true;
+			controller_queue[i].send_command();
+		}
+		else
+		{
+			controller::controller_queue[i].move_time(controller_timer.get_elapsed_time());
 		}
 	}
+	controller_timer.update_time();
 
 
 }
 
 void controller::clean_up()
 {
+	Commander::destroy_instance();
 	controller_queue.clear();
 }
