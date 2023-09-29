@@ -11,6 +11,7 @@
 #include "../command.h"
 #include "Interfaces/enums/device_type.h"
 
+
 /**
  * A command for the Model to add a device
  */

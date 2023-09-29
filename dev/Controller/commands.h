@@ -13,6 +13,7 @@
 #include "commands/device/device_initalize.h"
 #include "commands/device/device_command.h"
 #include "commands/device/device_create.h"
+#include "commands/device/device_destruction.h"
 #include "commands/device/on.h"
 #include "commands/device/off.h"
 #include "commands/device/assign.h"
