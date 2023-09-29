@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -70,17 +70,23 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="class_assign.html">Assign</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Assign</b>() (defined in <a class="el" href="class_assign.html">Assign</a>)</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_assign.html#a119ce6439ec2c98c5e57ee645bb48290">Assign</a>(Channel new_value)</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_assign.html#a841bfa75e9545846c47b005c2f68b808">Assign</a>(int channel_number, Channel new_value)</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Assign</b>()=delete (defined in <a class="el" href="class_assign.html">Assign</a>)</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_assign.html#a2709315d731aa3fc43768945b67b585e">Assign</a>(Device_Label label, Channel new_value)</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_assign.html#a46628154ec413f888d98f2e547273027">Assign</a>(Device_Label label, int channel_number, Channel new_value)</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_assign.html#a345022a41e432f7c42ca368969cc4ed1">channel</a></td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Command</b>() (defined in <a class="el" href="class_command.html">Command</a>)</td><td class="entry"><a class="el" href="class_command.html">Command</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_command.html#a032e8f44b7d694c57f8819d61020ec78">complete_command</a>()</td><td class="entry"><a class="el" href="class_command.html">Command</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_command.html#ad454e0c6bcdc2fc50fb0ebd33277479b">completed</a>()</td><td class="entry"><a class="el" href="class_command.html">Command</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">get_id</a>()</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>Device_Command</b>() (defined in <a class="el" href="class_device___command.html">Device_Command</a>)</td><td class="entry"><a class="el" href="class_device___command.html">Device_Command</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">get_id</a>()</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_device___command.html#aa515679f54ad6a169a7a773ce657fb7a">get_label</a>()</td><td class="entry"><a class="el" href="class_device___command.html">Device_Command</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_device___command.html#a067b09339a553119704c518f5c8320a9">label</a></td><td class="entry"><a class="el" href="class_device___command.html">Device_Command</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_device___command.html#a46c9d4b06228d0eef364a21d8146f5c1">set_label</a>(Device_Label label)</td><td class="entry"><a class="el" href="class_device___command.html">Device_Command</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_command.html#ae0b0ac58d2c3698ec51aa884df674bd6">time_to_complete</a></td><td class="entry"><a class="el" href="class_command.html">Command</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_assign.html#a6d393fcf868fa57e0023c90daca8f85d">value</a></td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Assign</b>() (defined in <a class="el" href="class_assign.html">Assign</a>)</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Assign</b>() (defined in <a class="el" href="class_assign.html">Assign</a>)</td><td class="entry"><a class="el" href="class_assign.html">Assign</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~Command</b>() (defined in <a class="el" href="class_command.html">Command</a>)</td><td class="entry"><a class="el" href="class_command.html">Command</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Device_Command</b>() (defined in <a class="el" href="class_device___command.html">Device_Command</a>)</td><td class="entry"><a class="el" href="class_device___command.html">Device_Command</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

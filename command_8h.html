@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -84,17 +84,34 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="command_8h__dep__incl.png" border="0" usemap="#acommand_8hdep" alt=""/></div>
 <map name="acommand_8hdep" id="acommand_8hdep">
-<area shape="rect" title=" " alt="" coords="137,5,226,32"/>
-<area shape="rect" href="initalize_8h.html" title=" " alt="" coords="5,80,80,107"/>
-<area shape="rect" href="assign_8h.html" title=" " alt="" coords="105,80,175,107"/>
-<area shape="rect" href="off_8h.html" title=" " alt="" coords="199,80,246,107"/>
-<area shape="rect" href="on_8h.html" title=" " alt="" coords="270,80,317,107"/>
-<area shape="rect" href="commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="133,155,229,181"/>
-<area shape="rect" href="_interfaces_2types_2model__command_8h.html" title=" " alt="" coords="40,229,171,256"/>
-<area shape="rect" href="timed__command_8h.html" title=" " alt="" coords="195,229,323,256"/>
-<area shape="rect" href="model__interface_8h.html" title=" " alt="" coords="43,304,167,331"/>
-<area shape="rect" href="controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="195,304,315,331"/>
-<area shape="rect" href="controller__interface_8h.html" title=" " alt="" coords="339,304,482,331"/>
+<area shape="rect" title=" " alt="" coords="285,5,374,32"/>
+<area shape="rect" href="device__command_8h.html" title=" " alt="" coords="114,80,249,107"/>
+<area shape="rect" href="device__create_8h.html" title=" " alt="" coords="273,80,386,107"/>
+<area shape="rect" href="device__destruction_8h.html" title=" " alt="" coords="411,80,552,107"/>
+<area shape="rect" href="assign_8h.html" title=" " alt="" coords="26,155,97,181"/>
+<area shape="rect" href="commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="242,229,338,256"/>
+<area shape="rect" href="device__initalize_8h.html" title=" " alt="" coords="122,155,242,181"/>
+<area shape="rect" href="off_8h.html" title=" " alt="" coords="266,155,313,181"/>
+<area shape="rect" href="on_8h.html" title=" " alt="" coords="337,155,384,181"/>
+<area shape="rect" href="packed__command_8h.html" title=" " alt="" coords="220,304,359,331"/>
+<area shape="rect" href="commander_8h.html" title=" " alt="" coords="180,468,280,495"/>
+<area shape="rect" href="controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="170,692,290,719"/>
+<area shape="rect" href="controller__model__command__message_8h.html" title=" " alt="" coords="263,379,444,420"/>
+<area shape="rect" href="model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="353,692,456,719"/>
+<area shape="rect" href="internal__messages_8h.html" title="List of Internal Messages." alt="" coords="303,468,444,495"/>
+<area shape="rect" href="consumers_8h.html" title=" " alt="" coords="659,543,755,569"/>
+<area shape="rect" href="message__relay_8h.html" title=" " alt="" coords="520,617,638,644"/>
+<area shape="rect" href="format_8h.html" title=" " alt="" coords="672,617,742,644"/>
+<area shape="rect" href="log__view__type_8h.html" title=" " alt="" coords="828,617,943,644"/>
+<area shape="rect" href="option__view__type_8h.html" title=" " alt="" coords="1010,617,1142,644"/>
+<area shape="rect" href="_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="480,692,614,719"/>
+<area shape="rect" href="view__main_8h.html" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="638,692,733,719"/>
+<area shape="rect" href="network__main_8h.html" title=" " alt="" coords="490,767,604,793"/>
+<area shape="rect" href="console_8h.html" title=" " alt="" coords="758,692,835,719"/>
+<area shape="rect" href="console__log__view_8h.html" title=" " alt="" coords="860,692,994,719"/>
+<area shape="rect" href="views_8h.html" title=" " alt="" coords="979,767,1046,793"/>
+<area shape="rect" href="view__factory_8h.html" title=" " alt="" coords="960,841,1065,868"/>
+<area shape="rect" href="console__option__popup_8h.html" title=" " alt="" coords="1018,692,1180,719"/>
 </map>
 </div>
 </div>
@@ -113,13 +130,13 @@ Typedefs</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:ad23753ea6d8d32dc2528e2533bc94549"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> : command_id { <br />
-&#160;&#160;<a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549aabf76f47b2e6a0fd68ca359b2d262f9a">INITALIZE</a>
+&#160;&#160;<a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c">DEVICE_CREATION</a>
+, <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a0a1add1837ce52d597e3585b70909aa4">INITALIZE_DEVICE</a>
 , <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a90651ebea9a35ec4e018c8157492e17c">ON</a>
 , <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4">OFF</a>
-, <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1">ASSIGN</a>
 , <br />
-&#160;&#160;<a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a60543e0a0d32ef0d7cf1c48df5a0aa69">TRANSITION</a>
-, <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ac64c05f73feed16c1c70b833ff713591">LINEAR_TRANSITION</a>
+&#160;&#160;<a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1">ASSIGN</a>
+, <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ad7228a9a2e12b4a40c98ffd8812fda97">DEVICE_DESTRUCTION</a>
 , <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549accc0377a8afbf50e7094f5c23a8af223">INVALID</a> = 0xffff
 <br />
  }</td></tr>
@@ -166,7 +183,9 @@ Enumerations</h2></td></tr>
 </div><div class="memdoc">
 <p>An enumerated list of command types </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549aabf76f47b2e6a0fd68ca359b2d262f9a"></a>INITALIZE&#160;</td><td class="fielddoc"><p>Do device start up routine </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c"></a>DEVICE_CREATION&#160;</td><td class="fielddoc"><p>Create a new device </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549a0a1add1837ce52d597e3585b70909aa4"></a>INITALIZE_DEVICE&#160;</td><td class="fielddoc"><p>Do device start up routine </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549a90651ebea9a35ec4e018c8157492e17c"></a>ON&#160;</td><td class="fielddoc"><p>Turn device on </p>
 </td></tr>
@@ -174,9 +193,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1"></a>ASSIGN&#160;</td><td class="fielddoc"><p><a class="el" href="class_assign.html">Assign</a> value to a channel </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549a60543e0a0d32ef0d7cf1c48df5a0aa69"></a>TRANSITION&#160;</td><td class="fielddoc"><p>Generic transition </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549ac64c05f73feed16c1c70b833ff713591"></a>LINEAR_TRANSITION&#160;</td><td class="fielddoc"><p>Transition at in a linear manner </p>
+<tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549ad7228a9a2e12b4a40c98ffd8812fda97"></a>DEVICE_DESTRUCTION&#160;</td><td class="fielddoc"><p>Destroy device. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549accc0377a8afbf50e7094f5c23a8af223"></a>INVALID&#160;</td><td class="fielddoc"><p>Unmapped <a class="el" href="class_command.html">Command</a> </p>
 </td></tr>

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -75,36 +75,35 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef ASSIGN_COMMAND</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define ASSIGN_COMMAND</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../command.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="device__command_8h.html">device_command.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="channel_8h.html">Interfaces/types/channel.h</a>&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_assign.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_assign.html">Assign</a> : <span class="keyword">public</span> <a class="code" href="class_command.html">Command</a> {</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_assign.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_assign.html">Assign</a> : <span class="keyword">public</span> <a class="code" href="class_device___command.html">Device_Command</a> {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_assign.html">Assign</a>() </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="class_assign.html#a345022a41e432f7c42ca368969cc4ed1">channel</a> = 0;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="class_assign.html#a6d393fcf868fa57e0023c90daca8f85d">value</a> = 0;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_assign.html">Assign</a>(<a class="code" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> new_value);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_assign.html">Assign</a>(<span class="keywordtype">int</span> channel_number, <a class="code" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> new_value);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ~<a class="code" href="class_assign.html">Assign</a>() {};</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">   37</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> <a class="code" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">get_id</a>() { <span class="keywordflow">return</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1">COMMAND_ENUM::ASSIGN</a>; }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_assign.html#a6d393fcf868fa57e0023c90daca8f85d">   40</a></span>&#160;    <a class="code" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> <a class="code" href="class_assign.html#a6d393fcf868fa57e0023c90daca8f85d">value</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_assign.html#a345022a41e432f7c42ca368969cc4ed1">   42</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_assign.html#a345022a41e432f7c42ca368969cc4ed1">channel</a>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ASSIGN_COMMAND</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_assign.html">Assign</a>() = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_assign.html">Assign</a>(<a class="code" href="class_device___label.html">Device_Label</a> <a class="code" href="class_device___command.html#a067b09339a553119704c518f5c8320a9">label</a>, <a class="code" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> new_value);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_assign.html">Assign</a>(<a class="code" href="class_device___label.html">Device_Label</a> <a class="code" href="class_device___command.html#a067b09339a553119704c518f5c8320a9">label</a>, <span class="keywordtype">int</span> channel_number, <a class="code" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> new_value);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_assign.html">Assign</a>() {};</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">   35</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> <a class="code" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">get_id</a>() { <span class="keywordflow">return</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1">COMMAND_ENUM::ASSIGN</a>; }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_assign.html#a6d393fcf868fa57e0023c90daca8f85d">   38</a></span>&#160;    <a class="code" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> <a class="code" href="class_assign.html#a6d393fcf868fa57e0023c90daca8f85d">value</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_assign.html#a345022a41e432f7c42ca368969cc4ed1">   40</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_assign.html#a345022a41e432f7c42ca368969cc4ed1">channel</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ASSIGN_COMMAND</span></div>
 <div class="ttc" id="achannel_8h_html"><div class="ttname"><a href="channel_8h.html">channel.h</a></div></div>
 <div class="ttc" id="achannel_8h_html_ae9484950cd8d29fc1af01c5dd60844ca"><div class="ttname"><a href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a></div><div class="ttdeci">unsigned char Channel</div><div class="ttdef"><b>Definition:</b> channel.h:13</div></div>
 <div class="ttc" id="aclass_assign_html"><div class="ttname"><a href="class_assign.html">Assign</a></div><div class="ttdef"><b>Definition:</b> assign.h:17</div></div>
-<div class="ttc" id="aclass_assign_html_a345022a41e432f7c42ca368969cc4ed1"><div class="ttname"><a href="class_assign.html#a345022a41e432f7c42ca368969cc4ed1">Assign::channel</a></div><div class="ttdeci">int channel</div><div class="ttdef"><b>Definition:</b> assign.h:42</div></div>
-<div class="ttc" id="aclass_assign_html_a6d393fcf868fa57e0023c90daca8f85d"><div class="ttname"><a href="class_assign.html#a6d393fcf868fa57e0023c90daca8f85d">Assign::value</a></div><div class="ttdeci">Channel value</div><div class="ttdef"><b>Definition:</b> assign.h:40</div></div>
-<div class="ttc" id="aclass_assign_html_ad29bcee589dd1a151f1cb170f6d665de"><div class="ttname"><a href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">Assign::get_id</a></div><div class="ttdeci">virtual COMMAND_ENUM get_id()</div><div class="ttdef"><b>Definition:</b> assign.h:37</div></div>
-<div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:54</div></div>
+<div class="ttc" id="aclass_assign_html_a345022a41e432f7c42ca368969cc4ed1"><div class="ttname"><a href="class_assign.html#a345022a41e432f7c42ca368969cc4ed1">Assign::channel</a></div><div class="ttdeci">int channel</div><div class="ttdef"><b>Definition:</b> assign.h:40</div></div>
+<div class="ttc" id="aclass_assign_html_a6d393fcf868fa57e0023c90daca8f85d"><div class="ttname"><a href="class_assign.html#a6d393fcf868fa57e0023c90daca8f85d">Assign::value</a></div><div class="ttdeci">Channel value</div><div class="ttdef"><b>Definition:</b> assign.h:38</div></div>
+<div class="ttc" id="aclass_assign_html_ad29bcee589dd1a151f1cb170f6d665de"><div class="ttname"><a href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">Assign::get_id</a></div><div class="ttdeci">virtual COMMAND_ENUM get_id()</div><div class="ttdef"><b>Definition:</b> assign.h:35</div></div>
+<div class="ttc" id="aclass_device___command_html"><div class="ttname"><a href="class_device___command.html">Device_Command</a></div><div class="ttdef"><b>Definition:</b> device_command.h:17</div></div>
+<div class="ttc" id="aclass_device___command_html_a067b09339a553119704c518f5c8320a9"><div class="ttname"><a href="class_device___command.html#a067b09339a553119704c518f5c8320a9">Device_Command::label</a></div><div class="ttdeci">Device_Label label</div><div class="ttdef"><b>Definition:</b> device_command.h:35</div></div>
+<div class="ttc" id="aclass_device___label_html"><div class="ttname"><a href="class_device___label.html">Device_Label</a></div><div class="ttdef"><b>Definition:</b> Interfaces/types/device_label.h:48</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a></div><div class="ttdeci">COMMAND_ENUM</div><div class="ttdef"><b>Definition:</b> command.h:20</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1">COMMAND_ENUM::ASSIGN</a></div><div class="ttdeci">@ ASSIGN</div></div>
+<div class="ttc" id="adevice__command_8h_html"><div class="ttname"><a href="device__command_8h.html">device_command.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

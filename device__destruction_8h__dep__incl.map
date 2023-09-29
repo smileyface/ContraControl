@@ -1,0 +1,23 @@
+<map id="device_destruction.h" name="device_destruction.h">
+<area shape="rect" id="node1" title=" " alt="" coords="83,5,224,32"/>
+<area shape="rect" id="node2" href="$commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="105,80,201,107"/>
+<area shape="rect" id="node3" href="$packed__command_8h.html" title=" " alt="" coords="84,155,223,181"/>
+<area shape="rect" id="node4" href="$commander_8h.html" title=" " alt="" coords="43,319,143,345"/>
+<area shape="rect" id="node5" href="$controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="33,543,153,569"/>
+<area shape="rect" id="node6" href="$controller__model__command__message_8h.html" title=" " alt="" coords="127,229,308,271"/>
+<area shape="rect" id="node10" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="217,543,319,569"/>
+<area shape="rect" id="node7" href="$internal__messages_8h.html" title="List of Internal Messages." alt="" coords="167,319,308,345"/>
+<area shape="rect" id="node8" href="$consumers_8h.html" title=" " alt="" coords="523,393,619,420"/>
+<area shape="rect" id="node9" href="$message__relay_8h.html" title=" " alt="" coords="383,468,502,495"/>
+<area shape="rect" id="node14" href="$format_8h.html" title=" " alt="" coords="536,468,605,495"/>
+<area shape="rect" id="node16" href="$log__view__type_8h.html" title=" " alt="" coords="692,468,807,495"/>
+<area shape="rect" id="node20" href="$option__view__type_8h.html" title=" " alt="" coords="874,468,1006,495"/>
+<area shape="rect" id="node11" href="$_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="343,543,478,569"/>
+<area shape="rect" id="node13" href="$view__main_8h.html" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="502,543,597,569"/>
+<area shape="rect" id="node12" href="$network__main_8h.html" title=" " alt="" coords="354,617,467,644"/>
+<area shape="rect" id="node15" href="$console_8h.html" title=" " alt="" coords="621,543,699,569"/>
+<area shape="rect" id="node17" href="$console__log__view_8h.html" title=" " alt="" coords="723,543,858,569"/>
+<area shape="rect" id="node18" href="$views_8h.html" title=" " alt="" coords="843,617,909,644"/>
+<area shape="rect" id="node19" href="$view__factory_8h.html" title=" " alt="" coords="823,692,929,719"/>
+<area shape="rect" id="node21" href="$console__option__popup_8h.html" title=" " alt="" coords="882,543,1043,569"/>
+</map>

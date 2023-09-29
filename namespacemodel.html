@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -99,8 +99,8 @@ Functions</h2></td></tr>
 <tr class="separator:a6351f3eaaa255414641993f7c8474f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0478f08c9da9bffb76a54cd6dc74a649"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html#a0478f08c9da9bffb76a54cd6dc74a649">initalize_my_node</a> (<a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> id)</td></tr>
 <tr class="separator:a0478f08c9da9bffb76a54cd6dc74a649"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44853b855293eb70e0e241134c0c8a34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html#a44853b855293eb70e0e241134c0c8a34">command_model</a> (<a class="el" href="class_model___command.html">Model_Command</a> command)</td></tr>
-<tr class="separator:a44853b855293eb70e0e241134c0c8a34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae9b235cb0085daa26bd3b1c85458a82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html#aae9b235cb0085daa26bd3b1c85458a82">command_model</a> (const <a class="el" href="class_packed___command.html">Packed_Command</a> &amp;command)</td></tr>
+<tr class="separator:aae9b235cb0085daa26bd3b1c85458a82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -108,10 +108,12 @@ Variables</h2></td></tr>
 <tr class="separator:aa6bf9f694786bbe9fa5b41c46960b3ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2181d9eb36627560587b691300bfeb56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html#a2181d9eb36627560587b691300bfeb56">my_node</a></td></tr>
 <tr class="separator:a2181d9eb36627560587b691300bfeb56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa424fa4639589be337b0f33c7fe3559"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_interfaces_2types_2model__command_8h.html#a01a0bac86f68be310bbd4467441793b0">Command_List</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html#afa424fa4639589be337b0f33c7fe3559">step_actions</a></td></tr>
+<tr class="memitem:afa424fa4639589be337b0f33c7fe3559"><td class="memItemLeft" align="right" valign="top"><a class="el" href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html#afa424fa4639589be337b0f33c7fe3559">step_actions</a></td></tr>
 <tr class="separator:afa424fa4639589be337b0f33c7fe3559"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbff244884f3d2199de277aaf99077cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_task.html">Task</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html#abbff244884f3d2199de277aaf99077cb">model_task</a></td></tr>
 <tr class="separator:abbff244884f3d2199de277aaf99077cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c03eb1aa0448953f417b30ba1063612"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_message___consumer.html">Message_Consumer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html#a6c03eb1aa0448953f417b30ba1063612">model_controller_consumer</a></td></tr>
+<tr class="separator:a6c03eb1aa0448953f417b30ba1063612"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main brain of the model. It keeps track of nodes and does actions such as looping, stepping through commands given from the Command_Interface, and sending nodes commands to run with devices. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>Include logging of model state. </dd></dl>
@@ -134,8 +136,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a44853b855293eb70e0e241134c0c8a34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44853b855293eb70e0e241134c0c8a34">&#9670;&nbsp;</a></span>command_model()</h2>
+<a id="aae9b235cb0085daa26bd3b1c85458a82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae9b235cb0085daa26bd3b1c85458a82">&#9670;&nbsp;</a></span>command_model()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,7 +145,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void model::command_model </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_model___command.html">Model_Command</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_packed___command.html">Packed_Command</a> &amp;&#160;</td>
           <td class="paramname"><em>command</em></td><td>)</td>
           <td></td>
         </tr>
@@ -278,7 +280,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="class_initalize.html">Initalize</a> the node that controls the local devices. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Initalize the node that controls the local devices. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Name of the local node. </td></tr>
   </table>
@@ -342,6 +344,29 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a6c03eb1aa0448953f417b30ba1063612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c03eb1aa0448953f417b30ba1063612">&#9670;&nbsp;</a></span>model_controller_consumer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_message___consumer.html">Message_Consumer</a> * model::model_controller_consumer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Consumer for Controller messages </p>
+
+</div>
+</div>
 <a id="aa6bf9f694786bbe9fa5b41c46960b3ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6bf9f694786bbe9fa5b41c46960b3ba">&#9670;&nbsp;</a></span>model_running</h2>
 
@@ -421,7 +446,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="_interfaces_2types_2model__command_8h.html#a01a0bac86f68be310bbd4467441793b0">Command_List</a> model::step_actions</td>
+          <td class="memname"><a class="el" href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a> model::step_actions</td>
         </tr>
       </table>
   </td>

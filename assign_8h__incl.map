@@ -1,5 +1,8 @@
 <map id="assign.h" name="assign.h">
-<area shape="rect" id="node1" title=" " alt="" coords="99,5,170,32"/>
-<area shape="rect" id="node2" href="$command_8h.html" title=" " alt="" coords="5,80,104,107"/>
-<area shape="rect" id="node3" href="$channel_8h.html" title=" " alt="" coords="129,80,303,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="186,5,257,32"/>
+<area shape="rect" id="node2" href="$device__command_8h.html" title=" " alt="" coords="65,80,199,107"/>
+<area shape="rect" id="node6" href="$channel_8h.html" title=" " alt="" coords="223,80,398,107"/>
+<area shape="rect" id="node3" href="$command_8h.html" title=" " alt="" coords="5,162,104,189"/>
+<area shape="rect" id="node4" href="$device__type_8h.html" title=" " alt="" coords="128,155,293,196"/>
+<area shape="rect" id="node5" title=" " alt="" coords="132,244,289,285"/>
 </map>

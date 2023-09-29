@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -78,9 +78,10 @@ Inheritance diagram for Response_Message:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_response___message__inherit__graph.png" border="0" usemap="#a_response___message_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_response___message_inherit__map" id="a_response___message_inherit__map">
-<area shape="rect" title=" " alt="" coords="20,80,160,107"/>
-<area shape="rect" href="class_option___popup___response___message.html" title=" " alt="" coords="5,155,175,196"/>
-<area shape="rect" href="class_internal___message.html" title=" " alt="" coords="27,5,153,32"/>
+<area shape="rect" title=" " alt="" coords="119,80,259,107"/>
+<area shape="rect" href="class_create___device___response___message.html" title=" " alt="" coords="5,155,177,196"/>
+<area shape="rect" href="class_option___popup___response___message.html" title=" " alt="" coords="201,155,371,196"/>
+<area shape="rect" href="class_internal___message.html" title=" " alt="" coords="126,5,251,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -95,6 +96,10 @@ Collaboration diagram for Response_Message:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a4f6f08229c1550a0a8f563328c2d7eb5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_response___message.html#a4f6f08229c1550a0a8f563328c2d7eb5">this_message</a> (<a class="el" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a> check_message)</td></tr>
+<tr class="separator:a4f6f08229c1550a0a8f563328c2d7eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbdb584c77fadd6ff12ddf75041420df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_response___message.html#adbdb584c77fadd6ff12ddf75041420df">get_receipt</a> ()</td></tr>
+<tr class="separator:adbdb584c77fadd6ff12ddf75041420df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97ffe8252e02dee7def7c9368e59251b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_internal___message.html#a97ffe8252e02dee7def7c9368e59251b">is_valid</a> ()</td></tr>
 <tr class="separator:a97ffe8252e02dee7def7c9368e59251b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9016d3b3103c411dc2ca183bd87188e0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_internal___message.html#a9016d3b3103c411dc2ca183bd87188e0">validate</a> ()</td></tr>
@@ -102,12 +107,34 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a9961cd4b33984908dee587462d680816"><td class="memItemLeft" align="right" valign="top"><a id="a9961cd4b33984908dee587462d680816"></a>
+<a class="el" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_response___message.html#a9961cd4b33984908dee587462d680816">receipt</a></td></tr>
+<tr class="memdesc:a9961cd4b33984908dee587462d680816"><td class="mdescLeft">&#160;</td><td class="mdescRight">An object to know which message we are responding to. <br /></td></tr>
+<tr class="separator:a9961cd4b33984908dee587462d680816"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3f28db926ccf38a0720409a7671b917"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_internal___message.html#ad3f28db926ccf38a0720409a7671b917">valid</a></td></tr>
 <tr class="separator:ad3f28db926ccf38a0720409a7671b917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A parent for responding to messages. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="adbdb584c77fadd6ff12ddf75041420df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbdb584c77fadd6ff12ddf75041420df">&#9670;&nbsp;</a></span>get_receipt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a> Response_Message::get_receipt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The pointer to the recipt </dd></dl>
+
+</div>
+</div>
 <a id="a97ffe8252e02dee7def7c9368e59251b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97ffe8252e02dee7def7c9368e59251b">&#9670;&nbsp;</a></span>is_valid()</h2>
 
@@ -131,6 +158,40 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Is the message valid. </p><dl class="section return"><dt>Returns</dt><dd>Validity of the message. </dd></dl>
+
+</div>
+</div>
+<a id="a4f6f08229c1550a0a8f563328c2d7eb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f6f08229c1550a0a8f563328c2d7eb5">&#9670;&nbsp;</a></span>this_message()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Response_Message::this_message </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a>&#160;</td>
+          <td class="paramname"><em>check_message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Checks if we are responding to the correct message. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">check_message</td><td>Message to compare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>If the message is this message </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Make this an overloaded == </dd></dl>
 
 </div>
 </div>
@@ -184,8 +245,9 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="response__message_8h_source.html">response_message.h</a></li>
+<li>response_message.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

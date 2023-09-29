@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -87,6 +87,10 @@ $(function() {
 <li>get_code()
 : <a class="el" href="class_key___press___interface.html#af0ceb8499dabd32f6c416634321d9abc">Key_Press_Interface</a>
 </li>
+<li>get_command()
+: <a class="el" href="class_controller___model___command.html#a48212bcbf0b2a7ccf32b1e8f05c6e6d7">Controller_Model_Command</a>
+, <a class="el" href="class_packed___command.html#a5d42a03cd40fc564d03c037db4133787">Packed_Command</a>
+</li>
 <li>get_connection()
 : <a class="el" href="class_network___interface.html#a6bbe9891f210c963c842686350f9f6e1">Network_Interface</a>
 , <a class="el" href="class_node.html#af4f19568e78941d05e0e8f87b90dee6c">Node</a>
@@ -100,7 +104,8 @@ $(function() {
 , <a class="el" href="class_network___word.html#afb8e8090590704ee04a072921dafa77b">Network_Word</a>
 </li>
 <li>get_device()
-: <a class="el" href="class_node.html#acb8a937bfee2af3fe302f23f9c954002">Node</a>
+: <a class="el" href="class_device___destruction.html#ad3482cfd28ffa2e6798ee34dc0301b92">Device_Destruction</a>
+, <a class="el" href="class_node.html#acb8a937bfee2af3fe302f23f9c954002">Node</a>
 </li>
 <li>get_device_id()
 : <a class="el" href="class_device___label.html#ad29eea6a6ca3835dc0045d1ae1a86115">Device_Label</a>
@@ -124,7 +129,9 @@ $(function() {
 : <a class="el" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">Assign</a>
 , <a class="el" href="class_command.html#a16d05707b4c02e4ffc1887c7db16255a">Command</a>
 , <a class="el" href="class_device.html#afad12507c383f6f79c56ec6630119dd3">Device</a>
-, <a class="el" href="class_initalize.html#acd930de5c4f1740b239bd76fd1d8966b">Initalize</a>
+, <a class="el" href="class_device___create.html#a23f1350163c95ce14b9c50ecd3ccc740">Device_Create</a>
+, <a class="el" href="class_device___destruction.html#af7004dd133c85534d26fd9ea5581c6e1">Device_Destruction</a>
+, <a class="el" href="class_initalize___device.html#aca774451d15c88707c53c8aac073cb5b">Initalize_Device</a>
 , <a class="el" href="class_node.html#a6b67fa27b2bcb94d7fb1e87e8d3baf36">Node</a>
 , <a class="el" href="class_off.html#a96ff6673ec4332f5fac782c53e6dcc94">Off</a>
 , <a class="el" href="class_on.html#aab6574162edd320a75a88fc14ee2d399">On</a>
@@ -133,11 +140,15 @@ $(function() {
 : <a class="el" href="class_keyboard___buffer___input.html#a7504b3f9f3251b5769664c6cd150cb68">Keyboard_Buffer_Input</a>
 </li>
 <li>get_instance()
-: <a class="el" href="class_message___relay.html#a07a1aa357c1c5d95c1ba405f6536d191">Message_Relay</a>
+: <a class="el" href="class_commander.html#a4d2aae6229cc8d0ca56026864409bf7d">Commander</a>
+, <a class="el" href="class_message___relay.html#a07a1aa357c1c5d95c1ba405f6536d191">Message_Relay</a>
 , <a class="el" href="class_scheduler.html#af1549eccfc413c5a1cfb2d4f4f824734">Scheduler</a>
 </li>
 <li>get_keyboard_present()
 : <a class="el" href="class_keyboard___interface.html#a7c530498973c22efcfffb44a3c39384f">Keyboard_Interface</a>
+</li>
+<li>get_label()
+: <a class="el" href="class_device___command.html#aa515679f54ad6a169a7a773ce657fb7a">Device_Command</a>
 </li>
 <li>get_location()
 : <a class="el" href="class_logging___message.html#a819864dc378db16f461d91c70b215179">Logging_Message</a>
@@ -161,6 +172,9 @@ $(function() {
 </li>
 <li>get_number()
 : <a class="el" href="class_keyboard___buffer___input.html#a90bebde0f9ff8311e31ac219d6f97031">Keyboard_Buffer_Input</a>
+</li>
+<li>get_number_of_commands()
+: <a class="el" href="class_commander.html#a079df55d4af86b3895379883171e5a3b">Commander</a>
 </li>
 <li>get_number_of_subtasks()
 : <a class="el" href="class_scheduler.html#aaf2bb6de35334ff9ee74447eae4e68a0">Scheduler</a>
@@ -203,6 +217,9 @@ $(function() {
 <li>get_program_time()
 : <a class="el" href="class_timer.html#a71ef10777450ac9d7a89b1ae99ab7e13">Timer</a>
 </li>
+<li>get_receipt()
+: <a class="el" href="class_response___message.html#adbdb584c77fadd6ff12ddf75041420df">Response_Message</a>
+</li>
 <li>get_selection()
 : <a class="el" href="class_option___popup___response___message.html#a5f67e49a133f82882aaac780ed892bf9">Option_Popup_Response_Message</a>
 </li>
@@ -217,6 +234,9 @@ $(function() {
 </li>
 <li>get_status()
 : <a class="el" href="class_network___interface.html#ab177d1f50825378e9e2d6c1f997519f8">Network_Interface</a>
+</li>
+<li>get_time()
+: <a class="el" href="class_packed___command.html#ac4a55b943cf63ea8ca78d269f96d687e">Packed_Command</a>
 </li>
 <li>get_type()
 : <a class="el" href="class_network___message.html#ac2cfbe36e5ddd56e03afbebae6b6c669">Network_Message</a>

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -77,8 +77,8 @@ Functions</h2></td></tr>
 <tr class="separator:af07af31a9787398dbc5ca3454c3c1c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a815d20e50a745df9c1a4acf131d3e888"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller.html#a815d20e50a745df9c1a4acf131d3e888">start_controller</a> ()</td></tr>
 <tr class="separator:a815d20e50a745df9c1a4acf131d3e888"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a931c22c31933423c6b50ad9c1ed5b936"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller.html#a931c22c31933423c6b50ad9c1ed5b936">add_command</a> (<a class="el" href="class_timed___command.html">Timed_Command</a> tc)</td></tr>
-<tr class="separator:a931c22c31933423c6b50ad9c1ed5b936"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb5f7666c6ec3b27abf330d252876495"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller.html#aeb5f7666c6ec3b27abf330d252876495">add_command</a> (const <a class="el" href="class_packed___command.html">Packed_Command</a> &amp;cmd)</td></tr>
+<tr class="separator:aeb5f7666c6ec3b27abf330d252876495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a376aeb0fcc9d5ea97aa94922c9ac8856"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller.html#a376aeb0fcc9d5ea97aa94922c9ac8856">step</a> ()</td></tr>
 <tr class="separator:a376aeb0fcc9d5ea97aa94922c9ac8856"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5be140de5464a3afb01167950c9a570"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller.html#aa5be140de5464a3afb01167950c9a570">stop_controller</a> ()</td></tr>
@@ -90,16 +90,16 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:acfa93d1e5a03bb764dd2ad7bfc4f14f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller.html#acfa93d1e5a03bb764dd2ad7bfc4f14f5">controller_running</a> = true</td></tr>
 <tr class="separator:acfa93d1e5a03bb764dd2ad7bfc4f14f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a953795f75d08627b15b2b08b75e58305"><td class="memItemLeft" align="right" valign="top"><a class="el" href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller.html#a953795f75d08627b15b2b08b75e58305">controller_queue</a></td></tr>
-<tr class="separator:a953795f75d08627b15b2b08b75e58305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac123aff8ee71f65be2ee34408f38a95d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller.html#ac123aff8ee71f65be2ee34408f38a95d">controller_queue</a></td></tr>
+<tr class="separator:ac123aff8ee71f65be2ee34408f38a95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63bc076cd83738f8f9d4baabdced4b3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_task.html">Task</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller.html#a63bc076cd83738f8f9d4baabdced4b3a">controller_task</a></td></tr>
 <tr class="separator:a63bc076cd83738f8f9d4baabdced4b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main brain of the controller. It keeps track of commands to send to the model, and when to send them </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Change the timer interface from decrement timer to activate_state timer. This will mainly solve the issues with editing a timeline. </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a931c22c31933423c6b50ad9c1ed5b936"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a931c22c31933423c6b50ad9c1ed5b936">&#9670;&nbsp;</a></span>add_command()</h2>
+<a id="aeb5f7666c6ec3b27abf330d252876495"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb5f7666c6ec3b27abf330d252876495">&#9670;&nbsp;</a></span>add_command()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -107,16 +107,16 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void controller::add_command </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_timed___command.html">Timed_Command</a>&#160;</td>
-          <td class="paramname"><em>tc</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="class_packed___command.html">Packed_Command</a> &amp;&#160;</td>
+          <td class="paramname"><em>cmd</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Add a <a class="el" href="class_timed___command.html">Timed_Command</a> to the sorted queue of commands. Thread safe.</p>
+<p>Add a <a class="el" href="class_packed___command.html">Packed_Command</a> to the sorted queue of commands. Thread safe.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tc</td><td><a class="el" href="class_command.html">Command</a> to add </td></tr>
+    <tr><td class="paramname">cmd</td><td><a class="el" href="class_command.html">Command</a> to add </td></tr>
   </table>
   </dd>
 </dl>
@@ -215,8 +215,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a953795f75d08627b15b2b08b75e58305"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a953795f75d08627b15b2b08b75e58305">&#9670;&nbsp;</a></span>controller_queue</h2>
+<a id="ac123aff8ee71f65be2ee34408f38a95d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac123aff8ee71f65be2ee34408f38a95d">&#9670;&nbsp;</a></span>controller_queue</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +225,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a> controller::controller_queue</td>
+          <td class="memname"><a class="el" href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a> controller::controller_queue</td>
         </tr>
       </table>
   </td>

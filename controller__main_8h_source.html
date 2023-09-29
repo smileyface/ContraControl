@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -75,47 +75,50 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef MAIN_EXECUTOR_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define MAIN_EXECUTOR_H</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="timed__command_8h.html">Interfaces/types/timed_command.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;system/timer.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="message__relay_8h.html">Messaging/message_relay.h</a>&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="threading_8h.html">Threading/threading.h</a>&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="namespacecontroller.html">   21</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecontroller.html">controller</a></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* subsystem_name = <span class="stringliteral">&quot;Controller&quot;</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="namespacecontroller.html#acfa93d1e5a03bb764dd2ad7bfc4f14f5">controller_running</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">extern</span> <a class="code" href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a> <a class="code" href="namespacecontroller.html#a953795f75d08627b15b2b08b75e58305">controller_queue</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">extern</span> <a class="code" href="class_task.html">Task</a> <a class="code" href="namespacecontroller.html#a63bc076cd83738f8f9d4baabdced4b3a">controller_task</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#af07af31a9787398dbc5ca3454c3c1c2e">initalize</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a815d20e50a745df9c1a4acf131d3e888">start_controller</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a931c22c31933423c6b50ad9c1ed5b936">add_command</a>(<a class="code" href="class_timed___command.html">Timed_Command</a> tc);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a376aeb0fcc9d5ea97aa94922c9ac8856">step</a>();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#aa5be140de5464a3afb01167950c9a570">stop_controller</a>();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a27c308484eee50eee14c47b4121bedf7">clean_up</a>();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="commander_8h.html">commander/commander.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="packed__command_8h.html">Interfaces/types/packed_command.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;system/timer.h&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="message__relay_8h.html">Messaging/message_relay.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="threading_8h.html">Threading/threading.h</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="namespacecontroller.html">   23</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecontroller.html">controller</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* subsystem_name = <span class="stringliteral">&quot;Controller&quot;</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="namespacecontroller.html#acfa93d1e5a03bb764dd2ad7bfc4f14f5">controller_running</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">extern</span> <a class="code" href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a> <a class="code" href="namespacecontroller.html#ac123aff8ee71f65be2ee34408f38a95d">controller_queue</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">extern</span> <a class="code" href="class_task.html">Task</a> <a class="code" href="namespacecontroller.html#a63bc076cd83738f8f9d4baabdced4b3a">controller_task</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#af07af31a9787398dbc5ca3454c3c1c2e">initalize</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a815d20e50a745df9c1a4acf131d3e888">start_controller</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#aeb5f7666c6ec3b27abf330d252876495">add_command</a>(<span class="keyword">const</span> <a class="code" href="class_packed___command.html">Packed_Command</a>&amp; cmd);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a376aeb0fcc9d5ea97aa94922c9ac8856">step</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#aa5be140de5464a3afb01167950c9a570">stop_controller</a>();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecontroller.html#a27c308484eee50eee14c47b4121bedf7">clean_up</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_packed___command_html"><div class="ttname"><a href="class_packed___command.html">Packed_Command</a></div><div class="ttdef"><b>Definition:</b> packed_command.h:18</div></div>
 <div class="ttc" id="aclass_task_html"><div class="ttname"><a href="class_task.html">Task</a></div><div class="ttdoc">The Task class represents a task with subtasks.</div><div class="ttdef"><b>Definition:</b> task.h:23</div></div>
-<div class="ttc" id="aclass_timed___command_html"><div class="ttname"><a href="class_timed___command.html">Timed_Command</a></div><div class="ttdef"><b>Definition:</b> timed_command.h:17</div></div>
+<div class="ttc" id="acommander_8h_html"><div class="ttname"><a href="commander_8h.html">commander.h</a></div></div>
 <div class="ttc" id="amessage__relay_8h_html"><div class="ttname"><a href="message__relay_8h.html">message_relay.h</a></div></div>
-<div class="ttc" id="anamespacecontroller_html"><div class="ttname"><a href="namespacecontroller.html">controller</a></div><div class="ttdef"><b>Definition:</b> controller_main.h:22</div></div>
-<div class="ttc" id="anamespacecontroller_html_a27c308484eee50eee14c47b4121bedf7"><div class="ttname"><a href="namespacecontroller.html#a27c308484eee50eee14c47b4121bedf7">controller::clean_up</a></div><div class="ttdeci">void clean_up()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:99</div></div>
-<div class="ttc" id="anamespacecontroller_html_a376aeb0fcc9d5ea97aa94922c9ac8856"><div class="ttname"><a href="namespacecontroller.html#a376aeb0fcc9d5ea97aa94922c9ac8856">controller::step</a></div><div class="ttdeci">void step()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:67</div></div>
-<div class="ttc" id="anamespacecontroller_html_a63bc076cd83738f8f9d4baabdced4b3a"><div class="ttname"><a href="namespacecontroller.html#a63bc076cd83738f8f9d4baabdced4b3a">controller::controller_task</a></div><div class="ttdeci">Task controller_task</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:14</div></div>
-<div class="ttc" id="anamespacecontroller_html_a815d20e50a745df9c1a4acf131d3e888"><div class="ttname"><a href="namespacecontroller.html#a815d20e50a745df9c1a4acf131d3e888">controller::start_controller</a></div><div class="ttdeci">void start_controller()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:42</div></div>
-<div class="ttc" id="anamespacecontroller_html_a931c22c31933423c6b50ad9c1ed5b936"><div class="ttname"><a href="namespacecontroller.html#a931c22c31933423c6b50ad9c1ed5b936">controller::add_command</a></div><div class="ttdeci">void add_command(Timed_Command tc)</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:56</div></div>
-<div class="ttc" id="anamespacecontroller_html_a953795f75d08627b15b2b08b75e58305"><div class="ttname"><a href="namespacecontroller.html#a953795f75d08627b15b2b08b75e58305">controller::controller_queue</a></div><div class="ttdeci">Timed_List controller_queue</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:13</div></div>
+<div class="ttc" id="anamespacecontroller_html"><div class="ttname"><a href="namespacecontroller.html">controller</a></div><div class="ttdef"><b>Definition:</b> controller_main.h:24</div></div>
+<div class="ttc" id="anamespacecontroller_html_a27c308484eee50eee14c47b4121bedf7"><div class="ttname"><a href="namespacecontroller.html#a27c308484eee50eee14c47b4121bedf7">controller::clean_up</a></div><div class="ttdeci">void clean_up()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:83</div></div>
+<div class="ttc" id="anamespacecontroller_html_a376aeb0fcc9d5ea97aa94922c9ac8856"><div class="ttname"><a href="namespacecontroller.html#a376aeb0fcc9d5ea97aa94922c9ac8856">controller::step</a></div><div class="ttdeci">void step()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:61</div></div>
+<div class="ttc" id="anamespacecontroller_html_a63bc076cd83738f8f9d4baabdced4b3a"><div class="ttname"><a href="namespacecontroller.html#a63bc076cd83738f8f9d4baabdced4b3a">controller::controller_task</a></div><div class="ttdeci">Task controller_task</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:13</div></div>
+<div class="ttc" id="anamespacecontroller_html_a815d20e50a745df9c1a4acf131d3e888"><div class="ttname"><a href="namespacecontroller.html#a815d20e50a745df9c1a4acf131d3e888">controller::start_controller</a></div><div class="ttdeci">void start_controller()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:41</div></div>
 <div class="ttc" id="anamespacecontroller_html_aa5be140de5464a3afb01167950c9a570"><div class="ttname"><a href="namespacecontroller.html#aa5be140de5464a3afb01167950c9a570">controller::stop_controller</a></div><div class="ttdeci">void stop_controller()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:49</div></div>
-<div class="ttc" id="anamespacecontroller_html_acfa93d1e5a03bb764dd2ad7bfc4f14f5"><div class="ttname"><a href="namespacecontroller.html#acfa93d1e5a03bb764dd2ad7bfc4f14f5">controller::controller_running</a></div><div class="ttdeci">bool controller_running</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:12</div></div>
-<div class="ttc" id="anamespacecontroller_html_af07af31a9787398dbc5ca3454c3c1c2e"><div class="ttname"><a href="namespacecontroller.html#af07af31a9787398dbc5ca3454c3c1c2e">controller::initalize</a></div><div class="ttdeci">void initalize()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:19</div></div>
+<div class="ttc" id="anamespacecontroller_html_ac123aff8ee71f65be2ee34408f38a95d"><div class="ttname"><a href="namespacecontroller.html#ac123aff8ee71f65be2ee34408f38a95d">controller::controller_queue</a></div><div class="ttdeci">Command_List controller_queue</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:12</div></div>
+<div class="ttc" id="anamespacecontroller_html_acfa93d1e5a03bb764dd2ad7bfc4f14f5"><div class="ttname"><a href="namespacecontroller.html#acfa93d1e5a03bb764dd2ad7bfc4f14f5">controller::controller_running</a></div><div class="ttdeci">bool controller_running</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:11</div></div>
+<div class="ttc" id="anamespacecontroller_html_aeb5f7666c6ec3b27abf330d252876495"><div class="ttname"><a href="namespacecontroller.html#aeb5f7666c6ec3b27abf330d252876495">controller::add_command</a></div><div class="ttdeci">void add_command(const Packed_Command &amp;cmd)</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:56</div></div>
+<div class="ttc" id="anamespacecontroller_html_af07af31a9787398dbc5ca3454c3c1c2e"><div class="ttname"><a href="namespacecontroller.html#af07af31a9787398dbc5ca3454c3c1c2e">controller::initalize</a></div><div class="ttdeci">void initalize()</div><div class="ttdef"><b>Definition:</b> controller_main.cpp:18</div></div>
+<div class="ttc" id="apacked__command_8h_html"><div class="ttname"><a href="packed__command_8h.html">packed_command.h</a></div></div>
+<div class="ttc" id="apacked__command_8h_html_aeb32ee7d906550c527ee3da030cdb70e"><div class="ttname"><a href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a></div><div class="ttdeci">std::vector&lt; Packed_Command &gt; Command_List</div><div class="ttdef"><b>Definition:</b> packed_command.h:84</div></div>
 <div class="ttc" id="athreading_8h_html"><div class="ttname"><a href="threading_8h.html">threading.h</a></div></div>
-<div class="ttc" id="atimed__command_8h_html"><div class="ttname"><a href="timed__command_8h.html">timed_command.h</a></div></div>
-<div class="ttc" id="atimed__command_8h_html_ad11384ace0e6819718d3dcb5c3236a1d"><div class="ttname"><a href="timed__command_8h.html#ad11384ace0e6819718d3dcb5c3236a1d">Timed_List</a></div><div class="ttdeci">std::vector&lt; Timed_Command &gt; Timed_List</div><div class="ttdef"><b>Definition:</b> timed_command.h:62</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

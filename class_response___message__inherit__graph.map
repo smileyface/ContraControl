@@ -1,5 +1,6 @@
 <map id="Response_Message" name="Response_Message">
-<area shape="rect" id="node1" title=" " alt="" coords="20,80,160,107"/>
-<area shape="rect" id="node3" href="$class_option___popup___response___message.html" title=" " alt="" coords="5,155,175,196"/>
-<area shape="rect" id="node2" href="$class_internal___message.html" title=" " alt="" coords="27,5,153,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="119,80,259,107"/>
+<area shape="rect" id="node3" href="$class_create___device___response___message.html" title=" " alt="" coords="5,155,177,196"/>
+<area shape="rect" id="node4" href="$class_option___popup___response___message.html" title=" " alt="" coords="201,155,371,196"/>
+<area shape="rect" id="node2" href="$class_internal___message.html" title=" " alt="" coords="126,5,251,32"/>
 </map>

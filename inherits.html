@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -82,54 +82,47 @@ $(function() {
 </td></tr>
 <tr><td><img src="inherit_graph_2.png" border="0" usemap="#a_command" alt=""/>
 <map name="a_command" id="a_command">
-<area shape="rect" href="class_command.html" title=" " alt="" coords="5,81,87,108"/>
-<area shape="rect" href="class_assign.html" title=" " alt="" coords="137,5,199,32"/>
-<area shape="rect" href="class_initalize.html" title=" " alt="" coords="135,56,201,83"/>
-<area shape="rect" href="class_off.html" title=" " alt="" coords="149,107,187,133"/>
-<area shape="rect" href="class_on.html" title=" " alt="" coords="149,157,187,184"/>
+<area shape="rect" href="class_command.html" title=" " alt="" coords="5,132,87,159"/>
+<area shape="rect" href="class_device___command.html" title=" " alt="" coords="138,81,266,108"/>
+<area shape="rect" href="class_device___create.html" title=" " alt="" coords="149,132,255,159"/>
+<area shape="rect" href="class_device___destruction.html" title=" " alt="" coords="135,183,269,209"/>
+<area shape="rect" href="class_assign.html" title=" " alt="" coords="343,5,405,32"/>
+<area shape="rect" href="class_initalize___device.html" title=" " alt="" coords="317,56,431,83"/>
+<area shape="rect" href="class_off.html" title=" " alt="" coords="355,107,393,133"/>
+<area shape="rect" href="class_on.html" title=" " alt="" coords="355,157,393,184"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_3.png" border="0" usemap="#a_compare___message" alt=""/>
+<tr><td><img src="inherit_graph_3.png" border="0" usemap="#a_commander" alt=""/>
+<map name="a_commander" id="a_commander">
+<area shape="rect" href="class_commander.html" title=" " alt="" coords="5,5,97,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_4.png" border="0" usemap="#a_compare___message" alt=""/>
 <map name="a_compare___message" id="a_compare___message">
 <area shape="rect" href="struct_compare___message.html" title="A basic structure for comparisons." alt="" coords="5,5,140,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_4.png" border="0" usemap="#a_connection" alt=""/>
+<tr><td><img src="inherit_graph_5.png" border="0" usemap="#a_connection" alt=""/>
 <map name="a_connection" id="a_connection">
 <area shape="rect" href="connections_8h.html#struct_connection" title=" " alt="" coords="5,5,92,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_5.png" border="0" usemap="#a_console___view_1_1_console___state" alt=""/>
+<tr><td><img src="inherit_graph_6.png" border="0" usemap="#a_console___view_1_1_console___state" alt=""/>
 <map name="a_console___view_1_1_console___state" id="a_console___view_1_1_console___state">
 <area shape="rect" href="struct_console___view_1_1_console___state.html" title=" " alt="" coords="5,5,164,47"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_6.png" border="0" usemap="#a_controller___interfaces" alt=""/>
-<map name="a_controller___interfaces" id="a_controller___interfaces">
-<area shape="rect" href="controller__interface_8h.html#class_controller___interfaces" title=" " alt="" coords="5,5,148,32"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_7.png" border="0" usemap="#a_controller___interfaces_1_1_main___interface" alt=""/>
-<map name="a_controller___interfaces_1_1_main___interface" id="a_controller___interfaces_1_1_main___interface">
-<area shape="rect" href="class_controller___interfaces_1_1_main___interface.html" title=" " alt="" coords="5,5,148,47"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_8.png" border="0" usemap="#a_controller___interfaces_1_1_model___interface" alt=""/>
-<map name="a_controller___interfaces_1_1_model___interface" id="a_controller___interfaces_1_1_model___interface">
-<area shape="rect" href="class_controller___interfaces_1_1_model___interface.html" title=" " alt="" coords="5,5,148,47"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_9.png" border="0" usemap="#a_device" alt=""/>
+<tr><td><img src="inherit_graph_7.png" border="0" usemap="#a_device" alt=""/>
 <map name="a_device" id="a_device">
 <area shape="rect" href="class_device.html" title=" " alt="" coords="5,5,68,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_10.png" border="0" usemap="#a_device___label" alt=""/>
+<tr><td><img src="inherit_graph_8.png" border="0" usemap="#a_device___label" alt=""/>
 <map name="a_device___label" id="a_device___label">
 <area shape="rect" href="class_device___label.html" title=" " alt="" coords="5,5,107,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_11.png" border="0" usemap="#a_device_not_found_exception" alt=""/>
+<tr><td><img src="inherit_graph_9.png" border="0" usemap="#a_device_not_found_exception" alt=""/>
 <map name="a_device_not_found_exception" id="a_device_not_found_exception">
 <area shape="rect" title=" " alt="" coords="5,157,107,184"/>
 <area shape="rect" href="class_device_not_found_exception.html" title="Exception node throws when attempting to access a device that does not exist." alt="" coords="177,5,351,32"/>
@@ -141,63 +134,65 @@ $(function() {
 <area shape="rect" href="class_unimplemented_function_exception.html" title="When a function has not been implemented." alt="" coords="155,309,373,336"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_12.png" border="0" usemap="#a_format" alt=""/>
+<tr><td><img src="inherit_graph_10.png" border="0" usemap="#a_format" alt=""/>
 <map name="a_format" id="a_format">
 <area shape="rect" href="class_format.html" title="Format that the data will take." alt="" coords="5,5,68,32"/>
 <area shape="rect" href="class_console___format.html" title=" " alt="" coords="116,5,233,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_13.png" border="0" usemap="#a_internal___message" alt=""/>
+<tr><td><img src="inherit_graph_11.png" border="0" usemap="#a_internal___message" alt=""/>
 <map name="a_internal___message" id="a_internal___message">
-<area shape="rect" href="class_internal___message.html" title=" " alt="" coords="5,56,131,83"/>
-<area shape="rect" href="class_logging___message.html" title=" " alt="" coords="206,5,334,32"/>
-<area shape="rect" href="class_response___message.html" title=" " alt="" coords="200,56,340,83"/>
-<area shape="rect" href="class_view___subsystem___message.html" title=" " alt="" coords="179,108,361,135"/>
-<area shape="rect" href="class_option___popup___response___message.html" title=" " alt="" coords="409,46,579,87"/>
-<area shape="rect" href="class_option___popup___message.html" title=" " alt="" coords="412,112,576,139"/>
+<area shape="rect" href="class_internal___message.html" title=" " alt="" coords="5,81,131,108"/>
+<area shape="rect" href="class_controller___model___command.html" title=" " alt="" coords="179,5,364,32"/>
+<area shape="rect" href="class_logging___message.html" title=" " alt="" coords="207,56,335,83"/>
+<area shape="rect" href="class_response___message.html" title=" " alt="" coords="201,107,341,133"/>
+<area shape="rect" href="class_view___subsystem___message.html" title=" " alt="" coords="180,161,363,188"/>
+<area shape="rect" href="class_create___device___response___message.html" title=" " alt="" coords="412,34,584,75"/>
+<area shape="rect" href="class_option___popup___response___message.html" title=" " alt="" coords="413,99,583,141"/>
+<area shape="rect" href="class_option___popup___message.html" title=" " alt="" coords="416,165,580,192"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_14.png" border="0" usemap="#a_i_p_v4___addr" alt=""/>
+<tr><td><img src="inherit_graph_12.png" border="0" usemap="#a_i_p_v4___addr" alt=""/>
 <map name="a_i_p_v4___addr" id="a_i_p_v4___addr">
 <area shape="rect" href="struct_i_p_v4___addr.html" title=" " alt="" coords="5,5,91,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_15.png" border="0" usemap="#a_i_p_v4___addr_8_s__un" alt=""/>
+<tr><td><img src="inherit_graph_13.png" border="0" usemap="#a_i_p_v4___addr_8_s__un" alt=""/>
 <map name="a_i_p_v4___addr_8_s__un" id="a_i_p_v4___addr_8_s__un">
 <area shape="rect" href="ipv4__addr_8h.html#union_i_p_v4___addr_8_s__un" title=" " alt="" coords="5,5,124,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_16.png" border="0" usemap="#a_i_p_v4___addr_8_s__un_8_s__un__b" alt=""/>
+<tr><td><img src="inherit_graph_14.png" border="0" usemap="#a_i_p_v4___addr_8_s__un_8_s__un__b" alt=""/>
 <map name="a_i_p_v4___addr_8_s__un_8_s__un__b" id="a_i_p_v4___addr_8_s__un_8_s__un__b">
 <area shape="rect" href="ipv4__addr_8h.html#struct_i_p_v4___addr_8_s__un_8_s__un__b" title=" " alt="" coords="5,5,171,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_17.png" border="0" usemap="#a_i_p_v4___addr_8_s__un_8_s__un__w" alt=""/>
+<tr><td><img src="inherit_graph_15.png" border="0" usemap="#a_i_p_v4___addr_8_s__un_8_s__un__w" alt=""/>
 <map name="a_i_p_v4___addr_8_s__un_8_s__un__w" id="a_i_p_v4___addr_8_s__un_8_s__un__w">
 <area shape="rect" href="ipv4__addr_8h.html#struct_i_p_v4___addr_8_s__un_8_s__un__w" title=" " alt="" coords="5,5,173,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_18.png" border="0" usemap="#a_key___press___interface" alt=""/>
+<tr><td><img src="inherit_graph_16.png" border="0" usemap="#a_key___press___interface" alt=""/>
 <map name="a_key___press___interface" id="a_key___press___interface">
 <area shape="rect" href="class_key___press___interface.html" title=" " alt="" coords="5,5,148,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_19.png" border="0" usemap="#a_keyboard___buffer___input" alt=""/>
+<tr><td><img src="inherit_graph_17.png" border="0" usemap="#a_keyboard___buffer___input" alt=""/>
 <map name="a_keyboard___buffer___input" id="a_keyboard___buffer___input">
 <area shape="rect" href="class_keyboard___buffer___input.html" title=" " alt="" coords="5,5,159,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_20.png" border="0" usemap="#a_keyboard___input___buffer" alt=""/>
+<tr><td><img src="inherit_graph_18.png" border="0" usemap="#a_keyboard___input___buffer" alt=""/>
 <map name="a_keyboard___input___buffer" id="a_keyboard___input___buffer">
 <area shape="rect" href="class_keyboard___input___buffer.html" title=" " alt="" coords="5,5,159,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_21.png" border="0" usemap="#a_keyboard___interface" alt=""/>
+<tr><td><img src="inherit_graph_19.png" border="0" usemap="#a_keyboard___interface" alt=""/>
 <map name="a_keyboard___interface" id="a_keyboard___interface">
 <area shape="rect" href="class_keyboard___interface.html" title=" " alt="" coords="5,5,140,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_22.png" border="0" usemap="#a_log___view___type" alt=""/>
+<tr><td><img src="inherit_graph_20.png" border="0" usemap="#a_log___view___type" alt=""/>
 <map name="a_log___view___type" id="a_log___view___type">
 <area shape="rect" href="class_log___view___type.html" title=" " alt="" coords="112,5,227,32"/>
 <area shape="rect" href="class_console___log___view.html" title=" " alt="" coords="295,31,429,57"/>
@@ -207,112 +202,92 @@ $(function() {
 <area shape="rect" href="class_console___view.html" title=" " alt="" coords="117,56,222,83"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_23.png" border="0" usemap="#a_log___view___type_1_1_m_e_s_s_a_g_e" alt=""/>
+<tr><td><img src="inherit_graph_21.png" border="0" usemap="#a_log___view___type_1_1_m_e_s_s_a_g_e" alt=""/>
 <map name="a_log___view___type_1_1_m_e_s_s_a_g_e" id="a_log___view___type_1_1_m_e_s_s_a_g_e">
 <area shape="rect" href="class_log___view___type.html#struct_log___view___type_1_1_m_e_s_s_a_g_e" title=" " alt="" coords="5,5,191,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_24.png" border="0" usemap="#a_main___interfaces" alt=""/>
+<tr><td><img src="inherit_graph_22.png" border="0" usemap="#a_main___interfaces" alt=""/>
 <map name="a_main___interfaces" id="a_main___interfaces">
 <area shape="rect" href="main__interface_8h.html#class_main___interfaces" title=" " alt="" coords="5,5,120,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_25.png" border="0" usemap="#a_main___interfaces_1_1_controller___interface" alt=""/>
+<tr><td><img src="inherit_graph_23.png" border="0" usemap="#a_main___interfaces_1_1_controller___interface" alt=""/>
 <map name="a_main___interfaces_1_1_controller___interface" id="a_main___interfaces_1_1_controller___interface">
 <area shape="rect" href="class_main___interfaces_1_1_controller___interface.html" title=" " alt="" coords="5,5,181,47"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_26.png" border="0" usemap="#a_main___interfaces_1_1_model___interface" alt=""/>
+<tr><td><img src="inherit_graph_24.png" border="0" usemap="#a_main___interfaces_1_1_model___interface" alt=""/>
 <map name="a_main___interfaces_1_1_model___interface" id="a_main___interfaces_1_1_model___interface">
 <area shape="rect" href="class_main___interfaces_1_1_model___interface.html" title=" " alt="" coords="5,5,161,47"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_27.png" border="0" usemap="#a_main___interfaces_1_1_view___interface" alt=""/>
+<tr><td><img src="inherit_graph_25.png" border="0" usemap="#a_main___interfaces_1_1_view___interface" alt=""/>
 <map name="a_main___interfaces_1_1_view___interface" id="a_main___interfaces_1_1_view___interface">
 <area shape="rect" href="class_main___interfaces_1_1_view___interface.html" title=" " alt="" coords="5,5,156,47"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_28.png" border="0" usemap="#a_message___consumer" alt=""/>
+<tr><td><img src="inherit_graph_26.png" border="0" usemap="#a_message___consumer" alt=""/>
 <map name="a_message___consumer" id="a_message___consumer">
 <area shape="rect" href="struct_message___consumer.html" title=" " alt="" coords="5,5,147,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_29.png" border="0" usemap="#a_message___footer" alt=""/>
+<tr><td><img src="inherit_graph_27.png" border="0" usemap="#a_message___footer" alt=""/>
 <map name="a_message___footer" id="a_message___footer">
 <area shape="rect" href="struct_message___footer.html" title=" " alt="" coords="5,5,124,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_30.png" border="0" usemap="#a_message___header" alt=""/>
+<tr><td><img src="inherit_graph_28.png" border="0" usemap="#a_message___header" alt=""/>
 <map name="a_message___header" id="a_message___header">
 <area shape="rect" href="struct_message___header.html" title=" " alt="" coords="5,5,129,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_31.png" border="0" usemap="#a_message___ptr_3_01_t_01_4" alt=""/>
+<tr><td><img src="inherit_graph_29.png" border="0" usemap="#a_message___ptr_3_01_t_01_4" alt=""/>
 <map name="a_message___ptr_3_01_t_01_4" id="a_message___ptr_3_01_t_01_4">
 <area shape="rect" href="class_message___ptr.html" title="A smart pointer class for managing objects of type T. This class provides reference&#45;counted ownership..." alt="" coords="5,5,135,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_32.png" border="0" usemap="#a_message___relay" alt=""/>
+<tr><td><img src="inherit_graph_30.png" border="0" usemap="#a_message___relay" alt=""/>
 <map name="a_message___relay" id="a_message___relay">
 <area shape="rect" href="class_message___relay.html" title=" " alt="" coords="5,5,120,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_33.png" border="0" usemap="#a_message___types" alt=""/>
+<tr><td><img src="inherit_graph_31.png" border="0" usemap="#a_message___types" alt=""/>
 <map name="a_message___types" id="a_message___types">
 <area shape="rect" href="struct_message___types.html" title=" " alt="" coords="5,5,123,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_34.png" border="0" usemap="#a_model___command" alt=""/>
+<tr><td><img src="inherit_graph_32.png" border="0" usemap="#a_model___command" alt=""/>
 <map name="a_model___command" id="a_model___command">
 <area shape="rect" href="class_model___command.html" title=" " alt="" coords="5,5,128,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_35.png" border="0" usemap="#a_model___interfaces" alt=""/>
-<map name="a_model___interfaces" id="a_model___interfaces">
-<area shape="rect" href="model__interface_8h.html#class_model___interfaces" title=" " alt="" coords="5,5,128,32"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_36.png" border="0" usemap="#a_model___interfaces_1_1_controller___interface" alt=""/>
-<map name="a_model___interfaces_1_1_controller___interface" id="a_model___interfaces_1_1_controller___interface">
-<area shape="rect" href="class_model___interfaces_1_1_controller___interface.html" title=" " alt="" coords="5,5,188,47"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_37.png" border="0" usemap="#a_model___interfaces_1_1_main___interface" alt=""/>
-<map name="a_model___interfaces_1_1_main___interface" id="a_model___interfaces_1_1_main___interface">
-<area shape="rect" href="class_model___interfaces_1_1_main___interface.html" title=" " alt="" coords="5,5,161,47"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_38.png" border="0" usemap="#a_model___interfaces_1_1_network___interface" alt=""/>
-<map name="a_model___interfaces_1_1_network___interface" id="a_model___interfaces_1_1_network___interface">
-<area shape="rect" href="model__interface_8h.html#class_model___interfaces_1_1_network___interface" title=" " alt="" coords="5,5,183,47"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_39.png" border="0" usemap="#a_network___interface" alt=""/>
+<tr><td><img src="inherit_graph_33.png" border="0" usemap="#a_network___interface" alt=""/>
 <map name="a_network___interface" id="a_network___interface">
 <area shape="rect" href="class_network___interface.html" title="Interface for handling network communication between Nodes." alt="" coords="5,5,135,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_40.png" border="0" usemap="#a_network___interfaces" alt=""/>
+<tr><td><img src="inherit_graph_34.png" border="0" usemap="#a_network___interfaces" alt=""/>
 <map name="a_network___interfaces" id="a_network___interfaces">
 <area shape="rect" href="_interfaces_2_interfaces_2network__interface_8h.html#class_network___interfaces" title=" " alt="" coords="5,5,141,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_41.png" border="0" usemap="#a_network___interfaces_1_1_model___interface" alt=""/>
+<tr><td><img src="inherit_graph_35.png" border="0" usemap="#a_network___interfaces_1_1_model___interface" alt=""/>
 <map name="a_network___interfaces_1_1_model___interface" id="a_network___interfaces_1_1_model___interface">
 <area shape="rect" href="_interfaces_2_interfaces_2network__interface_8h.html#class_network___interfaces_1_1_model___interface" title=" " alt="" coords="5,5,141,47"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_42.png" border="0" usemap="#a_network___interfaces_1_1_view___interface" alt=""/>
+<tr><td><img src="inherit_graph_36.png" border="0" usemap="#a_network___interfaces_1_1_view___interface" alt=""/>
 <map name="a_network___interfaces_1_1_view___interface" id="a_network___interfaces_1_1_view___interface">
 <area shape="rect" href="class_network___interfaces_1_1_view___interface.html" title=" " alt="" coords="5,5,141,47"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_43.png" border="0" usemap="#a_network___message" alt=""/>
+<tr><td><img src="inherit_graph_37.png" border="0" usemap="#a_network___message" alt=""/>
 <map name="a_network___message" id="a_network___message">
 <area shape="rect" href="class_network___message.html" title=" " alt="" coords="5,5,136,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_44.png" border="0" usemap="#a_network___messaging___type" alt=""/>
+<tr><td><img src="inherit_graph_38.png" border="0" usemap="#a_network___messaging___type" alt=""/>
 <map name="a_network___messaging___type" id="a_network___messaging___type">
 <area shape="rect" href="class_network___messaging___type.html" title=" " alt="" coords="5,132,181,159"/>
 <area shape="rect" href="class_network___address.html" title=" " alt="" coords="229,5,356,32"/>
@@ -323,64 +298,64 @@ $(function() {
 <area shape="rect" href="class_network___word.html" title=" " alt="" coords="239,259,347,285"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_45.png" border="0" usemap="#a_network___status___state" alt=""/>
+<tr><td><img src="inherit_graph_39.png" border="0" usemap="#a_network___status___state" alt=""/>
 <map name="a_network___status___state" id="a_network___status___state">
 <area shape="rect" href="struct_network___status___state.html" title="A container for displaying the state of the network." alt="" coords="5,5,160,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_46.png" border="0" usemap="#a_node" alt=""/>
+<tr><td><img src="inherit_graph_40.png" border="0" usemap="#a_node" alt=""/>
 <map name="a_node" id="a_node">
 <area shape="rect" href="class_node.html" title=" " alt="" coords="5,5,59,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_47.png" border="0" usemap="#a_option___view___type_1_1_m_e_s_s_a_g_e" alt=""/>
+<tr><td><img src="inherit_graph_41.png" border="0" usemap="#a_option___view___type_1_1_m_e_s_s_a_g_e" alt=""/>
 <map name="a_option___view___type_1_1_m_e_s_s_a_g_e" id="a_option___view___type_1_1_m_e_s_s_a_g_e">
 <area shape="rect" href="class_option___view___type.html#struct_option___view___type_1_1_m_e_s_s_a_g_e" title=" " alt="" coords="5,5,207,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_48.png" border="0" usemap="#a_packed___message" alt=""/>
+<tr><td><img src="inherit_graph_42.png" border="0" usemap="#a_packed___command" alt=""/>
+<map name="a_packed___command" id="a_packed___command">
+<area shape="rect" href="class_packed___command.html" title=" " alt="" coords="5,5,137,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_43.png" border="0" usemap="#a_packed___message" alt=""/>
 <map name="a_packed___message" id="a_packed___message">
 <area shape="rect" href="struct_packed___message.html" title=" " alt="" coords="5,5,132,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_49.png" border="0" usemap="#a_scheduler" alt=""/>
+<tr><td><img src="inherit_graph_44.png" border="0" usemap="#a_scheduler" alt=""/>
 <map name="a_scheduler" id="a_scheduler">
 <area shape="rect" href="class_scheduler.html" title="The Scheduler class manages the scheduling and execution of tasks." alt="" coords="5,5,85,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_50.png" border="0" usemap="#a_socket___maker" alt=""/>
+<tr><td><img src="inherit_graph_45.png" border="0" usemap="#a_socket___maker" alt=""/>
 <map name="a_socket___maker" id="a_socket___maker">
 <area shape="rect" href="_network_2system__interfaces_2network__interface_8h.html#struct_socket___maker" title=" " alt="" coords="5,5,112,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_51.png" border="0" usemap="#a_subtask" alt=""/>
+<tr><td><img src="inherit_graph_46.png" border="0" usemap="#a_subtask" alt=""/>
 <map name="a_subtask" id="a_subtask">
 <area shape="rect" href="subtask_8h.html#struct_subtask" title="A subtask to be run during the runtime of the Task." alt="" coords="5,5,76,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_52.png" border="0" usemap="#a_task" alt=""/>
+<tr><td><img src="inherit_graph_47.png" border="0" usemap="#a_task" alt=""/>
 <map name="a_task" id="a_task">
 <area shape="rect" href="class_task.html" title="The Task class represents a task with subtasks." alt="" coords="5,5,56,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_53.png" border="0" usemap="#a_timed___command" alt=""/>
-<map name="a_timed___command" id="a_timed___command">
-<area shape="rect" href="class_timed___command.html" title=" " alt="" coords="5,5,129,32"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_54.png" border="0" usemap="#a_timer" alt=""/>
+<tr><td><img src="inherit_graph_48.png" border="0" usemap="#a_timer" alt=""/>
 <map name="a_timer" id="a_timer">
 <area shape="rect" href="class_timer.html" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_55.png" border="0" usemap="#a_view___interface___base" alt=""/>
+<tr><td><img src="inherit_graph_49.png" border="0" usemap="#a_view___interface___base" alt=""/>
 <map name="a_view___interface___base" id="a_view___interface___base">
 <area shape="rect" href="class_view___interface___base.html" title=" " alt="" coords="5,46,152,73"/>
 <area shape="rect" href="class_view___interfaces_1_1_main___interface.html" title=" " alt="" coords="210,5,361,47"/>
 <area shape="rect" href="class_view___interfaces_1_1_network___interface.html" title=" " alt="" coords="200,71,371,112"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_56.png" border="0" usemap="#a_view___interfaces" alt=""/>
+<tr><td><img src="inherit_graph_50.png" border="0" usemap="#a_view___interfaces" alt=""/>
 <map name="a_view___interfaces" id="a_view___interfaces">
 <area shape="rect" href="view__interface_8h.html#class_view___interfaces" title=" " alt="" coords="5,5,121,32"/>
 </map>

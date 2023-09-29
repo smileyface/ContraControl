@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -66,6 +66,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_assign-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Assign Class Reference</div>  </div>
@@ -78,8 +79,9 @@ Inheritance diagram for Assign:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_assign__inherit__graph.png" border="0" usemap="#a_assign_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_assign_inherit__map" id="a_assign_inherit__map">
-<area shape="rect" title=" " alt="" coords="15,80,77,107"/>
-<area shape="rect" href="class_command.html" title=" " alt="" coords="5,5,87,32"/>
+<area shape="rect" title=" " alt="" coords="38,155,101,181"/>
+<area shape="rect" href="class_device___command.html" title=" " alt="" coords="5,80,133,107"/>
+<area shape="rect" href="class_command.html" title=" " alt="" coords="29,5,110,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -87,19 +89,25 @@ Collaboration diagram for Assign:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_assign__coll__graph.png" border="0" usemap="#a_assign_coll__map" alt="Collaboration graph"/></div>
 <map name="a_assign_coll__map" id="a_assign_coll__map">
-<area shape="rect" title=" " alt="" coords="15,80,77,107"/>
+<area shape="rect" title=" " alt="" coords="72,171,135,197"/>
+<area shape="rect" href="class_device___command.html" title=" " alt="" coords="39,95,167,121"/>
 <area shape="rect" href="class_command.html" title=" " alt="" coords="5,5,87,32"/>
+<area shape="rect" href="class_device___label.html" title=" " alt="" coords="111,5,213,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a119ce6439ec2c98c5e57ee645bb48290"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_assign.html#a119ce6439ec2c98c5e57ee645bb48290">Assign</a> (<a class="el" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> new_value)</td></tr>
-<tr class="separator:a119ce6439ec2c98c5e57ee645bb48290"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a841bfa75e9545846c47b005c2f68b808"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_assign.html#a841bfa75e9545846c47b005c2f68b808">Assign</a> (int channel_number, <a class="el" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> new_value)</td></tr>
-<tr class="separator:a841bfa75e9545846c47b005c2f68b808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2709315d731aa3fc43768945b67b585e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_assign.html#a2709315d731aa3fc43768945b67b585e">Assign</a> (<a class="el" href="class_device___label.html">Device_Label</a> <a class="el" href="class_device___command.html#a067b09339a553119704c518f5c8320a9">label</a>, <a class="el" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> new_value)</td></tr>
+<tr class="separator:a2709315d731aa3fc43768945b67b585e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46628154ec413f888d98f2e547273027"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_assign.html#a46628154ec413f888d98f2e547273027">Assign</a> (<a class="el" href="class_device___label.html">Device_Label</a> <a class="el" href="class_device___command.html#a067b09339a553119704c518f5c8320a9">label</a>, int channel_number, <a class="el" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a> new_value)</td></tr>
+<tr class="separator:a46628154ec413f888d98f2e547273027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad29bcee589dd1a151f1cb170f6d665de"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">get_id</a> ()</td></tr>
 <tr class="separator:ad29bcee589dd1a151f1cb170f6d665de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46c9d4b06228d0eef364a21d8146f5c1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_device___command.html#a46c9d4b06228d0eef364a21d8146f5c1">set_label</a> (<a class="el" href="class_device___label.html">Device_Label</a> <a class="el" href="class_device___command.html#a067b09339a553119704c518f5c8320a9">label</a>)</td></tr>
+<tr class="separator:a46c9d4b06228d0eef364a21d8146f5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa515679f54ad6a169a7a773ce657fb7a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_device___label.html">Device_Label</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_device___command.html#aa515679f54ad6a169a7a773ce657fb7a">get_label</a> ()</td></tr>
+<tr class="separator:aa515679f54ad6a169a7a773ce657fb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad454e0c6bcdc2fc50fb0ebd33277479b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_command.html#ad454e0c6bcdc2fc50fb0ebd33277479b">completed</a> ()</td></tr>
 <tr class="separator:ad454e0c6bcdc2fc50fb0ebd33277479b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a032e8f44b7d694c57f8819d61020ec78"><td class="memItemLeft" align="right" valign="top"><a id="a032e8f44b7d694c57f8819d61020ec78"></a>
@@ -115,12 +123,17 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a345022a41e432f7c42ca368969cc4ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0b0ac58d2c3698ec51aa884df674bd6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_command.html#ae0b0ac58d2c3698ec51aa884df674bd6">time_to_complete</a> = 0.0</td></tr>
 <tr class="separator:ae0b0ac58d2c3698ec51aa884df674bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a067b09339a553119704c518f5c8320a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_device___label.html">Device_Label</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_device___command.html#a067b09339a553119704c518f5c8320a9">label</a></td></tr>
+<tr class="separator:a067b09339a553119704c518f5c8320a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A command to assign a channel a certain value. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a119ce6439ec2c98c5e57ee645bb48290"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a119ce6439ec2c98c5e57ee645bb48290">&#9670;&nbsp;</a></span>Assign() <span class="overload">[1/2]</span></h2>
+<a id="a2709315d731aa3fc43768945b67b585e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2709315d731aa3fc43768945b67b585e">&#9670;&nbsp;</a></span>Assign() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -128,14 +141,25 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">Assign::Assign </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a>&#160;</td>
-          <td class="paramname"><em>new_value</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_device___label.html">Device_Label</a>&#160;</td>
+          <td class="paramname"><em>label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="channel_8h.html#ae9484950cd8d29fc1af01c5dd60844ca">Channel</a>&#160;</td>
+          <td class="paramname"><em>new_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Set channel 0 to a specific value. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">label</td><td>Label of the device to command. </td></tr>
     <tr><td class="paramname">new_value</td><td>Value to assign to channel 0 </td></tr>
   </table>
   </dd>
@@ -143,8 +167,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a841bfa75e9545846c47b005c2f68b808"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a841bfa75e9545846c47b005c2f68b808">&#9670;&nbsp;</a></span>Assign() <span class="overload">[2/2]</span></h2>
+<a id="a46628154ec413f888d98f2e547273027"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46628154ec413f888d98f2e547273027">&#9670;&nbsp;</a></span>Assign() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,6 +176,12 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">Assign::Assign </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="class_device___label.html">Device_Label</a>&#160;</td>
+          <td class="paramname"><em>label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>channel_number</em>, </td>
         </tr>
@@ -170,6 +200,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Set a channel to a specific value. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">label</td><td>Label of the device to command. </td></tr>
     <tr><td class="paramname">channel_number</td><td>Designation of channel to assign value to. </td></tr>
     <tr><td class="paramname">new_value</td><td>Value to assign to channel </td></tr>
   </table>
@@ -233,6 +264,65 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa515679f54ad6a169a7a773ce657fb7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa515679f54ad6a169a7a773ce657fb7a">&#9670;&nbsp;</a></span>get_label()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_device___label.html">Device_Label</a> Device_Command::get_label </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>label of the device to command. </dd></dl>
+
+</div>
+</div>
+<a id="a46c9d4b06228d0eef364a21d8146f5c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46c9d4b06228d0eef364a21d8146f5c1">&#9670;&nbsp;</a></span>set_label()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Device_Command::set_label </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_device___label.html">Device_Label</a>&#160;</td>
+          <td class="paramname"><em>label</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Identifier of device to command</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">label</td><td>Label for the device. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a345022a41e432f7c42ca368969cc4ed1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a345022a41e432f7c42ca368969cc4ed1">&#9670;&nbsp;</a></span>channel</h2>
@@ -246,6 +336,29 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Channel to assign value to </p>
+
+</div>
+</div>
+<a id="a067b09339a553119704c518f5c8320a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a067b09339a553119704c518f5c8320a9">&#9670;&nbsp;</a></span>label</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_device___label.html">Device_Label</a> Device_Command::label</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="class_device.html">Device</a> to command </p>
 
 </div>
 </div>

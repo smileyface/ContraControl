@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.7</span>
+   &#160;<span id="projectnumber">0.0.8</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -77,16 +77,27 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../internal_message_type.h&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_response___message.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_response___message.html">Response_Message</a> : <span class="keyword">public</span> <a class="code" href="class_internal___message.html">Internal_Message</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> placeholder()</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    { }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">   17</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span>* <a class="code" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_response___message.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_response___message.html">Response_Message</a> : <span class="keyword">public</span> <a class="code" href="class_internal___message.html">Internal_Message</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_response___message.html">Response_Message</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_response___message.html#a4f6f08229c1550a0a8f563328c2d7eb5">this_message</a>(<a class="code" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a> check_message);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a> <a class="code" href="class_response___message.html#adbdb584c77fadd6ff12ddf75041420df">get_receipt</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_response___message.html#a9961cd4b33984908dee587462d680816">   39</a></span>&#160;    <a class="code" href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a> <a class="code" href="class_response___message.html#a9961cd4b33984908dee587462d680816">receipt</a>; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="ttc" id="aclass_internal___message_html"><div class="ttname"><a href="class_internal___message.html">Internal_Message</a></div><div class="ttdef"><b>Definition:</b> internal_message_type.h:16</div></div>
-<div class="ttc" id="aclass_response___message_html"><div class="ttname"><a href="class_response___message.html">Response_Message</a></div><div class="ttdef"><b>Definition:</b> response_message.h:18</div></div>
+<div class="ttc" id="aclass_response___message_html"><div class="ttname"><a href="class_response___message.html">Response_Message</a></div><div class="ttdef"><b>Definition:</b> response_message.h:23</div></div>
+<div class="ttc" id="aclass_response___message_html_a4f6f08229c1550a0a8f563328c2d7eb5"><div class="ttname"><a href="class_response___message.html#a4f6f08229c1550a0a8f563328c2d7eb5">Response_Message::this_message</a></div><div class="ttdeci">virtual bool this_message(Message_Receipt check_message)</div><div class="ttdef"><b>Definition:</b> response_message.cpp:8</div></div>
+<div class="ttc" id="aclass_response___message_html_a9961cd4b33984908dee587462d680816"><div class="ttname"><a href="class_response___message.html#a9961cd4b33984908dee587462d680816">Response_Message::receipt</a></div><div class="ttdeci">Message_Receipt receipt</div><div class="ttdoc">An object to know which message we are responding to.</div><div class="ttdef"><b>Definition:</b> response_message.h:39</div></div>
+<div class="ttc" id="aclass_response___message_html_adbdb584c77fadd6ff12ddf75041420df"><div class="ttname"><a href="class_response___message.html#adbdb584c77fadd6ff12ddf75041420df">Response_Message::get_receipt</a></div><div class="ttdeci">Message_Receipt get_receipt()</div><div class="ttdef"><b>Definition:</b> response_message.cpp:13</div></div>
+<div class="ttc" id="aresponse__message_8h_html_ab97465f3bfae39e494f8ecd67c7081dd"><div class="ttname"><a href="response__message_8h.html#ab97465f3bfae39e494f8ecd67c7081dd">Message_Receipt</a></div><div class="ttdeci">int * Message_Receipt</div><div class="ttdef"><b>Definition:</b> response_message.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
