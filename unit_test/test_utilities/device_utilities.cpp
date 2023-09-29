@@ -48,7 +48,8 @@ Device_Label device_utilities::add_device(Device_Creator creator)
 
 void device_utilities::remove_device(Device_Label label)
 {
-	model::get_node(label.get_node_id())->remove_device(label.get_device_id());
+	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Device_Destruction>(label), 0));
+	system_utilities::step(2);
 }
 
 Device* device_utilities::command_device(Device_Label label, Command* command)

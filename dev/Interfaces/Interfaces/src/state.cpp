@@ -8,6 +8,9 @@ void state_interfaces::mangle_state(Command* command)
 	case COMMAND_ENUM::DEVICE_CREATION:
 		model::get_node(static_cast<Device_Create*>(command)->node)->register_device(static_cast<Device_Create*>(command)->device);
 		break;
+	case COMMAND_ENUM::DEVICE_DESTRUCTION:
+		model::get_node(static_cast<Device_Destruction*>(command)->get_device().get_node_id())->remove_device(static_cast<Device_Destruction*>(command)->get_device().get_device_id());
+		break;
 	case COMMAND_ENUM::INITALIZE_DEVICE:
 		model::get_device(static_cast<Initalize_Device*>(command)->get_label())->initalize(static_cast<Initalize_Device*>(command)->name);
 		break;
