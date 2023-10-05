@@ -67,6 +67,11 @@ namespace model
 	void create_node(NODE_TYPE, Node_Id);
 
 	/**
+	 * \brief Destroy the Node in the models map.
+	 */
+	void remove_node(Node_Id);
+
+	/**
 	 * \brief A short circut for getting a device on a node using a node ID and device ID
 	 *
 	 * This is mainly used for testing devices, though should probably be removed.

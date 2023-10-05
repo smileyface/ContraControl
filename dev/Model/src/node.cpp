@@ -8,12 +8,6 @@ Node::Node() :
 	my_id("")
 { }
 
-Node::Node(NODE_TYPE type) : 
-	my_type(type),
-	id_pool(0),
-	my_id("")
-{ }
-
 Node::Node(NODE_TYPE type, Node_Id id) :
 	my_type(type),
 	id_pool(0),
@@ -110,6 +104,7 @@ void Node::add_connection(NODE_TYPE type, Node_Id id)
 void Node::remove_connection(Node_Id id)
 {
 	delete connections[id];
+	connections.erase(id);
 }
 
 Node_Id Node::get_id()

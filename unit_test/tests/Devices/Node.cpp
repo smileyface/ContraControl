@@ -22,10 +22,25 @@ namespace {
 
 TEST_F(Node_Test, Node_Creation)
 {
-	node_utilities::create_node("Test_Node_2");
-	Device_Label dl = node_utilities::add_device("Test_Node_2", Device_Creator((int) DEVICE_IDENTIFIER::SWITCH, "Test1"));
+	Node_Id temp_id = "Test_Node_2";
+	node_utilities::create_node(temp_id);
+	EXPECT_NO_THROW(model::get_node(temp_id));
+	Device_Label dl = node_utilities::add_device(temp_id, Device_Creator((int) DEVICE_IDENTIFIER::SWITCH, "Test1"));
 	
+	Node* node = model::get_node(temp_id);
+	EXPECT_EQ(node->get_id(), temp_id);
+	EXPECT_EQ(node->get_devices().size(), 1);
+
 	EXPECT_NO_THROW(device_utilities::command_device(dl, Commander::get_instance()->make_command<On>(dl)));
+}
+
+TEST_F(Node_Test, Node_Destruction)
+{
+	Node_Id temp_id = "Test_Node_2";
+	node_utilities::create_node(temp_id);
+	EXPECT_NO_THROW(model::get_node(temp_id));
+	node_utilities::remove_node(temp_id);
+	EXPECT_THROW(model::get_node(temp_id), NodeNotFoundException);
 }
 
 TEST_F(Node_Test, Device_Exclusion)

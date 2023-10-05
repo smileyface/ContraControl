@@ -47,6 +47,12 @@ void state_interfaces::mangle_state(Command* command)
 		model::create_node(node_create_command->get_type(), node_create_command->get_node_id());
 		break;
 	}
+	case COMMAND_ENUM::NODE_DESTORY:
+	{
+		Node_Destroy* node_destroy_command = static_cast<Node_Destroy*>(command);
+		model::remove_node(node_destroy_command->get_node_id());
+		break;
+	}
 	case COMMAND_ENUM::INVALID:
 	default:
 		throw InvalidCommandException();

@@ -10,6 +10,10 @@ namespace node_utilities
 	Create node in the model.
 	*/
 	void create_node(Node_Id id);
+	/**
+	 Remove a node from the model
+	 */
+	void remove_node(Node_Id id);
 
 	/*
 	Add a device to the given node in the model. Returns device name.

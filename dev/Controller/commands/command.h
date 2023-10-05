@@ -46,6 +46,11 @@ enum class COMMAND_ENUM :command_id
      * Create a new node.
      */
     NODE_CREATION,
+
+    /**
+     * Destroy a node.
+     */
+    NODE_DESTORY,
     /**
      Unmapped Command
      */

@@ -55,6 +55,11 @@ void model::create_node(NODE_TYPE type, Node_Id id)
 	my_node.add_connection(type, id);
 }
 
+void model::remove_node(Node_Id id)
+{
+	my_node.remove_connection(id);
+}
+
 Device* model::get_device(Device_Label label)
 {
 	return model::get_node(label.get_node_id())->get_device(label.get_device_id());

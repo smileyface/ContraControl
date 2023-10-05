@@ -15,6 +15,12 @@ void node_utilities::create_node(Node_Id id)
 	system_utilities::step(2);
 }
 
+void node_utilities::remove_node(Node_Id id)
+{
+	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Destroy>(id), 0));
+	system_utilities::step(2);
+}
+
 Device_Label node_utilities::add_device(Node_Id id, Device_Creator creator)
 {
 	model::get_node(id)->register_device(creator);

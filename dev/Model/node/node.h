@@ -19,16 +19,10 @@ class Node
 public:
 	Node();
 	/**
-	 Create a node instance by giving it a type.
-
-	 \param type The type of node.
-	 */
-	Node(NODE_TYPE type);
-
-	/**
 	 Create a node instance by giving it a type and a name.
 
 	 \param type The type of node.
+	 \param id Common ID of the node.
 	 */
 	Node(NODE_TYPE type, Node_Id id);
 
