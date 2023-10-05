@@ -11,7 +11,7 @@ Node_Create::~Node_Create()
 
 }
 
-Node_Create::get_type()
+NODE_TYPE Node_Create::get_type()
 {
 	return type;
 }

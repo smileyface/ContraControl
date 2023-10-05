@@ -11,7 +11,8 @@ set(CONTROLLER_HEADER_FILES
                     commander/commander.h
                     controller_main.h
                     system/timer.h
-                    commands/node/node_command.h "commands/node/node_create.h")
+                    commands/node/node_command.h
+                    commands/node/node_create.h)
 
 set(CONTROLLER_SOURCE_FILES
                     commands/src/assign.cpp
@@ -23,6 +24,7 @@ set(CONTROLLER_SOURCE_FILES
                     commands/src/device_initalize.cpp
                     commands/src/device_destruction.cpp
                     commands/src/node_command.cpp
+                    commands/src/node_create.cpp
                     commander/src/commander.cpp)
 
 add_library(Controller controller_main.cpp ${CONTROLLER_HEADER_FILES} ${CONTROLLER_SOURCE_FILES})

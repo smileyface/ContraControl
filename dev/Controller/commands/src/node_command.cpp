@@ -1,5 +1,8 @@
 #include "../node/node_command.h"
 
+Node_Command::Node_Command()
+{ }
+
 Node_Command::~Node_Command()
 { }
 
