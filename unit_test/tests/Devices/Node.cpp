@@ -20,6 +20,14 @@ namespace {
 	};
 }
 
+TEST_F(Node_Test, Node_Creation)
+{
+	node_utilities::create_node("Test_Node_2");
+	Device_Label dl = node_utilities::add_device("Test_Node_2", Device_Creator((int) DEVICE_IDENTIFIER::SWITCH, "Test1"));
+	
+	EXPECT_NO_THROW(device_utilities::command_device(dl, Commander::get_instance()->make_command<On>(dl)));
+}
+
 TEST_F(Node_Test, Device_Exclusion)
 {
 	node_utilities::create_node("Test_Node_2");
@@ -27,13 +35,13 @@ TEST_F(Node_Test, Device_Exclusion)
 
 	Device_Label dl_e("Test_Node_2", 0);
 
-	EXPECT_THROW(device_utilities::command_device(dl_e, new On(dl_e)), DeviceNotFoundException);
+	EXPECT_THROW(device_utilities::command_device(dl_e, Commander::get_instance()->make_command<On>(dl_e)), DeviceNotFoundException);
 }
 
 TEST_F(Node_Test, Node_Exclusion)
 {
 	Device_Label dl_e2("Test_Fail", 0);
-	EXPECT_THROW(device_utilities::command_device(dl_e2, new Off(dl_e2)), NodeNotFoundException);
+	EXPECT_THROW(device_utilities::command_device(dl_e2, Commander::get_instance()->make_command<Off>(dl_e2)), NodeNotFoundException);
 }
 
 TEST_F(Node_Test, Add_Devices)

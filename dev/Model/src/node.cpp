@@ -2,16 +2,24 @@
 
 #include "../Utilities/Utilities/exceptions.h"
 
-Node::Node(NODE_TYPE type)
-{
-	my_type = type;
-	id_pool = 0;
-}
-Node::Node()
-{
-	my_type = NODE_TYPE::INVALID;
-	id_pool = 0;
-}
+Node::Node() :
+	my_type(NODE_TYPE::INVALID),
+	id_pool(0),
+	my_id("")
+{ }
+
+Node::Node(NODE_TYPE type) : 
+	my_type(type),
+	id_pool(0),
+	my_id("")
+{ }
+
+Node::Node(NODE_TYPE type, Node_Id id) :
+	my_type(type),
+	id_pool(0),
+	my_id(id)
+{ }
+
 Node::~Node()
 {
 	for(auto device = devices.begin(); device != devices.end();device++)
@@ -96,7 +104,7 @@ Node* Node::get_connection(Node_Id id)
 
 void Node::add_connection(NODE_TYPE type, Node_Id id)
 {
-	connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
+	connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type, id)));
 }
 
 void Node::remove_connection(Node_Id id)
