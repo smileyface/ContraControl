@@ -17,5 +17,7 @@
 #include "commands/device/on.h"
 #include "commands/device/off.h"
 #include "commands/device/assign.h"
+#include "commands/node/node_command.h"
+#include "commands/node/node_create.h"
 
 #endif // !COMMANDS_INCLUSION_H

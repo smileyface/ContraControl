@@ -43,6 +43,10 @@ enum class COMMAND_ENUM :command_id
      */
     DEVICE_DESTRUCTION,
     /**
+     * Create a new node.
+     */
+    NODE_CREATION,
+    /**
      Unmapped Command
      */
 	INVALID = 0xffff

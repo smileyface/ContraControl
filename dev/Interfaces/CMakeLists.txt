@@ -42,6 +42,7 @@ set(INTERFACE_TYPE_HEADER_FILES
                     Interfaces/enums/display_type_enum.h
                     Interfaces/enums/subsystem_enum.h
                     Interfaces/enums/view_type_enum.h
+                    Interfaces/enums/node_type.h
                     Interfaces/enums/device_type.h)
 
 add_library(System_Interface ${INTERFACE_SOURCE_FILES} ${INTERFACE_HEADER_FILES})

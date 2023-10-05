@@ -9,25 +9,7 @@
 #define MODEL_NODE_H
 
 #include "../device.h"
-
-/**
- Type of node, such as UI, GENERIC_HARDWARE or R-PI
- */
-enum class NODE_TYPE : uint8_t
-{
-	/**
-	 A Tester node.
-	 */
-	TEST,
-	/**
-	 A UI node. Connects to virtual devices
-	 */
-	UI,
-	/**
-	 Invalid node. Undefined.
-	 */
-	INVALID
-};
+#include "Interfaces/enums/node_type.h"
 
 /**
  A node, which represents a computer, such as a Raspberry Pi, or other command device. 
