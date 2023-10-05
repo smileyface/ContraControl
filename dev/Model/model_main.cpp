@@ -121,7 +121,6 @@ void model::stop_loop()
 void model::clean_up()
 {
 	Message_Relay::get_instance()->deregister_consumer(model_controller_consumer);
-	my_node.clear_node();
 	step_actions.clear();
 }
 

@@ -29,20 +29,6 @@ Node::~Node()
 
 }
 
-void Node::clear_node()
-{
-	//for (auto iter = connections.begin(); iter != connections.end(); iter++)
-	//{
-	//	delete connections[iter->first];
-	//}
-	//for (auto iter = devices.begin(); iter != devices.end(); iter++)
-	//{
-	//	delete devices[iter->first];
-	//}
-	connections.clear();
-	devices.clear();
-}
-
 void Node::register_device(Device_Creator device)
 {
 	devices[id_pool] = create_device_instance(device);
