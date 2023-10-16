@@ -84,6 +84,14 @@ namespace model
 	void connect_node(Node_Id id1, Node_Id id2);
 
 	/**
+	 * \brief Remove a connection for each node.
+	 * 
+	 * \param id1 An ID to remove connection from id2.
+	 * \param id2 An ID to remove connection from id1.
+	 */
+	void disconnect_node(Node_Id id1, Node_Id id2);
+
+	/**
 	 * \brief A short circut for getting a device on a node using a node ID and device ID
 	 *
 	 * This is mainly used for testing devices, though should probably be removed.

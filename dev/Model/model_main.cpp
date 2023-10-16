@@ -82,6 +82,12 @@ void model::connect_node(Node_Id id1, Node_Id id2)
 	get_node(id2)->add_connection(get_node(id1));
 }
 
+void model::disconnect_node(Node_Id id1, Node_Id id2)
+{ 
+	get_node(id1)->remove_connection(id2);
+	get_node(id2)->remove_connection(id1);
+}
+
 Device* model::get_device(Device_Label label)
 {
 	return model::get_node(label.get_node_id())->get_device(label.get_device_id());

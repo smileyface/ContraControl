@@ -59,6 +59,10 @@ enum class COMMAND_ENUM :command_id
      */
     NODE_CONNECT,
     /**
+     * Disconnect two nodes
+     */
+    NODE_DISCONNECT,
+    /**
      Unmapped Command
      */
 	INVALID = 0xffff

@@ -22,5 +22,6 @@
 #include "commands/node/node_initalize.h"
 #include "commands/node/node_destroy.h"
 #include "commands/node/node_connect.h"
+#include "commands/node/node_disconnect.h"
 
 #endif // !COMMANDS_INCLUSION_H

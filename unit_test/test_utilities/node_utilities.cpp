@@ -29,6 +29,12 @@ void node_utilities::connect_node(Node_Id id1, Node_Id id2)
 	system_utilities::step(2);
 }
 
+void node_utilities::disconnect_node(Node_Id id1, Node_Id id2)
+{ 
+	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Disconnect>(id1, id2), 0));
+	system_utilities::step(2);
+}
+
 Device_Label node_utilities::add_device(Node_Id id, Device_Creator creator)
 {
 	model::get_node(id)->register_device(creator);

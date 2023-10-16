@@ -87,7 +87,6 @@ void Node::add_connection(Node* node_connection)
 
 void Node::remove_connection(Node_Id id)
 {
-	delete connections[id];
 	connections.erase(id);
 }
 

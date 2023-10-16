@@ -65,6 +65,12 @@ void state_interfaces::mangle_state(Command* command)
 		model::connect_node(node_connect_command->get_connected_node(), node_connect_command->get_connecting_node_name());
 		break;
 	}
+	case COMMAND_ENUM::NODE_DISCONNECT:
+	{
+		Node_Disconnect* node_disconnect_command = static_cast<Node_Disconnect*>(command);
+		model::disconnect_node(node_disconnect_command->get_disconnected_node(), node_disconnect_command->get_disconnecting_node());
+		break;
+	}
 	case COMMAND_ENUM::INVALID:
 	default:
 		throw InvalidCommandException();

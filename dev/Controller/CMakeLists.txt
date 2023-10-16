@@ -15,7 +15,8 @@ set(CONTROLLER_HEADER_FILES
                     commands/node/node_create.h
                     commands/node/node_initalize.h
                     commands/node/node_destroy.h
-                    commands/node/node_connect.h)
+                    commands/node/node_connect.h
+                    commands/node/node_disconnect.h)
 
 set(CONTROLLER_SOURCE_FILES
                     commands/src/assign.cpp
@@ -31,7 +32,8 @@ set(CONTROLLER_SOURCE_FILES
                     commands/src/node_initalize.cpp
                     commands/src/node_destroy.cpp
                     commands/src/node_connect.cpp
-                    commander/src/commander.cpp)
+                    commander/src/commander.cpp
+                    commands/src/node_disconnect.cpp)
 
 add_library(Controller controller_main.cpp ${CONTROLLER_HEADER_FILES} ${CONTROLLER_SOURCE_FILES})
 
