@@ -12,6 +12,7 @@ std::mutex model_mutex;
 Timer model_timer;
 std::atomic<bool> model::model_running;
 Command_List model::step_actions;
+std::vector<Node> model::node_list;
 Task model::model_task;
 Message_Consumer* model::model_controller_consumer;
 
@@ -21,7 +22,6 @@ void model::initalize()
 {
 	model_controller_consumer = Message_Relay::get_instance()->register_consumer<Controller_Model_Command>();
 	model_timer.reset_clock();
-	initalize_my_node("LOCAL");
 	model_task = Task("Model", 2, .2);
 	Scheduler::get_instance()->add_system_task(model::step);
 	Scheduler::get_instance()->add_cleanup_task([] ()
@@ -43,21 +43,43 @@ void model::initalize()
 
 Node* model::get_node(Node_Id id)
 {
-	if(my_node.get_id() == id)
+	Node* found_item = nullptr;
+	for(int i = 0; i < node_list.size(); i++)
 	{
-		return &my_node;
+		if(node_list[i].get_id() == id)
+		{
+			found_item = &node_list[i];
+		}
 	}
-	return my_node.get_connection(id);
+	if(found_item == nullptr)
+	{
+		throw NodeNotFoundException();
+	}
+	return found_item;
 }
 
 void model::create_node(NODE_TYPE type, Node_Id id)
 {
-	my_node.add_connection(type, id);
+	node_list.emplace_back(Node(type, id));
 }
 
 void model::remove_node(Node_Id id)
 {
-	my_node.remove_connection(id);
+	auto i = node_list.begin();
+	for(; i != node_list.end(); i++)
+	{
+		if((*i).get_id() == id)
+		{
+			break;
+		}
+	}
+	node_list.erase(i);
+}
+
+void model::connect_node(Node_Id id1, Node_Id id2)
+{ 
+	get_node(id1)->add_connection(get_node(id2));
+	get_node(id2)->add_connection(get_node(id1));
 }
 
 Device* model::get_device(Device_Label label)
@@ -122,6 +144,7 @@ void model::clean_up()
 {
 	Message_Relay::get_instance()->deregister_consumer(model_controller_consumer);
 	step_actions.clear();
+	node_list.clear();
 }
 
 void model::initalize_my_node(Node_Id id)

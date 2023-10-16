@@ -19,6 +19,8 @@
 #include "commands/device/assign.h"
 #include "commands/node/node_command.h"
 #include "commands/node/node_create.h"
+#include "commands/node/node_initalize.h"
 #include "commands/node/node_destroy.h"
+#include "commands/node/node_connect.h"
 
 #endif // !COMMANDS_INCLUSION_H

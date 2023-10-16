@@ -46,11 +46,18 @@ enum class COMMAND_ENUM :command_id
      * Create a new node.
      */
     NODE_CREATION,
-
+    /**
+     * Initalize node. To be used for local node only.
+     */
+    NODE_INITALIZE,
     /**
      * Destroy a node.
      */
     NODE_DESTORY,
+    /**
+     * Connect two nodes
+     */
+    NODE_CONNECT,
     /**
      Unmapped Command
      */

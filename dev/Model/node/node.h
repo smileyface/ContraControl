@@ -82,7 +82,7 @@ public:
 	 * \param type Type of the node.
 	 * \param id The id of the node on the system.
 	 */
-	void add_connection(NODE_TYPE type, Node_Id id);
+	void add_connection(Node* node_connection);
 
 	/**
 	 * Remove a connection to a node.

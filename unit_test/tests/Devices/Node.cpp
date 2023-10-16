@@ -43,6 +43,14 @@ TEST_F(Node_Test, Node_Destruction)
 	EXPECT_THROW(model::get_node(temp_id), NodeNotFoundException);
 }
 
+TEST_F(Node_Test, Node_Connection)
+{
+	Node_Id temp_id = "Test_Node_2";
+	node_utilities::create_node(temp_id);
+	node_utilities::connect_node(node_utilities::local_node_handle, temp_id);
+	EXPECT_NO_THROW(model::get_node(node_utilities::local_node_handle)->get_connection(temp_id));
+}
+
 TEST_F(Node_Test, Device_Exclusion)
 {
 	node_utilities::create_node("Test_Node_2");

@@ -53,6 +53,18 @@ void state_interfaces::mangle_state(Command* command)
 		model::remove_node(node_destroy_command->get_node_id());
 		break;
 	}
+	case COMMAND_ENUM::NODE_INITALIZE:
+	{
+		Node_Initalize* node_initalize_command = static_cast<Node_Initalize*>(command);
+		model::initalize_my_node(node_initalize_command->get_node_id());
+		break;
+	}
+	case COMMAND_ENUM::NODE_CONNECT:
+	{
+		Node_Connect* node_connect_command = static_cast<Node_Connect*>(command);
+		model::connect_node(node_connect_command->get_connected_node(), node_connect_command->get_connecting_node_name());
+		break;
+	}
 	case COMMAND_ENUM::INVALID:
 	default:
 		throw InvalidCommandException();

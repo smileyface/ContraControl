@@ -15,6 +15,8 @@ namespace node_utilities
 	 */
 	void remove_node(Node_Id id);
 
+	void connect_node(Node_Id id1, Node_Id id2);
+
 	/*
 	Add a device to the given node in the model. Returns device name.
 	*/

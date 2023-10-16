@@ -1,4 +1,5 @@
 #include "../node/node.h"
+#include "../model_main.h"
 
 #include "../Utilities/Utilities/exceptions.h"
 
@@ -21,10 +22,7 @@ Node::~Node()
 		delete device->second;
 	}
 	devices.clear();
-	for(auto conn = connections.begin(); conn != connections.end(); conn++)
-	{
-		delete conn->second;
-	}
+	//Nodes memory is handled in the Model
 	connections.clear();
 
 }
@@ -82,9 +80,9 @@ Node* Node::get_connection(Node_Id id)
 }
 
 
-void Node::add_connection(NODE_TYPE type, Node_Id id)
+void Node::add_connection(Node* node_connection)
 {
-	connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type, id)));
+	connections.emplace(std::pair<Node_Id, Node*> (node_connection->get_id(), node_connection));
 }
 
 void Node::remove_connection(Node_Id id)

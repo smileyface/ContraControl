@@ -48,6 +48,10 @@ namespace model
 	 * Consumer for Controller messages
 	 */
 	extern Message_Consumer* model_controller_consumer;
+	/**
+	 * A container for all node pointers
+	 */
+	extern std::vector<Node> node_list;
 
 	/**
 	 * \brief Get node from list of known nodes by ID
@@ -70,6 +74,14 @@ namespace model
 	 * \brief Destroy the Node in the models map.
 	 */
 	void remove_node(Node_Id);
+
+	/**
+	 * \brief Add a connection for each node.
+	 * 
+	 * \param id1 An ID to connect id2 to
+	 * \param id2 An ID to connect id1 to
+	 */
+	void connect_node(Node_Id id1, Node_Id id2);
 
 	/**
 	 * \brief A short circut for getting a device on a node using a node ID and device ID
