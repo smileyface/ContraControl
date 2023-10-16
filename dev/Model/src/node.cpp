@@ -17,11 +17,10 @@ Node::Node(NODE_TYPE type, Node_Id id) :
 
 Node::~Node()
 {
-	for(auto device = devices.begin(); device != devices.end();device++)
+	while(devices.size() != 0)
 	{
-		delete device->second;
+		remove_device(devices[0]->get_id());
 	}
-	devices.clear();
 	//Nodes memory is handled in the Model
 	connections.clear();
 

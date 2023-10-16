@@ -18,9 +18,8 @@ public:
 	Node_Initalize() = delete;
 	~Node_Initalize();
 
-	Node_Initalize(NODE_TYPE type, Node_Id id);
+	Node_Initalize(Node_Id id);
 
-	NODE_TYPE get_node_type();
 	Node_Id get_node_id();
 
 	virtual COMMAND_ENUM get_id()
@@ -28,7 +27,6 @@ public:
 		return COMMAND_ENUM::NODE_INITALIZE;
 	}
 private:
-	NODE_TYPE node_type;
 	Node_Id node_id;
 };
 

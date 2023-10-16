@@ -117,7 +117,7 @@ public:
      * @brief Runs the task for the given frame duration.
      * @param frameDuration The duration of a frame.
      */
-    void run(std::chrono::milliseconds frameDuration);
+    void run_task(std::chrono::milliseconds frameDuration);
 
     /**
      * @brief Starts the execution of the task.

@@ -100,7 +100,7 @@ void Task::set_persistence(bool persist)
     persistence = persist;
 }
 
-void Task::run(std::chrono::milliseconds frameDuration)
+void Task::run_task(std::chrono::milliseconds frameDuration)
 {
     alive_threads++;
     for(const auto& subtask : subtasks)
@@ -116,7 +116,7 @@ void Task::start(std::chrono::milliseconds frameDuration)
     if(!is_running)
     {
         is_running = true;
-        std::thread thrd(&Task::run, this, frameDuration);
+        std::thread thrd(&Task::run_task, this, frameDuration);
         thread.push_back(std::move(thrd));
     }
 }
@@ -124,6 +124,7 @@ void Task::start(std::chrono::milliseconds frameDuration)
 void Task::stop()
 {
     g_pages_mutex.lock();
+    is_running = false;
     for(int i = 0; i < thread.size(); i++)
     {
         if(thread[i].joinable())
@@ -133,7 +134,6 @@ void Task::stop()
     }
     thread.clear();
     g_pages_mutex.unlock();
-    is_running = false;
 
 
     auto tasks = subtasks.begin();
