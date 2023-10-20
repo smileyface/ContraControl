@@ -53,7 +53,7 @@ void controller::stop_controller()
 	controller_running = false;
 }
 
-void controller::add_command(Packed_Command& cmd)
+void controller::add_command(const Packed_Command& cmd)
 {
 	controller_queue.push_back(cmd);
 }

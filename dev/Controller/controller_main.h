@@ -55,7 +55,7 @@ namespace controller
 	 *
 	 * \param cmd Command to add
 	 */
-	void add_command(Packed_Command& cmd);
+	void add_command(const Packed_Command& cmd);
 
 	/**
 	 * Iterate the loop.
