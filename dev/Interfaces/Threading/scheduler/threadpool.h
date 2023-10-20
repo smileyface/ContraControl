@@ -48,9 +48,10 @@ public:
         condition.notify_one();
     }
 
+    /**
+     * Sleep the current thread with a spin lock until all threads have finished executing and all queued up jobs are run.
+     */
     void sleep_my_thread();
-
-    bool pool_empty();
 
     ~ThreadPool();
 

@@ -54,11 +54,6 @@ void ThreadPool::sleep_my_thread()
     }
 }
 
-bool ThreadPool::pool_empty()
-{ 
-    return tasks.empty();
-}
-
 ThreadPool::~ThreadPool()
 {
     {

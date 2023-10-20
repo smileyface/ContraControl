@@ -11,13 +11,13 @@
 
 //commands.h included by inheritance
 #include "commands/device/device_initalize.h"
-#include "commands/device/device_command.h"
+//#include "commands/device/device_command.h"
 #include "commands/device/device_create.h"
 #include "commands/device/device_destruction.h"
 #include "commands/device/on.h"
 #include "commands/device/off.h"
 #include "commands/device/assign.h"
-#include "commands/node/node_command.h"
+//#include "commands/node/node_command.h"
 #include "commands/node/node_create.h"
 #include "commands/node/node_initalize.h"
 #include "commands/node/node_destroy.h"

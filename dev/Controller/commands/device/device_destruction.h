@@ -9,13 +9,12 @@
 #ifndef DEVICE_DESTRUCTION_COMMAND_H
 #define DEVICE_DESTRUCTION_COMMAND_H
 
-#include "../command.h"
-#include "Interfaces/types/device_label.h"
+#include "device_command.h"
 
  /**
   * A command for the Model to remove a device from a designated Node.
   */
-class Device_Destruction : public Command
+class Device_Destruction : public Device_Command
 {
 public:
 	Device_Destruction() = delete;

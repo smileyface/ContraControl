@@ -79,8 +79,7 @@ public:
 
 	/**
 	 * Add node to known connections.
-	 * \param type Type of the node.
-	 * \param id The id of the node on the system.
+	 * \param node_connection Node to connect to this node.
 	 */
 	void add_connection(Node* node_connection);
 

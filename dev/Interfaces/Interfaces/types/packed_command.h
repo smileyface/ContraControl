@@ -8,7 +8,6 @@
 #ifndef INTERFACE_PACKED_COMMAND_TYPE
 #define INTERFACE_PACKED_COMMAND_TYPE
 
-#include "Interfaces/types/device_label.h"
 #include "../../../Controller/commands.h"
 
  /**
@@ -19,6 +18,11 @@ class Packed_Command
 public:
 	Packed_Command();
 	~Packed_Command();
+	/**
+	 * Copy constructor.
+	 * 
+	 * @param cmd Packed_Command to copy
+	 */
 	Packed_Command(const Packed_Command& cmd);
 	/**
 	 @param cmd Command to run.

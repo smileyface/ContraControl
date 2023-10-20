@@ -12,7 +12,6 @@
 
 #include "system/timer.h"
 
-#include "Interfaces/types/packed_command.h"
 #include "node/node.h"
 #include "Messaging/message_relay.h"
 #include "Threading/threading.h"
@@ -72,6 +71,8 @@ namespace model
 
 	/**
 	 * \brief Destroy the Node in the models map.
+	 * 
+	 * \param id Identifier of the node to remove.
 	 */
 	void remove_node(Node_Id);
 

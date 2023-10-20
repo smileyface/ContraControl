@@ -3,12 +3,7 @@
 Node_Initalize::~Node_Initalize()
 { }
 
-Node_Initalize::Node_Initalize(Node_Id id) :
-	node_id(id)
-{ }
-
-Node_Id Node_Initalize::get_node_id()
+Node_Initalize::Node_Initalize(Node_Id id)
 {
-	return node_id;
+	set_node_id(id);
 }
-

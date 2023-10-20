@@ -8,14 +8,12 @@
 #ifndef COMMAND_DEVICE_CREATOR
 #define COMMAND_DEVICE_CREATOR
 
-#include "../command.h"
-#include "Interfaces/enums/device_type.h"
-
+#include "device_command.h"
 
 /**
  * A command for the Model to add a device to a designated Node.
  */
-class Device_Create : public Command
+class Device_Create : public Device_Command
 {
 public:
 	Device_Create() = delete;
