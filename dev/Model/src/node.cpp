@@ -17,13 +17,13 @@ Node::Node(NODE_TYPE type, Node_Id id) :
 
 Node::~Node()
 {
-	while(devices.size() != 0)
+	for(auto i = devices.begin(); i != devices.end(); i++)
 	{
-		remove_device(devices[0]->get_id());
+		delete devices[i->first];
 	}
+	devices.clear();
 	//Nodes memory is handled in the Model
 	connections.clear();
-
 }
 
 void Node::register_device(Device_Creator device)
