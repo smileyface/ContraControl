@@ -1,5 +1,7 @@
 #include "../scheduler/task.h"
 
+#include "../scheduler/threadpool.h"
+
 #include <iostream>
 #include <map>
 #include <mutex>
@@ -7,6 +9,9 @@
 std::mutex g_pages_mutex;
 
 int alive_threads = 0;
+
+bool* FALSE = new bool(false);
+bool* TRUE = new bool(true);
 
 Task::Task(const std::string& name, int priority, double percentage, bool persistence, bool clear_subtasks) :  
     name(name),
@@ -102,40 +107,19 @@ void Task::set_persistence(bool persist)
 
 void Task::run_task(std::chrono::milliseconds frameDuration)
 {
-    alive_threads++;
     for(const auto& subtask : subtasks)
     {
-        if(is_running)
-            subtask.task();
+        ThreadPool::getInstance().enqueue(subtask.task);
     }
-    alive_threads--;
 }
 
 void Task::start(std::chrono::milliseconds frameDuration)
 {
-    if(!is_running)
-    {
-        is_running = true;
-        std::thread thrd(&Task::run_task, this, frameDuration);
-        thread.push_back(std::move(thrd));
-    }
+    run_task(frameDuration);
 }
 
 void Task::stop()
 {
-    g_pages_mutex.lock();
-    is_running = false;
-    for(int i = 0; i < thread.size(); i++)
-    {
-        if(thread[i].joinable())
-        {
-            thread[i].join();
-        }
-    }
-    thread.clear();
-    g_pages_mutex.unlock();
-
-
     auto tasks = subtasks.begin();
     while(tasks != subtasks.end())
     {

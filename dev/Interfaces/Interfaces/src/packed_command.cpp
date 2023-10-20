@@ -17,6 +17,12 @@ Packed_Command::Packed_Command(Command* cmd, double time) :
 	sent(false)
 { }
 
+Packed_Command::Packed_Command(const Packed_Command& cmd) :
+	command(cmd.command),
+	time(cmd.time),
+	run(cmd.run),
+	sent(cmd.sent)
+{ }
 
 Packed_Command::~Packed_Command()
 {

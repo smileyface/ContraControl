@@ -10,6 +10,7 @@
 
 #include "task.h"
 #include <mutex>
+#include <condition_variable>
 
 /**
  * @brief The Scheduler class manages the scheduling and execution of tasks.
@@ -103,6 +104,8 @@ private:
     Task cleanup_task;
 
     std::vector<std::vector<Task*>> tasks;
+    std::mutex queueMutex;
+    std::condition_variable condition;
     int frame_rate;
     std::thread scheduler_thread;
     int overruns;

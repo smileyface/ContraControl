@@ -2,6 +2,7 @@
 #include <thread>
 
 #include "Threading/scheduler/scheduler.h"
+#include "Threading/scheduler/threadpool.h"
 #include "Messaging/message_relay.h"
 
 
@@ -87,10 +88,14 @@ void Scheduler::frame(std::chrono::milliseconds frameDurationMs)
 {
     for(int i = 0; i < tasks.size(); i++)
     {
+        //Start the tasks for this priority of the frame.
         for(int j = 0; j < tasks[i].size(); j++)
         {
             tasks[i][j]->start(frameDurationMs);
         }
+        //Wait for the tasks of this priority to finish running
+        ThreadPool::getInstance().sleep_my_thread();
+        //Clean up the tasks for this priority of the frame.
         for(int j = 0; j < tasks[i].size(); j++)
         {
             tasks[i][j]->stop();

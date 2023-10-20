@@ -27,10 +27,12 @@ void model::initalize()
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{
 													model_timer.update_time();
+													std::lock_guard<std::mutex> lock(model_mutex);
 													for(auto i = model::step_actions.begin(); i != model::step_actions.end(); )
 													{
 														if(i->command_run())
 														{
+															i->get_command()->complete_command();
 															i = model::step_actions.erase(i);
 														}
 														else
@@ -106,19 +108,19 @@ void model::step()
 		command_model(i.get_command());
 	}
 	int model_step_thread = 0;
-	for(auto i = 0; i < model::step_actions.size(); ++i)
+	for(auto command = model::step_actions.begin(); command != model::step_actions.end(); command++)
 	{
 		model_step_thread++;
-		if(model::step_actions[i].command_run() == false)
+		if(command->command_run() == false)
 		{
-			auto command = model::step_actions[i].get_command();
 			model_task.add_subtask(Cleaned_Task([command, &model_step_thread] () mutable
 								   {
 									   try
 									   {
-										   mangle_model(command);
-										   command->complete_command();
-										   command->time_to_complete -= model_timer.get_elapsed_time();
+										   std::lock_guard<std::mutex> lock(model_mutex);
+										   mangle_model(command->get_command());
+										   command->run_command();
+										   command->get_command()->time_to_complete -= model_timer.get_elapsed_time();
 									   }
 									   catch(std::exception&)
 									   {
@@ -126,7 +128,6 @@ void model::step()
 									   }
 									   model_step_thread--;
 								   }));
-			model::step_actions[i].run_command();
 		}
 
 	}

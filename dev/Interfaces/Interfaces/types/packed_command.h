@@ -19,6 +19,7 @@ class Packed_Command
 public:
 	Packed_Command();
 	~Packed_Command();
+	Packed_Command(const Packed_Command& cmd);
 	/**
 	 @param cmd Command to run.
 	 @param time Time from start to run the command.

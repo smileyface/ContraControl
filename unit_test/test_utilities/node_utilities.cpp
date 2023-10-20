@@ -7,7 +7,7 @@ Node_Id node_utilities::local_node_handle = "Local Test Node";
 void node_utilities::start_test_environment()
 {
 	create_node(node_utilities::local_node_handle);
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Initalize>(NODE_TYPE::TEST, local_node_handle), 0));
+	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Initalize>(local_node_handle), 0));
 	system_utilities::step(2);
 }
 

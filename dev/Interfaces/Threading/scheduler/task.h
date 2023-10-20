@@ -150,8 +150,8 @@ private:
     bool persistence;
     bool clear_subtasks;
     double percentage;
-    std::vector<Subtask> subtasks;
     bool is_running;
+    std::vector<Subtask> subtasks;
     std::vector<std::thread> thread;
     std::queue<std::exception_ptr> thrown_exceptions;
 public:
