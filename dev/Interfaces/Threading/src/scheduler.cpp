@@ -24,6 +24,7 @@ void Scheduler::destroy_instance()
         delete instance;
         instance = nullptr;
     }
+    Thread_Pool::destroy_instance();
 }
 
 void Scheduler::clean_persistence()
@@ -94,7 +95,7 @@ void Scheduler::frame(std::chrono::milliseconds frameDurationMs)
             tasks[i][j]->start(frameDurationMs);
         }
         //Wait for the tasks of this priority to finish running
-        ThreadPool::getInstance().sleep_my_thread();
+        Thread_Pool::getInstance()->sleep_my_thread();
         //Clean up the tasks for this priority of the frame.
         for(int j = 0; j < tasks[i].size(); j++)
         {

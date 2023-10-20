@@ -19,19 +19,25 @@
 #include <atomic>
 
  /**
-  * @brief The ThreadPool class represents a thread pool for concurrent task execution.
+  * @brief The Thread_Pool class represents a thread pool for concurrent task execution.
   */
-class ThreadPool
+class Thread_Pool
 {
 public:
     /**
-     * @brief Get the singleton instance of the ThreadPool.
-     * @return The ThreadPool instance.
+     * @brief Get the singleton instance of the Thread_Pool.
+     * @return The Thread_Pool instance.
      */
-    static ThreadPool& getInstance();
+    static Thread_Pool* getInstance();
 
-    ThreadPool(const ThreadPool&) = delete;
-    ThreadPool& operator=(const ThreadPool&) = delete;
+    /**
+     * @brief Destroy the singleton instance of the Thread_Pool.
+     * 
+     */
+    static void destroy_instance();
+
+    Thread_Pool(const Thread_Pool&) = delete;
+    Thread_Pool& operator=(const Thread_Pool&) = delete;
 
     /**
      * @brief Enqueue a task for execution in the thread pool.
@@ -53,10 +59,10 @@ public:
      */
     void sleep_my_thread();
 
-    ~ThreadPool();
+    ~Thread_Pool();
 
 private:
-    ThreadPool();
+    Thread_Pool();
 
     std::vector<std::thread> workers;
     std::queue<std::function<void()>> tasks;
@@ -66,6 +72,8 @@ private:
 
     std::atomic_bool stop;
     std::atomic_char task_running;
+
+    static Thread_Pool* instance;
 };
 
 #endif // THREADPOOL_H

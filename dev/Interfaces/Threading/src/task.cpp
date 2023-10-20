@@ -109,7 +109,7 @@ void Task::run_task(std::chrono::milliseconds frameDuration)
 {
     for(const auto& subtask : subtasks)
     {
-        ThreadPool::getInstance().enqueue(subtask.task);
+        Thread_Pool::getInstance()->enqueue(subtask.task);
     }
 }
 

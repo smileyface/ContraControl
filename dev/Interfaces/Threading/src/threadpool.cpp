@@ -1,7 +1,8 @@
 #include "../scheduler/threadpool.h"
 
+Thread_Pool* Thread_Pool::instance = nullptr;
 
-ThreadPool::ThreadPool() : stop(false)
+Thread_Pool::Thread_Pool() : stop(false)
 {
     // Determine the number of threads based on the hardware concurrency
     const size_t numThreads = std::thread::hardware_concurrency();
@@ -40,13 +41,24 @@ ThreadPool::ThreadPool() : stop(false)
 }
 
 
-ThreadPool& ThreadPool::getInstance()
+Thread_Pool* Thread_Pool::getInstance()
 {
-    static ThreadPool instance;
+    if(instance == nullptr)
+    {
+        instance = new Thread_Pool();
+    }
     return instance;
 }
 
-void ThreadPool::sleep_my_thread()
+void Thread_Pool::destroy_instance()
+{
+    if(instance != nullptr)
+    {
+        delete instance;
+        instance = nullptr;
+    }
+}
+void Thread_Pool::sleep_my_thread()
 {
     while(tasks.empty() == false || task_running > 0)
     {
@@ -54,7 +66,7 @@ void ThreadPool::sleep_my_thread()
     }
 }
 
-ThreadPool::~ThreadPool()
+Thread_Pool::~Thread_Pool()
 {
     {
         std::unique_lock<std::mutex> lock(queueMutex);
