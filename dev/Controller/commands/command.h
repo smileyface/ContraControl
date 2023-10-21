@@ -43,6 +43,26 @@ enum class COMMAND_ENUM :command_id
      */
     DEVICE_DESTRUCTION,
     /**
+     * Create a new node.
+     */
+    NODE_CREATION,
+    /**
+     * Initalize node. To be used for local node only.
+     */
+    NODE_INITALIZE,
+    /**
+     * Destroy a node.
+     */
+    NODE_DESTORY,
+    /**
+     * Connect two nodes
+     */
+    NODE_CONNECT,
+    /**
+     * Disconnect two nodes
+     */
+    NODE_DISCONNECT,
+    /**
      Unmapped Command
      */
 	INVALID = 0xffff

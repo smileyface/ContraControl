@@ -41,7 +41,7 @@ public:
 	 */
 	Device(DEVICE_IDENTIFIER type_of_device, int number_of_channels);
 
-	~Device();
+	virtual ~Device();
 	/**
 	 * \return Numeric ID of the device. This is assigned by the system.
 	 */

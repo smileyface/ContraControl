@@ -9,25 +9,7 @@
 #define MODEL_NODE_H
 
 #include "../device.h"
-
-/**
- Type of node, such as UI, GENERIC_HARDWARE or R-PI
- */
-enum class NODE_TYPE : uint8_t
-{
-	/**
-	 A Tester node.
-	 */
-	TEST,
-	/**
-	 A UI node. Connects to virtual devices
-	 */
-	UI,
-	/**
-	 Invalid node. Undefined.
-	 */
-	INVALID
-};
+#include "Interfaces/enums/node_type.h"
 
 /**
  A node, which represents a computer, such as a Raspberry Pi, or other command device. 
@@ -35,14 +17,15 @@ enum class NODE_TYPE : uint8_t
 class Node
 {
 public:
+	Node();
 	/**
-	 Create a node instance by giving it a type.
+	 Create a node instance by giving it a type and a name.
 
 	 \param type The type of node.
+	 \param id Common ID of the node.
 	 */
-	Node(NODE_TYPE type);
+	Node(NODE_TYPE type, Node_Id id);
 
-	Node();
 	~Node();
 	/**
 	 Get ready to destroy node.
@@ -96,10 +79,9 @@ public:
 
 	/**
 	 * Add node to known connections.
-	 * \param type Type of the node.
-	 * \param id The id of the node on the system.
+	 * \param node_connection Node to connect to this node.
 	 */
-	void add_connection(NODE_TYPE type, Node_Id id);
+	void add_connection(Node* node_connection);
 
 	/**
 	 * Remove a connection to a node.

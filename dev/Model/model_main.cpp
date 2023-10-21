@@ -12,6 +12,7 @@ std::mutex model_mutex;
 Timer model_timer;
 std::atomic<bool> model::model_running;
 Command_List model::step_actions;
+std::vector<Node> model::node_list;
 Task model::model_task;
 Message_Consumer* model::model_controller_consumer;
 
@@ -21,16 +22,17 @@ void model::initalize()
 {
 	model_controller_consumer = Message_Relay::get_instance()->register_consumer<Controller_Model_Command>();
 	model_timer.reset_clock();
-	initalize_my_node("LOCAL");
 	model_task = Task("Model", 2, .2);
 	Scheduler::get_instance()->add_system_task(model::step);
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{
 													model_timer.update_time();
+													std::lock_guard<std::mutex> lock(model_mutex);
 													for(auto i = model::step_actions.begin(); i != model::step_actions.end(); )
 													{
 														if(i->command_run())
 														{
+															i->get_command()->complete_command();
 															i = model::step_actions.erase(i);
 														}
 														else
@@ -43,16 +45,49 @@ void model::initalize()
 
 Node* model::get_node(Node_Id id)
 {
-	if(my_node.get_id() == id)
+	Node* found_item = nullptr;
+	for(int i = 0; i < node_list.size(); i++)
 	{
-		return &my_node;
+		if(node_list[i].get_id() == id)
+		{
+			found_item = &node_list[i];
+		}
 	}
-	return my_node.get_connection(id);
+	if(found_item == nullptr)
+	{
+		throw NodeNotFoundException();
+	}
+	return found_item;
 }
 
 void model::create_node(NODE_TYPE type, Node_Id id)
 {
-	my_node.add_connection(type, id);
+	node_list.emplace_back(Node(type, id));
+}
+
+void model::remove_node(Node_Id id)
+{
+	auto i = node_list.begin();
+	for(; i != node_list.end(); i++)
+	{
+		if((*i).get_id() == id)
+		{
+			break;
+		}
+	}
+	node_list.erase(i);
+}
+
+void model::connect_node(Node_Id id1, Node_Id id2)
+{ 
+	get_node(id1)->add_connection(get_node(id2));
+	get_node(id2)->add_connection(get_node(id1));
+}
+
+void model::disconnect_node(Node_Id id1, Node_Id id2)
+{ 
+	get_node(id1)->remove_connection(id2);
+	get_node(id2)->remove_connection(id1);
 }
 
 Device* model::get_device(Device_Label label)
@@ -73,19 +108,19 @@ void model::step()
 		command_model(i.get_command());
 	}
 	int model_step_thread = 0;
-	for(auto i = 0; i < model::step_actions.size(); ++i)
+	for(auto command = model::step_actions.begin(); command != model::step_actions.end(); command++)
 	{
 		model_step_thread++;
-		if(model::step_actions[i].command_run() == false)
+		if(command->command_run() == false)
 		{
-			auto command = model::step_actions[i].get_command();
 			model_task.add_subtask(Cleaned_Task([command, &model_step_thread] () mutable
 								   {
 									   try
 									   {
-										   mangle_model(command);
-										   command->complete_command();
-										   command->time_to_complete -= model_timer.get_elapsed_time();
+										   std::lock_guard<std::mutex> lock(model_mutex);
+										   mangle_model(command->get_command());
+										   command->run_command();
+										   command->get_command()->time_to_complete -= model_timer.get_elapsed_time();
 									   }
 									   catch(std::exception&)
 									   {
@@ -93,7 +128,6 @@ void model::step()
 									   }
 									   model_step_thread--;
 								   }));
-			model::step_actions[i].run_command();
 		}
 
 	}
@@ -116,8 +150,8 @@ void model::stop_loop()
 void model::clean_up()
 {
 	Message_Relay::get_instance()->deregister_consumer(model_controller_consumer);
-	my_node.clear_node();
 	step_actions.clear();
+	node_list.clear();
 }
 
 void model::initalize_my_node(Node_Id id)

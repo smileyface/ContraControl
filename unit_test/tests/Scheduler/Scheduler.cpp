@@ -122,11 +122,17 @@ TEST_F(Scheduler_Test, Run_Tasks_In_Order)
 
     auto subtask2 = [&called_order] () mutable
     {
+            for(int i = 0; i < 100; i++)
+            {
+            }
         called_order.push_back(2);
     };
 
     auto subtask3 = [&called_order] () mutable
     {
+            for(int i = 0; i < 1000; i++)
+            {
+            }
         called_order.push_back(3);
     };
 
@@ -280,7 +286,7 @@ TEST_F(Scheduler_Test, Test_Scheduler_Overrun)
     Task test_task("Test", 1, 0.3, false);
     test_task.add_subtask(Cleaned_Task([] () mutable
                           {
-                              std::this_thread::sleep_for(std::chrono::milliseconds(200));
+                              std::this_thread::sleep_for(std::chrono::milliseconds(2000));
                           }));
     scheduler->add_task(&test_task);
     scheduler->start(30);

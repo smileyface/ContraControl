@@ -32,7 +32,9 @@ Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 
 void device_utilities::start_test_environment()
 {
-	model::initalize_my_node(device_utilities::node_handle);
+	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Create>(NODE_TYPE::TEST, device_utilities::node_handle), 0));
+	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Initalize>(device_utilities::node_handle), 0));
+	system_utilities::step(2);
 }
 
 

@@ -11,7 +11,6 @@
 #include <string>			//std::string
 
 #include "device_command.h"
-#include "Interfaces/types/device_label.h"
 
  /**
   * Run device initalization. Name device and check for validity.

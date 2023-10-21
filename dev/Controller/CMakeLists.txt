@@ -4,13 +4,19 @@ set(CONTROLLER_HEADER_FILES
                     commands/device/off.h
                     commands/device/on.h
                     commands/device/assign.h
+                    commands/device/device_initalize.h
+                    commands/device/device_destruction.h
                     commands/command.h
                     commands.h
                     commander/commander.h
                     controller_main.h
-                    system/timer.h 
-                    commands/device/device_initalize.h
-                    commands/device/device_destruction.h)
+                    system/timer.h
+                    commands/node/node_command.h
+                    commands/node/node_create.h
+                    commands/node/node_initalize.h
+                    commands/node/node_destroy.h
+                    commands/node/node_connect.h
+                    commands/node/node_disconnect.h)
 
 set(CONTROLLER_SOURCE_FILES
                     commands/src/assign.cpp
@@ -20,8 +26,14 @@ set(CONTROLLER_SOURCE_FILES
                     commands/src/off.cpp 
                     commands/src/device_command.cpp
                     commands/src/device_initalize.cpp
-                    commander/src/commander.cpp 
-                    commands/src/device_destruction.cpp)
+                    commands/src/device_destruction.cpp
+                    commands/src/node_command.cpp
+                    commands/src/node_create.cpp
+                    commands/src/node_initalize.cpp
+                    commands/src/node_destroy.cpp
+                    commands/src/node_connect.cpp
+                    commander/src/commander.cpp
+                    commands/src/node_disconnect.cpp)
 
 add_library(Controller controller_main.cpp ${CONTROLLER_HEADER_FILES} ${CONTROLLER_SOURCE_FILES})
 

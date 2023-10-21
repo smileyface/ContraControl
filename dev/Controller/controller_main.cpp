@@ -60,20 +60,23 @@ void controller::add_command(const Packed_Command& cmd)
 
 void controller::step()
 {
-	for(int i = 0; i < controller_queue.size(); i++)
+	for(auto command = controller_queue.begin(); command != controller_queue.end(); command++)
   {
-		if(!controller_queue[i].command_sent() && controller_queue[i].get_time() <= 0)
-		{
-			controller_task.add_subtask(Cleaned_Task([i] ()
+		controller_task.add_subtask(Cleaned_Task([command] () mutable
+									{
+										controller_mutex.lock();
+										if(!command->command_sent() && command->get_time() <= 0)
 										{
-											Message_Relay::get_instance()->push(new Controller_Model_Command(controller::controller_queue[i]));
-										}));
-			controller_queue[i].send_command();
-		}
-		else
-		{
-			controller::controller_queue[i].move_time(controller_timer.get_elapsed_time());
-		}
+											Message_Relay::get_instance()->push(new Controller_Model_Command((*command)));
+											command->send_command();
+										}
+										else
+										{
+											command->move_time(controller_timer.get_elapsed_time());
+										}
+										controller_mutex.unlock();
+									}));
+
 	}
 	controller_timer.update_time();
 

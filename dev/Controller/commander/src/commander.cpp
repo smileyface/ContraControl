@@ -36,6 +36,7 @@ void Commander::clean_list()
 		if((*i)->completed())
 		{
 			delete* i;
+			(*i) = nullptr;
 			i = command_list.erase(i);
 		}
 		else

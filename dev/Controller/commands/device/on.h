@@ -11,7 +11,6 @@
 
 
 #include "device_command.h"
-#include "Interfaces/types/device_label.h"
 
 /**
  * A command to turn devices on.

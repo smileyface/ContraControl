@@ -1,44 +1,29 @@
 #include "../node/node.h"
+#include "../model_main.h"
 
 #include "../Utilities/Utilities/exceptions.h"
 
-Node::Node(NODE_TYPE type)
-{
-	my_type = type;
-	id_pool = 0;
-}
-Node::Node()
-{
-	my_type = NODE_TYPE::INVALID;
-	id_pool = 0;
-}
+Node::Node() :
+	my_type(NODE_TYPE::INVALID),
+	id_pool(0),
+	my_id("")
+{ }
+
+Node::Node(NODE_TYPE type, Node_Id id) :
+	my_type(type),
+	id_pool(0),
+	my_id(id)
+{ }
+
 Node::~Node()
 {
-	for(auto device = devices.begin(); device != devices.end();device++)
+	for(auto i = devices.begin(); i != devices.end(); i++)
 	{
-		delete device->second;
+		delete devices[i->first];
 	}
 	devices.clear();
-	for(auto conn = connections.begin(); conn != connections.end(); conn++)
-	{
-		delete conn->second;
-	}
+	//Nodes memory is handled in the Model
 	connections.clear();
-
-}
-
-void Node::clear_node()
-{
-	//for (auto iter = connections.begin(); iter != connections.end(); iter++)
-	//{
-	//	delete connections[iter->first];
-	//}
-	//for (auto iter = devices.begin(); iter != devices.end(); iter++)
-	//{
-	//	delete devices[iter->first];
-	//}
-	connections.clear();
-	devices.clear();
 }
 
 void Node::register_device(Device_Creator device)
@@ -94,14 +79,14 @@ Node* Node::get_connection(Node_Id id)
 }
 
 
-void Node::add_connection(NODE_TYPE type, Node_Id id)
+void Node::add_connection(Node* node_connection)
 {
-	connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
+	connections.emplace(std::pair<Node_Id, Node*> (node_connection->get_id(), node_connection));
 }
 
 void Node::remove_connection(Node_Id id)
 {
-	delete connections[id];
+	connections.erase(id);
 }
 
 Node_Id Node::get_id()
