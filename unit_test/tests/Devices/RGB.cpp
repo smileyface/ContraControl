@@ -40,7 +40,7 @@ TEST_F(Device_RGB_Test, Device_Removed)
 {
 	testing_utilities::device_utilities::check_type(dl, DEVICE_IDENTIFIER::RGB);
 	device_utilities::remove_device(dl);
-	EXPECT_THROW(testing_utilities::device_utilities::check_type(dl, DEVICE_IDENTIFIER::RGB), DeviceNotFoundException);
+	testing_utilities::device_utilities::check_type(dl, DEVICE_IDENTIFIER::INVALID);
 }
 TEST_F(Device_RGB_Test, Device_Naming)
 {

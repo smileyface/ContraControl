@@ -36,7 +36,7 @@ enum class DEVICE_IDENTIFIER : Device_Id
 	*/
 	AUDIO,
 	/**
-	 An invalid device
+	 An invalid device. Either uninitalized or removed.
 	 */
 	INVALID
 };

@@ -67,7 +67,7 @@ TEST_F(Node_Test, Device_Exclusion)
 
 	Device_Label dl_e("Test_Node_2", 0);
 
-	EXPECT_THROW(device_utilities::command_device(dl_e, Commander::get_instance()->make_command<On>(dl_e)), DeviceNotFoundException);
+	testing_utilities::device_utilities::check_type(dl_e, DEVICE_IDENTIFIER::INVALID);
 }
 
 TEST_F(Node_Test, Node_Exclusion)

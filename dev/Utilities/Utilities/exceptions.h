@@ -9,22 +9,6 @@
 #define PROJECT_EXCEPTIONS_H
 
 #include <stdexcept>
-/**
- \brief Exception node throws when attempting to access a device that does not exist.
- */
-class DeviceNotFoundException : public std::exception
-{
-public:
-    /**
- * Austin 3:16 says:
- *
- * \return String of message
- */
-    virtual const char* what() const throw()
-    {
-        return "Device is not on node";
-    }
-};
 
 /**
  \brief Exception for when attempting to access a node that is non-existant

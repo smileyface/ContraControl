@@ -54,8 +54,7 @@ public:
 	/**
 	 Return a pointer to a device requested by Device_Name
 	 \param device A name that points to a specific device.
-	 \return Pointer to the device.
-	 \throws DeviceNotFoundException if node does not know about the device
+	 \return Pointer to the device. If no device is found, it returns nullptr
 	 */
 	Device* get_device(Device_Name device);
 	/**

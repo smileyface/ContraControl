@@ -20,14 +20,12 @@ namespace
 
 TEST_F(Exceptions_Test, Description_Test)
 {
-	DeviceNotFoundException dnfe;
 	NodeNotFoundException nnfe;
 	IncorrectStateTypeException iste;
 	InvalidCommandException ice;
 	InvalidDeviceException ide;
 	UnimplementedFunctionException ufe;
 	NetworkErrorException nee;
-	EXPECT_STREQ(dnfe.what(), "Device is not on node");
 	EXPECT_STREQ(nnfe.what(), "Node is unknown");
 	EXPECT_STREQ(iste.what(), "Incorrect state attempting to be mangled");
 	EXPECT_STREQ(ice.what(), "Invalid command given");
