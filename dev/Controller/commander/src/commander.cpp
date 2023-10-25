@@ -35,6 +35,7 @@ void Commander::clean_list()
 	{
 		if((*i)->completed())
 		{
+			printf("Command %d completed\n", static_cast<int>((*i)->get_id()));
 			delete* i;
 			(*i) = nullptr;
 			i = command_list.erase(i);

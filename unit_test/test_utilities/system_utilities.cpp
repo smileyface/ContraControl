@@ -35,6 +35,7 @@ bool system_utilities::WINDOWS = false;
 
 void system_utilities::setup()
 {
+	printf("Test initalizing systems\n");
 	if(system_setup == false)
 	{
 		try
@@ -75,6 +76,7 @@ void system_utilities::teardown_messaging()
 
 void system_utilities::start_system()
 {
+	printf("Test starting loops\n");
 	model::start_loop();
 	controller::start_controller();
 	view::start_view();
@@ -137,14 +139,23 @@ void system_utilities::cleanup()
 
 void system_utilities::step(int steps)
 {
+
+	std::chrono::milliseconds frameDurationMs(100);
 	for(int i = 0; i < steps; i++)
 	{
-		std::chrono::milliseconds frameDurationMs(100);
 		Scheduler::get_instance()->frame(frameDurationMs);
-		sleep_thread(100);
 	}
 }
 
+void system_utilities::run_all_queued_commands()
+{
+	std::chrono::milliseconds frameDurationMs(100);
+	while(Commander::get_instance()->get_number_of_commands() > 0)
+	{
+
+		Scheduler::get_instance()->frame(frameDurationMs);
+	}
+}
 void system_utilities::sleep_thread(int time_to_sleep)
 {
 		std::this_thread::sleep_for(std::chrono::milliseconds(time_to_sleep));

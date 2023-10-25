@@ -23,6 +23,7 @@ void model::initalize()
 	model_controller_consumer = Message_Relay::get_instance()->register_consumer<Controller_Model_Command>();
 	model_timer.reset_clock();
 	model_task = Task("Model", 2, .2);
+	step_actions = Command_List();
 	Scheduler::get_instance()->add_system_task(model::step);
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{
@@ -40,6 +41,10 @@ void model::initalize()
 															i++;
 														}
 													}
+													if(model::step_actions.size() > 0)
+													{
+														printf("Model will run %d commands next frame\n");
+													}
 												} );
 }
 
@@ -55,6 +60,8 @@ Node* model::get_node(Node_Id id)
 	}
 	if(found_item == nullptr)
 	{
+		printf("Node %s not found\n", id);
+		fflush(stdout);
 		throw NodeNotFoundException();
 	}
 	return found_item;
@@ -105,6 +112,8 @@ void model::step()
 {
 	for(auto i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer); i.is_valid(); i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer))
 	{
+		printf("Model has recieved command %d\n", i.get_command().get_command()->get_id());
+		fflush(stdout);
 		command_model(i.get_command());
 	}
 	int model_step_thread = 0;
@@ -115,6 +124,8 @@ void model::step()
 		{
 			model_task.add_subtask(Cleaned_Task([command, &model_step_thread] () mutable
 								   {
+										printf("Running command %d on the model\n", command->get_command()->get_id());
+										fflush(stdout);
 									   try
 									   {
 										   std::lock_guard<std::mutex> lock(model_mutex);
@@ -124,6 +135,8 @@ void model::step()
 									   }
 									   catch(std::exception&)
 									   {
+											printf("Exception thrown and caught");
+											fflush(stdout);
 										   model_task.exception(std::current_exception());
 									   }
 									   model_step_thread--;

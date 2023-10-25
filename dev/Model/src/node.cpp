@@ -43,12 +43,14 @@ void Node::remove_device(Device_Id label)
 Device* Node::get_device(Device_Id device)
 {
 	Device* found_device = nullptr;
-	if (devices.find(device) != devices.end())
+	if (devices.count(device))
 	{
 		found_device = devices[device];
 	}
 	else
 	{
+		printf("Device not found\n");
+		fflush(stdout);
 		LOG_ERROR("Device " + std::to_string(device) + " Not Found", "Node::get_device(Device_Id)");
 	}
 	return found_device;

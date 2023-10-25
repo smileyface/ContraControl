@@ -2,14 +2,18 @@
 
 Thread_Pool* Thread_Pool::instance = nullptr;
 
-Thread_Pool::Thread_Pool() : stop(false)
+Thread_Pool::Thread_Pool() : 
+    stop(false),
+    task_running(0)
 {
     // Determine the number of threads based on the hardware concurrency
-    const size_t numThreads = std::thread::hardware_concurrency();
+    const size_t numThreads = 1;
+
+    printf("Adding %d threads\n", numThreads);
 
     for(size_t i = 0; i < numThreads; ++i)
     {
-        workers.emplace_back([this]
+        workers.emplace_back([this, i]
                              {
                                  while(true)
                                  {
@@ -33,7 +37,16 @@ Thread_Pool::Thread_Pool() : stop(false)
                                      }
 
                                      task_running++;
-                                     task();
+                                     //printf("Thread %d Running a task\n", static_cast<int>(i));
+                                     try
+                                     {
+                                        task();
+                                     }
+                                     catch(std::exception& e)
+                                     {
+                                        printf("Exception thrown in task %s\n", e.what());
+                                        fflush(stdout);
+                                     }
                                      task_running--;
                                  }
                              });
@@ -60,9 +73,10 @@ void Thread_Pool::destroy_instance()
 }
 void Thread_Pool::sleep_my_thread()
 {
-    while(tasks.empty() == false || task_running > 0)
+    int i = 0;
+    while((tasks.empty() == false || task_running > 0) && i < 100000)
     {
-        int i = 0;
+        i++;
     }
 }
 

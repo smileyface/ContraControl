@@ -87,6 +87,8 @@ int Scheduler::get_overruns()
 
 void Scheduler::frame(std::chrono::milliseconds frameDurationMs)
 {
+
+    printf("Frame Beginning\n");
     for(int i = 0; i < tasks.size(); i++)
     {
         //Start the tasks for this priority of the frame.
@@ -102,7 +104,7 @@ void Scheduler::frame(std::chrono::milliseconds frameDurationMs)
             tasks[i][j]->stop();
         }
     }
-
+    printf("Frame End\n");
     clean_persistence();
 }
 
@@ -147,6 +149,7 @@ void Scheduler::start(int frameDuration) {
                         frames_run++;
                     }
                     LOG_INFO("Scheduler Dead", "Scheduler");
+                    printf("Scheduler Dead");
                 });
 }
 
