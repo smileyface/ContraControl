@@ -60,9 +60,7 @@ Node* model::get_node(Node_Id id)
 	}
 	if(found_item == nullptr)
 	{
-		printf("Node %s not found\n", id);
-		fflush(stdout);
-		throw NodeNotFoundException();
+		LOG_ERROR("Node " + id + " not found", "Node");
 	}
 	return found_item;
 }
@@ -112,8 +110,7 @@ void model::step()
 {
 	for(auto i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer); i.is_valid(); i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer))
 	{
-		printf("Model has recieved command %d\n", i.get_command().get_command()->get_id());
-		fflush(stdout);
+		LOG_DEBUG("Model has recieved command " + i.get_command().get_command()->get_id_str());
 		command_model(i.get_command());
 	}
 	int model_step_thread = 0;
@@ -124,8 +121,7 @@ void model::step()
 		{
 			model_task.add_subtask(Cleaned_Task([command, &model_step_thread] () mutable
 								   {
-										printf("Running command %d on the model\n", command->get_command()->get_id());
-										fflush(stdout);
+									   LOG_DEBUG("Running command %d on the model"+ command->get_command()->get_id_str());
 									   try
 									   {
 										   std::lock_guard<std::mutex> lock(model_mutex);
@@ -133,10 +129,10 @@ void model::step()
 										   command->run_command();
 										   command->get_command()->time_to_complete -= model_timer.get_elapsed_time();
 									   }
-									   catch(std::exception&)
+									   catch(std::exception& e)
 									   {
-											printf("Exception thrown and caught");
-											fflush(stdout);
+										   std::string what = e.what();
+										   LOG_ERROR("Exception thrown " + what, "Model");
 										   model_task.exception(std::current_exception());
 									   }
 									   model_step_thread--;

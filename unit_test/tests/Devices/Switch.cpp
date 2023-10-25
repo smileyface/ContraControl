@@ -28,7 +28,6 @@ namespace
 
 TEST_F(Device_Switch_Test, Device_Created)
 {
-	printf("In test\n");
 	testing_utilities::device_utilities::check_type(dl, DEVICE_IDENTIFIER::SWITCH);
 }
 TEST_F(Device_Switch_Test, Device_Invalid)

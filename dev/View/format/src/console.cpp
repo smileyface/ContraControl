@@ -23,7 +23,6 @@ View* Console_Format::add_view(VIEW_TYPE_ENUM view)
 
 void Console_Format::step()
 {
-	printf("Running Console View step\n");
 	process_internal_messages();
 	update_views();
 	//send off internal messages();

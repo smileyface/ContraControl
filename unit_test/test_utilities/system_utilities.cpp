@@ -35,7 +35,7 @@ bool system_utilities::WINDOWS = false;
 
 void system_utilities::setup()
 {
-	printf("Test initalizing systems\n");
+	LOG_INFO("Initalizing System", "Test");
 	if(system_setup == false)
 	{
 		try
@@ -76,7 +76,7 @@ void system_utilities::teardown_messaging()
 
 void system_utilities::start_system()
 {
-	printf("Test starting loops\n");
+	LOG_INFO("Starting Loops", "Test");
 	model::start_loop();
 	controller::start_controller();
 	view::start_view();

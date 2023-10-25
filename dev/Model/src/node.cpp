@@ -49,9 +49,7 @@ Device* Node::get_device(Device_Id device)
 	}
 	else
 	{
-		printf("Device not found\n");
-		fflush(stdout);
-		LOG_ERROR("Device " + std::to_string(device) + " Not Found", "Node::get_device(Device_Id)");
+		LOG_ERROR("Device " + std::to_string(device) + " Not Found", "Node");
 	}
 	return found_device;
 }

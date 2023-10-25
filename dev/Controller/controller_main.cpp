@@ -55,8 +55,8 @@ void controller::stop_controller()
 
 void controller::add_command(const Packed_Command& cmd)
 {
-	Packed_Command id = cmd;	
-	printf("Command %d added\n", id.get_command()->get_id());
+	Packed_Command id = cmd;
+	LOG_DEBUG("Command " + id.get_command()->get_id_str() + " added");
 	controller_queue.push_back(cmd);
 }
 
@@ -66,7 +66,7 @@ void controller::step()
   {
 		controller_task.add_subtask(Cleaned_Task([command] () mutable
 									{
-										printf("Sending Command %d to the Model\n", (*command).get_command()->get_id());
+										LOG_DEBUG("Sending Command" + (*command).get_command()->get_id_str() +" to the Model")
 										controller_mutex.lock();
 										if(!command->command_sent() && command->get_time() <= 0)
 										{

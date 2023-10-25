@@ -1,5 +1,7 @@
 #include "../scheduler/threadpool.h"
 
+#include "Messaging/message_relay.h"
+
 Thread_Pool* Thread_Pool::instance = nullptr;
 
 Thread_Pool::Thread_Pool() : 
@@ -9,8 +11,7 @@ Thread_Pool::Thread_Pool() :
     // Determine the number of threads based on the hardware concurrency
     const size_t numThreads = 1;
 
-    printf("Adding %d threads\n", numThreads);
-
+    LOG_INFO("Adding " + std::to_string(numThreads) + " threads", "Scheduler");
     for(size_t i = 0; i < numThreads; ++i)
     {
         workers.emplace_back([this, i]
@@ -44,8 +45,8 @@ Thread_Pool::Thread_Pool() :
                                      }
                                      catch(std::exception& e)
                                      {
-                                        printf("Exception thrown in task %s\n", e.what());
-                                        fflush(stdout);
+                                         std::string what(e.what());
+                                         LOG_ERROR("Exception thrown in task." + what, "Thread Runner");
                                      }
                                      task_running--;
                                  }
