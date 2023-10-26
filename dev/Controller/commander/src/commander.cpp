@@ -36,7 +36,7 @@ void Commander::clean_list()
 	{
 		if((*i)->completed())
 		{
-			LOG_DEBUG("Command %d completed\n", static_cast<int>((*i)->get_id()));
+			LOG_DEBUG("Command " + ((*i)->get_id_str()) + " completed\n");
 			delete* i;
 			(*i) = nullptr;
 			i = command_list.erase(i);
