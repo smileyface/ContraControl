@@ -93,6 +93,22 @@ public:
 	 * \return The id.
 	 */
 	Node_Id get_id();
+
+	/**
+	 * Get type of the device.
+	 * \return The Type of the device.
+	 */
+	NODE_TYPE get_type();
+
+	/**
+	 * An invalid device.
+	 */
+	static Device invalid_device;
+
+	/**
+	 * An invalid node.
+	 */
+	static Node invalid_node;
 private:
 	std::map<Node_Id, Node*> connections;
 	Device_Id_Map devices;
@@ -100,6 +116,7 @@ private:
 	NODE_TYPE my_type;
 	Device_Id id_pool;
 	Node_Id my_id;
+
 };
 
 #endif // !MODEL_NODE_H

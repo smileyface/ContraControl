@@ -37,14 +37,7 @@ void testing_utilities::device_utilities::check_validity(Device_Label label, boo
 void testing_utilities::device_utilities::check_type(Device_Label label, DEVICE_IDENTIFIER type)
 {
 	Device* device = model::get_device(label);
-	if(device == nullptr)
-	{
-		EXPECT_EQ(type, DEVICE_IDENTIFIER::INVALID) << "Device type is incorrect";
-	}
-	else
-	{
-		EXPECT_EQ(device->get_device_type(), type) << "Device type is incorrect";
-	}
+	EXPECT_EQ(device->get_device_type(), type) << "Device type is incorrect";
 }
 
 void testing_utilities::device_utilities::check_channel(Device_Label label, int channel, Channel value)

@@ -11,24 +11,6 @@
 #include <stdexcept>
 
 /**
- \brief Exception for when attempting to access a node that is non-existant
- */
-
-class NodeNotFoundException : public std::exception
-{
-public:
-    /**
- * Austin 3:16 says:
- *
- * \return String of message
- */
-    virtual const char* what() const throw()
-    {
-        return "Node is unknown";
-    }
-};
-
-/**
  \brief Exception thrown when a command is given to a device that does not deal with the command. Example: A switch attempting a linear transition.
  */
 class IncorrectStateTypeException : public std::exception

@@ -72,11 +72,18 @@ Device* device_utilities::command_device(Device_Label label, Command* command)
 
 Device* device_utilities::command_device(Device_Label label, Command* command, double delay)
 {
-	std::cout << "Test commanding device " << label.get_node_id() << ":" << label.get_device_id() << " - " << static_cast<int>(command->get_id()) << std::endl;
-	Device_Command* d_command = static_cast<Device_Command*>(command);
+	LOG_DEBUG("Commanding Device " + label.get_node_id() + ":" + std::to_string(label.get_device_id()) + " - " + command->get_id_str());
+	get_nominal_state(label.get_device_id(), command);
 	controller::add_command(Packed_Command(command, delay));
 	system_utilities::run_all_queued_commands();
-	return model_list[label.get_device_id()];
+	if(model_list.count(label.get_device_id()))
+	{
+		return model_list[label.get_device_id()];
+	}
+	else
+	{
+		return &Node::invalid_device;
+	}
 }
 
 void device_utilities::add_command(Command* command)

@@ -60,6 +60,7 @@ Node* model::get_node(Node_Id id)
 	}
 	if(found_item == nullptr)
 	{
+		found_item = &Node::invalid_node;
 		LOG_ERROR("Node " + id + " not found", "Node");
 	}
 	return found_item;
@@ -97,7 +98,10 @@ void model::disconnect_node(Node_Id id1, Node_Id id2)
 
 Device* model::get_device(Device_Label label)
 {
-	return model::get_node(label.get_node_id())->get_device(label.get_device_id());
+	Device* found_device = nullptr;
+	found_device = model::get_node(label.get_node_id())->get_device(label.get_device_id());
+
+	return found_device;
 }
 
 template <typename T>
@@ -117,29 +121,30 @@ void model::step()
 	for(auto command = model::step_actions.begin(); command != model::step_actions.end(); command++)
 	{
 		model_step_thread++;
-		if(command->command_run() == false)
-		{
-			model_task.add_subtask(Cleaned_Task([command, &model_step_thread] () mutable
+			Packed_Command& step_command = (*command);
+			model_task.add_subtask(Cleaned_Task([&step_command, &model_step_thread] () mutable
 								   {
-									   LOG_DEBUG("Running command %d on the model"+ command->get_command()->get_id_str());
-									   try
+									   if(step_command.command_run() == false)
 									   {
-										   std::lock_guard<std::mutex> lock(model_mutex);
-										   mangle_model(command->get_command());
-										   command->run_command();
-										   command->get_command()->time_to_complete -= model_timer.get_elapsed_time();
-									   }
-									   catch(std::exception& e)
-									   {
-										   std::string what = e.what();
-										   LOG_ERROR("Exception thrown " + what, "Model");
-										   model_task.exception(std::current_exception());
+										   LOG_DEBUG("Running command %d on the model"+ step_command.get_command()->get_id_str());
+										   try
+										   {
+											   std::lock_guard<std::mutex> lock(model_mutex);
+											   mangle_model(step_command.get_command());
+											   step_command.run_command();
+											   step_command.get_command()->time_to_complete -= model_timer.get_elapsed_time();
+										   }
+										   catch(std::exception& e)
+										   {
+											   std::string what = e.what();
+											   LOG_ERROR("Exception thrown " + what, "Model");
+											   model_task.exception(std::current_exception());
+										   }
 									   }
 									   model_step_thread--;
 								   }));
 		}
 
-	}
 }
 
 void model::start_loop()

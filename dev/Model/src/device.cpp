@@ -43,7 +43,14 @@ std::string device_type_as_string(DEVICE_IDENTIFIER type)
 }
 
 
-Device::Device()
+Device::Device() :
+	id(-1),
+	device_name(""),
+	type(DEVICE_IDENTIFIER::INVALID),
+	initalized(false),
+	power(false),
+	valid(false),
+	channels()
 {
 
 }

@@ -3,6 +3,9 @@
 
 #include "../Utilities/Utilities/exceptions.h"
 
+Device Node::invalid_device;
+Node Node::invalid_node;
+
 Node::Node() :
 	my_type(NODE_TYPE::INVALID),
 	id_pool(0),
@@ -49,6 +52,7 @@ Device* Node::get_device(Device_Id device)
 	}
 	else
 	{
+		found_device = &invalid_device;
 		LOG_ERROR("Device " + std::to_string(device) + " Not Found", "Node");
 	}
 	return found_device;
@@ -76,11 +80,16 @@ void Node::initalize_local_control(Node_Id id)
 
 Node* Node::get_connection(Node_Id id)
 {
-	if (connections.find(id) == connections.end())
+	Node* found_node = nullptr;
+	if(connections.find(id) == connections.end())
 	{
-		throw NodeNotFoundException();
+		found_node = &invalid_node;
 	}
-	return connections[id];
+	else
+	{
+		found_node = connections[id];
+	}
+	return found_node;
 }
 
 
@@ -97,4 +106,9 @@ void Node::remove_connection(Node_Id id)
 Node_Id Node::get_id()
 {
 	return my_id;
+}
+
+NODE_TYPE Node::get_type()
+{
+	return my_type;
 }

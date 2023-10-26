@@ -126,14 +126,14 @@ void system_utilities::print_log_messages()
 
 void system_utilities::cleanup()
 {
+	Scheduler::get_instance()->stop();
+	Scheduler::get_instance()->clear();
+	Scheduler::destroy_instance();
 	controller::clean_up();
 	model::clean_up();
 	view::clean_up();
 	network::clean_up();
 	teardown_messaging();
-	Scheduler::get_instance()->stop();
-	Scheduler::get_instance()->clear();
-	Scheduler::destroy_instance();
 	system_setup = false;
 }
 
