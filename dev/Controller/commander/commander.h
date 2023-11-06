@@ -10,6 +10,7 @@
 #include <stdarg.h>     /* va_list, va_start, va_arg, va_end */
 
 #include "Interfaces/types/packed_command.h"
+#include "Messaging/message_relay.h"
 
 /**
  * An interface for Command memory management.
