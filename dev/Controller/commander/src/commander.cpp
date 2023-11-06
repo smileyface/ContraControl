@@ -1,4 +1,7 @@
 #include "../commander.h"
+
+#include <algorithm>
+
 #include "Messaging/message_relay.h"
 
 Commander* Commander::instance = nullptr;
@@ -36,7 +39,7 @@ void Commander::clean_list()
 	{
 		if((*i)->completed())
 		{
-			LOG_DEBUG("Command " + ((*i)->get_id_str()) + " completed\n");
+			LOG_DEBUG("Command " + ((*i)->get_id_str()) + " completed");
 			delete* i;
 			(*i) = nullptr;
 			i = command_list.erase(i);
@@ -51,4 +54,10 @@ void Commander::clean_list()
 int Commander::get_number_of_commands()
 {
 	return command_list.size();
+}
+
+bool Commander::is_command_still_around(Command* command)
+{
+	auto i = std::find(command_list.begin(), command_list.end(), command);
+	return i != command_list.end();
 }

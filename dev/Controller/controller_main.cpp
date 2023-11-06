@@ -68,9 +68,9 @@ void controller::step()
 		controller_task.add_subtask(Cleaned_Task([&step_command] () mutable
 									{
 										controller_mutex.lock();
-										LOG_DEBUG("Sending Command " + step_command.get_command()->get_id_str() +" to the Model")
 										if(!step_command.command_sent() && step_command.get_time() <= 0)
 										{
+											LOG_DEBUG("Sending Command " + step_command.get_command()->get_id_str() + " to the Model")
 											Message_Relay::get_instance()->push(new Controller_Model_Command((step_command)));
 											step_command.send_command();
 										}

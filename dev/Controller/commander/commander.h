@@ -45,6 +45,13 @@ public:
 	 */
 	int get_number_of_commands();
 
+	/**
+	 * \return If the command is still on the commander.
+	 * 
+	 * \param command Command to verify the existance of.
+	 */
+	bool is_command_still_around(Command* command);
+
 private:
 	std::vector<Command*> command_list;
 	Commander() = default;
@@ -56,5 +63,6 @@ template<typename T, typename ...Args>
 inline Command* Commander::make_command(Args&&... a)
 {
 	command_list.emplace_back(new T(std::forward<Args>(a)...));
+	LOG_DEBUG("Adding command " + command_list[command_list.size() - 1]->get_id_str() + " to commander." );
 	return command_list[command_list.size()-1];
 }

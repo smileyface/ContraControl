@@ -10,15 +10,7 @@ Byte Network_Byte::size()
 
 Byte_Array Network_Byte::pack()
 {
-	if (number < 256)
-	{
-		return { (Byte)number };
-	}
-	else
-	{
-		throw std::length_error("");
-	}
-	return Byte_Array();
+	return { (Byte)number };
 }
 
 void Network_Byte::unpack(Byte_Array& byte_string)
