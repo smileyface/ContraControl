@@ -8,6 +8,9 @@
 #include <typeinfo>
 
 const int TIMEOUT_TIME = 5;
+Message_Consumer* testing_consumer = 0;
+
+std::vector<Logging_Message> error_list;
 
 void testing_utilities::get_partial_on(Command* command, Device* device, double timeout)
 {
@@ -242,6 +245,20 @@ void testing_utilities::error_utilities::check_override_failure(std::function<vo
 	FAIL() << "No exception thrown";
 }
 
+void testing_utilities::error_utilities::error_found(std::string location, std::string message)
+{
+	testing_utilities::message_utilities::get_messages_from_relay();
+	bool found = false;
+	for(auto i = error_list.begin(); i != error_list.end(); i++)
+	{
+		if(i->get_message() == message && i->get_location() == location)
+		{
+			found = true;
+		}
+	}
+	EXPECT_TRUE(found);
+}
+
 
 void dummy_func()
 { }
@@ -275,4 +292,33 @@ void testing_utilities::input_utilities::connect_keyboard(std::string path_to_ke
 void testing_utilities::message_utilities::system_is_clean()
 {
 	EXPECT_EQ(Message_Relay::get_instance()->number_of_consumers(), 0) << "There are still consumers on the Message Relay";
+}
+
+void testing_utilities::message_utilities::setup_testing()
+{ 
+	if(testing_consumer == 0)
+	{
+		testing_consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
+	}
+}
+
+void testing_utilities::message_utilities::messaging_teardown()
+{ 
+	Message_Relay::get_instance()->deregister_consumer(testing_consumer);
+	testing_consumer = 0;
+}
+
+void testing_utilities::message_utilities::get_messages_from_relay()
+{
+	for(auto message = Message_Relay::get_instance()->pop<Logging_Message>(testing_consumer); message.is_valid() == true; message = Message_Relay::get_instance()->pop<Logging_Message>(testing_consumer))
+	{
+		switch(message.get_priority())
+		{
+		case MESSAGE_PRIORITY::ERROR_MESSAGE:
+			error_list.push_back(message);
+			break;
+		default:
+			break;
+		}
+	}
 }

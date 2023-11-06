@@ -48,7 +48,6 @@ public:
 
 	 \param device An Id struct that points to a specific device.
 	 \return Pointer to the device.
-	 \throws DeviceNotFoundException if node does not know about the device
 	 */
 	Device* get_device(Device_Id device);
 	/**
@@ -72,7 +71,6 @@ public:
 	 * Get the node connected to the local node.
 	 * \param id Id of the node to get.
 	 * \return Pointer to the connected node.
-	 * \throw NodeNotFoundException If node is not a known connection.
 	 */
 	Node* get_connection(Node_Id id);
 

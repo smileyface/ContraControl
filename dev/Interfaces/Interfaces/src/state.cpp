@@ -74,6 +74,7 @@ void state_interfaces::mangle_state(Command* command)
 	}
 	case COMMAND_ENUM::INVALID:
 	default:
-		throw InvalidCommandException();
+		LOG_ERROR("Invalid Command recieved by Model", "Model Mangle State");
+		break;
 	}
 }

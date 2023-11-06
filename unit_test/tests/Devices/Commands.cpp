@@ -69,7 +69,8 @@ TEST_F(Commands_Test, Device_Assign_Channel)
 
 TEST_F(Commands_Test, Device_Invalid_Command) 
 {
-	EXPECT_THROW(device_utilities::command_device(dl, new Command()), InvalidCommandException);
+	device_utilities::command_device(dl, Commander::get_instance()->make_command<Command>());
+	testing_utilities::error_utilities::error_found("Model Mangle State", "Invalid Command recieved by Model");
 }
 
 /*This test and concept needs a redesign*/
