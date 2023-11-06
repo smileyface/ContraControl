@@ -43,7 +43,7 @@ void model::initalize()
 													}
 													if(model::step_actions.size() > 0)
 													{
-														printf("Model will run %d commands next frame\n");
+														LOG_DEBUG("Model will run " + std::to_string(model::step_actions.size()) + " commands next frame");
 													}
 												} );
 }
@@ -126,7 +126,7 @@ void model::step()
 								   {
 									   if(step_command.command_run() == false)
 									   {
-										   LOG_DEBUG("Running command %d on the model"+ step_command.get_command()->get_id_str());
+										   LOG_DEBUG("Running command " + step_command.get_command()->get_id_str() + "on the model");
 										   try
 										   {
 											   std::lock_guard<std::mutex> lock(model_mutex);

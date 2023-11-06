@@ -56,7 +56,7 @@ void controller::stop_controller()
 void controller::add_command(const Packed_Command& cmd)
 {
 	Packed_Command id = cmd;
-	LOG_DEBUG("Command " + id.get_command()->get_id_str() + " added");
+	LOG_DEBUG("Command " + id.get_command()->get_id_str() + " added to controller");
 	controller_queue.push_back(cmd);
 }
 
@@ -68,7 +68,7 @@ void controller::step()
 		controller_task.add_subtask(Cleaned_Task([&step_command] () mutable
 									{
 										controller_mutex.lock();
-										LOG_DEBUG("Sending Command" + step_command.get_command()->get_id_str() +" to the Model")
+										LOG_DEBUG("Sending Command " + step_command.get_command()->get_id_str() +" to the Model")
 										if(!step_command.command_sent() && step_command.get_time() <= 0)
 										{
 											Message_Relay::get_instance()->push(new Controller_Model_Command((step_command)));

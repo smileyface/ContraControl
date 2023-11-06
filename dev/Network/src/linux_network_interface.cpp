@@ -71,7 +71,7 @@ void Linux_Network_Interface::setup_interface()
 	freeifaddrs(ifap);
 	if(found == 0)
 	{
-		LOG_ERROR("No Adapter Found", "Finding Interface");
+		LOG_ERROR("No Adapter Found", "Linux Network");
 		status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
 		throw NetworkErrorException();
 	}

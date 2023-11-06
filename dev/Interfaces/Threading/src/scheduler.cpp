@@ -50,7 +50,7 @@ void Scheduler::add_task(Task* task)
 {
     if(task->get_priority() < 1 || task->get_priority() > 10)
     {
-        LOG_ERROR("Task priority outside of range", "Adding task");
+        LOG_ERROR("Task priority outside of range", "Scheduler");
         return;
     }
     tasks[task->get_priority() - 1].push_back(task);
