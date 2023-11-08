@@ -131,6 +131,7 @@ void Scheduler::start(int frameDuration) {
                     auto cur_time = start_time;
                     while(scheduler_running)
                     {
+                        LOG_DEBUG("Scheduler Loop");
                         start_time = std::chrono::steady_clock::now();
                         frame(frameDurationMs);
                         cur_time = std::chrono::steady_clock::now();
@@ -154,13 +155,6 @@ void Scheduler::start(int frameDuration) {
 void Scheduler::stop()
 {
     scheduler_running = false;
-    for(int i = 0; i < tasks.size(); i++)
-    {
-        for(int j = 0; j < tasks[i].size(); j++)
-        {
-            tasks[i][j]->stop();
-        }
-    }
     if(scheduler_thread.joinable())
     {
         scheduler_thread.join();

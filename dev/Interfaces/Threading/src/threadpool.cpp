@@ -75,7 +75,7 @@ void Thread_Pool::destroy_instance()
 void Thread_Pool::sleep_my_thread()
 {
     int i = 0;
-    while((tasks.empty() == false || task_running > 0) && i < 100000)
+    while((tasks.empty() == false || task_running > 0))
     {
         i++;
     }

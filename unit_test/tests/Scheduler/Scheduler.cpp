@@ -286,11 +286,11 @@ TEST_F(Scheduler_Test, Test_Scheduler_Overrun)
     Task test_task("Test", 1, 0.3, false);
     test_task.add_subtask(Cleaned_Task([] () mutable
                           {
-                              std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                              std::this_thread::sleep_for(std::chrono::milliseconds(100));
                           }));
     scheduler->add_task(&test_task);
     scheduler->start(30);
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(300));
     scheduler->stop();
     EXPECT_EQ(scheduler->get_overruns(), 1);
 }
