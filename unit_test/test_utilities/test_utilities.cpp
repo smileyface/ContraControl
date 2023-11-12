@@ -128,18 +128,9 @@ void testing_utilities::network_utilities::exception_handle()
 
 void testing_utilities::network_utilities::expect_exception(std::function<void()> function, NETWORK_ERRORS error)
 {
-	try
-	{
-		function();
-	}
-	catch(NetworkErrorException e)
-	{
-		EXPECT_STREQ(e.what(), "Network Error");
-		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
-		return;
-	}
+	function();
+	EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 	system_utilities::print_log_messages();
-	FAIL() << "Network Error Exception did not throw\nExpected " + get_string_of_error(error);
 }
 
 void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)
@@ -228,21 +219,9 @@ void testing_utilities::subsystem_utilities::controller_utilities::check_is_runn
 
 void testing_utilities::error_utilities::check_override_failure(std::function<void()> function)
 {
-	try
-	{
-		function();
-	}
-	catch(UnimplementedFunctionException e)
-	{
-		EXPECT_STREQ(e.what(), "Function not implemented");
-		SUCCEED();
-		return;
-	}
-	catch(...)
-	{
-		FAIL() << "Wrong exception thrown";
-	}
-	FAIL() << "No exception thrown";
+
+	function();
+	testing_utilities::error_utilities::error_found("Network Message Type", "Unimplemented Function");
 }
 
 void testing_utilities::error_utilities::error_found(std::string location, std::string message)
@@ -254,6 +233,8 @@ void testing_utilities::error_utilities::error_found(std::string location, std::
 		if(i->get_message() == message && i->get_location() == location)
 		{
 			found = true;
+			error_list.erase(i);
+			break;
 		}
 	}
 	EXPECT_TRUE(found);

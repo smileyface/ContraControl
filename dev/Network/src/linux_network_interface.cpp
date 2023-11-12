@@ -73,7 +73,7 @@ void Linux_Network_Interface::setup_interface()
 	{
 		LOG_ERROR("No Adapter Found", "Linux Network");
 		status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
-		throw NetworkErrorException();
+		return;
 	}
 }
 
@@ -102,7 +102,11 @@ NETWORK_ERRORS set_error_state()
 	case ENOPROTOOPT:
 		return NETWORK_ERRORS::NETWORK_OPTION_ERROR;
 	default:
+		{
+		std::string msg("Unknown network error "  + std::to_string(errno) + " caught");
+		LOG_ERROR(msg, "Linux Network");
 		return NETWORK_ERRORS::UNKNOWN_ERROR;
+		}
 	}
 	return NETWORK_ERRORS::UNKNOWN_ERROR;
 }
@@ -120,15 +124,18 @@ void Linux_Network_Interface::initalize()
 	if(rc != 0)
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
-		throw NetworkErrorException();
+		return;
 	}
 	hostname = hostname_temp;
 
 	local_connections::setup(connections);
 	setup_interface();
-	server_running = false;
-	setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
-	setup_connection(local_connections::broadcast, { IPPROTO_UDP, SOCK_DGRAM, AF_INET });
+	if(status_state.status != NETWORK_STATUS::NETWORK_ERROR)
+	{
+		server_running = false;
+		setup_connection(local_connections::local, { IPPROTO_TCP, SOCK_STREAM, AF_INET });
+		setup_connection(local_connections::broadcast, { IPPROTO_UDP, SOCK_DGRAM, AF_INET });
+	}
 }
 
 void Linux_Network_Interface::clean_up()
@@ -149,7 +156,7 @@ void Linux_Network_Interface::setup_broadcast_socket(Connection& connect, IPV4_A
 		status_state.set_error(set_error_state());
 		close(connect.sock);
 		connect.sock = INVALID_SOCKET;
-		throw NetworkErrorException();
+		return;
 	}
 }
 
@@ -175,13 +182,15 @@ void Linux_Network_Interface::initalized()
 	if(hostname == INVALID_HOSTNAME)
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
-		throw NetworkErrorException();
+		LOG_ERROR("Invalid Hostname", "Linux Network");
+		return;
 	}
 	if(connections[local_connections::local].sock < 0 ||
 	   connections[local_connections::broadcast].sock < 0)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
-		throw NetworkErrorException();
+		LOG_ERROR("Invalid Socket", "Linux Network");
+		return;
 	}
 	status_state.set_status(NETWORK_STATUS::NETWORK_INITALIZED);
 }

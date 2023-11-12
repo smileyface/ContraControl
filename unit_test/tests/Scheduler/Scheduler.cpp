@@ -20,7 +20,7 @@ namespace
         virtual void TearDown()
         {
             scheduler->destroy_instance();
-            system_utilities::cleanup();
+            system_utilities::teardown_messaging();
         }
     };
 }
