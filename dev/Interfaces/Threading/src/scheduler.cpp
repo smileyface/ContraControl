@@ -154,6 +154,7 @@ void Scheduler::start(int frameDuration) {
 
 void Scheduler::stop()
 {
+    Thread_Pool::getInstance()->sleep_my_thread();
     scheduler_running = false;
     if(scheduler_thread.joinable())
     {

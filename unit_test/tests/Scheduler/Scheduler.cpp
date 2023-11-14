@@ -5,6 +5,7 @@
 #include "../../dev/Interfaces/Threading/scheduler/scheduler.h"
 
 #include <algorithm>
+#include <stdio.h>
 
 namespace
 {
@@ -19,7 +20,8 @@ namespace
         }
         virtual void TearDown()
         {
-            scheduler->destroy_instance();
+            Scheduler::destroy_instance();
+            scheduler = nullptr;
             system_utilities::teardown_messaging();
         }
     };
@@ -306,7 +308,7 @@ TEST_F(Scheduler_Test, Add_Task_With_Scheduler_Running)
                           {
                               run = true;
                           });
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     scheduler->stop();
     EXPECT_TRUE(run);
 }

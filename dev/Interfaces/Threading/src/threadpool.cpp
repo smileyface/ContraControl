@@ -30,7 +30,9 @@ Thread_Pool::Thread_Pool() :
 
                                          if(stop && tasks.empty())
                                          {
-                                             return;
+                                            printf("Killing a thread");
+                                            fflush(stdout);
+                                            return;
                                          }
 
                                          task = std::move(tasks.front());
@@ -68,6 +70,8 @@ void Thread_Pool::destroy_instance()
 {
     if(instance != nullptr)
     {
+        printf("attempting to destroy threadpool\n");
+        fflush(stdout);
         delete instance;
         instance = nullptr;
     }
@@ -92,6 +96,16 @@ Thread_Pool::~Thread_Pool()
 
     for(std::thread& worker : workers)
     {
-        worker.join();
+        if(worker.joinable())
+        {
+            printf("Attempting to destroy worker\n");
+            fflush(stdout);
+            worker.join();
+            printf("Threadpool destroyed\n");
+            fflush(stdout);
+        }
     }
+
+    workers.clear();
+
 }
