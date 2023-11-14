@@ -30,8 +30,6 @@ Thread_Pool::Thread_Pool() :
 
                                          if(stop && tasks.empty())
                                          {
-                                            printf("Killing a thread");
-                                            fflush(stdout);
                                             return;
                                          }
 
@@ -89,14 +87,12 @@ Thread_Pool::~Thread_Pool()
     stop = true;
     condition.notify_all();
 
-    while(!workers.empty())
+    for(auto worker : workers)
     {
-        if(workers[0].joinable())
+        if(worker.joinable())
         {
-            workers[0].join();
-            printf("Threadpool destroyed\n");
-            fflush(stdout);
+            worker.join();
         }
-        workers.erase(workers.begin());
     }
+    workers.clear();
 }
