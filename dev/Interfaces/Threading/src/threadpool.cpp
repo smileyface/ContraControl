@@ -70,8 +70,7 @@ void Thread_Pool::destroy_instance()
 {
     if(instance != nullptr)
     {
-        printf("attempting to destroy threadpool\n");
-        fflush(stdout);
+        LOG_INFO("Destroying Thread Pool", "Scheduler");
         delete instance;
         instance = nullptr;
     }
@@ -87,25 +86,17 @@ void Thread_Pool::sleep_my_thread()
 
 Thread_Pool::~Thread_Pool()
 {
-    {
-        std::unique_lock<std::mutex> lock(queueMutex);
-        stop = true;
-    }
-
+    stop = true;
     condition.notify_all();
 
-    for(std::thread& worker : workers)
+    while(!workers.empty())
     {
-        if(worker.joinable())
+        if(workers[0].joinable())
         {
-            printf("Attempting to destroy worker\n");
-            fflush(stdout);
-            worker.join();
+            workers[0].join();
             printf("Threadpool destroyed\n");
             fflush(stdout);
         }
+        workers.erase(workers.begin());
     }
-
-    workers.clear();
-
 }

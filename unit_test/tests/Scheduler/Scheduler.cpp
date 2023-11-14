@@ -321,7 +321,7 @@ TEST_F(Scheduler_Test, System_Task)
                                    run_id = 42;
                                });
     scheduler->start(30);
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     scheduler->stop();
     EXPECT_EQ(run_id, 42);
 }
@@ -334,7 +334,7 @@ TEST_F(Scheduler_Test, Cleanup_Task)
                                {
                                    run_id = 42;
                                });
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     scheduler->stop();
     EXPECT_EQ(run_id, 42);
 }
