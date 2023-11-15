@@ -87,7 +87,7 @@ Thread_Pool::~Thread_Pool()
     stop = true;
     condition.notify_all();
 
-    for(auto worker : workers)
+    for(std::thread& worker : workers)
     {
         if(worker.joinable())
         {
