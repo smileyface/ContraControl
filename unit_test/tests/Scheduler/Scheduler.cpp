@@ -21,7 +21,6 @@ namespace
         virtual void TearDown()
         {
             Scheduler::destroy_instance();
-            scheduler = nullptr;
             system_utilities::teardown_messaging();
         }
     };

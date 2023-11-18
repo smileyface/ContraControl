@@ -6,9 +6,11 @@
 #include "../../Network/network_main.h"
 #ifdef _WIN32
 #include "../../Network/system_interfaces/windows_network_interface.h"
+const std::string NETWORK_INTERFACE_NAME = "Windows Network";
 #endif // _WIN32
 #ifdef __linux__
 #include "../../Network/system_interfaces/linux_network_interface.h"
+const std::string NETWORK_INTERFACE_NAME = "Linux Network";
 #endif
 
 namespace {
@@ -41,7 +43,7 @@ TEST_F(Network_Error_Test, Error_States_Initalized)
 	system_utilities::network_utilities::setup();
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::INVALID_HOSTNAME);
-	testing_utilities::error_utilities::error_found("Linux Network", "Invalid Hostname");
+	testing_utilities::error_utilities::error_found(NETWORK_INTERFACE_NAME, "Hostname Invalid");
 	system_utilities::network_utilities::setup();
 	network::network_interface->setup_connection(local_connections::local, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);

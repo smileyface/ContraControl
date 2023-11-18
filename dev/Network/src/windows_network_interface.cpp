@@ -108,7 +108,6 @@ IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname,
 		LOG_ERROR("Cannot get adapter address", "Windows Network");
 		FREE(pAddresses);
 		pAddresses = NULL;
-		throw NetworkErrorException();
 	}
 
 	for(PIP_ADAPTER_ADDRESSES pCurrAddresses = pAddresses; pCurrAddresses; pCurrAddresses = pCurrAddresses->Next)
@@ -130,7 +129,7 @@ IPV4_Addr Windows_Network_Interface::get_interface_address(std::string hostname,
 	if(found_ip == INVALID_ADDRESS)
 	{
 		status_state.set_error(NETWORK_ERRORS::ADDRESS_ERROR);
-		throw NetworkErrorException();
+		LOG_ERROR("Address not found", "Windows Network");
 	}
 	if(pAddresses)
 	{
@@ -147,7 +146,6 @@ IPV4_Addr Windows_Network_Interface::get_subnet_mask(SOCKET sock, IPV4_Addr host
 	   sizeof(InterfaceList), &nBytesReturned, 0, 0) == SOCKET_ERROR)
 	{
 		status_state.set_error(set_error_state());
-		throw NetworkErrorException();
 	}
 	int nNumInterfaces = nBytesReturned / sizeof(INTERFACE_INFO);
 
@@ -169,7 +167,6 @@ void Windows_Network_Interface::setup_broadcast_socket(Connection& connect, IPV4
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
 		LOG_ERROR("Broadcast Sock Invalid", "Windows Network");
-		throw NetworkErrorException();
 	}
 	char broadcast_opt_true = '1';
 	if(setsockopt(connect.sock, SOL_SOCKET, SO_BROADCAST, (char*) &broadcast_opt_true, sizeof(broadcast_opt_true)) < 0)
@@ -178,7 +175,6 @@ void Windows_Network_Interface::setup_broadcast_socket(Connection& connect, IPV4
 		LOG_ERROR("Issue setting up broadcast socket", "Windows Network");
 		closesocket(connect.sock);
 		connect.sock = INVALID_SOCKET;
-		throw NetworkErrorException();
 	}
 }
 
@@ -216,7 +212,7 @@ void Windows_Network_Interface::initalize()
 	{
 		LOG_ERROR("Error starting WSA", "Windows Network");
 		status_state.set_error(set_error_state(err));
-		throw NetworkErrorException();
+		return;
 	}
 
 	char* host = (char*) hostname.c_str();
@@ -225,7 +221,7 @@ void Windows_Network_Interface::initalize()
 	{
 		LOG_ERROR("Error getting hostname", "Windows Network");
 		status_state.set_error(set_error_state(err));
-		throw NetworkErrorException();
+		return;
 	}
 	hostname = host;
 
@@ -239,12 +235,14 @@ void Windows_Network_Interface::initalized()
 	if(connections[local_connections::local].sock == INVALID_SOCKET)
 	{
 		status_state.set_error(NETWORK_ERRORS::SOCKET_INVALID);
-		throw NetworkErrorException();
+		LOG_ERROR("Socket Invalid", "Windows Network");
+		return;
 	}
 	if(hostname == INVALID_HOSTNAME)
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
-		throw NetworkErrorException();
+		LOG_ERROR("Hostname Invalid", "Windows Network");
+		return;
 	}
 	status_state.set_status(NETWORK_STATUS::NETWORK_INITALIZED);
 }

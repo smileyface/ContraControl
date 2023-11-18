@@ -237,7 +237,7 @@ void testing_utilities::error_utilities::error_found(std::string location, std::
 			break;
 		}
 	}
-	EXPECT_TRUE(found);
+	EXPECT_TRUE(found) << "Error message not found";
 }
 
 
