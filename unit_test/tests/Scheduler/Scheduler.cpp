@@ -314,28 +314,28 @@ TEST_F(Scheduler_Test, Add_Task_With_Scheduler_Running)
 
 TEST_F(Scheduler_Test, System_Task)
 {
-    int run_id = 0;
-    scheduler->add_system_task([&run_id] () mutable
+    bool run = false;
+    scheduler->add_system_task([&run] () mutable
                                {
-                                   run_id = 42;
+                                   run = true;
                                });
     scheduler->start(30);
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     scheduler->stop();
-    EXPECT_EQ(run_id, 42);
+    EXPECT_TRUE(run);
 }
 
 TEST_F(Scheduler_Test, Cleanup_Task)
 {
-    int run_id = 0;
+    bool run = false;
     scheduler->start(30);
-    scheduler->add_cleanup_task([&run_id] () mutable
+    scheduler->add_cleanup_task([&run] () mutable
                                {
-                                   run_id = 42;
+                                   run = true;
                                });
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     scheduler->stop();
-    EXPECT_EQ(run_id, 42);
+    EXPECT_TRUE(run);
 }
 
 TEST_F(Scheduler_Test, Dryrun_The_System_and_Cleanups)
