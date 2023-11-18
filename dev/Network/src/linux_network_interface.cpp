@@ -182,7 +182,7 @@ void Linux_Network_Interface::initalized()
 	if(hostname == INVALID_HOSTNAME)
 	{
 		status_state.set_error(NETWORK_ERRORS::INVALID_HOSTNAME);
-		LOG_ERROR("Invalid Hostname", "Linux Network");
+		LOG_ERROR("Hostname Invalid", "Linux Network");
 		return;
 	}
 	if(connections[local_connections::local].sock < 0 ||
