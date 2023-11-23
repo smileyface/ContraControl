@@ -81,6 +81,10 @@ void testing_utilities::network_utilities::check_initalized()
 	{
 		exception_handle();
 	}
+	else
+	{
+		system_utilities::print_log_messages();
+	}
 }
 
 std::string get_string_of_error(NETWORK_ERRORS errors)
@@ -219,7 +223,6 @@ void testing_utilities::subsystem_utilities::controller_utilities::check_is_runn
 
 void testing_utilities::error_utilities::check_override_failure(std::function<void()> function)
 {
-
 	function();
 	testing_utilities::error_utilities::error_found("Network Message Type", "Unimplemented Function");
 }
