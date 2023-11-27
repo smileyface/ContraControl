@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -77,19 +77,29 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//commands.h included by inheritance</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="device__initalize_8h.html">commands/device/device_initalize.h</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="device__command_8h.html">commands/device/device_command.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//#include &quot;commands/device/device_command.h&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="device__create_8h.html">commands/device/device_create.h</a>&quot;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="device__destruction_8h.html">commands/device/device_destruction.h</a>&quot;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="on_8h.html">commands/device/on.h</a>&quot;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="off_8h.html">commands/device/off.h</a>&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="assign_8h.html">commands/device/assign.h</a>&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !COMMANDS_INCLUSION_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//#include &quot;commands/node/node_command.h&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="node__create_8h.html">commands/node/node_create.h</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="node__initalize_8h.html">commands/node/node_initalize.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="node__destroy_8h.html">commands/node/node_destroy.h</a>&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="node__connect_8h.html">commands/node/node_connect.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="node__disconnect_8h.html">commands/node/node_disconnect.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !COMMANDS_INCLUSION_H</span></div>
 <div class="ttc" id="aassign_8h_html"><div class="ttname"><a href="assign_8h.html">assign.h</a></div></div>
-<div class="ttc" id="adevice__command_8h_html"><div class="ttname"><a href="device__command_8h.html">device_command.h</a></div></div>
 <div class="ttc" id="adevice__create_8h_html"><div class="ttname"><a href="device__create_8h.html">device_create.h</a></div></div>
 <div class="ttc" id="adevice__destruction_8h_html"><div class="ttname"><a href="device__destruction_8h.html">device_destruction.h</a></div></div>
 <div class="ttc" id="adevice__initalize_8h_html"><div class="ttname"><a href="device__initalize_8h.html">device_initalize.h</a></div></div>
+<div class="ttc" id="anode__connect_8h_html"><div class="ttname"><a href="node__connect_8h.html">node_connect.h</a></div></div>
+<div class="ttc" id="anode__create_8h_html"><div class="ttname"><a href="node__create_8h.html">node_create.h</a></div></div>
+<div class="ttc" id="anode__destroy_8h_html"><div class="ttname"><a href="node__destroy_8h.html">node_destroy.h</a></div></div>
+<div class="ttc" id="anode__disconnect_8h_html"><div class="ttname"><a href="node__disconnect_8h.html">node_disconnect.h</a></div></div>
+<div class="ttc" id="anode__initalize_8h_html"><div class="ttname"><a href="node__initalize_8h.html">node_initalize.h</a></div></div>
 <div class="ttc" id="aoff_8h_html"><div class="ttname"><a href="off_8h.html">off.h</a></div></div>
 <div class="ttc" id="aon_8h_html"><div class="ttname"><a href="on_8h.html">on.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

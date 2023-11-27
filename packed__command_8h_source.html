@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -75,48 +75,48 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef INTERFACE_PACKED_COMMAND_TYPE</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define INTERFACE_PACKED_COMMAND_TYPE</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;Interfaces/types/device_label.h&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../../../Controller/commands.h&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_packed___command.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_packed___command.html">Packed_Command</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_packed___command.html">Packed_Command</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    ~<a class="code" href="class_packed___command.html">Packed_Command</a>();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_packed___command.html">Packed_Command</a>(<a class="code" href="class_command.html">Command</a>* cmd, <span class="keywordtype">double</span> time);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_packed___command.html#a01ba52d699b3524bbad91dc8a1220ad5">move_time</a>(<span class="keywordtype">double</span> elapse_time);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="class_packed___command.html#ac4a55b943cf63ea8ca78d269f96d687e">get_time</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_command.html">Command</a>* <a class="code" href="class_packed___command.html#a5d42a03cd40fc564d03c037db4133787">get_command</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_packed___command.html#a2fae937abfc1fac9cd5980f9f6f61cd9">command_sent</a>();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_packed___command.html#a9dca33f7c210ac324a926ca6ba445207">command_run</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_packed___command.html#ab0ec288b451a7d4234d2907eb2def2de">send_command</a>();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_packed___command.html#a69a8f98a0b56962b3cf9513501409948">run_command</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="class_command.html">Command</a>* command;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">double</span> time;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">bool</span> run;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">bool</span> sent;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">   84</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;Packed_Command&gt; <a class="code" href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../../../Controller/commands.h&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_packed___command.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_packed___command.html">Packed_Command</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_packed___command.html">Packed_Command</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    ~<a class="code" href="class_packed___command.html">Packed_Command</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_packed___command.html">Packed_Command</a>(<span class="keyword">const</span> <a class="code" href="class_packed___command.html">Packed_Command</a>&amp; cmd);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_packed___command.html">Packed_Command</a>(<a class="code" href="class_command.html">Command</a>* cmd, <span class="keywordtype">double</span> time);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_packed___command.html#a01ba52d699b3524bbad91dc8a1220ad5">move_time</a>(<span class="keywordtype">double</span> elapse_time);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="class_packed___command.html#ac4a55b943cf63ea8ca78d269f96d687e">get_time</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_command.html">Command</a>* <a class="code" href="class_packed___command.html#a5d42a03cd40fc564d03c037db4133787">get_command</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_packed___command.html#a2fae937abfc1fac9cd5980f9f6f61cd9">command_sent</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_packed___command.html#a9dca33f7c210ac324a926ca6ba445207">command_run</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_packed___command.html#ab0ec288b451a7d4234d2907eb2def2de">send_command</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_packed___command.html#a69a8f98a0b56962b3cf9513501409948">run_command</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="class_command.html">Command</a>* command;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">double</span> time;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">bool</span> run;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">bool</span> sent;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:54</div></div>
-<div class="ttc" id="aclass_packed___command_html"><div class="ttname"><a href="class_packed___command.html">Packed_Command</a></div><div class="ttdef"><b>Definition:</b> packed_command.h:18</div></div>
-<div class="ttc" id="aclass_packed___command_html_a01ba52d699b3524bbad91dc8a1220ad5"><div class="ttname"><a href="class_packed___command.html#a01ba52d699b3524bbad91dc8a1220ad5">Packed_Command::move_time</a></div><div class="ttdeci">void move_time(double elapse_time)</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:26</div></div>
-<div class="ttc" id="aclass_packed___command_html_a2fae937abfc1fac9cd5980f9f6f61cd9"><div class="ttname"><a href="class_packed___command.html#a2fae937abfc1fac9cd5980f9f6f61cd9">Packed_Command::command_sent</a></div><div class="ttdeci">bool command_sent()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:45</div></div>
-<div class="ttc" id="aclass_packed___command_html_a5d42a03cd40fc564d03c037db4133787"><div class="ttname"><a href="class_packed___command.html#a5d42a03cd40fc564d03c037db4133787">Packed_Command::get_command</a></div><div class="ttdeci">Command * get_command()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:36</div></div>
-<div class="ttc" id="aclass_packed___command_html_a69a8f98a0b56962b3cf9513501409948"><div class="ttname"><a href="class_packed___command.html#a69a8f98a0b56962b3cf9513501409948">Packed_Command::run_command</a></div><div class="ttdeci">void run_command()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:55</div></div>
-<div class="ttc" id="aclass_packed___command_html_a9dca33f7c210ac324a926ca6ba445207"><div class="ttname"><a href="class_packed___command.html#a9dca33f7c210ac324a926ca6ba445207">Packed_Command::command_run</a></div><div class="ttdeci">bool command_run()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:40</div></div>
-<div class="ttc" id="aclass_packed___command_html_ab0ec288b451a7d4234d2907eb2def2de"><div class="ttname"><a href="class_packed___command.html#ab0ec288b451a7d4234d2907eb2def2de">Packed_Command::send_command</a></div><div class="ttdeci">void send_command()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:50</div></div>
-<div class="ttc" id="aclass_packed___command_html_ac4a55b943cf63ea8ca78d269f96d687e"><div class="ttname"><a href="class_packed___command.html#ac4a55b943cf63ea8ca78d269f96d687e">Packed_Command::get_time</a></div><div class="ttdeci">double get_time()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:31</div></div>
-<div class="ttc" id="apacked__command_8h_html_aeb32ee7d906550c527ee3da030cdb70e"><div class="ttname"><a href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a></div><div class="ttdeci">std::vector&lt; Packed_Command &gt; Command_List</div><div class="ttdef"><b>Definition:</b> packed_command.h:84</div></div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">   89</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;Packed_Command&gt; <a class="code" href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:76</div></div>
+<div class="ttc" id="aclass_packed___command_html"><div class="ttname"><a href="class_packed___command.html">Packed_Command</a></div><div class="ttdef"><b>Definition:</b> packed_command.h:17</div></div>
+<div class="ttc" id="aclass_packed___command_html_a01ba52d699b3524bbad91dc8a1220ad5"><div class="ttname"><a href="class_packed___command.html#a01ba52d699b3524bbad91dc8a1220ad5">Packed_Command::move_time</a></div><div class="ttdeci">void move_time(double elapse_time)</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:32</div></div>
+<div class="ttc" id="aclass_packed___command_html_a2fae937abfc1fac9cd5980f9f6f61cd9"><div class="ttname"><a href="class_packed___command.html#a2fae937abfc1fac9cd5980f9f6f61cd9">Packed_Command::command_sent</a></div><div class="ttdeci">bool command_sent()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:51</div></div>
+<div class="ttc" id="aclass_packed___command_html_a5d42a03cd40fc564d03c037db4133787"><div class="ttname"><a href="class_packed___command.html#a5d42a03cd40fc564d03c037db4133787">Packed_Command::get_command</a></div><div class="ttdeci">Command * get_command()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:42</div></div>
+<div class="ttc" id="aclass_packed___command_html_a69a8f98a0b56962b3cf9513501409948"><div class="ttname"><a href="class_packed___command.html#a69a8f98a0b56962b3cf9513501409948">Packed_Command::run_command</a></div><div class="ttdeci">void run_command()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:61</div></div>
+<div class="ttc" id="aclass_packed___command_html_a9dca33f7c210ac324a926ca6ba445207"><div class="ttname"><a href="class_packed___command.html#a9dca33f7c210ac324a926ca6ba445207">Packed_Command::command_run</a></div><div class="ttdeci">bool command_run()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:46</div></div>
+<div class="ttc" id="aclass_packed___command_html_ab0ec288b451a7d4234d2907eb2def2de"><div class="ttname"><a href="class_packed___command.html#ab0ec288b451a7d4234d2907eb2def2de">Packed_Command::send_command</a></div><div class="ttdeci">void send_command()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:56</div></div>
+<div class="ttc" id="aclass_packed___command_html_ac4a55b943cf63ea8ca78d269f96d687e"><div class="ttname"><a href="class_packed___command.html#ac4a55b943cf63ea8ca78d269f96d687e">Packed_Command::get_time</a></div><div class="ttdeci">double get_time()</div><div class="ttdef"><b>Definition:</b> packed_command.cpp:37</div></div>
+<div class="ttc" id="apacked__command_8h_html_aeb32ee7d906550c527ee3da030cdb70e"><div class="ttname"><a href="packed__command_8h.html#aeb32ee7d906550c527ee3da030cdb70e">Command_List</a></div><div class="ttdeci">std::vector&lt; Packed_Command &gt; Command_List</div><div class="ttdef"><b>Definition:</b> packed_command.h:89</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

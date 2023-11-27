@@ -1,9 +1,10 @@
 <map id="node.h" name="node.h">
-<area shape="rect" id="node1" title=" " alt="" coords="102,5,162,32"/>
-<area shape="rect" id="node2" href="$device_8h.html" title=" " alt="" coords="92,80,172,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="55,155,102,181"/>
-<area shape="rect" id="node4" href="$devices_2device_8h.html" title=" " alt="" coords="126,155,245,181"/>
-<area shape="rect" id="node5" href="$device__type_8h.html" title=" " alt="" coords="5,229,171,271"/>
-<area shape="rect" id="node7" href="$channel_8h.html" title=" " alt="" coords="195,237,370,263"/>
-<area shape="rect" id="node6" title=" " alt="" coords="9,319,167,360"/>
+<area shape="rect" id="node1" title=" " alt="" coords="173,5,233,32"/>
+<area shape="rect" id="node2" href="$device_8h.html" title=" " alt="" coords="92,87,172,114"/>
+<area shape="rect" id="node8" href="$node__type_8h.html" title=" " alt="" coords="196,80,351,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="55,169,102,196"/>
+<area shape="rect" id="node4" href="$devices_2device_8h.html" title=" " alt="" coords="126,169,245,196"/>
+<area shape="rect" id="node5" href="$device__type_8h.html" title=" " alt="" coords="5,244,171,285"/>
+<area shape="rect" id="node7" href="$channel_8h.html" title=" " alt="" coords="195,251,370,278"/>
+<area shape="rect" id="node6" title=" " alt="" coords="9,333,167,375"/>
 </map>

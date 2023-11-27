@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -75,37 +75,35 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef COMMAND_DEVICE_CREATOR</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define COMMAND_DEVICE_CREATOR</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../command.h&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="device__type_8h.html">Interfaces/enums/device_type.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_device___create.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_device___create.html">Device_Create</a> : <span class="keyword">public</span> <a class="code" href="class_command.html">Command</a></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_device___create.html">Device_Create</a>() = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ~<a class="code" href="class_device___create.html">Device_Create</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_device___create.html">Device_Create</a>(<a class="code" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> send_to_node, <a class="code" href="_interfaces_2types_2device__label_8h.html#afcd0293ca55435419fc56f71a0d092fa">Device_Id</a> <span class="keywordtype">id</span>, <a class="code" href="_interfaces_2types_2device__label_8h.html#ac94540d3f1845789bf21ad03ce0092c8">Device_Name</a> name);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_device___create.html#a1a8b1b1d88684e2fa5caee0ce9ec20cf">   35</a></span>&#160;    <a class="code" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> <a class="code" href="class_device___create.html#a1a8b1b1d88684e2fa5caee0ce9ec20cf">node</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_device___create.html#a4104986ba4e9f70e44a36084074375a7">   39</a></span>&#160;    <a class="code" href="_interfaces_2types_2device__label_8h.html#a176ffce7500cebaab0d28514755a3a11">Device_Creator</a> <a class="code" href="class_device___create.html#a4104986ba4e9f70e44a36084074375a7">device</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_device___create.html#a23f1350163c95ce14b9c50ecd3ccc740">   41</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> <a class="code" href="class_device___create.html#a23f1350163c95ce14b9c50ecd3ccc740">get_id</a>() { <span class="keywordflow">return</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c">COMMAND_ENUM::DEVICE_CREATION</a>; }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !COMMAND_DEVICE_CREATOR</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="device__command_8h.html">device_command.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_device___create.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_device___create.html">Device_Create</a> : <span class="keyword">public</span> <a class="code" href="class_device___command.html">Device_Command</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_device___create.html">Device_Create</a>() = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    ~<a class="code" href="class_device___create.html">Device_Create</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_device___create.html">Device_Create</a>(<a class="code" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> send_to_node, <a class="code" href="_interfaces_2types_2device__label_8h.html#afcd0293ca55435419fc56f71a0d092fa">Device_Id</a> <span class="keywordtype">id</span>, <a class="code" href="_interfaces_2types_2device__label_8h.html#ac94540d3f1845789bf21ad03ce0092c8">Device_Name</a> name);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_device___create.html#a1a8b1b1d88684e2fa5caee0ce9ec20cf">   33</a></span>&#160;    <a class="code" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> <a class="code" href="class_device___create.html#a1a8b1b1d88684e2fa5caee0ce9ec20cf">node</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_device___create.html#a4104986ba4e9f70e44a36084074375a7">   37</a></span>&#160;    <a class="code" href="_interfaces_2types_2device__label_8h.html#a176ffce7500cebaab0d28514755a3a11">Device_Creator</a> <a class="code" href="class_device___create.html#a4104986ba4e9f70e44a36084074375a7">device</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_device___create.html#a23f1350163c95ce14b9c50ecd3ccc740">   39</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> <a class="code" href="class_device___create.html#a23f1350163c95ce14b9c50ecd3ccc740">get_id</a>() { <span class="keywordflow">return</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c">COMMAND_ENUM::DEVICE_CREATION</a>; }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !COMMAND_DEVICE_CREATOR</span></div>
 <div class="ttc" id="a_interfaces_2types_2device__label_8h_html_a0ee85d5e033de663c6d6d91a3323eebd"><div class="ttname"><a href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a></div><div class="ttdeci">std::string Node_Id</div><div class="ttdef"><b>Definition:</b> Interfaces/types/device_label.h:37</div></div>
 <div class="ttc" id="a_interfaces_2types_2device__label_8h_html_a176ffce7500cebaab0d28514755a3a11"><div class="ttname"><a href="_interfaces_2types_2device__label_8h.html#a176ffce7500cebaab0d28514755a3a11">Device_Creator</a></div><div class="ttdeci">std::pair&lt; Device_Id, Device_Name &gt; Device_Creator</div><div class="ttdef"><b>Definition:</b> Interfaces/types/device_label.h:42</div></div>
 <div class="ttc" id="a_interfaces_2types_2device__label_8h_html_ac94540d3f1845789bf21ad03ce0092c8"><div class="ttname"><a href="_interfaces_2types_2device__label_8h.html#ac94540d3f1845789bf21ad03ce0092c8">Device_Name</a></div><div class="ttdeci">std::string Device_Name</div><div class="ttdef"><b>Definition:</b> Interfaces/types/device_label.h:26</div></div>
 <div class="ttc" id="a_interfaces_2types_2device__label_8h_html_afcd0293ca55435419fc56f71a0d092fa"><div class="ttname"><a href="_interfaces_2types_2device__label_8h.html#afcd0293ca55435419fc56f71a0d092fa">Device_Id</a></div><div class="ttdeci">uint16_t Device_Id</div><div class="ttdef"><b>Definition:</b> Interfaces/types/device_label.h:22</div></div>
-<div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:54</div></div>
-<div class="ttc" id="aclass_device___create_html"><div class="ttname"><a href="class_device___create.html">Device_Create</a></div><div class="ttdef"><b>Definition:</b> device_create.h:19</div></div>
-<div class="ttc" id="aclass_device___create_html_a1a8b1b1d88684e2fa5caee0ce9ec20cf"><div class="ttname"><a href="class_device___create.html#a1a8b1b1d88684e2fa5caee0ce9ec20cf">Device_Create::node</a></div><div class="ttdeci">Node_Id node</div><div class="ttdef"><b>Definition:</b> device_create.h:35</div></div>
-<div class="ttc" id="aclass_device___create_html_a23f1350163c95ce14b9c50ecd3ccc740"><div class="ttname"><a href="class_device___create.html#a23f1350163c95ce14b9c50ecd3ccc740">Device_Create::get_id</a></div><div class="ttdeci">virtual COMMAND_ENUM get_id()</div><div class="ttdef"><b>Definition:</b> device_create.h:41</div></div>
-<div class="ttc" id="aclass_device___create_html_a4104986ba4e9f70e44a36084074375a7"><div class="ttname"><a href="class_device___create.html#a4104986ba4e9f70e44a36084074375a7">Device_Create::device</a></div><div class="ttdeci">Device_Creator device</div><div class="ttdef"><b>Definition:</b> device_create.h:39</div></div>
-<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a></div><div class="ttdeci">COMMAND_ENUM</div><div class="ttdef"><b>Definition:</b> command.h:20</div></div>
+<div class="ttc" id="aclass_device___command_html"><div class="ttname"><a href="class_device___command.html">Device_Command</a></div><div class="ttdef"><b>Definition:</b> device_command.h:17</div></div>
+<div class="ttc" id="aclass_device___create_html"><div class="ttname"><a href="class_device___create.html">Device_Create</a></div><div class="ttdef"><b>Definition:</b> device_create.h:17</div></div>
+<div class="ttc" id="aclass_device___create_html_a1a8b1b1d88684e2fa5caee0ce9ec20cf"><div class="ttname"><a href="class_device___create.html#a1a8b1b1d88684e2fa5caee0ce9ec20cf">Device_Create::node</a></div><div class="ttdeci">Node_Id node</div><div class="ttdef"><b>Definition:</b> device_create.h:33</div></div>
+<div class="ttc" id="aclass_device___create_html_a23f1350163c95ce14b9c50ecd3ccc740"><div class="ttname"><a href="class_device___create.html#a23f1350163c95ce14b9c50ecd3ccc740">Device_Create::get_id</a></div><div class="ttdeci">virtual COMMAND_ENUM get_id()</div><div class="ttdef"><b>Definition:</b> device_create.h:39</div></div>
+<div class="ttc" id="aclass_device___create_html_a4104986ba4e9f70e44a36084074375a7"><div class="ttname"><a href="class_device___create.html#a4104986ba4e9f70e44a36084074375a7">Device_Create::device</a></div><div class="ttdeci">Device_Creator device</div><div class="ttdef"><b>Definition:</b> device_create.h:37</div></div>
+<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a></div><div class="ttdeci">COMMAND_ENUM</div><div class="ttdef"><b>Definition:</b> command.h:22</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c">COMMAND_ENUM::DEVICE_CREATION</a></div><div class="ttdeci">@ DEVICE_CREATION</div></div>
-<div class="ttc" id="adevice__type_8h_html"><div class="ttname"><a href="device__type_8h.html">device_type.h</a></div></div>
+<div class="ttc" id="adevice__command_8h_html"><div class="ttname"><a href="device__command_8h.html">device_command.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,8 +1,9 @@
 <map id="message_relay.h" name="message_relay.h">
-<area shape="rect" id="node1" title=" " alt="" coords="213,5,331,32"/>
-<area shape="rect" id="node2" href="$controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="5,80,125,107"/>
-<area shape="rect" id="node3" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="150,80,253,107"/>
-<area shape="rect" id="node4" href="$_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="277,80,411,107"/>
-<area shape="rect" id="node6" href="$view__main_8h.html" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="435,80,530,107"/>
-<area shape="rect" id="node5" href="$network__main_8h.html" title=" " alt="" coords="287,155,401,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="173,5,292,32"/>
+<area shape="rect" id="node2" href="$commander_8h.html" title=" " alt="" coords="5,80,105,107"/>
+<area shape="rect" id="node3" href="$controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="39,155,159,181"/>
+<area shape="rect" id="node4" href="$model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="181,80,284,107"/>
+<area shape="rect" id="node5" href="$_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="308,80,443,107"/>
+<area shape="rect" id="node7" href="$view__main_8h.html" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="467,80,561,107"/>
+<area shape="rect" id="node6" href="$network__main_8h.html" title=" " alt="" coords="319,155,432,181"/>
 </map>

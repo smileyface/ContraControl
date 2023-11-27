@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -75,50 +75,65 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef COMMAND_H</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define COMMAND_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="command_8h.html#ada307d0434b55913c4763ab0684b0c9b">   14</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="command_8h.html#ada307d0434b55913c4763ab0684b0c9b">command_id</a>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">   19</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> :<a class="code" href="command_8h.html#ada307d0434b55913c4763ab0684b0c9b">command_id</a></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c">DEVICE_CREATION</a>,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a0a1add1837ce52d597e3585b70909aa4">INITALIZE_DEVICE</a>,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a90651ebea9a35ec4e018c8157492e17c">ON</a>,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4">OFF</a>,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;     <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1">ASSIGN</a>,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ad7228a9a2e12b4a40c98ffd8812fda97">DEVICE_DESTRUCTION</a>,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549accc0377a8afbf50e7094f5c23a8af223">INVALID</a> = 0xffff</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_command.html">   54</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_command.html">Command</a> {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_command.html#ae0b0ac58d2c3698ec51aa884df674bd6">   59</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="class_command.html#ae0b0ac58d2c3698ec51aa884df674bd6">time_to_complete</a> = 0.0;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="class_command.html">Command</a>();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_command.html">Command</a>()</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    { };</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_command.html#ad454e0c6bcdc2fc50fb0ebd33277479b">completed</a>();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_command.html#a032e8f44b7d694c57f8819d61020ec78">complete_command</a>();</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> <a class="code" href="class_command.html#a16d05707b4c02e4ffc1887c7db16255a">get_id</a>();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">bool</span> complete;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !COMMAND_H</span></div>
-<div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:54</div></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="command_8h.html#ada307d0434b55913c4763ab0684b0c9b">   16</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="command_8h.html#ada307d0434b55913c4763ab0684b0c9b">command_id</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">   21</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> :<a class="code" href="command_8h.html#ada307d0434b55913c4763ab0684b0c9b">command_id</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c">DEVICE_CREATION</a>,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a0a1add1837ce52d597e3585b70909aa4">INITALIZE_DEVICE</a>,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a90651ebea9a35ec4e018c8157492e17c">ON</a>,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4">OFF</a>,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1">ASSIGN</a>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ad7228a9a2e12b4a40c98ffd8812fda97">DEVICE_DESTRUCTION</a>,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549af3685dd50c9f76f2f0305fd84b5f2925">NODE_CREATION</a>,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ad77f757776db7a286b017fb6fb4ec580">NODE_INITALIZE</a>,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a0e003f234a165bb27516330a8732f671">NODE_DESTORY</a>,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ade618d82e4b605ef53b6a541398d06b7">NODE_CONNECT</a>,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a5211dcd694e929466b12a0de39ca3ac9">NODE_DISCONNECT</a>,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549accc0377a8afbf50e7094f5c23a8af223">INVALID</a> = 0xffff</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class_command.html">   76</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_command.html">Command</a> {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="class_command.html#ae0b0ac58d2c3698ec51aa884df674bd6">   81</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="class_command.html#ae0b0ac58d2c3698ec51aa884df674bd6">time_to_complete</a> = 0.0;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="class_command.html">Command</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_command.html">Command</a>()</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    { };</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_command.html#ad454e0c6bcdc2fc50fb0ebd33277479b">completed</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_command.html#a032e8f44b7d694c57f8819d61020ec78">complete_command</a>();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> <a class="code" href="class_command.html#a16d05707b4c02e4ffc1887c7db16255a">get_id</a>();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    std::string <a class="code" href="class_command.html#a3596109c18ace30d62ada9173abf2fbf">get_id_str</a>();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">bool</span> complete;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !COMMAND_H</span></div>
+<div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:76</div></div>
 <div class="ttc" id="aclass_command_html_a032e8f44b7d694c57f8819d61020ec78"><div class="ttname"><a href="class_command.html#a032e8f44b7d694c57f8819d61020ec78">Command::complete_command</a></div><div class="ttdeci">void complete_command()</div><div class="ttdoc">Set if a command has been completed by the Subsystem that the command was sent to.</div><div class="ttdef"><b>Definition:</b> command.cpp:18</div></div>
 <div class="ttc" id="aclass_command_html_a16d05707b4c02e4ffc1887c7db16255a"><div class="ttname"><a href="class_command.html#a16d05707b4c02e4ffc1887c7db16255a">Command::get_id</a></div><div class="ttdeci">virtual COMMAND_ENUM get_id()</div><div class="ttdef"><b>Definition:</b> command.cpp:8</div></div>
+<div class="ttc" id="aclass_command_html_a3596109c18ace30d62ada9173abf2fbf"><div class="ttname"><a href="class_command.html#a3596109c18ace30d62ada9173abf2fbf">Command::get_id_str</a></div><div class="ttdeci">std::string get_id_str()</div><div class="ttdef"><b>Definition:</b> command.cpp:23</div></div>
 <div class="ttc" id="aclass_command_html_ad454e0c6bcdc2fc50fb0ebd33277479b"><div class="ttname"><a href="class_command.html#ad454e0c6bcdc2fc50fb0ebd33277479b">Command::completed</a></div><div class="ttdeci">virtual bool completed()</div><div class="ttdef"><b>Definition:</b> command.cpp:13</div></div>
-<div class="ttc" id="aclass_command_html_ae0b0ac58d2c3698ec51aa884df674bd6"><div class="ttname"><a href="class_command.html#ae0b0ac58d2c3698ec51aa884df674bd6">Command::time_to_complete</a></div><div class="ttdeci">double time_to_complete</div><div class="ttdef"><b>Definition:</b> command.h:59</div></div>
-<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a></div><div class="ttdeci">COMMAND_ENUM</div><div class="ttdef"><b>Definition:</b> command.h:20</div></div>
+<div class="ttc" id="aclass_command_html_ae0b0ac58d2c3698ec51aa884df674bd6"><div class="ttname"><a href="class_command.html#ae0b0ac58d2c3698ec51aa884df674bd6">Command::time_to_complete</a></div><div class="ttdeci">double time_to_complete</div><div class="ttdef"><b>Definition:</b> command.h:81</div></div>
+<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a></div><div class="ttdeci">COMMAND_ENUM</div><div class="ttdef"><b>Definition:</b> command.h:22</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549a0a1add1837ce52d597e3585b70909aa4"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a0a1add1837ce52d597e3585b70909aa4">COMMAND_ENUM::INITALIZE_DEVICE</a></div><div class="ttdeci">@ INITALIZE_DEVICE</div></div>
+<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549a0e003f234a165bb27516330a8732f671"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a0e003f234a165bb27516330a8732f671">COMMAND_ENUM::NODE_DESTORY</a></div><div class="ttdeci">@ NODE_DESTORY</div></div>
+<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549a5211dcd694e929466b12a0de39ca3ac9"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a5211dcd694e929466b12a0de39ca3ac9">COMMAND_ENUM::NODE_DISCONNECT</a></div><div class="ttdeci">@ NODE_DISCONNECT</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4">COMMAND_ENUM::OFF</a></div><div class="ttdeci">@ OFF</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549a90651ebea9a35ec4e018c8157492e17c"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a90651ebea9a35ec4e018c8157492e17c">COMMAND_ENUM::ON</a></div><div class="ttdeci">@ ON</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ac622c048f835ef0b84431f04e040db7c">COMMAND_ENUM::DEVICE_CREATION</a></div><div class="ttdeci">@ DEVICE_CREATION</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549accc0377a8afbf50e7094f5c23a8af223"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549accc0377a8afbf50e7094f5c23a8af223">COMMAND_ENUM::INVALID</a></div><div class="ttdeci">@ INVALID</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549ad7228a9a2e12b4a40c98ffd8812fda97"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ad7228a9a2e12b4a40c98ffd8812fda97">COMMAND_ENUM::DEVICE_DESTRUCTION</a></div><div class="ttdeci">@ DEVICE_DESTRUCTION</div></div>
+<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549ad77f757776db7a286b017fb6fb4ec580"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ad77f757776db7a286b017fb6fb4ec580">COMMAND_ENUM::NODE_INITALIZE</a></div><div class="ttdeci">@ NODE_INITALIZE</div></div>
+<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549ade618d82e4b605ef53b6a541398d06b7"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ade618d82e4b605ef53b6a541398d06b7">COMMAND_ENUM::NODE_CONNECT</a></div><div class="ttdeci">@ NODE_CONNECT</div></div>
+<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549af3685dd50c9f76f2f0305fd84b5f2925"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549af3685dd50c9f76f2f0305fd84b5f2925">COMMAND_ENUM::NODE_CREATION</a></div><div class="ttdeci">@ NODE_CREATION</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1">COMMAND_ENUM::ASSIGN</a></div><div class="ttdeci">@ ASSIGN</div></div>
-<div class="ttc" id="acommand_8h_html_ada307d0434b55913c4763ab0684b0c9b"><div class="ttname"><a href="command_8h.html#ada307d0434b55913c4763ab0684b0c9b">command_id</a></div><div class="ttdeci">unsigned short command_id</div><div class="ttdef"><b>Definition:</b> command.h:14</div></div>
+<div class="ttc" id="acommand_8h_html_ada307d0434b55913c4763ab0684b0c9b"><div class="ttname"><a href="command_8h.html#ada307d0434b55913c4763ab0684b0c9b">command_id</a></div><div class="ttdeci">unsigned short command_id</div><div class="ttdef"><b>Definition:</b> command.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

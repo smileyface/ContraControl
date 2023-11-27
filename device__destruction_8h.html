@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -77,16 +77,18 @@ $(function() {
 <p><br  />
   
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="command_8h_source.html">../command.h</a>&quot;</code><br />
-<code>#include &quot;Interfaces/types/device_label.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="device__command_8h_source.html">device_command.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for device_destruction.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="device__destruction_8h__incl.png" border="0" usemap="#adevice__destruction_8h" alt=""/></div>
 <map name="adevice__destruction_8h" id="adevice__destruction_8h">
-<area shape="rect" title=" " alt="" coords="60,5,201,32"/>
-<area shape="rect" href="command_8h.html" title=" " alt="" coords="5,87,104,114"/>
-<area shape="rect" title=" " alt="" coords="128,80,285,121"/>
+<area shape="rect" title=" " alt="" coords="61,5,203,32"/>
+<area shape="rect" href="device__command_8h.html" title=" " alt="" coords="65,80,199,107"/>
+<area shape="rect" href="command_8h.html" title=" " alt="" coords="5,162,104,189"/>
+<area shape="rect" href="device__type_8h.html" title=" " alt="" coords="128,155,293,196"/>
+<area shape="rect" title=" " alt="" coords="27,251,82,278"/>
+<area shape="rect" title=" " alt="" coords="132,244,289,285"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -94,27 +96,27 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="device__destruction_8h__dep__incl.png" border="0" usemap="#adevice__destruction_8hdep" alt=""/></div>
 <map name="adevice__destruction_8hdep" id="adevice__destruction_8hdep">
-<area shape="rect" title=" " alt="" coords="83,5,224,32"/>
-<area shape="rect" href="commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="105,80,201,107"/>
-<area shape="rect" href="packed__command_8h.html" title=" " alt="" coords="84,155,223,181"/>
-<area shape="rect" href="commander_8h.html" title=" " alt="" coords="43,319,143,345"/>
-<area shape="rect" href="controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="33,543,153,569"/>
-<area shape="rect" href="controller__model__command__message_8h.html" title=" " alt="" coords="127,229,308,271"/>
-<area shape="rect" href="model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="217,543,319,569"/>
-<area shape="rect" href="internal__messages_8h.html" title="List of Internal Messages." alt="" coords="167,319,308,345"/>
-<area shape="rect" href="consumers_8h.html" title=" " alt="" coords="523,393,619,420"/>
-<area shape="rect" href="message__relay_8h.html" title=" " alt="" coords="383,468,502,495"/>
-<area shape="rect" href="format_8h.html" title=" " alt="" coords="536,468,605,495"/>
-<area shape="rect" href="log__view__type_8h.html" title=" " alt="" coords="692,468,807,495"/>
-<area shape="rect" href="option__view__type_8h.html" title=" " alt="" coords="874,468,1006,495"/>
-<area shape="rect" href="_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="343,543,478,569"/>
-<area shape="rect" href="view__main_8h.html" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="502,543,597,569"/>
-<area shape="rect" href="network__main_8h.html" title=" " alt="" coords="354,617,467,644"/>
-<area shape="rect" href="console_8h.html" title=" " alt="" coords="621,543,699,569"/>
-<area shape="rect" href="console__log__view_8h.html" title=" " alt="" coords="723,543,858,569"/>
-<area shape="rect" href="views_8h.html" title=" " alt="" coords="843,617,909,644"/>
-<area shape="rect" href="view__factory_8h.html" title=" " alt="" coords="823,692,929,719"/>
-<area shape="rect" href="console__option__popup_8h.html" title=" " alt="" coords="882,543,1043,569"/>
+<area shape="rect" title=" " alt="" coords="158,5,299,32"/>
+<area shape="rect" href="commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="181,80,277,107"/>
+<area shape="rect" href="packed__command_8h.html" title=" " alt="" coords="159,155,298,181"/>
+<area shape="rect" href="commander_8h.html" title=" " alt="" coords="5,543,105,569"/>
+<area shape="rect" href="controller__model__command__message_8h.html" title=" " alt="" coords="270,229,451,271"/>
+<area shape="rect" href="controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="39,617,159,644"/>
+<area shape="rect" href="internal__messages_8h.html" title="List of Internal Messages." alt="" coords="343,319,485,345"/>
+<area shape="rect" href="consumers_8h.html" title=" " alt="" coords="487,393,583,420"/>
+<area shape="rect" href="message__relay_8h.html" title=" " alt="" coords="260,468,379,495"/>
+<area shape="rect" href="format_8h.html" title=" " alt="" coords="501,468,570,495"/>
+<area shape="rect" href="log__view__type_8h.html" title=" " alt="" coords="657,468,771,495"/>
+<area shape="rect" href="option__view__type_8h.html" title=" " alt="" coords="839,468,971,495"/>
+<area shape="rect" href="model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="181,543,284,569"/>
+<area shape="rect" href="_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="308,543,443,569"/>
+<area shape="rect" href="view__main_8h.html" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="467,543,561,569"/>
+<area shape="rect" href="network__main_8h.html" title=" " alt="" coords="319,617,432,644"/>
+<area shape="rect" href="console_8h.html" title=" " alt="" coords="586,543,663,569"/>
+<area shape="rect" href="console__log__view_8h.html" title=" " alt="" coords="688,543,823,569"/>
+<area shape="rect" href="views_8h.html" title=" " alt="" coords="807,617,874,644"/>
+<area shape="rect" href="view__factory_8h.html" title=" " alt="" coords="788,692,893,719"/>
+<area shape="rect" href="console__option__popup_8h.html" title=" " alt="" coords="847,543,1008,569"/>
 </map>
 </div>
 </div>

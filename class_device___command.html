@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -79,12 +79,14 @@ Inheritance diagram for Device_Command:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_device___command__inherit__graph.png" border="0" usemap="#a_device___command_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_device___command_inherit__map" id="a_device___command_inherit__map">
-<area shape="rect" title=" " alt="" coords="134,80,262,107"/>
+<area shape="rect" title=" " alt="" coords="301,80,429,107"/>
 <area shape="rect" href="class_assign.html" title=" " alt="" coords="5,155,68,181"/>
-<area shape="rect" href="class_initalize___device.html" title=" " alt="" coords="92,155,205,181"/>
-<area shape="rect" href="class_off.html" title=" " alt="" coords="229,155,268,181"/>
-<area shape="rect" href="class_on.html" title=" " alt="" coords="292,155,331,181"/>
-<area shape="rect" href="class_command.html" title=" " alt="" coords="157,5,239,32"/>
+<area shape="rect" href="class_device___create.html" title=" " alt="" coords="93,155,199,181"/>
+<area shape="rect" href="class_device___destruction.html" title=" " alt="" coords="224,155,359,181"/>
+<area shape="rect" href="class_initalize___device.html" title=" " alt="" coords="383,155,496,181"/>
+<area shape="rect" href="class_off.html" title=" " alt="" coords="520,155,559,181"/>
+<area shape="rect" href="class_on.html" title=" " alt="" coords="583,155,621,181"/>
+<area shape="rect" href="class_command.html" title=" " alt="" coords="324,5,405,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -112,6 +114,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a032e8f44b7d694c57f8819d61020ec78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16d05707b4c02e4ffc1887c7db16255a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_command.html#a16d05707b4c02e4ffc1887c7db16255a">get_id</a> ()</td></tr>
 <tr class="separator:a16d05707b4c02e4ffc1887c7db16255a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3596109c18ace30d62ada9173abf2fbf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_command.html#a3596109c18ace30d62ada9173abf2fbf">get_id_str</a> ()</td></tr>
+<tr class="separator:a3596109c18ace30d62ada9173abf2fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -174,9 +178,35 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Return Enum of the command. Mainly for <a class="el" href="class_command.html">Command</a> indentification purposes. </p><dl class="section return"><dt>Returns</dt><dd>Enum value of the command. </dd></dl>
+<p>Return Enum of the command. Mainly for <a class="el" href="class_command.html">Command</a> identification purposes. </p><dl class="section return"><dt>Returns</dt><dd>Enum value of the command. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_on.html#aab6574162edd320a75a88fc14ee2d399">On</a>, <a class="el" href="class_off.html#a96ff6673ec4332f5fac782c53e6dcc94">Off</a>, <a class="el" href="class_initalize___device.html#aca774451d15c88707c53c8aac073cb5b">Initalize_Device</a>, <a class="el" href="class_device___destruction.html#af7004dd133c85534d26fd9ea5581c6e1">Device_Destruction</a>, <a class="el" href="class_device___create.html#a23f1350163c95ce14b9c50ecd3ccc740">Device_Create</a>, and <a class="el" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">Assign</a>.</p>
+<p>Reimplemented in <a class="el" href="class_node___initalize.html#aa59763fd75f9ca381c0aac59827d040a">Node_Initalize</a>, <a class="el" href="class_node___disconnect.html#afe1754ef3e4ee3051cf66f53b1074503">Node_Disconnect</a>, <a class="el" href="class_node___destroy.html#adf3450c45cee748a1714250aff8e764a">Node_Destroy</a>, <a class="el" href="class_node___create.html#af235e0df1f3b101abbbd68ba430a9495">Node_Create</a>, <a class="el" href="class_node___connect.html#a1aae04527adad14e8321c81040a28024">Node_Connect</a>, <a class="el" href="class_on.html#aab6574162edd320a75a88fc14ee2d399">On</a>, <a class="el" href="class_off.html#a96ff6673ec4332f5fac782c53e6dcc94">Off</a>, <a class="el" href="class_initalize___device.html#aca774451d15c88707c53c8aac073cb5b">Initalize_Device</a>, <a class="el" href="class_device___destruction.html#af7004dd133c85534d26fd9ea5581c6e1">Device_Destruction</a>, <a class="el" href="class_device___create.html#a23f1350163c95ce14b9c50ecd3ccc740">Device_Create</a>, and <a class="el" href="class_assign.html#ad29bcee589dd1a151f1cb170f6d665de">Assign</a>.</p>
+
+</div>
+</div>
+<a id="a3596109c18ace30d62ada9173abf2fbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3596109c18ace30d62ada9173abf2fbf">&#9670;&nbsp;</a></span>get_id_str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Command::get_id_str </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get id as a string. Helper function </p><dl class="section return"><dt>Returns</dt><dd>Enum value as a string. </dd></dl>
 
 </div>
 </div>

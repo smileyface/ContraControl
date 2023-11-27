@@ -12,7 +12,7 @@ var searchData=
   ['add_5faction_5flayer_9',['add_action_layer',['../class_action___stack.html#a65859ebb909bfa57ec97f769c598e3dc',1,'Action_Stack']]],
   ['add_5fcleanup_5ftask_10',['add_cleanup_task',['../class_scheduler.html#ad7f73412c6a672297feacb109baf89ba',1,'Scheduler']]],
   ['add_5fcommand_11',['add_command',['../namespacecontroller.html#aeb5f7666c6ec3b27abf330d252876495',1,'controller']]],
-  ['add_5fconnection_12',['add_connection',['../class_node.html#a2ec479bef3712c3010d828b034ce1221',1,'Node']]],
+  ['add_5fconnection_12',['add_connection',['../class_node.html#a378402d53c2d4f723be520c3d0268a7b',1,'Node']]],
   ['add_5fdisplay_13',['add_display',['../namespaceview.html#a4db6e2a8e7849b39de13fe36cbc8f999',1,'view']]],
   ['add_5fsubtask_14',['add_subtask',['../class_task.html#a83b2f04acfa75e20db6fdf1c29d8e800',1,'Task::add_subtask(const Subtask &amp;subtask)'],['../class_task.html#a346b298745d8473337b814036b4cea91',1,'Task::add_subtask(const std::function&lt; void()&gt; &amp;subtask)']]],
   ['add_5fsystem_5ftask_15',['add_system_task',['../class_scheduler.html#afca7e1c183dc928dde049fe5e0efce06',1,'Scheduler']]],

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -65,6 +65,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="class_node-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Node Class Reference</div>  </div>
@@ -72,11 +73,20 @@ $(function() {
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="node_8h_source.html">node.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Node:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_node__coll__graph.png" border="0" usemap="#a_node_coll__map" alt="Collaboration graph"/></div>
+<map name="a_node_coll__map" id="a_node_coll__map">
+<area shape="rect" title=" " alt="" coords="10,95,63,121"/>
+<area shape="rect" href="class_device.html" title=" " alt="" coords="5,5,68,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad27ade37db0d02ba3285ffecf5bfac56"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#ad27ade37db0d02ba3285ffecf5bfac56">Node</a> (<a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a> type)</td></tr>
-<tr class="separator:ad27ade37db0d02ba3285ffecf5bfac56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0d1f76f95b47db3a4e233290475ebeb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#ad0d1f76f95b47db3a4e233290475ebeb">Node</a> (<a class="el" href="node__type_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a> type, <a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> id)</td></tr>
+<tr class="separator:ad0d1f76f95b47db3a4e233290475ebeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae55a8ebfeb9d095dc162470dbc0704d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#ae55a8ebfeb9d095dc162470dbc0704d5">clear_node</a> ()</td></tr>
 <tr class="separator:ae55a8ebfeb9d095dc162470dbc0704d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8da160d5437ff7a47300769e4376c9c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#a8da160d5437ff7a47300769e4376c9c7">register_device</a> (<a class="el" href="_interfaces_2types_2device__label_8h.html#a176ffce7500cebaab0d28514755a3a11">Device_Creator</a> device)</td></tr>
@@ -93,18 +103,27 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a780714e2e37aa8407aaaf6067116c7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4f19568e78941d05e0e8f87b90dee6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#af4f19568e78941d05e0e8f87b90dee6c">get_connection</a> (<a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> id)</td></tr>
 <tr class="separator:af4f19568e78941d05e0e8f87b90dee6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ec479bef3712c3010d828b034ce1221"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#a2ec479bef3712c3010d828b034ce1221">add_connection</a> (<a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a> type, <a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> id)</td></tr>
-<tr class="separator:a2ec479bef3712c3010d828b034ce1221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a378402d53c2d4f723be520c3d0268a7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#a378402d53c2d4f723be520c3d0268a7b">add_connection</a> (<a class="el" href="class_node.html">Node</a> *node_connection)</td></tr>
+<tr class="separator:a378402d53c2d4f723be520c3d0268a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab183af7b45a08f92479e044c8d461baf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#ab183af7b45a08f92479e044c8d461baf">remove_connection</a> (<a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a> id)</td></tr>
 <tr class="separator:ab183af7b45a08f92479e044c8d461baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b67fa27b2bcb94d7fb1e87e8d3baf36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_interfaces_2types_2device__label_8h.html#a0ee85d5e033de663c6d6d91a3323eebd">Node_Id</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#a6b67fa27b2bcb94d7fb1e87e8d3baf36">get_id</a> ()</td></tr>
 <tr class="separator:a6b67fa27b2bcb94d7fb1e87e8d3baf36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d8818ca6e0c2b51bd47621dcc0525d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="node__type_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#a2d8818ca6e0c2b51bd47621dcc0525d7">get_type</a> ()</td></tr>
+<tr class="separator:a2d8818ca6e0c2b51bd47621dcc0525d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a24eeff5e4e4dc95ae12e4311a57db37a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_device.html">Device</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#a24eeff5e4e4dc95ae12e4311a57db37a">invalid_device</a></td></tr>
+<tr class="separator:a24eeff5e4e4dc95ae12e4311a57db37a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad42c2c2cd14d1efc8fb4c29bc3f8e1e9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#ad42c2c2cd14d1efc8fb4c29bc3f8e1e9">invalid_node</a></td></tr>
+<tr class="separator:ad42c2c2cd14d1efc8fb4c29bc3f8e1e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A node, which represents a computer, such as a Raspberry Pi, or other command device. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad27ade37db0d02ba3285ffecf5bfac56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad27ade37db0d02ba3285ffecf5bfac56">&#9670;&nbsp;</a></span>Node()</h2>
+<a id="ad0d1f76f95b47db3a4e233290475ebeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0d1f76f95b47db3a4e233290475ebeb">&#9670;&nbsp;</a></span>Node()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -112,33 +131,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Node::Node </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a>&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Create a node instance by giving it a type.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type</td><td>The type of node. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2ec479bef3712c3010d828b034ce1221"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ec479bef3712c3010d828b034ce1221">&#9670;&nbsp;</a></span>add_connection()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Node::add_connection </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="node__type_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a>&#160;</td>
           <td class="paramname"><em>type</em>, </td>
         </tr>
         <tr>
@@ -154,10 +147,36 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Create a node instance by giving it a type and a name.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The type of node. </td></tr>
+    <tr><td class="paramname">id</td><td>Common ID of the node. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a378402d53c2d4f723be520c3d0268a7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a378402d53c2d4f723be520c3d0268a7b">&#9670;&nbsp;</a></span>add_connection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Node::add_connection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>node_connection</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 <p>Add node to known connections. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">type</td><td>Type of the node. </td></tr>
-    <tr><td class="paramname">id</td><td>The id of the node on the system. </td></tr>
+    <tr><td class="paramname">node_connection</td><td><a class="el" href="class_node.html">Node</a> to connect to this node. </td></tr>
   </table>
   </dd>
 </dl>
@@ -204,12 +223,6 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the connected node. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_node_not_found_exception.html" title="Exception for when attempting to access a node that is non-existant.">NodeNotFoundException</a></td><td>If node is not a known connection. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -236,12 +249,6 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the device. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_device_not_found_exception.html" title="Exception node throws when attempting to access a device that does not exist.">DeviceNotFoundException</a></td><td>if node does not know about the device </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -266,13 +273,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the device. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_device_not_found_exception.html" title="Exception node throws when attempting to access a device that does not exist.">DeviceNotFoundException</a></td><td>if node does not know about the device </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the device. If no device is found, it returns nullptr </dd></dl>
 
 </div>
 </div>
@@ -309,6 +310,24 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Get the id of the local node. </p><dl class="section return"><dt>Returns</dt><dd>The id. </dd></dl>
+
+</div>
+</div>
+<a id="a2d8818ca6e0c2b51bd47621dcc0525d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d8818ca6e0c2b51bd47621dcc0525d7">&#9670;&nbsp;</a></span>get_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="node__type_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a> Node::get_type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get type of the device. </p><dl class="section return"><dt>Returns</dt><dd>The Type of the device. </dd></dl>
 
 </div>
 </div>
@@ -406,6 +425,53 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a24eeff5e4e4dc95ae12e4311a57db37a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24eeff5e4e4dc95ae12e4311a57db37a">&#9670;&nbsp;</a></span>invalid_device</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_device.html">Device</a> Node::invalid_device</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>An invalid device. </p>
+
+</div>
+</div>
+<a id="ad42c2c2cd14d1efc8fb4c29bc3f8e1e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad42c2c2cd14d1efc8fb4c29bc3f8e1e9">&#9670;&nbsp;</a></span>invalid_node</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_node.html">Node</a> Node::invalid_node</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>An invalid node. </p>
 
 </div>
 </div>

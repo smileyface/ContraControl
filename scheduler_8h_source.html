@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -77,68 +77,72 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="task_8h.html">task.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_scheduler.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_scheduler.html">Scheduler</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_scheduler.html">Scheduler</a>* <a class="code" href="class_scheduler.html#af1549eccfc413c5a1cfb2d4f4f824734">get_instance</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a9c4653c6323d4bac0dcc1e349e8effe0">destroy_instance</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a6220b56ae5ef4ef67a03e01e2d5d2d71">add_task</a>(<a class="code" href="class_task.html">Task</a>* task);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#afca7e1c183dc928dde049fe5e0efce06">add_system_task</a>(std::function&lt;<span class="keywordtype">void</span>()&gt; task);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#ad7f73412c6a672297feacb109baf89ba">add_cleanup_task</a>(std::function&lt;<span class="keywordtype">void</span>()&gt; task);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scheduler.html#afa4a8c26b1d4a1edb20b44e65fd8a0bd">get_number_of_tasks</a>();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scheduler.html#aaf2bb6de35334ff9ee74447eae4e68a0">get_number_of_subtasks</a>();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scheduler.html#a3a81a2e2b5485431ef542732f94443ca">get_overruns</a>();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a86d4189517e71b5c52dbbe07d48eeab2">start</a>(<span class="keywordtype">int</span> frame_rate);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a7ac470a1b0421f2db78e5b478a6b28b1">stop</a>();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a10491d05740640f2ede57c44d5dfad02">frame</a>(std::chrono::milliseconds frameDurationMs);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a53a061075e64681ba5b6b4f9e540898b">clear</a>();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="class_scheduler.html">Scheduler</a>();</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    ~<a class="code" href="class_scheduler.html">Scheduler</a>();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="class_scheduler.html">Scheduler</a>(<span class="keyword">const</span> <a class="code" href="class_scheduler.html">Scheduler</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="class_scheduler.html">Scheduler</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="class_scheduler.html">Scheduler</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> clean_persistence();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">bool</span> scheduler_running;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    std::mutex mutex;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="class_task.html">Task</a> system_task;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="class_task.html">Task</a> cleanup_task;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    std::vector&lt;std::vector&lt;Task*&gt;&gt; tasks;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">int</span> frame_rate;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::thread scheduler_thread;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">int</span> overruns;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_scheduler.html">Scheduler</a>* instance;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SCHEDULER_H</span></div>
-<div class="ttc" id="aclass_scheduler_html"><div class="ttname"><a href="class_scheduler.html">Scheduler</a></div><div class="ttdoc">The Scheduler class manages the scheduling and execution of tasks.</div><div class="ttdef"><b>Definition:</b> scheduler.h:17</div></div>
-<div class="ttc" id="aclass_scheduler_html_a10491d05740640f2ede57c44d5dfad02"><div class="ttname"><a href="class_scheduler.html#a10491d05740640f2ede57c44d5dfad02">Scheduler::frame</a></div><div class="ttdeci">void frame(std::chrono::milliseconds frameDurationMs)</div><div class="ttdoc">Run a single frame.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:86</div></div>
-<div class="ttc" id="aclass_scheduler_html_a3a81a2e2b5485431ef542732f94443ca"><div class="ttname"><a href="class_scheduler.html#a3a81a2e2b5485431ef542732f94443ca">Scheduler::get_overruns</a></div><div class="ttdeci">int get_overruns()</div><div class="ttdoc">Gets the number of overruns.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:81</div></div>
-<div class="ttc" id="aclass_scheduler_html_a53a061075e64681ba5b6b4f9e540898b"><div class="ttname"><a href="class_scheduler.html#a53a061075e64681ba5b6b4f9e540898b">Scheduler::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Remove all tasks from the scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:163</div></div>
-<div class="ttc" id="aclass_scheduler_html_a6220b56ae5ef4ef67a03e01e2d5d2d71"><div class="ttname"><a href="class_scheduler.html#a6220b56ae5ef4ef67a03e01e2d5d2d71">Scheduler::add_task</a></div><div class="ttdeci">void add_task(Task *task)</div><div class="ttdoc">Adds a task to the scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:47</div></div>
-<div class="ttc" id="aclass_scheduler_html_a7ac470a1b0421f2db78e5b478a6b28b1"><div class="ttname"><a href="class_scheduler.html#a7ac470a1b0421f2db78e5b478a6b28b1">Scheduler::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stops the execution of all tasks.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:147</div></div>
-<div class="ttc" id="aclass_scheduler_html_a86d4189517e71b5c52dbbe07d48eeab2"><div class="ttname"><a href="class_scheduler.html#a86d4189517e71b5c52dbbe07d48eeab2">Scheduler::start</a></div><div class="ttdeci">void start(int frame_rate)</div><div class="ttdoc">Starts the execution of the tasks with the given frame duration.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:113</div></div>
-<div class="ttc" id="aclass_scheduler_html_a9c4653c6323d4bac0dcc1e349e8effe0"><div class="ttname"><a href="class_scheduler.html#a9c4653c6323d4bac0dcc1e349e8effe0">Scheduler::destroy_instance</a></div><div class="ttdeci">static void destroy_instance()</div><div class="ttdoc">Destroys the instance of the Scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:19</div></div>
-<div class="ttc" id="aclass_scheduler_html_aaf2bb6de35334ff9ee74447eae4e68a0"><div class="ttname"><a href="class_scheduler.html#aaf2bb6de35334ff9ee74447eae4e68a0">Scheduler::get_number_of_subtasks</a></div><div class="ttdeci">int get_number_of_subtasks()</div><div class="ttdoc">Gets the total number of subtasks in each task on the scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:67</div></div>
-<div class="ttc" id="aclass_scheduler_html_ad7f73412c6a672297feacb109baf89ba"><div class="ttname"><a href="class_scheduler.html#ad7f73412c6a672297feacb109baf89ba">Scheduler::add_cleanup_task</a></div><div class="ttdeci">void add_cleanup_task(std::function&lt; void()&gt; task)</div><div class="ttdoc">Adds a cleanup task to the scheduler. The cleanup task is for adding more task to the cleanup frame....</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:108</div></div>
-<div class="ttc" id="aclass_scheduler_html_af1549eccfc413c5a1cfb2d4f4f824734"><div class="ttname"><a href="class_scheduler.html#af1549eccfc413c5a1cfb2d4f4f824734">Scheduler::get_instance</a></div><div class="ttdeci">static Scheduler * get_instance()</div><div class="ttdoc">Gets the singleton instance of the Scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:10</div></div>
-<div class="ttc" id="aclass_scheduler_html_afa4a8c26b1d4a1edb20b44e65fd8a0bd"><div class="ttname"><a href="class_scheduler.html#afa4a8c26b1d4a1edb20b44e65fd8a0bd">Scheduler::get_number_of_tasks</a></div><div class="ttdeci">int get_number_of_tasks()</div><div class="ttdoc">Gets number of tasks on the scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:57</div></div>
-<div class="ttc" id="aclass_scheduler_html_afca7e1c183dc928dde049fe5e0efce06"><div class="ttname"><a href="class_scheduler.html#afca7e1c183dc928dde049fe5e0efce06">Scheduler::add_system_task</a></div><div class="ttdeci">void add_system_task(std::function&lt; void()&gt; task)</div><div class="ttdoc">Adds a system task to the scheduler. The system task is for adding more task to the current frame....</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:103</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;condition_variable&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_scheduler.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_scheduler.html">Scheduler</a> {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_scheduler.html">Scheduler</a>* <a class="code" href="class_scheduler.html#af1549eccfc413c5a1cfb2d4f4f824734">get_instance</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a9c4653c6323d4bac0dcc1e349e8effe0">destroy_instance</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a6220b56ae5ef4ef67a03e01e2d5d2d71">add_task</a>(<a class="code" href="class_task.html">Task</a>* task);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#afca7e1c183dc928dde049fe5e0efce06">add_system_task</a>(std::function&lt;<span class="keywordtype">void</span>()&gt; task);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#ad7f73412c6a672297feacb109baf89ba">add_cleanup_task</a>(std::function&lt;<span class="keywordtype">void</span>()&gt; task);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scheduler.html#afa4a8c26b1d4a1edb20b44e65fd8a0bd">get_number_of_tasks</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scheduler.html#aaf2bb6de35334ff9ee74447eae4e68a0">get_number_of_subtasks</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scheduler.html#a3a81a2e2b5485431ef542732f94443ca">get_overruns</a>();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a86d4189517e71b5c52dbbe07d48eeab2">start</a>(<span class="keywordtype">int</span> frame_rate);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a7ac470a1b0421f2db78e5b478a6b28b1">stop</a>();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a10491d05740640f2ede57c44d5dfad02">frame</a>(std::chrono::milliseconds frameDurationMs);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scheduler.html#a53a061075e64681ba5b6b4f9e540898b">clear</a>();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="class_scheduler.html">Scheduler</a>();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    ~<a class="code" href="class_scheduler.html">Scheduler</a>();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="class_scheduler.html">Scheduler</a>(<span class="keyword">const</span> <a class="code" href="class_scheduler.html">Scheduler</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="class_scheduler.html">Scheduler</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="class_scheduler.html">Scheduler</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> clean_persistence();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    std::atomic_bool scheduler_running;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    std::mutex mutex;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="class_task.html">Task</a> system_task;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="class_task.html">Task</a> cleanup_task;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::vector&lt;std::vector&lt;Task*&gt;&gt; tasks;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::mutex queueMutex;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    std::condition_variable condition;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">int</span> frame_rate;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    std::thread scheduler_thread;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">int</span> overruns;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_scheduler.html">Scheduler</a>* instance;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;};</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SCHEDULER_H</span></div>
+<div class="ttc" id="aclass_scheduler_html"><div class="ttname"><a href="class_scheduler.html">Scheduler</a></div><div class="ttdoc">The Scheduler class manages the scheduling and execution of tasks.</div><div class="ttdef"><b>Definition:</b> scheduler.h:19</div></div>
+<div class="ttc" id="aclass_scheduler_html_a10491d05740640f2ede57c44d5dfad02"><div class="ttname"><a href="class_scheduler.html#a10491d05740640f2ede57c44d5dfad02">Scheduler::frame</a></div><div class="ttdeci">void frame(std::chrono::milliseconds frameDurationMs)</div><div class="ttdoc">Run a single frame.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:88</div></div>
+<div class="ttc" id="aclass_scheduler_html_a3a81a2e2b5485431ef542732f94443ca"><div class="ttname"><a href="class_scheduler.html#a3a81a2e2b5485431ef542732f94443ca">Scheduler::get_overruns</a></div><div class="ttdeci">int get_overruns()</div><div class="ttdoc">Gets the number of overruns.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:83</div></div>
+<div class="ttc" id="aclass_scheduler_html_a53a061075e64681ba5b6b4f9e540898b"><div class="ttname"><a href="class_scheduler.html#a53a061075e64681ba5b6b4f9e540898b">Scheduler::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Remove all tasks from the scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:165</div></div>
+<div class="ttc" id="aclass_scheduler_html_a6220b56ae5ef4ef67a03e01e2d5d2d71"><div class="ttname"><a href="class_scheduler.html#a6220b56ae5ef4ef67a03e01e2d5d2d71">Scheduler::add_task</a></div><div class="ttdeci">void add_task(Task *task)</div><div class="ttdoc">Adds a task to the scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:49</div></div>
+<div class="ttc" id="aclass_scheduler_html_a7ac470a1b0421f2db78e5b478a6b28b1"><div class="ttname"><a href="class_scheduler.html#a7ac470a1b0421f2db78e5b478a6b28b1">Scheduler::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stops the execution of all tasks.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:155</div></div>
+<div class="ttc" id="aclass_scheduler_html_a86d4189517e71b5c52dbbe07d48eeab2"><div class="ttname"><a href="class_scheduler.html#a86d4189517e71b5c52dbbe07d48eeab2">Scheduler::start</a></div><div class="ttdeci">void start(int frame_rate)</div><div class="ttdoc">Starts the execution of the tasks with the given frame duration.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:120</div></div>
+<div class="ttc" id="aclass_scheduler_html_a9c4653c6323d4bac0dcc1e349e8effe0"><div class="ttname"><a href="class_scheduler.html#a9c4653c6323d4bac0dcc1e349e8effe0">Scheduler::destroy_instance</a></div><div class="ttdeci">static void destroy_instance()</div><div class="ttdoc">Destroys the instance of the Scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:20</div></div>
+<div class="ttc" id="aclass_scheduler_html_aaf2bb6de35334ff9ee74447eae4e68a0"><div class="ttname"><a href="class_scheduler.html#aaf2bb6de35334ff9ee74447eae4e68a0">Scheduler::get_number_of_subtasks</a></div><div class="ttdeci">int get_number_of_subtasks()</div><div class="ttdoc">Gets the total number of subtasks in each task on the scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:69</div></div>
+<div class="ttc" id="aclass_scheduler_html_ad7f73412c6a672297feacb109baf89ba"><div class="ttname"><a href="class_scheduler.html#ad7f73412c6a672297feacb109baf89ba">Scheduler::add_cleanup_task</a></div><div class="ttdeci">void add_cleanup_task(std::function&lt; void()&gt; task)</div><div class="ttdoc">Adds a cleanup task to the scheduler. The cleanup task is for adding more task to the cleanup frame....</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:115</div></div>
+<div class="ttc" id="aclass_scheduler_html_af1549eccfc413c5a1cfb2d4f4f824734"><div class="ttname"><a href="class_scheduler.html#af1549eccfc413c5a1cfb2d4f4f824734">Scheduler::get_instance</a></div><div class="ttdeci">static Scheduler * get_instance()</div><div class="ttdoc">Gets the singleton instance of the Scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:11</div></div>
+<div class="ttc" id="aclass_scheduler_html_afa4a8c26b1d4a1edb20b44e65fd8a0bd"><div class="ttname"><a href="class_scheduler.html#afa4a8c26b1d4a1edb20b44e65fd8a0bd">Scheduler::get_number_of_tasks</a></div><div class="ttdeci">int get_number_of_tasks()</div><div class="ttdoc">Gets number of tasks on the scheduler.</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:59</div></div>
+<div class="ttc" id="aclass_scheduler_html_afca7e1c183dc928dde049fe5e0efce06"><div class="ttname"><a href="class_scheduler.html#afca7e1c183dc928dde049fe5e0efce06">Scheduler::add_system_task</a></div><div class="ttdeci">void add_system_task(std::function&lt; void()&gt; task)</div><div class="ttdoc">Adds a system task to the scheduler. The system task is for adding more task to the current frame....</div><div class="ttdef"><b>Definition:</b> scheduler.cpp:110</div></div>
 <div class="ttc" id="aclass_task_html"><div class="ttname"><a href="class_task.html">Task</a></div><div class="ttdoc">The Task class represents a task with subtasks.</div><div class="ttdef"><b>Definition:</b> task.h:23</div></div>
 <div class="ttc" id="atask_8h_html"><div class="ttname"><a href="task_8h.html">task.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

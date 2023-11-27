@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -76,26 +76,25 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define OFF_COMMAND</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="device__command_8h.html">device_command.h</a>&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;Interfaces/types/device_label.h&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_off.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_off.html">Off</a> : <span class="keyword">public</span> <a class="code" href="class_device___command.html">Device_Command</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_off.html">Off</a>() = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_off.html">Off</a>(<a class="code" href="class_device___label.html">Device_Label</a> <a class="code" href="class_device___command.html#a067b09339a553119704c518f5c8320a9">label</a>);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ~<a class="code" href="class_off.html">Off</a>();</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_off.html#a96ff6673ec4332f5fac782c53e6dcc94">   26</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> <a class="code" href="class_off.html#a96ff6673ec4332f5fac782c53e6dcc94">get_id</a>() { <span class="keywordflow">return</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4">COMMAND_ENUM::OFF</a>; }</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_off.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_off.html">Off</a> : <span class="keyword">public</span> <a class="code" href="class_device___command.html">Device_Command</a> {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_off.html">Off</a>() = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_off.html">Off</a>(<a class="code" href="class_device___label.html">Device_Label</a> <a class="code" href="class_device___command.html#a067b09339a553119704c518f5c8320a9">label</a>);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    ~<a class="code" href="class_off.html">Off</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_off.html#a96ff6673ec4332f5fac782c53e6dcc94">   25</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a> <a class="code" href="class_off.html#a96ff6673ec4332f5fac782c53e6dcc94">get_id</a>() { <span class="keywordflow">return</span> <a class="code" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4">COMMAND_ENUM::OFF</a>; }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !OFF_COMMAND</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !OFF_COMMAND</span></div>
 <div class="ttc" id="aclass_device___command_html"><div class="ttname"><a href="class_device___command.html">Device_Command</a></div><div class="ttdef"><b>Definition:</b> device_command.h:17</div></div>
 <div class="ttc" id="aclass_device___command_html_a067b09339a553119704c518f5c8320a9"><div class="ttname"><a href="class_device___command.html#a067b09339a553119704c518f5c8320a9">Device_Command::label</a></div><div class="ttdeci">Device_Label label</div><div class="ttdef"><b>Definition:</b> device_command.h:35</div></div>
 <div class="ttc" id="aclass_device___label_html"><div class="ttname"><a href="class_device___label.html">Device_Label</a></div><div class="ttdef"><b>Definition:</b> Interfaces/types/device_label.h:48</div></div>
-<div class="ttc" id="aclass_off_html"><div class="ttname"><a href="class_off.html">Off</a></div><div class="ttdef"><b>Definition:</b> off.h:17</div></div>
-<div class="ttc" id="aclass_off_html_a96ff6673ec4332f5fac782c53e6dcc94"><div class="ttname"><a href="class_off.html#a96ff6673ec4332f5fac782c53e6dcc94">Off::get_id</a></div><div class="ttdeci">virtual COMMAND_ENUM get_id()</div><div class="ttdef"><b>Definition:</b> off.h:26</div></div>
-<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a></div><div class="ttdeci">COMMAND_ENUM</div><div class="ttdef"><b>Definition:</b> command.h:20</div></div>
+<div class="ttc" id="aclass_off_html"><div class="ttname"><a href="class_off.html">Off</a></div><div class="ttdef"><b>Definition:</b> off.h:16</div></div>
+<div class="ttc" id="aclass_off_html_a96ff6673ec4332f5fac782c53e6dcc94"><div class="ttname"><a href="class_off.html#a96ff6673ec4332f5fac782c53e6dcc94">Off::get_id</a></div><div class="ttdeci">virtual COMMAND_ENUM get_id()</div><div class="ttdef"><b>Definition:</b> off.h:25</div></div>
+<div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549">COMMAND_ENUM</a></div><div class="ttdeci">COMMAND_ENUM</div><div class="ttdef"><b>Definition:</b> command.h:22</div></div>
 <div class="ttc" id="acommand_8h_html_ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4"><div class="ttname"><a href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a88559a0cfd8250c9d65970cc145c92d4">COMMAND_ENUM::OFF</a></div><div class="ttdeci">@ OFF</div></div>
 <div class="ttc" id="adevice__command_8h_html"><div class="ttname"><a href="device__command_8h.html">device_command.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

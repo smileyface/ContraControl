@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -79,39 +79,55 @@ $(function() {
 <p><br  />
   
 <a href="#details">More...</a></p>
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for command.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="command_8h__incl.png" border="0" usemap="#acommand_8h" alt=""/></div>
+<map name="acommand_8h" id="acommand_8h">
+<area shape="rect" title=" " alt="" coords="5,5,95,32"/>
+<area shape="rect" title=" " alt="" coords="23,80,77,107"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="command_8h__dep__incl.png" border="0" usemap="#acommand_8hdep" alt=""/></div>
 <map name="acommand_8hdep" id="acommand_8hdep">
-<area shape="rect" title=" " alt="" coords="285,5,374,32"/>
-<area shape="rect" href="device__command_8h.html" title=" " alt="" coords="114,80,249,107"/>
-<area shape="rect" href="device__create_8h.html" title=" " alt="" coords="273,80,386,107"/>
-<area shape="rect" href="device__destruction_8h.html" title=" " alt="" coords="411,80,552,107"/>
-<area shape="rect" href="assign_8h.html" title=" " alt="" coords="26,155,97,181"/>
-<area shape="rect" href="commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="242,229,338,256"/>
-<area shape="rect" href="device__initalize_8h.html" title=" " alt="" coords="122,155,242,181"/>
-<area shape="rect" href="off_8h.html" title=" " alt="" coords="266,155,313,181"/>
-<area shape="rect" href="on_8h.html" title=" " alt="" coords="337,155,384,181"/>
-<area shape="rect" href="packed__command_8h.html" title=" " alt="" coords="220,304,359,331"/>
-<area shape="rect" href="commander_8h.html" title=" " alt="" coords="180,468,280,495"/>
-<area shape="rect" href="controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="170,692,290,719"/>
-<area shape="rect" href="controller__model__command__message_8h.html" title=" " alt="" coords="263,379,444,420"/>
-<area shape="rect" href="model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="353,692,456,719"/>
-<area shape="rect" href="internal__messages_8h.html" title="List of Internal Messages." alt="" coords="303,468,444,495"/>
-<area shape="rect" href="consumers_8h.html" title=" " alt="" coords="659,543,755,569"/>
-<area shape="rect" href="message__relay_8h.html" title=" " alt="" coords="520,617,638,644"/>
-<area shape="rect" href="format_8h.html" title=" " alt="" coords="672,617,742,644"/>
-<area shape="rect" href="log__view__type_8h.html" title=" " alt="" coords="828,617,943,644"/>
-<area shape="rect" href="option__view__type_8h.html" title=" " alt="" coords="1010,617,1142,644"/>
-<area shape="rect" href="_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="480,692,614,719"/>
-<area shape="rect" href="view__main_8h.html" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="638,692,733,719"/>
-<area shape="rect" href="network__main_8h.html" title=" " alt="" coords="490,767,604,793"/>
-<area shape="rect" href="console_8h.html" title=" " alt="" coords="758,692,835,719"/>
-<area shape="rect" href="console__log__view_8h.html" title=" " alt="" coords="860,692,994,719"/>
-<area shape="rect" href="views_8h.html" title=" " alt="" coords="979,767,1046,793"/>
-<area shape="rect" href="view__factory_8h.html" title=" " alt="" coords="960,841,1065,868"/>
-<area shape="rect" href="console__option__popup_8h.html" title=" " alt="" coords="1018,692,1180,719"/>
+<area shape="rect" title=" " alt="" coords="625,5,715,32"/>
+<area shape="rect" href="device__command_8h.html" title=" " alt="" coords="396,80,531,107"/>
+<area shape="rect" href="node__command_8h.html" title=" " alt="" coords="881,80,1005,107"/>
+<area shape="rect" href="assign_8h.html" title=" " alt="" coords="5,155,76,181"/>
+<area shape="rect" href="device__create_8h.html" title=" " alt="" coords="100,155,213,181"/>
+<area shape="rect" href="device__destruction_8h.html" title=" " alt="" coords="238,155,379,181"/>
+<area shape="rect" href="device__initalize_8h.html" title=" " alt="" coords="403,155,523,181"/>
+<area shape="rect" href="off_8h.html" title=" " alt="" coords="548,155,595,181"/>
+<area shape="rect" href="on_8h.html" title=" " alt="" coords="619,155,665,181"/>
+<area shape="rect" href="commands_8h.html" title="A file to include to get all defined commands. To drop in a new command, you must add the command to ..." alt="" coords="594,229,690,256"/>
+<area shape="rect" href="packed__command_8h.html" title=" " alt="" coords="573,304,711,331"/>
+<area shape="rect" href="commander_8h.html" title=" " alt="" coords="419,692,519,719"/>
+<area shape="rect" href="controller__model__command__message_8h.html" title=" " alt="" coords="637,379,818,420"/>
+<area shape="rect" href="controller__main_8h.html" title="Main brains for the controller. DO NOT INCLUDE. Include a controller_interface instead." alt="" coords="453,767,573,793"/>
+<area shape="rect" href="internal__messages_8h.html" title="List of Internal Messages." alt="" coords="730,468,871,495"/>
+<area shape="rect" href="consumers_8h.html" title=" " alt="" coords="901,543,997,569"/>
+<area shape="rect" href="message__relay_8h.html" title=" " alt="" coords="673,617,792,644"/>
+<area shape="rect" href="format_8h.html" title=" " alt="" coords="914,617,983,644"/>
+<area shape="rect" href="log__view__type_8h.html" title=" " alt="" coords="1070,617,1185,644"/>
+<area shape="rect" href="option__view__type_8h.html" title=" " alt="" coords="1252,617,1384,644"/>
+<area shape="rect" href="model__main_8h.html" title="Main brains for the model. DO NOT INCLUDE. Include a model_interface instead." alt="" coords="595,692,697,719"/>
+<area shape="rect" href="_network_2system__interfaces_2network__interface_8h.html" title=" " alt="" coords="721,692,856,719"/>
+<area shape="rect" href="view__main_8h.html" title="Main brains for the view. DO NOT INCLUDE. Include a viewCre_interface instead." alt="" coords="880,692,975,719"/>
+<area shape="rect" href="network__main_8h.html" title=" " alt="" coords="732,767,845,793"/>
+<area shape="rect" href="console_8h.html" title=" " alt="" coords="999,692,1077,719"/>
+<area shape="rect" href="console__log__view_8h.html" title=" " alt="" coords="1101,692,1236,719"/>
+<area shape="rect" href="views_8h.html" title=" " alt="" coords="1221,767,1287,793"/>
+<area shape="rect" href="view__factory_8h.html" title=" " alt="" coords="1201,841,1307,868"/>
+<area shape="rect" href="console__option__popup_8h.html" title=" " alt="" coords="1260,692,1421,719"/>
+<area shape="rect" href="node__connect_8h.html" title=" " alt="" coords="689,155,803,181"/>
+<area shape="rect" href="node__create_8h.html" title=" " alt="" coords="827,155,929,181"/>
+<area shape="rect" href="node__destroy_8h.html" title=" " alt="" coords="954,155,1063,181"/>
+<area shape="rect" href="node__disconnect_8h.html" title=" " alt="" coords="1087,155,1218,181"/>
+<area shape="rect" href="node__initalize_8h.html" title=" " alt="" coords="1243,155,1353,181"/>
 </map>
 </div>
 </div>
@@ -137,6 +153,12 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1">ASSIGN</a>
 , <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ad7228a9a2e12b4a40c98ffd8812fda97">DEVICE_DESTRUCTION</a>
+, <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549af3685dd50c9f76f2f0305fd84b5f2925">NODE_CREATION</a>
+, <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ad77f757776db7a286b017fb6fb4ec580">NODE_INITALIZE</a>
+, <br />
+&#160;&#160;<a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a0e003f234a165bb27516330a8732f671">NODE_DESTORY</a>
+, <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549ade618d82e4b605ef53b6a541398d06b7">NODE_CONNECT</a>
+, <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549a5211dcd694e929466b12a0de39ca3ac9">NODE_DISCONNECT</a>
 , <a class="el" href="command_8h.html#ad23753ea6d8d32dc2528e2533bc94549accc0377a8afbf50e7094f5c23a8af223">INVALID</a> = 0xffff
 <br />
  }</td></tr>
@@ -194,6 +216,16 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549affd6976a2b4f6934eb075d0013316ff1"></a>ASSIGN&#160;</td><td class="fielddoc"><p><a class="el" href="class_assign.html">Assign</a> value to a channel </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549ad7228a9a2e12b4a40c98ffd8812fda97"></a>DEVICE_DESTRUCTION&#160;</td><td class="fielddoc"><p>Destroy device. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549af3685dd50c9f76f2f0305fd84b5f2925"></a>NODE_CREATION&#160;</td><td class="fielddoc"><p>Create a new node. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549ad77f757776db7a286b017fb6fb4ec580"></a>NODE_INITALIZE&#160;</td><td class="fielddoc"><p>Initalize node. To be used for local node only. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549a0e003f234a165bb27516330a8732f671"></a>NODE_DESTORY&#160;</td><td class="fielddoc"><p>Destroy a node. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549ade618d82e4b605ef53b6a541398d06b7"></a>NODE_CONNECT&#160;</td><td class="fielddoc"><p>Connect two nodes </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549a5211dcd694e929466b12a0de39ca3ac9"></a>NODE_DISCONNECT&#160;</td><td class="fielddoc"><p>Disconnect two nodes </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ad23753ea6d8d32dc2528e2533bc94549accc0377a8afbf50e7094f5c23a8af223"></a>INVALID&#160;</td><td class="fielddoc"><p>Unmapped <a class="el" href="class_command.html">Command</a> </p>
 </td></tr>

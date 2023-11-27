@@ -1,4 +1,5 @@
 <map id="Device_Create" name="Device_Create">
-<area shape="rect" id="node1" title=" " alt="" coords="5,80,112,107"/>
-<area shape="rect" id="node2" href="$class_command.html" title=" " alt="" coords="18,5,99,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="16,155,123,181"/>
+<area shape="rect" id="node2" href="$class_device___command.html" title=" " alt="" coords="5,80,133,107"/>
+<area shape="rect" id="node3" href="$class_command.html" title=" " alt="" coords="29,5,110,32"/>
 </map>

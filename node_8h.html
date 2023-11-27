@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -68,8 +68,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">node.h File Reference</div>  </div>
 </div><!--header-->
@@ -79,18 +78,20 @@ $(function() {
   
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="device_8h_source.html">../device.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="node__type_8h_source.html">Interfaces/enums/node_type.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for node.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="node_8h__incl.png" border="0" usemap="#anode_8h" alt=""/></div>
 <map name="anode_8h" id="anode_8h">
-<area shape="rect" title=" " alt="" coords="102,5,162,32"/>
-<area shape="rect" href="device_8h.html" title=" " alt="" coords="92,80,172,107"/>
-<area shape="rect" title=" " alt="" coords="55,155,102,181"/>
-<area shape="rect" href="devices_2device_8h.html" title=" " alt="" coords="126,155,245,181"/>
-<area shape="rect" href="device__type_8h.html" title=" " alt="" coords="5,229,171,271"/>
-<area shape="rect" href="channel_8h.html" title=" " alt="" coords="195,237,370,263"/>
-<area shape="rect" title=" " alt="" coords="9,319,167,360"/>
+<area shape="rect" title=" " alt="" coords="173,5,233,32"/>
+<area shape="rect" href="device_8h.html" title=" " alt="" coords="92,87,172,114"/>
+<area shape="rect" href="node__type_8h.html" title=" " alt="" coords="196,80,351,121"/>
+<area shape="rect" title=" " alt="" coords="55,169,102,196"/>
+<area shape="rect" href="devices_2device_8h.html" title=" " alt="" coords="126,169,245,196"/>
+<area shape="rect" href="device__type_8h.html" title=" " alt="" coords="5,244,171,285"/>
+<area shape="rect" href="channel_8h.html" title=" " alt="" coords="195,251,370,278"/>
+<area shape="rect" title=" " alt="" coords="9,333,167,375"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -109,51 +110,11 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html">Node</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a0862af0a8c00f6b58b8af427fc241daf"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a> : uint8_t { <a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241dafa033bd94b1168d7e4f0d644c3c95e35bf">TEST</a>
-, <a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241dafa71ff71526d15db86eb50fcac245d183b">UI</a>
-, <a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241dafaccc0377a8afbf50e7094f5c23a8af223">INVALID</a>
- }</td></tr>
-<tr class="separator:a0862af0a8c00f6b58b8af427fc241daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>kason </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>May 2021 </dd></dl>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a0862af0a8c00f6b58b8af427fc241daf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0862af0a8c00f6b58b8af427fc241daf">&#9670;&nbsp;</a></span>NODE_TYPE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="node_8h.html#a0862af0a8c00f6b58b8af427fc241daf">NODE_TYPE</a> : uint8_t</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Type of node, such as UI, GENERIC_HARDWARE or R-PI </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0862af0a8c00f6b58b8af427fc241dafa033bd94b1168d7e4f0d644c3c95e35bf"></a>TEST&#160;</td><td class="fielddoc"><p>A Tester node. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0862af0a8c00f6b58b8af427fc241dafa71ff71526d15db86eb50fcac245d183b"></a>UI&#160;</td><td class="fielddoc"><p>A UI node. Connects to virtual devices </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0862af0a8c00f6b58b8af427fc241dafaccc0377a8afbf50e7094f5c23a8af223"></a>INVALID&#160;</td><td class="fielddoc"><p>Invalid node. Undefined. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

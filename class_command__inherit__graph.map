@@ -1,10 +1,16 @@
 <map id="Command" name="Command">
-<area shape="rect" id="node1" title=" " alt="" coords="299,5,380,32"/>
-<area shape="rect" id="node2" href="$class_device___command.html" title=" " alt="" coords="134,80,262,107"/>
-<area shape="rect" id="node7" href="$class_device___create.html" title=" " alt="" coords="286,80,393,107"/>
-<area shape="rect" id="node8" href="$class_device___destruction.html" title=" " alt="" coords="417,80,552,107"/>
-<area shape="rect" id="node3" href="$class_assign.html" title=" " alt="" coords="5,155,68,181"/>
-<area shape="rect" id="node4" href="$class_initalize___device.html" title=" " alt="" coords="92,155,205,181"/>
-<area shape="rect" id="node5" href="$class_off.html" title=" " alt="" coords="229,155,268,181"/>
-<area shape="rect" id="node6" href="$class_on.html" title=" " alt="" coords="292,155,331,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,284,87,311"/>
+<area shape="rect" id="node2" href="$class_device___command.html" title=" " alt="" coords="135,157,263,184"/>
+<area shape="rect" id="node9" href="$class_node___command.html" title=" " alt="" coords="139,385,258,412"/>
+<area shape="rect" id="node3" href="$class_assign.html" title=" " alt="" coords="347,5,409,32"/>
+<area shape="rect" id="node4" href="$class_device___create.html" title=" " alt="" coords="325,56,431,83"/>
+<area shape="rect" id="node5" href="$class_device___destruction.html" title=" " alt="" coords="311,107,445,133"/>
+<area shape="rect" id="node6" href="$class_initalize___device.html" title=" " alt="" coords="321,157,435,184"/>
+<area shape="rect" id="node7" href="$class_off.html" title=" " alt="" coords="359,208,397,235"/>
+<area shape="rect" id="node8" href="$class_on.html" title=" " alt="" coords="359,259,397,285"/>
+<area shape="rect" id="node10" href="$class_node___connect.html" title=" " alt="" coords="324,309,432,336"/>
+<area shape="rect" id="node11" href="$class_node___create.html" title=" " alt="" coords="329,360,427,387"/>
+<area shape="rect" id="node12" href="$class_node___destroy.html" title=" " alt="" coords="326,411,430,437"/>
+<area shape="rect" id="node13" href="$class_node___disconnect.html" title=" " alt="" coords="315,461,441,488"/>
+<area shape="rect" id="node14" href="$class_node___initalize.html" title=" " alt="" coords="326,512,430,539"/>
 </map>

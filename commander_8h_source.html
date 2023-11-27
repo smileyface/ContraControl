@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.8</span>
+   &#160;<span id="projectnumber">0.0.9</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -76,39 +76,46 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stdarg.h&gt;</span>     <span class="comment">/* va_list, va_start, va_arg, va_end */</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="packed__command_8h.html">Interfaces/types/packed_command.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_commander.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_commander.html">Commander</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_commander.html">Commander</a>* <a class="code" href="class_commander.html#a4d2aae6229cc8d0ca56026864409bf7d">get_instance</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_commander.html#a4a9e843d21d0e6344b400a663b99b15a">destroy_instance</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> <a class="code" href="namespace_k_e_y.html#aa3ab7fd8736ccce291e139b31a2916f7">T</a>, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_command.html">Command</a>* <a class="code" href="class_commander.html#a0d881e262d7352d20f510dafdc307769">make_command</a>(Args&amp;&amp;... a);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_commander.html#a44044759203fe8da346d4224be073a1a">clean_list</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_commander.html#a079df55d4af86b3895379883171e5a3b">get_number_of_commands</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    std::vector&lt;Command*&gt; command_list;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_commander.html">Commander</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ~<a class="code" href="class_commander.html">Commander</a>();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_commander.html">Commander</a>* instance;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> <a class="code" href="namespace_k_e_y.html#aa3ab7fd8736ccce291e139b31a2916f7">T</a>, <span class="keyword">typename</span> ...Args&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_commander.html#a0d881e262d7352d20f510dafdc307769">   56</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="class_command.html">Command</a>* <a class="code" href="class_commander.html#a0d881e262d7352d20f510dafdc307769">Commander::make_command</a>(Args&amp;&amp;... a)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    command_list.emplace_back(<span class="keyword">new</span> <a class="code" href="namespace_k_e_y.html#aa3ab7fd8736ccce291e139b31a2916f7">T</a>(std::forward&lt;Args&gt;(a)...));</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> command_list[command_list.size()-1];</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:54</div></div>
-<div class="ttc" id="aclass_commander_html"><div class="ttname"><a href="class_commander.html">Commander</a></div><div class="ttdef"><b>Definition:</b> commander.h:18</div></div>
-<div class="ttc" id="aclass_commander_html_a079df55d4af86b3895379883171e5a3b"><div class="ttname"><a href="class_commander.html#a079df55d4af86b3895379883171e5a3b">Commander::get_number_of_commands</a></div><div class="ttdeci">int get_number_of_commands()</div><div class="ttdef"><b>Definition:</b> commander.cpp:48</div></div>
-<div class="ttc" id="aclass_commander_html_a0d881e262d7352d20f510dafdc307769"><div class="ttname"><a href="class_commander.html#a0d881e262d7352d20f510dafdc307769">Commander::make_command</a></div><div class="ttdeci">Command * make_command(Args &amp;&amp;... a)</div><div class="ttdef"><b>Definition:</b> commander.h:56</div></div>
-<div class="ttc" id="aclass_commander_html_a44044759203fe8da346d4224be073a1a"><div class="ttname"><a href="class_commander.html#a44044759203fe8da346d4224be073a1a">Commander::clean_list</a></div><div class="ttdeci">void clean_list()</div><div class="ttdef"><b>Definition:</b> commander.cpp:32</div></div>
-<div class="ttc" id="aclass_commander_html_a4a9e843d21d0e6344b400a663b99b15a"><div class="ttname"><a href="class_commander.html#a4a9e843d21d0e6344b400a663b99b15a">Commander::destroy_instance</a></div><div class="ttdeci">static void destroy_instance()</div><div class="ttdef"><b>Definition:</b> commander.cpp:23</div></div>
-<div class="ttc" id="aclass_commander_html_a4d2aae6229cc8d0ca56026864409bf7d"><div class="ttname"><a href="class_commander.html#a4d2aae6229cc8d0ca56026864409bf7d">Commander::get_instance</a></div><div class="ttdeci">static Commander * get_instance()</div><div class="ttdef"><b>Definition:</b> commander.cpp:14</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="message__relay_8h.html">Messaging/message_relay.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_commander.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_commander.html">Commander</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_commander.html">Commander</a>* <a class="code" href="class_commander.html#a4d2aae6229cc8d0ca56026864409bf7d">get_instance</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_commander.html#a4a9e843d21d0e6344b400a663b99b15a">destroy_instance</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> <a class="code" href="namespace_k_e_y.html#aa3ab7fd8736ccce291e139b31a2916f7">T</a>, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_command.html">Command</a>* <a class="code" href="class_commander.html#a0d881e262d7352d20f510dafdc307769">make_command</a>(Args&amp;&amp;... a);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_commander.html#a44044759203fe8da346d4224be073a1a">clean_list</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_commander.html#a079df55d4af86b3895379883171e5a3b">get_number_of_commands</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_commander.html#a0a068425a939c90542963efb4709ac1a">is_command_still_around</a>(<a class="code" href="class_command.html">Command</a>* command);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::vector&lt;Command*&gt; command_list;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="class_commander.html">Commander</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    ~<a class="code" href="class_commander.html">Commander</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_commander.html">Commander</a>* instance;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> <a class="code" href="namespace_k_e_y.html#aa3ab7fd8736ccce291e139b31a2916f7">T</a>, <span class="keyword">typename</span> ...Args&gt;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_commander.html#a0d881e262d7352d20f510dafdc307769">   64</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="class_command.html">Command</a>* <a class="code" href="class_commander.html#a0d881e262d7352d20f510dafdc307769">Commander::make_command</a>(Args&amp;&amp;... a)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    command_list.emplace_back(<span class="keyword">new</span> <a class="code" href="namespace_k_e_y.html#aa3ab7fd8736ccce291e139b31a2916f7">T</a>(std::forward&lt;Args&gt;(a)...));</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="message__relay_8h.html#a87f39d92adfc939c31320aaf4b9f7a37">LOG_DEBUG</a>(<span class="stringliteral">&quot;Adding command &quot;</span> + command_list[command_list.size() - 1]-&gt;get_id_str() + <span class="stringliteral">&quot; to commander.&quot;</span> );</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">return</span> command_list[command_list.size()-1];</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition:</b> command.h:76</div></div>
+<div class="ttc" id="aclass_commander_html"><div class="ttname"><a href="class_commander.html">Commander</a></div><div class="ttdef"><b>Definition:</b> commander.h:19</div></div>
+<div class="ttc" id="aclass_commander_html_a079df55d4af86b3895379883171e5a3b"><div class="ttname"><a href="class_commander.html#a079df55d4af86b3895379883171e5a3b">Commander::get_number_of_commands</a></div><div class="ttdeci">int get_number_of_commands()</div><div class="ttdef"><b>Definition:</b> commander.cpp:54</div></div>
+<div class="ttc" id="aclass_commander_html_a0a068425a939c90542963efb4709ac1a"><div class="ttname"><a href="class_commander.html#a0a068425a939c90542963efb4709ac1a">Commander::is_command_still_around</a></div><div class="ttdeci">bool is_command_still_around(Command *command)</div><div class="ttdef"><b>Definition:</b> commander.cpp:59</div></div>
+<div class="ttc" id="aclass_commander_html_a0d881e262d7352d20f510dafdc307769"><div class="ttname"><a href="class_commander.html#a0d881e262d7352d20f510dafdc307769">Commander::make_command</a></div><div class="ttdeci">Command * make_command(Args &amp;&amp;... a)</div><div class="ttdef"><b>Definition:</b> commander.h:64</div></div>
+<div class="ttc" id="aclass_commander_html_a44044759203fe8da346d4224be073a1a"><div class="ttname"><a href="class_commander.html#a44044759203fe8da346d4224be073a1a">Commander::clean_list</a></div><div class="ttdeci">void clean_list()</div><div class="ttdef"><b>Definition:</b> commander.cpp:36</div></div>
+<div class="ttc" id="aclass_commander_html_a4a9e843d21d0e6344b400a663b99b15a"><div class="ttname"><a href="class_commander.html#a4a9e843d21d0e6344b400a663b99b15a">Commander::destroy_instance</a></div><div class="ttdeci">static void destroy_instance()</div><div class="ttdef"><b>Definition:</b> commander.cpp:27</div></div>
+<div class="ttc" id="aclass_commander_html_a4d2aae6229cc8d0ca56026864409bf7d"><div class="ttname"><a href="class_commander.html#a4d2aae6229cc8d0ca56026864409bf7d">Commander::get_instance</a></div><div class="ttdeci">static Commander * get_instance()</div><div class="ttdef"><b>Definition:</b> commander.cpp:18</div></div>
+<div class="ttc" id="amessage__relay_8h_html"><div class="ttname"><a href="message__relay_8h.html">message_relay.h</a></div></div>
+<div class="ttc" id="amessage__relay_8h_html_a87f39d92adfc939c31320aaf4b9f7a37"><div class="ttname"><a href="message__relay_8h.html#a87f39d92adfc939c31320aaf4b9f7a37">LOG_DEBUG</a></div><div class="ttdeci">#define LOG_DEBUG(message)</div><div class="ttdef"><b>Definition:</b> message_relay.h:172</div></div>
 <div class="ttc" id="anamespace_k_e_y_html_aa3ab7fd8736ccce291e139b31a2916f7"><div class="ttname"><a href="namespace_k_e_y.html#aa3ab7fd8736ccce291e139b31a2916f7">KEY::T</a></div><div class="ttdeci">KPI T</div><div class="ttdoc">T common code.</div><div class="ttdef"><b>Definition:</b> key_input_interface.cpp:26</div></div>
 <div class="ttc" id="apacked__command_8h_html"><div class="ttname"><a href="packed__command_8h.html">packed_command.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
