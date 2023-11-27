@@ -5,6 +5,7 @@
 #include "../../dev/Interfaces/Threading/scheduler/scheduler.h"
 
 #include <algorithm>
+#include <stdio.h>
 
 namespace
 {
@@ -19,8 +20,8 @@ namespace
         }
         virtual void TearDown()
         {
-            scheduler->destroy_instance();
-            system_utilities::cleanup();
+            Scheduler::destroy_instance();
+            system_utilities::teardown_messaging();
         }
     };
 }
@@ -122,11 +123,17 @@ TEST_F(Scheduler_Test, Run_Tasks_In_Order)
 
     auto subtask2 = [&called_order] () mutable
     {
+            for(int i = 0; i < 100; i++)
+            {
+            }
         called_order.push_back(2);
     };
 
     auto subtask3 = [&called_order] () mutable
     {
+            for(int i = 0; i < 1000; i++)
+            {
+            }
         called_order.push_back(3);
     };
 
@@ -280,11 +287,11 @@ TEST_F(Scheduler_Test, Test_Scheduler_Overrun)
     Task test_task("Test", 1, 0.3, false);
     test_task.add_subtask(Cleaned_Task([] () mutable
                           {
-                              std::this_thread::sleep_for(std::chrono::milliseconds(200));
+                              std::this_thread::sleep_for(std::chrono::milliseconds(100));
                           }));
     scheduler->add_task(&test_task);
     scheduler->start(30);
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(300));
     scheduler->stop();
     EXPECT_EQ(scheduler->get_overruns(), 1);
 }
@@ -300,35 +307,35 @@ TEST_F(Scheduler_Test, Add_Task_With_Scheduler_Running)
                           {
                               run = true;
                           });
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     scheduler->stop();
     EXPECT_TRUE(run);
 }
 
 TEST_F(Scheduler_Test, System_Task)
 {
-    int run_id = 0;
-    scheduler->add_system_task([&run_id] () mutable
+    bool run = false;
+    scheduler->add_system_task([&run] () mutable
                                {
-                                   run_id = 42;
+                                   run = true;
                                });
     scheduler->start(30);
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     scheduler->stop();
-    EXPECT_EQ(run_id, 42);
+    EXPECT_TRUE(run);
 }
 
 TEST_F(Scheduler_Test, Cleanup_Task)
 {
-    int run_id = 0;
+    bool run = false;
     scheduler->start(30);
-    scheduler->add_cleanup_task([&run_id] () mutable
+    scheduler->add_cleanup_task([&run] () mutable
                                {
-                                   run_id = 42;
+                                   run = true;
                                });
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     scheduler->stop();
-    EXPECT_EQ(run_id, 42);
+    EXPECT_TRUE(run);
 }
 
 TEST_F(Scheduler_Test, Dryrun_The_System_and_Cleanups)

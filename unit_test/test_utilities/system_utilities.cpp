@@ -35,6 +35,9 @@ bool system_utilities::WINDOWS = false;
 
 void system_utilities::setup()
 {
+
+	setup_messaging();
+	LOG_INFO("Initalizing System", "Test");
 	if(system_setup == false)
 	{
 		try
@@ -46,17 +49,16 @@ void system_utilities::setup()
 		}
 		catch(NetworkErrorException)
 		{
-			printf("Caught network exception");
+			LOG_ERROR("Network Error Caught", "Test");
 			testing_utilities::network_utilities::exception_handle();
 		}
-		setup_messaging();
 		system_setup = true;
 	}
-
 }
 
 void system_utilities::setup_messaging()
 {
+	testing_utilities::message_utilities::setup_testing();
 	if(message_consumer == 0)
 	{
 		message_consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
@@ -65,6 +67,7 @@ void system_utilities::setup_messaging()
 
 void system_utilities::teardown_messaging()
 {
+	testing_utilities::message_utilities::messaging_teardown();
 	print_log_messages();
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
 	testing_utilities::message_utilities::system_is_clean();
@@ -75,6 +78,7 @@ void system_utilities::teardown_messaging()
 
 void system_utilities::start_system()
 {
+	LOG_INFO("Starting Loops", "Test");
 	model::start_loop();
 	controller::start_controller();
 	view::start_view();
@@ -124,27 +128,36 @@ void system_utilities::print_log_messages()
 
 void system_utilities::cleanup()
 {
+	Scheduler::get_instance()->stop();
+	Scheduler::get_instance()->clear();
+	Scheduler::destroy_instance();
 	controller::clean_up();
 	model::clean_up();
 	view::clean_up();
 	network::clean_up();
 	teardown_messaging();
-	Scheduler::get_instance()->stop();
-	Scheduler::get_instance()->clear();
-	Scheduler::destroy_instance();
 	system_setup = false;
 }
 
 void system_utilities::step(int steps)
 {
+	std::chrono::milliseconds frameDurationMs(100);
 	for(int i = 0; i < steps; i++)
 	{
-		std::chrono::milliseconds frameDurationMs(100);
 		Scheduler::get_instance()->frame(frameDurationMs);
-		sleep_thread(100);
 	}
+	print_log_messages();
 }
 
+void system_utilities::run_all_queued_commands()
+{
+	std::chrono::milliseconds frameDurationMs(100);
+	while(Commander::get_instance()->get_number_of_commands() > 0)
+	{
+		Scheduler::get_instance()->frame(frameDurationMs);
+	}
+	print_log_messages();
+}
 void system_utilities::sleep_thread(int time_to_sleep)
 {
 		std::this_thread::sleep_for(std::chrono::milliseconds(time_to_sleep));

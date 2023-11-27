@@ -8,6 +8,8 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include <string>
+
 /*!
    An identifier object mainly for readability
  */
@@ -43,6 +45,26 @@ enum class COMMAND_ENUM :command_id
      */
     DEVICE_DESTRUCTION,
     /**
+     * Create a new node.
+     */
+    NODE_CREATION,
+    /**
+     * Initalize node. To be used for local node only.
+     */
+    NODE_INITALIZE,
+    /**
+     * Destroy a node.
+     */
+    NODE_DESTORY,
+    /**
+     * Connect two nodes
+     */
+    NODE_CONNECT,
+    /**
+     * Disconnect two nodes
+     */
+    NODE_DISCONNECT,
+    /**
      Unmapped Command
      */
 	INVALID = 0xffff
@@ -71,10 +93,16 @@ public:
      */
     void complete_command();
     /**
-     * Return Enum of the command. Mainly for Command indentification purposes.
+     * Return Enum of the command. Mainly for Command identification purposes.
      * \return Enum value of the command.
      */
     virtual COMMAND_ENUM get_id();
+
+    /**
+     * Get id as a string. Helper function
+     * \return Enum value as a string.
+     */
+    std::string get_id_str();
 private:
     bool complete;
 };

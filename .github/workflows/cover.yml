@@ -61,6 +61,23 @@ jobs:
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       run: make cov
 
+    - name: Upload on Cancelled
+      if: ${{ cancelled() }}
+      uses: a7ul/tar-action@v1.1.3
+      id: compress
+      with:
+        command: c
+        cwd: ${{runner.workspace}}
+        files: build
+        outPath: build.tar.gz
+
+    - name: Upload Artifact
+      if: ${{ cancelled() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: my-coverage-artifacts
+        path: build.tar.gz
+
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:

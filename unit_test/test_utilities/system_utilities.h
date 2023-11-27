@@ -17,8 +17,10 @@ namespace system_utilities
 
 	void step(int steps);
 
-	void sleep_thread(int wait_time);
-	extern bool CI;
+    void run_all_queued_commands();
+
+    void sleep_thread(int wait_time);
+    extern bool CI;
 	extern bool LINUX;
 	extern bool WINDOWS;
 	namespace model_utilities

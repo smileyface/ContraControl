@@ -72,6 +72,7 @@ bool system_utilities::keyboard_utilities::Keyboard::keyboard_present()
 
 Keyboard_Interface* system_utilities::keyboard_utilities::Keyboard::get_interface()
 {
+	print_log_messages();
 	return buffer;
 }
 

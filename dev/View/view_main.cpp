@@ -14,7 +14,7 @@ void view::initalize()
 	view_task = Task("View", 2, .4);
 	Scheduler::get_instance()->add_system_task(view::step);
 	Scheduler::get_instance()->add_cleanup_task([] ()
-												{ });
+												{});
 	//initalize any format already added the system
 	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
 	{

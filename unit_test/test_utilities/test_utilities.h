@@ -2,7 +2,7 @@
 #define TESTING_UTILITIES_H
 
 
-//#define DEBUG
+#define DEBUG
 
 #include <utility>
 #include <functional>
@@ -63,6 +63,7 @@ namespace testing_utilities
 	namespace error_utilities
 	{
 		void check_override_failure(std::function<void()> function);
+		void error_found(std::string location, std::string message);
 	}
 	namespace input_utilities
 	{
@@ -72,6 +73,9 @@ namespace testing_utilities
 	}
 	namespace message_utilities
 	{
+		void setup_testing();
+		void messaging_teardown();
+		void get_messages_from_relay();
 		void system_is_clean();
 	}
 }

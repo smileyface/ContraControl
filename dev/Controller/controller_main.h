@@ -11,7 +11,6 @@
 
 #include "commander/commander.h"
 
-#include "Interfaces/types/packed_command.h"
 #include "system/timer.h"
 #include "Messaging/message_relay.h"
 #include "Threading/threading.h"

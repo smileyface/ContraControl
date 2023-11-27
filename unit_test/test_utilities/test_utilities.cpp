@@ -8,6 +8,9 @@
 #include <typeinfo>
 
 const int TIMEOUT_TIME = 5;
+Message_Consumer* testing_consumer = 0;
+
+std::vector<Logging_Message> error_list;
 
 void testing_utilities::get_partial_on(Command* command, Device* device, double timeout)
 {
@@ -36,7 +39,8 @@ void testing_utilities::device_utilities::check_validity(Device_Label label, boo
 
 void testing_utilities::device_utilities::check_type(Device_Label label, DEVICE_IDENTIFIER type)
 {
-	EXPECT_EQ(model::get_device(label)->get_device_type(), type) << "Device type is incorrect";
+	Device* device = model::get_device(label);
+	EXPECT_EQ(device->get_device_type(), type) << "Device type is incorrect";
 }
 
 void testing_utilities::device_utilities::check_channel(Device_Label label, int channel, Channel value)
@@ -76,6 +80,10 @@ void testing_utilities::network_utilities::check_initalized()
 	if(network::network_interface->get_status().status == NETWORK_STATUS::NETWORK_ERROR)
 	{
 		exception_handle();
+	}
+	else
+	{
+		system_utilities::print_log_messages();
 	}
 }
 
@@ -124,18 +132,9 @@ void testing_utilities::network_utilities::exception_handle()
 
 void testing_utilities::network_utilities::expect_exception(std::function<void()> function, NETWORK_ERRORS error)
 {
-	try
-	{
-		function();
-	}
-	catch(NetworkErrorException e)
-	{
-		EXPECT_STREQ(e.what(), "Network Error");
-		EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
-		return;
-	}
+	function();
+	EXPECT_EQ(error, network::network_interface->get_status().error) << "The wrong error state was given";
 	system_utilities::print_log_messages();
-	FAIL() << "Network Error Exception did not throw\nExpected " + get_string_of_error(error);
 }
 
 void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)
@@ -224,21 +223,24 @@ void testing_utilities::subsystem_utilities::controller_utilities::check_is_runn
 
 void testing_utilities::error_utilities::check_override_failure(std::function<void()> function)
 {
-	try
+	function();
+	testing_utilities::error_utilities::error_found("Network Message Type", "Unimplemented Function");
+}
+
+void testing_utilities::error_utilities::error_found(std::string location, std::string message)
+{
+	testing_utilities::message_utilities::get_messages_from_relay();
+	bool found = false;
+	for(auto i = error_list.begin(); i != error_list.end(); i++)
 	{
-		function();
+		if(i->get_message() == message && i->get_location() == location)
+		{
+			found = true;
+			error_list.erase(i);
+			break;
+		}
 	}
-	catch(UnimplementedFunctionException e)
-	{
-		EXPECT_STREQ(e.what(), "Function not implemented");
-		SUCCEED();
-		return;
-	}
-	catch(...)
-	{
-		FAIL() << "Wrong exception thrown";
-	}
-	FAIL() << "No exception thrown";
+	EXPECT_TRUE(found) << "Error message not found";
 }
 
 
@@ -274,4 +276,33 @@ void testing_utilities::input_utilities::connect_keyboard(std::string path_to_ke
 void testing_utilities::message_utilities::system_is_clean()
 {
 	EXPECT_EQ(Message_Relay::get_instance()->number_of_consumers(), 0) << "There are still consumers on the Message Relay";
+}
+
+void testing_utilities::message_utilities::setup_testing()
+{ 
+	if(testing_consumer == 0)
+	{
+		testing_consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
+	}
+}
+
+void testing_utilities::message_utilities::messaging_teardown()
+{ 
+	Message_Relay::get_instance()->deregister_consumer(testing_consumer);
+	testing_consumer = 0;
+}
+
+void testing_utilities::message_utilities::get_messages_from_relay()
+{
+	for(auto message = Message_Relay::get_instance()->pop<Logging_Message>(testing_consumer); message.is_valid() == true; message = Message_Relay::get_instance()->pop<Logging_Message>(testing_consumer))
+	{
+		switch(message.get_priority())
+		{
+		case MESSAGE_PRIORITY::ERROR_MESSAGE:
+			error_list.push_back(message);
+			break;
+		default:
+			break;
+		}
+	}
 }

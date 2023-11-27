@@ -1,44 +1,32 @@
 #include "../node/node.h"
+#include "../model_main.h"
 
 #include "../Utilities/Utilities/exceptions.h"
 
-Node::Node(NODE_TYPE type)
-{
-	my_type = type;
-	id_pool = 0;
-}
-Node::Node()
-{
-	my_type = NODE_TYPE::INVALID;
-	id_pool = 0;
-}
+Device Node::invalid_device;
+Node Node::invalid_node;
+
+Node::Node() :
+	my_type(NODE_TYPE::INVALID),
+	id_pool(0),
+	my_id("")
+{ }
+
+Node::Node(NODE_TYPE type, Node_Id id) :
+	my_type(type),
+	id_pool(0),
+	my_id(id)
+{ }
+
 Node::~Node()
 {
-	for(auto device = devices.begin(); device != devices.end();device++)
+	for(auto i = devices.begin(); i != devices.end(); i++)
 	{
-		delete device->second;
+		delete devices[i->first];
 	}
 	devices.clear();
-	for(auto conn = connections.begin(); conn != connections.end(); conn++)
-	{
-		delete conn->second;
-	}
+	//Nodes memory is handled in the Model
 	connections.clear();
-
-}
-
-void Node::clear_node()
-{
-	//for (auto iter = connections.begin(); iter != connections.end(); iter++)
-	//{
-	//	delete connections[iter->first];
-	//}
-	//for (auto iter = devices.begin(); iter != devices.end(); iter++)
-	//{
-	//	delete devices[iter->first];
-	//}
-	connections.clear();
-	devices.clear();
 }
 
 void Node::register_device(Device_Creator device)
@@ -57,11 +45,17 @@ void Node::remove_device(Device_Id label)
 
 Device* Node::get_device(Device_Id device)
 {
-	if (devices.find(device) == devices.end())
+	Device* found_device = nullptr;
+	if (devices.count(device))
 	{
-		throw DeviceNotFoundException();
+		found_device = devices[device];
 	}
-	return devices[device];
+	else
+	{
+		found_device = &invalid_device;
+		LOG_ERROR("Device " + std::to_string(device) + " Not Found", "Node");
+	}
+	return found_device;
 }
 
 Device* Node::get_device(Device_Name device)
@@ -86,25 +80,35 @@ void Node::initalize_local_control(Node_Id id)
 
 Node* Node::get_connection(Node_Id id)
 {
-	if (connections.find(id) == connections.end())
+	Node* found_node = nullptr;
+	if(connections.find(id) == connections.end())
 	{
-		throw NodeNotFoundException();
+		found_node = &invalid_node;
 	}
-	return connections[id];
+	else
+	{
+		found_node = connections[id];
+	}
+	return found_node;
 }
 
 
-void Node::add_connection(NODE_TYPE type, Node_Id id)
+void Node::add_connection(Node* node_connection)
 {
-	connections.emplace(std::pair<Node_Id, Node*>(id, new Node(type)));
+	connections.emplace(std::pair<Node_Id, Node*> (node_connection->get_id(), node_connection));
 }
 
 void Node::remove_connection(Node_Id id)
 {
-	delete connections[id];
+	connections.erase(id);
 }
 
 Node_Id Node::get_id()
 {
 	return my_id;
+}
+
+NODE_TYPE Node::get_type()
+{
+	return my_type;
 }

@@ -69,7 +69,8 @@ TEST_F(Commands_Test, Device_Assign_Channel)
 
 TEST_F(Commands_Test, Device_Invalid_Command) 
 {
-	EXPECT_THROW(device_utilities::command_device(dl, new Command()), InvalidCommandException);
+	device_utilities::command_device(dl, Commander::get_instance()->make_command<Command>());
+	testing_utilities::error_utilities::error_found("Model Mangle State", "Invalid Command recieved by Model");
 }
 
 /*This test and concept needs a redesign*/
@@ -82,9 +83,11 @@ TEST_F(Commands_Test, Device_Duplicate_Command)
 
 TEST_F(Commands_Test, Device_Time_Delay_Command)
 {
-	Device* ds = static_cast<Device*>(device_utilities::command_device(dl, Commander::get_instance()->make_command<Initalize_Device>(dl, "Test1")));
-	Command* the_command = new On(dl);
-	ds = static_cast<Device*>(device_utilities::command_device(dl, the_command , .25));
+	static_cast<Device*>(device_utilities::command_device(dl, Commander::get_instance()->make_command<Initalize_Device>(dl, "Test1")));
+	Command* the_command = new On(dl); 
+	Device* ds = new Device();
+	ds->initalize("tester");
+	static_cast<Device*>(device_utilities::command_device(dl, the_command , .25));
 	testing_utilities::device_utilities::check_state(dl, ds);
 	ds = static_cast<Device*>(device_utilities::finish_command(dl, the_command));
 	testing_utilities::device_utilities::check_state(dl, ds);

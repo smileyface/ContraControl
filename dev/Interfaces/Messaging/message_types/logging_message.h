@@ -69,7 +69,6 @@ public:
 	Logging_Message(MESSAGE_PRIORITY pri, std::string msg, std::string loc);
 	/**
 	 * Create an empty message with a defined validity.
-	 * \param valid_message Desired validity to set message to.
 	 */
 	Logging_Message();
 private:

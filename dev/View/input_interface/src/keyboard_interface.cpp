@@ -80,7 +80,7 @@ std::string Keyboard_Interface::get_simple()
 		counter++;
 		if(count_the_counter == BUFFERED_TIMEOUT)
 		{
-			LOG_ERROR("No input recived", "Get simple buffered");
+			LOG_ERROR("No input recived", "Keyboard Interface");
 			break;
 		}
 	}

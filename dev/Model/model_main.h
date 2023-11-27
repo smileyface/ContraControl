@@ -12,7 +12,6 @@
 
 #include "system/timer.h"
 
-#include "Interfaces/types/packed_command.h"
 #include "node/node.h"
 #include "Messaging/message_relay.h"
 #include "Threading/threading.h"
@@ -48,6 +47,10 @@ namespace model
 	 * Consumer for Controller messages
 	 */
 	extern Message_Consumer* model_controller_consumer;
+	/**
+	 * A container for all node pointers
+	 */
+	extern std::vector<Node> node_list;
 
 	/**
 	 * \brief Get node from list of known nodes by ID
@@ -65,6 +68,29 @@ namespace model
 	 * \param id Identifier of the node that model will refer to it as.
 	 */
 	void create_node(NODE_TYPE, Node_Id);
+
+	/**
+	 * \brief Destroy the Node in the models map.
+	 * 
+	 * \param id Identifier of the node to remove.
+	 */
+	void remove_node(Node_Id);
+
+	/**
+	 * \brief Add a connection for each node.
+	 * 
+	 * \param id1 An ID to connect id2 to
+	 * \param id2 An ID to connect id1 to
+	 */
+	void connect_node(Node_Id id1, Node_Id id2);
+
+	/**
+	 * \brief Remove a connection for each node.
+	 * 
+	 * \param id1 An ID to remove connection from id2.
+	 * \param id2 An ID to remove connection from id1.
+	 */
+	void disconnect_node(Node_Id id1, Node_Id id2);
 
 	/**
 	 * \brief A short circut for getting a device on a node using a node ID and device ID
@@ -87,8 +113,7 @@ namespace model
 	/**
 	* \brief Run all commands lined up for this iteration of the loop.
 	*
-	* This is the main function of a loop. If an exception is thrown, the command is thrown away and the exception gets rethrown.
-	* \todo Add details to the exception thrown
+	* This is the main function of a loop.
 	*/
 	void step();
 

@@ -27,10 +27,6 @@ namespace node_messages
 	void network_message_populate(Network_Message& message);
 	/**
 	 * Main communication brain. This will probably need to be split into Client tree and Server tree.
-	 * 
-	 * \param type Incoming message type
-	 * \param incoming Incoming message body
-	 * \return Outgoing message
 	 */
 	void network_client_state_machine();
 }

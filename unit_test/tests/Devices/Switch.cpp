@@ -40,7 +40,7 @@ TEST_F(Device_Switch_Test, Device_Removed)
 {
 	testing_utilities::device_utilities::check_type(dl, DEVICE_IDENTIFIER::SWITCH);
 	device_utilities::remove_device(dl);
-	EXPECT_THROW(testing_utilities::device_utilities::check_type(dl, DEVICE_IDENTIFIER::SWITCH), DeviceNotFoundException);
+	testing_utilities::device_utilities::check_type(dl, DEVICE_IDENTIFIER::INVALID);
 }
 TEST_F(Device_Switch_Test, Device_Naming)
 {

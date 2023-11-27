@@ -1,5 +1,7 @@
 #include "../scheduler/task.h"
 
+#include "../scheduler/threadpool.h"
+
 #include <iostream>
 #include <map>
 #include <mutex>
@@ -7,6 +9,9 @@
 std::mutex g_pages_mutex;
 
 int alive_threads = 0;
+
+bool* FALSE = new bool(false);
+bool* TRUE = new bool(true);
 
 Task::Task(const std::string& name, int priority, double percentage, bool persistence, bool clear_subtasks) :  
     name(name),
@@ -100,42 +105,21 @@ void Task::set_persistence(bool persist)
     persistence = persist;
 }
 
-void Task::run(std::chrono::milliseconds frameDuration)
+void Task::run_task(std::chrono::milliseconds frameDuration)
 {
-    alive_threads++;
     for(const auto& subtask : subtasks)
     {
-        if(is_running)
-            subtask.task();
+        Thread_Pool::getInstance()->enqueue(subtask.task);
     }
-    alive_threads--;
 }
 
 void Task::start(std::chrono::milliseconds frameDuration)
 {
-    if(!is_running)
-    {
-        is_running = true;
-        std::thread thrd(&Task::run, this, frameDuration);
-        thread.push_back(std::move(thrd));
-    }
+    run_task(frameDuration);
 }
 
 void Task::stop()
 {
-    g_pages_mutex.lock();
-    for(int i = 0; i < thread.size(); i++)
-    {
-        if(thread[i].joinable())
-        {
-            thread[i].join();
-        }
-    }
-    thread.clear();
-    g_pages_mutex.unlock();
-    is_running = false;
-
-
     auto tasks = subtasks.begin();
     while(tasks != subtasks.end())
     {
@@ -149,12 +133,12 @@ void Task::stop()
         }
     }
     
-    while(thrown_exceptions.size() > 0)
-    {
-        std::exception_ptr ex = thrown_exceptions.front();
-        thrown_exceptions.pop();
-        std::rethrow_exception(ex);
-    }
+    //while(thrown_exceptions.size() > 0)
+    //{
+    //    std::exception_ptr ex = thrown_exceptions.front();
+    //    thrown_exceptions.pop();
+    //    std::rethrow_exception(ex);
+    //}
 }
 
 void Task::exception(std::exception_ptr ex)
