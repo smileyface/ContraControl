@@ -35,6 +35,8 @@ bool system_utilities::WINDOWS = false;
 
 void system_utilities::setup()
 {
+
+	setup_messaging();
 	LOG_INFO("Initalizing System", "Test");
 	if(system_setup == false)
 	{
@@ -47,13 +49,11 @@ void system_utilities::setup()
 		}
 		catch(NetworkErrorException)
 		{
-			printf("Caught network exception");
+			LOG_ERROR("Network Error Caught", "Test");
 			testing_utilities::network_utilities::exception_handle();
 		}
-		setup_messaging();
 		system_setup = true;
 	}
-
 }
 
 void system_utilities::setup_messaging()
