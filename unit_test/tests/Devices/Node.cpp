@@ -38,9 +38,9 @@ TEST_F(Node_Test, Node_Destruction)
 {
 	Node_Id temp_id = "Test_Node_2";
 	node_utilities::create_node(temp_id);
-	EXPECT_NO_THROW(model::get_node(temp_id));
+	EXPECT_EQ(model::get_node(temp_id)->get_type(), NODE_TYPE::TEST);
 	node_utilities::remove_node(temp_id);
-	EXPECT_THROW(model::get_node(temp_id), NodeNotFoundException);
+	EXPECT_EQ(model::get_node(temp_id)->get_type(), NODE_TYPE::INVALID);
 }
 
 TEST_F(Node_Test, Node_Connection)
@@ -57,7 +57,7 @@ TEST_F(Node_Test, Node_Disconnect)
 	node_utilities::create_node(temp_id);
 	node_utilities::connect_node(node_utilities::local_node_handle, temp_id);
 	node_utilities::disconnect_node(node_utilities::local_node_handle, temp_id);
-	EXPECT_THROW(model::get_node(node_utilities::local_node_handle)->get_connection(temp_id), NodeNotFoundException);
+	EXPECT_EQ(model::get_node(node_utilities::local_node_handle)->get_connection(temp_id)->get_type(), NODE_TYPE::INVALID);
 }
 
 TEST_F(Node_Test, Device_Exclusion)
@@ -67,13 +67,13 @@ TEST_F(Node_Test, Device_Exclusion)
 
 	Device_Label dl_e("Test_Node_2", 0);
 
-	EXPECT_THROW(device_utilities::command_device(dl_e, Commander::get_instance()->make_command<On>(dl_e)), DeviceNotFoundException);
+	testing_utilities::device_utilities::check_type(dl_e, DEVICE_IDENTIFIER::INVALID);
 }
 
 TEST_F(Node_Test, Node_Exclusion)
 {
 	Device_Label dl_e2("Test_Fail", 0);
-	EXPECT_THROW(device_utilities::command_device(dl_e2, Commander::get_instance()->make_command<Off>(dl_e2)), NodeNotFoundException);
+	EXPECT_EQ(device_utilities::command_device(dl_e2, Commander::get_instance()->make_command<Off>(dl_e2))->get_device_type(), DEVICE_IDENTIFIER::INVALID );
 }
 
 TEST_F(Node_Test, Add_Devices)

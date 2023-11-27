@@ -50,7 +50,7 @@ void Scheduler::add_task(Task* task)
 {
     if(task->get_priority() < 1 || task->get_priority() > 10)
     {
-        LOG_ERROR("Task priority outside of range", "Adding task");
+        LOG_ERROR("Task priority outside of range", "Scheduler");
         return;
     }
     tasks[task->get_priority() - 1].push_back(task);
@@ -87,6 +87,7 @@ int Scheduler::get_overruns()
 
 void Scheduler::frame(std::chrono::milliseconds frameDurationMs)
 {
+    LOG_DEBUG("Frame Beginning");
     for(int i = 0; i < tasks.size(); i++)
     {
         //Start the tasks for this priority of the frame.
@@ -102,7 +103,7 @@ void Scheduler::frame(std::chrono::milliseconds frameDurationMs)
             tasks[i][j]->stop();
         }
     }
-
+    LOG_DEBUG("Frame End");
     clean_persistence();
 }
 
@@ -130,6 +131,7 @@ void Scheduler::start(int frameDuration) {
                     auto cur_time = start_time;
                     while(scheduler_running)
                     {
+                        LOG_DEBUG("Scheduler Loop");
                         start_time = std::chrono::steady_clock::now();
                         frame(frameDurationMs);
                         cur_time = std::chrono::steady_clock::now();
@@ -152,14 +154,8 @@ void Scheduler::start(int frameDuration) {
 
 void Scheduler::stop()
 {
+    Thread_Pool::getInstance()->sleep_my_thread();
     scheduler_running = false;
-    for(int i = 0; i < tasks.size(); i++)
-    {
-        for(int j = 0; j < tasks[i].size(); j++)
-        {
-            tasks[i][j]->stop();
-        }
-    }
     if(scheduler_thread.joinable())
     {
         scheduler_thread.join();

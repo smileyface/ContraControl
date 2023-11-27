@@ -67,7 +67,7 @@ void Console_Option_Popup::on_query()
 		option_input = 1;
 		if(option_input > options.size())
 		{
-			LOG_ERROR("Selection outside of range of choices", "Option Popup Query");
+			LOG_ERROR("Selection outside of range of choices", "Option Popup");
 		}
 
 		if(option_input < 1 || option_input > options.size() + 1)

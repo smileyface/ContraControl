@@ -3,6 +3,7 @@
 
 void state_interfaces::mangle_state(Command* command)
 {
+	LOG_DEBUG(command->get_id_str());
 	switch(command->get_id())
 	{
 	case COMMAND_ENUM::DEVICE_CREATION:
@@ -73,6 +74,7 @@ void state_interfaces::mangle_state(Command* command)
 	}
 	case COMMAND_ENUM::INVALID:
 	default:
-		throw InvalidCommandException();
+		LOG_ERROR("Invalid Command recieved by Model", "Model Mangle State");
+		break;
 	}
 }

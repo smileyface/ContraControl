@@ -11,6 +11,7 @@
 #include "task.h"
 #include <mutex>
 #include <condition_variable>
+#include <atomic>
 
 /**
  * @brief The Scheduler class manages the scheduling and execution of tasks.
@@ -97,7 +98,7 @@ private:
     Scheduler& operator=(const Scheduler&) = delete;
     void clean_persistence();
 
-    bool scheduler_running;
+    std::atomic_bool scheduler_running;
     std::mutex mutex;
 
     Task system_task;

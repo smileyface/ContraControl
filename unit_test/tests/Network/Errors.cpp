@@ -6,9 +6,11 @@
 #include "../../Network/network_main.h"
 #ifdef _WIN32
 #include "../../Network/system_interfaces/windows_network_interface.h"
+const std::string NETWORK_INTERFACE_NAME = "Windows Network";
 #endif // _WIN32
 #ifdef __linux__
 #include "../../Network/system_interfaces/linux_network_interface.h"
+const std::string NETWORK_INTERFACE_NAME = "Linux Network";
 #endif
 
 namespace {
@@ -41,7 +43,7 @@ TEST_F(Network_Error_Test, Error_States_Initalized)
 	system_utilities::network_utilities::setup();
 	network::network_interface->set_hostname(INVALID_HOSTNAME);
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::INVALID_HOSTNAME);
-	system_utilities::teardown_messaging(); 
+	testing_utilities::error_utilities::error_found(NETWORK_INTERFACE_NAME, "Hostname Invalid");
 	system_utilities::network_utilities::setup();
 	network::network_interface->setup_connection(local_connections::local, { IPPROTO_MAX, SOCK_STREAM, AF_INET });
 	testing_utilities::network_utilities::expect_exception([]() {network::network_interface->initalized(); }, NETWORK_ERRORS::SOCKET_INVALID);
@@ -69,9 +71,8 @@ TEST_F(EmptyLocalNetworkTest, Error_States_Local_Setup)
 
 TEST_F(Network_Error_Test, Messaging_Types_Unimplemented)
 {
-
 	Network_Message message = node_messages::network_message_factory(MESSAGES::NODE_HELLO);
-	testing_utilities::error_utilities::check_override_failure ([message]()mutable {message[0] = -110; });
+	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[0] = -110; });
 	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[0] = std::string("hi"); });
 	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[0] = Byte(32); });
 	testing_utilities::error_utilities::check_override_failure([message]()mutable {message[0] = 33.92f; });

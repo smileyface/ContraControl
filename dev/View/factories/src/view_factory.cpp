@@ -1,6 +1,7 @@
 #include "../view_factory.h"
 
 #include "Utilities/exceptions.h"
+#include "Messaging/message_relay.h"
 
 View* view_factory(VIEW_TYPE_ENUM type, DISPLAY_TYPES display)
 {
@@ -20,7 +21,7 @@ View* view_factory(VIEW_TYPE_ENUM type, DISPLAY_TYPES display)
 	}
 	if(val == 0)
 	{
-		throw UnimplementedFunctionException();
+		LOG_ERROR("Unimplemented Function", "View Factory");
 	}
 	return val;
 }

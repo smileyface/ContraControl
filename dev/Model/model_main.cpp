@@ -23,6 +23,7 @@ void model::initalize()
 	model_controller_consumer = Message_Relay::get_instance()->register_consumer<Controller_Model_Command>();
 	model_timer.reset_clock();
 	model_task = Task("Model", 2, .2);
+	step_actions = Command_List();
 	Scheduler::get_instance()->add_system_task(model::step);
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{
@@ -40,6 +41,10 @@ void model::initalize()
 															i++;
 														}
 													}
+													if(model::step_actions.size() > 0)
+													{
+														LOG_DEBUG("Model will run " + std::to_string(model::step_actions.size()) + " commands next frame");
+													}
 												} );
 }
 
@@ -55,7 +60,8 @@ Node* model::get_node(Node_Id id)
 	}
 	if(found_item == nullptr)
 	{
-		throw NodeNotFoundException();
+		found_item = &Node::invalid_node;
+		LOG_ERROR("Node " + id + " not found", "Node");
 	}
 	return found_item;
 }
@@ -92,7 +98,10 @@ void model::disconnect_node(Node_Id id1, Node_Id id2)
 
 Device* model::get_device(Device_Label label)
 {
-	return model::get_node(label.get_node_id())->get_device(label.get_device_id());
+	Device* found_device = nullptr;
+	found_device = model::get_node(label.get_node_id())->get_device(label.get_device_id());
+
+	return found_device;
 }
 
 template <typename T>
@@ -105,32 +114,37 @@ void model::step()
 {
 	for(auto i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer); i.is_valid(); i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer))
 	{
+		LOG_DEBUG("Model has recieved command " + i.get_command().get_command()->get_id_str());
 		command_model(i.get_command());
 	}
 	int model_step_thread = 0;
 	for(auto command = model::step_actions.begin(); command != model::step_actions.end(); command++)
 	{
 		model_step_thread++;
-		if(command->command_run() == false)
-		{
-			model_task.add_subtask(Cleaned_Task([command, &model_step_thread] () mutable
+			Packed_Command& step_command = (*command);
+			model_task.add_subtask(Cleaned_Task([&step_command, &model_step_thread] () mutable
 								   {
-									   try
+									   if(step_command.command_run() == false)
 									   {
-										   std::lock_guard<std::mutex> lock(model_mutex);
-										   mangle_model(command->get_command());
-										   command->run_command();
-										   command->get_command()->time_to_complete -= model_timer.get_elapsed_time();
-									   }
-									   catch(std::exception&)
-									   {
-										   model_task.exception(std::current_exception());
+										   LOG_DEBUG("Running command " + step_command.get_command()->get_id_str() + "on the model");
+										   try
+										   {
+											   std::lock_guard<std::mutex> lock(model_mutex);
+											   mangle_model(step_command.get_command());
+											   step_command.run_command();
+											   step_command.get_command()->time_to_complete -= model_timer.get_elapsed_time();
+										   }
+										   catch(std::exception& e)
+										   {
+											   std::string what = e.what();
+											   LOG_ERROR("Exception thrown " + what, "Model");
+											   model_task.exception(std::current_exception());
+										   }
 									   }
 									   model_step_thread--;
 								   }));
 		}
 
-	}
 }
 
 void model::start_loop()
@@ -181,7 +195,6 @@ struct compare
 void model::command_model(const Packed_Command& command)
 {
 	//OPTIMIZE
-
 	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(command));
 	if(found == model::step_actions.end() || model::step_actions.size() == 0)
 	{

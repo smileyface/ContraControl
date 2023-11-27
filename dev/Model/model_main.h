@@ -113,8 +113,7 @@ namespace model
 	/**
 	* \brief Run all commands lined up for this iteration of the loop.
 	*
-	* This is the main function of a loop. If an exception is thrown, the command is thrown away and the exception gets rethrown.
-	* \todo Add details to the exception thrown
+	* This is the main function of a loop.
 	*/
 	void step();
 

@@ -1,15 +1,20 @@
 #include "../scheduler/threadpool.h"
 
+#include "Messaging/message_relay.h"
+
 Thread_Pool* Thread_Pool::instance = nullptr;
 
-Thread_Pool::Thread_Pool() : stop(false)
+Thread_Pool::Thread_Pool() : 
+    stop(false),
+    task_running(0)
 {
     // Determine the number of threads based on the hardware concurrency
-    const size_t numThreads = std::thread::hardware_concurrency();
+    const size_t numThreads = 1;
 
+    LOG_INFO("Adding " + std::to_string(numThreads) + " threads", "Scheduler");
     for(size_t i = 0; i < numThreads; ++i)
     {
-        workers.emplace_back([this]
+        workers.emplace_back([this, i]
                              {
                                  while(true)
                                  {
@@ -25,7 +30,7 @@ Thread_Pool::Thread_Pool() : stop(false)
 
                                          if(stop && tasks.empty())
                                          {
-                                             return;
+                                            return;
                                          }
 
                                          task = std::move(tasks.front());
@@ -33,7 +38,16 @@ Thread_Pool::Thread_Pool() : stop(false)
                                      }
 
                                      task_running++;
-                                     task();
+                                     //printf("Thread %d Running a task\n", static_cast<int>(i));
+                                     try
+                                     {
+                                        task();
+                                     }
+                                     catch(std::exception& e)
+                                     {
+                                         std::string what(e.what());
+                                         LOG_ERROR("Exception thrown in task." + what, "Thread Runner");
+                                     }
                                      task_running--;
                                  }
                              });
@@ -54,29 +68,31 @@ void Thread_Pool::destroy_instance()
 {
     if(instance != nullptr)
     {
+        LOG_INFO("Destroying Thread Pool", "Scheduler");
         delete instance;
         instance = nullptr;
     }
 }
 void Thread_Pool::sleep_my_thread()
 {
-    while(tasks.empty() == false || task_running > 0)
+    int i = 0;
+    while((tasks.empty() == false || task_running > 0))
     {
-        int i = 0;
+        i++;
     }
 }
 
 Thread_Pool::~Thread_Pool()
 {
-    {
-        std::unique_lock<std::mutex> lock(queueMutex);
-        stop = true;
-    }
-
+    stop = true;
     condition.notify_all();
 
     for(std::thread& worker : workers)
     {
-        worker.join();
+        if(worker.joinable())
+        {
+            worker.join();
+        }
     }
+    workers.clear();
 }

@@ -48,14 +48,12 @@ public:
 
 	 \param device An Id struct that points to a specific device.
 	 \return Pointer to the device.
-	 \throws DeviceNotFoundException if node does not know about the device
 	 */
 	Device* get_device(Device_Id device);
 	/**
 	 Return a pointer to a device requested by Device_Name
 	 \param device A name that points to a specific device.
-	 \return Pointer to the device.
-	 \throws DeviceNotFoundException if node does not know about the device
+	 \return Pointer to the device. If no device is found, it returns nullptr
 	 */
 	Device* get_device(Device_Name device);
 	/**
@@ -73,7 +71,6 @@ public:
 	 * Get the node connected to the local node.
 	 * \param id Id of the node to get.
 	 * \return Pointer to the connected node.
-	 * \throw NodeNotFoundException If node is not a known connection.
 	 */
 	Node* get_connection(Node_Id id);
 
@@ -94,6 +91,22 @@ public:
 	 * \return The id.
 	 */
 	Node_Id get_id();
+
+	/**
+	 * Get type of the device.
+	 * \return The Type of the device.
+	 */
+	NODE_TYPE get_type();
+
+	/**
+	 * An invalid device.
+	 */
+	static Device invalid_device;
+
+	/**
+	 * An invalid node.
+	 */
+	static Node invalid_node;
 private:
 	std::map<Node_Id, Node*> connections;
 	Device_Id_Map devices;
@@ -101,6 +114,7 @@ private:
 	NODE_TYPE my_type;
 	Device_Id id_pool;
 	Node_Id my_id;
+
 };
 
 #endif // !MODEL_NODE_H

@@ -8,6 +8,8 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include <string>
+
 /*!
    An identifier object mainly for readability
  */
@@ -91,10 +93,16 @@ public:
      */
     void complete_command();
     /**
-     * Return Enum of the command. Mainly for Command indentification purposes.
+     * Return Enum of the command. Mainly for Command identification purposes.
      * \return Enum value of the command.
      */
     virtual COMMAND_ENUM get_id();
+
+    /**
+     * Get id as a string. Helper function
+     * \return Enum value as a string.
+     */
+    std::string get_id_str();
 private:
     bool complete;
 };

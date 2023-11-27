@@ -10,17 +10,13 @@ namespace
 	class Message_Pointer_Wrapper_Test : public ::testing::Test
 	{
 	public:
-		Message_Consumer* consumer = 0;
 		bool found = false;
 		virtual void SetUp()
 		{
 			system_utilities::setup();
-			if(consumer == 0)
-				consumer = Message_Relay::get_instance()->register_consumer<Logging_Message>();
 		}
 		virtual void TearDown()
 		{
-			Message_Relay::get_instance()->deregister_consumer(consumer);
 			system_utilities::cleanup();
 		}
 	};
