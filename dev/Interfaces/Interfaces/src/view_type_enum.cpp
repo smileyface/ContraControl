@@ -2,7 +2,7 @@
 
 char* get_view_type_enum_as_string(VIEW_TYPE_ENUM view_type)
 {
-	char* val = "";
+	char* val = 0;
 	switch(view_type)
 	{
 	case VIEW_TYPE_ENUM::LOG:

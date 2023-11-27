@@ -25,8 +25,6 @@ public:
 
 	/**
 	 * Connect to the physical or vitrual keyboard.
-	 * 
-	 * \return whether connection is successful 
 	 */
 	virtual void connect_to_keyboard() = 0;
 
