@@ -6,15 +6,11 @@
 #include "../Interfaces/Messaging/message_relay.h"
 #include "../Utilities/Utilities/tools/classes.h"
 
-View* Format::add_view(VIEW_TYPE_ENUM view)
-{
-	std::string type(get_view_type_enum_as_string(view));
-	LOG_INFO("Adding View: " + type, "Console Format");
-	View* new_view = view_factory(view, DISPLAY_TYPES::CONSOLE);
-	new_view->on_create();
-	view_list.push_back(new_view);
-	return new_view;
-}
+Format::Format()
+{ }
+
+Format::~Format()
+{ }
 
 void Format::update_views()
 {
@@ -56,6 +52,15 @@ void Format::clean_views()
 	Message_Relay::get_instance()->deregister_consumer(format_consumer);
 }
 
+View* Format::create_view(VIEW_TYPE_ENUM view, DISPLAY_TYPES type)
+{
+	LOG_INFO("Adding View: " + std::string(get_view_type_enum_as_string(view)), "Format");
+	View* new_view = view_factory(view, type);
+	new_view->on_create();
+	view_list.push_back(new_view);
+	return new_view;
+}
+
 void Format::process_internal_messages()
 {
 	std::vector<View_Subsystem_Message*> list_of_messages;
@@ -64,7 +69,7 @@ void Format::process_internal_messages()
 		if(message.instance_of<Option_Popup_Message>())
 		{
 			Option_Popup_Message message_actualized = message.convert_type<Option_Popup_Message>();
-			Console_Option_Popup* opm = dynamic_cast<Console_Option_Popup*>(add_view(VIEW_TYPE_ENUM::POPUP_OPTION));
+			add_view(VIEW_TYPE_ENUM::POPUP_OPTION);
 			std::string log_message = "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(message_actualized.get_sender()));
 			LOG_INFO(log_message, "Option Popup Creation");
 		}

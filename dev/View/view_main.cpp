@@ -1,6 +1,7 @@
 #include "view_main.h"
 
 #include "format/console.h"
+#include "format/file.h"
 #include "view/views.h"
 
 std::map<View_Handle, Format*> view::list_of_formats = {};
@@ -64,6 +65,8 @@ View_Handle view::add_display(DISPLAY_TYPES display)
 	case DISPLAY_TYPES::CONSOLE:
 		list_of_formats[my_display_id] = new Console_Format();
 		break;
+	case DISPLAY_TYPES::FILE:
+		list_of_formats[my_display_id] = new File_Format();
 	}
 	if(view_running)
 	{

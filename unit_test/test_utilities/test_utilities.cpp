@@ -137,7 +137,7 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 	system_utilities::print_log_messages();
 }
 
-void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)
+void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, std::size_t size, std::vector<unsigned char> p_message)
 {
 	EXPECT_EQ(0x65, p_message[0]) << "Invalid Packet Header";
 	EXPECT_EQ(message_id, p_message[1]) << "Incorrect Message Id";

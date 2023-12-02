@@ -9,8 +9,15 @@ View* view_factory(VIEW_TYPE_ENUM type, DISPLAY_TYPES display)
 	switch (type)
 	{
 	case VIEW_TYPE_ENUM::LOG:
-		if (display == DISPLAY_TYPES::CONSOLE)
+		switch(display)
+		{
+		case DISPLAY_TYPES::CONSOLE:
 			val = new Console_Log_View();
+			break;
+		case DISPLAY_TYPES::FILE:
+			val = new File_Log_View();
+			break;
+		}
 		break;
 	case VIEW_TYPE_ENUM::POPUP_OPTION:
 		if(display == DISPLAY_TYPES::CONSOLE)

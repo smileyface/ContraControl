@@ -45,7 +45,7 @@ namespace testing_utilities
 		void expect_exception(std::function<void()> function, NETWORK_ERRORS error);
 		namespace network_message_utilities
 		{
-			void check_header(int message_id, int size, std::vector<unsigned char> p_message);
+			void check_header(int message_id, std::size_t size, std::vector<unsigned char> p_message);
 			void compare_messages(Packed_Message m1, Packed_Message m2);
 		}
 	}
