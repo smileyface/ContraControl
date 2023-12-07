@@ -30,8 +30,11 @@ public:
 	// Inherited via File_View
 	bool is_stale() override;
 	bool quit() override;
+
+	std::string get_file_name();
 private:
 	std::ofstream log_file;
+	std::string file_name;
 	std::string get_time_str();
 
 };

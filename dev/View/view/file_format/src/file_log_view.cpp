@@ -8,7 +8,23 @@
 #include <windows.h>
 #endif
 
-File_Log_View::File_Log_View()
+#include "Messaging/message_relay.h"
+
+//TODO: Add this to a utility
+void replace(
+	std::string& s,
+	std::string const& toReplace,
+	std::string const& replaceWith
+)
+{
+	for(std::size_t pos = s.find(toReplace); pos != std::string::npos; pos = s.find(toReplace))
+	{
+		s.replace(pos, toReplace.length(), replaceWith);
+	}
+}
+
+File_Log_View::File_Log_View() :
+	file_name("")
 {
 }
 
@@ -17,7 +33,16 @@ File_Log_View::~File_Log_View()
 
 void File_Log_View::on_create()
 { 
-	log_file.open(get_time_str() + ".log");
+	std::string timestamp = get_time_str();
+	replace(timestamp, ":", ".");
+	replace(timestamp, "/", "-");
+	file_name = "LOG FILE" + timestamp + ".log";
+	const char* file = file_name.c_str();
+	log_file.open(file);
+	if(log_file.fail())
+	{
+		LOG_ERROR("File creation failed. Error No: " + errno, "File_Log_View");
+	}
 	Log_View_Type::create();
 	File_View::on_create();
 }
@@ -33,7 +58,7 @@ void File_Log_View::on_paint()
 	{
 		auto message = log_messages.front();
 		std::string paint_message = "[" + message.LEVEL + "]\t(" + message.LOC + "):\t" + message.MESSAGE;
-		painted_messages.push_back(get_time_str() + "\t" + paint_message);
+		painted_messages.push_back("[" + get_time_str() + "]" + "\t" + paint_message);
 		log_messages.erase(log_messages.begin());
 	}
 }
@@ -43,7 +68,7 @@ void File_Log_View::on_display()
 	while(!painted_messages.empty())
 	{
 		auto message = painted_messages.front();
-		log_file << painted_message << std::endl << std::flush;
+		log_file << message << std::endl << std::flush;
 		painted_messages.erase(painted_messages.begin());
 	}
 }
@@ -71,7 +96,7 @@ std::string File_Log_View::get_time_str()
 	int hour = aTime.tm_hour; //24 hour format
 	int minute = aTime.tm_min;
 	int second = aTime.tm_sec;
-	return "[" + std::to_string(month) + "/" + std::to_string(day) + "/" + std::to_string(year) + "  "
+	return std::to_string(month) + "/" + std::to_string(day) + "/" + std::to_string(year) + "-"
 		+ std::to_string(hour) + ":" + std::to_string(minute) + ":" + std::to_string(second) + "." + std::to_string(milliseconds);
 }
 
@@ -83,4 +108,9 @@ bool File_Log_View::is_stale()
 bool File_Log_View::quit()
 {
 	return quiter;
+}
+
+std::string File_Log_View::get_file_name()
+{
+	return file_name;
 }
