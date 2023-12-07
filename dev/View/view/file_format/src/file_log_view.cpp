@@ -29,13 +29,23 @@ void File_Log_View::on_refresh()
 
 void File_Log_View::on_paint()
 {
-	std::string paint_message = "[" + message.LEVEL + "]\t(" + message.LOC + "):\t" + message.MESSAGE;
-	painted_message = get_time_str() +"\t" + paint_message;
+	while(!log_messages.empty())
+	{
+		auto message = log_messages.front();
+		std::string paint_message = "[" + message.LEVEL + "]\t(" + message.LOC + "):\t" + message.MESSAGE;
+		painted_messages.push_back(get_time_str() + "\t" + paint_message);
+		log_messages.erase(log_messages.begin());
+	}
 }
 
 void File_Log_View::on_display()
 {
-	log_file << painted_message << std::endl << std::flush;
+	while(!painted_messages.empty())
+	{
+		auto message = painted_messages.front();
+		log_file << painted_message << std::endl << std::flush;
+		painted_messages.erase(painted_messages.begin());
+	}
 }
 
 void File_Log_View::on_destroy()

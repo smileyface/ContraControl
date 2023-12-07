@@ -15,11 +15,15 @@ Log_View_Type::~Log_View_Type()
 }
 void Log_View_Type::get_message()
 {
-	Logging_Message messages = Message_Relay::get_instance()->pop<Logging_Message>(log_consumer);
-	message.MESSAGE = messages.get_message();
-	message.LOC = messages.get_location();
-	message.LEVEL = messages.get_priority_string();
-	message.vaild = message.MESSAGE == "" ? false: true;
+	for(Logging_Message messages = Message_Relay::get_instance()->pop<Logging_Message>(log_consumer); messages.is_valid() != false; messages = Message_Relay::get_instance()->pop<Logging_Message>(log_consumer))
+	{
+		MESSAGE message;
+		message.MESSAGE = messages.get_message();
+		message.LOC = messages.get_location();
+		message.LEVEL = messages.get_priority_string();
+		message.vaild = message.MESSAGE == "" ? false : true;
+		log_messages.push_back(message);
+	}
 }
 void Log_View_Type::create()
 {

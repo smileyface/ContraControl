@@ -56,8 +56,11 @@ View* Format::create_view(VIEW_TYPE_ENUM view, DISPLAY_TYPES type)
 {
 	LOG_INFO("Adding View: " + std::string(get_view_type_enum_as_string(view)), "Format");
 	View* new_view = view_factory(view, type);
-	new_view->on_create();
-	view_list.push_back(new_view);
+	if(new_view != 0)
+	{
+		new_view->on_create();
+		view_list.push_back(new_view);
+	}
 	return new_view;
 }
 
@@ -70,7 +73,7 @@ void Format::process_internal_messages()
 		{
 			Option_Popup_Message message_actualized = message.convert_type<Option_Popup_Message>();
 			add_view(VIEW_TYPE_ENUM::POPUP_OPTION);
-			std::string log_message = "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(message_actualized.get_sender()));
+			std::string log_message = "Option Popup request recieved from subsystem ID " + std::to_string(static_cast<int>(message_actualized.get_sender()));
 			LOG_INFO(log_message, "Option Popup Creation");
 		}
 	}

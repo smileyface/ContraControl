@@ -14,10 +14,6 @@ Console_Log_View::~Console_Log_View()
 void Console_Log_View::on_refresh()
 {
 	get_message();
-	message_ = message.MESSAGE;
-	system_id = message.LOC;
-	message_level = message.LEVEL;
-	message_valid = message.vaild;
 }
 void Console_Log_View::on_create()
 { 
@@ -27,11 +23,22 @@ void Console_Log_View::on_create()
 
 void Console_Log_View::on_display()
 {
-	std::cout << painted_message << std::endl << std::flush;
+	while(!painted_messages.empty())
+	{
+		auto message = painted_messages.front();
+		std::cout << message << std::endl << std::flush;
+		painted_messages.erase(painted_messages.begin());
+	}
+	
 }
 void Console_Log_View::on_paint()
 {
-	painted_message = "[" + message_level + "]\t(" + system_id + "):\t" + message_;
+	while(!log_messages.empty())
+	{
+		auto message = log_messages.front();
+		painted_messages.push_back("[" + message.LEVEL + "]\t(" + message.LOC + "):\t" + message.MESSAGE);
+		log_messages.erase(log_messages.begin());
+	}
 }
 
 void Console_Log_View::on_destroy()
