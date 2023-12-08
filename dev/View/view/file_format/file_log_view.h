@@ -31,6 +31,9 @@ public:
 	bool is_stale() override;
 	bool quit() override;
 
+	/**
+	 * \return The name of the Log file.
+	 */
 	std::string get_file_name();
 private:
 	std::ofstream log_file;
