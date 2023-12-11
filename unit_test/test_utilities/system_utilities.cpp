@@ -54,6 +54,7 @@ void system_utilities::setup()
 		}
 		system_setup = true;
 	}
+	print_log_messages();
 }
 
 void system_utilities::setup_messaging()
@@ -128,6 +129,7 @@ void system_utilities::print_log_messages()
 
 void system_utilities::cleanup()
 {
+	LOG_INFO("System Teardown", "Test");
 	Scheduler::get_instance()->stop();
 	Scheduler::get_instance()->clear();
 	Scheduler::destroy_instance();

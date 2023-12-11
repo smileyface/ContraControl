@@ -10,6 +10,7 @@
 #define INTERFACE_KEYBOARD_INTERFACE
 
 #include "../action_layer/action_stack.h"
+#include "Threading/threading.h"
 
 /** Generic interface for reading keypresses from a keyboard. */
 class Keyboard_Interface
@@ -64,6 +65,8 @@ protected:
 	bool keyboard_present;
 private:
 	void loop();
+	void step();
+	Task keyboard_task;
 	
 
 
