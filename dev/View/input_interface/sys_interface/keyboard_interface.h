@@ -39,7 +39,7 @@ public:
 	void stop_listening();
 
 	/**
-	 * Read an event from the keyboard
+	 * Read an event from the keyboard. Add to the key_buffer.
 	 */
 	virtual void readEv() = 0;
 	
@@ -63,6 +63,8 @@ protected:
 	bool active;
 	/** Is there a physical or virtual keyboard present on the system*/
 	bool keyboard_present;
+	/** Keys pressed this step. */
+	std::vector<KPI> key_buffer;
 private:
 	void loop();
 	void step();

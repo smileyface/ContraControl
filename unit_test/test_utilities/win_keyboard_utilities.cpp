@@ -34,7 +34,7 @@ void system_utilities::keyboard_utilities::press_button(int key)
 	ip.ki.dwFlags = 0;
 
 	SendInput(1, &ip, sizeof(INPUT));
-	std::this_thread::sleep_for(std::chrono::milliseconds(40));
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	ip.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &ip, sizeof(INPUT));
 	std::this_thread::sleep_for(std::chrono::milliseconds(40));
