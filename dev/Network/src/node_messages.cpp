@@ -6,10 +6,13 @@ Network_Message node_messages::network_message_factory(MESSAGES message)
 	switch (message)
 	{
 	case MESSAGES::NODE_HELLO:
+		LOG_DEBUG("Node Hello message created");
 		return Network_Message(message, { new Network_Address(), new Network_String() });
 	case MESSAGES::NODE_ACK:
+		LOG_DEBUG("Node Ack message created");
 		return Network_Message(message, { new Network_String() });
 	default:
+		LOG_DEBUG("Unknown message attempted");
 		return Network_Message(MESSAGES::UNDEFINED, { new Network_String(), new Network_Address(), new Network_Bool(), new Network_Byte(), new Network_Percent(), new Network_Word() });
 	}
 }

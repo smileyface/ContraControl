@@ -15,7 +15,9 @@
 enum class DISPLAY_TYPES
 {
 	/** This display is on a console */
-	CONSOLE
+	CONSOLE,
+	/** This is for File IO */
+	FILE
 };
 
 #endif

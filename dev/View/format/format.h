@@ -26,6 +26,8 @@
 class Format
 {
 public:
+	Format();
+	virtual ~Format();
 	/**
 	 * Initalize the Format. Generally includes an alive message and adding system messages.
 	 */
@@ -35,7 +37,7 @@ public:
 	 * \param view Type of view to add.
 	 * \return Pointer to the newly created view
 	 */
-	virtual View* add_view(VIEW_TYPE_ENUM view);
+	virtual View* add_view(VIEW_TYPE_ENUM view) = 0;
 	/**
 	 * \brief Update all stale views.
 	 *
@@ -67,6 +69,14 @@ protected:
 	bool format_running = false;
 	/** Consume view messages */
 	Message_Consumer* format_consumer = 0;
+	/**
+	 * Create view, call View::on_create(), and add to the list of views.
+	 * \param view View to create.
+	 * \param type Format to create view on.
+	 * 
+	 * \return Pointer to the newly created view
+	 */
+	View* create_view(VIEW_TYPE_ENUM view, DISPLAY_TYPES type);
 private:
 };
 

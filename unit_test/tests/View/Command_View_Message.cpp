@@ -67,7 +67,7 @@ TEST_F(Command_View_Message_Test, Send_Option)
 		auto item_ref = item.convert_type<Logging_Message>();
 		if(item_ref.get_priority() == MESSAGE_PRIORITY::INFO_MESSAGE &&
 		   item_ref.get_location() == "Option Popup Creation" &&
-		   item_ref.get_message() == "Option Popup request recieved from subsystem ID" + std::to_string(static_cast<int>(SUBSYSTEM_ID_ENUM::TEST)))
+		   item_ref.get_message() == "Option Popup request recieved from subsystem ID " + std::to_string(static_cast<int>(SUBSYSTEM_ID_ENUM::TEST)))
 		{
 			message_in_view = true;
 		}

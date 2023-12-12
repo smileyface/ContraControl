@@ -34,7 +34,7 @@ void system_utilities::keyboard_utilities::press_button(int key)
 	ip.ki.dwFlags = 0;
 
 	SendInput(1, &ip, sizeof(INPUT));
-	std::this_thread::sleep_for(std::chrono::milliseconds(40));
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	ip.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &ip, sizeof(INPUT));
 	std::this_thread::sleep_for(std::chrono::milliseconds(40));
@@ -42,103 +42,104 @@ void system_utilities::keyboard_utilities::press_button(int key)
 
 char system_utilities::keyboard_utilities::get_char_from_kpi(KPI key)
 {
+	char value = 0xFF;
 	if(key == KEY::A)
-		return 'A';
+		value = 'A';
 	else if(key == KEY::B)
-		return 'B';
+		value = 'B';
 	else if(key == KEY::C)
-		return 'C';
+		value = 'C';
 	else if(key == KEY::D)
-		return 'D';
+		value = 'D';
 	else if(key == KEY::E)
-		return 'E';
+		value = 'E';
 	else if(key == KEY::F)
-		return 'F';
+		value = 'F';
 	else if(key == KEY::G)
-		return 'G';
+		value = 'G';
 	else if(key == KEY::H)
-		return 'H';
+		value = 'H';
 	else if(key == KEY::I)
-		return 'I';
+		value = 'I';
 	else if(key == KEY::J)
-		return 'J';
+		value = 'J';
 	else if(key == KEY::K)
-		return 'K';
+		value = 'K';
 	else if(key == KEY::L)
-		return 'L';
+		value = 'L';
 	else if(key == KEY::M)
-		return 'M';
+		value = 'M';
 	else if(key == KEY::N)
-		return 'N';
+		value = 'N';
 	else if(key == KEY::O)
-		return 'O';
+		value = 'O';
 	else if(key == KEY::P)
-		return 'P';
+		value = 'P';
 	else if(key == KEY::Q)
-		return 'Q';
+		value = 'Q';
 	else if(key == KEY::R)
-		return 'R';
+		value = 'R';
 	else if(key == KEY::S)
-		return 'S';
+		value = 'S';
 	else if(key == KEY::T)
-		return 'T';
+		value = 'T';
 	else if(key == KEY::U)
-		return 'U';
+		value = 'U';
 	else if(key == KEY::V)
-		return 'V';
+		value = 'V';
 	else if(key == KEY::W)
-		return 'W';
+		value = 'W';
 	else if(key == KEY::X)
-		return 'X';
+		value = 'X';
 	else if(key == KEY::Y)
-		return 'Y';
+		value = 'Y';
 	else if(key == KEY::Z)
-		return 'Z';
+		value = 'Z';
 	else if(key == KEY::NUM_0)
-		return '0';
+		value = '0';
 	else if(key == KEY::NUM_1)
-		return '1';
+		value = '1';
 	else if(key == KEY::NUM_2)
-		return '2';
+		value = '2';
 	else if(key == KEY::NUM_3)
-		return '3';
+		value = '3';
 	else if(key == KEY::NUM_4)
-		return '4';
+		value = '4';
 	else if(key == KEY::NUM_5)
-		return '5';
+		value = '5';
 	else if(key == KEY::NUM_6)
-		return '6';
+		value = '6';
 	else if(key == KEY::NUM_7)
-		return '7';
+		value = '7';
 	else if(key == KEY::NUM_8)
-		return '8';
+		value = '8';
 	else if(key == KEY::NUM_9)
-		return '9';
+		value = '9';
 	else if(key == KEY::NUM_PAD::NUM_0)
-		return VK_NUMPAD0;
+		value = VK_NUMPAD0;
 	else if(key == KEY::NUM_PAD::NUM_1)
-		return VK_NUMPAD1;
+		value = VK_NUMPAD1;
 	else if(key == KEY::NUM_PAD::NUM_2)
-		return VK_NUMPAD2;
+		value = VK_NUMPAD2;
 	else if(key == KEY::NUM_PAD::NUM_3)
-		return VK_NUMPAD3;
+		value = VK_NUMPAD3;
 	else if(key == KEY::NUM_PAD::NUM_4)
-		return VK_NUMPAD4;
+		value = VK_NUMPAD4;
 	else if(key == KEY::NUM_PAD::NUM_5)
-		return VK_NUMPAD5;
+		value = VK_NUMPAD5;
 	else if(key == KEY::NUM_PAD::NUM_6)
-		return VK_NUMPAD6;
+		value = VK_NUMPAD6;
 	else if(key == KEY::NUM_PAD::NUM_7)
-		return VK_NUMPAD7;
+		value = VK_NUMPAD7;
 	else if(key == KEY::NUM_PAD::NUM_8)
-		return VK_NUMPAD8;
+		value = VK_NUMPAD8;
 	else if(key == KEY::NUM_PAD::NUM_9)
-		return VK_NUMPAD9;
+		value = VK_NUMPAD9;
 	else if(key == KEY::L_SHIFT)
-		return VK_LSHIFT;
+		value = VK_LSHIFT;
 	else if(key == KEY::ENTER)
-		return VK_RETURN;
-	return 0xFF;
+		value = VK_RETURN;
+	return value;
 }
 
 void system_utilities::keyboard_utilities::tear_down()

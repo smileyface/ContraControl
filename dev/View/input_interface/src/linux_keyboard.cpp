@@ -91,7 +91,6 @@ Linux_Keyboard::~Linux_Keyboard()
 	if(keyboard_fd > 0)
 	{
 		active = false;
-		pthread_join(thread, 0);
 		close(keyboard_fd);
 	}
 	delete keyboard_st;

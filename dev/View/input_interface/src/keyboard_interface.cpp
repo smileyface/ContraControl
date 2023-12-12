@@ -12,14 +12,13 @@ std::thread keyboard_thread;
 unsigned int BUFFERED_TIMEOUT = 5;
 
 Keyboard_Interface::Keyboard_Interface()
-{ 
+{
 	active = false;
 	keyboard_present = false;
 }
 
 Keyboard_Interface::~Keyboard_Interface()
-{
-}
+{ }
 
 bool is_simple = false;
 
@@ -67,7 +66,7 @@ std::string Keyboard_Interface::get_simple()
 {
 	std::string val;
 	action_stack.change_action_layers(Predefined_Action_Layer::SIMPLE_BUFFERED_INPUT_LAYER);
-	unsigned int counter=1;
+	unsigned int counter = 1;
 	unsigned int count_the_counter = 0;
 	//Spin while the buffer collects input
 	while(!Predefined_Action_Layer::Simple_Input_Layer::terminated)
@@ -85,7 +84,7 @@ std::string Keyboard_Interface::get_simple()
 		}
 	}
 
-    val = input_buffer.get_buffer();
+	val = input_buffer.get_buffer();
 	Predefined_Action_Layer::Simple_Input_Layer::returned = Predefined_Action_Layer::Simple_Input_Layer::terminated;
 	return val;
 }

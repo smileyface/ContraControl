@@ -13,13 +13,14 @@ set(DEVICE_TEST_FILES "tests/Devices/Switch.cpp"
                       "tests/Messaging/Internal_Messages.cpp"  
                       "tests/Messaging/Internal_Messages_Ptr.cpp"
                       "tests/View/Command_View_Message.cpp" 
+                      "tests/View/File_View.cpp"
                       "tests/Keyboard/Action_Layer.cpp"
                       "tests/Keyboard/Action_Stack.cpp"
                       "tests/Keyboard/Keyboard_Buffer_Input.cpp" 
                       "tests/Keyboard/Keyboard_Hardware.cpp" 
                       "tests/Keyboard/Keyboard_System_Not_Connected.cpp" 
                       "tests/Scheduler/Task.cpp"
-                      "tests/Scheduler/Scheduler.cpp")
+                      "tests/Scheduler/Scheduler.cpp" "tests/View/Console_View.cpp" "tests/View/View_Format.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/system_utilities.h"

@@ -137,11 +137,12 @@ void testing_utilities::network_utilities::expect_exception(std::function<void()
 	system_utilities::print_log_messages();
 }
 
-void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, int size, std::vector<unsigned char> p_message)
+void testing_utilities::network_utilities::network_message_utilities::check_header(int message_id, std::size_t size, std::vector<unsigned char> p_message)
 {
 	EXPECT_EQ(0x65, p_message[0]) << "Invalid Packet Header";
 	EXPECT_EQ(message_id, p_message[1]) << "Incorrect Message Id";
 	EXPECT_EQ(size, p_message[2]) << "Incorrect Packet Size";
+	system_utilities::print_log_messages();
 }
 
 void testing_utilities::network_utilities::network_message_utilities::compare_messages(Packed_Message m1, Packed_Message m2)
@@ -209,6 +210,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 			FAIL() << "Type is not handled by test";
 		}
 	}
+	system_utilities::print_log_messages();
 }
 
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)

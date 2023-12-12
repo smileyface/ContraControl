@@ -17,7 +17,7 @@ void Console_Format::initalize()
 
 View* Console_Format::add_view(VIEW_TYPE_ENUM view)
 {
-	View* new_view = Format::add_view(view);
+	View* new_view = Format::create_view(view, DISPLAY_TYPES::CONSOLE);
 	return new_view;
 }
 

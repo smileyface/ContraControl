@@ -13,6 +13,7 @@
 
 
 #include "../../dev/Utilities/Utilities/exceptions.h"
+#include "../../dev/Utilities/Utilities/tools/classes.h"
 #include "../../dev/Network/system_interfaces/types/network_status_state.h"
 #include "../../dev/Network/messages/messaging.h"
 #include "../../dev/View/input_interface/sys_interface/keyboard_interface.h"
@@ -45,7 +46,7 @@ namespace testing_utilities
 		void expect_exception(std::function<void()> function, NETWORK_ERRORS error);
 		namespace network_message_utilities
 		{
-			void check_header(int message_id, int size, std::vector<unsigned char> p_message);
+			void check_header(int message_id, std::size_t size, std::vector<unsigned char> p_message);
 			void compare_messages(Packed_Message m1, Packed_Message m2);
 		}
 	}
