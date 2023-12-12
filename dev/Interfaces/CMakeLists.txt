@@ -22,12 +22,8 @@ if(NOT HOME)
 endif()
 
 set(INTERFACE_HEADER_FILES
-                    Interfaces/view_interface.h
-                    Interfaces/main_interface.h
                     Interfaces/network_interface.h)
 set(INTERFACE_SOURCE_FILES
-                    Interfaces/src/main_interface.cpp
-                    Interfaces/src/view_interface.cpp 
                     Interfaces/src/view_type_enum.cpp
                     Interfaces/src/packed_command.cpp 
                     Interfaces/src/state.cpp)
