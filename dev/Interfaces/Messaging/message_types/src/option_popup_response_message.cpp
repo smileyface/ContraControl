@@ -4,9 +4,6 @@ Option_Popup_Response_Message::Option_Popup_Response_Message() :
 	selection_(-1),
 	responding_message_(0)
 { 
-	Response_Message();
-	selection_ = -1;
-	responding_message_ = 0;
 }
 
 Option_Popup_Response_Message::Option_Popup_Response_Message(int selection, Option_Popup_Message* responding_message)
