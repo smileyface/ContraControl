@@ -14,7 +14,7 @@ namespace
 		View_Handle display_handle = 0;
 		virtual void SetUp()
 		{
-			display_handle = view::add_display(DISPLAY_TYPES::FILE);
+			display_handle = view::add_display(DISPLAY_TYPES::CONSOLE);
 			system_utilities::setup();
 			system_utilities::start_system();
 		}
