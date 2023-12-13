@@ -127,19 +127,10 @@ void model::step()
 									   if(step_command.command_run() == false)
 									   {
 										   LOG_DEBUG("Running command " + step_command.get_command()->get_id_str() + "on the model");
-										   try
-										   {
-											   std::lock_guard<std::mutex> lock(model_mutex);
-											   mangle_model(step_command.get_command());
-											   step_command.run_command();
-											   step_command.get_command()->time_to_complete -= model_timer.get_elapsed_time();
-										   }
-										   catch(std::exception& e)
-										   {
-											   std::string what = e.what();
-											   LOG_ERROR("Exception thrown " + what, "Model");
-											   model_task.exception(std::current_exception());
-										   }
+											std::lock_guard<std::mutex> lock(model_mutex);
+											mangle_model(step_command.get_command());
+											step_command.run_command();
+											step_command.get_command()->time_to_complete -= model_timer.get_elapsed_time();
 									   }
 									   model_step_thread--;
 								   }));

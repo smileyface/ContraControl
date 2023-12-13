@@ -132,18 +132,6 @@ void Task::stop()
             tasks++;
         }
     }
-    
-    //while(thrown_exceptions.size() > 0)
-    //{
-    //    std::exception_ptr ex = thrown_exceptions.front();
-    //    thrown_exceptions.pop();
-    //    std::rethrow_exception(ex);
-    //}
-}
-
-void Task::exception(std::exception_ptr ex)
-{
-    thrown_exceptions.push(ex);
 }
 
 Task& Task::operator=(const Task& other)
