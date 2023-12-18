@@ -28,7 +28,6 @@ void model::initalize()
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{
 													model_timer.update_time();
-													std::lock_guard<std::mutex> lock(model_mutex);
 													for(auto i = model::step_actions.begin(); i != model::step_actions.end(); )
 													{
 														if(i->command_run())
@@ -127,7 +126,6 @@ void model::step()
 									   if(step_command.command_run() == false)
 									   {
 										   LOG_DEBUG("Running command " + step_command.get_command()->get_id_str() + "on the model");
-											std::lock_guard<std::mutex> lock(model_mutex);
 											mangle_model(step_command.get_command());
 											step_command.run_command();
 											step_command.get_command()->time_to_complete -= model_timer.get_elapsed_time();

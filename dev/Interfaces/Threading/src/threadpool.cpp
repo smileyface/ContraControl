@@ -38,10 +38,12 @@ Thread_Pool::Thread_Pool() :
                                      }
 
                                      task_running++;
-                                     //printf("Thread %d Running a task\n", static_cast<int>(i));
+                                     LOG_DEBUG("Thread " + std::to_string(static_cast<int>(i)) + " Running a task");
                                      
                                      task();
+
                                      task_running--;
+                                     LOG_DEBUG("Thread " + std::to_string(static_cast<int>(i)) + " Task complete");
                                  }
                              });
     }
