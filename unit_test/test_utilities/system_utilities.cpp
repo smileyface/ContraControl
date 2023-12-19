@@ -84,6 +84,7 @@ void system_utilities::start_system()
 	model::start_loop();
 	controller::start_controller();
 	view::start_view();
+	print_log_messages();
 }
 
 void system_utilities::stop_system()
