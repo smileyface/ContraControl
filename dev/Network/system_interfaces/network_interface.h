@@ -36,6 +36,12 @@ class Network_Interface
 public:
 
 	/**
+	 * @brief Destroy the Network_Interface object.
+	 * 
+	 */
+	virtual ~Network_Interface();
+
+	/**
 	 * \brief Initalize the interface.
 	 *
 	 * Creates the socket.

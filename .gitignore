@@ -48,7 +48,7 @@ test/googletest*
 googletest-*
 Test
 CoverageReport*
-LastCoverageResults.log
+*.log
 
 #CMake Extras
 CMakeLists.txt.user

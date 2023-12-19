@@ -42,12 +42,16 @@ IPV4_Addr Linux_Network_Interface::get_subnet_mask(SOCKET sock, IPV4_Addr host_i
 
 void Linux_Network_Interface::setup_interface()
 {
+	struct ifaddrs* ifap;
 	int found = 0;
-	if(getifaddrs(&ifa) == -1)
+
+	if(getifaddrs(&ifap) == -1)
 	{
 		perror("getifaddrs");
 		exit(EXIT_FAILURE);
 	}
+
+	ifa = ifap;
 
 	LOG_DEBUG("Interface trying to find is " + interfaces);
 	while(ifa && !found)
@@ -65,6 +69,7 @@ void Linux_Network_Interface::setup_interface()
 		}
 		ifa = ifa->ifa_next;
 	}
+	freeifaddrs(ifap);
 	if(found == 0)
 	{
 		LOG_ERROR("No Adapter Found", "Linux Network");
@@ -109,13 +114,13 @@ NETWORK_ERRORS set_error_state()
 
 Linux_Network_Interface::Linux_Network_Interface()
 {
+
 	interfaces = "lo";
 	local_connections::setup(connections);
 }
 
 Linux_Network_Interface::~Linux_Network_Interface()
 {
-	freeifaddrs(ifa);
 }
 void Linux_Network_Interface::initalize()
 {
