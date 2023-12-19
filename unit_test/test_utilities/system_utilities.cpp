@@ -55,6 +55,7 @@ void system_utilities::setup()
 		system_setup = true;
 	}
 	print_log_messages();
+	std::cout << "The messages have been printed" << std::endl << std::flush;
 }
 
 void system_utilities::setup_messaging()

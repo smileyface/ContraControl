@@ -76,7 +76,7 @@ TEST_F(Commands_Test, Device_Invalid_Command)
 /*This test and concept needs a redesign*/
 //This has become undefined behavior
 
-TEST_F(Commands_Test, Device_Duplicate_Command)
+TEST_F(Commands_Test, DISABLED_Device_Duplicate_Command)
 {
 
 }

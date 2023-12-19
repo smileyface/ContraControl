@@ -116,9 +116,10 @@ void Linux_Keyboard::connect_to_keyboard()
 				event_eligible.push_back(s);
 			}
 		}
+		closedir(dp);
 	}
 
-	closedir(dp);
+
 	bool keyboard_present = false;
 	for(int i = 0; i < event_eligible.size(); i++)
 	{
