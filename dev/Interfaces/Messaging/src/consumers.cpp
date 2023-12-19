@@ -1,6 +1,6 @@
-#include "Messaging/consumers.h"
-#include "../Utilities/Utilities/tools/classes.h"
 #include <typeinfo>
+#include "../Utilities/Utilities/tools/classes.h"
+#include "Messaging/consumers.h"
 
 
 Message_Consumer::Message_Consumer( const Internal_Message* mess)
@@ -18,7 +18,7 @@ void Message_Consumer::freshen()
 	stale = false;
 }
 
-bool Message_Consumer::is_stale()
+bool Message_Consumer::is_stale() const
 {
 	return stale;
 }

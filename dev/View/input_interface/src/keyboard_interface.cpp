@@ -1,12 +1,12 @@
-#include <thread>
-#include <functional>   // std::mem_fn
 #include <algorithm>    // std::find
+#include <condition_variable>
+#include <functional>   // std::mem_fn
 #include <iostream>
 #include <stdint.h>
-#include <condition_variable>
+#include <thread>
 
-#include "../sys_interface/keyboard_interface.h"
 #include "../action_layer/predefined_layer.h"
+#include "../sys_interface/keyboard_interface.h"
 #include "Messaging/message_relay.h"
 
 std::thread keyboard_thread;
@@ -24,6 +24,11 @@ Keyboard_Interface::Keyboard_Interface()
 
 Keyboard_Interface::~Keyboard_Interface()
 { }
+
+void Keyboard_Interface::initalize()
+{ 
+	initalize_codes();
+}
 
 bool is_simple = false;
 
@@ -62,7 +67,7 @@ void Keyboard_Interface::stop_listening()
 	}
 }
 
-bool Keyboard_Interface::get_keyboard_present()
+bool Keyboard_Interface::get_keyboard_present() const
 {
 	return keyboard_present;
 }

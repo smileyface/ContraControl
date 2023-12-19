@@ -48,7 +48,7 @@ public:
     void enqueue(F&& task)
     {
         {
-            std::unique_lock<std::mutex> lock(queueMutex);
+            const std::lock_guard<std::mutex> lock(queueMutex);
             tasks.emplace((task));
         }
         condition.notify_one();

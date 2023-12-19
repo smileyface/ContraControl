@@ -4,18 +4,18 @@
 
 //#define DEBUG
 
-#include <utility>
 #include <functional>
+#include <utility>
 
-#include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
+#include "../../dev/Model/model_main.h"
 #include "../../dev/View/view_main.h"
 
 
+#include "../../dev/Network/messages/messaging.h"
+#include "../../dev/Network/system_interfaces/types/network_status_state.h"
 #include "../../dev/Utilities/Utilities/exceptions.h"
 #include "../../dev/Utilities/Utilities/tools/classes.h"
-#include "../../dev/Network/system_interfaces/types/network_status_state.h"
-#include "../../dev/Network/messages/messaging.h"
 #include "../../dev/View/input_interface/sys_interface/keyboard_interface.h"
 
 namespace testing_utilities

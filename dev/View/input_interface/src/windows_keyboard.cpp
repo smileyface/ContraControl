@@ -1,14 +1,14 @@
 
 #ifdef _WIN32
-#include "../sys_interface/windows_keyboard.h"
-#include "../sys_interface/key_input_interface.h"
 #include "../action_layer/action_layer.h"
+#include "../sys_interface/key_input_interface.h"
+#include "../sys_interface/windows_keyboard.h"
 #include "Messaging/message_relay.h"
 
-#include <Windows.h>
-#include <vector>
-#include <string>
 #include <iostream>
+#include <string>
+#include <vector>
+#include <Windows.h>
 
 UINT nDevices;
 
@@ -74,7 +74,6 @@ void Windows_Keyboard::initalize_codes()
 
 Windows_Keyboard::Windows_Keyboard()
 {
-	initalize_codes();
 	action_stack.setup_action_layers();
 }
 

@@ -38,12 +38,10 @@ Thread_Pool::Thread_Pool() :
                                      }
 
                                      task_running++;
-                                     LOG_DEBUG("Thread " + std::to_string(static_cast<int>(i)) + " Running a task");
                                      
                                      task();
 
                                      task_running--;
-                                     LOG_DEBUG("Thread " + std::to_string(static_cast<int>(i)) + " Task complete");
                                  }
                              });
     }
@@ -70,11 +68,8 @@ void Thread_Pool::destroy_instance()
 }
 void Thread_Pool::sleep_my_thread()
 {
-    int i = 0;
     while((tasks.empty() == false || task_running > 0))
-    {
-        i++;
-    }
+    {  }
 }
 
 Thread_Pool::~Thread_Pool()

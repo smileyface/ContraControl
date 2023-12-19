@@ -1,8 +1,8 @@
 #include "model_main.h"
 
 #include <algorithm>
-#include <thread>
 #include <mutex>
+#include <thread>
 
 #include "Interfaces/types/state.h"
 #include "Threading/threading.h"
