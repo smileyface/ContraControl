@@ -55,6 +55,7 @@ void system_utilities::setup()
 		system_setup = true;
 	}
 	print_log_messages();
+	std::cout << "The messages have been printed" << std::endl << std::flush;
 }
 
 void system_utilities::setup_messaging()
@@ -72,7 +73,6 @@ void system_utilities::teardown_messaging()
 	print_log_messages();
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
 	testing_utilities::message_utilities::system_is_clean();
-	Message_Relay::get_instance()->clear();
 	Message_Relay::destroy_instance();
 	message_consumer = 0;
 }
@@ -83,6 +83,7 @@ void system_utilities::start_system()
 	model::start_loop();
 	controller::start_controller();
 	view::start_view();
+	print_log_messages();
 }
 
 void system_utilities::stop_system()

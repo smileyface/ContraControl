@@ -12,9 +12,9 @@
 #include <cstring>
 
 #include "types/messages.h"
-#include "types/network_message_types.h"
-#include "types/network_message_header.h"
 #include "types/network_message_footer.h"
+#include "types/network_message_header.h"
+#include "types/network_message_types.h"
 
 
 /**

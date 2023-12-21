@@ -44,14 +44,16 @@ void Linux_Network_Interface::setup_interface()
 {
 	struct ifaddrs* ifap;
 	int found = 0;
+
 	if(getifaddrs(&ifap) == -1)
 	{
 		perror("getifaddrs");
 		exit(EXIT_FAILURE);
 	}
 
-	LOG_DEBUG("Interface trying to find is " + interfaces);
 	ifa = ifap;
+
+	LOG_DEBUG("Interface trying to find is " + interfaces);
 	while(ifa && !found)
 	{
 		if(ifa->ifa_addr->sa_family == AF_INET)
@@ -67,7 +69,6 @@ void Linux_Network_Interface::setup_interface()
 		}
 		ifa = ifa->ifa_next;
 	}
-
 	freeifaddrs(ifap);
 	if(found == 0)
 	{
@@ -113,10 +114,14 @@ NETWORK_ERRORS set_error_state()
 
 Linux_Network_Interface::Linux_Network_Interface()
 {
+
 	interfaces = "lo";
 	local_connections::setup(connections);
 }
 
+Linux_Network_Interface::~Linux_Network_Interface()
+{
+}
 void Linux_Network_Interface::initalize()
 {
 	char hostname_temp[50];

@@ -20,9 +20,9 @@ public:
 	virtual ~Keyboard_Interface();
 
 	/**
-	 * Setup the codemap.
+	 * Initalize structures for the keyboard.
 	 */
-	virtual void initalize_codes() = 0;
+	void initalize();
 
 	/**
 	 * Connect to the physical or vitrual keyboard.
@@ -46,7 +46,7 @@ public:
 	/**
 	 * \return Is there a physical or virtual keyboard present.
 	 */
-	bool get_keyboard_present(); 
+	bool get_keyboard_present() const; 
 
 	/**
 	* Stack of action layers for keyboard interaction.
@@ -59,6 +59,10 @@ public:
 	 */
 	std::string get_simple();
 protected:
+	/**
+	 * Setup the codemap.
+	 */
+	virtual void initalize_codes() = 0;
 	/** Is the interface active.  */
 	bool active;
 	/** Is there a physical or virtual keyboard present on the system*/

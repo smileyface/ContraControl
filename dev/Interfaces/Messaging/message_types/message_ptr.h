@@ -165,7 +165,7 @@ private:
 	void cleanup()
 	{
 		(*uses)--;
-		if((*uses) <= 0)
+		if((*uses) == 0)
 		{
 			if(message != nullptr)
 			{

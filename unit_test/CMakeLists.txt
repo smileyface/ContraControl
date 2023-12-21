@@ -20,7 +20,9 @@ set(DEVICE_TEST_FILES "tests/Devices/Switch.cpp"
                       "tests/Keyboard/Keyboard_Hardware.cpp" 
                       "tests/Keyboard/Keyboard_System_Not_Connected.cpp" 
                       "tests/Scheduler/Task.cpp"
-                      "tests/Scheduler/Scheduler.cpp" "tests/View/Console_View.cpp" "tests/View/View_Format.cpp")
+                      "tests/Scheduler/Scheduler.cpp" 
+                      "tests/View/Console_View.cpp" 
+                      "tests/View/View_Format.cpp")
 
 add_library(Test_Utilities "test_utilities/pch.h"
                            "test_utilities/system_utilities.h"

@@ -57,8 +57,11 @@ void File_Log_View::on_paint()
 	while(!log_messages.empty())
 	{
 		auto message = log_messages.front();
-		std::string paint_message = "[" + message.LEVEL + "]\t(" + message.LOC + "):\t" + message.MESSAGE;
-		painted_messages.push_back("[" + get_time_str() + "]" + "\t" + paint_message);
+		if(message.vaild)
+		{
+			std::string paint_message = "[" + message.LEVEL + "]\t(" + message.LOC + "):\t" + message.MESSAGE;
+			painted_messages.push_back("[" + get_time_str() + "]" + "\t" + paint_message);
+		}
 		log_messages.erase(log_messages.begin());
 	}
 }

@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "Interfaces/main_interface.h"
 
 
 bool program_running;
@@ -9,15 +8,12 @@ void start_program()
 {
 	std::cout << "RUNNING HEADLESS CLIENT" << std::endl;
 	program_running = true;
-	Main_Interfaces::View_Interface::add_view(0);
-	Main_Interfaces::View_Interface::start_view();
 }
 
 void exit_program()
 {
 	std::cout << "STOPPING HEADLESS CLIENT" << std::endl;
 	program_running = false;
-	Main_Interfaces::View_Interface::stop_view();
 }
 
 

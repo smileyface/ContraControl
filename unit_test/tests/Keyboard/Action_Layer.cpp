@@ -158,7 +158,6 @@ TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Multiple_Buttons)
 TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Press_Unhandled_Button)
 {
 	bool the_good_one = false;
-	bool the_bad_one = false;
 	keyboard.get_interface()->action_stack.get_active_layer()->set_on_release(KEY::A,
 																		   [&the_good_one] () mutable
 																		   {
@@ -173,7 +172,6 @@ TEST_F(Action_Layer_Test, Action_Layer_Event_Handle_Press_Unhandled_Button)
 TEST_F(Action_Layer_Test, Action_Layer_On_Hold_On_New_Layer)
 {
 	bool the_good_one = false;
-	bool the_bad_one = false;
 	int new_layer_index = keyboard.get_interface()->action_stack.add_action_layer();
 	keyboard.get_interface()->action_stack.change_action_layers(new_layer_index);
 	keyboard.get_interface()->action_stack.get_active_layer()->set_on_hold(KEY::A,

@@ -69,3 +69,26 @@ TEST_F(File_View_Test, File_Log_Write)
 	}
 
 }
+
+TEST_F(File_View_Test, File_Log_Invalid_No_Write)
+{
+	File_Log_View* log_view = static_cast<File_Log_View*>(file_format_ptr->add_view(VIEW_TYPE_ENUM::LOG));
+	LOG_INFO("", "File_Log_Write Test");
+	system_utilities::step(2);
+
+	std::ifstream infile(log_view->get_file_name());
+	std::string line;
+	bool found = false;
+	while(std::getline(infile, line))
+	{
+		if(line.find("File_Log_Write Test") != std::string::npos)
+		{
+			found = true;
+		}
+	}
+	if(found)
+	{
+		FAIL() << "Message is found in log file.";
+	}
+
+}

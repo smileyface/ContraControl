@@ -1,13 +1,13 @@
 #ifdef __linux__
 
-#include "../sys_interface/linux_keyboard.h"
 #include "../sys_interface/key_input_interface.h"
+#include "../sys_interface/linux_keyboard.h"
 #include "Messaging/message_relay.h"
 
-#include <unistd.h>
 #include <linux/input-event-codes.h>
 #include <mutex>
 #include <regex>
+#include <unistd.h>
 
 #include <dirent.h>
 
@@ -82,7 +82,6 @@ Linux_Keyboard::Linux_Keyboard()
 	keyboard_ev = new input_event();
 	keyboard_st = new keyboard_state();
 
-	initalize_codes();
 	action_stack.setup_action_layers();
 }
 
@@ -117,9 +116,10 @@ void Linux_Keyboard::connect_to_keyboard()
 				event_eligible.push_back(s);
 			}
 		}
+		closedir(dp);
 	}
 
-	closedir(dp);
+
 	bool keyboard_present = false;
 	for(int i = 0; i < event_eligible.size(); i++)
 	{

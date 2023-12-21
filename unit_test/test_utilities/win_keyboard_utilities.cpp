@@ -1,15 +1,15 @@
-#include <thread>
 #include <chrono>
 #include <iostream>
+#include <thread>
 
-#include "system_utilities.h"
 #include "keyboard_interface_utilities.h"
+#include "system_utilities.h"
 
-#include "Utilities/exceptions.h"
 #include "test_utilities.h"
+#include "Utilities/exceptions.h"
 
-#include "../../dev/Model/model_main.h"
 #include "../../dev/Controller/controller_main.h"
+#include "../../dev/Model/model_main.h"
 
 #include "../../Network/network_main.h"
 

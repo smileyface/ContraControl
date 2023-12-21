@@ -25,6 +25,7 @@ system_utilities::keyboard_utilities::Keyboard::Keyboard()
 		buffer = new Linux_Keyboard();
 	#endif
 	}
+	buffer->initalize();
 }
 
 system_utilities::keyboard_utilities::Keyboard::~Keyboard()

@@ -21,7 +21,7 @@ Keyboard_Buffer_Input::Keyboard_Buffer_Input()
 #ifdef __linux__
 	keyboard = new Linux_Keyboard();
 #endif
-
+	keyboard->initalize();
 }
 
 std::string Keyboard_Buffer_Input::get_input()
@@ -34,7 +34,7 @@ int Keyboard_Buffer_Input::get_number()
 	return 0;
 }
 
-bool Keyboard_Interface::get_keyboard_present()
+bool Keyboard_Interface::get_keyboard_present() const
 {
 	return keyboard_present;
 }
