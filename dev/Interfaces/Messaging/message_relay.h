@@ -133,11 +133,6 @@ public:
 	 */
 	void deregister_consumer(Message_Consumer* consumer);
 
-	/**
-	* Remove all messages from the relay
-	*/
-	void clear();
-
 
 private:
 	Message_Relay();

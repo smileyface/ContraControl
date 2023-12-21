@@ -73,7 +73,6 @@ void system_utilities::teardown_messaging()
 	print_log_messages();
 	Message_Relay::get_instance()->deregister_consumer(message_consumer);
 	testing_utilities::message_utilities::system_is_clean();
-	Message_Relay::get_instance()->clear();
 	Message_Relay::destroy_instance();
 	message_consumer = 0;
 }
