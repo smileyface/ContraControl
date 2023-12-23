@@ -13,7 +13,6 @@
 
 #include <iostream>
 #include <fcntl.h>
-#include <pthread.h>
 #include <linux/input.h>
 
 #include "keyboard_interface.h"

@@ -305,6 +305,7 @@ TEST_F(Scheduler_Test, Add_Task_With_Scheduler_Running)
     scheduler->start(30);
     test_task.add_subtask([&run] () mutable
                           {
+                              LOG_INFO("Test in the subtask", "Subtask");
                               run = true;
                           });
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));

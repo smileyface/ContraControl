@@ -44,9 +44,9 @@ TEST_F(Keyboard_Hardware_Test, Capture_Test)
 {
 	bool is_pressed = false;
 	keyboard.set_key_operation(KEY::A, [&is_pressed] () mutable
-								{
-									is_pressed = true;
-								});
+							   {
+								   is_pressed = true;
+							   });
 	system_utilities::sleep_thread(100);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
 	system_utilities::sleep_thread(100);
@@ -57,9 +57,9 @@ TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Simple)
 {
 	std::string test1 = "";
 	std::thread keyboard_test_thread = std::thread([&test1, this] () mutable
-									{
-									test1 = keyboard.get_interface()->get_simple();
-									});
+												   {
+													   test1 = keyboard.get_interface()->get_simple();
+												   });
 	system_utilities::sleep_thread(100);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::T);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::E);
@@ -78,9 +78,9 @@ TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Double_Identical_Character)
 {
 	std::string test1 = "";
 	std::thread keyboard_test_thread = std::thread([&test1, this] () mutable
-													{
-														test1 = keyboard.get_interface()->get_simple();
-													});
+												   {
+													   test1 = keyboard.get_interface()->get_simple();
+												   });
 	system_utilities::sleep_thread(100);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
@@ -115,9 +115,9 @@ TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Twice)
 
 	test1 = "";
 	std::thread keyboard_test_thread2 = std::thread([&test1, this] () mutable
-												   {
-													   test1 = keyboard.get_interface()->get_simple();
-												   });
+													{
+														test1 = keyboard.get_interface()->get_simple();
+													});
 	system_utilities::sleep_thread(100);
 
 	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::B);

@@ -1,8 +1,8 @@
 #include "model_main.h"
 
 #include <algorithm>
-#include <thread>
 #include <mutex>
+#include <thread>
 
 #include "Interfaces/types/state.h"
 #include "Threading/threading.h"
@@ -28,7 +28,6 @@ void model::initalize()
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{
 													model_timer.update_time();
-													std::lock_guard<std::mutex> lock(model_mutex);
 													for(auto i = model::step_actions.begin(); i != model::step_actions.end(); )
 													{
 														if(i->command_run())
@@ -127,19 +126,9 @@ void model::step()
 									   if(step_command.command_run() == false)
 									   {
 										   LOG_DEBUG("Running command " + step_command.get_command()->get_id_str() + "on the model");
-										   try
-										   {
-											   std::lock_guard<std::mutex> lock(model_mutex);
-											   mangle_model(step_command.get_command());
-											   step_command.run_command();
-											   step_command.get_command()->time_to_complete -= model_timer.get_elapsed_time();
-										   }
-										   catch(std::exception& e)
-										   {
-											   std::string what = e.what();
-											   LOG_ERROR("Exception thrown " + what, "Model");
-											   model_task.exception(std::current_exception());
-										   }
+											mangle_model(step_command.get_command());
+											step_command.run_command();
+											step_command.get_command()->time_to_complete -= model_timer.get_elapsed_time();
 									   }
 									   model_step_thread--;
 								   }));

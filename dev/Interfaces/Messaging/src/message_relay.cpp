@@ -123,15 +123,6 @@ void Message_Relay::destroy_instance()
 
 }
 
-void Message_Relay::clear()
-{ 
-	std::lock_guard<std::mutex> guard(message_relay_mutex);
-	for(auto i = list_of_registered_consumers.begin(); i != list_of_registered_consumers.end(); i = list_of_registered_consumers.begin())
-	{
-		deregister_consumer(*i);
-	}
-}
-
 Message_Ptr<Internal_Message> Message_Relay::get_found_message(Message_Consumer* consumer, Message_Map_Node& current_message)
 {
 	Message_Ptr<Internal_Message> found_message;
@@ -150,6 +141,7 @@ void Message_Relay::remove_consumer_from_messages(Message_Consumer* consumer, Co
 	auto it = std::find(messages.begin(), messages.end(), consumer);
 	if(it != messages.end())
 	{
+		std::lock_guard<std::mutex> lock(message_relay_mutex);
 		messages.erase(it);
 	}
 }
@@ -167,7 +159,9 @@ void Message_Relay::remove_unwanted_messages()
 	{
 		if(it->second.size() == 0)
 		{
+			message_relay_mutex.lock();
 			it = list_of_message.erase(it);
+			message_relay_mutex.unlock();
 		}
 		else
 		{

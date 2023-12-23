@@ -1,4 +1,4 @@
-/*****************************************************************//**
+ /*****************************************************************//**
  * \file   console_view.h
  * \brief
  *
@@ -17,6 +17,11 @@ class Console_View : public View
 {
 public:
 	Console_View();
+	virtual ~Console_View();
+
+	virtual void on_create();
+	virtual void on_destroy();
+
 	/** Console is unique, because the window that the out goes is the same that the in comes in. */
 	struct Console_State
 	{

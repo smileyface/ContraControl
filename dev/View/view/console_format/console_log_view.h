@@ -17,15 +17,16 @@ class Console_Log_View : public Console_View, public Log_View_Type
 {
 public:
     Console_Log_View();
+    virtual ~Console_Log_View();
 
-    void on_create();
-    void on_display();
-    void on_refresh();
-    void on_paint();
-    void on_destroy();
+    void on_create() override;
+    void on_display() override;
+    void on_refresh() override;
+    void on_paint() override;
+    void on_destroy() override;
 
-    bool is_stale();
-    bool quit();
+    bool is_stale() override;
+    bool quit() override;
 private:
 	std::string system_id;
     std::string message_;

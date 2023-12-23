@@ -33,7 +33,7 @@ public:
 	/**
 	 * \return the selected option.
 	 */
-	int get_option();
+	const int get_option();
 
 	bool is_stale();
 	bool quit();

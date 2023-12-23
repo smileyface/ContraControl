@@ -16,6 +16,7 @@ class Log_View_Type
 {
 public:
 	Log_View_Type();
+	virtual ~Log_View_Type();
 	/**The log message captured from the message relay.*/
 	struct MESSAGE
 	{
@@ -23,7 +24,7 @@ public:
 		std::string LOC;///<Location message was sent from.
 		std::string LEVEL;///<Level of log.
 		bool vaild; ///<Is the message valid.
-	} message;///<Instance of the captured message.
+	};
 	/**Get the log message from the message relay.*/
 	void get_message();
 	/** Create the Log View */
@@ -36,6 +37,8 @@ protected:
 	* .Message Consumer
 	*/
 	Message_Consumer* log_consumer;
+	std::vector<MESSAGE> log_messages;///<Instance of the captured message.
+	std::vector<std::string> painted_messages;///<Instance of the captured message formatted for display.
 
 };
 #endif // !VIEW_LOG_VIEW_TYPE

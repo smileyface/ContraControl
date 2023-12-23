@@ -92,7 +92,7 @@ TEST_F(Task_Test, Assignment)
 	EXPECT_NE(&task, &task_3);
 }
 
-TEST_F(Task_Test, Cleaned_Subtask)
+TEST_F(Task_Test, DISABLED_Cleaned_Subtask)
 {
 
 }

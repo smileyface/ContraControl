@@ -38,16 +38,9 @@ Thread_Pool::Thread_Pool() :
                                      }
 
                                      task_running++;
-                                     //printf("Thread %d Running a task\n", static_cast<int>(i));
-                                     try
-                                     {
-                                        task();
-                                     }
-                                     catch(std::exception& e)
-                                     {
-                                         std::string what(e.what());
-                                         LOG_ERROR("Exception thrown in task." + what, "Thread Runner");
-                                     }
+                                     
+                                     task();
+
                                      task_running--;
                                  }
                              });
@@ -75,11 +68,8 @@ void Thread_Pool::destroy_instance()
 }
 void Thread_Pool::sleep_my_thread()
 {
-    int i = 0;
     while((tasks.empty() == false || task_running > 0))
-    {
-        i++;
-    }
+    {  }
 }
 
 Thread_Pool::~Thread_Pool()

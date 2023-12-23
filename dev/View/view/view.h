@@ -18,7 +18,7 @@ class View
 {
 public:
 	View();
-	~View();
+	virtual ~View();
 	/**
 	 * Set quiter to true.
 	 */

@@ -2,6 +2,10 @@
 #include <iostream>
 #include "../system_interfaces/network_interface.h"
 
+Network_Interface::~Network_Interface()
+{
+}
+
 void Network_Interface::set_client()
 {
 	is_server = false;

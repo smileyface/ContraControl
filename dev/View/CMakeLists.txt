@@ -1,10 +1,12 @@
 set(FORMAT_INCLUDES format/format.h
                     format/console.h
-                    format/ui.h)
+                    format/ui.h
+                    format/file.h)
 
 set(FORMAT_SOURCE format/src/format.cpp
                   format/src/console.cpp
-                  format/src/ui.cpp)
+                  format/src/ui.cpp
+                  format/src/file.cpp)
 
 set(INPUT_ACTION_LAYERS_INCLUDES input_interface/action_layer/action_layer.h
                                  input_interface/action_layer/action_stack.h
@@ -35,16 +37,29 @@ set(CONSOLE_FORMAT_VIEWS_INCLUDES view/console_format/console_view.h
                                   view/console_format/console_log_view.h
                                   view/console_format/console_option_popup.h)
 
+set(CONSOLE_FORMAT_VIEWS_SOURCE view/console_format/src/console_view.cpp
+                                view/console_format/src/console_log_view.cpp
+                                view/console_format/src/console_option_popup.cpp)
+
+set(FILE_FORMAT_VIEWS_INCLUDES view/file_format/file_view.h
+                               view/file_format/file_log_view.h)
+
+set(FILE_FORMAT_VIEWS_SOURCE view/file_format/src/file_view.cpp
+                             view/file_format/src/file_log_view.cpp)
+
 
 set(VIEW_INCLUDES view/view.h
                   view/views.h
                   ${VIEW_TYPE_INCLUDES}
                   ${CONSOLE_FORMAT_VIEWS_INCLUDES}
+                  ${FILE_FORMAT_VIEWS_INCLUDES}
                   view/ui_format/ui_view.h
                   view/ui_format/ui_led_view.h
-                  view/ui_format/ui_main_view.h)
+                  view/ui_format/ui_main_view.h )
 
 set(VIEW_SOURCE view/src/view.cpp
+                ${CONSOLE_FORMAT_VIEWS_SOURCE}
+                ${FILE_FORMAT_VIEWS_SOURCE}
                 view/src/ui_view.cpp
                 view/src/log_view.cpp
                 view/src/option_popup.cpp)

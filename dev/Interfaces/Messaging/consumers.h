@@ -40,7 +40,7 @@ struct Message_Consumer
 	 * Is the consumer stale (has it been notified)
 	 * \return Is the consumer notified
 	 */
-	bool is_stale();
+	bool is_stale() const;
 private:
 	bool stale = false;
 	const Internal_Message* message_type = 0;
