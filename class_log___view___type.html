@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.9</span>
+   &#160;<span id="projectnumber">0.0.10</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -66,7 +66,6 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_log___view___type-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -80,8 +79,9 @@ Inheritance diagram for Log_View_Type:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_log___view___type__inherit__graph.png" border="0" usemap="#a_log___view___type_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_log___view___type_inherit__map" id="a_log___view___type_inherit__map">
-<area shape="rect" title=" " alt="" coords="15,5,130,32"/>
+<area shape="rect" title=" " alt="" coords="87,5,202,32"/>
 <area shape="rect" href="class_console___log___view.html" title=" " alt="" coords="5,80,140,107"/>
+<area shape="rect" href="class_file___log___view.html" title=" " alt="" coords="164,80,272,107"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -89,9 +89,8 @@ Collaboration diagram for Log_View_Type:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_log___view___type__coll__graph.png" border="0" usemap="#a_log___view___type_coll__map" alt="Collaboration graph"/></div>
 <map name="a_log___view___type_coll__map" id="a_log___view___type_coll__map">
-<area shape="rect" title=" " alt="" coords="112,95,227,121"/>
+<area shape="rect" title=" " alt="" coords="19,95,133,121"/>
 <area shape="rect" href="struct_message___consumer.html" title=" " alt="" coords="5,5,147,32"/>
-<area shape="rect" href="class_log___view___type.html#struct_log___view___type_1_1_m_e_s_s_a_g_e" title=" " alt="" coords="171,5,357,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -109,17 +108,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0803d6022fba32e1197e20e013722d10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_log___view___type.html#a0803d6022fba32e1197e20e013722d10">destroy</a> ()</td></tr>
 <tr class="separator:a0803d6022fba32e1197e20e013722d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a5ce4637d5f4fd9c3d862ee53aac1d0b6"><td class="memItemLeft" align="right" valign="top"><a id="a5ce4637d5f4fd9c3d862ee53aac1d0b6"></a>
-struct <a class="el" href="class_log___view___type.html#struct_log___view___type_1_1_m_e_s_s_a_g_e">Log_View_Type::MESSAGE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_log___view___type.html#a5ce4637d5f4fd9c3d862ee53aac1d0b6">message</a></td></tr>
-<tr class="memdesc:a5ce4637d5f4fd9c3d862ee53aac1d0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance of the captured message. <br /></td></tr>
-<tr class="separator:a5ce4637d5f4fd9c3d862ee53aac1d0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a5daf609774a4832e1d98e4fce3efa948"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_message___consumer.html">Message_Consumer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_log___view___type.html#a5daf609774a4832e1d98e4fce3efa948">log_consumer</a></td></tr>
 <tr class="separator:a5daf609774a4832e1d98e4fce3efa948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec1553654b8937a233f3942f0329b2fd"><td class="memItemLeft" align="right" valign="top"><a id="aec1553654b8937a233f3942f0329b2fd"></a>
+std::vector&lt; <a class="el" href="class_log___view___type.html#struct_log___view___type_1_1_m_e_s_s_a_g_e">MESSAGE</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_log___view___type.html#aec1553654b8937a233f3942f0329b2fd">log_messages</a></td></tr>
+<tr class="memdesc:aec1553654b8937a233f3942f0329b2fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance of the captured message. <br /></td></tr>
+<tr class="separator:aec1553654b8937a233f3942f0329b2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad157cd64fe130d0b0fc24199c10dc289"><td class="memItemLeft" align="right" valign="top"><a id="ad157cd64fe130d0b0fc24199c10dc289"></a>
+std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_log___view___type.html#ad157cd64fe130d0b0fc24199c10dc289">painted_messages</a></td></tr>
+<tr class="memdesc:ad157cd64fe130d0b0fc24199c10dc289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance of the captured message formatted for display. <br /></td></tr>
+<tr class="separator:ad157cd64fe130d0b0fc24199c10dc289"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A UI type for viewing logs </p>

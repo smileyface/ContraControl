@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.9</span>
+   &#160;<span id="projectnumber">0.0.10</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -66,6 +66,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_keyboard___interface-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -86,8 +87,8 @@ Collaboration diagram for Keyboard_Interface:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5417845688d45fc64e2af1d000636672"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a5417845688d45fc64e2af1d000636672">initalize_codes</a> ()=0</td></tr>
-<tr class="separator:a5417845688d45fc64e2af1d000636672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9afa0e4e6d4680d7c66eba85a7015f8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a9afa0e4e6d4680d7c66eba85a7015f8a">initalize</a> ()</td></tr>
+<tr class="separator:a9afa0e4e6d4680d7c66eba85a7015f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6587cbd2bb77e3f2a870162072e236f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#ab6587cbd2bb77e3f2a870162072e236f">connect_to_keyboard</a> ()=0</td></tr>
 <tr class="separator:ab6587cbd2bb77e3f2a870162072e236f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6418318354fd3b944de0decf8f64b5ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a6418318354fd3b944de0decf8f64b5ac">start_listening</a> ()</td></tr>
@@ -96,8 +97,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aade3ba12a647a157ba78e04ac86062e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5544e52f496cd020eff897a7786482fa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a5544e52f496cd020eff897a7786482fa">readEv</a> ()=0</td></tr>
 <tr class="separator:a5544e52f496cd020eff897a7786482fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c530498973c22efcfffb44a3c39384f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a7c530498973c22efcfffb44a3c39384f">get_keyboard_present</a> ()</td></tr>
-<tr class="separator:a7c530498973c22efcfffb44a3c39384f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b438f24805f418cef2a6cddc4cb25ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a2b438f24805f418cef2a6cddc4cb25ea">get_keyboard_present</a> () const</td></tr>
+<tr class="separator:a2b438f24805f418cef2a6cddc4cb25ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73d0c7828c4be6a01c0b845c7da3ad44"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a73d0c7828c4be6a01c0b845c7da3ad44">get_simple</a> ()</td></tr>
 <tr class="separator:a73d0c7828c4be6a01c0b845c7da3ad44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -106,12 +107,19 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aace09139708a93d0e654568f3d48fb6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_action___stack.html">Action_Stack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#aace09139708a93d0e654568f3d48fb6c">action_stack</a></td></tr>
 <tr class="separator:aace09139708a93d0e654568f3d48fb6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a5417845688d45fc64e2af1d000636672"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a5417845688d45fc64e2af1d000636672">initalize_codes</a> ()=0</td></tr>
+<tr class="separator:a5417845688d45fc64e2af1d000636672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:af295405e37914ae65e48bdb8270fece3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#af295405e37914ae65e48bdb8270fece3">active</a></td></tr>
 <tr class="separator:af295405e37914ae65e48bdb8270fece3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f9d400c6e73059bafa55ab80084c8eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a3f9d400c6e73059bafa55ab80084c8eb">keyboard_present</a></td></tr>
 <tr class="separator:a3f9d400c6e73059bafa55ab80084c8eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e351e325ccc07a7a5671864168200a9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="key__input__interface_8h.html#ae460934b0e0040963b99d4d03a850ef1">KPI</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_keyboard___interface.html#a8e351e325ccc07a7a5671864168200a9">key_buffer</a></td></tr>
+<tr class="separator:a8e351e325ccc07a7a5671864168200a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic interface for reading keypresses from a keyboard. </p>
@@ -142,8 +150,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7c530498973c22efcfffb44a3c39384f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c530498973c22efcfffb44a3c39384f">&#9670;&nbsp;</a></span>get_keyboard_present()</h2>
+<a id="a2b438f24805f418cef2a6cddc4cb25ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b438f24805f418cef2a6cddc4cb25ea">&#9670;&nbsp;</a></span>get_keyboard_present()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,7 +160,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">bool Keyboard_Interface::get_keyboard_present </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -178,6 +186,24 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a9afa0e4e6d4680d7c66eba85a7015f8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9afa0e4e6d4680d7c66eba85a7015f8a">&#9670;&nbsp;</a></span>initalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Keyboard_Interface::initalize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Initalize structures for the keyboard. </p>
+
+</div>
+</div>
 <a id="a5417845688d45fc64e2af1d000636672"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5417845688d45fc64e2af1d000636672">&#9670;&nbsp;</a></span>initalize_codes()</h2>
 
@@ -196,7 +222,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -226,7 +252,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read an event from the keyboard </p>
+<p>Read an event from the keyboard. Add to the key_buffer. </p>
 
 </div>
 </div>
@@ -303,6 +329,29 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Is the interface active. <br  />
  </p>
+
+</div>
+</div>
+<a id="a8e351e325ccc07a7a5671864168200a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e351e325ccc07a7a5671864168200a9">&#9670;&nbsp;</a></span>key_buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="key__input__interface_8h.html#ae460934b0e0040963b99d4d03a850ef1">KPI</a>&gt; Keyboard_Interface::key_buffer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Keys pressed this step. </p>
 
 </div>
 </div>

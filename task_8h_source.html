@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.9</span>
+   &#160;<span id="projectnumber">0.0.10</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -120,7 +120,7 @@ $(function() {
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#aba5eb3d6c2a034aa0e319383fbec68c4">stop</a>();</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a0b9538d24091379690719b77724cf684">exception</a>(std::exception_ptr ex);</div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="class_task.html#a0b9538d24091379690719b77724cf684">  137</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_task.html#a0b9538d24091379690719b77724cf684">exception</a>(std::exception_ptr ex);</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <a class="code" href="class_task.html">Task</a>&amp; <a class="code" href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_task.html">Task</a>&amp; other);</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
@@ -140,7 +140,7 @@ $(function() {
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// TASK_H</span></div>
 <div class="ttc" id="aclass_task_html"><div class="ttname"><a href="class_task.html">Task</a></div><div class="ttdoc">The Task class represents a task with subtasks.</div><div class="ttdef"><b>Definition:</b> task.h:23</div></div>
-<div class="ttc" id="aclass_task_html_a0b9538d24091379690719b77724cf684"><div class="ttname"><a href="class_task.html#a0b9538d24091379690719b77724cf684">Task::exception</a></div><div class="ttdeci">void exception(std::exception_ptr ex)</div><div class="ttdoc">Add an exception thrown in the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:144</div></div>
+<div class="ttc" id="aclass_task_html_a0b9538d24091379690719b77724cf684"><div class="ttname"><a href="class_task.html#a0b9538d24091379690719b77724cf684">Task::exception</a></div><div class="ttdeci">void exception(std::exception_ptr ex)</div><div class="ttdoc">Add an exception thrown in the task.</div></div>
 <div class="ttc" id="aclass_task_html_a0ca53354bdc006762a0fda68c64f7608"><div class="ttname"><a href="class_task.html#a0ca53354bdc006762a0fda68c64f7608">Task::Task</a></div><div class="ttdeci">Task()</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> task.cpp:57</div></div>
 <div class="ttc" id="aclass_task_html_a11b4338c3f4bd70248f54761679e3479"><div class="ttname"><a href="class_task.html#a11b4338c3f4bd70248f54761679e3479">Task::number_of_subtask</a></div><div class="ttdeci">int number_of_subtask()</div><div class="ttdoc">Get number of subtasks to be run.</div><div class="ttdef"><b>Definition:</b> task.cpp:83</div></div>
 <div class="ttc" id="aclass_task_html_a3ecf499ea35fb4a96853969a1e1cbbce"><div class="ttname"><a href="class_task.html#a3ecf499ea35fb4a96853969a1e1cbbce">Task::~Task</a></div><div class="ttdeci">~Task()</div><div class="ttdoc">Default deconstructor.</div><div class="ttdef"><b>Definition:</b> task.cpp:68</div></div>
@@ -149,7 +149,7 @@ $(function() {
 <div class="ttc" id="aclass_task_html_a5d1244a988fe9bfd7d092fd9b0dd6a19"><div class="ttname"><a href="class_task.html#a5d1244a988fe9bfd7d092fd9b0dd6a19">Task::get_overruns</a></div><div class="ttdeci">int get_overruns()</div><div class="ttdoc">Get number of overruns, defined as a task taking more than 1.5 times over execution time.</div></div>
 <div class="ttc" id="aclass_task_html_a802a9c63e280ff96cc13d498924bc748"><div class="ttname"><a href="class_task.html#a802a9c63e280ff96cc13d498924bc748">Task::start</a></div><div class="ttdeci">void start(std::chrono::milliseconds frame_duration)</div><div class="ttdoc">Starts the execution of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:116</div></div>
 <div class="ttc" id="aclass_task_html_a83b2f04acfa75e20db6fdf1c29d8e800"><div class="ttname"><a href="class_task.html#a83b2f04acfa75e20db6fdf1c29d8e800">Task::add_subtask</a></div><div class="ttdeci">void add_subtask(const Subtask &amp;subtask)</div><div class="ttdoc">Adds a subtask to the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:73</div></div>
-<div class="ttc" id="aclass_task_html_a96fcef3b463a6c11a78ea3cc7cd8f83c"><div class="ttname"><a href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">Task::operator=</a></div><div class="ttdeci">Task &amp; operator=(const Task &amp;other)</div><div class="ttdoc">Assignment operator override.</div><div class="ttdef"><b>Definition:</b> task.cpp:149</div></div>
+<div class="ttc" id="aclass_task_html_a96fcef3b463a6c11a78ea3cc7cd8f83c"><div class="ttname"><a href="class_task.html#a96fcef3b463a6c11a78ea3cc7cd8f83c">Task::operator=</a></div><div class="ttdeci">Task &amp; operator=(const Task &amp;other)</div><div class="ttdoc">Assignment operator override.</div><div class="ttdef"><b>Definition:</b> task.cpp:137</div></div>
 <div class="ttc" id="aclass_task_html_aae7c5fe4dbb7389294c95b8553d4c94d"><div class="ttname"><a href="class_task.html#aae7c5fe4dbb7389294c95b8553d4c94d">Task::get_persistence</a></div><div class="ttdeci">bool get_persistence()</div><div class="ttdoc">Get persistance of task.</div><div class="ttdef"><b>Definition:</b> task.cpp:93</div></div>
 <div class="ttc" id="aclass_task_html_aba5eb3d6c2a034aa0e319383fbec68c4"><div class="ttname"><a href="class_task.html#aba5eb3d6c2a034aa0e319383fbec68c4">Task::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stops the execution of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:121</div></div>
 <div class="ttc" id="aclass_task_html_af2a7929ba758a50e826b5ce3850b3868"><div class="ttname"><a href="class_task.html#af2a7929ba758a50e826b5ce3850b3868">Task::get_priority</a></div><div class="ttdeci">int get_priority()</div><div class="ttdoc">Get priority of the task.</div><div class="ttdef"><b>Definition:</b> task.cpp:88</div></div>

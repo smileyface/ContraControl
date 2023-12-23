@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.9</span>
+   &#160;<span id="projectnumber">0.0.10</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -76,50 +76,59 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define INTERFACE_KEYBOARD_INTERFACE</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../action_layer/action_stack.h&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_keyboard___interface.html">Keyboard_Interface</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_keyboard___interface.html">Keyboard_Interface</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_keyboard___interface.html">Keyboard_Interface</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#a5417845688d45fc64e2af1d000636672">   24</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#a5417845688d45fc64e2af1d000636672">initalize_codes</a>() = 0;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#ab6587cbd2bb77e3f2a870162072e236f">   29</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#ab6587cbd2bb77e3f2a870162072e236f">connect_to_keyboard</a>() = 0;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#a6418318354fd3b944de0decf8f64b5ac">start_listening</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#aade3ba12a647a157ba78e04ac86062e9">stop_listening</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#a5544e52f496cd020eff897a7786482fa">   43</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#a5544e52f496cd020eff897a7786482fa">readEv</a>() = 0;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_keyboard___interface.html#a7c530498973c22efcfffb44a3c39384f">get_keyboard_present</a>(); </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#aace09139708a93d0e654568f3d48fb6c">   53</a></span>&#160;    <a class="code" href="class_action___stack.html">Action_Stack</a> <a class="code" href="class_keyboard___interface.html#aace09139708a93d0e654568f3d48fb6c">action_stack</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::string <a class="code" href="class_keyboard___interface.html#a73d0c7828c4be6a01c0b845c7da3ad44">get_simple</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#af295405e37914ae65e48bdb8270fece3">   62</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_keyboard___interface.html#af295405e37914ae65e48bdb8270fece3">active</a>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#a3f9d400c6e73059bafa55ab80084c8eb">   64</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_keyboard___interface.html#a3f9d400c6e73059bafa55ab80084c8eb">keyboard_present</a>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> loop();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="threading_8h.html">Threading/threading.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_keyboard___interface.html">Keyboard_Interface</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_keyboard___interface.html">Keyboard_Interface</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_keyboard___interface.html">Keyboard_Interface</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#a9afa0e4e6d4680d7c66eba85a7015f8a">initalize</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#ab6587cbd2bb77e3f2a870162072e236f">   30</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#ab6587cbd2bb77e3f2a870162072e236f">connect_to_keyboard</a>() = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#a6418318354fd3b944de0decf8f64b5ac">start_listening</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#aade3ba12a647a157ba78e04ac86062e9">stop_listening</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#a5544e52f496cd020eff897a7786482fa">   44</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#a5544e52f496cd020eff897a7786482fa">readEv</a>() = 0;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_keyboard___interface.html#a2b438f24805f418cef2a6cddc4cb25ea">get_keyboard_present</a>() <span class="keyword">const</span>; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#aace09139708a93d0e654568f3d48fb6c">   54</a></span>&#160;    <a class="code" href="class_action___stack.html">Action_Stack</a> <a class="code" href="class_keyboard___interface.html#aace09139708a93d0e654568f3d48fb6c">action_stack</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    std::string <a class="code" href="class_keyboard___interface.html#a73d0c7828c4be6a01c0b845c7da3ad44">get_simple</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#a5417845688d45fc64e2af1d000636672">   65</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_keyboard___interface.html#a5417845688d45fc64e2af1d000636672">initalize_codes</a>() = 0;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#af295405e37914ae65e48bdb8270fece3">   67</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_keyboard___interface.html#af295405e37914ae65e48bdb8270fece3">active</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#a3f9d400c6e73059bafa55ab80084c8eb">   69</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_keyboard___interface.html#a3f9d400c6e73059bafa55ab80084c8eb">keyboard_present</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_keyboard___interface.html#a8e351e325ccc07a7a5671864168200a9">   71</a></span>&#160;    std::vector&lt;KPI&gt; <a class="code" href="class_keyboard___interface.html#a8e351e325ccc07a7a5671864168200a9">key_buffer</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> loop();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> step();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_task.html">Task</a> keyboard_task;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_action___stack_html"><div class="ttname"><a href="class_action___stack.html">Action_Stack</a></div><div class="ttdef"><b>Definition:</b> action_stack.h:15</div></div>
-<div class="ttc" id="aclass_keyboard___interface_html"><div class="ttname"><a href="class_keyboard___interface.html">Keyboard_Interface</a></div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:16</div></div>
-<div class="ttc" id="aclass_keyboard___interface_html_a3f9d400c6e73059bafa55ab80084c8eb"><div class="ttname"><a href="class_keyboard___interface.html#a3f9d400c6e73059bafa55ab80084c8eb">Keyboard_Interface::keyboard_present</a></div><div class="ttdeci">bool keyboard_present</div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:64</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html"><div class="ttname"><a href="class_keyboard___interface.html">Keyboard_Interface</a></div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:17</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html_a2b438f24805f418cef2a6cddc4cb25ea"><div class="ttname"><a href="class_keyboard___interface.html#a2b438f24805f418cef2a6cddc4cb25ea">Keyboard_Interface::get_keyboard_present</a></div><div class="ttdeci">bool get_keyboard_present() const</div><div class="ttdef"><b>Definition:</b> keyboard_buffer_input.cpp:37</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html_a3f9d400c6e73059bafa55ab80084c8eb"><div class="ttname"><a href="class_keyboard___interface.html#a3f9d400c6e73059bafa55ab80084c8eb">Keyboard_Interface::keyboard_present</a></div><div class="ttdeci">bool keyboard_present</div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:69</div></div>
 <div class="ttc" id="aclass_keyboard___interface_html_a5417845688d45fc64e2af1d000636672"><div class="ttname"><a href="class_keyboard___interface.html#a5417845688d45fc64e2af1d000636672">Keyboard_Interface::initalize_codes</a></div><div class="ttdeci">virtual void initalize_codes()=0</div></div>
 <div class="ttc" id="aclass_keyboard___interface_html_a5544e52f496cd020eff897a7786482fa"><div class="ttname"><a href="class_keyboard___interface.html#a5544e52f496cd020eff897a7786482fa">Keyboard_Interface::readEv</a></div><div class="ttdeci">virtual void readEv()=0</div></div>
-<div class="ttc" id="aclass_keyboard___interface_html_a6418318354fd3b944de0decf8f64b5ac"><div class="ttname"><a href="class_keyboard___interface.html#a6418318354fd3b944de0decf8f64b5ac">Keyboard_Interface::start_listening</a></div><div class="ttdeci">void start_listening()</div><div class="ttdef"><b>Definition:</b> keyboard_interface.cpp:39</div></div>
-<div class="ttc" id="aclass_keyboard___interface_html_a73d0c7828c4be6a01c0b845c7da3ad44"><div class="ttname"><a href="class_keyboard___interface.html#a73d0c7828c4be6a01c0b845c7da3ad44">Keyboard_Interface::get_simple</a></div><div class="ttdeci">std::string get_simple()</div><div class="ttdef"><b>Definition:</b> keyboard_interface.cpp:66</div></div>
-<div class="ttc" id="aclass_keyboard___interface_html_a7c530498973c22efcfffb44a3c39384f"><div class="ttname"><a href="class_keyboard___interface.html#a7c530498973c22efcfffb44a3c39384f">Keyboard_Interface::get_keyboard_present</a></div><div class="ttdeci">bool get_keyboard_present()</div><div class="ttdef"><b>Definition:</b> keyboard_buffer_input.cpp:37</div></div>
-<div class="ttc" id="aclass_keyboard___interface_html_aace09139708a93d0e654568f3d48fb6c"><div class="ttname"><a href="class_keyboard___interface.html#aace09139708a93d0e654568f3d48fb6c">Keyboard_Interface::action_stack</a></div><div class="ttdeci">Action_Stack action_stack</div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:53</div></div>
-<div class="ttc" id="aclass_keyboard___interface_html_aade3ba12a647a157ba78e04ac86062e9"><div class="ttname"><a href="class_keyboard___interface.html#aade3ba12a647a157ba78e04ac86062e9">Keyboard_Interface::stop_listening</a></div><div class="ttdeci">void stop_listening()</div><div class="ttdef"><b>Definition:</b> keyboard_interface.cpp:51</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html_a6418318354fd3b944de0decf8f64b5ac"><div class="ttname"><a href="class_keyboard___interface.html#a6418318354fd3b944de0decf8f64b5ac">Keyboard_Interface::start_listening</a></div><div class="ttdeci">void start_listening()</div><div class="ttdef"><b>Definition:</b> keyboard_interface.cpp:48</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html_a73d0c7828c4be6a01c0b845c7da3ad44"><div class="ttname"><a href="class_keyboard___interface.html#a73d0c7828c4be6a01c0b845c7da3ad44">Keyboard_Interface::get_simple</a></div><div class="ttdeci">std::string get_simple()</div><div class="ttdef"><b>Definition:</b> keyboard_interface.cpp:75</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html_a8e351e325ccc07a7a5671864168200a9"><div class="ttname"><a href="class_keyboard___interface.html#a8e351e325ccc07a7a5671864168200a9">Keyboard_Interface::key_buffer</a></div><div class="ttdeci">std::vector&lt; KPI &gt; key_buffer</div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:71</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html_a9afa0e4e6d4680d7c66eba85a7015f8a"><div class="ttname"><a href="class_keyboard___interface.html#a9afa0e4e6d4680d7c66eba85a7015f8a">Keyboard_Interface::initalize</a></div><div class="ttdeci">void initalize()</div><div class="ttdef"><b>Definition:</b> keyboard_interface.cpp:28</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html_aace09139708a93d0e654568f3d48fb6c"><div class="ttname"><a href="class_keyboard___interface.html#aace09139708a93d0e654568f3d48fb6c">Keyboard_Interface::action_stack</a></div><div class="ttdeci">Action_Stack action_stack</div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:54</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html_aade3ba12a647a157ba78e04ac86062e9"><div class="ttname"><a href="class_keyboard___interface.html#aade3ba12a647a157ba78e04ac86062e9">Keyboard_Interface::stop_listening</a></div><div class="ttdeci">void stop_listening()</div><div class="ttdef"><b>Definition:</b> keyboard_interface.cpp:60</div></div>
 <div class="ttc" id="aclass_keyboard___interface_html_ab6587cbd2bb77e3f2a870162072e236f"><div class="ttname"><a href="class_keyboard___interface.html#ab6587cbd2bb77e3f2a870162072e236f">Keyboard_Interface::connect_to_keyboard</a></div><div class="ttdeci">virtual void connect_to_keyboard()=0</div></div>
-<div class="ttc" id="aclass_keyboard___interface_html_af295405e37914ae65e48bdb8270fece3"><div class="ttname"><a href="class_keyboard___interface.html#af295405e37914ae65e48bdb8270fece3">Keyboard_Interface::active</a></div><div class="ttdeci">bool active</div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:62</div></div>
+<div class="ttc" id="aclass_keyboard___interface_html_af295405e37914ae65e48bdb8270fece3"><div class="ttname"><a href="class_keyboard___interface.html#af295405e37914ae65e48bdb8270fece3">Keyboard_Interface::active</a></div><div class="ttdeci">bool active</div><div class="ttdef"><b>Definition:</b> keyboard_interface.h:67</div></div>
+<div class="ttc" id="aclass_task_html"><div class="ttname"><a href="class_task.html">Task</a></div><div class="ttdoc">The Task class represents a task with subtasks.</div><div class="ttdef"><b>Definition:</b> task.h:23</div></div>
+<div class="ttc" id="athreading_8h_html"><div class="ttname"><a href="threading_8h.html">threading.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

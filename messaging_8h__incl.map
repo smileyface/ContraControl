@@ -1,13 +1,13 @@
 <map id="messaging.h" name="messaging.h">
 <area shape="rect" id="node1" title=" " alt="" coords="175,5,270,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,87,67,114"/>
-<area shape="rect" id="node3" href="$messages_2types_2messages_8h.html" title=" " alt="" coords="11,177,138,203"/>
-<area shape="rect" id="node8" href="$network__message__types_8h.html" title=" " alt="" coords="141,80,304,121"/>
-<area shape="rect" id="node10" href="$network__message__header_8h.html" title=" " alt="" coords="288,169,451,211"/>
-<area shape="rect" id="node11" href="$network__message__footer_8h.html" title=" " alt="" coords="407,80,569,121"/>
-<area shape="rect" id="node4" href="$network__type_8h.html" title=" " alt="" coords="236,259,345,285"/>
-<area shape="rect" id="node5" title=" " alt="" coords="199,341,257,367"/>
-<area shape="rect" id="node6" href="$ipv4__addr_8h.html" title=" " alt="" coords="281,333,429,375"/>
-<area shape="rect" id="node7" title=" " alt="" coords="327,423,382,449"/>
-<area shape="rect" id="node9" href="$basic__types_8h.html" title=" " alt="" coords="163,177,264,203"/>
+<area shape="rect" id="node3" href="$messages_2types_2messages_8h.html" title=" " alt="" coords="49,177,175,203"/>
+<area shape="rect" id="node8" href="$network__message__footer_8h.html" title=" " alt="" coords="141,80,304,121"/>
+<area shape="rect" id="node9" href="$network__message__header_8h.html" title=" " alt="" coords="255,169,417,211"/>
+<area shape="rect" id="node10" href="$network__message__types_8h.html" title=" " alt="" coords="395,80,557,121"/>
+<area shape="rect" id="node4" href="$network__type_8h.html" title=" " alt="" coords="221,259,331,285"/>
+<area shape="rect" id="node5" title=" " alt="" coords="184,341,243,367"/>
+<area shape="rect" id="node6" href="$ipv4__addr_8h.html" title=" " alt="" coords="266,333,414,375"/>
+<area shape="rect" id="node7" title=" " alt="" coords="313,423,367,449"/>
+<area shape="rect" id="node11" href="$basic__types_8h.html" title=" " alt="" coords="441,177,543,203"/>
 </map>

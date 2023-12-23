@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.9</span>
+   &#160;<span id="projectnumber">0.0.10</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -85,7 +85,7 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="struct_message___consumer.html#ac8de775dfdaa35b2d726003351a790c2">freshen</a>();</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="struct_message___consumer.html#a3c776c27521f33f699632aabf0e0f746">correct_type</a>(<a class="code" href="class_internal___message.html">Internal_Message</a>* message);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="struct_message___consumer.html#aadb113466818097e6d10b58c94acb9ee">is_stale</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="struct_message___consumer.html#a9a8bd3583b3e6ece6264924571acce75">is_stale</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">bool</span> stale = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_internal___message.html">Internal_Message</a>* message_type = 0;</div>
@@ -98,7 +98,7 @@ $(function() {
 <div class="ttc" id="astruct_message___consumer_html"><div class="ttname"><a href="struct_message___consumer.html">Message_Consumer</a></div><div class="ttdef"><b>Definition:</b> consumers.h:18</div></div>
 <div class="ttc" id="astruct_message___consumer_html_a3c776c27521f33f699632aabf0e0f746"><div class="ttname"><a href="struct_message___consumer.html#a3c776c27521f33f699632aabf0e0f746">Message_Consumer::correct_type</a></div><div class="ttdeci">bool correct_type(Internal_Message *message)</div><div class="ttdef"><b>Definition:</b> consumers.cpp:26</div></div>
 <div class="ttc" id="astruct_message___consumer_html_a7fc0579d7b5b01c4535c1e8072228f57"><div class="ttname"><a href="struct_message___consumer.html#a7fc0579d7b5b01c4535c1e8072228f57">Message_Consumer::Message_Consumer</a></div><div class="ttdeci">Message_Consumer(const Internal_Message *message_type)</div><div class="ttdef"><b>Definition:</b> consumers.cpp:6</div></div>
-<div class="ttc" id="astruct_message___consumer_html_aadb113466818097e6d10b58c94acb9ee"><div class="ttname"><a href="struct_message___consumer.html#aadb113466818097e6d10b58c94acb9ee">Message_Consumer::is_stale</a></div><div class="ttdeci">bool is_stale()</div><div class="ttdef"><b>Definition:</b> consumers.cpp:21</div></div>
+<div class="ttc" id="astruct_message___consumer_html_a9a8bd3583b3e6ece6264924571acce75"><div class="ttname"><a href="struct_message___consumer.html#a9a8bd3583b3e6ece6264924571acce75">Message_Consumer::is_stale</a></div><div class="ttdeci">bool is_stale() const</div><div class="ttdef"><b>Definition:</b> consumers.cpp:21</div></div>
 <div class="ttc" id="astruct_message___consumer_html_ac8de775dfdaa35b2d726003351a790c2"><div class="ttname"><a href="struct_message___consumer.html#ac8de775dfdaa35b2d726003351a790c2">Message_Consumer::freshen</a></div><div class="ttdeci">void freshen()</div><div class="ttdef"><b>Definition:</b> consumers.cpp:16</div></div>
 <div class="ttc" id="astruct_message___consumer_html_ad4971d98f19e8839d7144d5ee96c8155"><div class="ttname"><a href="struct_message___consumer.html#ad4971d98f19e8839d7144d5ee96c8155">Message_Consumer::notify</a></div><div class="ttdeci">void notify()</div><div class="ttdef"><b>Definition:</b> consumers.cpp:11</div></div>
 </div><!-- fragment --></div><!-- contents -->

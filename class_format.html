@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.9</span>
+   &#160;<span id="projectnumber">0.0.10</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -65,6 +65,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_format-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -81,8 +82,9 @@ Inheritance diagram for Format:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_format__inherit__graph.png" border="0" usemap="#a_format_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_format_inherit__map" id="a_format_inherit__map">
-<area shape="rect" title="Format that the data will take." alt="" coords="33,5,95,32"/>
+<area shape="rect" title="Format that the data will take." alt="" coords="97,5,159,32"/>
 <area shape="rect" href="class_console___format.html" title=" " alt="" coords="5,80,123,107"/>
+<area shape="rect" href="class_file___format.html" title=" " alt="" coords="147,80,237,107"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -99,8 +101,8 @@ Collaboration diagram for Format:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae9e2667bee40a4afeee7ac7126e03c15"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#ae9e2667bee40a4afeee7ac7126e03c15">initalize</a> ()=0</td></tr>
 <tr class="separator:ae9e2667bee40a4afeee7ac7126e03c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b45881f2a862b276af502da9281d080"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_view.html">View</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a6b45881f2a862b276af502da9281d080">add_view</a> (<a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a> view)</td></tr>
-<tr class="separator:a6b45881f2a862b276af502da9281d080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c6fa1ecd4b803ea48ba1d66e415c8c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_view.html">View</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#aa0c6fa1ecd4b803ea48ba1d66e415c8c">add_view</a> (<a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a> view)=0</td></tr>
+<tr class="separator:aa0c6fa1ecd4b803ea48ba1d66e415c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f669c63d185b6de463c56f4c3ebb945"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a7f669c63d185b6de463c56f4c3ebb945">update_views</a> ()</td></tr>
 <tr class="memdesc:a7f669c63d185b6de463c56f4c3ebb945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update all stale views.  <a href="class_format.html#a7f669c63d185b6de463c56f4c3ebb945">More...</a><br /></td></tr>
 <tr class="separator:a7f669c63d185b6de463c56f4c3ebb945"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,6 +116,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a938c33ab05837b0c72da0cf3299ece1c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a938c33ab05837b0c72da0cf3299ece1c">step</a> ()=0</td></tr>
 <tr class="separator:a938c33ab05837b0c72da0cf3299ece1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac46aaaca23a79d3ae2b268fe205beb07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_view.html">View</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#ac46aaaca23a79d3ae2b268fe205beb07">create_view</a> (<a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a> view, <a class="el" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a> type)</td></tr>
+<tr class="separator:ac46aaaca23a79d3ae2b268fe205beb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a5f3f85dbe1419cfaf430344dc6b53b11"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_view.html">View</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_format.html#a5f3f85dbe1419cfaf430344dc6b53b11">view_list</a></td></tr>
@@ -126,8 +133,8 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Examples include: A console. A UI. WS2811 protocol. DMX protocol. Data pin. It contains a list of Views that feed it the data to "display." A <a class="el" href="class_format.html" title="Format that the data will take.">Format</a> mainly calls the handles for all it's known Views in every loop </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6b45881f2a862b276af502da9281d080"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b45881f2a862b276af502da9281d080">&#9670;&nbsp;</a></span>add_view()</h2>
+<a id="aa0c6fa1ecd4b803ea48ba1d66e415c8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c6fa1ecd4b803ea48ba1d66e415c8c">&#9670;&nbsp;</a></span>add_view()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,7 +143,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_view.html">View</a> * Format::add_view </td>
+          <td class="memname">virtual <a class="el" href="class_view.html">View</a>* Format::add_view </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a>&#160;</td>
           <td class="paramname"><em>view</em></td><td>)</td>
@@ -145,7 +152,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -157,7 +164,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the newly created view </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_console___format.html#a512afe17207cb5e9353183455fede86c">Console_Format</a>.</p>
+<p>Implemented in <a class="el" href="class_file___format.html#ab18d3fe84ca33d0b6dc8b7b9cf3bf3b2">File_Format</a>, and <a class="el" href="class_console___format.html#a512afe17207cb5e9353183455fede86c">Console_Format</a>.</p>
 
 </div>
 </div>
@@ -176,6 +183,50 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Call on_destroy on all views. </p>
+
+</div>
+</div>
+<a id="ac46aaaca23a79d3ae2b268fe205beb07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac46aaaca23a79d3ae2b268fe205beb07">&#9670;&nbsp;</a></span>create_view()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_view.html">View</a> * Format::create_view </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="view__type__enum_8h.html#a1fb66550c6a5e0cfd06147ef17b366ba">VIEW_TYPE_ENUM</a>&#160;</td>
+          <td class="paramname"><em>view</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="display__type__enum_8h.html#a276e342efd244f8591592e86219914ba">DISPLAY_TYPES</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create view, call <a class="el" href="class_view.html#a51efc1b48afdc4e4e0a874725b2a89e4">View::on_create()</a>, and add to the list of views. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">view</td><td><a class="el" href="class_view.html" title="way to view a Device.">View</a> to create. </td></tr>
+    <tr><td class="paramname">type</td><td><a class="el" href="class_format.html" title="Format that the data will take.">Format</a> to create view on.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the newly created view </dd></dl>
 
 </div>
 </div>
@@ -203,7 +254,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Initalize the <a class="el" href="class_format.html" title="Format that the data will take.">Format</a>. Generally includes an alive message and adding system messages. </p>
 
-<p>Implemented in <a class="el" href="class_console___format.html#a8249bb65ee539d0ea3ae16264da45fba">Console_Format</a>.</p>
+<p>Implemented in <a class="el" href="class_file___format.html#ada89782db6eacea92e7447878dbe8d9e">File_Format</a>, and <a class="el" href="class_console___format.html#a8249bb65ee539d0ea3ae16264da45fba">Console_Format</a>.</p>
 
 </div>
 </div>
@@ -231,7 +282,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>An update step for the views </p>
 
-<p>Implemented in <a class="el" href="class_console___format.html#a695198ef677e096c91d9e768f60a4edd">Console_Format</a>.</p>
+<p>Implemented in <a class="el" href="class_file___format.html#a2919b47d9fcb64f73f200733dc2deed2">File_Format</a>, and <a class="el" href="class_console___format.html#a695198ef677e096c91d9e768f60a4edd">Console_Format</a>.</p>
 
 </div>
 </div>

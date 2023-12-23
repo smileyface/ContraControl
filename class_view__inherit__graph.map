@@ -1,6 +1,8 @@
 <map id="View" name="View">
-<area shape="rect" id="node1" title="way to view a Device." alt="" coords="133,5,183,32"/>
-<area shape="rect" id="node2" href="$class_console___view.html" title=" " alt="" coords="105,80,211,107"/>
+<area shape="rect" id="node1" title="way to view a Device." alt="" coords="286,5,337,32"/>
+<area shape="rect" id="node2" href="$class_console___view.html" title=" " alt="" coords="191,80,296,107"/>
+<area shape="rect" id="node5" href="$class_file___view.html" title=" " alt="" coords="340,80,419,107"/>
 <area shape="rect" id="node3" href="$class_console___log___view.html" title=" " alt="" coords="5,155,140,181"/>
 <area shape="rect" id="node4" href="$class_console___option___popup.html" title=" " alt="" coords="164,155,323,181"/>
+<area shape="rect" id="node6" href="$class_file___log___view.html" title=" " alt="" coords="347,155,455,181"/>
 </map>

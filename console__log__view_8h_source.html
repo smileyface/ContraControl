@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ContraControl
-   &#160;<span id="projectnumber">0.0.9</span>
+   &#160;<span id="projectnumber">0.0.10</span>
    </div>
    <div id="projectbrief">Control various devices.</div>
   </td>
@@ -82,31 +82,32 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_console___log___view.html">Console_Log_View</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#a6ff6ed0eea1f71fe20f3fd550f25ec6b">on_create</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#a6e2cb93720eb720f8d448ddb41a72409">on_display</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#a8b12b624e5f03bb75719bdd8a585ba40">on_refresh</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#a27c26095588fbf799645ae187608d268">on_paint</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#a254b3cb176b2bb3cdafaa766131a0bab">on_destroy</a>();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_console___log___view.html#a11e46554c81ca01084b1bc93619d3e04">is_stale</a>();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_console___log___view.html#a71e6d015df9ec333db70172b04068a32">quit</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    std::string system_id;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    std::string message_;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::string message_level;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">bool</span> message_valid;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_console___log___view.html">Console_Log_View</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#a7e453f5c151fb8df46cc0775b759eed7">on_create</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#a59ac007e3a6af8e5a34d0d0af2b93f0c">on_display</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#ae844a086334f1bfe36daced09d1d5c9d">on_refresh</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#a6390da837b57b00da74feec544cba6df">on_paint</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_console___log___view.html#a3891d36ab3e4f40776135aa2b5b32bb4">on_destroy</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_console___log___view.html#a8a095ed5970fe4d1764be25049d36775">is_stale</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_console___log___view.html#a0b2435383d5463e2ce7f8c411ecbf2a5">quit</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    std::string system_id;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::string message_;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::string message_level;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">bool</span> message_valid;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_console___log___view_html"><div class="ttname"><a href="class_console___log___view.html">Console_Log_View</a></div><div class="ttdef"><b>Definition:</b> console_log_view.h:17</div></div>
-<div class="ttc" id="aclass_console___log___view_html_a11e46554c81ca01084b1bc93619d3e04"><div class="ttname"><a href="class_console___log___view.html#a11e46554c81ca01084b1bc93619d3e04">Console_Log_View::is_stale</a></div><div class="ttdeci">bool is_stale()</div><div class="ttdef"><b>Definition:</b> log_view.cpp:61</div></div>
-<div class="ttc" id="aclass_console___log___view_html_a254b3cb176b2bb3cdafaa766131a0bab"><div class="ttname"><a href="class_console___log___view.html#a254b3cb176b2bb3cdafaa766131a0bab">Console_Log_View::on_destroy</a></div><div class="ttdeci">void on_destroy()</div><div class="ttdef"><b>Definition:</b> log_view.cpp:55</div></div>
-<div class="ttc" id="aclass_console___log___view_html_a27c26095588fbf799645ae187608d268"><div class="ttname"><a href="class_console___log___view.html#a27c26095588fbf799645ae187608d268">Console_Log_View::on_paint</a></div><div class="ttdeci">void on_paint()</div><div class="ttdef"><b>Definition:</b> log_view.cpp:50</div></div>
-<div class="ttc" id="aclass_console___log___view_html_a6e2cb93720eb720f8d448ddb41a72409"><div class="ttname"><a href="class_console___log___view.html#a6e2cb93720eb720f8d448ddb41a72409">Console_Log_View::on_display</a></div><div class="ttdeci">void on_display()</div><div class="ttdef"><b>Definition:</b> log_view.cpp:46</div></div>
-<div class="ttc" id="aclass_console___log___view_html_a6ff6ed0eea1f71fe20f3fd550f25ec6b"><div class="ttname"><a href="class_console___log___view.html#a6ff6ed0eea1f71fe20f3fd550f25ec6b">Console_Log_View::on_create</a></div><div class="ttdeci">void on_create()</div><div class="ttdef"><b>Definition:</b> log_view.cpp:40</div></div>
-<div class="ttc" id="aclass_console___log___view_html_a71e6d015df9ec333db70172b04068a32"><div class="ttname"><a href="class_console___log___view.html#a71e6d015df9ec333db70172b04068a32">Console_Log_View::quit</a></div><div class="ttdeci">bool quit()</div><div class="ttdef"><b>Definition:</b> log_view.cpp:66</div></div>
-<div class="ttc" id="aclass_console___log___view_html_a8b12b624e5f03bb75719bdd8a585ba40"><div class="ttname"><a href="class_console___log___view.html#a8b12b624e5f03bb75719bdd8a585ba40">Console_Log_View::on_refresh</a></div><div class="ttdeci">void on_refresh()</div><div class="ttdef"><b>Definition:</b> log_view.cpp:32</div></div>
+<div class="ttc" id="aclass_console___log___view_html_a0b2435383d5463e2ce7f8c411ecbf2a5"><div class="ttname"><a href="class_console___log___view.html#a0b2435383d5463e2ce7f8c411ecbf2a5">Console_Log_View::quit</a></div><div class="ttdeci">bool quit() override</div><div class="ttdef"><b>Definition:</b> console_log_view.cpp:55</div></div>
+<div class="ttc" id="aclass_console___log___view_html_a3891d36ab3e4f40776135aa2b5b32bb4"><div class="ttname"><a href="class_console___log___view.html#a3891d36ab3e4f40776135aa2b5b32bb4">Console_Log_View::on_destroy</a></div><div class="ttdeci">void on_destroy() override</div><div class="ttdef"><b>Definition:</b> console_log_view.cpp:44</div></div>
+<div class="ttc" id="aclass_console___log___view_html_a59ac007e3a6af8e5a34d0d0af2b93f0c"><div class="ttname"><a href="class_console___log___view.html#a59ac007e3a6af8e5a34d0d0af2b93f0c">Console_Log_View::on_display</a></div><div class="ttdeci">void on_display() override</div><div class="ttdef"><b>Definition:</b> console_log_view.cpp:24</div></div>
+<div class="ttc" id="aclass_console___log___view_html_a6390da837b57b00da74feec544cba6df"><div class="ttname"><a href="class_console___log___view.html#a6390da837b57b00da74feec544cba6df">Console_Log_View::on_paint</a></div><div class="ttdeci">void on_paint() override</div><div class="ttdef"><b>Definition:</b> console_log_view.cpp:34</div></div>
+<div class="ttc" id="aclass_console___log___view_html_a7e453f5c151fb8df46cc0775b759eed7"><div class="ttname"><a href="class_console___log___view.html#a7e453f5c151fb8df46cc0775b759eed7">Console_Log_View::on_create</a></div><div class="ttdeci">void on_create() override</div><div class="ttdef"><b>Definition:</b> console_log_view.cpp:18</div></div>
+<div class="ttc" id="aclass_console___log___view_html_a8a095ed5970fe4d1764be25049d36775"><div class="ttname"><a href="class_console___log___view.html#a8a095ed5970fe4d1764be25049d36775">Console_Log_View::is_stale</a></div><div class="ttdeci">bool is_stale() override</div><div class="ttdef"><b>Definition:</b> console_log_view.cpp:50</div></div>
+<div class="ttc" id="aclass_console___log___view_html_ae844a086334f1bfe36daced09d1d5c9d"><div class="ttname"><a href="class_console___log___view.html#ae844a086334f1bfe36daced09d1d5c9d">Console_Log_View::on_refresh</a></div><div class="ttdeci">void on_refresh() override</div><div class="ttdef"><b>Definition:</b> console_log_view.cpp:14</div></div>
 <div class="ttc" id="aclass_console___view_html"><div class="ttname"><a href="class_console___view.html">Console_View</a></div><div class="ttdef"><b>Definition:</b> console_view.h:17</div></div>
 <div class="ttc" id="aclass_log___view___type_html"><div class="ttname"><a href="class_log___view___type.html">Log_View_Type</a></div><div class="ttdef"><b>Definition:</b> log_view_type.h:16</div></div>
 <div class="ttc" id="aconsole__view_8h_html"><div class="ttname"><a href="console__view_8h.html">console_view.h</a></div></div>
