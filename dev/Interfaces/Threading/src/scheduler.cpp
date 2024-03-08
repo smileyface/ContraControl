@@ -1,9 +1,9 @@
 #include <chrono>
 #include <thread>
 
+#include "Messaging/message_relay.h"
 #include "Threading/scheduler/scheduler.h"
 #include "Threading/scheduler/threadpool.h"
-#include "Messaging/message_relay.h"
 
 
 Scheduler* Scheduler::instance = nullptr;
@@ -25,6 +25,7 @@ void Scheduler::destroy_instance()
         instance = nullptr;
     }
     Thread_Pool::destroy_instance();
+    LOG_INFO("Scheduler Destroyed", "Scheduler");
 }
 
 void Scheduler::clean_persistence()
@@ -59,7 +60,7 @@ void Scheduler::add_task(Task* task)
 int Scheduler::get_number_of_tasks()
 {
     int total = 0;
-    for(auto task_list : tasks)
+    for(auto& task_list : tasks)
     {
             total += task_list.size();
     }
@@ -70,7 +71,7 @@ int Scheduler::get_number_of_subtasks()
 {
     int total = 0;
 
-    for(auto task_list : tasks)
+    for(auto& task_list : tasks)
     {
         for(auto task : task_list)
         {
@@ -80,7 +81,7 @@ int Scheduler::get_number_of_subtasks()
     return total;
 }
 
-int Scheduler::get_overruns()
+int Scheduler::get_overruns() const
 {
     return overruns;
 }
@@ -172,9 +173,9 @@ void Scheduler::clear()
 }
 
 Scheduler::Scheduler() :
-    overruns(0),
+    scheduler_running(false),
     frame_rate(30),
-    scheduler_running(false)
+    overruns(0)
 {
     tasks.resize(10);
 
@@ -186,5 +187,6 @@ Scheduler::Scheduler() :
 
 Scheduler::~Scheduler()
 { 
+    stop();
     clear();
 }

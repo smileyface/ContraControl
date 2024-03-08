@@ -37,6 +37,6 @@ void node_utilities::disconnect_node(Node_Id id1, Node_Id id2)
 
 Device_Label node_utilities::add_device(Node_Id id, Device_Creator creator)
 {
-	model::get_node(id)->register_device(creator);
-	return(Device_Label(id, model::get_node(id)->get_device(creator.second)->get_id()));
+	model->get_node(id)->register_device(creator);
+	return(Device_Label(id, model->get_node(id)->get_device(creator.second)->get_id()));
 }

@@ -43,6 +43,8 @@ void view::clean_up()
 	{
 		(*iterator).second->clean_views();
 	}
+
+	LOG_INFO("View Destroyed", "View");
 }
 
 void  view::step()

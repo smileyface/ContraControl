@@ -22,7 +22,7 @@ void testing_utilities::get_partial_on(Command* command, Device* device, double 
 
 void testing_utilities::device_utilities::check_state(Device_Label device, Device* expected_state)
 {
-	Device* received_state = model::get_device(device);
+	Device* received_state = model->get_device(device);
   
 	EXPECT_EQ(received_state->is_valid(), expected_state->is_valid()) << "Device validity is not correct";
 	EXPECT_EQ(received_state->is_initalized(), expected_state->is_initalized()) << "Device is not initalized properly";
@@ -31,20 +31,20 @@ void testing_utilities::device_utilities::check_state(Device_Label device, Devic
 
 void testing_utilities::device_utilities::check_validity(Device_Label label, bool expect_valid)
 {
-	Device received_state = *model::get_device(label);
+	Device received_state = *model->get_device(label);
 
 	EXPECT_EQ(received_state.is_valid(), expect_valid) << "Device validity is not correct";
 }
 
 void testing_utilities::device_utilities::check_type(Device_Label label, DEVICE_IDENTIFIER type)
 {
-	Device* device = model::get_device(label);
+	Device* device = model->get_device(label);
 	EXPECT_EQ(device->get_device_type(), type) << "Device type is incorrect";
 }
 
 void testing_utilities::device_utilities::check_channel(Device_Label label, int channel, Channel value)
 {
-	EXPECT_EQ(model::get_device(label)->get_channel(channel), value) << "Channel is incorrect";
+	EXPECT_EQ(model->get_device(label)->get_channel(channel), value) << "Channel is incorrect";
 }
 
 void testing_utilities::device_utilities::check_channel(Device_Label label, Channel value)
@@ -54,17 +54,17 @@ void testing_utilities::device_utilities::check_channel(Device_Label label, Chan
 
 void testing_utilities::device_utilities::check_name(Device_Label label, DEVICE_IDENTIFIER type, std::string name)
 {
-	EXPECT_EQ(model::get_device(label)->get_name(), name);
-	std::string device_full_name = device_type_as_string(type) + "::" + name + "#" + std::to_string(model::get_device(label)->get_id());
-	EXPECT_EQ(model::get_device(label)->get_full_name(), device_full_name);
+	EXPECT_EQ(model->get_device(label)->get_name(), name);
+	std::string device_full_name = device_type_as_string(type) + "::" + name + "#" + std::to_string(model->get_device(label)->get_id());
+	EXPECT_EQ(model->get_device(label)->get_full_name(), device_full_name);
 }
 
 void testing_utilities::node_utilities::check_for_device(Device_Label label)
 {
 	bool found = false;
-	for(int i = 0; i < model::get_node(label.get_node_id())->get_devices().size(); i++)
+	for(int i = 0; i < model->get_node(label.get_node_id())->get_devices().size(); i++)
 	{
-		if(model::get_node(label.get_node_id())->get_devices()[i] == label.get_device_id())
+		if(model->get_node(label.get_node_id())->get_devices()[i] == label.get_device_id())
 		{
 			found = true;
 		}
@@ -214,7 +214,7 @@ void testing_utilities::network_utilities::network_message_utilities::compare_me
 
 void testing_utilities::subsystem_utilities::model_utilities::check_is_running(bool is_running)
 {
-	EXPECT_EQ(model::model_running, is_running);
+	EXPECT_EQ(model->is_running(), is_running);
 }
 
 void testing_utilities::subsystem_utilities::controller_utilities::check_is_running(bool is_running)

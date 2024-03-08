@@ -91,4 +91,5 @@ void controller::clean_up()
 {
 	Commander::destroy_instance();
 	controller_queue.clear();
+	LOG_INFO("Controller Destroyed", "Controller");
 }

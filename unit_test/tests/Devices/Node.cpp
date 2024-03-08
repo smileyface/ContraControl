@@ -24,10 +24,10 @@ TEST_F(Node_Test, Node_Creation)
 {
 	Node_Id temp_id = "Test_Node_2";
 	node_utilities::create_node(temp_id);
-	EXPECT_NO_THROW(model::get_node(temp_id));
+	EXPECT_NO_THROW(model->get_node(temp_id));
 	Device_Label dl = node_utilities::add_device(temp_id, Device_Creator((int) DEVICE_IDENTIFIER::SWITCH, "Test1"));
 	
-	Node* node = model::get_node(temp_id);
+	Node* node = model->get_node(temp_id);
 	EXPECT_EQ(node->get_id(), temp_id);
 	EXPECT_EQ(node->get_devices().size(), 1);
 
@@ -38,9 +38,9 @@ TEST_F(Node_Test, Node_Destruction)
 {
 	Node_Id temp_id = "Test_Node_2";
 	node_utilities::create_node(temp_id);
-	EXPECT_EQ(model::get_node(temp_id)->get_type(), NODE_TYPE::TEST);
+	EXPECT_EQ(model->get_node(temp_id)->get_type(), NODE_TYPE::TEST);
 	node_utilities::remove_node(temp_id);
-	EXPECT_EQ(model::get_node(temp_id)->get_type(), NODE_TYPE::INVALID);
+	EXPECT_EQ(model->get_node(temp_id)->get_type(), NODE_TYPE::INVALID);
 }
 
 TEST_F(Node_Test, Node_Connection)
@@ -48,7 +48,7 @@ TEST_F(Node_Test, Node_Connection)
 	Node_Id temp_id = "Test_Node_2";
 	node_utilities::create_node(temp_id);
 	node_utilities::connect_node(node_utilities::local_node_handle, temp_id);
-	EXPECT_NO_THROW(model::get_node(node_utilities::local_node_handle)->get_connection(temp_id));
+	EXPECT_NO_THROW(model->get_node(node_utilities::local_node_handle)->get_connection(temp_id));
 }
 
 TEST_F(Node_Test, Node_Disconnect)
@@ -57,7 +57,7 @@ TEST_F(Node_Test, Node_Disconnect)
 	node_utilities::create_node(temp_id);
 	node_utilities::connect_node(node_utilities::local_node_handle, temp_id);
 	node_utilities::disconnect_node(node_utilities::local_node_handle, temp_id);
-	EXPECT_EQ(model::get_node(node_utilities::local_node_handle)->get_connection(temp_id)->get_type(), NODE_TYPE::INVALID);
+	EXPECT_EQ(model->get_node(node_utilities::local_node_handle)->get_connection(temp_id)->get_type(), NODE_TYPE::INVALID);
 }
 
 TEST_F(Node_Test, Device_Exclusion)

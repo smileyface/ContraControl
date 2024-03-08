@@ -8,46 +8,96 @@
 #include "Threading/threading.h"
 
 std::mutex model_mutex;
-
 Timer model_timer;
-std::atomic<bool> model::model_running;
-Command_List model::step_actions;
-std::vector<Node> model::node_list;
-Task model::model_task;
-Message_Consumer* model::model_controller_consumer;
 
-Node model::my_node;
+Model* Model::instance = 0;
 
-void model::initalize()
+void model_step()
+{
+	Model::get_instance()->step();
+}
+
+Model::Model()
 {
 	model_controller_consumer = Message_Relay::get_instance()->register_consumer<Controller_Model_Command>();
 	model_timer.reset_clock();
 	model_task = Task("Model", 2, .2);
 	step_actions = Command_List();
-	Scheduler::get_instance()->add_system_task(model::step);
-	Scheduler::get_instance()->add_cleanup_task([] ()
+	Scheduler::get_instance()->add_system_task(model_step);
+	Scheduler::get_instance()->add_cleanup_task([this] ()
 												{
 													model_timer.update_time();
-													for(auto i = model::step_actions.begin(); i != model::step_actions.end(); )
+													for(auto i = step_actions.begin(); i != step_actions.end(); )
 													{
 														if(i->command_run())
 														{
 															i->get_command()->complete_command();
-															i = model::step_actions.erase(i);
+															i = step_actions.erase(i);
 														}
 														else
 														{
 															i++;
 														}
 													}
-													if(model::step_actions.size() > 0)
+													if(step_actions.size() > 0)
 													{
-														LOG_DEBUG("Model will run " + std::to_string(model::step_actions.size()) + " commands next frame");
+														LOG_DEBUG("Model will run " + std::to_string(step_actions.size()) + " commands next frame");
 													}
 												} );
 }
 
-Node* model::get_node(Node_Id id)
+Model::~Model()
+{
+	Message_Relay::get_instance()->deregister_consumer(model_controller_consumer);
+	step_actions.clear();
+	node_list.clear();
+}
+
+Model* Model::get_instance()
+{
+	if(instance == 0)
+	{
+		instance = new Model();
+	}
+	return instance;
+}
+
+void Model::destroy_instance()
+{
+	if(instance != 0)
+	{
+		delete instance;
+		instance = 0;
+	}
+}
+
+Model::~Model()
+{
+	Message_Relay::get_instance()->deregister_consumer(model_controller_consumer);
+	step_actions.clear();
+	node_list.clear();
+}
+
+Model* Model::get_instance()
+{
+	if(instance == 0)
+	{
+		instance = new Model();
+	}
+	return instance;
+}
+
+void Model::destroy_instance()
+{
+	if(instance != 0)
+	{
+		delete instance;
+		instance = 0;
+	}
+	LOG_INFO("Model Destroyed", "Model");
+}
+
+Node* Model::get_node(Node_Id id)
 {
 	Node* found_item = nullptr;
 	for(int i = 0; i < node_list.size(); i++)
@@ -65,12 +115,12 @@ Node* model::get_node(Node_Id id)
 	return found_item;
 }
 
-void model::create_node(NODE_TYPE type, Node_Id id)
+void Model::create_node(NODE_TYPE type, Node_Id id)
 {
-	node_list.emplace_back(Node(type, id));
+	node_list.emplace_back(type, id);
 }
 
-void model::remove_node(Node_Id id)
+void Model::remove_node(Node_Id id)
 {
 	auto i = node_list.begin();
 	for(; i != node_list.end(); i++)
@@ -83,22 +133,22 @@ void model::remove_node(Node_Id id)
 	node_list.erase(i);
 }
 
-void model::connect_node(Node_Id id1, Node_Id id2)
+void Model::connect_node(Node_Id id1, Node_Id id2)
 { 
 	get_node(id1)->add_connection(get_node(id2));
 	get_node(id2)->add_connection(get_node(id1));
 }
 
-void model::disconnect_node(Node_Id id1, Node_Id id2)
+void Model::disconnect_node(Node_Id id1, Node_Id id2)
 { 
 	get_node(id1)->remove_connection(id2);
 	get_node(id2)->remove_connection(id1);
 }
 
-Device* model::get_device(Device_Label label)
+Device* Model::get_device(Device_Label label)
 {
 	Device* found_device = nullptr;
-	found_device = model::get_node(label.get_node_id())->get_device(label.get_device_id());
+	found_device = get_node(label.get_node_id())->get_device(label.get_device_id());
 
 	return found_device;
 }
@@ -109,7 +159,7 @@ void mangle_model(T* command)
 	state_interfaces::mangle_state(command);
 }
 
-void model::step()
+void Model::step()
 {
 	for(auto i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer); i.is_valid(); i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer))
 	{
@@ -117,7 +167,7 @@ void model::step()
 		command_model(i.get_command());
 	}
 	int model_step_thread = 0;
-	for(auto command = model::step_actions.begin(); command != model::step_actions.end(); command++)
+	for(auto command = step_actions.begin(); command != step_actions.end(); command++)
 	{
 		model_step_thread++;
 			Packed_Command& step_command = (*command);
@@ -136,28 +186,23 @@ void model::step()
 
 }
 
-void model::start_loop()
+void Model::start_loop()
 {
 	model_running = true;
 	LOG_INFO("Model added to scheduler", subsystem_name);
-	Scheduler::get_instance()->add_task(&model::model_task);
+	Scheduler::get_instance()->add_task(&model_task);
 }
 
-void model::stop_loop()
+void Model::stop_loop()
 {
 	LOG_INFO("Model Stopped", subsystem_name);
 	model_running = false;
 	model_task.set_persistence(false);
 }
 
-void model::clean_up()
-{
-	Message_Relay::get_instance()->deregister_consumer(model_controller_consumer);
-	step_actions.clear();
-	node_list.clear();
-}
 
-void model::initalize_my_node(Node_Id id)
+
+void Model::initalize_my_node(Node_Id id)
 {
 	my_node.initalize_local_control(id);
 }
@@ -181,12 +226,12 @@ struct compare
  */
 
 
-void model::command_model(const Packed_Command& command)
+void Model::command_model(const Packed_Command& command)
 {
 	//OPTIMIZE
-	auto found = std::find_if(model::step_actions.begin(), model::step_actions.end(), compare(command));
-	if(found == model::step_actions.end() || model::step_actions.size() == 0)
+	auto found = std::find_if(step_actions.begin(), step_actions.end(), compare(command));
+	if(found == step_actions.end() || step_actions.size() == 0)
 	{
-		model::step_actions.push_back(std::move(command));
+		step_actions.push_back(std::move(command));
 	}
 }

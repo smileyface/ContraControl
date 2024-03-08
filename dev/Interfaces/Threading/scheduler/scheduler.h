@@ -8,10 +8,10 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
-#include "task.h"
-#include <mutex>
-#include <condition_variable>
 #include <atomic>
+#include <condition_variable>
+#include <mutex>
+#include "task.h"
 
 /**
  * @brief The Scheduler class manages the scheduling and execution of tasks.
@@ -67,7 +67,7 @@ public:
      * @brief Gets the number of overruns.
      * @return The number of overrun frames.
      */
-    int get_overruns();
+    int get_overruns() const;
 
     /**
      * @brief Starts the execution of the tasks with the given frame duration.

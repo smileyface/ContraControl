@@ -47,7 +47,7 @@ Device_Label device_utilities::add_device(Device_Creator creator)
 	LOG_DEBUG("Test Adding Device");
 	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Device_Create>(device_utilities::node_handle, creator.first, creator.second), 0));
 	system_utilities::run_all_queued_commands();
-	Node* my_node = model::get_node(device_utilities::node_handle);
+	Node* my_node = model->get_node(device_utilities::node_handle);
 	Device* my_device = my_node->get_device(creator.second);
 	if(my_device == nullptr)
 	{
@@ -55,8 +55,8 @@ Device_Label device_utilities::add_device(Device_Creator creator)
 		return Device_Label(device_utilities::node_handle, -1);
 	}
 
-	model_list[model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()] = create_device_instance(creator);
-	return(Device_Label(device_utilities::node_handle, model::get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()));
+	model_list[model->get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()] = create_device_instance(creator);
+	return(Device_Label(device_utilities::node_handle, model->get_node(device_utilities::node_handle)->get_device(creator.second)->get_id()));
 }
 
 void device_utilities::remove_device(Device_Label label)
@@ -76,7 +76,8 @@ Device* device_utilities::command_device(Device_Label label, Command* command, d
 	get_nominal_state(label.get_device_id(), command);
 	controller::add_command(Packed_Command(command, delay));
 	system_utilities::run_all_queued_commands();
-	if(model_list.count(label.get_device_id()))
+	auto thing = model_list[label.get_device_id()];
+	if(model_list.count(label.get_device_id())>0 && !(label.get_device_id() == 0 && thing==NULL))
 	{
 		return model_list[label.get_device_id()];
 	}

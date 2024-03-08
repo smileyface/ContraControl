@@ -42,7 +42,6 @@ void system_utilities::setup()
 	{
 		try
 		{
-			model::initalize();
 			controller::initalize();
 			view::initalize();
 			system_utilities::network_utilities::setup();
@@ -80,7 +79,7 @@ void system_utilities::teardown_messaging()
 void system_utilities::start_system()
 {
 	LOG_INFO("Starting Loops", "Test");
-	model::start_loop();
+	model->start_loop();
 	controller::start_controller();
 	view::start_view();
 	print_log_messages();
@@ -88,7 +87,7 @@ void system_utilities::start_system()
 
 void system_utilities::stop_system()
 {
-	model::stop_loop();
+	model->stop_loop();
 	controller::stop_controller();
 	view::stop_view();
 }
@@ -131,11 +130,9 @@ void system_utilities::print_log_messages()
 void system_utilities::cleanup()
 {
 	LOG_INFO("System Teardown", "Test");
-	Scheduler::get_instance()->stop();
-	Scheduler::get_instance()->clear();
 	Scheduler::destroy_instance();
 	controller::clean_up();
-	model::clean_up();
+	model->destroy_instance();
 	view::clean_up();
 	network::clean_up();
 	teardown_messaging();
@@ -168,12 +165,12 @@ void system_utilities::sleep_thread(int time_to_sleep)
 
 void system_utilities::model_utilities::start()
 {
-	model::start_loop();
+	model->start_loop();
 }
 
 void system_utilities::model_utilities::stop()
 {
-	model::stop_loop();
+	model->stop_loop();
 }
 
 void system_utilities::controller_utilities::start()

@@ -41,6 +41,11 @@ public:
 	 */
 	Device(DEVICE_IDENTIFIER type_of_device, int number_of_channels);
 
+	/**
+	* Copy constructor
+	*/
+	Device(const Device& copy);
+
 	virtual ~Device();
 	/**
 	 * \return Numeric ID of the device. This is assigned by the system.
@@ -119,6 +124,7 @@ public:
 	 */
 	Channel get_channel(int channel);
 
+
 protected:
 	/**
 	 ID of the device. This is a system assigned unique id.
@@ -147,6 +153,9 @@ protected:
 	 Position of each channel. 1-255 range. 0 is reserved for unused channels
 	*/
 	std::vector<Channel> channels;
+
+
+	static std::vector<Device> devices;
 };
 
 #endif

@@ -26,6 +26,8 @@ public:
 	 */
 	Node(NODE_TYPE type, Node_Id id);
 
+	Node(const Node&);
+
 	~Node();
 	/**
 	 Get ready to destroy node.
