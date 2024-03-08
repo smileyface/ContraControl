@@ -71,31 +71,6 @@ void Model::destroy_instance()
 	}
 }
 
-Model::~Model()
-{
-	Message_Relay::get_instance()->deregister_consumer(model_controller_consumer);
-	step_actions.clear();
-	node_list.clear();
-}
-
-Model* Model::get_instance()
-{
-	if(instance == 0)
-	{
-		instance = new Model();
-	}
-	return instance;
-}
-
-void Model::destroy_instance()
-{
-	if(instance != 0)
-	{
-		delete instance;
-		instance = 0;
-	}
-	LOG_INFO("Model Destroyed", "Model");
-}
 
 Node* Model::get_node(Node_Id id)
 {

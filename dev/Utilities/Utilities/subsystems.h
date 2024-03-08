@@ -22,8 +22,6 @@ public:
  */
 	virtual bool is_running() = 0;
 	virtual void step() = 0;
-protected:
-	virtual void step() = 0;
 };
 
 inline Subsystem::~Subsystem()

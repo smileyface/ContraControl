@@ -90,6 +90,13 @@ public:
 	 */
 	void start_loop();
 
+	/**
+	*\brief Run all commands lined up for this iteration of the loop.
+	*
+	* This is the main function of a loop.
+	*/
+	void step();
+
 	bool is_running();
 
 	static Model* get_instance();
@@ -117,23 +124,8 @@ private:
 	 Actions to be completed on this step of the loop.
 	 */
 	Command_List step_actions;
-	/**
-* \brief Run all commands lined up for this iteration of the loop.
-*
-* This is the main function of a loop.
-*/
-	void step();
 
-	bool is_running();
 
-	static Model* get_instance();
-	static void destroy_instance();
-private:
-
-	Model();
-	~Model();
-
-	static Model* instance;
 
 	/**
 	 * \brief Delete all nodes and send out a 'Node Shut Down' notice on the network
