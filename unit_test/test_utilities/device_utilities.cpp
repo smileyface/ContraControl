@@ -34,9 +34,9 @@ Device* device_utilities::get_nominal_state(Device_Id label, Command* command)
 void device_utilities::start_test_environment()
 {
 	LOG_DEBUG("Test Adding Node");
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Create>(NODE_TYPE::TEST, device_utilities::node_handle), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Node_Create>(NODE_TYPE::TEST, device_utilities::node_handle), 0));
 	LOG_DEBUG("Test Initalizing Node");
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Initalize>(device_utilities::node_handle), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Node_Initalize>(device_utilities::node_handle), 0));
 	system_utilities::run_all_queued_commands();
 }
 
@@ -45,7 +45,7 @@ void device_utilities::start_test_environment()
 Device_Label device_utilities::add_device(Device_Creator creator)
 {
 	LOG_DEBUG("Test Adding Device");
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Device_Create>(device_utilities::node_handle, creator.first, creator.second), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Device_Create>(device_utilities::node_handle, creator.first, creator.second), 0));
 	system_utilities::run_all_queued_commands();
 	Node* my_node = model->get_node(device_utilities::node_handle);
 	Device* my_device = my_node->get_device(creator.second);
@@ -61,7 +61,7 @@ Device_Label device_utilities::add_device(Device_Creator creator)
 
 void device_utilities::remove_device(Device_Label label)
 {
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Device_Destruction>(label), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Device_Destruction>(label), 0));
 	system_utilities::run_all_queued_commands();
 }
 
@@ -74,7 +74,7 @@ Device* device_utilities::command_device(Device_Label label, Command* command, d
 {
 	LOG_DEBUG("Commanding Device " + label.get_node_id() + ":" + std::to_string(label.get_device_id()) + " - " + command->get_id_str());
 	get_nominal_state(label.get_device_id(), command);
-	controller::add_command(Packed_Command(command, delay));
+	controller->add_command(Packed_Command(command, delay));
 	system_utilities::run_all_queued_commands();
 	auto thing = model_list[label.get_device_id()];
 	if(model_list.count(label.get_device_id())>0 && !(label.get_device_id() == 0 && thing==NULL))
@@ -89,7 +89,7 @@ Device* device_utilities::command_device(Device_Label label, Command* command, d
 
 void device_utilities::add_command(Command* command)
 {
-	controller::add_command(Packed_Command(command, 0));
+	controller->add_command(Packed_Command(command, 0));
 }
 
 Device* device_utilities::finish_command(Device_Label label, Command* command)

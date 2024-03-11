@@ -14,63 +14,62 @@
 #include "system/timer.h"
 #include "Messaging/message_relay.h"
 #include "Threading/threading.h"
+#include "Utilities/subsystems.h"
 
  /**
   * Main brain of the controller. It keeps track of commands to send to the model, and when to send them
   * \todo Change the timer interface from decrement timer to activate_state timer. This will mainly solve the issues with editing a timeline.
   */
-namespace controller
+class Controller : public Subsystem
 {
+public:
+
+	void start_loop();
+	void stop_loop();
+	bool is_running();
+	void step();
+	char* subsystem_name() const;
+
+	static Controller* get_instance();
+	static void destroy_instance();
 	/**
-	 * .The string of the namespace name. This is for locating Messages.
-	 */
-	static const char* subsystem_name = "Controller";
+	* Add a Packed_Command to the sorted queue of commands. Thread safe.
+	*
+	* \param cmd Command to add
+	*/
+	void add_command(const Packed_Command& cmd);
+private:
+	Controller();
+	~Controller();
+
+	static Controller* instance;
 	/**
 	 Is controller loop running
 	 */
-	extern bool controller_running;
+	std::atomic_bool controller_running;
 	/**
 	 Sorted queue of commands to send to the model.
 	 */
-	extern Command_List controller_queue;
+	Command_List controller_queue;
 	/**
 	 * Task to add the controller to the scheduler.
 	 */
-	extern Task controller_task;
+	Task controller_task;
 
-	/**
-	 * Start up.
-	 *
-	 * Resets the Controller clock.
-	 */
-	void initalize();
 
-	/**
-	 * Start the controller loop;
-	 */
-	void start_controller();
 
-	/**
-	 * Add a Packed_Command to the sorted queue of commands. Thread safe.
-	 *
-	 * \param cmd Command to add
-	 */
-	void add_command(const Packed_Command& cmd);
 
-	/**
-	 * Iterate the loop.
-	 *
-	 */
-	void step();
+};
 
-	/**
-	 * Start shutting down the controller.
-	 */
-	void stop_controller();
-	/**
-	 * Clear queues
-	 */
-	void clean_up();
+inline char* Controller::subsystem_name() const
+{
+	return (char*) "Controller";
 }
 
+inline bool Controller::is_running()
+{
+	return controller_running;
+}
+
+#define controller Controller::get_instance()
 #endif

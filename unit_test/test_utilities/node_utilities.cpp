@@ -7,31 +7,31 @@ Node_Id node_utilities::local_node_handle = "Local Test Node";
 void node_utilities::start_test_environment()
 {
 	create_node(node_utilities::local_node_handle);
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Initalize>(local_node_handle), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Node_Initalize>(local_node_handle), 0));
 	system_utilities::run_all_queued_commands();
 }
 
 void node_utilities::create_node(Node_Id id)
 {
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Create>(NODE_TYPE::TEST, id), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Node_Create>(NODE_TYPE::TEST, id), 0));
 	system_utilities::run_all_queued_commands();
 }
 
 void node_utilities::remove_node(Node_Id id)
 {
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Destroy>(id), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Node_Destroy>(id), 0));
 	system_utilities::run_all_queued_commands();
 }
 
 void node_utilities::connect_node(Node_Id id1, Node_Id id2)
 { 
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Connect>(id1, id2), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Node_Connect>(id1, id2), 0));
 	system_utilities::run_all_queued_commands();
 }
 
 void node_utilities::disconnect_node(Node_Id id1, Node_Id id2)
 { 
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Node_Disconnect>(id1, id2), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Node_Disconnect>(id1, id2), 0));
 	system_utilities::run_all_queued_commands();
 }
 

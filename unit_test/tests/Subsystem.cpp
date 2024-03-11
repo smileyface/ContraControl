@@ -39,7 +39,7 @@ TEST_F(Subsystem_Test, Commander_Destroy_With_Not_Run_Commands)
 	system_utilities::setup();
 	system_utilities::start_system();
 
-	controller::add_command(Packed_Command(Commander::get_instance()->make_command<Device_Create>("Test_Node", 0, "Test_Device"), 0));
+	controller->add_command(Packed_Command(Commander::get_instance()->make_command<Device_Create>("Test_Node", 0, "Test_Device"), 0));
 
 	EXPECT_EQ(Commander::get_instance()->get_number_of_commands(), 1);
 	Commander::destroy_instance();

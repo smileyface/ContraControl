@@ -61,26 +61,26 @@ public:
 	void disconnect_node(Node_Id id1, Node_Id id2);
 
 	/**
- * \brief A short cut for getting a device on a node using a node ID and device ID
- *
- * This is mainly used for testing devices, though should probably be removed.
- * \param label Node and device combination to access device.
- * \return Pointer to the called for device
- * \todo remove this
- */
+	 * \brief A short cut for getting a device on a node using a node ID and device ID
+	 *
+	 * This is mainly used for testing devices, though should probably be removed.
+	 * \param label Node and device combination to access device.
+	 * \return Pointer to the called for device
+	 * \todo remove this
+	 */
 	Device* get_device(Device_Label);
 
 	/**
- * Initalize the node that controls the local devices.
- * \param id Name of the local node.
- */
+	 * Initalize the node that controls the local devices.
+	 * \param id Name of the local node.
+	 */
 	void initalize_my_node(Node_Id id);
 
 	/**
- * \brief Start shutting down the model.
- *
- * Shuts down the Model execution loop.
- */
+	 * \brief Start shutting down the model.
+	 *
+	 * Shuts down the Model execution loop.
+	 */
 	void stop_loop();
 
 	/**
@@ -96,7 +96,7 @@ public:
 	* This is the main function of a loop.
 	*/
 	void step();
-
+	char* subsystem_name() const;
 	bool is_running();
 
 	static Model* get_instance();
@@ -107,11 +107,6 @@ private:
 	~Model();
 
 	static Model* instance;
-
-	/**
-	 * .The string of the namespace name. This is for locating Messages.
-	 */
-	const char* subsystem_name = "Model";
 	/**
 	 Is the model looping
 	 */
@@ -124,8 +119,6 @@ private:
 	 Actions to be completed on this step of the loop.
 	 */
 	Command_List step_actions;
-
-
 
 	/**
 	 * \brief Delete all nodes and send out a 'Node Shut Down' notice on the network
@@ -141,14 +134,17 @@ private:
 	 */
 	std::vector<Node> node_list;
 
-
-
 	/**
 	 * .Add a command to the Model from the an interface.
 	 * \param command The command to run.
 	 */
 	void command_model(const Packed_Command& command);
 };
+
+inline char* Model::subsystem_name() const
+{
+	return (char*)"Model";
+}
 
 inline bool Model::is_running()
 {

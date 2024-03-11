@@ -42,7 +42,6 @@ void system_utilities::setup()
 	{
 		try
 		{
-			controller::initalize();
 			view::initalize();
 			system_utilities::network_utilities::setup();
 		}
@@ -54,7 +53,6 @@ void system_utilities::setup()
 		system_setup = true;
 	}
 	print_log_messages();
-	std::cout << "The messages have been printed" << std::endl << std::flush;
 }
 
 void system_utilities::setup_messaging()
@@ -80,7 +78,7 @@ void system_utilities::start_system()
 {
 	LOG_INFO("Starting Loops", "Test");
 	model->start_loop();
-	controller::start_controller();
+	controller->start_loop();
 	view::start_view();
 	print_log_messages();
 }
@@ -88,7 +86,7 @@ void system_utilities::start_system()
 void system_utilities::stop_system()
 {
 	model->stop_loop();
-	controller::stop_controller();
+	controller->stop_loop();
 	view::stop_view();
 }
 
@@ -131,8 +129,8 @@ void system_utilities::cleanup()
 {
 	LOG_INFO("System Teardown", "Test");
 	Scheduler::destroy_instance();
-	controller::clean_up();
-	model->destroy_instance();
+	Controller::destroy_instance();
+	Model::destroy_instance();
 	view::clean_up();
 	network::clean_up();
 	teardown_messaging();
@@ -175,12 +173,12 @@ void system_utilities::model_utilities::stop()
 
 void system_utilities::controller_utilities::start()
 {
-	controller::start_controller();
+	controller->start_loop();
 }
 
 void system_utilities::controller_utilities::stop()
 {
-	controller::stop_controller();
+	controller->stop_loop();
 }
 
 void system_utilities::network_utilities::setup()

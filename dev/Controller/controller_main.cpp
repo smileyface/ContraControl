@@ -8,26 +8,29 @@
 std::mutex controller_mutex;
 
 Timer controller_timer;
-bool controller::controller_running = true;
-Command_List controller::controller_queue;
-Task controller::controller_task;
+
+Controller* Controller::instance = 0;
 
 //FILE GLOBALS
 std::vector<int> remove_indexes;
+void controller_step()
+{
+	Controller::get_instance()->step();
+}
 
-void controller::initalize()
+Controller::Controller()
 {
 	controller_timer.reset_clock();
 	controller_task = Task("Controller", 2, .15);
-	Scheduler::get_instance()->add_system_task(controller::step);
-	Scheduler::get_instance()->add_cleanup_task([] ()
+	Scheduler::get_instance()->add_system_task(controller_step);
+	Scheduler::get_instance()->add_cleanup_task([this] ()
 												{
-													for(auto command = controller::controller_queue.begin(); command != controller::controller_queue.end();)
+													for(auto command = controller_queue.begin(); command != controller_queue.end();)
 													{
 														controller_mutex.lock();
 														if(command->command_sent())
 														{
-															command = controller::controller_queue.erase(command);
+															command = controller_queue.erase(command);
 														}
 														else
 														{
@@ -38,29 +41,55 @@ void controller::initalize()
 													Commander::get_instance()->clean_list();
 												});
 }
-void controller::start_controller()
+
+Controller ::~Controller()
+{
+	Commander::destroy_instance();
+	controller_queue.clear();
+	LOG_INFO("Controller Destroyed", "Controller");
+}
+
+Controller* Controller::get_instance()
+{
+	if (instance == 0)
+	{
+		instance = new Controller();
+	}
+	return instance;
+}
+
+void Controller::destroy_instance()
+{
+	if (instance != 0)
+	{
+		delete instance;
+		instance = 0;
+	}
+}
+
+void Controller::start_loop()
 {
 	controller_running = true;
 	controller_timer.start_clock();
-	LOG_INFO("Controller Added to the Scheduler", subsystem_name);
-	Scheduler::get_instance()->add_task(&controller::controller_task);
+	LOG_INFO("Controller Added to the Scheduler", subsystem_name());
+	Scheduler::get_instance()->add_task(&controller_task);
 }
 
-void controller::stop_controller()
+void Controller::stop_loop()
 {
-	LOG_INFO("Controller Stopped", subsystem_name);
+	LOG_INFO("Controller Stopped", subsystem_name());
 	controller_task.set_persistence(false);
 	controller_running = false;
 }
 
-void controller::add_command(const Packed_Command& cmd)
+void Controller::add_command(const Packed_Command& cmd)
 {
 	Packed_Command id = cmd;
 	LOG_DEBUG("Command " + id.get_command()->get_id_str() + " added to controller");
 	controller_queue.push_back(cmd);
 }
 
-void controller::step()
+void Controller::step()
 {
 	for(auto command = controller_queue.begin(); command != controller_queue.end(); command++)
   {
@@ -85,11 +114,4 @@ void controller::step()
 	controller_timer.update_time();
 
 
-}
-
-void controller::clean_up()
-{
-	Commander::destroy_instance();
-	controller_queue.clear();
-	LOG_INFO("Controller Destroyed", "Controller");
 }

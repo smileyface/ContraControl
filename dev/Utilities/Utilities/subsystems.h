@@ -22,6 +22,10 @@ public:
  */
 	virtual bool is_running() = 0;
 	virtual void step() = 0;
+	/**
+	 * .The string of the namespace name. This is for locating Messages.
+	 */
+	virtual char* subsystem_name() const = 0;
 };
 
 inline Subsystem::~Subsystem()

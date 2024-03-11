@@ -164,13 +164,13 @@ void Model::step()
 void Model::start_loop()
 {
 	model_running = true;
-	LOG_INFO("Model added to scheduler", subsystem_name);
+	LOG_INFO("Model added to scheduler", subsystem_name());
 	Scheduler::get_instance()->add_task(&model_task);
 }
 
 void Model::stop_loop()
 {
-	LOG_INFO("Model Stopped", subsystem_name);
+	LOG_INFO("Model Stopped", subsystem_name());
 	model_running = false;
 	model_task.set_persistence(false);
 }
