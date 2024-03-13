@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   model_main.h
- * \brief  Main brains for the model. DO NOT INCLUDE. Include a model_interface instead
+ * \brief 
  *
  * \author kason
  * \date   May 2021
@@ -99,7 +99,14 @@ public:
 	char* subsystem_name() const;
 	bool is_running();
 
+	/**
+	 * Singleton get instance
+	 * \return Singleton instance
+	 */
 	static Model* get_instance();
+	/**
+	 * Singleton destroy instance
+	 */
 	static void destroy_instance();
 private:
 
@@ -150,6 +157,8 @@ inline bool Model::is_running()
 {
 	return model_running;
 }
-
+/**
+ * Get the instance of the controller as an object. This is to convert a namespace to singleton.
+ */
 #define model Model::get_instance()
 #endif 

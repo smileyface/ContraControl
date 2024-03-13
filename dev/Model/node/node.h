@@ -26,7 +26,12 @@ public:
 	 */
 	Node(NODE_TYPE type, Node_Id id);
 
-	Node(const Node&);
+	/**
+	 * Copy Constructor.
+	 * 
+	 * \param copy Instance to copy.
+	 */
+	Node(const Node& copy);
 
 	~Node();
 	/**

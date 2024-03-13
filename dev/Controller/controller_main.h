@@ -23,14 +23,20 @@
 class Controller : public Subsystem
 {
 public:
-
 	void start_loop();
 	void stop_loop();
 	bool is_running();
 	void step();
 	char* subsystem_name() const;
 
+	/**
+	 * Singleton get instance
+	 * \return Singleton instance
+	 */
 	static Controller* get_instance();
+	/**
+	 * Singleton destroy instance
+	 */
 	static void destroy_instance();
 	/**
 	* Add a Packed_Command to the sorted queue of commands. Thread safe.
@@ -55,10 +61,6 @@ private:
 	 * Task to add the controller to the scheduler.
 	 */
 	Task controller_task;
-
-
-
-
 };
 
 inline char* Controller::subsystem_name() const
@@ -70,6 +72,8 @@ inline bool Controller::is_running()
 {
 	return controller_running;
 }
-
+/**
+ * Get the instance of the controller as an object. This is to convert a namespace to singleton.
+ */
 #define controller Controller::get_instance()
 #endif

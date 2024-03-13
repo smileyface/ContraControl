@@ -36,13 +36,15 @@ public:
 	Device();
 	/**
 	 * Constructor that creates number of channels that the device has.
-	 *  \param type_of_device Device type for the views.
+	 * \param type_of_device Device type for the views.
 	 * \param number_of_channels Channels to be added to this device type.
 	 */
 	Device(DEVICE_IDENTIFIER type_of_device, int number_of_channels);
 
 	/**
 	* Copy constructor
+	* 
+	* \param[in] copy Instance of device to copy.
 	*/
 	Device(const Device& copy);
 
@@ -153,9 +155,6 @@ protected:
 	 Position of each channel. 1-255 range. 0 is reserved for unused channels
 	*/
 	std::vector<Channel> channels;
-
-
-	static std::vector<Device> devices;
 };
 
 #endif
