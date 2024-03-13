@@ -35,7 +35,6 @@ bool system_utilities::WINDOWS = false;
 
 void system_utilities::setup()
 {
-
 	setup_messaging();
 	LOG_INFO("Initalizing System", "Test");
 	if(system_setup == false)
