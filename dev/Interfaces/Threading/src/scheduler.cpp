@@ -119,6 +119,7 @@ void Scheduler::add_cleanup_task(std::function<void()> task)
 }
 
 void Scheduler::start(int frameDuration) {
+    std::lock_guard<std::mutex> lock(mutex);
     scheduler_running = true;
     frame_rate = frameDuration;
     int frames_run = 0;

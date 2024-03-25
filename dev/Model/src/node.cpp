@@ -33,9 +33,8 @@ Node::Node(const Node& node) :
 
 Node::~Node()
 {
-	for(auto i = devices.begin(); i != devices.end(); i++)
-	{
-		delete devices[i->first];
+	for (auto& pair : devices) {
+		delete pair.second;
 	}
 	devices.clear();
 	//Nodes memory is handled in the Model

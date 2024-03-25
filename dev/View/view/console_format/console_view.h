@@ -13,7 +13,7 @@
 #include "../../input_interface/sys_interface/keyboard_interface.h"
 
 /** A view to display on the console. */
-class Console_View : public View
+class Console_View : public Device_View
 {
 public:
 	Console_View();

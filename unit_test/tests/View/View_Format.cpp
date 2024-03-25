@@ -28,35 +28,35 @@ namespace
 
 TEST_F(View_Format_Test, Add_Console_Format)
 {
-	View_Handle test_handle = view::add_display(DISPLAY_TYPES::CONSOLE);
-	EXPECT_TRUE(view::list_of_formats.find(test_handle) != view::list_of_formats.end());
-	EXPECT_TRUE(instanceof<Console_Format>(view::list_of_formats[test_handle]));
+	display_handle = view->add_display(DISPLAY_TYPES::CONSOLE);
+	EXPECT_TRUE(view->get_format(display_handle) != 0);
+	EXPECT_TRUE(instanceof<Console_Format>(view->get_format(display_handle)));
 
-	view::remove_display(test_handle);
+	view->remove_display(display_handle);
 }
 
 TEST_F(View_Format_Test, Remove_Console_Format)
 {
-	View_Handle test_handle = view::add_display(DISPLAY_TYPES::CONSOLE);
+	display_handle = view->add_display(DISPLAY_TYPES::CONSOLE);
 
-	view::remove_display(test_handle);
-	EXPECT_TRUE(view::list_of_formats.find(test_handle) == view::list_of_formats.end());
+	view->remove_display(display_handle);
+	EXPECT_TRUE(view->get_format(display_handle) == 0);
 }
 
 
 TEST_F(View_Format_Test, Add_File_Format)
 {
-	View_Handle test_handle = view::add_display(DISPLAY_TYPES::FILE);
-	EXPECT_TRUE(view::list_of_formats.find(test_handle) != view::list_of_formats.end());
-	EXPECT_TRUE(instanceof<File_Format>(view::list_of_formats[test_handle]));
+	display_handle = view->add_display(DISPLAY_TYPES::FILE);
+	EXPECT_TRUE(view->get_format(display_handle) != 0);
+	EXPECT_TRUE(instanceof<File_Format>(view->get_format(display_handle)));
 
-	view::remove_display(test_handle);
+	view->remove_display(display_handle);
 }
 
 TEST_F(View_Format_Test, Remove_File_Format)
 {
-	View_Handle test_handle = view::add_display(DISPLAY_TYPES::FILE);
+	display_handle = view->add_display(DISPLAY_TYPES::FILE);
 
-	view::remove_display(test_handle);
-	EXPECT_TRUE(view::list_of_formats.find(test_handle) == view::list_of_formats.end());
+	view->remove_display(display_handle);
+	EXPECT_TRUE(view->get_format(display_handle) == 0);
 }

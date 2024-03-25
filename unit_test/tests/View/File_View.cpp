@@ -18,14 +18,14 @@ namespace
 		File_Format* file_format_ptr = 0;
 		virtual void SetUp()
 		{
-			display_handle = view::add_display(DISPLAY_TYPES::FILE);
-			file_format_ptr = static_cast<File_Format*>(view::list_of_formats[display_handle]);
+			display_handle = view->add_display(DISPLAY_TYPES::FILE);
+			file_format_ptr = static_cast<File_Format*>(view->get_format(display_handle));
 			system_utilities::setup();
 			system_utilities::start_system();
 		}
 		virtual void TearDown()
 		{
-			view::remove_display(display_handle);
+			view->remove_display(display_handle);
 			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}
@@ -40,9 +40,9 @@ namespace
 
 TEST_F(File_View_Test, Log_View_Create)
 {
-	View* view = file_format_ptr->add_view(VIEW_TYPE_ENUM::LOG);
-	EXPECT_TRUE(instanceof<File_Log_View>(view));
-	File_Log_View* log_view = static_cast<File_Log_View*>(view);
+	Device_View* view_ptr = file_format_ptr->add_view(VIEW_TYPE_ENUM::LOG);
+	EXPECT_TRUE(instanceof<File_Log_View>(view_ptr));
+	File_Log_View* log_view = static_cast<File_Log_View*>(view_ptr);
 	EXPECT_TRUE(log_view->get_file_name().find(".log") != std::string::npos);
 	EXPECT_TRUE(exists_test3(log_view->get_file_name()));
 }

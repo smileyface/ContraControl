@@ -9,6 +9,8 @@
 #ifndef MAIN_EXECUTOR_H
 #define MAIN_EXECUTOR_H
 
+#include <memory>
+
 #include "commander/commander.h"
 
 #include "system/timer.h"
@@ -23,50 +25,35 @@
 class Controller : public Subsystem
 {
 public:
+	static Controller* get_instance();
+	static void destroy_instance();
+
 	void start_loop();
 	void stop_loop();
-	bool is_running();
-	void step();
-	char* subsystem_name() const;
-
-	/**
-	 * Singleton get instance
-	 * \return Singleton instance
-	 */
-	static Controller* get_instance();
-	/**
-	 * Singleton destroy instance
-	 */
-	static void destroy_instance();
-	/**
-	* Add a Packed_Command to the sorted queue of commands. Thread safe.
-	*
-	* \param cmd Command to add
-	*/
 	void add_command(const Packed_Command& cmd);
+	void step();
+
+	char* subsystem_name() const; // Added accessor for subsystem name
+	bool is_running(); // Added method to check if the controller is running
+
+	~Controller();
 private:
 	Controller();
-	~Controller();
-
 	static Controller* instance;
-	/**
-	 Is controller loop running
-	 */
-	std::atomic_bool controller_running;
-	/**
-	 Sorted queue of commands to send to the model.
-	 */
-	Command_List controller_queue;
-	/**
-	 * Task to add the controller to the scheduler.
-	 */
-	Task controller_task;
-};
 
-inline char* Controller::subsystem_name() const
-{
-	return (char*) "Controller";
-}
+	Task controller_task;
+	std::vector<Packed_Command> controller_queue;
+	std::mutex controller_mutex;
+	Timer controller_timer;
+	bool controller_running = false;
+
+	// Cleanup task function
+	void cleanup_task();
+
+	// Prevent copy construction and assignment
+	Controller(const Controller&) = delete;
+	Controller& operator=(const Controller&) = delete;
+};
 
 inline bool Controller::is_running()
 {

@@ -2,6 +2,7 @@
 
 #include "../devices/device.h"
 #include "Utilities/exceptions.h"
+#include "Messaging/message_relay.h"
 
 Device* create_device_instance(Device_Creator creator)
 {
@@ -18,6 +19,7 @@ Device* create_device_instance(Device_Creator creator)
 		the_device = new Device(DEVICE_IDENTIFIER::RGB, 3);
 		break;
 	case DEVICE_IDENTIFIER::INVALID:
+		LOG_ERROR("Invalid device type provided in create_device_instance()", "Device");
 	default:
 		the_device = new Device();
 		break;

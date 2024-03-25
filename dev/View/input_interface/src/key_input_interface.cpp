@@ -2,6 +2,7 @@
 #include "Messaging/message_relay.h"
 
 #include <vector>
+#include <Windows.h>
 
 KPI INVALID;
 KPI KEY::A;

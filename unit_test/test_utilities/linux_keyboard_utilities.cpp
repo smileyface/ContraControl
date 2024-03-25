@@ -204,7 +204,7 @@ static int create(int fd)
 }
 
 
-void system_utilities::keyboard_utilities::press_button(int key)
+void system_utilities::keyboard_utilities::press_button(char key)
 {
 	// Write a key to the keyboard buffer
 	if(fd > 0)

@@ -3,9 +3,9 @@
 #include "Utilities/exceptions.h"
 #include "Messaging/message_relay.h"
 
-View* view_factory(VIEW_TYPE_ENUM type, DISPLAY_TYPES display)
+Device_View* view_factory(VIEW_TYPE_ENUM type, DISPLAY_TYPES display)
 {
-	View* val = 0;
+	Device_View* val = 0;
 	switch (type)
 	{
 	case VIEW_TYPE_ENUM::LOG:

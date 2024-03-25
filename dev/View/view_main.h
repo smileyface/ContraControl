@@ -11,6 +11,7 @@
 #include "format/format.h"
 #include "Threading/threading.h"
 #include "Messaging/message_relay.h"
+#include "Utilities/subsystems.h"
 
 /**
  * A unique identifier the handle a View
@@ -20,45 +21,9 @@ typedef unsigned short View_Handle;
 /**
  * An interface for every display.
  */
-namespace view
+class View : public Subsystem
 {
-	/**
-	 * .The string of the namespace name. This is for locating Messages.
-	 */
-	static const char* subsystem_name = "View";
-	/**
-	 * Contained list of formats. Not for public consumption.
-	 */
-	extern std::map<View_Handle, Format*> list_of_formats;
-	/**
-	 * Boolean for the state of all views.
-	 */
-	extern bool view_running;
-	/**
-	 * Task to add view to the scheduler.
-	 */
-	extern Task view_task;
-
-	/**
-	 * Initalize all formats.
-	 */
-	void initalize();
-	/**
-	 * Start all Formats in threads.
-	 */
-	void start_view();
-	/**
-	 * Stop all Formats threads.
-	 */
-	void stop_view();
-	/**
-	 * Clean all the view.
-	 */
-	void clean_up();
-	/**
-	 * A single step of the view.
-	 */
-	void step();
+public:
 	/**
 	 * Add a new Format.
 	 * \param display Type for Format to display.
@@ -71,7 +36,51 @@ namespace view
 	 * \param handle Handle to specifiy the display to remove
 	 */
 	void remove_display(View_Handle handle);
-}
 
+	Format* get_format(View_Handle display_handle);
+
+	/**
+	 * Singleton get instance
+	 * \return Singleton instance
+	 */
+	static View* get_instance();
+	/**
+	 * Singleton destroy instance
+	 */
+	static void destroy_instance();
+
+	// Inherited via Subsystem	
+	void start_loop() override;
+	void stop_loop() override;
+	bool is_running() override;
+	char* subsystem_name() const override;
+	void step() override;
+
+private:
+	View();
+	~View();
+
+	static View* instance;
+	/**
+	 * Contained list of formats. Not for public consumption.
+	 */
+	std::map<View_Handle, Format*> list_of_formats;
+	/**
+	 * Boolean for the state of all views.
+	 */
+	bool view_running;
+	/**
+	 * Task to add view to the scheduler.
+	 */
+	Task view_task;
+
+	// Inherited via Subsystem
+
+};
+
+/**
+ * Get the instance of the controller as an object. This is to convert a namespace to singleton.
+ */
+#define view View::get_instance()
 
 #endif

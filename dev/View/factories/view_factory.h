@@ -20,6 +20,6 @@
  * \param display What to display on like a console or WS2811 devices.
  * \return created View pointer.
  */
-View* view_factory(VIEW_TYPE_ENUM type, DISPLAY_TYPES display);
+Device_View* view_factory(VIEW_TYPE_ENUM type, DISPLAY_TYPES display);
 
 #endif

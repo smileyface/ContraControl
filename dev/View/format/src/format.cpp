@@ -14,10 +14,10 @@ Format::~Format()
 
 void Format::update_views()
 {
-	std::vector<std::vector<View*>::iterator> destroy_list;
+	std::vector<std::vector<Device_View*>::iterator> destroy_list;
 	for(auto i = view_list.begin(); i != view_list.end();)
 	{
-		View* r = (*i);
+		Device_View* r = (*i);
 		if(r->is_stale())
 		{
 			r->on_refresh();
@@ -52,10 +52,10 @@ void Format::clean_views()
 	Message_Relay::get_instance()->deregister_consumer(format_consumer);
 }
 
-View* Format::create_view(VIEW_TYPE_ENUM view, DISPLAY_TYPES type)
+Device_View* Format::create_view(VIEW_TYPE_ENUM view, DISPLAY_TYPES type)
 {
 	LOG_INFO("Adding View: " + std::string(get_view_type_enum_as_string(view)), "Format");
-	View* new_view = view_factory(view, type);
+	Device_View* new_view = view_factory(view, type);
 	if(new_view != 0)
 	{
 		new_view->on_create();

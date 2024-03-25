@@ -47,9 +47,7 @@ TEST_F(Keyboard_Hardware_Test, Capture_Test)
 							   {
 								   is_pressed = true;
 							   });
-	system_utilities::sleep_thread(100);
-	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::A);
-	system_utilities::sleep_thread(100);
+	keyboard << "a";
 	EXPECT_TRUE(is_pressed);
 }
 
@@ -61,11 +59,7 @@ TEST_F(Keyboard_Hardware_Test, Keyboard_Input_Simple)
 													   test1 = keyboard.get_interface()->get_simple();
 												   });
 	system_utilities::sleep_thread(100);
-	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::T);
-	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::E);
-	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::S);
-	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::T);
-	keyboard << system_utilities::keyboard_utilities::get_char_from_kpi(KEY::ENTER);
+	keyboard << "test";
 	if(keyboard_test_thread.joinable())
 	{
 		keyboard_test_thread.join();

@@ -4,16 +4,15 @@
 #include "format/file.h"
 #include "view/views.h"
 
-std::map<View_Handle, Format*> view::list_of_formats = {};
-bool view::view_running = false;
+//FILE GLOBALS
 int display_id = 0;
 
-Task view::view_task;
+View* View::instance = 0;
 
-void view::initalize()
+View::View()
 {
 	view_task = Task("View", 2, .4);
-	Scheduler::get_instance()->add_system_task(view::step);
+	Scheduler::get_instance()->add_system_task(std::bind(&View::step, this));
 	Scheduler::get_instance()->add_cleanup_task([] ()
 												{});
 	//initalize any format already added the system
@@ -23,42 +22,59 @@ void view::initalize()
 	}
 }
 
-void view::start_view()
+View::~View()
 {
-	LOG_INFO("View System added to the Scheduler", subsystem_name);
-	Scheduler::get_instance()->add_task(&view::view_task);
+	for (auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
+	{
+		(*iterator).second->clean_views();
+	}
+	LOG_INFO("View Destroyed", "View");
+}
+
+View* View::get_instance()
+{
+	if (instance == 0)
+	{
+		instance = new View();
+	}
+	return instance;
+}
+
+void View::destroy_instance()
+{
+	if (instance != 0)
+	{
+		delete instance;
+		instance = 0;
+	}
+}
+
+void View::start_loop()
+{
+	LOG_INFO("View System added to the Scheduler", subsystem_name());
+	Scheduler::get_instance()->add_task(&view_task);
 	view_running = true;
 }
 
-void view::stop_view()
+void View::stop_loop()
 {
-	LOG_INFO("View Stopped", subsystem_name);
+	LOG_INFO("View Stopped", subsystem_name());
 	view_task.set_persistence(false);
 	view_running = false;
 }
 
-void view::clean_up()
+void  View::step()
 {
 	for(auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
 	{
-		(*iterator).second->clean_views();
-	}
-
-	LOG_INFO("View Destroyed", "View");
-}
-
-void  view::step()
-{
-	for(auto iterator = list_of_formats.begin(); iterator != list_of_formats.end(); iterator++)
-	{
-		view::view_task.add_subtask(Cleaned_Task([iterator] ()
+		view_task.add_subtask(Cleaned_Task([iterator] ()
 									{
 										(*iterator).second->step();
 									}));
 	}
 }
 
-View_Handle view::add_display(DISPLAY_TYPES display)
+View_Handle View::add_display(DISPLAY_TYPES display)
 {
 	int my_display_id = display_id;
 	display_id++;
@@ -77,9 +93,29 @@ View_Handle view::add_display(DISPLAY_TYPES display)
 	return my_display_id;
 }
 
-void view::remove_display(View_Handle handle)
+void View::remove_display(View_Handle handle)
 {
 	list_of_formats[handle]->clean_views();
 	delete list_of_formats[handle];
 	list_of_formats.erase(handle);
+}
+
+Format* View::get_format(View_Handle display_handle)
+{
+	Format* format = 0;
+	if (list_of_formats.find(display_handle) != list_of_formats.end())
+	{
+		format = list_of_formats[display_handle];
+	}
+	return format;
+}
+
+bool View::is_running()
+{
+	return false;
+}
+
+char* View::subsystem_name() const
+{
+	return (char*)"View";
 }

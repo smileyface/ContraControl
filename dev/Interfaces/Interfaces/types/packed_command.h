@@ -39,20 +39,20 @@ public:
 	/**
 	 * \return Time offset.
 	 */
-	double get_time();
+	double get_time() const;
 	/**
 	 * \return Pointer to the command.
 	 */
-	Command* get_command();
+	Command* get_command() const;
 
 	/**
 	 * \return If the message has been sent from the Controller to the Model.
 	 */
-	bool command_sent();
+	bool command_sent() const;
 	/**
 	 * \return If the command has been run from the Model.
 	 */
-	bool command_run();
+	bool command_run() const;
 
 	/**
 	 * Set the send flag
@@ -63,6 +63,7 @@ public:
 	 */
 	void run_command();
 
+	bool operator==(const Packed_Command& rhs) const;
 
 private:
 	/**

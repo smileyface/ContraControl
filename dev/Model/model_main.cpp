@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <mutex>
 #include <thread>
+#include <unordered_set>
 
 #include "Interfaces/types/state.h"
 #include "Threading/threading.h"
@@ -136,28 +137,29 @@ void mangle_model(T* command)
 
 void Model::step()
 {
-	for(auto i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer); i.is_valid(); i = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer))
-	{
-		LOG_DEBUG("Model has recieved command " + i.get_command().get_command()->get_id_str());
-		command_model(i.get_command());
+	// Step 1: Process controller commands
+	for (auto command = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer); command.is_valid(); command = Message_Relay::get_instance()->pop<Controller_Model_Command>(model_controller_consumer)) {
+		LOG_DEBUG("Model has received command " + command.get_command().get_command()->get_id_str());
+		command_model(command.get_command());
 	}
-	int model_step_thread = 0;
-	for(auto command = step_actions.begin(); command != step_actions.end(); command++)
-	{
-		model_step_thread++;
-			Packed_Command& step_command = (*command);
-			model_task.add_subtask(Cleaned_Task([&step_command, &model_step_thread] () mutable
-								   {
-									   if(step_command.command_run() == false)
-									   {
-										   LOG_DEBUG("Running command " + step_command.get_command()->get_id_str() + "on the model");
-											mangle_model(step_command.get_command());
-											step_command.run_command();
-											step_command.get_command()->time_to_complete -= model_timer.get_elapsed_time();
-									   }
-									   model_step_thread--;
-								   }));
-		}
+
+	// Step 2: Process step actions
+	for (auto& step_command : step_actions) {
+		model_task.add_subtask([&step_command, this]() {
+				model_timer.update_time();
+				if (!step_command.command_run()) {
+					LOG_DEBUG("Running command " + step_command.get_command()->get_id_str() + " on the model");
+					mangle_model(step_command.get_command());
+					step_command.run_command();
+					step_command.get_command()->time_to_complete -= model_timer.get_elapsed_time();
+				}
+			});
+	}
+
+	// Step 3: Log remaining step actions
+	if (!step_actions.empty()) {
+		LOG_DEBUG("Model will run " + std::to_string(step_actions.size()) + " commands next frame");
+	}
 
 }
 
@@ -205,7 +207,7 @@ void Model::command_model(const Packed_Command& command)
 {
 	//OPTIMIZE
 	auto found = std::find_if(step_actions.begin(), step_actions.end(), compare(command));
-	if(found == step_actions.end() || step_actions.size() == 0)
+	if (found == step_actions.end() || step_actions.size() == 0)
 	{
 		step_actions.push_back(std::move(command));
 	}

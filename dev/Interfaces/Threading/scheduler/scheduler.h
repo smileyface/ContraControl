@@ -101,6 +101,11 @@ private:
     std::atomic_bool scheduler_running;
     std::mutex mutex;
 
+
+    // Helper function to acquire and release mutex lock
+    void lock_mutex() { mutex.lock(); }
+    void unlock_mutex() { mutex.unlock(); }
+
     Task system_task;
     Task cleanup_task;
 

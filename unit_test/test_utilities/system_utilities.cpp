@@ -41,7 +41,6 @@ void system_utilities::setup()
 	{
 		try
 		{
-			view::initalize();
 			system_utilities::network_utilities::setup();
 		}
 		catch(NetworkErrorException)
@@ -78,7 +77,7 @@ void system_utilities::start_system()
 	LOG_INFO("Starting Loops", "Test");
 	model->start_loop();
 	controller->start_loop();
-	view::start_view();
+	view->start_loop();
 	print_log_messages();
 }
 
@@ -86,10 +85,10 @@ void system_utilities::stop_system()
 {
 	model->stop_loop();
 	controller->stop_loop();
-	view::stop_view();
+	view->stop_loop();
 }
 
-void display_log_messages(Logging_Message mess)
+static void display_log_messages(Logging_Message mess)
 {
 	int level = (int) MESSAGE_PRIORITY::INFO_MESSAGE;
 #ifdef DEBUG
@@ -130,7 +129,7 @@ void system_utilities::cleanup()
 	Scheduler::destroy_instance();
 	Controller::destroy_instance();
 	Model::destroy_instance();
-	view::clean_up();
+	View::destroy_instance();
 	network::clean_up();
 	teardown_messaging();
 	system_setup = false;
