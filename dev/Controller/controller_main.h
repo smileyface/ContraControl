@@ -25,20 +25,32 @@
 class Controller : public Subsystem
 {
 public:
+	/**
+	 * Singleton get instance
+	 * \return Singleton instance
+	 */
 	static Controller* get_instance();
+	/**
+	 * Singleton destroy instance
+	 */
 	static void destroy_instance();
 
-	void start_loop();
-	void stop_loop();
-	void add_command(const Packed_Command& cmd);
-	void step();
+	void start_loop() override;
+	void stop_loop() override;
+	void step() override;
+	char* subsystem_name() const override; // Added accessor for subsystem name
+	bool is_running() override; // Added method to check if the controller is running
 
-	char* subsystem_name() const; // Added accessor for subsystem name
-	bool is_running(); // Added method to check if the controller is running
 
-	~Controller();
+	/**
+	 * \brief Add a command to run through the controller.
+	 *
+	 * \param cmd Reference to the command to add to the controller.
+	 */
+	void add_command(const Packed_Command& cmd); 
 private:
 	Controller();
+	~Controller();
 	static Controller* instance;
 
 	Task controller_task;

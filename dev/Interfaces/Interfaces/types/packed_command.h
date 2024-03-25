@@ -63,7 +63,11 @@ public:
 	 */
 	void run_command();
 
-	bool operator==(const Packed_Command& rhs) const;
+	/**
+	* \param rhs Right hand object
+	* \return true if the command on the right hand is at the same pointer location as this.
+	*/
+	bool operator==(const Packed_Command& rhs) const; 
 
 private:
 	/**

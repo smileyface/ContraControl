@@ -37,6 +37,12 @@ public:
 	 */
 	void remove_display(View_Handle handle);
 
+
+	/**
+	 * \brief Get a pointer to a Format by a handle.
+	 * \param display_handle Handle to the map of formats
+	 * \return pointer to the format.
+	 */
 	Format* get_format(View_Handle display_handle);
 
 	/**
@@ -73,8 +79,6 @@ private:
 	 * Task to add view to the scheduler.
 	 */
 	Task view_task;
-
-	// Inherited via Subsystem
 
 };
 
