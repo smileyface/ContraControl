@@ -96,22 +96,22 @@ void Controller::step()
 	// Iterate over the controller queue
 	for (auto& step_command : controller_queue) {
 		// Create a lambda function for executing the step command
-		auto step_task = [step_command = &step_command, this]() {
+		auto step_task = [&step_command, this]() {
 				controller_mutex.lock();
-				if (!step_command->command_sent() && step_command->get_time() <= 0) 
+				if (!step_command.command_sent() && step_command.get_time() <= 0) 
 				{
 					//If the command has not been sent, and is ready to be sent, send it.
-					LOG_DEBUG("Sending Command " + step_command->get_command()->get_id_str() + " to the Model");
-					Message_Relay::get_instance()->push(new Controller_Model_Command(*step_command));
-					step_command->send_command();
+					LOG_DEBUG("Sending Command " + step_command.get_command()->get_id_str() + " to the Model");
+					Message_Relay::get_instance()->push(new Controller_Model_Command(step_command));
+					step_command.send_command();
 				}
-				else if (step_command->command_sent())
+				else if (step_command.command_sent())
 				{
 					//Clean task happens on a different priority
 					//Left blank intentionally
 				}
 				else {
-					step_command->move_time(controller_timer.get_elapsed_time());
+					step_command.move_time(controller_timer.get_elapsed_time());
 				}
 				controller_mutex.unlock();
 			};
