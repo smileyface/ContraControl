@@ -21,10 +21,10 @@ Console_View::~Console_View()
 
 void Console_View::on_create()
 {
-	View::on_create();
+	Device_View::on_create();
 }
 
 void Console_View::on_destroy()
 { 
-	View::on_destroy();
+	Device_View::on_destroy();
 }

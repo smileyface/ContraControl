@@ -37,7 +37,7 @@ public:
 	 * \param view Type of view to add.
 	 * \return Pointer to the newly created view
 	 */
-	virtual View* add_view(VIEW_TYPE_ENUM view) = 0;
+	virtual Device_View* add_view(VIEW_TYPE_ENUM view) = 0;
 	/**
 	 * \brief Update all stale views.
 	 *
@@ -64,7 +64,7 @@ public:
 protected:
 
 	/** List of views that the format controls */
-	std::vector<View*> view_list;
+	std::vector<Device_View*> view_list;
 	/** Is the display loop running */
 	bool format_running = false;
 	/** Consume view messages */
@@ -76,7 +76,7 @@ protected:
 	 * 
 	 * \return Pointer to the newly created view
 	 */
-	View* create_view(VIEW_TYPE_ENUM view, DISPLAY_TYPES type);
+	Device_View* create_view(VIEW_TYPE_ENUM view, DISPLAY_TYPES type);
 private:
 };
 

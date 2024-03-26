@@ -14,7 +14,7 @@ Thread_Pool::Thread_Pool() :
     LOG_INFO("Adding " + std::to_string(numThreads) + " threads", "Scheduler");
     for(size_t i = 0; i < numThreads; ++i)
     {
-        workers.emplace_back([this, i]
+        workers.emplace_back([this]
                              {
                                  while(true)
                                  {

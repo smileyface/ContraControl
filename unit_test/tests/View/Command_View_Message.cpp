@@ -24,7 +24,7 @@ namespace
 		{
 			system_utilities::setup();
 			system_utilities::start_system();
-			display_handle = view::add_display(DISPLAY_TYPES::CONSOLE);
+			display_handle = view->add_display(DISPLAY_TYPES::CONSOLE);
 			logging_messages = Message_Relay::get_instance()->register_consumer<Logging_Message>();
 			option_consumer = Message_Relay::get_instance()->register_consumer<Option_Popup_Message>();
 		}
@@ -32,7 +32,7 @@ namespace
 		{
 			Message_Relay::get_instance()->deregister_consumer(logging_messages);
 			Message_Relay::get_instance()->deregister_consumer(option_consumer);
-			view::remove_display(display_handle);
+			view->remove_display(display_handle);
 			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}

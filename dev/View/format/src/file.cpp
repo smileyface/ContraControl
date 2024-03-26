@@ -9,9 +9,9 @@ void File_Format::initalize()
 	LOG_INFO("File Format On Line", "File Format");
 }
 
-View* File_Format::add_view(VIEW_TYPE_ENUM view)
+Device_View* File_Format::add_view(VIEW_TYPE_ENUM view)
 {
-	View* new_view = Format::create_view(view, DISPLAY_TYPES::FILE);
+	Device_View* new_view = Format::create_view(view, DISPLAY_TYPES::FILE);
 	return new_view;
 }
 

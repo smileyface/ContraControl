@@ -58,7 +58,7 @@ namespace system_utilities
 		char get_char_from_kpi(KPI key);
 		void setup();
 		void tear_down();
-		void press_button(int key);
+		void press_button(char key);
 		extern bool connect; //default is connect to the hardware
 	}
 }

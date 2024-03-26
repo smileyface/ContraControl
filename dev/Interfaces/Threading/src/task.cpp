@@ -107,9 +107,18 @@ void Task::set_persistence(bool persist)
 
 void Task::run_task(std::chrono::milliseconds frameDuration)
 {
-    for(const auto& subtask : subtasks)
-    {
-        Thread_Pool::getInstance()->enqueue(subtask.task);
+    // Ensure thread pool singleton is initialized
+    Thread_Pool* threadPool = Thread_Pool::getInstance();
+
+    // Enqueue each subtask to the thread pool for concurrent execution
+    for (const auto& subtask : subtasks) {
+        // Wrap the subtask in a lambda to capture it by value
+        auto taskWrapper = [subtask]() {
+            // Execute the subtask
+            subtask.task();
+            };
+        // Enqueue the wrapped task to the thread pool
+        threadPool->enqueue(std::move(taskWrapper));
     }
 }
 

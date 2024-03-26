@@ -20,10 +20,10 @@ public:
 	void initalize();
 	/**
 	 * Add a new view to the format.
-	 * \param view Type of view to add.
+	 * \param view_type Type of view to add.
 	 * \return Pointer to the newly created view
 	 */
-	View* add_view(VIEW_TYPE_ENUM view);
+	Device_View* add_view(VIEW_TYPE_ENUM view_type);
 
 
 protected:

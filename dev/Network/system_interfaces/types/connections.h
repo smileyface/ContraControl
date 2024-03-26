@@ -41,7 +41,7 @@ namespace local_connections
 {
 	/** Connection to the Broadcast address */
 	extern const Connection_Id broadcast;
-	/** Connection to \ref model::my_node */
+	/** Connection to the local node. */
 	extern const Connection_Id local;
 
 	/**

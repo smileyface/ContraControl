@@ -49,7 +49,7 @@ TEST_F(Client_Network_Test, Client_Initial_State)
 
 	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::NETWORK_INITALIZED);
 
-	system_utilities::step(2);
+	system_utilities::step(1);
 
 	EXPECT_EQ(network::network_interface->get_status().status, NETWORK_STATUS::CLIENT_WAIT);
 

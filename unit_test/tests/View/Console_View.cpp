@@ -14,13 +14,13 @@ namespace
 		View_Handle display_handle = 0;
 		virtual void SetUp()
 		{
-			display_handle = view::add_display(DISPLAY_TYPES::CONSOLE);
+			display_handle = view->add_display(DISPLAY_TYPES::CONSOLE);
 			system_utilities::setup();
 			system_utilities::start_system();
 		}
 		virtual void TearDown()
 		{
-			view::remove_display(display_handle);
+			view->remove_display(display_handle);
 			system_utilities::stop_system();
 			system_utilities::cleanup();
 		}

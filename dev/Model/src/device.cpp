@@ -2,7 +2,7 @@
 
 #include "../devices/device.h"
 #include "Utilities/exceptions.h"
-
+#include "Messaging/message_relay.h"
 
 Device* create_device_instance(Device_Creator creator)
 {
@@ -19,8 +19,10 @@ Device* create_device_instance(Device_Creator creator)
 		the_device = new Device(DEVICE_IDENTIFIER::RGB, 3);
 		break;
 	case DEVICE_IDENTIFIER::INVALID:
+		LOG_ERROR("Invalid device type provided in create_device_instance()", "Device");
 	default:
 		the_device = new Device();
+		break;
 	}
 	the_device->set_name(creator.second);
 	return the_device;
@@ -55,11 +57,29 @@ Device::Device() :
 
 }
 
-Device::Device(DEVICE_IDENTIFIER type_of_device, int number_of_channels)
+Device::Device(DEVICE_IDENTIFIER type_of_device, int number_of_channels) :
+	id(-1),
+	device_name(""),
+	type(type_of_device),
+	initalized(false),
+	power(false),
+	valid(false),
+	channels()
 {
-	type = type_of_device;
 	channels.resize(number_of_channels);
 	std::fill(channels.begin(), channels.end(), UNUSED);
+}
+
+Device::Device(const Device& copy) :
+	id(copy.id),
+	device_name(copy.device_name),
+	type(copy.type),
+	initalized(copy.initalized),
+	power(copy.power),
+	valid(copy.valid),
+	channels(copy.channels)
+{
+
 }
 
 Device::~Device()

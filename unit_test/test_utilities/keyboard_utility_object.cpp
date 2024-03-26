@@ -44,10 +44,10 @@ void system_utilities::keyboard_utilities::Keyboard::operator<<(const std::strin
 {
 	for(char i : input)
 	{
-		system_utilities::keyboard_utilities::press_button(i);
+		operator<<(i);
 	}
 
-	system_utilities::keyboard_utilities::press_button(system_utilities::keyboard_utilities::get_char_from_kpi(KEY::ENTER));
+	operator<<(system_utilities::keyboard_utilities::get_char_from_kpi(KEY::ENTER));
 }
 
 void system_utilities::keyboard_utilities::Keyboard::operator<<(const int& input)
@@ -59,6 +59,7 @@ void system_utilities::keyboard_utilities::Keyboard::operator<<(const char& inpu
 {
 	LOG_DEBUG(std::to_string(input) + " sent");
 	system_utilities::keyboard_utilities::press_button(input);
+	system_utilities::sleep_thread(50);
 }
 
 void system_utilities::keyboard_utilities::Keyboard::set_key_operation(KPI key, std::function<void()> func)

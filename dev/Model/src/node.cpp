@@ -18,11 +18,23 @@ Node::Node(NODE_TYPE type, Node_Id id) :
 	my_id(id)
 { }
 
+Node::Node(const Node& node) :
+	my_type(node.my_type),
+	id_pool(node.id_pool),
+	my_id(node.my_id)
+{
+	connections = node.connections;
+	for (auto i : node.devices)
+	{
+		devices.emplace(i.first, new Device(*i.second));
+	}
+	name_to_id_map = node.name_to_id_map;
+}
+
 Node::~Node()
 {
-	for(auto i = devices.begin(); i != devices.end(); i++)
-	{
-		delete devices[i->first];
+	for (auto& pair : devices) {
+		delete pair.second;
 	}
 	devices.clear();
 	//Nodes memory is handled in the Model

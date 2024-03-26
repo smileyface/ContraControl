@@ -15,9 +15,9 @@ void Console_Format::initalize()
 	add_view(VIEW_TYPE_ENUM::LOG);
 }
 
-View* Console_Format::add_view(VIEW_TYPE_ENUM view)
+Device_View* Console_Format::add_view(VIEW_TYPE_ENUM view)
 {
-	View* new_view = Format::create_view(view, DISPLAY_TYPES::CONSOLE);
+	Device_View* new_view = Format::create_view(view, DISPLAY_TYPES::CONSOLE);
 	return new_view;
 }
 

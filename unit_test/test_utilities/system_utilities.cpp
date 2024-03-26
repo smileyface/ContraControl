@@ -35,16 +35,12 @@ bool system_utilities::WINDOWS = false;
 
 void system_utilities::setup()
 {
-
 	setup_messaging();
 	LOG_INFO("Initalizing System", "Test");
 	if(system_setup == false)
 	{
 		try
 		{
-			model::initalize();
-			controller::initalize();
-			view::initalize();
 			system_utilities::network_utilities::setup();
 		}
 		catch(NetworkErrorException)
@@ -55,7 +51,6 @@ void system_utilities::setup()
 		system_setup = true;
 	}
 	print_log_messages();
-	std::cout << "The messages have been printed" << std::endl << std::flush;
 }
 
 void system_utilities::setup_messaging()
@@ -80,20 +75,20 @@ void system_utilities::teardown_messaging()
 void system_utilities::start_system()
 {
 	LOG_INFO("Starting Loops", "Test");
-	model::start_loop();
-	controller::start_controller();
-	view::start_view();
+	model->start_loop();
+	controller->start_loop();
+	view->start_loop();
 	print_log_messages();
 }
 
 void system_utilities::stop_system()
 {
-	model::stop_loop();
-	controller::stop_controller();
-	view::stop_view();
+	model->stop_loop();
+	controller->stop_loop();
+	view->stop_loop();
 }
 
-void display_log_messages(Logging_Message mess)
+static void display_log_messages(Logging_Message mess)
 {
 	int level = (int) MESSAGE_PRIORITY::INFO_MESSAGE;
 #ifdef DEBUG
@@ -131,12 +126,10 @@ void system_utilities::print_log_messages()
 void system_utilities::cleanup()
 {
 	LOG_INFO("System Teardown", "Test");
-	Scheduler::get_instance()->stop();
-	Scheduler::get_instance()->clear();
 	Scheduler::destroy_instance();
-	controller::clean_up();
-	model::clean_up();
-	view::clean_up();
+	Controller::destroy_instance();
+	Model::destroy_instance();
+	View::destroy_instance();
 	network::clean_up();
 	teardown_messaging();
 	system_setup = false;
@@ -168,22 +161,22 @@ void system_utilities::sleep_thread(int time_to_sleep)
 
 void system_utilities::model_utilities::start()
 {
-	model::start_loop();
+	model->start_loop();
 }
 
 void system_utilities::model_utilities::stop()
 {
-	model::stop_loop();
+	model->stop_loop();
 }
 
 void system_utilities::controller_utilities::start()
 {
-	controller::start_controller();
+	controller->start_loop();
 }
 
 void system_utilities::controller_utilities::stop()
 {
-	controller::stop_controller();
+	controller->stop_loop();
 }
 
 void system_utilities::network_utilities::setup()

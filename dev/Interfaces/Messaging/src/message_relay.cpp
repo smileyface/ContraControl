@@ -73,7 +73,7 @@ int Message_Relay::number_of_consumers()
 Message_Ptr<Internal_Message> Message_Relay::front(Message_Consumer* mc)
 {
 	Message_Ptr<Internal_Message> message = 0;
-	for(auto i = list_of_message.begin(); i != list_of_message.end(); i++)
+	for(auto i = list_of_message.begin(); i != list_of_message.end(); ++i)
 	{
 		if(get_found_message(mc, (*i)).get() != nullptr)
 		{

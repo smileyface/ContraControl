@@ -14,11 +14,11 @@
   *
   * This parent class is meant to be extended to handle a viewing interface looking at a specific device, such as a system message, or a channel state.
   */
-class View
+class Device_View
 {
 public:
-	View();
-	virtual ~View();
+	Device_View();
+	virtual ~Device_View();
 	/**
 	 * Set quiter to true.
 	 */

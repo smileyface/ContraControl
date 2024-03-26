@@ -10,7 +10,7 @@ set(UTILITIES_HEADER_FILES
                     "Utilities/save_reader.h"
                     "Utilities/timer.h"
                     "Utilities/utils.h"
-                    "Utilities/exceptions.h"  "Utilities/tools/classes.h")
+                    "Utilities/exceptions.h"  "Utilities/tools/classes.h" "Utilities/subsystems.h")
 set(UTILITIES_SOURCE_FILES
                     "Utilities/save_reader.cpp")
 

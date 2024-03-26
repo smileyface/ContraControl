@@ -13,7 +13,7 @@
 #include <string>
 
 /** A view to read and write to a file. */
-class File_View : public View
+class File_View : public Device_View
 {
 public:
 	File_View();

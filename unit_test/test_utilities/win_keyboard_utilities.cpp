@@ -18,7 +18,7 @@
 #include "../../Network/system_interfaces/windows_network_interface.h"
 #include "../../dev/View/input_interface/sys_interface/windows_keyboard.h"
 
-void system_utilities::keyboard_utilities::press_button(int key)
+void system_utilities::keyboard_utilities::press_button(char key)
 {
 	// This structure will be used to create the keyboard
 // input event.
@@ -30,14 +30,12 @@ void system_utilities::keyboard_utilities::press_button(int key)
 	ip.ki.dwExtraInfo = 0;
 
 	// Press the "A" key
-	ip.ki.wVk = key;
+	ip.ki.wVk = VkKeyScanA(key);
 	ip.ki.dwFlags = 0;
 
 	SendInput(1, &ip, sizeof(INPUT));
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	ip.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &ip, sizeof(INPUT));
-	std::this_thread::sleep_for(std::chrono::milliseconds(40));
 }
 
 char system_utilities::keyboard_utilities::get_char_from_kpi(KPI key)

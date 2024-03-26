@@ -8,10 +8,10 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
-#include "task.h"
-#include <mutex>
-#include <condition_variable>
 #include <atomic>
+#include <condition_variable>
+#include <mutex>
+#include "task.h"
 
 /**
  * @brief The Scheduler class manages the scheduling and execution of tasks.
@@ -67,7 +67,7 @@ public:
      * @brief Gets the number of overruns.
      * @return The number of overrun frames.
      */
-    int get_overruns();
+    int get_overruns() const;
 
     /**
      * @brief Starts the execution of the tasks with the given frame duration.
@@ -100,6 +100,11 @@ private:
 
     std::atomic_bool scheduler_running;
     std::mutex mutex;
+
+
+    // Helper function to acquire and release mutex lock
+    void lock_mutex() { mutex.lock(); }
+    void unlock_mutex() { mutex.unlock(); }
 
     Task system_task;
     Task cleanup_task;
